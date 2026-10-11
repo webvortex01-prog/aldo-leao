@@ -1,6 +1,5 @@
 import React from 'react';
 import { Award, BookOpen, Scale, Shield, CheckCircle2 } from 'lucide-react';
-import boardroomImg from '../assets/images/office_boardroom_luxury_1791570183507.jpg';
 import { useSite } from '../context/SiteContext';
 
 interface AboutLeadershipProps {
@@ -150,8 +149,8 @@ export const AboutLeadership: React.FC<AboutLeadershipProps> = ({ onOpenConsulta
             {/* Right Image */}
             <div className="lg:col-span-6 relative min-h-[300px] lg:min-h-full">
               <img
-                src={boardroomImg}
-                alt="Sala de Reuniões Executiva - Aldo Leão Advocacia Estratégica"
+                src="/img/dr-aldo-consultoria.jpg"
+                alt="Atendimento e Consultoria Estratégica - Aldo Leão Advocacia Estratégica"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />

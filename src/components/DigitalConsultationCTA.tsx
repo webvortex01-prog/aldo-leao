@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, PhoneCall, ShieldCheck, Scale, Clock } from 'lucide-react';
-import boardroomImg from '../assets/images/office_boardroom_luxury_1791570183507.jpg';
 import { useSite } from '../context/SiteContext';
 
 interface DigitalConsultationCTAProps {
@@ -27,8 +26,8 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
           {/* Background image overlay */}
           <div className="absolute inset-0 z-0">
             <img
-              src={boardroomImg}
-              alt="Ambiente de Atendimento Jurídico Digital"
+              src="/img/dr-aldo-reuniao.jpg"
+              alt="Ambiente de Atendimento Jurídico Digital Dr. Aldo Leão"
               className="w-full h-full object-cover opacity-20"
               referrerPolicy="no-referrer"
             />

@@ -3,11 +3,13 @@ import { SiteProvider } from './context/SiteContext';
 import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
 import { ProfessionalExperienceCounter } from './components/ProfessionalExperienceCounter';
+import { Selo40AnosSection } from './components/Selo40AnosSection';
 import { CentennialLegacy } from './components/CentennialLegacy';
 import { InstitutionalQuote } from './components/InstitutionalQuote';
 import { PracticeAreas } from './components/PracticeAreas';
 import { HoldingFamiliarSection } from './components/HoldingFamiliarSection';
 import { ExcellenceSolutions } from './components/ExcellenceSolutions';
+import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
 import { StrategicAssessment } from './components/StrategicAssessment';
 import { HeadJuridico } from './components/HeadJuridico';
 import { CaseStudies } from './components/CaseStudies';
@@ -19,6 +21,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ConsultationModal } from './components/ConsultationModal';
 import { UrgentHotlineFloat } from './components/UrgentHotlineFloat';
+import { FloatingQuickNav } from './components/FloatingQuickNav';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
@@ -87,6 +90,9 @@ function AppContent() {
         {/* 2. Caixa Dourada de Experiência Profissional (40 Anos Dr. Aldo Leão, 1986-2026) */}
         <ProfessionalExperienceCounter />
 
+        {/* 2.1 Selo Comemorativo de 40 Anos de Advocacia (1986–2026) e Sua Importância */}
+        <Selo40AnosSection onOpenConsultation={() => handleOpenConsultation()} />
+
         {/* 3. O Legado Centenário (1908 1ª Geração Arnaldo Ferreira, 2ª Geração, 3ª Geração Aldo Leão Filho) */}
         <CentennialLegacy />
 
@@ -109,6 +115,9 @@ function AppContent() {
           onGoToLandingPage={() => setCurrentView('holding-landing')}
           onOpenConsultation={() => handleOpenConsultation()}
         />
+
+        {/* 7.1 Academia Leão Ferreira (Centro de Estudos Jurídicos Superiores, Logo & Palestras do Dr. Aldo) */}
+        <AcademiaLeaoSection onOpenConsultation={(topic) => handleOpenConsultation(topic)} />
 
         {/* 8. Diagnóstico de Risco Interativo & Consulta Preliminar */}
         <StrategicAssessment onSelectStrategy={handleStrategySelected} />
@@ -152,8 +161,16 @@ function AppContent() {
         onOpenTutorial={() => setIsTutorialOpen(true)}
       />
 
-      {/* Floating 24/7 Hotline Widget */}
+      {/* Floating 24/7 Hotline Widget (Bottom Left) */}
       <UrgentHotlineFloat onOpenConsultation={() => handleOpenConsultation()} />
+
+      {/* Floating Mini Menu with Emojis & Hamburger (Bottom Right) */}
+      <FloatingQuickNav
+        onOpenConsultation={() => handleOpenConsultation()}
+        onOpenAdmin={() => setCurrentView('admin')}
+        onOpenTutorial={() => setIsTutorialOpen(true)}
+        onOpenLandingPage={() => setCurrentView('holding-landing')}
+      />
 
       {/* Priority Strategic Consultation Modal */}
       <ConsultationModal

@@ -323,66 +323,43 @@ export const CmsEditor: React.FC = () => {
               Selecione o Retrato do Advogado Fundador:
             </label>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Option A: Photo matching screenshot */}
-              <div
-                onClick={() => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, photoUrl: realPortraitImg }
-                })}
-                className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ${
-                  formData.founder.photoUrl === realPortraitImg
-                    ? 'border-[#D4AF37] bg-[#0E1F3D] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
-                    : 'border-slate-800 bg-[#050B14] hover:border-slate-700'
-                }`}
-              >
-                <img
-                  src={realPortraitImg}
-                  alt="Dr. Aldo Leão Real"
-                  className="w-16 h-20 object-cover rounded-lg border border-[#D4AF37]/40"
-                />
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white">Retrato Fiel ao GetNinjas</span>
-                    {formData.founder.photoUrl === realPortraitImg && (
-                      <span className="text-[10px] bg-[#D4AF37] text-black px-1.5 py-0.2 rounded font-bold">Ativo</span>
-                    )}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {[
+                { url: '/img/dr-aldo-portrait.jpg', title: 'Retrato Oficial HD', desc: 'Retrato formal direto com gravata e óculos' },
+                { url: '/img/dr-aldo-1.jpg', title: 'Dr. Aldo Forense', desc: 'Atuação profissional em tribunal' },
+                { url: '/img/dr-aldo-2.jpg', title: 'Dr. Aldo Escritório', desc: 'Ambiente de escritório executivo' },
+                { url: '/img/dr-aldo-3.jpg', title: 'Dr. Aldo Reunião', desc: 'Atendimento e consultoria estratégica' },
+                { url: '/img/dr-aldo-4.jpg', title: 'Dr. Aldo Gabinete', desc: 'Gabinete e biblioteca jurídica' },
+                { url: '/img/dr-aldo-foco.jpg', title: 'Dr. Aldo Foco', desc: 'Retrato focado em alta resolução' },
+              ].map((p, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, photoUrl: p.url }
+                  })}
+                  className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center gap-3 ${
+                    formData.founder.photoUrl === p.url
+                      ? 'border-[#D4AF37] bg-[#0E1F3D] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
+                      : 'border-slate-800 bg-[#050B14] hover:border-slate-700'
+                  }`}
+                >
+                  <img
+                    src={p.url}
+                    alt={p.title}
+                    className="w-12 h-14 object-cover rounded-lg border border-[#D4AF37]/40 shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-white truncate">{p.title}</span>
+                      {formData.founder.photoUrl === p.url && (
+                        <span className="text-[9px] bg-[#D4AF37] text-black px-1.5 py-0.2 rounded font-bold shrink-0">Ativo</span>
+                      )}
+                    </div>
+                    <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{p.desc}</p>
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Com óculos, terno clássico e gravata azul royal, conferindo máxima autenticidade ao perfil real.
-                  </p>
                 </div>
-              </div>
-
-              {/* Option B: Classic portrait */}
-              <div
-                onClick={() => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, photoUrl: classicPortraitImg }
-                })}
-                className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-4 ${
-                  formData.founder.photoUrl === classicPortraitImg
-                    ? 'border-[#D4AF37] bg-[#0E1F3D] shadow-[0_0_15px_rgba(212,175,55,0.25)]'
-                    : 'border-slate-800 bg-[#050B14] hover:border-slate-700'
-                }`}
-              >
-                <img
-                  src={classicPortraitImg}
-                  alt="Dr. Aldo Leão Clássico"
-                  className="w-16 h-20 object-cover rounded-lg border border-[#D4AF37]/40"
-                />
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white">Retrato em Biblioteca Clássica</span>
-                    {formData.founder.photoUrl === classicPortraitImg && (
-                      <span className="text-[10px] bg-[#D4AF37] text-black px-1.5 py-0.2 rounded font-bold">Ativo</span>
-                    )}
-                  </div>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Visual cinematográfico com estantes de livros em mogno e iluminação âmbar.
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             {/* Custom URL Option */}

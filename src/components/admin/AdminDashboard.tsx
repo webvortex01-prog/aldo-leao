@@ -298,9 +298,87 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
               </div>
             </div>
 
-            {/* Cases Table */}
+            {/* Cases Table (Desktop View & Mobile Card View) */}
             <div className="rounded-xl border border-[#D4AF37]/25 overflow-hidden bg-[#071122] shadow-xl">
-              <div className="overflow-x-auto">
+              {/* Mobile Card List (Hidden on md and up) */}
+              <div className="block md:hidden divide-y divide-slate-800">
+                {filteredLeads.length === 0 ? (
+                  <div className="py-12 text-center text-slate-400 text-xs px-4">
+                    Nenhum caso encontrado com os filtros atuais.
+                  </div>
+                ) : (
+                  filteredLeads.map((lead) => {
+                    const cleanPhone = lead.phone.replace(/\D/g, '');
+                    const waUrl = `https://wa.me/55${cleanPhone}?text=${encodeURIComponent(
+                      `Olá ${lead.fullName}, sou o Dr. Aldo Leão. Recebi seus dados sobre o caso de ${lead.area}.`
+                    )}`;
+
+                    return (
+                      <div
+                        key={lead.id}
+                        className="p-4 hover:bg-[#0B1A35]/40 transition-colors cursor-pointer space-y-3"
+                        onClick={() => setActiveLeadModal(lead)}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <span className="font-semibold text-white text-sm block">
+                              {lead.fullName}
+                            </span>
+                            {lead.company && (
+                              <span className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
+                                <Building2 className="w-3 h-3 text-[#D4AF37]" />
+                                <span>{lead.company}</span>
+                              </span>
+                            )}
+                            <span className="text-[10px] text-slate-500 tabular-nums">
+                              {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString('pt-BR') : 'Hoje'} · {lead.phone}
+                            </span>
+                          </div>
+                          <div>
+                            {getStatusBadge(lead.status)}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-800/80">
+                          <div>
+                            <span className="text-slate-300 font-medium block">{lead.area}</span>
+                            <div className="mt-0.5">{getUrgencyText(lead.urgency)}</div>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-[10px] text-slate-400 block uppercase">Volume</span>
+                            <span className="font-bold text-[#F6E27A] tabular-nums">
+                              {lead.estimatedValue || 'A definir'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-end gap-2 pt-2" onClick={(e) => e.stopPropagation()}>
+                          <a
+                            href={waUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-1.5 rounded bg-[#25D366] text-black text-xs font-semibold hover:brightness-110 flex items-center gap-1.5"
+                          >
+                            <MessageSquare className="w-3.5 h-3.5" />
+                            <span>WhatsApp</span>
+                          </a>
+
+                          <button
+                            onClick={() => setActiveLeadModal(lead)}
+                            className="px-3 py-1.5 rounded bg-[#0E1F3D] border border-slate-700 text-slate-200 hover:text-white hover:border-[#D4AF37] text-xs flex items-center gap-1"
+                          >
+                            <Eye className="w-3.5 h-3.5 text-[#D4AF37]" />
+                            <span>Ver Detalhes</span>
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+
+              {/* Desktop Table (Hidden on small screens) */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left text-xs border-collapse">
                   <thead>
                     <tr className="bg-[#0A1730] border-b border-[#D4AF37]/20 text-slate-400 uppercase text-[10px] tracking-wider">

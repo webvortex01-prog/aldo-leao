@@ -278,6 +278,36 @@ export const ExemplarTutorialModal: React.FC<ExemplarTutorialModalProps> = ({
                     </p>
                   </div>
                 </div>
+
+                {/* Step 6 */}
+                <div className="p-4 rounded-xl bg-[#060D1A] border border-slate-800 flex items-start gap-3.5">
+                  <div className="w-7 h-7 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center text-[#F6E27A] font-bold text-xs shrink-0 mt-0.5">
+                    6
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                      Selo Comemorativo de 40 Anos de Advocacia (1986–2026)
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                      Conheça a chancela histórica do <strong>Selo de 40 Anos</strong> com visualizador em alta resolução e explicação detalhada sobre a importância de quatro décadas ininterruptas de liderança e segurança jurídica.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 7 */}
+                <div className="p-4 rounded-xl bg-[#060D1A] border border-slate-800 flex items-start gap-3.5">
+                  <div className="w-7 h-7 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center text-[#F6E27A] font-bold text-xs shrink-0 mt-0.5">
+                    7
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-white">
+                      Academia Leão Ferreira & Palestras Nacionais
+                    </h4>
+                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                      Explore a seção da <strong>Academia Leão</strong> com seu logo oficial, fotos reais do Dr. Aldo ministrando conferências em auditórios e catálogo completo de temas corporativos para contratação.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           )}

@@ -49,8 +49,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onOpenTutorial }) =
                 </a>
               </li>
               <li>
-                <a href="#fundador" className="hover:text-[#F6E27A] transition-colors">
-                  O Dr. Aldo Leão
+                <a href="#selo-40-anos" className="hover:text-[#F6E27A] text-[#F6E27A] font-semibold transition-colors">
+                  Selo Comemorativo 40 Anos
+                </a>
+              </li>
+              <li>
+                <a href="#academia-leao" className="hover:text-[#F6E27A] transition-colors">
+                  Academia Leão Ferreira & Palestras
+                </a>
+              </li>
+              <li>
+                <a href="#head-juridico" className="hover:text-[#F6E27A] transition-colors">
+                  Head Jurídico Dr. Aldo Leão
                 </a>
               </li>
               <li>

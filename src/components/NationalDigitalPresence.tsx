@@ -1,6 +1,5 @@
 import React from 'react';
-import { Globe2, ShieldCheck, Cpu, Smartphone, Lock, CheckCircle2 } from 'lucide-react';
-import boardroomImg from '../assets/images/office_boardroom_luxury_1791570183507.jpg';
+import { Globe2, ShieldCheck, Smartphone, Lock } from 'lucide-react';
 
 export const NationalDigitalPresence: React.FC = () => {
   return (
@@ -65,9 +64,9 @@ export const NationalDigitalPresence: React.FC = () => {
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/40 shadow-2xl bg-[#071122]">
               <img
-                src={boardroomImg}
-                alt="Presença Nacional Digital - Aldo Leão Advocacia Estratégica"
-                className="w-full h-[420px] object-cover"
+                src="/img/dr-aldo-reuniao.jpg"
+                alt="Dr. Aldo Leão em Reunião e Atendimento Estratégico"
+                className="w-full h-[420px] object-cover object-center"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-80" />

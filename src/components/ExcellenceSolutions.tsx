@@ -169,13 +169,33 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
               )}
 
               {selectedSolution.id === 'academia-leao-ferreira' && (
-                <div className="space-y-2 pt-2">
-                  <h4 className="font-cinzel text-xs font-bold text-white uppercase">
-                    Missão da Academia:
-                  </h4>
-                  <p className="text-xs text-slate-300">
-                    Difusão do conhecimento jurídico especializado, atualização contínua e publicação de livros digitais com corpo docente altamente qualificado.
-                  </p>
+                <div className="space-y-3 pt-2">
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-[#071122] border border-[#D4AF37]/30">
+                    <img
+                      src="/img/academia-leao.png"
+                      alt="Logo Academia Leão"
+                      className="w-12 h-12 object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = '/img/academia-leao.jpg';
+                      }}
+                    />
+                    <div>
+                      <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase">
+                        Centro de Estudos Jurídicos Superiores
+                      </h4>
+                      <p className="text-[11px] text-slate-300">
+                        Órgão cultural dedicado à alta capacitação, palestras magnas e difusão doutrinária.
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href="#academia-leao"
+                    onClick={() => setSelectedSolution(null)}
+                    className="inline-flex items-center gap-1.5 text-xs text-[#F6E27A] hover:underline font-bold"
+                  >
+                    <span>Ver Seção Completa da Academia Leão & Palestras</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
                 </div>
               )}
             </div>

@@ -25,8 +25,16 @@ export const InstitutionalQuote: React.FC = () => {
           mais antigo do Brasil e consolidando mais de 40 anos de experiência profissional na advocacia estratégica brasileira.
         </p>
 
-        {/* Brand Attributor Lockup */}
+        {/* Signature & Brand Attributor Lockup */}
         <div className="inline-flex flex-col items-center pt-6 border-t border-[#D4AF37]/25">
+          <img
+            src="/img/assinatura-gold.png"
+            alt="Assinatura Dr. Aldo Leão"
+            className="h-11 sm:h-14 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)] opacity-95 mb-3"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
+            }}
+          />
           <span className="font-cinzel text-lg font-bold text-white tracking-widest uppercase">
             ALDO LEÃO
           </span>
@@ -34,7 +42,7 @@ export const InstitutionalQuote: React.FC = () => {
             ADVOCACIA ESTRATÉGICA
           </span>
           <span className="text-[10px] text-slate-400 uppercase tracking-widest mt-1">
-            Tradição Jurídica Desde 1908 · Porto Alegre & Brasil
+            Tradição Jurídica Desde 1908 · 40 Anos de Advocacia Estratégica (1986–2026)
           </span>
         </div>
       </div>

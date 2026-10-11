@@ -15,6 +15,18 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
   const { founder } = siteConfig;
   const [curriculumModalOpen, setCurriculumModalOpen] = useState(false);
 
+  const aldoPhotos = [
+    { url: '/img/dr-aldo-portrait.jpg', label: 'Retrato Oficial' },
+    { url: '/img/dr-aldo-1.jpg', label: 'Dr. Aldo Forense' },
+    { url: '/img/dr-aldo-2.jpg', label: 'Dr. Aldo Escritório' },
+    { url: '/img/dr-aldo-3.jpg', label: 'Dr. Aldo Reunião' },
+    { url: '/img/dr-aldo-4.jpg', label: 'Dr. Aldo Estratégico' },
+    { url: '/img/dr-aldo-foco.jpg', label: 'Dr. Aldo Foco' },
+    { url: '/img/apresentacao-dr-aldo.jpg', label: 'Apresentação Corporativa' }
+  ];
+
+  const [currentPhoto, setCurrentPhoto] = useState<string>(founder.photoUrl || '/img/dr-aldo-portrait.jpg');
+
   const handleWhatsApp = () => {
     const phone = siteConfig.contact.whatsappNumber || '5551998088998';
     const text = encodeURIComponent(
@@ -45,23 +57,34 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Portrait & Badge */}
+          {/* Left Column: Portrait & Badge with Real Photos Switcher */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/30 to-transparent rounded-2xl blur-md" />
 
               <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#091528]">
-                <div className="aspect-[3/4] relative overflow-hidden">
+                <div className="aspect-[3/4] relative overflow-hidden bg-[#0A1424]">
                   <img
-                    src={founder.photoUrl}
+                    src={currentPhoto}
                     alt={`${founder.name} - Head Jurídico`}
                     className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-portrait.jpg';
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/30 to-transparent opacity-90" />
 
+                  {/* 40 Anos Badge overlay */}
+                  <a
+                    href="#selo-40-anos"
+                    className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#071122]/90 border border-[#D4AF37]/60 text-[10px] font-bold text-[#F6E27A] flex items-center gap-1.5 shadow-md hover:bg-[#0E1F3D] transition-colors"
+                  >
+                    <Award className="w-3.5 h-3.5 text-[#F6E27A]" />
+                    <span>40 Anos (1986–2026)</span>
+                  </a>
+
                   {/* Name Tag on Portrait */}
-                  <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/35 text-center">
+                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/35 text-center">
                     <p className="font-cinzel text-xl font-bold text-white">
                       {founder.name}
                     </p>
@@ -73,29 +96,59 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     </p>
                   </div>
                 </div>
+
+                {/* Thumbnails of Dr. Aldo's photos */}
+                <div className="p-3 bg-[#060D1A] border-t border-[#D4AF37]/20 flex items-center justify-center gap-2 overflow-x-auto">
+                  {aldoPhotos.map((p, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentPhoto(p.url)}
+                      className={`relative w-11 h-11 rounded-lg overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
+                        currentPhoto === p.url
+                          ? 'border-[#F6E27A] scale-105 shadow-[0_0_10px_rgba(212,175,55,0.5)]'
+                          : 'border-slate-700 opacity-60 hover:opacity-100 hover:border-slate-500'
+                      }`}
+                      title={p.label}
+                    >
+                      <img
+                        src={p.url}
+                        alt={p.label}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
           {/* Right Column: Bio & Specialties */}
           <div className="lg:col-span-7 text-left">
-            <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-1">
-              DR. ALDO LEÃO
-            </h3>
-            <p className="text-xs text-[#E5C158] uppercase tracking-wider font-semibold mb-6">
-              Head Jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
+                DR. ALDO LEÃO
+              </h3>
+              <a
+                href="#selo-40-anos"
+                className="px-2.5 py-0.5 rounded bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider"
+              >
+                Selo 40 Anos
+              </a>
+            </div>
+            <p className="text-xs text-[#E5C158] uppercase tracking-wider font-semibold mb-5">
+              Head Jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA · 3ª Geração
             </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-4 font-light">
               {founder.bioParagraph1}
             </p>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
               {founder.bioParagraph2}
             </p>
 
             {/* Diferenciais List (from PDF Page 22) */}
-            <div className="space-y-2.5 mb-8">
+            <div className="space-y-2 mb-6">
               <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider mb-2">
                 Diferenciais Estratégicos:
               </h4>
@@ -107,18 +160,43 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               ))}
             </div>
 
+            {/* Signature & CTAs */}
+            <div className="mb-6 pb-4 border-b border-[#D4AF37]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <img
+                  src="/img/assinatura-gold.png"
+                  alt="Assinatura Dr. Aldo Leão"
+                  className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)] opacity-95"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
+                  }}
+                />
+                <span className="text-[11px] text-slate-400">
+                  Dr. Aldo Leão Ferreira Filho · OAB/RS
+                </span>
+              </div>
+
+              <a
+                href="#academia-leao"
+                className="text-xs text-[#F6E27A] hover:underline inline-flex items-center gap-1 font-semibold"
+              >
+                <span>Academia Leão & Palestras</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
               <button
                 onClick={handleWhatsApp}
-                className="px-6 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
+                className="w-full sm:w-auto text-center px-6 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
               >
                 AGENDAR CONSULTA DIGITAL
               </button>
 
               <a
                 href="#livros"
-                className="px-5 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#F6E27A] border border-[#D4AF37]/50 bg-[#0E1F3D] hover:bg-[#1A3F5D] transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+                className="w-full sm:w-auto justify-center px-5 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#F6E27A] border border-[#D4AF37]/50 bg-[#0E1F3D] hover:bg-[#1A3F5D] transition-colors flex items-center gap-2 cursor-pointer shadow-md"
               >
                 <BookOpen className="w-4 h-4 text-[#F6E27A]" />
                 <span>Obras & Livros (Baixar PDF)</span>
@@ -126,7 +204,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
 
               <button
                 onClick={() => setCurriculumModalOpen(true)}
-                className="px-5 py-3 rounded text-xs font-semibold uppercase tracking-wider text-slate-200 border border-slate-700 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-white transition-colors cursor-pointer"
+                className="w-full sm:w-auto text-center px-5 py-3 rounded text-xs font-semibold uppercase tracking-wider text-slate-200 border border-slate-700 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-white transition-colors cursor-pointer"
               >
                 Currículo & Especialidades
               </button>

@@ -110,8 +110,25 @@ export const CentennialLegacy: React.FC = () => {
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/30 mb-4">
                 <span className="font-cinzel text-xl font-bold text-[#F6E27A] tabular-nums">1986 – 2026</span>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#F6E27A]">3ª Geração</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#F6E27A]">3ª Geração · 40 Anos</span>
               </div>
+              
+              {/* Photo of Dr. Aldo */}
+              <div className="mb-4 rounded-lg overflow-hidden border border-[#D4AF37]/40 aspect-[16/9] relative bg-[#060D1A]">
+                <img
+                  src="/img/dr-aldo-1.jpg"
+                  alt="Dr. Aldo Leão Ferreira Filho - 3ª Geração (1986-2026)"
+                  className="w-full h-full object-cover object-top hover:scale-103 transition-transform duration-500"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = '/img/DrAldo.jpg.jpeg';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071122] via-transparent to-transparent opacity-60" />
+                <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-[#071122]/90 border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A]">
+                  40 Anos de Advocacia
+                </span>
+              </div>
+
               <h3 className="font-cinzel text-lg font-bold text-white mb-2">
                 Advocacia Estratégica 4.0
               </h3>
@@ -180,13 +197,23 @@ export const CentennialLegacy: React.FC = () => {
             </div>
 
             {/* Stylized Dr. Aldo Leão Signature */}
-            <div className="text-right">
-              <div className="font-serif italic text-lg sm:text-xl text-[#F6E27A] tracking-wider">
-                Dr. Aldo Leão Ferreira Filho
+            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
+              <img
+                src="/img/assinatura-gold.png"
+                alt="Assinatura Dr. Aldo Leão Ferreira Filho"
+                className="h-10 sm:h-12 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)] opacity-95"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
+                }}
+              />
+              <div>
+                <div className="font-cinzel text-sm sm:text-base font-bold text-[#F6E27A] tracking-wider">
+                  Dr. Aldo Leão Ferreira Filho
+                </div>
+                <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">
+                  Head Jurídico · Terceira Geração Familiar (1986–2026)
+                </p>
               </div>
-              <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">
-                Head Jurídico · Terceira Geração Familiar
-              </p>
             </div>
           </div>
         </div>

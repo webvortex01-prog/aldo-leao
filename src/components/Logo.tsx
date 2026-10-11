@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface LogoProps {
   className?: string;
@@ -11,114 +11,126 @@ export const Logo: React.FC<LogoProps> = ({
   size = 'md',
   variant = 'full',
 }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+
   const getDimensions = () => {
     switch (size) {
       case 'sm':
-        return { shield: 34, title: 'text-base', sub: 'text-[9px]' };
+        return { shield: 32, imgHeight: 'h-8 sm:h-9', title: 'text-base', sub: 'text-[9px]' };
       case 'lg':
-        return { shield: 58, title: 'text-2xl', sub: 'text-xs' };
+        return { shield: 56, imgHeight: 'h-14 sm:h-16', title: 'text-2xl', sub: 'text-xs' };
       case 'md':
       default:
-        return { shield: 44, title: 'text-lg md:text-xl', sub: 'text-[10px]' };
+        return { shield: 44, imgHeight: 'h-11 sm:h-12', title: 'text-lg md:text-xl', sub: 'text-[10px]' };
     }
   };
 
-  const { shield, title, sub } = getDimensions();
+  const { shield, imgHeight, title, sub } = getDimensions();
 
-  // Ornate Shield Emblem with "AL" Monogram and Scales of Justice
+  // Official Lion Emblem (from Dr. Aldo Leão logo without background) or SVG Fallback
   const ShieldEmblem = (
     <div className="relative shrink-0 flex items-center justify-center">
-      <svg
-        width={shield}
-        height={Math.round(shield * 1.15)}
-        viewBox="0 0 60 70"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-[0_2px_10px_rgba(212,175,55,0.35)]"
-      >
-        <defs>
-          <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFF2B2" />
-            <stop offset="40%" stopColor="#E5C158" />
-            <stop offset="70%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#996515" />
-          </linearGradient>
-          <linearGradient id="shieldDarkBg" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#0E1B33" />
-            <stop offset="100%" stopColor="#050B14" />
-          </linearGradient>
-          <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
+      {!imgFailed ? (
+        <img
+          src="/img/logo-symbol.png"
+          alt="Aldo Leão Advocacia Estratégica"
+          className={`${imgHeight} w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.45)] transition-transform duration-300 group-hover:scale-105`}
+          onError={(e) => {
+            const el = e.currentTarget as HTMLImageElement;
+            if (!el.src.includes('logo.png')) {
+              el.src = '/img/logo.png';
+            } else {
+              setImgFailed(true);
+            }
+          }}
+        />
+      ) : (
+        <svg
+          width={shield}
+          height={Math.round(shield * 1.15)}
+          viewBox="0 0 60 70"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="drop-shadow-[0_2px_10px_rgba(212,175,55,0.35)]"
+        >
+          <defs>
+            <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#FFF2B2" />
+              <stop offset="40%" stopColor="#E5C158" />
+              <stop offset="70%" stopColor="#D4AF37" />
+              <stop offset="100%" stopColor="#996515" />
+            </linearGradient>
+            <linearGradient id="shieldDarkBg" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#0E1B33" />
+              <stop offset="100%" stopColor="#050B14" />
+            </linearGradient>
+          </defs>
 
-        {/* Outer Shield Outline */}
-        <path
-          d="M30 3L53 11.5C53 38 43 57.5 30 67C17 57.5 7 38 7 11.5L30 3Z"
-          fill="url(#shieldDarkBg)"
-          stroke="url(#goldGradient)"
-          strokeWidth="2.2"
-        />
+          {/* Outer Shield Outline */}
+          <path
+            d="M30 3L53 11.5C53 38 43 57.5 30 67C17 57.5 7 38 7 11.5L30 3Z"
+            fill="url(#shieldDarkBg)"
+            stroke="url(#goldGradient)"
+            strokeWidth="2.2"
+          />
 
-        {/* Inner Shield Hairline */}
-        <path
-          d="M30 7.5L49 14.5C49 37 40 53.5 30 61.5C20 53.5 11 37 11 14.5L30 7.5Z"
-          stroke="url(#goldGradient)"
-          strokeWidth="0.8"
-          strokeOpacity="0.6"
-        />
+          {/* Inner Shield Hairline */}
+          <path
+            d="M30 7.5L49 14.5C49 37 40 53.5 30 61.5C20 53.5 11 37 11 14.5L30 7.5Z"
+            stroke="url(#goldGradient)"
+            strokeWidth="0.8"
+            strokeOpacity="0.6"
+          />
 
-        {/* Laurel Wreath Left */}
-        <path
-          d="M16 28C14 34 16 42 22 48M14 35C12 37 12 40 15 42M16 28C14 26 13 29 15 32"
-          stroke="url(#goldGradient)"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-          strokeOpacity="0.85"
-        />
-        {/* Laurel Wreath Right */}
-        <path
-          d="M44 28C46 34 44 42 38 48M46 35C48 37 48 40 45 42M44 28C46 26 47 29 45 32"
-          stroke="url(#goldGradient)"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-          strokeOpacity="0.85"
-        />
+          {/* Laurel Wreath Left */}
+          <path
+            d="M16 28C14 34 16 42 22 48M14 35C12 37 12 40 15 42M16 28C14 26 13 29 15 32"
+            stroke="url(#goldGradient)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeOpacity="0.85"
+          />
+          {/* Laurel Wreath Right */}
+          <path
+            d="M44 28C46 34 44 42 38 48M46 35C48 37 48 40 45 42M44 28C46 26 47 29 45 32"
+            stroke="url(#goldGradient)"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeOpacity="0.85"
+          />
 
-        {/* Scales Balance Beam at Top */}
-        <path
-          d="M24 19H36M30 16V22M24 19L22 25M36 19L38 25"
-          stroke="url(#goldGradient)"
-          strokeWidth="1"
-          strokeLinecap="round"
-          strokeOpacity="0.75"
-        />
+          {/* Scales Balance Beam at Top */}
+          <path
+            d="M24 19H36M30 16V22M24 19L22 25M36 19L38 25"
+            stroke="url(#goldGradient)"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeOpacity="0.75"
+          />
 
-        {/* Intertwined Monogram A & L */}
-        {/* Letter A */}
-        <path
-          d="M25 46L30 25L35 46M26.5 40H33.5"
-          stroke="url(#goldGradient)"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        {/* Letter L overlapping */}
-        <path
-          d="M28 29V47H39.5"
-          stroke="url(#goldGradient)"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+          {/* Intertwined Monogram A & L */}
+          <path
+            d="M25 46L30 25L35 46M26.5 40H33.5"
+            stroke="url(#goldGradient)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M28 29V47H39.5"
+            stroke="url(#goldGradient)"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
 
-        {/* Crown/Star Accent at Top */}
-        <polygon
-          points="30,8 31.5,11 34.5,11.5 32,13.5 32.8,16.5 30,14.8 27.2,16.5 28,13.5 25.5,11.5 28.5,11"
-          fill="url(#goldGradient)"
-        />
-      </svg>
+          {/* Crown/Star Accent at Top */}
+          <polygon
+            points="30,8 31.5,11 34.5,11.5 32,13.5 32.8,16.5 30,14.8 27.2,16.5 28,13.5 25.5,11.5 28.5,11"
+            fill="url(#goldGradient)"
+          />
+        </svg>
+      )}
     </div>
   );
 

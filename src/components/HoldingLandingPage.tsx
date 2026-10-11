@@ -501,16 +501,28 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <div className="lg:col-span-5 text-left">
               <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 bg-[#071122] shadow-2xl mb-6">
                 <img
-                  src={realPartnerImg}
+                  src="/img/dr-aldo-portrait.jpg"
                   alt="Dr. Aldo Leão - Especialista em Holding Familiar"
                   className="w-full aspect-[4/3] object-cover object-top"
-                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = '/img/draldo6.jpg.jpeg';
+                  }}
                 />
                 <div className="p-4 bg-[#050B14] border-t border-[#D4AF37]/30 text-center">
                   <p className="font-cinzel text-base font-bold text-white">Dr. Aldo Leão Ferreira Filho</p>
                   <p className="text-xs text-[#E5C158] uppercase tracking-wider font-semibold mt-0.5">
-                    Head Jurídico · 40 Anos de Advocacia
+                    Head Jurídico · 40 Anos de Advocacia (1986–2026)
                   </p>
+                  <div className="mt-2 flex justify-center">
+                    <img
+                      src="/img/assinatura-gold.png"
+                      alt="Assinatura Dr. Aldo Leão"
+                      className="h-8 w-auto object-contain filter drop-shadow-[0_2px_6px_rgba(212,175,55,0.4)] opacity-95"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
+                      }}
+                    />
+                  </div>
                   <p className="text-[11px] text-slate-400 mt-1">
                     Autor dos livros de referência em Planejamento Patrimonial 4.0
                   </p>
