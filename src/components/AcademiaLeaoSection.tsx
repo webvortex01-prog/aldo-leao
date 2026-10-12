@@ -133,6 +133,20 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Voltar button */}
+        <div className="mb-8">
+          <button
+            onClick={() => {
+              const el = document.getElementById('solucoes-excelencia');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              else window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-xs font-semibold text-[#F6E27A] hover:bg-[#1A365D] hover:text-white transition-all cursor-pointer shadow"
+          >
+            <span>← Voltar</span>
+          </button>
+        </div>
+
         {/* Section Header with Logo Showcase */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0E1F3D]/80 border border-[#D4AF37]/40 text-xs uppercase tracking-[0.22em] text-[#E5C158] font-bold mb-4 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
@@ -153,12 +167,11 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
         </div>
 
         {/* Feature Presentation Box: The Official Logo + Mission Statement */}
-        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/45 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl mb-20">
+        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/45 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left: The Official Logo of Academia Leão */}
             <div className="lg:col-span-4 flex flex-col items-center justify-center text-center">
               <div className="relative group">
-                {/* Glow ring */}
                 <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/50 to-[#F6E27A]/30 rounded-full blur-lg opacity-75 group-hover:opacity-100 transition-opacity" />
 
                 <div className="relative w-44 h-44 sm:w-52 sm:h-52 rounded-2xl border-2 border-[#D4AF37]/60 shadow-[0_0_35px_rgba(212,175,55,0.35)] bg-gradient-to-b from-[#0E1F3D]/80 to-[#071122]/90 backdrop-blur-sm p-4 flex items-center justify-center">
@@ -226,31 +239,6 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
               </div>
             </div>
           </div>
-        </div>
-
-        {/* 4 Pillars of Academia Leão */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {academiaPillars.map((item, idx) => {
-            const IconComponent = item.icon;
-            return (
-              <div
-                key={idx}
-                className="p-6 rounded-xl bg-[#071122] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all flex flex-col justify-between group shadow-lg"
-              >
-                <div>
-                  <div className="w-12 h-12 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-110 transition-transform">
-                    <IconComponent className="w-6 h-6 stroke-[1.8]" />
-                  </div>
-                  <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-2 leading-snug">
-                    {item.title}
-                  </h4>
-                  <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
         </div>
 
         {/* Section Sub-Header: Dr. Aldo Leão como Palestrante */}

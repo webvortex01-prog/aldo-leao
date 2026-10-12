@@ -111,24 +111,21 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
                 onClick={onGoToLandingPage}
                 className="text-xs font-bold text-[#F6E27A] hover:underline inline-flex items-center gap-1 cursor-pointer"
               >
-                <span>Ver Estudo Completo</span>
+                <span>Saiba mais</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
         </div>
 
-        {/* TABELA COMPARATIVA DE CUSTOS (Inventário x Holding Familiar 4.0 - PDF Page 32) */}
+        {/* TABELA COMPARATIVA DE CUSTOS (Inventário x Holding Familiar) */}
         <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-6 sm:p-10 shadow-2xl mb-12">
           <div className="text-center max-w-2xl mx-auto mb-8">
-            <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-1">
-              ESTUDO COMPARATIVO DE CUSTOS
-            </span>
             <h3 className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase">
-              PROCESSO DE INVENTÁRIO × HOLDING FAMILIAR 4.0
+              INVENTÁRIO x HOLDING FAMILIAR
             </h3>
             <p className="text-xs text-slate-300 mt-2">
-              Cenário hipotético considerando um patrimônio adquirido por R$ 1.000.000,00 com valor de mercado atual de R$ 1.500.000,00 (Ganho de capital de R$ 500.000,00).
+              A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.
             </p>
           </div>
 
@@ -216,17 +213,17 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           {/* Destaque Gigante de Economia */}
           <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-[#0E1F3D] via-[#0B1A35] to-[#0E1F3D] border border-[#D4AF37] text-center shadow-lg">
             <p className="text-xs uppercase tracking-widest text-[#E5C158] font-bold mb-1">
-              ECONOMIA REAL COM A HOLDING FAMILIAR 4.0:
+              Economia com a Holding Familiar
             </p>
             <p className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-black text-[#25D366] tabular-nums">
               R$ 164.000,00
             </p>
             <p className="text-xs sm:text-sm text-slate-200 mt-1 font-semibold uppercase tracking-wider">
-              Redução de 55,21% em custos e despesas sucessórias
+              correspondente a 55,21%.
             </p>
           </div>
 
-          {/* Single CTA to Landing Page (as requested in PDF Page 33) */}
+          {/* Single CTA to Landing Page */}
           <div className="text-center mt-8">
             <button
               onClick={onGoToLandingPage}
@@ -235,9 +232,6 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <span>AGENDAR DIAGNÓSTICO DE VIABILIDADE</span>
               <ArrowRight className="w-4 h-4" />
             </button>
-            <p className="text-[11px] text-slate-400 mt-2">
-              Acesse a Landing Page exclusiva com todos os comparativos e agende no WhatsApp oficial.
-            </p>
           </div>
         </div>
       </div>

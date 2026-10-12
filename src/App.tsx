@@ -2,34 +2,33 @@ import React, { useState } from 'react';
 import { SiteProvider } from './context/SiteContext';
 import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
+import { NationalDigitalPresence } from './components/NationalDigitalPresence';
+import { CentennialLegacy } from './components/CentennialLegacy';
 import { ProfessionalExperienceCounter } from './components/ProfessionalExperienceCounter';
 import { Selo40AnosSection } from './components/Selo40AnosSection';
-import { CentennialLegacy } from './components/CentennialLegacy';
-import { InstitutionalQuote } from './components/InstitutionalQuote';
+import { HeadJuridico } from './components/HeadJuridico';
 import { PracticeAreas } from './components/PracticeAreas';
-import { HoldingFamiliarSection } from './components/HoldingFamiliarSection';
 import { ExcellenceSolutions } from './components/ExcellenceSolutions';
 import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
-import { StrategicAssessment } from './components/StrategicAssessment';
-import { HeadJuridico } from './components/HeadJuridico';
-import { CaseStudies } from './components/CaseStudies';
-import { DigitalBooksSection } from './components/DigitalBooksSection';
-import { PublicationsSection } from './components/PublicationsSection';
-import { NationalDigitalPresence } from './components/NationalDigitalPresence';
 import { DigitalConsultationCTA } from './components/DigitalConsultationCTA';
-import { ContactSection } from './components/ContactSection';
+import { HoldingFamiliarSection } from './components/HoldingFamiliarSection';
+import { PublicationsSection } from './components/PublicationsSection';
+import { DigitalBooksSection } from './components/DigitalBooksSection';
+import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
 import { ConsultationModal } from './components/ConsultationModal';
 import { UrgentHotlineFloat } from './components/UrgentHotlineFloat';
 import { FloatingQuickNav } from './components/FloatingQuickNav';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminAuthModal } from './components/admin/AdminAuthModal';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<'site' | 'admin' | 'holding-landing'>('site');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
-  const [isTutorialOpen, setIsTutorialOpen] = useState(true);
+  const [isAdminAuthOpen, setIsAdminAuthOpen] = useState(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
   const [presetArea, setPresetArea] = useState<string>('Planejamento Patrimonial 4.0');
   const [presetUrgency, setPresetUrgency] = useState<string>('media');
   const [presetValue, setPresetValue] = useState<string>('R$ 2M - R$ 5M');
@@ -39,21 +38,17 @@ function AppContent() {
     setIsConsultationOpen(true);
   };
 
-  const handleStrategySelected = (data: { area: string; urgency: string; estimatedValue: string }) => {
-    setPresetArea(data.area);
-    setPresetUrgency(data.urgency);
-    setPresetValue(data.estimatedValue);
-    setIsConsultationOpen(true);
+  const handleOpenAdmin = () => {
+    // Exige login e senha para acessar o Editor de Sites (Admin)
+    setIsAdminAuthOpen(true);
   };
 
-  const handleScrollToDiagnostic = () => {
-    const el = document.getElementById('diagnostico');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleAuthSuccess = () => {
+    setIsAdminAuthOpen(false);
+    setCurrentView('admin');
   };
 
-  // View: Gabinete Admin (CRM + CMS)
+  // View: Editor de Sites (CMS Live)
   if (currentView === 'admin') {
     return <AdminDashboard onBackToSite={() => setCurrentView('site')} />;
   }
@@ -63,113 +58,106 @@ function AppContent() {
     return (
       <HoldingLandingPage
         onBackToSite={() => setCurrentView('site')}
-        onOpenAdmin={() => setCurrentView('admin')}
+        onOpenAdmin={handleOpenAdmin}
+        onOpenConsultation={() => handleOpenConsultation()}
       />
     );
   }
 
-  // View: Portal Institucional Completo
+  // View: Portal Institucional Completo com Ordem Rigorosa dos Itens 3 a 14
   return (
     <div className="min-h-screen bg-[#050B14] text-slate-100 flex flex-col font-sans-body selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
-      {/* Top Bar with 3-Zone Contract, Landing Page direct access & Admin Access */}
+      {/* Top Bar with Navigation & Admin */}
       <Navbar
         onOpenConsultation={() => handleOpenConsultation()}
-        onOpenAdmin={() => setCurrentView('admin')}
+        onOpenAdmin={handleOpenAdmin}
         onOpenTutorial={() => setIsTutorialOpen(true)}
         onOpenLandingPage={() => setCurrentView('holding-landing')}
       />
 
-      {/* Main Page Flow adhering to the PDF specifications */}
+      {/* Main Page Flow adhering to Dr. Aldo Leão specifications */}
       <main className="flex-grow">
-        {/* 1. Hero Slider com Slide 1 (Tradição 1908 - 118 anos) e Slide 2 (Holding 4.0) */}
+        {/* 1. Página Home: Hero Slider com Slide 1 (Tradição 1908) e Slide 2 (Holding 4.0) */}
         <HeroSlider
           onOpenConsultation={() => handleOpenConsultation()}
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
-        {/* 2. Caixa Dourada de Experiência Profissional (40 Anos Dr. Aldo Leão, 1986-2026) */}
-        <ProfessionalExperienceCounter />
+        {/* 2. Página PRESENÇA NACIONAL DIGITAL (Item 4) */}
+        <NationalDigitalPresence />
 
-        {/* 2.1 Selo Comemorativo de 40 Anos de Advocacia (1986–2026) e Sua Importância */}
-        <Selo40AnosSection onOpenConsultation={() => handleOpenConsultation()} />
-
-        {/* 3. O Legado Centenário (1908 1ª Geração Arnaldo Ferreira, 2ª Geração, 3ª Geração Aldo Leão Filho) */}
+        {/* 3. Página O LEGADO CENTENÁRIO (Item 5) */}
         <CentennialLegacy />
 
-        {/* 4. Citação Institucional de Impacto ("Patrimônios podem ser construídos em uma vida...") */}
-        <InstitutionalQuote />
+        {/* Deslocado para o final da página O LEGADO CENTENÁRIO abaixo da linha do tempo (Item 5) */}
+        <ProfessionalExperienceCounter />
+        <Selo40AnosSection onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 5. As 5 Áreas de Atuação Estratégicas do PDF */}
-        <PracticeAreas
-          onGoToLandingPage={() => setCurrentView('holding-landing')}
-          onOpenConsultation={() => handleOpenConsultation()}
-        />
-
-        {/* 6. Holding Familiar 4.0 + Tabela Comparativa de Custos (Inventário x Holding - Economia de R$ 164.000,00) */}
-        <HoldingFamiliarSection
-          onGoToLandingPage={() => setCurrentView('holding-landing')}
-        />
-
-        {/* 7. As 14 Soluções de Excelência da Aldo Leão Advocacia Estratégica */}
-        <ExcellenceSolutions
-          onGoToLandingPage={() => setCurrentView('holding-landing')}
-          onOpenConsultation={() => handleOpenConsultation()}
-        />
-
-        {/* 7.1 Academia Leão Ferreira (Centro de Estudos Jurídicos Superiores, Logo & Palestras do Dr. Aldo) */}
-        <AcademiaLeaoSection onOpenConsultation={(topic) => handleOpenConsultation(topic)} />
-
-        {/* 8. Diagnóstico de Risco Interativo & Consulta Preliminar */}
-        <StrategicAssessment onSelectStrategy={handleStrategySelected} />
-
-        {/* 9. Head Jurídico (Dr. Aldo Leão Ferreira Filho, PUC-RS, Unisinos, 20 Municípios, Livros e Modal) */}
+        {/* 4. Página HEAD JURÍDICO (Item 6) */}
         <HeadJuridico
           onOpenConsultation={() => handleOpenConsultation()}
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
-        {/* 10. Histórico de Grandes Vitórias & Precedentes */}
-        <CaseStudies />
-
-        {/* 11. Livros do Dr. Aldo Leão (6 Livros, sendo 4 para Download Imediato em PDF e Aquisição) */}
-        <DigitalBooksSection
-          onOpenConsultation={(area) => handleOpenConsultation(area)}
+        {/* 5. Página ÁREAS DE ATUAÇÃO (Item 7) */}
+        <PracticeAreas
+          onGoToLandingPage={() => setCurrentView('holding-landing')}
+          onOpenConsultation={() => handleOpenConsultation()}
         />
 
-        {/* 12. Publicações Jurídicas (Artigos e Notícias com busca, filtro e leitor) */}
-        <PublicationsSection />
+        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8) & ACADEMIA LEÃO (Item 16) */}
+        <ExcellenceSolutions
+          onGoToLandingPage={() => setCurrentView('holding-landing')}
+          onOpenConsultation={() => handleOpenConsultation()}
+        />
+        <AcademiaLeaoSection onOpenConsultation={(topic) => handleOpenConsultation(topic)} />
 
-        {/* 12. Presença Nacional Digital (Atendimento 100% digital a partir de Porto Alegre) */}
-        <NationalDigitalPresence />
-
-        {/* 13. Agende Sua Consulta Jurídica Digital */}
+        {/* 7. Página AGENDE A SUA CONSULTA DIGITAL (Item 9) */}
         <DigitalConsultationCTA
           onOpenConsultation={() => handleOpenConsultation()}
         />
 
-        {/* 14. Canais de Contato & Sede Porto Alegre */}
-        <ContactSection
-          initialArea={presetArea}
-          initialUrgency={presetUrgency}
-          initialValue={presetValue}
+        {/* 8. Página PLANEJAMENTO PATRIMONIAL 4.0 (Item 10) */}
+        <HoldingFamiliarSection
+          onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
+
+        {/* 9. Página PUBLICAÇÕES (Item 11) */}
+        <PublicationsSection />
+
+        {/* 10. Página LIVROS DIGITAIS (Item 12) */}
+        <DigitalBooksSection
+          onOpenConsultation={(area) => handleOpenConsultation(area)}
+        />
+
+        {/* 11. Página LOCALIZAÇÃO (Item 13) */}
+        <LocationSection />
       </main>
 
-      {/* Footer com Sede Porto Alegre, Horário, CFOAB e Links */}
+      {/* 12. Página RODAPÉ (Item 14) */}
       <Footer 
-        onOpenAdmin={() => setCurrentView('admin')} 
-        onOpenTutorial={() => setIsTutorialOpen(true)}
-      />
-
-      {/* Floating 24/7 Hotline Widget (Bottom Left) */}
-      <UrgentHotlineFloat onOpenConsultation={() => handleOpenConsultation()} />
-
-      {/* Floating Mini Menu with Emojis & Hamburger (Bottom Right) */}
-      <FloatingQuickNav
-        onOpenConsultation={() => handleOpenConsultation()}
-        onOpenAdmin={() => setCurrentView('admin')}
+        onOpenAdmin={handleOpenAdmin} 
         onOpenTutorial={() => setIsTutorialOpen(true)}
         onOpenLandingPage={() => setCurrentView('holding-landing')}
+      />
+
+      {/* Rodapé Fixo Centralizado (Item 1) */}
+      <UrgentHotlineFloat onOpenConsultation={() => handleOpenConsultation()} />
+
+      {/* Mini Menu Flutuante com Emojis & Hamburguinho (Bottom Right) */}
+      <FloatingQuickNav
+        onOpenConsultation={() => handleOpenConsultation()}
+        onOpenAdmin={handleOpenAdmin}
+        onOpenTutorial={() => setIsTutorialOpen(true)}
+        onOpenLandingPage={() => setCurrentView('holding-landing')}
+      />
+
+      {/* Modal de Autenticação / Login para Editor de Sites (Admin) */}
+      <AdminAuthModal
+        isOpen={isAdminAuthOpen}
+        onClose={() => setIsAdminAuthOpen(false)}
+        onSuccess={handleAuthSuccess}
+        title="Editor de Sites · Acesso Restrito"
       />
 
       {/* Priority Strategic Consultation Modal */}
@@ -181,15 +169,19 @@ function AppContent() {
         presetValue={presetValue}
       />
 
-      {/* Grand Onboarding / Exemplar Project Tutorial Modal */}
+      {/* Exemplar Project Tutorial Modal */}
       <ExemplarTutorialModal
         isOpen={isTutorialOpen}
         onClose={() => setIsTutorialOpen(false)}
         onGoToAdmin={() => {
           setIsTutorialOpen(false);
-          setCurrentView('admin');
+          handleOpenAdmin();
         }}
-        onGoToDiagnostic={handleScrollToDiagnostic}
+        onGoToDiagnostic={() => {
+          setIsTutorialOpen(false);
+          const el = document.getElementById('areas-atuacao');
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }}
       />
     </div>
   );

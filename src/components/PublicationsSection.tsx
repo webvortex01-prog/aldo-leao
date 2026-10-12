@@ -128,7 +128,7 @@ export const PublicationsSection: React.FC = () => {
                         className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded ${
                           isArtigo
                             ? 'bg-[#D4AF37] text-black'
-                            : 'bg-[#1A3F5D] text-[#F6E27A] border border-[#D4AF37]/40'
+                            : 'bg-slate-200 text-[#071122] font-black'
                         }`}
                       >
                         {isArtigo ? 'ARTIGO JURÍDICO' : 'NOTÍCIA JURÍDICA'}
@@ -180,23 +180,26 @@ export const PublicationsSection: React.FC = () => {
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 pt-6 border-t border-[#D4AF37]/20">
+          <div className="flex items-center justify-center gap-4 pt-8 border-t border-[#D4AF37]/20">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 disabled:opacity-40 cursor-pointer"
+              className="px-4 py-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/40 text-slate-300 hover:text-white hover:border-[#D4AF37] disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center gap-2 text-xs font-bold cursor-pointer"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4 text-[#F6E27A]" />
+              <span>Anterior</span>
             </button>
-            <span className="text-xs text-slate-300 font-semibold font-cinzel">
+            <span className="text-xs text-[#F6E27A] font-bold font-cinzel px-3 py-1 rounded bg-[#0A1730] border border-[#D4AF37]/30">
               Página {currentPage} de {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="p-2 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 disabled:opacity-40 cursor-pointer"
+              className="px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] hover:brightness-110 disabled:opacity-30 disabled:pointer-events-none transition-all flex items-center gap-2 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md"
+              title="Ver as outras seis publicações"
             >
-              <ChevronRight className="w-4 h-4" />
+              <span>Ver mais publicações</span>
+              <ChevronRight className="w-4 h-4 text-[#050B14]" />
             </button>
           </div>
         )}
@@ -225,9 +228,11 @@ export const PublicationsSection: React.FC = () => {
               <h3 className="font-cinzel text-2xl font-bold text-white leading-tight">
                 {activePubModal.title}
               </h3>
-              <p className="text-xs text-[#D4AF37] mt-1.5 font-medium">
-                Publicado por Dr. Aldo Leão · Aldo Leão Advocacia Estratégica
-              </p>
+              {activePubModal.type === 'artigo' && (
+                <p className="text-xs text-[#D4AF37] mt-1.5 font-medium">
+                  Publicado por Dr. Aldo Leão
+                </p>
+              )}
             </div>
 
             <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">

@@ -40,19 +40,13 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-2">
-            <span>DIRETOR JURÍDICO</span>
-            <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>
-            <span>TERCEIRA GERAÇÃO FAMILIAR</span>
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
+            <span>TERCEIRA GERAÇÃO DESDE 1986</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-3">
             HEAD <span className="gold-text-gradient">JURÍDICO</span>
           </h2>
-
-          <p className="text-sm text-slate-300 font-sans-body">
-            Head Jurídico da Aldo Leão Advocacia Estratégica.
-          </p>
         </div>
 
         {/* Main Grid */}
@@ -83,16 +77,13 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     <span>40 Anos (1986–2026)</span>
                   </a>
 
-                  {/* Name Tag on Portrait */}
+                  {/* Name Tag on Portrait (Excluído PUCRS, Unisinos, OABRS, Procurador de 20 Municípios conforme Item 6) */}
                   <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/35 text-center">
                     <p className="font-cinzel text-xl font-bold text-white">
                       {founder.name}
                     </p>
                     <p className="text-xs text-[#E5C158] font-semibold tracking-wider uppercase mt-0.5">
                       Advocacia Estratégica
-                    </p>
-                    <p className="text-[11px] text-slate-300 mt-1">
-                      {founder.credentials}
                     </p>
                   </div>
                 </div>
@@ -124,7 +115,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
 
           {/* Right Column: Bio & Specialties */}
           <div className="lg:col-span-7 text-left">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 mb-3">
               <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
                 DR. ALDO LEÃO
               </h3>
@@ -135,9 +126,6 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 Selo 40 Anos
               </a>
             </div>
-            <p className="text-xs text-[#E5C158] uppercase tracking-wider font-semibold mb-5">
-              Head Jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA · 3ª Geração
-            </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-4 font-light">
               {founder.bioParagraph1}
@@ -199,14 +187,14 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 className="w-full sm:w-auto justify-center px-5 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#F6E27A] border border-[#D4AF37]/50 bg-[#0E1F3D] hover:bg-[#1A3F5D] transition-colors flex items-center gap-2 cursor-pointer shadow-md"
               >
                 <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-                <span>Obras & Livros (Baixar PDF)</span>
+                <span>LIVROS DIGITAIS</span>
               </a>
 
               <button
                 onClick={() => setCurriculumModalOpen(true)}
                 className="w-full sm:w-auto text-center px-5 py-3 rounded text-xs font-semibold uppercase tracking-wider text-slate-200 border border-slate-700 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-white transition-colors cursor-pointer"
               >
-                Currículo & Especialidades
+                Saiba Mais
               </button>
             </div>
           </div>

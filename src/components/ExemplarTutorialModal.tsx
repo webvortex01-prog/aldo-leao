@@ -271,10 +271,10 @@ export const ExemplarTutorialModal: React.FC<ExemplarTutorialModalProps> = ({
                   </div>
                   <div>
                     <h4 className="text-xs sm:text-sm font-bold text-white">
-                      Biblioteca Jurídica: Baixe E-Books (PDF) & Adquira Exemplares
+                      Biblioteca Jurídica: Baixe E-Books (PDF) & Adquira Exemplares Gratuitos
                     </h4>
                     <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
-                      Navegue até a seção <strong>"Livros do Dr. Aldo Leão"</strong>. São 6 livros de referência, incluindo <strong>4 e-books com download imediato liberado em PDF</strong> e botões diretos para aquisição de exemplares completos e contato com o autor.
+                      Navegue até a seção <strong>"Livros Digitais"</strong>. São 6 livros de referência 100% gratuitos com download liberado em PDF e botões diretos para adquirir exemplares digitais sem custo via WhatsApp oficial.
                     </p>
                   </div>
                 </div>

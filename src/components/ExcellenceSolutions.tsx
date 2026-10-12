@@ -20,6 +20,13 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
   const handleSolutionClick = (sol: ExcellenceSolution) => {
     if (sol.isLandingLink) {
       onGoToLandingPage();
+    } else if (sol.id === 'academia-leao-ferreira' || sol.title.toLowerCase().includes('academia')) {
+      const el = document.getElementById('academia-leao');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        setSelectedSolution(sol);
+      }
     } else {
       setSelectedSolution(sol);
     }

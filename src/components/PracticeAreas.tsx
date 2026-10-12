@@ -97,15 +97,9 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                 {/* Bottom Action */}
                 <div className="pt-4 border-t border-[#D4AF37]/15 flex items-center justify-between">
                   <span className="text-xs font-bold text-[#F6E27A] group-hover:underline inline-flex items-center gap-1.5">
-                    <span>{isFeatured ? 'CONHEÇA A HOLDING 4.0' : 'SAIBA MAIS'}</span>
+                    <span>SAIBA MAIS</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
                   </span>
-
-                  {isFeatured && (
-                    <span className="text-[10px] bg-[#D4AF37] text-black px-2 py-0.5 rounded font-extrabold uppercase">
-                      Destaque
-                    </span>
-                  )}
                 </div>
               </div>
             );

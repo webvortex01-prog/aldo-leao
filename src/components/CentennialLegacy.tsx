@@ -5,51 +5,46 @@ import { TimelineEvent } from '../types';
 export const CentennialLegacy: React.FC = () => {
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
 
-  const timelineEvents: TimelineEvent[] = [
+  const timelineEvents = [
     {
       year: '1908',
-      generation: 'Primeira Geração',
       title: 'Fundação do Escritório',
-      description: 'Prof. Dr. Arnaldo da Silva Ferreira inicia o legado jurídico familiar como precursor da advocacia empresarial no RS e fundador do escritório mais antigo do Brasil.',
-      badge: 'Origem Histórica'
+      lawyers: ['Prof. Dr. Arnaldo da Silva Ferreira'],
+      description: 'Precursor da advocacia empresarial no RS e fundador do escritório de advocacia mais antigo do Brasil.',
     },
     {
       year: '1935',
-      generation: 'Segunda Geração',
       title: 'Continuidade da Tradição',
-      description: 'Dr. Mario de Castilhos Ferreira e Dr. Aldo Leão Ferreira expandem a atuação no cenário jurídico estadual com excelência técnica e docência superior.',
-      badge: 'Expansão Estadual'
+      lawyers: ['Dr. Mário de Castilhos Ferreira', 'Dr. Ney de Castilhos Ferreira'],
+      description: 'Expansão da atuação jurídica de excelência técnica e docência superior no cenário estadual.',
     },
     {
-      year: '1951',
-      generation: 'Segunda Geração',
+      year: '1915',
       title: 'Consolidação Institucional',
-      description: 'Dr. Ney de Castilhos Ferreira assume como Procurador da Fazenda Nacional e Diretor Jurídico da VARIG/RJ, consolidando a projeção jurídica nacional da família.',
-      badge: 'Projeção Nacional'
+      lawyers: ['Prof. Dr. Aldo Leão Ferreira'],
+      description: 'Procurador do Estado do RS e Professor Universitário, unindo a academia à prática jurídica.',
     },
     {
       year: '1986',
-      generation: 'Terceira Geração',
       title: 'Advocacia Estratégica',
-      description: 'Dr. Aldo Leão Ferreira Filho inaugura a terceira geração familiar, estruturando a moderna Advocacia Estratégica, Gestão Patrimonial e Procuradoria Pública.',
-      badge: 'Advocacia 4.0'
+      lawyers: ['Prof. Dr. Aldo Leão Ferreira Filho'],
+      description: 'Início da terceira geração familiar, estruturando a moderna Advocacia Estratégica e Planejamento Patrimonial 4.0.',
     },
     {
       year: '2020',
-      generation: 'Escritório Digital',
-      title: 'Transformação Digital',
-      description: 'Migração integral para o atendimento jurídico 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.',
-      badge: 'Presença Nacional'
+      title: 'Presença Nacional Digital',
+      lawyers: ['Aldo Leão Advocacia Estratégica'],
+      description: 'Atuação 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.',
     }
   ];
 
   return (
-    <section id="legado" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20">
+    <section id="legado" className="py-20 md:py-24 bg-[#050B14] relative border-t border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
-            <span>Legado Jurídico Centenário</span>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
+            <span>EXCELÊNCIA JURÍDICA FAMILIAR</span>
             <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>
             <span>Desde 1908</span>
           </div>
@@ -65,94 +60,8 @@ export const CentennialLegacy: React.FC = () => {
           </p>
         </div>
 
-        {/* 3 Generations Feature Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20">
-          {/* Primeira Geração */}
-          <div className="p-7 rounded-xl bg-[#071122] border border-[#D4AF37]/30 flex flex-col justify-between gold-hairline-card">
-            <div>
-              <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/20 mb-4">
-                <span className="font-cinzel text-xl font-bold text-[#F6E27A] tabular-nums">1908</span>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#E5C158]">1ª Geração</span>
-              </div>
-              <h3 className="font-cinzel text-lg font-bold text-white mb-2">
-                O Início de uma Referência Jurídica
-              </h3>
-              <p className="text-xs font-semibold text-[#E5C158] mb-3">Prof. Dr. Arnaldo da Silva Ferreira</p>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
-                Fundador do escritório de advocacia mais antigo do Brasil e precursor da advocacia empresarial no Rio Grande do Sul.
-                Exerceu funções como Advogado, Professor, Juiz Federal, Juiz Municipal e Delegado. Idealizador, fundador e único
-                Presidente de Honra do Instituto dos Advogados do Rio Grande do Sul (IARGS).
-              </p>
-            </div>
-          </div>
-
-          {/* Segunda Geração */}
-          <div className="p-7 rounded-xl bg-[#071122] border border-[#D4AF37]/30 flex flex-col justify-between gold-hairline-card">
-            <div>
-              <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/20 mb-4">
-                <span className="font-cinzel text-xl font-bold text-[#F6E27A] tabular-nums">1935 & 1951</span>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-[#E5C158]">2ª Geração</span>
-              </div>
-              <h3 className="font-cinzel text-lg font-bold text-white mb-2">
-                A Expansão da Advocacia Familiar
-              </h3>
-              <p className="text-xs font-semibold text-[#E5C158] mb-3">Dr. Aldo, Dr. Mario e Dr. Ney de Castilhos Ferreira</p>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
-                Consolidação no cenário estadual e nacional. Dr. Ney de Castilhos Ferreira atuou como Procurador da Fazenda Nacional
-                e Diretor Jurídico da VARIG/RJ. Dr. Aldo Leão Ferreira exerceu as funções de Advogado, Procurador do Estado do RS e
-                Professor Universitário, aliando a academia à prática jurídica.
-              </p>
-            </div>
-          </div>
-
-          {/* Terceira Geração */}
-          <div className="p-7 rounded-xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/50 flex flex-col justify-between shadow-xl">
-            <div>
-              <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/30 mb-4">
-                <span className="font-cinzel text-xl font-bold text-[#F6E27A] tabular-nums">1986 – 2026</span>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#F6E27A]">3ª Geração · 40 Anos</span>
-              </div>
-              
-              {/* Photo of Dr. Aldo */}
-              <div className="mb-4 rounded-lg overflow-hidden border border-[#D4AF37]/40 aspect-[16/9] relative bg-[#060D1A]">
-                <img
-                  src="/img/dr-aldo-1.jpg"
-                  alt="Dr. Aldo Leão Ferreira Filho - 3ª Geração (1986-2026)"
-                  className="w-full h-full object-cover object-top hover:scale-103 transition-transform duration-500"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = '/img/DrAldo.jpg.jpeg';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071122] via-transparent to-transparent opacity-60" />
-                <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-[#071122]/90 border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A]">
-                  40 Anos de Advocacia
-                </span>
-              </div>
-
-              <h3 className="font-cinzel text-lg font-bold text-white mb-2">
-                Advocacia Estratégica 4.0
-              </h3>
-              <p className="text-xs font-semibold text-[#E5C158] mb-3">Dr. Aldo Leão Ferreira Filho</p>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
-                Unindo tradição iniciada em 1908 à gestão jurídica estratégica e às modernas soluções multidisciplinares.
-                Especialista nacional em Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar, Procurador Municipal de 20
-                municípios gaúchos, escritor e professor universitário.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* TIMELINE SECTION (Template History do Decision) */}
-        <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/35 bg-[#071122] p-8 sm:p-12 shadow-2xl">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-              NOSSA HISTÓRIA
-            </span>
-            <h3 className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase tracking-wider">
-              UMA TRAJETÓRIA DE TRÊS GERAÇÕES DEDICADAS À EXCELÊNCIA JURÍDICA
-            </h3>
-          </div>
-
+        {/* TIMELINE SECTION (Os 3 boxes foram excluídos conforme solicitado, mantendo a linha do tempo) */}
+        <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/35 bg-[#071122] p-6 sm:p-10 lg:p-12 shadow-2xl">
           {/* Timeline Milestones */}
           <div className="relative">
             {/* Horizontal Line on Desktop */}
@@ -166,15 +75,19 @@ export const CentennialLegacy: React.FC = () => {
                     {evt.year}
                   </div>
 
-                  {/* Generation */}
-                  <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider font-cinzel mb-1">
-                    {evt.generation}
-                  </span>
-
-                  {/* Institutional Phrase */}
-                  <h4 className="text-xs font-bold text-white mb-2 leading-tight">
+                  {/* Title */}
+                  <h4 className="text-xs font-bold text-white mb-2 leading-tight uppercase font-cinzel">
                     {evt.title}
                   </h4>
+
+                  {/* Lawyers in Bold */}
+                  <div className="mb-2 space-y-0.5">
+                    {evt.lawyers.map((name, i) => (
+                      <p key={i} className="text-xs font-black text-[#F6E27A] tracking-tight">
+                        {name}
+                      </p>
+                    ))}
+                  </div>
 
                   {/* Description */}
                   <p className="text-[11px] text-slate-400 leading-relaxed font-sans-body">
@@ -185,19 +98,17 @@ export const CentennialLegacy: React.FC = () => {
             </div>
           </div>
 
-          {/* Footer Signature & Modal Trigger */}
+          {/* Footer Modal Trigger */}
           <div className="mt-12 pt-8 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setHistoryModalOpen(true)}
-                className="px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 transition-all cursor-pointer"
-              >
-                Ler História Completa (1908 – 2026)
-              </button>
-            </div>
+            <button
+              onClick={() => setHistoryModalOpen(true)}
+              className="px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 transition-all cursor-pointer shadow-md"
+            >
+              Ler História Completa (1908 – 2026)
+            </button>
 
             {/* Stylized Dr. Aldo Leão Signature */}
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right">
+            <div className="flex items-center gap-3">
               <img
                 src="/img/assinatura-gold.png"
                 alt="Assinatura Dr. Aldo Leão Ferreira Filho"
@@ -206,14 +117,6 @@ export const CentennialLegacy: React.FC = () => {
                   (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
                 }}
               />
-              <div>
-                <div className="font-cinzel text-sm sm:text-base font-bold text-[#F6E27A] tracking-wider">
-                  Dr. Aldo Leão Ferreira Filho
-                </div>
-                <p className="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">
-                  Head Jurídico · Terceira Geração Familiar (1986–2026)
-                </p>
-              </div>
             </div>
           </div>
         </div>

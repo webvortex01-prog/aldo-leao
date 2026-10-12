@@ -1,144 +1,142 @@
 import React from 'react';
 import { Logo } from './Logo';
-import { Scale, ShieldCheck, Lock } from 'lucide-react';
+import { Scale, Lock, ArrowRight, FileEdit } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 
 interface FooterProps {
   onOpenAdmin?: () => void;
   onOpenTutorial?: () => void;
+  onOpenLandingPage?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenAdmin, onOpenTutorial }) => {
+export const Footer: React.FC<FooterProps> = ({ 
+  onOpenAdmin, 
+  onOpenTutorial,
+  onOpenLandingPage 
+}) => {
   const { siteConfig } = useSite();
-  const { contact } = siteConfig;
-
 
   return (
     <footer className="bg-[#040810] text-slate-400 border-t border-[#D4AF37]/20 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#D4AF37]/15">
-          {/* Brand & Manifesto */}
-          <div className="lg:col-span-5 space-y-4">
+        {/* Brand Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="flex justify-center mb-4">
             <Logo size="md" />
-            <p className="text-xs sm:text-sm text-slate-400 font-sans-body max-w-sm leading-relaxed mt-4">
-              Escritório de advocacia estratégica vocacionado para a resolução
-              de litígios de alta complexidade e proteção incondicional de grandes
-              patrimônios perante cortes superiores e tribunais administrativos.
-            </p>
-            <div className="flex items-center gap-2 text-xs text-[#E5C158] pt-2">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Inscrição {siteConfig.hero.oabNumber} · Sociedade de Advogados</span>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-400 font-sans-body leading-relaxed">
+            Desde 1908, excelência jurídica centenária em três gerações. Advocacia estratégica, proteção patrimonial e inteligência jurídica.
+          </p>
+        </div>
+
+        {/* 4 Footer Boxes as requested in Item 14 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pb-12 border-b border-[#D4AF37]/20">
+          {/* Box 1: Editor de Sites (Acesso Restrito Admin) */}
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-3">
+                <FileEdit className="w-5 h-5 text-[#E5C158]" />
+              </div>
+              <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider mb-2">
+                Editor de Sites
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
+                Acesso administrativo restrito para edição e personalização em tempo real de conteúdos do site.
+              </p>
+            </div>
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
+              <button
+                onClick={onOpenAdmin}
+                className="w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] hover:bg-[#1A365D] hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                title="Acessar Editor de Sites"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                <span>Admin (Editor de Sites)</span>
+              </button>
             </div>
           </div>
 
-          {/* Quick Nav Links */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-widest">
-              Navegação
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li>
-                <a href="#areas-atuacao" className="hover:text-[#F6E27A] transition-colors">
-                  Áreas de Atuação
-                </a>
-              </li>
-              <li>
-                <a href="#diagnostico" className="hover:text-[#F6E27A] transition-colors">
-                  Diagnóstico de Risco
-                </a>
-              </li>
-              <li>
-                <a href="#selo-40-anos" className="hover:text-[#F6E27A] text-[#F6E27A] font-semibold transition-colors">
-                  Selo Comemorativo 40 Anos
-                </a>
-              </li>
-              <li>
-                <a href="#academia-leao" className="hover:text-[#F6E27A] transition-colors">
-                  Academia Leão Ferreira & Palestras
-                </a>
-              </li>
-              <li>
-                <a href="#head-juridico" className="hover:text-[#F6E27A] transition-colors">
-                  Head Jurídico Dr. Aldo Leão
-                </a>
-              </li>
-              <li>
-                <a href="#casos" className="hover:text-[#F6E27A] transition-colors">
-                  Casos Emblemáticos
-                </a>
-              </li>
-              <li>
-                <a href="#livros" className="hover:text-[#F6E27A] text-[#F6E27A] font-semibold transition-colors">
-                  Livros & Obras (Download PDF)
-                </a>
-              </li>
-              <li>
-                <a href="#publicacoes" className="hover:text-[#F6E27A] transition-colors">
-                  Publicações Jurídicas
-                </a>
-              </li>
-              {onOpenTutorial && (
-                <li className="pt-2">
-                  <button
-                    onClick={onOpenTutorial}
-                    className="text-xs text-sky-400 hover:text-white flex items-center gap-1.5 cursor-pointer font-medium"
-                  >
-                    <span>✨ Abrir Guia do Projeto Exemplar</span>
-                  </button>
-                </li>
-              )}
-              {onOpenAdmin && (
-                <li className="pt-1">
-                  <button
-                    onClick={onOpenAdmin}
-                    className="text-xs text-[#E5C158] hover:text-[#F6E27A] flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <Lock className="w-3 h-3" />
-                    <span>Acesso Restrito · Gabinete Dr. Aldo</span>
-                  </button>
-                </li>
-              )}
-            </ul>
+          {/* Box 2: Planejamento Patrimonial 4.0 */}
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-3">
+                <Scale className="w-5 h-5 text-[#E5C158]" />
+              </div>
+              <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider mb-2">
+                Planejamento Patrimonial 4.0
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
+                Proteção e perpetuação do patrimônio familiar em vida, evitando o inventário e os custos sucessórios.
+              </p>
+            </div>
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
+              <button
+                onClick={onOpenLandingPage}
+                className="w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] hover:bg-[#1A365D] hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span>Conhecer Solução</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
 
-          {/* Sedes & Contato */}
-          <div className="lg:col-span-4 space-y-3">
-            <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-widest">
-              Sede & Atendimento Digital
-            </h4>
-            <div className="space-y-2 text-xs text-slate-400">
-              <p>
-                <strong className="text-slate-300">Sede Principal:</strong> {contact.addressPortoAlegre}
+          {/* Box 3: Planejamento Patrimonial 4.0 */}
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-3">
+                <Scale className="w-5 h-5 text-[#E5C158]" />
+              </div>
+              <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider mb-2">
+                Planejamento Patrimonial 4.0
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
+                Modelagem societária personalizada via Holding Familiar, governança corporativa e sucessão segura.
               </p>
-              <p>
-                <strong className="text-slate-300">Horário:</strong> {contact.officeHours}
+            </div>
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
+              <a
+                href="#holding-familiar"
+                className="w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] hover:bg-[#1A365D] hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+              >
+                <span>Ver Estudo de Custos</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Box 4: Atendimento Digital e Presencial */}
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+            <div>
+              <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-3">
+                <Scale className="w-5 h-5 text-[#E5C158]" />
+              </div>
+              <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider mb-2">
+                Atendimento Digital e Presencial
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
+                Sede em Porto Alegre - RS com atuação digital e suporte estratégico em todo o Brasil.
               </p>
-              <p>
-                <strong className="text-slate-300">Atendimento Nacional:</strong> 100% Digital com hora marcada
-              </p>
-              <p className="pt-2 text-[#E5C158] font-semibold tabular-nums">
-                Linhas: {contact.phonePrimary} · {contact.phoneSecondary}
-              </p>
-              <p className="text-[#E5C158]">
-                WhatsApp: {contact.whatsappNumber}
-              </p>
+            </div>
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
+              <a
+                href="#localizacao"
+                className="w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] hover:bg-[#1A365D] hover:text-white text-xs font-semibold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+              >
+                <span>Detalhes da Sede</span>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar & OAB Ethics Notice */}
+        {/* Bottom Bar (Excluído "Política de Privacidade, Termos de Uso e Compliance" conforme solicitado) */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <p>
-            © {new Date().getFullYear()} Aldo Leão Advocacia Estratégica. Todos os direitos reservados.
+            © {new Date().getFullYear()} Aldo Leão Advocacia Estratégica · Tradição Jurídica Centenária Desde 1908. Todos os direitos reservados.
           </p>
           <p className="max-w-xl text-center md:text-right">
-            Este portal tem caráter estritamente informativo e atende aos ditames do Provimento nº 205/2021
-            do Conselho Federal da Ordem dos Advogados do Brasil (CFOAB).
+            Provimento nº 205/2021 do Conselho Federal da OAB · Inscrição OAB/RS 22.418.
           </p>
         </div>
       </div>
     </footer>
   );
 };
-

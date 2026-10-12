@@ -14,8 +14,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 }) => {
   const { siteConfig } = useSite();
   const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [isCostModalOpen, setIsCostModalOpen] = useState(false);
 
-  // Auto advance slide every 10 seconds
+  // Auto advance slide every 12 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
@@ -119,7 +120,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
               <div className="p-3.5 rounded-lg bg-[#0E1F3D]/60 border border-[#D4AF37]/30 mb-6">
                 <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  EXCELÊNCIA JURÍDICA CENTENÁRIA NA PROTEÇÃO E PERPETUAÇÃO DO SEU LEGADO.
+                  EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES
                 </p>
               </div>
 
@@ -141,31 +142,18 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </button>
               </div>
 
-              {/* 2 Decision Boxes */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/25 text-left">
+              {/* Box 1 (Box 2 excluído conforme item 3) */}
+              <div className="w-full">
+                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left">
                   <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
-                    Box 1: Excelência Jurídica Centenária
+                    Excelência Jurídica Centenária
                   </span>
-                  <h4 className="font-cinzel text-xs font-bold text-white mb-1.5 uppercase">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
                     ADVOCACIA ESTRATÉGICA
                   </h4>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
+                  <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
                     Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em
                     uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/25 text-left">
-                  <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
-                    Box 2: Planejamento Patrimonial 4.0
-                  </span>
-                  <h4 className="font-cinzel text-xs font-bold text-white mb-1.5 uppercase">
-                    PROTEJA E PERPETUE O SEU LEGADO
-                  </h4>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    Planejamento 4.0 é uma solução jurídica estratégica que integra patrimônio, família e empresas,
-                    para estruturar, em vida, soluções personalizadas de proteção patrimonial e arquitetura empresarial.
                   </p>
                 </div>
               </div>
@@ -212,64 +200,48 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center animate-fadeIn">
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               {/* Eyebrow */}
-              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-4">
-                <span>PLANEJAMENTO PATRIMONIAL 4.0 (via Holding Familiar)</span>
+              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-4">
+                <span>{siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}</span>
               </div>
 
               {/* Title */}
               <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl lg:text-5.5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance]">
-                O ECOSSISTEMA SOCIETÁRIO QUE{' '}
-                <span className="gold-text-gradient">PROTEGE E PERPETUA</span> O SEU LEGADO
+                {siteConfig.slide2?.title || 'PLANEJAMENTO PATRIMONIAL 4.0'}
               </h1>
 
-              {/* Description */}
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-                Proteja, organize e perpetue o seu legado patrimonial e empresarial com inteligência jurídica e segurança estratégica.
-                A Holding Familiar é a solução jurídica de vanguarda para proteção patrimonial, sucessão empresarial e eliminação
-                da elevada perda patrimonial e financeira dos herdeiros causada pelo inventário.
-              </p>
-
-              <div className="p-3.5 rounded-lg bg-[#0E1F3D]/60 border border-[#D4AF37]/30 mb-6">
+              {/* Callout Box 1 */}
+              <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-4">
                 <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  AGENDE HOJE A PROTEÇÃO (JURÍDICA) E A PERPETUAÇÃO DO SEU LEGADO.
+                  {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
                 </p>
               </div>
 
-              {/* CTAs */}
+              {/* Callout Box 2 */}
+              <div className="p-3 rounded-lg bg-[#071122] border border-[#D4AF37]/25 mb-6">
+                <p className="text-xs sm:text-sm text-slate-200 font-semibold leading-relaxed">
+                  {siteConfig.slide2?.callout2 || 'EVITE A ALTA PERDA PATRIMONIAL E FINANCEIRA DOS SEUS FILHOS NO INVENTÁRIO.'}
+                </p>
+              </div>
+
+              {/* CTA: Only the requested PLANEJAMENTO PATRIMONIAL 4.0 button */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-8">
                 <button
                   onClick={onGoToLandingPage}
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] cursor-pointer"
                 >
-                  <span>AGENDAR DIAGNÓSTICO DE VIABILIDADE</span>
+                  <span>PLANEJAMENTO PATRIMONIAL 4.0</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={onOpenConsultation}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-semibold tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-[#F6E27A] hover:border-[#D4AF37] transition-all cursor-pointer"
-                >
-                  <span>CONSULTA JURÍDICA DIGITAL</span>
                 </button>
               </div>
 
-              {/* Slide 2 Quick Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/25 text-left">
-                  <h4 className="font-cinzel text-xs font-bold text-[#E5C158] mb-1 uppercase">
-                    Evita Perdas de até 20% no Inventário
+              {/* Slide 2 Single Box (Box "Controle total nas mãos dos pais" excluído) */}
+              <div className="w-full">
+                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] mb-2 uppercase">
+                    {siteConfig.slide2?.boxTitle || 'O INVENTÁRIO GERA UMA ALTA PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
                   </h4>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    Elimine a venda forçada de bens com deságio e a alta tributação do ITCMD através da transição jurídica planejada em vida.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/25 text-left">
-                  <h4 className="font-cinzel text-xs font-bold text-[#E5C158] mb-1 uppercase">
-                    Controle Total nas Mãos dos Pais
-                  </h4>
-                  <p className="text-[11px] text-slate-300 leading-relaxed">
-                    Doação de cotas com usufruto vitalício, cláusulas de inalienabilidade, incomunicabilidade e voto qualificado (Golden Share).
+                  <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed">
+                    {siteConfig.slide2?.boxText || 'O inventário gera uma Alta Perda Patrimonial e Financeira dos herdeiros em média de 40% do Patrimônio Inventário, em média, que é evitada pelo Planejamento Patrimonial 4.0, que vai aumentar por causa do aumento do ITCMD.'}
                   </p>
                 </div>
               </div>
@@ -278,36 +250,22 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             {/* Right Column Slide 2 */}
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-md lg:max-w-none">
-                <div className="p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/50 shadow-2xl">
-                  <div className="flex items-center justify-between border-b border-[#D4AF37]/25 pb-3 mb-4">
-                    <span className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                      Holding Familiar 4.0
-                    </span>
-                    <span className="text-[11px] text-[#25D366] font-bold">
-                      Economia Comprovada
+                <div className="p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl">
+                  <div className="border-b border-[#D4AF37]/30 pb-3 mb-4">
+                    <span className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider block">
+                      {siteConfig.slide2?.rightCardTitle || 'PERDA PATRIMONIAL E FINANCEIRA DOS HERDEIROS NO INVENTÁRIO'}
                     </span>
                   </div>
 
-                  <div className="space-y-3 mb-5">
-                    <div className="flex items-center justify-between text-xs text-slate-300">
-                      <span>Custo Médio do Inventário:</span>
-                      <span className="text-red-400 font-bold tabular-nums">R$ 297.000,00</span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-slate-300">
-                      <span>Custo da Holding 4.0:</span>
-                      <span className="text-[#F6E27A] font-bold tabular-nums">R$ 133.000,00</span>
-                    </div>
-                    <div className="pt-2 border-t border-[#D4AF37]/20 flex items-center justify-between text-xs font-bold">
-                      <span className="text-white">Economia Real para Herdeiros:</span>
-                      <span className="text-[#25D366] text-sm tabular-nums">R$ 164.000,00 (55,21%)</span>
-                    </div>
-                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-6 font-light">
+                    {siteConfig.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
+                  </p>
 
                   <button
-                    onClick={onGoToLandingPage}
-                    className="w-full py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 transition-all text-center cursor-pointer shadow-lg"
+                    onClick={() => setIsCostModalOpen(true)}
+                    className="w-full py-3.5 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer shadow-lg"
                   >
-                    Ver Estudo Comparativo Completo
+                    CUSTOS INVENTÁRIO X HOLDING FAMILIAR
                   </button>
                 </div>
               </div>
@@ -315,6 +273,104 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           </div>
         )}
       </div>
+
+      {/* Modal Tabela Comparativa de Custos (Inventário x Holding Familiar) */}
+      {isCostModalOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setIsCostModalOpen(false)}
+        >
+          <div
+            className="w-full max-w-2xl bg-[#071122] border border-[#D4AF37]/60 rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.9)] overflow-hidden animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-5 border-b border-[#D4AF37]/30 flex items-center justify-between bg-gradient-to-r from-[#0E1F3D] to-[#071122]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center text-[#F6E27A]">
+                  <Scale className="w-5 h-5 text-[#E5C158]" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white font-cinzel">
+                    INVENTÁRIO x HOLDING FAMILIAR
+                  </h3>
+                  <p className="text-[11px] text-[#E5C158]">
+                    Estudo Comparativo de Custos Patrimoniais
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsCostModalOpen(false)}
+                className="w-8 h-8 rounded-full bg-[#050B14] border border-[#D4AF37]/40 text-slate-300 hover:text-white flex items-center justify-center cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <p className="text-xs text-slate-300 leading-relaxed">
+                A título de exemplo, consideramos um patrimônio adquirido por <strong>{siteConfig.slide2?.sampleAcquisition || 'R$ 1.000.000,00'}</strong>, com valor de mercado atual de <strong>{siteConfig.slide2?.sampleMarket || 'R$ 1.500.000,00'}</strong> (ganho de capital de {siteConfig.slide2?.sampleCapitalGain || 'R$ 500.000,00'}):
+              </p>
+
+              <div className="overflow-x-auto rounded-lg border border-[#D4AF37]/30">
+                <table className="w-full text-xs text-left">
+                  <thead className="bg-[#0E1F3D] text-[#F6E27A] border-b border-[#D4AF37]/30">
+                    <tr>
+                      <th className="p-3">Etapa de Despesa</th>
+                      <th className="p-3 text-red-400">Inventário Judicial</th>
+                      <th className="p-3 text-[#25D366]">Holding Familiar 4.0</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#D4AF37]/15 text-slate-300 bg-[#050B14]">
+                    <tr>
+                      <td className="p-3 font-medium">ITCMD (Alíquota Tributária)</td>
+                      <td className="p-3 text-red-300">R$ 120.000,00 (8% mercado)</td>
+                      <td className="p-3 text-[#25D366]">R$ 40.000,00 (4% histórico)</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-medium">Custas Judiciais / Cartorárias</td>
+                      <td className="p-3 text-red-300">R$ 27.000,00</td>
+                      <td className="p-3 text-[#25D366]">R$ 8.000,00</td>
+                    </tr>
+                    <tr>
+                      <td className="p-3 font-medium">Honorários Advocatícios</td>
+                      <td className="p-3 text-red-300">R$ 150.000,00 (10%)</td>
+                      <td className="p-3 text-[#25D366]">R$ 85.000,00 (Planejamento)</td>
+                    </tr>
+                    <tr className="bg-[#0E1F3D]/60 font-bold">
+                      <td className="p-3 text-white">Custo Total Estimado</td>
+                      <td className="p-3 text-red-400">{siteConfig.slide2?.inventoryTotal || 'R$ 297.000,00'}</td>
+                      <td className="p-3 text-[#25D366]">{siteConfig.slide2?.holdingTotal || 'R$ 133.000,00'}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="p-3 rounded-lg bg-[#25D366]/10 border border-[#25D366]/30 flex items-center justify-between text-xs">
+                <span className="text-white font-medium">Economia com a Holding Familiar:</span>
+                <span className="text-[#25D366] font-bold text-sm">{siteConfig.slide2?.savingsAmount || 'R$ 164.000,00'} (correspondente a {siteConfig.slide2?.savingsPercentage || '55,21%'})</span>
+              </div>
+            </div>
+
+            <div className="p-4 bg-[#050B14] border-t border-[#D4AF37]/30 flex justify-end gap-3">
+              <button
+                onClick={() => setIsCostModalOpen(false)}
+                className="px-4 py-2 rounded-lg border border-slate-700 text-slate-300 text-xs font-semibold hover:bg-slate-800 cursor-pointer"
+              >
+                Fechar
+              </button>
+              <button
+                onClick={() => {
+                  setIsCostModalOpen(false);
+                  onGoToLandingPage();
+                }}
+                className="px-6 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 cursor-pointer shadow-md"
+              >
+                SAIBA MAIS
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

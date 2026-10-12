@@ -107,9 +107,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onOpenAdmin}
             className="text-[11px] font-semibold text-[#E5C158] hover:text-[#F6E27A] px-2.5 py-1 rounded bg-[#0A1730] border border-[#D4AF37]/35 transition-all whitespace-nowrap shrink-0 cursor-pointer"
-            title="Acesso ao Painel Admin e Gestão de Casos"
+            title="Editor de Sites (Acesso Restrito)"
           >
-            Gabinete Dr. Aldo
+            Admin
           </button>
         </nav>
 
@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </div>
 
-        {/* Mobile & Tablet Hamburger Toggle & Quick Actions (Always visible when desktop menu is hidden) */}
+        {/* Mobile & Tablet Hamburger Toggle & Quick Actions */}
         <div className="flex lg:hidden items-center gap-1.5 sm:gap-2.5 shrink-0">
           <button
             onClick={onOpenConsultation}
@@ -139,9 +139,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onOpenAdmin}
             className="px-2 sm:px-2.5 py-1.5 text-[10px] sm:text-[11px] uppercase font-bold text-[#F6E27A] bg-[#0E1F3D] border border-[#D4AF37]/50 rounded hover:bg-[#162D58] transition-colors cursor-pointer"
-            title="Gabinete Dr. Aldo"
+            title="Editor de Sites (Admin)"
           >
-            Gabinete
+            Admin
           </button>
 
           <button
@@ -262,8 +262,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               }}
               className="text-left text-xs uppercase font-bold text-[#F6E27A] py-1.5 flex items-center gap-2 cursor-pointer hover:brightness-110"
             >
-              <span>🔒</span>
-              <span>Painel Admin · Gabinete Dr. Aldo</span>
+              <span>⚙️</span>
+              <span>Admin (Editor de Sites)</span>
             </button>
           </nav>
           <div className="pt-3 border-t border-[#D4AF37]/20 flex flex-col gap-2">

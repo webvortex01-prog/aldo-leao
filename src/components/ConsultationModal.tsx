@@ -35,12 +35,26 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
 
   if (!isOpen) return null;
 
+  const buildWhatsAppMessage = () => {
+    return encodeURIComponent(
+      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de agendar uma Consulta Jurídica Virtual.\n\n` +
+      `📋 *DADOS DO AGENDAMENTO:*\n` +
+      `• *Nome:* ${fullName || 'Não informado'}\n` +
+      `• *WhatsApp:* ${phone || 'Não informado'}\n` +
+      `• *E-mail:* ${email || 'Não informado'}\n` +
+      `• *Área da Consulta:* ${area}\n` +
+      `• *Tipo de Consulta:* ${urgency === 'imediata' ? 'Urgente' : 'Normal'}\n` +
+      (notes ? `• *Assunto e Histórico:* ${notes}\n` : '') +
+      `\nSolicito confirmação de horário com o Dr. Aldo Leão.`
+    );
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !phone) return;
     setSubmitting(true);
 
-    // Save lead into Admin CRM
+    // 1. Grava no Gabinete de Estatísticas / Leads do Sistema
     addLead({
       fullName,
       phone,
@@ -48,21 +62,28 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
       area,
       urgency: urgency as any,
       estimatedValue: presetValue || 'A definir na consulta',
-      summary: notes || 'Solicitação via Consulta Rápida',
+      summary: notes || 'Solicitação via Consulta Digital do Site',
       ndaAccepted: true
     });
+
+    // 2. Notifica Dr. Aldo instantaneamente no WhatsApp oficial
+    const targetPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+    const waUrl = `https://wa.me/${targetPhone}?text=${buildWhatsAppMessage()}`;
+    try {
+      window.open(waUrl, '_blank');
+    } catch (err) {
+      console.warn('Popup blocked, WhatsApp can be opened manually:', err);
+    }
 
     setTimeout(() => {
       setSubmitting(false);
       setSent(true);
-    }, 600);
+    }, 500);
   };
 
   const handleWhatsApp = () => {
-    const text = encodeURIComponent(
-      `Prezado Dr. Aldo Leão, solicito agendamento de consulta estratégica prioritária.\n\n*Cliente:* ${fullName || 'Privado'}\n*Área:* ${area}\n*Urgência:* ${urgency}\n*Contato:* ${phone || 'WhatsApp'}`
-    );
-    window.open(`https://wa.me/${siteConfig.contact.whatsappNumber}?text=${text}`, '_blank');
+    const targetPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+    window.open(`https://wa.me/${targetPhone}?text=${buildWhatsAppMessage()}`, '_blank');
   };
 
 
@@ -124,14 +145,14 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                  Seu Nome ou Razão Social *
+                  Nome Completo *
                 </label>
                 <input
                   type="text"
                   required
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Nome do solicitante ou da empresa"
+                  placeholder="Seu nome completo"
                   className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                 />
               </div>
@@ -139,26 +160,26 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                    WhatsApp Direto para Retorno *
+                    WhatsApp *
                   </label>
                   <input
                     type="tel"
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="(11) 99999-9999"
+                    placeholder="(51) 99808-8998"
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                    E-mail Corporativo
+                    E-mail
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="contato@empresa.com"
+                    placeholder="seuemail@exemplo.com"
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                   />
                 </div>
@@ -167,47 +188,45 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                    Área Principal
+                    Área da Consulta
                   </label>
                   <select
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white focus:outline-none focus:border-[#D4AF37]"
                   >
-                    <option value="Defesa Tributária & CARF">Defesa Tributária & CARF</option>
-                    <option value="Blindagem Patrimonial & Sucessão">Blindagem Patrimonial & Sucessão</option>
-                    <option value="Cortes Superiores (STF/STJ)">Cortes Superiores (STF/STJ)</option>
-                    <option value="Direito Penal Econômico">Direito Penal Econômico</option>
-                    <option value="Direito Societário & M&A">Direito Societário & M&A</option>
-                    <option value="Agronegócio & Reestruturação">Agronegócio & Reestruturação</option>
+                    <option value="Planejamento Patrimonial 4.0">Planejamento Patrimonial 4.0</option>
+                    <option value="Direito Imobiliário">Direito Imobiliário</option>
+                    <option value="Direito Empresarial">Direito Empresarial</option>
+                    <option value="Direito Civil">Direito Civil</option>
+                    <option value="Relações de Consumo">Relações de Consumo</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                    Temporalidade
+                    Tipo de Consulta
                   </label>
                   <select
                     value={urgency}
                     onChange={(e) => setUrgency(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white focus:outline-none focus:border-[#D4AF37]"
                   >
-                    <option value="imediata">Urgência Crítica / Liminar / Prisão</option>
-                    <option value="media">Prazo de Recurso Aberto</option>
-                    <option value="baixa">Planejamento Preventivo</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Urgente">Urgente</option>
                   </select>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1">
-                  Notas sobre o Caso (Opcional)
+                  Assunto e Histórico
                 </label>
                 <textarea
                   rows={3}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Informações adicionais para nossa análise prévia..."
+                  placeholder="Descreva o assunto e o histórico da demanda..."
                   className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                 />
               </div>
@@ -216,10 +235,10 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-3.5 rounded text-xs font-semibold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
+                  className="w-full py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
-                  <span>{submitting ? 'Registrando...' : 'Solicitar Atendimento Prioritário'}</span>
+                  <span>{submitting ? 'Registrando...' : 'AGENDAR CONSULTA VIRTUAL'}</span>
                 </button>
               </div>
 
@@ -227,10 +246,10 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 <button
                   type="button"
                   onClick={handleWhatsApp}
-                  className="text-xs text-[#25D366] hover:underline inline-flex items-center gap-1.5"
+                  className="text-xs text-[#25D366] hover:underline inline-flex items-center gap-1.5 font-bold cursor-pointer"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
-                  <span>Ou prefiro acionar o Dr. Aldo Leão direto pelo WhatsApp</span>
+                  <span>AGENDAR PELO WHATSAPP</span>
                 </button>
               </div>
             </form>

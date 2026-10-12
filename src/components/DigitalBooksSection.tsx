@@ -5,7 +5,6 @@ import {
   FileText, 
   CheckCircle2, 
   Sparkles, 
-  ShoppingBag, 
   ExternalLink, 
   X, 
   Bookmark, 
@@ -29,7 +28,7 @@ interface DigitalBooksSectionProps {
 
 export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = ({ onOpenConsultation }) => {
   const { siteConfig } = useSite();
-  const [activeTab, setActiveTab] = useState<'todos' | 'download' | 'obras'>('todos');
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedBook, setSelectedBook] = useState<DigitalBook | null>(null);
   const [downloadModalBook, setDownloadModalBook] = useState<DigitalBook | null>(null);
   const [downloadName, setDownloadName] = useState('');
@@ -40,18 +39,12 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = ({ onOpen
   const books = siteConfig.digitalBooks || [];
 
   const filteredBooks = useMemo(() => {
-    if (activeTab === 'download') {
-      return books.filter((b) => b.downloadAvailable);
-    }
-    if (activeTab === 'obras') {
-      return books.filter((b) => !b.downloadAvailable);
-    }
-    return books;
-  }, [books, activeTab]);
-
-  const downloadableCount = useMemo(() => {
-    return books.filter((b) => b.downloadAvailable).length;
-  }, [books]);
+    return books.filter((b) => {
+      const matchesSearch = b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        b.area.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesSearch;
+    });
+  }, [books, searchTerm]);
 
   // Handle direct file download generation
   const triggerPdfDownload = (book: DigitalBook) => {
@@ -121,10 +114,18 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
     setDownloadSuccess(true);
   };
 
-  const handleAcquireViaWhatsApp = (book: DigitalBook) => {
+  const handleAcquireFreeViaWhatsApp = (bookTitle: string) => {
     const rawPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
     const message = encodeURIComponent(
-      `Olá, Dr. Aldo Leão! Tenho interesse em adquirir o livro "${book.title}" (Área: ${book.area}, ISBN: ${book.isbn || 'Oficial'}). Gostaria de saber os detalhes para aquisição e envio de exemplar.`
+      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de receber gratuitamente o livro digital "${bookTitle}".`
+    );
+    window.open(`https://wa.me/${rawPhone}?text=${message}`, '_blank');
+  };
+
+  const handleDownloadViaWhatsApp = (bookTitle: string) => {
+    const rawPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+    const message = encodeURIComponent(
+      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de baixar o livro digital gratuito "${bookTitle}".`
     );
     window.open(`https://wa.me/${rawPhone}?text=${message}`, '_blank');
   };
@@ -138,94 +139,55 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0E1F3D] border border-[#D4AF37]/40 text-[11px] uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3 shadow-inner">
             <BookOpen className="w-3.5 h-3.5 text-[#F6E27A]" />
-            <span>BIBLIOTECA JURÍDICA & OBRAS PUBLICADAS</span>
+            <span>BIBLIOTECA JURÍDICA GRATUITA</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
-            LIVROS DO <span className="gold-text-gradient">DR. ALDO LEÃO</span>
+            LIVROS <span className="gold-text-gradient">DIGITAIS</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body">
-            Com mais de 40 anos de prática ininterrupta e pioneirismo no Direito das Famílias e Sucessões, o Dr. Aldo Leão é autor de obras que são referência nacional. Acesse os <strong className="text-[#F6E27A]">4 livros disponíveis para download gratuito em PDF</strong> ou solicite a aquisição dos exemplares completos.
+            A produção intelectual e bibliográfica é um dos pilares da excelência da Aldo Leão Advocacia Estratégica. Todas as obras são 100% gratuitas e disponibilizadas pelo Dr. Aldo Leão para orientação jurídica e planejamento patrimonial.
           </p>
         </div>
 
-        {/* Filter Navigation Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-12">
-          <button
-            onClick={() => setActiveTab('todos')}
-            className={`px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-              activeTab === 'todos'
-                ? 'bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 shadow-lg shadow-[#D4AF37]/20 font-black'
-                : 'bg-[#071122] text-slate-300 border border-slate-700/80 hover:border-[#D4AF37]/50 hover:text-white'
-            }`}
-          >
-            Todas as Obras ({books.length})
-          </button>
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto mb-12 flex flex-col sm:flex-row items-center gap-3">
+          <div className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shrink-0 w-full sm:w-auto text-center">
+            TODOS OS LIVROS DIGITAIS (GRÁTIS)
+          </div>
 
-          <button
-            onClick={() => setActiveTab('download')}
-            className={`px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
-              activeTab === 'download'
-                ? 'bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 shadow-lg shadow-[#D4AF37]/20 font-black'
-                : 'bg-[#071122] text-[#F6E27A] border border-[#D4AF37]/40 hover:bg-[#0E1F3D]'
-            }`}
-          >
-            <Download className="w-3.5 h-3.5 text-current" />
-            <span>Para Download Gratuito ({downloadableCount} Livros)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('obras')}
-            className={`px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer ${
-              activeTab === 'obras'
-                ? 'bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 shadow-lg shadow-[#D4AF37]/20 font-black'
-                : 'bg-[#071122] text-slate-300 border border-slate-700/80 hover:border-[#D4AF37]/50 hover:text-white'
-            }`}
-          >
-            <ShoppingBag className="w-3.5 h-3.5 text-current" />
-            <span>Para Aquisição / Editora ({books.length - downloadableCount})</span>
-          </button>
+          <div className="flex-1 w-full relative">
+            <input
+              type="text"
+              placeholder="Buscar livro por título ou tema..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-3 pl-10 rounded-xl bg-[#071122] border border-[#D4AF37]/40 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#F6E27A] transition-all shadow-inner"
+            />
+            <BookOpen className="w-4 h-4 text-[#E5C158] absolute left-3.5 top-1/2 -translate-y-1/2" />
+          </div>
         </div>
 
-        {/* 6 Books Grid */}
+        {/* Books Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredBooks.map((book) => {
-            const isDownloadable = Boolean(book.downloadAvailable);
-
             return (
               <div
                 key={book.id}
                 className="group relative rounded-2xl bg-[#071122] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#D4AF37]/10 flex flex-col justify-between overflow-hidden"
               >
-                {/* Book Card Top Banner / Spine illusion */}
+                {/* Book Card Top Banner */}
                 <div className="relative p-6 bg-gradient-to-b from-[#0B1A35] via-[#071122] to-transparent border-b border-[#D4AF37]/20">
-                  {/* Decorative book spine line */}
                   <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#D4AF37] via-[#AA771C] to-[#8C6218]" />
 
-                  {/* Header badges */}
                   <div className="flex items-center justify-between gap-2 mb-4 pl-2">
-                    <span
-                      className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm ${
-                        isDownloadable
-                          ? 'bg-[#D4AF37] text-slate-950 font-black'
-                          : 'bg-[#1A3F5D] text-[#F6E27A] border border-[#D4AF37]/40'
-                      }`}
-                    >
-                      {isDownloadable ? (
-                        <>
-                          <Download className="w-3 h-3 text-slate-950" />
-                          <span>DOWNLOAD GRATUITO (PDF)</span>
-                        </>
-                      ) : (
-                        <>
-                          <Award className="w-3 h-3 text-[#F6E27A]" />
-                          <span>OBRA JURÍDICA</span>
-                        </>
-                      )}
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm bg-[#D4AF37] text-slate-950">
+                      <BookOpen className="w-3 h-3 text-slate-950" />
+                      <span>LIVRO DIGITAL GRATUITO</span>
                     </span>
 
                     <span className="text-[11px] font-cinzel text-slate-400 font-semibold">
@@ -238,8 +200,8 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
                     <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white group-hover:text-[#F6E27A] transition-colors leading-snug mb-2 line-clamp-2">
                       {book.title}
                     </h3>
-                    <p className="text-xs text-[#E5C158] font-medium tracking-wide">
-                      Por {book.author}
+                    <p className="text-xs text-[#E5C158] font-bold tracking-wide">
+                      Dr. Aldo Leão
                     </p>
                     <p className="text-[11px] text-slate-400 mt-0.5">
                       {book.area}
@@ -249,75 +211,38 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
 
                 {/* Body Content */}
                 <div className="p-6 pt-4 flex-grow flex flex-col justify-between space-y-4">
-                  {/* Book Description */}
-                  <p className="text-xs text-slate-300 leading-relaxed font-sans-body line-clamp-3">
-                    {book.description}
-                  </p>
-
-                  {/* Meta Details Pill Row */}
-                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800 text-[11px] text-slate-400">
-                    <div className="flex items-center gap-1.5 truncate">
-                      <Layers className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
-                      <span className="truncate">{book.pages || 'Edição Completa'}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 truncate">
-                      <Hash className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
-                      <span className="truncate">{book.isbn ? `ISBN ${book.isbn.slice(0, 10)}...` : 'Edição Oficial'}</span>
-                    </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-300 bg-[#050B14] p-3 rounded-lg border border-slate-800">
+                    <Layers className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                    <span>{book.pages || 'Edição Digital Completa'}</span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-[#F6E27A] font-semibold">Livro Digital (PDF Gratuito)</span>
                   </div>
-
-                  {/* Chapter Highlights preview */}
-                  {book.chapters && book.chapters.length > 0 && (
-                    <div className="bg-[#050B14] p-3 rounded-lg border border-slate-800/80 text-[11px] text-slate-300">
-                      <div className="flex items-center gap-1 text-[#E5C158] font-bold uppercase text-[10px] tracking-wider mb-1.5">
-                        <Bookmark className="w-3 h-3" />
-                        <span>Destaques da Obra:</span>
-                      </div>
-                      <p className="line-clamp-2 text-slate-400 italic">
-                        "{book.chapters[0]}"
-                      </p>
-                    </div>
-                  )}
                 </div>
 
                 {/* Action Buttons Footer */}
                 <div className="p-6 pt-2 bg-[#050B14]/60 border-t border-slate-800/80 space-y-2.5">
-                  {/* Primary Download / Acquire button */}
-                  {isDownloadable ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      <button
-                        onClick={() => handleStartDownloadFlow(book)}
-                        className="w-full py-2.5 px-3 rounded-lg bg-gradient-to-r from-[#D4AF37] via-[#F6E27A] to-[#D4AF37] text-slate-950 text-xs font-black uppercase tracking-wider hover:brightness-110 transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#D4AF37]/20 cursor-pointer"
-                      >
-                        <Download className="w-3.5 h-3.5 text-slate-950 shrink-0" />
-                        <span className="truncate">Baixar PDF</span>
-                      </button>
+                  <button
+                    onClick={() => handleAcquireFreeViaWhatsApp(book.title)}
+                    className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-[#D4AF37] via-[#F6E27A] to-[#D4AF37] text-slate-950 text-xs font-black uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-md shadow-[#D4AF37]/20 cursor-pointer"
+                  >
+                    <BookOpen className="w-4 h-4 text-slate-950 shrink-0" />
+                    <span>Adquirir Livro Grátis</span>
+                  </button>
 
-                      <button
-                        onClick={() => handleAcquireViaWhatsApp(book)}
-                        className="w-full py-2.5 px-3 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#0E1F3D] hover:border-[#D4AF37] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                      >
-                        <ShoppingBag className="w-3.5 h-3.5 text-[#F6E27A] shrink-0" />
-                        <span className="truncate">Adquirir</span>
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => handleAcquireViaWhatsApp(book)}
-                      className="w-full py-2.5 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-black uppercase tracking-wider hover:bg-[#1A3F5D] transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
-                    >
-                      <ShoppingBag className="w-4 h-4 text-[#F6E27A]" />
-                      <span>Adquirir Exemplar da Obra</span>
-                    </button>
-                  )}
+                  <button
+                    onClick={() => handleDownloadViaWhatsApp(book.title)}
+                    className="w-full py-2.5 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] hover:bg-[#1A365D] hover:text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Baixar Livro Digital</span>
+                  </button>
 
-                  {/* Secondary Quick Details button */}
                   <button
                     onClick={() => setSelectedBook(book)}
-                    className="w-full py-2 px-3 rounded-lg bg-transparent text-slate-400 hover:text-white text-[11px] font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full py-1.5 px-3 rounded-lg bg-transparent text-slate-400 hover:text-white text-[11px] font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <Eye className="w-3.5 h-3.5" />
-                    <span>Ver Sumário Completo & Detalhes</span>
+                    <span>Ver Sumário</span>
                   </button>
                 </div>
               </div>
@@ -349,7 +274,7 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
               Agendar com o Autor
             </button>
             <a
-              href={`https://wa.me/${siteConfig.contact?.whatsappNumber || '5551998088998'}?text=${encodeURIComponent('Olá Dr. Aldo Leão! Tenho interesse em adquirir suas obras jurídicas e saber sobre palestras/mentorias.')}`}
+              href={`https://wa.me/${siteConfig.contact?.whatsappNumber || '5551998088998'}?text=${encodeURIComponent('Olá Dr. Aldo Leão! Tenho interesse em receber seus livros digitais gratuitos e saber sobre palestras/mentorias.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-5 py-3 rounded-lg bg-[#25D366] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -376,12 +301,8 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
             {/* Modal Header */}
             <div className="border-b border-[#D4AF37]/30 pb-5 mb-6">
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded ${
-                  selectedBook.downloadAvailable 
-                    ? 'bg-[#D4AF37] text-slate-950 font-black' 
-                    : 'bg-[#1A3F5D] text-[#F6E27A] border border-[#D4AF37]/40'
-                }`}>
-                  {selectedBook.downloadAvailable ? 'E-BOOK PARA DOWNLOAD GRATUITO' : 'OBRA JURÍDICA PUBLICADA'}
+                <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#D4AF37] text-slate-950 font-black">
+                  LIVRO DIGITAL GRATUITO (DOWNLOAD LIBERADO)
                 </span>
                 <span className="text-xs text-[#E5C158] font-semibold">
                   · {selectedBook.area} · Ano {selectedBook.year || '2026'}
@@ -400,19 +321,19 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-xl bg-[#050B14] border border-slate-800 text-xs mb-6">
               <div>
                 <span className="text-slate-400 block text-[10px] uppercase">Formato:</span>
-                <span className="text-white font-medium">{selectedBook.format || 'Digital / Impresso'}</span>
+                <span className="text-white font-medium">Livro Digital (PDF)</span>
               </div>
               <div>
                 <span className="text-slate-400 block text-[10px] uppercase">Páginas:</span>
                 <span className="text-white font-medium">{selectedBook.pages || 'N/A'}</span>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px] uppercase">ISBN Registrado:</span>
-                <span className="text-white font-medium">{selectedBook.isbn || 'Oficial'}</span>
+                <span className="text-slate-400 block text-[10px] uppercase">Valor:</span>
+                <span className="text-emerald-400 font-bold">100% Gratuito</span>
               </div>
               <div>
-                <span className="text-slate-400 block text-[10px] uppercase">Circulação:</span>
-                <span className="text-[#F6E27A] font-bold">{selectedBook.downloadCount || 'Nacional'}</span>
+                <span className="text-slate-400 block text-[10px] uppercase">Disponibilidade:</span>
+                <span className="text-[#F6E27A] font-bold">Livre Acesso</span>
               </div>
             </div>
 
@@ -457,26 +378,24 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
             {/* Modal Actions */}
             <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="flex items-center gap-2 w-full sm:w-auto">
-                {selectedBook.downloadAvailable && (
-                  <button
-                    onClick={() => {
-                      const b = selectedBook;
-                      setSelectedBook(null);
-                      handleStartDownloadFlow(b);
-                    }}
-                    className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                  >
-                    <Download className="w-4 h-4" />
-                    <span>Baixar E-Book Grátis</span>
-                  </button>
-                )}
+                <button
+                  onClick={() => {
+                    const b = selectedBook;
+                    setSelectedBook(null);
+                    handleStartDownloadFlow(b);
+                  }}
+                  className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Baixar Livro Grátis (PDF)</span>
+                </button>
 
                 <button
-                  onClick={() => handleAcquireViaWhatsApp(selectedBook)}
+                  onClick={() => handleAcquireFreeViaWhatsApp(selectedBook.title)}
                   className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/60 text-[#F6E27A] font-bold text-xs uppercase tracking-wider hover:bg-[#1A3F5D] flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>Adquirir Exemplar</span>
+                  <BookOpen className="w-4 h-4" />
+                  <span>Adquirir Livro Grátis</span>
                 </button>
               </div>
 

@@ -52,12 +52,12 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div className="flex items-center gap-3 text-xs text-slate-200">
-                <Clock className="w-4 h-4 text-[#E5C158] shrink-0" />
-                <span>Atendimento pontual com hora previamente marcada</span>
+                <Scale className="w-4 h-4 text-[#E5C158] shrink-0" />
+                <span>Agendamento prévio da consulta</span>
               </div>
               <div className="flex items-center gap-3 text-xs text-slate-200">
-                <ShieldCheck className="w-4 h-4 text-[#E5C158] shrink-0" />
-                <span>Sigilo fiduciário OAB resguardado</span>
+                <Scale className="w-4 h-4 text-[#E5C158] shrink-0" />
+                <span>Consulta com hora marcada</span>
               </div>
             </div>
 

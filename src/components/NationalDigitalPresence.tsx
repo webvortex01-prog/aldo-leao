@@ -1,7 +1,11 @@
 import React from 'react';
-import { Globe2, ShieldCheck, Smartphone, Lock } from 'lucide-react';
+import { Scale } from 'lucide-react';
+import { useSite } from '../context/SiteContext';
 
 export const NationalDigitalPresence: React.FC = () => {
+  const { siteConfig } = useSite();
+  const np = siteConfig.nationalPresence;
+
   return (
     <section id="presenca-nacional" className="py-20 md:py-24 bg-[#060D1A] relative border-t border-[#D4AF37]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,20 +46,26 @@ export const NationalDigitalPresence: React.FC = () => {
             </div>
 
             {/* Technology & Digital Service Icons Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
-              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/20 flex items-center gap-3">
-                <Globe2 className="w-5 h-5 text-[#E5C158] shrink-0" />
-                <span className="text-xs text-slate-200 font-medium">Cobertura Nacional em 27 Estados</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/30 flex items-center gap-3">
+                <Scale className="w-5 h-5 text-[#E5C158] shrink-0" />
+                <span className="text-xs text-slate-200 font-medium leading-snug">
+                  {np?.card1Text || 'Atuação Digital no Brasil'}
+                </span>
               </div>
 
-              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/20 flex items-center gap-3">
-                <Lock className="w-5 h-5 text-[#E5C158] shrink-0" />
-                <span className="text-xs text-slate-200 font-medium">Sigilo Fiduciário & Criptografia</span>
+              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/30 flex items-center gap-3">
+                <Scale className="w-5 h-5 text-[#E5C158] shrink-0" />
+                <span className="text-xs text-slate-200 font-medium leading-snug">
+                  {np?.card2Text || 'Infraestrutura Tecnológica de última geração'}
+                </span>
               </div>
 
-              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/20 flex items-center gap-3">
-                <Smartphone className="w-5 h-5 text-[#E5C158] shrink-0" />
-                <span className="text-xs text-slate-200 font-medium">Reuniões Virtuais com Hora Marcada</span>
+              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/30 flex items-center gap-3">
+                <Scale className="w-5 h-5 text-[#E5C158] shrink-0" />
+                <span className="text-xs text-slate-200 font-medium leading-snug">
+                  {np?.card3Text || 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.'}
+                </span>
               </div>
             </div>
           </div>
@@ -73,7 +83,7 @@ export const NationalDigitalPresence: React.FC = () => {
               <div className="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-[#071122]/90 backdrop-blur-md border border-[#D4AF37]/30">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] flex items-center justify-center text-[#F6E27A]">
-                    <ShieldCheck className="w-5 h-5" />
+                    <Scale className="w-5 h-5 text-[#E5C158]" />
                   </div>
                   <div>
                     <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">

@@ -104,17 +104,20 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
       description: 'Fale direto pelo WhatsApp oficial',
       action: () => {
         setActiveTooltip(null);
+        const text = encodeURIComponent(
+          'Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de falar com um Advogado especialista.'
+        );
         window.open(
-          `https://wa.me/${siteConfig.contact.whatsappNumber}?text=Ol%C3%A1%20Dr.%20Aldo%20Le%C3%A3o%2C%20gostaria%20de%20um%20atendimento%20jur%C3%ADdico.`,
+          `https://wa.me/${siteConfig.contact.whatsappNumber || '5551998088998'}?text=${text}`,
           '_blank'
         );
       },
     },
     {
       id: 'admin',
-      emoji: '🔒',
-      label: 'Gabinete Admin',
-      description: 'Painel exclusivo de gestão do escritório',
+      emoji: '⚙️',
+      label: 'Editor de Sites',
+      description: 'Acesso restrito para editar o site (Admin)',
       action: () => {
         setIsFullMenuOpen(false);
         setActiveTooltip(null);
@@ -396,10 +399,10 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
                     }}
                     className="p-2.5 rounded-xl bg-[#0A1730] hover:bg-[#12244a] border border-[#D4AF37]/40 text-left cursor-pointer transition-all flex items-center gap-2"
                   >
-                    <span className="text-base">🔒</span>
+                    <span className="text-base">⚙️</span>
                     <div>
-                      <div className="text-[11px] font-bold text-[#E5C158]">Gabinete Dr. Aldo</div>
-                      <div className="text-[9px] text-slate-400">Painel do Escritório</div>
+                      <div className="text-[11px] font-bold text-[#E5C158]">Editor de Sites</div>
+                      <div className="text-[9px] text-slate-400">Admin com Senha</div>
                     </div>
                   </button>
 
