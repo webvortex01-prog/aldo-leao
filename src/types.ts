@@ -154,4 +154,35 @@ export interface SiteConfig {
   publications: Publication[];
   digitalBooks: DigitalBook[];
   caseStudies: CaseStudy[];
+  slide2?: {
+    eyebrow?: string;
+    title?: string;
+    callout1?: string;
+    callout2?: string;
+    boxTitle?: string;
+    boxText?: string;
+    rightCardTitle?: string;
+    rightCardText?: string;
+    sampleAcquisition?: string;
+    sampleMarket?: string;
+    sampleCapitalGain?: string;
+    inventoryTotal?: string;
+    holdingTotal?: string;
+    savingsAmount?: string;
+    savingsPercentage?: string;
+  };
+  nationalPresence?: {
+    card1Text?: string;
+    card2Text?: string;
+    card3Text?: string;
+  };
+  centennialLegacy?: {
+    goldKicker?: string;
+    title?: string;
+    subtitle?: string;
+    sub1908?: string;
+    sub1935?: string;
+    sub1915?: string;
+    sub1986?: string;
+  };
 }
