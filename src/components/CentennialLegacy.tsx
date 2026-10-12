@@ -39,7 +39,7 @@ export const CentennialLegacy: React.FC = () => {
   ];
 
   return (
-    <section id="legado" className="py-20 md:py-24 bg-[#050B14] relative border-t border-[#D4AF37]/20">
+    <section id="legado" className="py-20 md:py-24 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">

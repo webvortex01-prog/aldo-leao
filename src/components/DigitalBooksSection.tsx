@@ -131,7 +131,7 @@ Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
   };
 
   return (
-    <section id="livros" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20">
+    <section id="livros" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       {/* Background ambient glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-b from-[#D4AF37]/10 via-[#0E1F3D]/20 to-transparent blur-3xl rounded-full" />

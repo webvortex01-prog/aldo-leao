@@ -130,7 +130,7 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
     <>
       {/* Floating Mini Menu Dock (Canto Inferior Direito) */}
       <div 
-        className="fixed bottom-5 right-3 sm:right-6 z-50 flex flex-col items-end select-none"
+        className="fixed bottom-4 right-3 sm:bottom-5 sm:right-6 z-50 flex flex-col items-end select-none"
         aria-label="Menu Flutuante Rápido"
       >
         {/* Tooltip Card (Appears on Hover or Mobile Click/Tap) */}

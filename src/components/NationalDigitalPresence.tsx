@@ -7,7 +7,7 @@ export const NationalDigitalPresence: React.FC = () => {
   const np = siteConfig.nationalPresence;
 
   return (
-    <section id="presenca-nacional" className="py-20 md:py-24 bg-[#060D1A] relative border-t border-[#D4AF37]/20">
+    <section id="presenca-nacional" className="py-20 md:py-24 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Content */}

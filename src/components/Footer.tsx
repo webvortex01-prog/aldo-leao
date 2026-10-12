@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({
   const { siteConfig } = useSite();
 
   return (
-    <footer className="bg-[#040810] text-slate-400 border-t border-[#D4AF37]/20 pt-16 pb-12">
+    <footer className="bg-[#040810] text-slate-400 border-t border-[#D4AF37]/20 pt-16 pb-12 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Brand Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">

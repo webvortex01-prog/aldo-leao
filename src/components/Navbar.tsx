@@ -20,7 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#D4AF37]/20 bg-[#050B14]/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full max-w-full overflow-x-clip border-b border-[#D4AF37]/20 bg-[#050B14]/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
         {/* Zone 1: Brand Wordmark (Single Element) */}
         <a href="#" className="shrink-0 transition-opacity hover:opacity-95" aria-label="Aldo Leão Advocacia Estratégica">

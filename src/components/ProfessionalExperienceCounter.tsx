@@ -45,7 +45,7 @@ export const ProfessionalExperienceCounter: React.FC = () => {
   }, [hasStarted, targetYears]);
 
   return (
-    <section ref={sectionRef} className="py-12 sm:py-16 bg-[#050B14] relative border-t border-[#D4AF37]/20">
+    <section ref={sectionRef} className="py-12 sm:py-16 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/35 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-6 sm:p-10 md:p-12 shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">

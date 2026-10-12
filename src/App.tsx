@@ -66,7 +66,7 @@ function AppContent() {
 
   // View: Portal Institucional Completo com Ordem Rigorosa dos Itens 3 a 14
   return (
-    <div className="min-h-screen bg-[#050B14] text-slate-100 flex flex-col font-sans-body selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden overflow-x-clip bg-[#050B14] text-slate-100 flex flex-col font-sans-body selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
       {/* Top Bar with Navigation & Admin */}
       <Navbar
         onOpenConsultation={() => handleOpenConsultation()}
@@ -76,7 +76,7 @@ function AppContent() {
       />
 
       {/* Main Page Flow adhering to Dr. Aldo Leão specifications */}
-      <main className="flex-grow">
+      <main className="flex-grow w-full max-w-full overflow-x-hidden overflow-x-clip">
         {/* 1. Página Home: Hero Slider com Slide 1 (Tradição 1908) e Slide 2 (Holding 4.0) */}
         <HeroSlider
           onOpenConsultation={() => handleOpenConsultation()}

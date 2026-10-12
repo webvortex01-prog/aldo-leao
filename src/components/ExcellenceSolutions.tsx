@@ -41,7 +41,7 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
   };
 
   return (
-    <section id="solucoes-excelencia" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20">
+    <section id="solucoes-excelencia" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
