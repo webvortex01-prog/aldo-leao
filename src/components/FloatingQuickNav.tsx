@@ -136,7 +136,7 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
         {/* Tooltip Card (Appears on Hover or Mobile Click/Tap) */}
         {activeTooltip && !isFullMenuOpen && (
           <div 
-            className="mb-2.5 mr-1 py-1.5 px-3 rounded-lg bg-[#071122]/98 border border-[#D4AF37] text-white text-xs shadow-[0_8px_30px_rgba(0,0,0,0.85)] backdrop-blur-md flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-150 max-w-[260px] pointer-events-none"
+            className="mb-2 sm:mb-2.5 mr-1 py-1.5 px-3 rounded-lg bg-[#071122]/98 border border-[#D4AF37] text-white text-xs shadow-[0_8px_30px_rgba(0,0,0,0.85)] backdrop-blur-md flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-150 max-w-[240px] sm:max-w-[260px] pointer-events-none"
           >
             <span className="text-base leading-none shrink-0">
               {navItems.find((item) => item.id === activeTooltip)?.emoji}
@@ -165,20 +165,20 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
             <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#25D366] border border-[#071122] animate-pulse" />
           </button>
         ) : (
-          // Expanded Dock with Emojis Only
-          <div className="relative flex items-center p-1 sm:p-1.5 rounded-full bg-[#061021]/95 backdrop-blur-xl border border-[#D4AF37]/60 shadow-[0_10px_35px_rgba(0,0,0,0.75)]">
+          // Expanded Dock: Vertical (grows upwards) on mobile (flex-col-reverse), horizontal on desktop (sm:flex-row)
+          <div className="relative flex flex-col-reverse sm:flex-row items-center p-1 sm:p-1.5 rounded-full bg-[#061021]/95 backdrop-blur-xl border border-[#D4AF37]/60 shadow-[0_10px_35px_rgba(0,0,0,0.75)] animate-in fade-in slide-in-from-bottom-3 duration-200">
             {/* Collapse toggle mini button */}
             <button
               onClick={() => setIsCollapsed(true)}
-              className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0B1A33]/80 hover:bg-[#132A54] text-slate-400 hover:text-white flex items-center justify-center text-xs transition-colors cursor-pointer mr-0.5"
+              className="w-8 h-8 sm:w-8 sm:h-8 rounded-full bg-[#0B1A33]/80 hover:bg-[#132A54] text-slate-400 hover:text-white flex items-center justify-center text-xs transition-colors cursor-pointer mt-1 sm:mt-0 sm:mr-1 shrink-0"
               title="Minimizar barra"
               aria-label="Minimizar"
             >
               ✕
             </button>
 
-            {/* List of Emoji Buttons (No Text) */}
-            <div className="flex items-center gap-1 sm:gap-1.5">
+            {/* List of Emoji Buttons: Vertical column on mobile, horizontal row on desktop */}
+            <div className="flex flex-col-reverse sm:flex-row items-center gap-1 sm:gap-1.5">
               {navItems.map((item) => {
                 const isHighlight = item.highlight;
                 const isSelected = activeTooltip === item.id;
