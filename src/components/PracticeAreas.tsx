@@ -14,7 +14,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
   const { siteConfig } = useSite();
   const [selectedAreaModal, setSelectedAreaModal] = useState<PracticeArea | null>(null);
 
-  const practiceAreas: PracticeArea[] = [
+  const defaultAreas: PracticeArea[] = [
     {
       id: 'holding-40',
       number: '01',
@@ -57,6 +57,10 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       badge: 'Consumidor'
     }
   ];
+
+  const practiceAreas: PracticeArea[] = siteConfig.practiceAreas && siteConfig.practiceAreas.length > 0 
+    ? siteConfig.practiceAreas 
+    : defaultAreas;
 
   const handleAreaClick = (area: PracticeArea) => {
     if (area.id === 'holding-40') {

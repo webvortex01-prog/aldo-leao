@@ -14,6 +14,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenConsultation, 
   onOpenAdmin, 
 }) => {
+  const { siteConfig } = useSite();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Ordem rigorosa dos menus solicitada no Item 16:
@@ -104,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <span className="relative z-10 flex items-center gap-2">
               <PhoneCall className="w-3.5 h-3.5" />
-              Consulta Digital
+              {siteConfig?.navbar?.btnConsultation || 'Consulta Digital'}
             </span>
           </button>
         </div>

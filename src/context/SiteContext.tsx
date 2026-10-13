@@ -513,20 +513,34 @@ const DEFAULT_CASE_STUDIES: CaseStudy[] = [
 ];
 
 const DEFAULT_CONFIG: SiteConfig = {
+  navbar: {
+    logoTitle: 'Aldo Leão',
+    logoSubtitle: 'Advocacia Estratégica',
+    btnConsultation: 'Consulta Digital',
+    oabNumber: 'OAB/RS 48.452'
+  },
   hero: {
-    kicker: 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+    kicker: 'ALDO LEÃO',
+    kickerSub: 'ADVOCACIA ESTRATÉGICA',
     titlePart1: 'TRADIÇÃO JURÍDICA',
     titleHighlight: 'DESDE 1908',
     titlePart2: '· MAIS DE UM SÉCULO DE EXCELÊNCIA',
     description: 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.',
-    tagline: 'EXCELÊNCIA JURÍDICA CENTENÁRIA NA PROTEÇÃO E PERPETUAÇÃO DO SEU LEGADO.',
+    tagline: 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES',
     foundingYear: '1908',
     experienceYears: '40 Anos',
-    oabNumber: 'OAB/RS 22.418',
+    oabNumber: 'OAB/RS 48.452',
     yearsExperience: '40 Anos',
-    assetsPreserved: 'R$ 2.4B+'
+    assetsPreserved: 'R$ 2.4B+',
+    cta1Text: 'AGENDAR CONSULTA DIGITAL',
+    cta2Text: 'CONHEÇA O PLANEJAMENTO 4.0',
+    badgeYear: '1908',
+    badgeText: 'O Escritório Mais Antigo do Brasil'
   },
   contact: {
+    sectionKicker: 'ATENDIMENTO DIGITAL EM TODO O BRASIL',
+    sectionTitle: 'CONTATO',
+    introGold: 'Escolha o canal de relacionamento com a ALDO LEÃO ADVOCACIA ESTRATÉGICA da sua preferência para o seu atendimento digital em todo o Brasil.',
     whatsappNumber: '5551998088998',
     phonePrimary: '(51) 99808-8998',
     phoneSecondary: '(51) 99807-8998',
@@ -538,6 +552,8 @@ const DEFAULT_CONFIG: SiteConfig = {
     emailHolding: 'holdingfamiliarbr@gmail.com',
     addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     officeHours: 'De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs',
+    boxVirtualTitle: 'ATENDIMENTO VIRTUAL BRASIL',
+    boxVirtualText: 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp.',
     spAddress: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     bsbAddress: 'Atendimento Virtual Especializado com Hora Marcada em Todo o Brasil',
     cwbAddress: 'Escritório Digital Brasil · Atendimento em Todo o Território Nacional',
@@ -547,13 +563,28 @@ const DEFAULT_CONFIG: SiteConfig = {
     email: 'aldoleaoadvocacia@gmail.com'
   },
   founder: {
-    name: 'Dr. Aldo Leão',
+    sectionKicker: 'TERCEIRA GERAÇÃO DESDE 1986',
+    sectionTitle: 'HEAD',
+    sectionHighlight: 'JURÍDICO',
+    name: 'Dr. ALDO LEÃO',
     fullName: 'Dr. Aldo Leão',
     title: 'ADVOCACIA ESTRATÉGICA',
     credentials: 'Desde 1986 · Terceira Geração · Mais de 40 Anos de Excelência Jurídica',
     photoUrl: '/img/dr-aldo-reuniao.jpg',
     bioParagraph1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira. A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.',
     bioParagraph2: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado. O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.',
+    bioParagraph3: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.',
+    bioParagraph4: 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior.',
+    signatureImageUrl: '/img/assinatura-gold.png',
+    saibaMaisBtn: 'SAIBA MAIS',
+    btnConsultation: 'AGENDAR CONSULTA DIGITAL',
+    btnLivros: 'LIVROS DIGITAIS',
+    counterTitle: 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA',
+    counterSub: 'Desde 1986 · Terceira Geração de Tradição Jurídica Familiar Centenária',
+    counterYears: 40,
+    counterSuffix: 'Anos+',
+    modalBio1: 'Advogado atuante há mais de quatro décadas, líder da terceira geração da advocacia familiar iniciada em 1908. Especialista em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.',
+    modalBio2: 'Possui ampla experiência acadêmica e forense, tendo publicado mais de 100 artigos jurídicos especializados e 6 livros jurídicos digitais com foco em proteção patrimonial e segurança jurídica.',
     specialties: [
       'Planejamento Patrimonial 4.0 (via Holding Familiar)',
       'Direito Imobiliário e Gestão de Ativos',
@@ -575,13 +606,24 @@ const DEFAULT_CONFIG: SiteConfig = {
   caseStudies: DEFAULT_CASE_STUDIES,
   slide2: {
     eyebrow: 'HOLDING FAMILIAR',
-    title: 'PLANEJAMENTO PATRIMONIAL 4.0',
+    title: 'PLANEJAMENTO',
+    titleHighlight: 'PATRIMONIAL 4.0',
+    paragraph1: 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.',
+    paragraph2: 'A Holding Familiar é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.',
+    paragraph3: 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.',
+    paragraph4: 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.',
     callout1: 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?',
     callout2: 'EVITE A ALTA PERDA PATRIMONIAL E FINANCEIRA DOS SEUS FILHOS NO INVENTÁRIO.',
+    buttonText: 'Planejamento Patrimonial 4.0',
     boxTitle: 'O INVENTÁRIO GERA UMA ALTA PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO',
     boxText: 'O inventário gera uma Alta Perda Patrimonial e Financeira dos herdeiros em média de 40% do Patrimônio Inventário, em média, que é evitada pelo Planejamento Patrimonial 4.0, que vai aumentar por causa do aumento do ITCMD.',
-    rightCardTitle: 'PERDA PATRIMONIAL E FINANCEIRA DOS HERDEIROS NO INVENTÁRIO',
+    rightCardTitle: 'Comparativo de Custos entre o processo de Inventário e o Planejamento Patrimonial 4.0 via Holding Familiar',
+    rightCardSub: 'Você conhece o Alto Custo do processo de Inventário para os seus herdeiros? Os números são incontestáveis.',
     rightCardText: 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).',
+    rightCardBtn: 'VER OS CUSTOS',
+    badgeTitle: 'Aldo Leão Advocacia Estratégica',
+    badgeSubtitle: 'Desde 1908 · Tradição Jurídica Centenária',
+    badgeYears: '118 Anos',
     sampleAcquisition: 'R$ 1.000.000,00',
     sampleMarket: 'R$ 1.500.000,00',
     sampleCapitalGain: 'R$ 500.000,00',
@@ -591,18 +633,118 @@ const DEFAULT_CONFIG: SiteConfig = {
     savingsPercentage: '55,21%'
   },
   nationalPresence: {
+    kicker: 'ATENDIMENTO JURÍDICO DE EXCELÊNCIA EM TODO O BRASIL',
+    title: 'PRESENÇA NACIONAL',
+    titleHighlight: 'DIGITAL',
+    paragraph1: 'Com sede em Porto Alegre, a Advocacia Estratégica Dr. Aldo Leão rompe as fronteiras geográficas para levar a Excelência Jurídica Centenária a clientes de todo o território nacional.',
+    paragraph2: 'Por meio de uma infraestrutura tecnológica de última geração e de processos 100% digitais, disponibilizamos uma advocacia estratégica moderna, segura e eficiente, proporcionando atendimento virtual com a mesma qualidade, proximidade e excelência do atendimento presencial.',
+    paragraph3: 'Nosso modelo de atuação elimina deslocamentos desnecessários, otimiza o tempo dos clientes e amplia o acesso a soluções jurídicas especializadas, sem abrir mão da segurança, da confidencialidade e da excelência profissional.',
+    quoteBox: 'EXPERIMENTE A ADVOCACIA ESTRATÉGICA DO FUTURO, HOJE.',
     card1Text: 'Atuação Digital no Brasil',
     card2Text: 'Infraestrutura Tecnológica de última geração',
-    card3Text: 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.'
+    card3Text: 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.',
+    badgeStatus: 'Atendimento 100% Digital Ativo',
+    badgeStates: '27 Estados',
+    mapImageUrl: '/img/presencanacional.jpeg'
   },
   centennialLegacy: {
     goldKicker: 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL',
-    title: 'O LEGADO CENTENÁRIO',
+    title: 'O LEGADO',
+    titleHighlight: 'CENTENÁRIO',
     subtitle: 'DESDE 1908',
+    paragraph1: 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.',
+    paragraph2: 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.',
+    signatureImageUrl: '/img/assinatura-gold.png',
+    buttonText: 'Saiba Mais',
+    card40Title: '40 Anos + de Excelência Jurídica na Advocacia Estratégica',
+    card40Kicker: 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA',
+    card40Text: 'Iniciada em 1986, a atuação do Dr. Aldo Leão na terceira geração de advogados da família, consolidou uma das trajetórias mais respeitadas na proteção patrimonial e empresarial no país, unindo o rigor acadêmico, a experiência de mais de quatro décadas e a inteligência jurídica na prestação de serviços de vanguarda.',
+    events: [
+      {
+        year: '1908',
+        title: 'Fundação do Escritório',
+        lawyers: ['Prof. Dr. Arnaldo da Silva Ferreira'],
+        description: 'Precursor da advocacia empresarial no RS e fundador do escritório de advocacia mais antigo do Brasil.'
+      },
+      {
+        year: '1935',
+        title: 'CONTINUIDADE DO LEGADO JURÍDICO',
+        lawyers: ['Dr. Mário de Castilhos Ferreira', 'Dr. Ney de Castilhos Ferreira'],
+        description: 'Expansão da atuação jurídica de excelência técnica no cenário nacional.'
+      },
+      {
+        year: '1951',
+        title: 'Consolidação Institucional',
+        lawyers: ['Prof. Dr. Aldo Leão Ferreira'],
+        description: 'Procurador do Estado do RS e Professor Universitário, unindo a academia à prática jurídica.'
+      },
+      {
+        year: '1986',
+        title: 'Advocacia Estratégica',
+        lawyers: ['Prof. Dr. Aldo Leão Ferreira Filho'],
+        description: 'Início da terceira geração familiar, inovando ao estruturar a moderna Advocacia Estratégica e o Planejamento Patrimonial 4.0 (Holding Familiar).'
+      },
+      {
+        year: '2026',
+        title: 'Presença Nacional Digital',
+        lawyers: ['Aldo Leão Advocacia Estratégica'],
+        description: 'Atuação 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.'
+      }
+    ],
     sub1908: 'Prof. Dr. Arnaldo da Silva Ferreira',
     sub1935: 'Dr. Mário de Castilhos Ferreira e Dr. Ney de Castilhos Ferreira',
     sub1951: 'Prof. Dr. Aldo Leão Ferreira',
     sub1986: 'Prof. Dr. Aldo Leão Ferreira Filho'
+  },
+  holdingFamiliar: {
+    sectionKicker: 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0',
+    sectionTitle: 'HOLDING',
+    sectionHighlight: 'FAMILIAR',
+    paragraph1: 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.',
+    paragraph2: 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.',
+    paragraph3: 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).',
+    boxWhatIsTitle: 'O QUE É O PLANEJAMENTO 4.0?',
+    boxWhatIsHeading: 'Metodologia Jurídica Estratégica Multidisciplinar',
+    boxWhatIsText: 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.',
+    boxWhyTitle: 'Por Que Planejar em Vida?',
+    boxWhyText: 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.',
+    benefitsTitle: 'Principais Benefícios da Holding Familiar',
+    benefits: [
+      'Proteção Jurídica Patrimonial',
+      'Planejamento Sucessório Corporativo',
+      'Governança Familiar Estruturada',
+      'Redução Expressiva da Carga Tributária',
+      'Evita a Perda Financeira do Inventário',
+      'Segurança e Continuidade dos Negócios',
+      'Gestão Estratégica dos Ativos',
+      'Harmonia e Preservação da Paz Familiar'
+    ],
+    tableTitle: 'INVENTÁRIO x HOLDING FAMILIAR',
+    tableSubtitle: 'A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.',
+    tableSavingsText: 'R$ 164.000,00 (correspondente a 55,21%)'
+  },
+  digitalConsultation: {
+    sectionKicker: 'ATENDIMENTO DIGITAL EM TODO O BRASIL',
+    sectionTitle: 'AGENDE SUA',
+    sectionHighlight: 'CONSULTA DIGITAL',
+    description: 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.',
+    point1: 'Agendamento prévio da consulta',
+    point2: 'Consulta com hora marcada',
+    btnSchedule: 'AGENDAR CONSULTA VIRTUAL',
+    btnWhatsApp: 'Agendar pelo WhatsApp',
+    bgImageUrl: '/img/dr-aldo-reuniao.jpg'
+  },
+  footer: {
+    textCol1Paragraph1: 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.',
+    textCol1Paragraph2: 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.',
+    copyrightText: 'Aldo Leão Advocacia Estratégica · Tradição Jurídica Centenária Desde 1908. Todos os direitos reservados.',
+    oabDisclaimer: 'Provimento nº 205/2021 do Conselho Federal da OAB · Inscrição OAB/RS 48.452.'
+  },
+  urgentHotline: {
+    badge: 'Plantão Urgente',
+    title: 'Atendimento em Todo o Brasil',
+    phoneText: '(51) 99808-8998',
+    oabText: 'OAB/RS 48.452'
   }
 };
 
@@ -673,10 +815,24 @@ const SiteContext = createContext<SiteContextType | undefined>(undefined);
 export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     try {
-      const saved = localStorage.getItem('aldoleao_site_config_v5');
+      const saved = localStorage.getItem('aldoleao_site_config_v6') || localStorage.getItem('aldoleao_site_config_v5');
       if (saved) {
         const parsed = JSON.parse(saved);
-        return { ...DEFAULT_CONFIG, ...parsed };
+        return {
+          ...DEFAULT_CONFIG,
+          ...parsed,
+          navbar: { ...DEFAULT_CONFIG.navbar, ...(parsed.navbar || {}) },
+          hero: { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) },
+          contact: { ...DEFAULT_CONFIG.contact, ...(parsed.contact || {}) },
+          founder: { ...DEFAULT_CONFIG.founder, ...(parsed.founder || {}) },
+          slide2: { ...DEFAULT_CONFIG.slide2, ...(parsed.slide2 || {}) },
+          nationalPresence: { ...DEFAULT_CONFIG.nationalPresence, ...(parsed.nationalPresence || {}) },
+          centennialLegacy: { ...DEFAULT_CONFIG.centennialLegacy, ...(parsed.centennialLegacy || {}) },
+          holdingFamiliar: { ...DEFAULT_CONFIG.holdingFamiliar, ...(parsed.holdingFamiliar || {}) },
+          digitalConsultation: { ...DEFAULT_CONFIG.digitalConsultation, ...(parsed.digitalConsultation || {}) },
+          footer: { ...DEFAULT_CONFIG.footer, ...(parsed.footer || {}) },
+          urgentHotline: { ...DEFAULT_CONFIG.urgentHotline, ...(parsed.urgentHotline || {}) },
+        };
       }
     } catch (e) {
       console.error('Error loading site config:', e);
