@@ -17,11 +17,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
             <Logo size="sm" />
             <div className="hidden sm:block border-l border-slate-700 pl-4">
               <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold font-cinzel block">
-                Gabinete Jurídico Dr. Aldo Leão
+                Estatísticas & Editor de Sites · Dr. Aldo Leão
               </span>
               <span className="text-[10px] text-slate-400 flex items-center gap-1.5 mt-0.5">
                 <FileEdit className="w-3 h-3 text-[#D4AF37]" />
-                Editor de Sites (CMS Live) · Edição em Tempo Real
+                Painel Administrativo, Estatísticas e Edição em Tempo Real
               </span>
             </div>
           </div>

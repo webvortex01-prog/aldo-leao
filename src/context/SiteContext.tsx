@@ -68,7 +68,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'planejamento-patrimonial-40',
     number: '02',
     title: 'Planejamento Patrimonial 4.0',
-    subtitle: 'Holding Familiar & Sucessão em Vida',
+    subtitle: 'HOLDING FAMILIAR',
     description: 'Uma solução jurídica de vanguarda desenvolvida por especialistas para proteger, organizar e perpetuar patrimônios e empresas (holding e subsidiária), evitando a alta perda patrimonial e financeira dos herdeiros no inventário.',
     extendedText: 'Estruturação societária destinada à proteção, organização e perpetuação do patrimônio familiar e das empresas.',
     isLandingLink: true
@@ -78,7 +78,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     number: '03',
     title: 'Inteligência Jurídica',
     subtitle: 'Análise Estratégica & Apoio Decisório',
-    description: 'A Inteligência Jurídica utiliza análise estratégica, planejamento e visão preventiva para reduzir riscos, perdas patrimoniais e financeiras, transformando informações em decisões assertivas.',
+    description: 'A Inteligência Jurídica utiliza análise estratégica, planejamento e visão preventiva para reduzir riscos, perdas patrimoniais e financeiras, ampliando a segurança das decisões patrimoniais e empresariais.',
     extendedText: 'Estratégias jurídicas voltadas à prevenção de imprevistos e mitigação de vulnerabilidades com apoio integral a conselhos e famílias empresárias.'
   },
   {
@@ -102,7 +102,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     number: '06',
     title: 'Gestão Jurídica Imobiliária',
     subtitle: 'Proteção & Valorização de Ativos Imobiliários',
-    description: 'Estruturação jurídica de ativos imobiliários para compradores, vendedores, investidores, construtoras e incorporadoras com foco na blindagem de riscos e valorização patrimonial.',
+    description: 'Estruturação jurídica de ativos imobiliários para compradores e vendedores imobiliários, investidores, construtoras e incorporadoras com foco na prevenção de riscos e prejuízos.',
     extendedText: 'Atuação estratégica em due diligence aquisitiva, regularização fundiária, loteamentos e operações imobiliárias estruturadas.'
   },
   {
@@ -118,7 +118,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     number: '08',
     title: 'Gestão Jurídica 4.0',
     subtitle: 'Organizacional & Judicial',
-    description: 'Integração entre tecnologia, inteligência jurídica, gestão estratégica e inovação aplicada à advocacia de vanguarda para empresas de variados portes e famílias com patrimônio consolidado.',
+    description: 'Integração entre tecnologia, inteligência jurídica, gestão estratégica e inovação aplicada à advocacia de vanguarda.',
     extendedText: 'Diagnóstico Situacional Estratégico com auditoria de informações, mapeamento de vulnerabilidades e condução judicial combativa.'
   },
   {
@@ -126,42 +126,48 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     number: '09',
     title: 'Gestão Estratégica de Projetos',
     subtitle: 'Acompanhamento do Início à Conclusão',
-    description: 'Planejamento, organização, conformidade normativa e acompanhamento jurídico rigoroso de projetos patrimoniais, societários e de expansão empresarial durante todas as etapas de implantação.'
+    description: 'Planejamento, organização, conformidade normativa e acompanhamento jurídico rigoroso de projetos patrimoniais, societários e de expansão empresarial durante todas as etapas de implantação.',
+    extendedText: 'Estruturação jurídica de novos projetos, compliance preventivo e validação de contratos e marcos regulatórios.'
   },
   {
     id: 'gestao-documental',
     number: '10',
     title: 'Gestão Jurídica Documental',
     subtitle: 'Padronização & Segurança da Informação',
-    description: 'Gestão jurídica de documentos, organização, elaboração, análise, alteração e padronização jurídica estratégica para garantir segurança da informação e facilidade de gestão.'
+    description: 'Gestão Jurídica de documentos, organização, elaboração, análise, alteração, padronização e administração jurídica estratégica documental.',
+    extendedText: 'Padronização de minutas, contratos, acórdãos e governança eletrônica de arquivos estratégicos com rigor e segurança jurídica.'
   },
   {
     id: 'gestao-negocios',
     number: '11',
     title: 'Gestão Estratégica de Negócios',
     subtitle: 'Suporte a Investimentos & M&A',
-    description: 'Suporte jurídico especializado para decisões empresariais, reorganização e proteção de ativos, expansão de negócios, financiamentos e captação de investimentos.'
+    description: 'Suporte jurídico especializado para decisões empresariais, patrimoniais, sucessórias corporativas, investimentos, expansão de negócios, financiamentos, planejamento, reorganização e proteção de ativos, estruturação jurídica de negócios.',
+    extendedText: 'Apoio em modelagens contratuais, parcerias societárias e operações de crescimento de patrimônios e corporações.'
   },
   {
     id: 'gestao-administrativa',
     number: '12',
     title: 'Gestão Jurídica Administrativa',
     subtitle: 'Eficiência Operacional & Compliance',
-    description: 'Consultoria jurídica estratégica de processos administrativos voltada à organização, conformidade legal, redução de despesas e segurança operacional.'
+    description: 'Consultoria jurídica estratégica de processos administrativos voltada à organização, conformidade legal, redução de despesas e segurança operacional.',
+    extendedText: 'Aperfeiçoamento dos fluxos administrativos, compliance regulatório e blindagem contra inconformidades institucionais.'
   },
   {
     id: 'consulta-digital',
     number: '13',
     title: 'Consulta Digital Brasil',
     subtitle: 'Atendimento 100% Digital com Hora Marcada',
-    description: 'Atendimento jurídico especializado 100% digital, em todo o Brasil, com a mesma excelência centenária do atendimento presencial, com máxima confidencialidade e conforto.'
+    description: 'Atendimento jurídico especializado 100% digital, em todo o Brasil, com a mesma excelência centenária do atendimento presencial, com máxima confidencialidade e conforto.',
+    extendedText: 'Agendamento prévio com hora marcada e atendimento via videoconferência segura diretamente com Dr. Aldo Leão.'
   },
   {
     id: 'academia-leao-ferreira',
     number: '14',
     title: 'Academia Leão Ferreira',
-    subtitle: 'Centro de Estudos Jurídicos Superiores',
-    description: 'Órgão cultural da Aldo Leão Advocacia Estratégica dedicado à capacitação, publicação de livros digitais, artigos especializados, mentorias e difusão da alta cultura jurídica.'
+    subtitle: 'Centro de Produção e Difusão do Conhecimento Jurídico',
+    description: 'Centro de produção e difusão do conhecimento jurídico especializado de vanguarda, que reúne palestras de especialistas, a publicação de artigos e livros jurídicos digitais com o propósito de compartilhar a cultura e o conhecimento jurídico.',
+    extendedText: 'Produção bibliográfica de vanguarda, livros jurídicos digitais gratuitos e palestras de alta relevância com Dr. Aldo Leão.'
   }
 ];
 
@@ -522,40 +528,43 @@ const DEFAULT_CONFIG: SiteConfig = {
   },
   contact: {
     whatsappNumber: '5551998088998',
-    phonePrimary: '(51) 998.088.998',
-    phoneSecondary: '(51) 998.078.998',
-    emailPrimary: 'aldoleao@hotmail.com',
-    emailSecondary: 'aldoleao.adv@gmail.com',
+    phonePrimary: '(51) 99808-8998',
+    phoneSecondary: '(51) 99807-8998',
+    emailPrimary: 'aldoleaoadvocacia@gmail.com',
+    emailHolding1: 'aldoleao.planejamento@gmail.com',
+    emailHolding2: 'holdingfamiliarbr@gmail.com',
+    emailAcademia: 'academialeaoferreira@gmail.com',
+    emailSecondary: 'aldoleao.planejamento@gmail.com',
     emailHolding: 'holdingfamiliarbr@gmail.com',
-    addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, Porto Alegre - RS',
-    officeHours: 'De 2ª à 6ª Feira, das 08h30 às 11h30 e das 13h30 às 18h30',
-    spAddress: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, Porto Alegre - RS (Sede Central)',
-    bsbAddress: 'Atendimento Virtual Especializado perante Tribunais Superiores (STF/STJ/CARF)',
-    cwbAddress: 'Cobertura Integrada na Região Sul e Atendimento Digital em Todo o Brasil',
-    spPhone: '(51) 998.088.998',
-    bsbPhone: '(51) 998.078.998',
-    cwbPhone: '(51) 998.088.998',
-    email: 'aldoleao@hotmail.com'
+    addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
+    officeHours: 'De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs',
+    spAddress: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
+    bsbAddress: 'Atendimento Virtual Especializado com Hora Marcada em Todo o Brasil',
+    cwbAddress: 'Escritório Digital Brasil · Atendimento em Todo o Território Nacional',
+    spPhone: '(51) 99808-8998',
+    bsbPhone: '(51) 99807-8998',
+    cwbPhone: '(51) 99808-8998',
+    email: 'aldoleaoadvocacia@gmail.com'
   },
   founder: {
     name: 'Dr. Aldo Leão',
-    fullName: 'Dr. Aldo Leão Ferreira Filho',
-    title: 'Head Jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-    credentials: 'Desde 1986 · Terceira Geração · PUC-RS · Unisinos · IARGS · OAB/RS · Procurador de 20 Municípios',
-    photoUrl: '/img/dr-aldo-portrait.jpg',
-    bioParagraph1: 'Representando a terceira geração do legado jurídico familiar iniciado em 1908, o Dr. Aldo Leão Ferreira Filho exerce a advocacia estratégica desde 1986, desenvolvendo soluções jurídicas avançadas e legais voltadas à proteção patrimonial, estruturação societária (Holding Familiar), governança profissional, sucessão empresarial e perpetuação de legados familiares.',
-    bioParagraph2: 'Sua atuação combina tradição jurídica centenária, inteligência estratégica e visão preventiva, proporcionando aos clientes estruturas jurídicas personalizadas, capazes de proteger patrimônios, fortalecer empresas e assegurar a continuidade das futuras gerações. Como especialista em Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar, dedica-se ao desenvolvimento de soluções jurídicas modernas, estruturadas para reduzir riscos, evitar a alta perda patrimonial dos herdeiros no inventário, promover a proteção patrimonial e empresarial com a segurança jurídica inteligente e permitir a organização patrimonial e empresarial de forma estratégica.',
+    fullName: 'Dr. Aldo Leão',
+    title: 'ADVOCACIA ESTRATÉGICA',
+    credentials: 'Desde 1986 · Terceira Geração · Mais de 40 Anos de Excelência Jurídica',
+    photoUrl: '/img/dr-aldo-reuniao.jpg',
+    bioParagraph1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira. A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.',
+    bioParagraph2: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado. O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.',
     specialties: [
-      'Planejamento Patrimonial e Empresarial 4.0 (via Holding Familiar)',
+      'Planejamento Patrimonial 4.0 (via Holding Familiar)',
       'Direito Imobiliário e Gestão de Ativos',
       'Direito Empresarial e Societário',
       'Direito Civil, Família e Sucessões',
-      'Relações de Consumo e Compliance Consumerista'
+      'Relações de Consumo e Direito'
     ],
     differences: [
       'Terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.',
-      'Mais de quatro décadas de advocacia estratégica ininterrupta do Dr. Aldo Leão (1986).',
-      'Referência nacional em Holding Familiar (Planejamento Patrimonial e Empresarial 4.0).',
+      'Mais de quatro décadas de advocacia estratégica ininterrupta do Dr. Aldo Leão (desde 1986).',
+      'Referência nacional em Holding Familiar e Planejamento Patrimonial 4.0.',
       'Atuação nacional por meio de atendimento jurídico 100% digital, seguro, confidencial e resolutivo.'
     ]
   },
@@ -587,12 +596,12 @@ const DEFAULT_CONFIG: SiteConfig = {
     card3Text: 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.'
   },
   centennialLegacy: {
-    goldKicker: 'EXCELÊNCIA JURÍDICA FAMILIAR',
+    goldKicker: 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL',
     title: 'O LEGADO CENTENÁRIO',
-    subtitle: 'Desde 1908',
+    subtitle: 'DESDE 1908',
     sub1908: 'Prof. Dr. Arnaldo da Silva Ferreira',
     sub1935: 'Dr. Mário de Castilhos Ferreira e Dr. Ney de Castilhos Ferreira',
-    sub1915: 'Prof. Dr. Aldo Leão Ferreira',
+    sub1951: 'Prof. Dr. Aldo Leão Ferreira',
     sub1986: 'Prof. Dr. Aldo Leão Ferreira Filho'
   }
 };
@@ -664,21 +673,10 @@ const SiteContext = createContext<SiteContextType | undefined>(undefined);
 export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     try {
-      const saved = localStorage.getItem('aldoleao_site_config_v4');
+      const saved = localStorage.getItem('aldoleao_site_config_v5');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (!parsed.founder?.photoUrl || parsed.founder.photoUrl.includes('1791572566625')) {
-          parsed.founder = { ...parsed.founder, photoUrl: '/img/dr-aldo-portrait.jpg' };
-        }
-        if (parsed.digitalBooks && Array.isArray(parsed.digitalBooks)) {
-          parsed.digitalBooks = parsed.digitalBooks.map((b: DigitalBook) => ({
-            ...b,
-            downloadAvailable: true,
-            format: 'Livro Digital (PDF Gratuito)',
-            badge: 'Download Gratuito'
-          }));
-        }
-        return parsed;
+        return { ...DEFAULT_CONFIG, ...parsed };
       }
     } catch (e) {
       console.error('Error loading site config:', e);
@@ -701,7 +699,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save changes to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('aldoleao_site_config_v4', JSON.stringify(siteConfig));
+      localStorage.setItem('aldoleao_site_config_v5', JSON.stringify(siteConfig));
     } catch (e) {
       console.error('Error persisting site config:', e);
     }

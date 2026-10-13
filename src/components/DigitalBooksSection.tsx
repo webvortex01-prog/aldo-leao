@@ -1,23 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { 
   BookOpen, 
-  Download, 
-  FileText, 
-  CheckCircle2, 
-  Sparkles, 
-  ExternalLink, 
+  Search, 
+  Calendar, 
+  Layers, 
   X, 
-  Bookmark, 
-  ChevronRight, 
-  Share2, 
-  Phone,
-  Eye,
-  Award,
-  Hash,
-  Calendar,
-  Layers,
-  ArrowDownToLine,
-  MessageSquare
+  CheckCircle2, 
+  MessageSquare, 
+  Send 
 } from 'lucide-react';
 import { DigitalBook } from '../types';
 import { useSite } from '../context/SiteContext';
@@ -26,519 +16,357 @@ interface DigitalBooksSectionProps {
   onOpenConsultation?: (area?: string) => void;
 }
 
-export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = ({ onOpenConsultation }) => {
+export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
   const { siteConfig } = useSite();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedBook, setSelectedBook] = useState<DigitalBook | null>(null);
-  const [downloadModalBook, setDownloadModalBook] = useState<DigitalBook | null>(null);
-  const [downloadName, setDownloadName] = useState('');
-  const [downloadEmail, setDownloadEmail] = useState('');
-  const [downloadPhone, setDownloadPhone] = useState('');
-  const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [summaryBook, setSummaryBook] = useState<DigitalBook | null>(null);
+  const [formBook, setFormBook] = useState<DigitalBook | null>(null);
+  
+  // Form State
+  const [fullName, setFullName] = useState('');
+  const [whatsApp, setWhatsApp] = useState('');
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const books = siteConfig.digitalBooks || [];
 
   const filteredBooks = useMemo(() => {
     return books.filter((b) => {
-      const matchesSearch = b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      const match = b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         b.area.toLowerCase().includes(searchTerm.toLowerCase());
-      return matchesSearch;
+      return match;
     });
   }, [books, searchTerm]);
 
-  // Handle direct file download generation
-  const triggerPdfDownload = (book: DigitalBook) => {
-    const content = `================================================================================
-ALDO LEÃO ADVOCACIA ESTRATÉGICA · FUNDADA EM 1908
-BIBLIOTECA JURÍDICA E OBRAS DIGITAIS DO DR. ALDO LEÃO
-================================================================================
-
-TÍTULO DA OBRA: ${book.title}
-AUTOR: ${book.author}
-ÁREA DE ESPECIALIDADE: ${book.area}
-ANO: ${book.year || '2026'} | PÁGINAS: ${book.pages || 'N/A'} | ISBN: ${book.isbn || 'N/A'}
-FORMATO: ${book.format || 'E-Book Digital'}
-
---------------------------------------------------------------------------------
-SÍNTESE EXECUTIVA & APRESENTAÇÃO DA OBRA
---------------------------------------------------------------------------------
-${book.description}
-
---------------------------------------------------------------------------------
-EXCERTO / INTRODUÇÃO DA OBRA
---------------------------------------------------------------------------------
-"${book.sampleExcerpt || 'Obra técnica voltada para proteção patrimonial, direito societário e governança familiar 4.0.'}"
-
---------------------------------------------------------------------------------
-ESTRUTURA CAPITULAR (SUMÁRIO DA OBRA)
---------------------------------------------------------------------------------
-${book.chapters ? book.chapters.map((ch, idx) => `[Capítulo ${idx + 1}] ${ch}`).join('\n') : 'Sumário disponível sob consulta.'}
-
---------------------------------------------------------------------------------
-EXPEDIENTE JURÍDICO & ATENDIMENTO
---------------------------------------------------------------------------------
-Aldo Leão Advocacia Estratégica
-Sede: Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, Porto Alegre - RS
-Telefones Oficiais: (51) 998.088.998 / (51) 998.078.998
-E-mail: aldoleao.adv@gmail.com / holdingfamiliarbr@gmail.com
-Atendimento Nacional 100% Digital em todos os 27 estados e tribunais superiores.
-================================================================================
-`;
-
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    const sanitizedTitle = book.title
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, '_')
-      .replace(/_+/g, '_');
-    link.download = `Livro_Dr_Aldo_Leao_${sanitizedTitle}.txt`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+  const handleOpenForm = (book: DigitalBook) => {
+    setFormBook(book);
+    setSubmitSuccess(false);
+    setFullName('');
+    setWhatsApp('');
+    setEmail('');
   };
 
-  const handleStartDownloadFlow = (book: DigitalBook) => {
-    setDownloadModalBook(book);
-    setDownloadSuccess(false);
-  };
-
-  const handleConfirmDownload = (e: React.FormEvent) => {
+  const handleSubmitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!downloadModalBook) return;
+    if (!fullName || !whatsApp) return;
+    setSubmitting(true);
 
-    // Trigger local download
-    triggerPdfDownload(downloadModalBook);
-    setDownloadSuccess(true);
+    // Envio para WhatsApp automaticamente
+    const phone = '5551998088998';
+    const message = encodeURIComponent(
+      `Olá Dr. Aldo Leão, solicito o envio do Livro Digital gratuito:\n\n` +
+      `📖 *LIVRO:* ${formBook?.title}\n` +
+      `👤 *Nome Completo:* ${fullName}\n` +
+      `📱 *WhatsApp:* ${whatsApp}\n` +
+      `✉️ *E-mail:* ${email || 'Não informado'}`
+    );
+    try {
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    } catch (err) {
+      console.warn(err);
+    }
+
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitSuccess(true);
+    }, 400);
   };
 
-  const handleAcquireFreeViaWhatsApp = (bookTitle: string) => {
-    const rawPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+  const handleNaoRecebi = () => {
+    const phone = '5551998088998';
     const message = encodeURIComponent(
-      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de receber gratuitamente o livro digital "${bookTitle}".`
+      `Olá Dr. Aldo Leão, NÃO RECEBI O LIVRO DIGITAL solicitado no site:\n\n` +
+      `📖 *Livro:* ${formBook?.title}\n` +
+      `👤 *Nome:* ${fullName || 'Solicitante'}\n` +
+      `📱 *WhatsApp:* ${whatsApp}\n` +
+      `✉️ *E-mail:* ${email || 'Não informado'}\n\n` +
+      `Poderia por gentileza me encaminhar por este WhatsApp? Obrigado!`
     );
-    window.open(`https://wa.me/${rawPhone}?text=${message}`, '_blank');
-  };
-
-  const handleDownloadViaWhatsApp = (bookTitle: string) => {
-    const rawPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
-    const message = encodeURIComponent(
-      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de baixar o livro digital gratuito "${bookTitle}".`
-    );
-    window.open(`https://wa.me/${rawPhone}?text=${message}`, '_blank');
+    window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   };
 
   return (
     <section id="livros" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
-      {/* Background ambient glow */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-b from-[#D4AF37]/10 via-[#0E1F3D]/20 to-transparent blur-3xl rounded-full" />
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0E1F3D] border border-[#D4AF37]/40 text-[11px] uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3 shadow-inner">
+        {/* Section Header: BIBLIOTECA JURÍDICA e LIVROS JURÍDICOS DIGITAIS (Item 12 e Item 41) */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0E1F3D] border border-[#D4AF37]/40 text-[11px] uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3 shadow-inner">
             <BookOpen className="w-3.5 h-3.5 text-[#F6E27A]" />
-            <span>BIBLIOTECA JURÍDICA GRATUITA</span>
+            <span>BIBLIOTECA JURÍDICA</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
-            LIVROS <span className="gold-text-gradient">DIGITAIS</span>
+            LIVROS <span className="gold-text-gradient">JURÍDICOS DIGITAIS</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body">
-            A produção intelectual e bibliográfica é um dos pilares da excelência da Aldo Leão Advocacia Estratégica. Todas as obras são 100% gratuitas e disponibilizadas pelo Dr. Aldo Leão para orientação jurídica e planejamento patrimonial.
+          {/* Texto exato solicitado no Item 41 */}
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+            A produção intelectual e bibliográfica é um dos pilares da excelência da ALDO LEÃO ADVOCACIA ESTRATÉGICA, através da ACADEMIA LEÃO FERREIRA. Os livros digitais publicados são de distribuição gratuita.
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12 flex flex-col sm:flex-row items-center gap-3">
+        {/* Campo de Busca e Botão Todos os Livros Digitais sem número (Item 12 e 41) */}
+        <div className="max-w-3xl mx-auto mb-12 flex flex-col sm:flex-row items-center gap-4">
           <div className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shrink-0 w-full sm:w-auto text-center">
-            TODOS OS LIVROS DIGITAIS (GRÁTIS)
+            TODOS OS LIVROS DIGITAIS
           </div>
 
-          <div className="flex-1 w-full relative">
+          <div className="relative flex-1 w-full">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Buscar livro por título ou tema..."
+              placeholder="Buscar livro por título ou área (ex: holding, imóvel, proteção)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-10 rounded-xl bg-[#071122] border border-[#D4AF37]/40 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#F6E27A] transition-all shadow-inner"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#D4AF37]"
             />
-            <BookOpen className="w-4 h-4 text-[#E5C158] absolute left-3.5 top-1/2 -translate-y-1/2" />
           </div>
         </div>
 
-        {/* Books Grid */}
+        {/* 6 Livros Digitais Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredBooks.map((book) => {
             return (
               <div
                 key={book.id}
-                className="group relative rounded-2xl bg-[#071122] border border-[#D4AF37]/30 hover:border-[#D4AF37] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#D4AF37]/10 flex flex-col justify-between overflow-hidden"
+                className="rounded-2xl overflow-hidden bg-[#071122] border border-[#D4AF37]/30 hover:border-[#D4AF37]/70 transition-all duration-300 shadow-xl flex flex-col justify-between group text-left"
               >
-                {/* Book Card Top Banner */}
-                <div className="relative p-6 bg-gradient-to-b from-[#0B1A35] via-[#071122] to-transparent border-b border-[#D4AF37]/20">
-                  <div className="absolute top-0 left-0 bottom-0 w-2 bg-gradient-to-b from-[#D4AF37] via-[#AA771C] to-[#8C6218]" />
+                <div>
+                  {/* Top Header do Box com ícone 'Livro Digital' alinhado à esquerda (Item 41) */}
+                  <div className="p-4 bg-gradient-to-r from-[#0B1A35] to-[#071122] border-b border-[#D4AF37]/20 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/50 flex items-center justify-center text-[#F6E27A]">
+                        <BookOpen className="w-3.5 h-3.5 text-[#E5C158]" />
+                      </div>
+                      <span className="text-[11px] font-bold text-slate-200 uppercase tracking-wider">
+                        Livro Digital
+                      </span>
+                    </div>
 
-                  <div className="flex items-center justify-between gap-2 mb-4 pl-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center gap-1.5 shadow-sm bg-[#D4AF37] text-slate-950">
-                      <BookOpen className="w-3 h-3 text-slate-950" />
-                      <span>LIVRO DIGITAL GRATUITO</span>
-                    </span>
-
-                    <span className="text-[11px] font-cinzel text-slate-400 font-semibold">
-                      {book.year || '2026'}
+                    <span className="text-[10px] font-semibold text-[#E5C158] uppercase">
+                      {book.area}
                     </span>
                   </div>
 
-                  {/* Book Title */}
-                  <div className="pl-2">
-                    <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white group-hover:text-[#F6E27A] transition-colors leading-snug mb-2 line-clamp-2">
+                  <div className="p-6">
+                    {/* Title */}
+                    <h3 className="font-cinzel text-base sm:text-lg font-bold text-white group-hover:text-[#F6E27A] transition-colors leading-snug mb-2">
                       {book.title}
                     </h3>
-                    <p className="text-xs text-[#E5C158] font-bold tracking-wide">
+
+                    {/* Autor Dr. Aldo Leão (Item 12 e 41) */}
+                    <p className="text-xs text-[#E5C158] font-medium mb-4">
                       Dr. Aldo Leão
                     </p>
-                    <p className="text-[11px] text-slate-400 mt-0.5">
-                      {book.area}
-                    </p>
+
+                    {/* Box preto com Ano e Páginas conforme Item 41 */}
+                    <div className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/20 flex items-center justify-between text-xs text-slate-300 mb-6">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5 text-[#E5C158]" />
+                        <span className="font-semibold">{book.year || '2026'}</span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-slate-400">
+                        <Layers className="w-3.5 h-3.5 text-[#E5C158]" />
+                        <span>{book.pages || '144 páginas'}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Body Content */}
-                <div className="p-6 pt-4 flex-grow flex flex-col justify-between space-y-4">
-                  <div className="flex items-center gap-2 text-xs text-slate-300 bg-[#050B14] p-3 rounded-lg border border-slate-800">
-                    <Layers className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span>{book.pages || 'Edição Digital Completa'}</span>
-                    <span className="text-slate-600">·</span>
-                    <span className="text-[#F6E27A] font-semibold">Livro Digital (PDF Gratuito)</span>
-                  </div>
-                </div>
-
-                {/* Action Buttons Footer */}
-                <div className="p-6 pt-2 bg-[#050B14]/60 border-t border-slate-800/80 space-y-2.5">
+                {/* Bottom Actions: Botão Baixar Livro Digital centralizado e Botão Ver Sumário (Item 12 e 41) */}
+                <div className="p-5 pt-0 flex flex-col gap-2.5">
                   <button
-                    onClick={() => handleAcquireFreeViaWhatsApp(book.title)}
-                    className="w-full py-3 px-4 rounded-lg bg-gradient-to-r from-[#D4AF37] via-[#F6E27A] to-[#D4AF37] text-slate-950 text-xs font-black uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-md shadow-[#D4AF37]/20 cursor-pointer"
+                    onClick={() => handleOpenForm(book)}
+                    className="w-full py-3 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 text-[#050B14] text-xs font-bold uppercase tracking-wider transition-all text-center cursor-pointer shadow-md"
                   >
-                    <BookOpen className="w-4 h-4 text-slate-950 shrink-0" />
-                    <span>Adquirir Livro Grátis</span>
+                    Baixar Livro Digital
                   </button>
 
                   <button
-                    onClick={() => handleDownloadViaWhatsApp(book.title)}
-                    className="w-full py-2.5 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] hover:bg-[#1A365D] hover:text-white text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                    onClick={() => setSummaryBook(book)}
+                    className="w-full py-2.5 rounded-lg bg-[#0A1730] hover:bg-[#0E1F3D] border border-[#D4AF37]/35 text-[#F6E27A] hover:text-white text-xs font-semibold uppercase tracking-wider transition-all text-center cursor-pointer"
                   >
-                    <Download className="w-3.5 h-3.5" />
-                    <span>Baixar Livro Digital</span>
-                  </button>
-
-                  <button
-                    onClick={() => setSelectedBook(book)}
-                    className="w-full py-1.5 px-3 rounded-lg bg-transparent text-slate-400 hover:text-white text-[11px] font-semibold transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-                  >
-                    <Eye className="w-3.5 h-3.5" />
-                    <span>Ver Sumário</span>
+                    VER SUMÁRIO
                   </button>
                 </div>
               </div>
             );
           })}
         </div>
-
-        {/* Bottom Banner with Institutional Guarantee */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border border-[#D4AF37]/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/20 border border-[#D4AF37]/40 flex items-center justify-center shrink-0">
-              <Sparkles className="w-6 h-6 text-[#F6E27A]" />
-            </div>
-            <div>
-              <h4 className="font-cinzel text-base sm:text-lg font-bold text-white">
-                Deseja um exemplar autografado ou mentoria jurídica executiva?
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 font-sans-body mt-1">
-                O Dr. Aldo Leão realiza mentorias fechadas e palestras para grupos familiares, cooperativas do agronegócio e associações empresariais.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
-            <button
-              onClick={() => onOpenConsultation && onOpenConsultation('Planejamento Patrimonial 4.0')}
-              className="w-full sm:w-auto px-6 py-3 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-lg cursor-pointer"
-            >
-              Agendar com o Autor
-            </button>
-            <a
-              href={`https://wa.me/${siteConfig.contact?.whatsappNumber || '5551998088998'}?text=${encodeURIComponent('Olá Dr. Aldo Leão! Tenho interesse em receber seus livros digitais gratuitos e saber sobre palestras/mentorias.')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto px-5 py-3 rounded-lg bg-[#25D366] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <MessageSquare className="w-4 h-4" />
-              <span>WhatsApp Oficial</span>
-            </a>
-          </div>
-        </div>
       </div>
 
-      {/* Book Details & Full Table of Contents Modal */}
-      {selectedBook && (
+      {/* Modal 1: VER SUMÁRIO (Item 12 e Item 41) */}
+      {summaryBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-3xl bg-[#071122] rounded-2xl border border-[#D4AF37]/60 shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto text-slate-100">
+          <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto text-slate-100 text-left">
             <button
-              onClick={() => setSelectedBook(null)}
-              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+              onClick={() => setSummaryBook(null)}
+              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Fechar"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {/* Modal Header */}
-            <div className="border-b border-[#D4AF37]/30 pb-5 mb-6">
-              <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#D4AF37] text-slate-950 font-black">
-                  LIVRO DIGITAL GRATUITO (DOWNLOAD LIBERADO)
-                </span>
-                <span className="text-xs text-[#E5C158] font-semibold">
-                  · {selectedBook.area} · Ano {selectedBook.year || '2026'}
-                </span>
-              </div>
-
-              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white leading-tight">
-                {selectedBook.title}
+            {/* Cabeçalho do Sumário: Formato Livro Digital (PDF), Autor Dr. Aldo Leão, sem ISBN nem sinopse (Item 41) */}
+            <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
+              <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider block mb-1">
+                LIVRO DIGITAL (PDF)
+              </span>
+              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
+                {summaryBook.title}
               </h3>
-              <p className="text-sm text-[#D4AF37] mt-1 font-semibold">
-                Autor: {selectedBook.author} (OAB/RS 22.418)
+              <p className="text-xs text-slate-300 mt-1">
+                Autor: <strong className="text-white">Dr. Aldo Leão</strong>
               </p>
             </div>
 
-            {/* Technical Specs Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-xl bg-[#050B14] border border-slate-800 text-xs mb-6">
-              <div>
-                <span className="text-slate-400 block text-[10px] uppercase">Formato:</span>
-                <span className="text-white font-medium">Livro Digital (PDF)</span>
-              </div>
-              <div>
-                <span className="text-slate-400 block text-[10px] uppercase">Páginas:</span>
-                <span className="text-white font-medium">{selectedBook.pages || 'N/A'}</span>
-              </div>
-              <div>
-                <span className="text-slate-400 block text-[10px] uppercase">Valor:</span>
-                <span className="text-emerald-400 font-bold">100% Gratuito</span>
-              </div>
-              <div>
-                <span className="text-slate-400 block text-[10px] uppercase">Disponibilidade:</span>
-                <span className="text-[#F6E27A] font-bold">Livre Acesso</span>
-              </div>
-            </div>
-
-            {/* Synopsis */}
-            <div className="space-y-4 mb-6">
-              <h4 className="font-cinzel text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                Sinopse da Obra
+            {/* Seção Sumário (Item 12 e 41) */}
+            <div className="mb-6">
+              <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider mb-3">
+                Sumário
               </h4>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-                {selectedBook.description}
-              </p>
-
-              {selectedBook.sampleExcerpt && (
-                <div className="p-4 rounded-xl bg-[#0B1A35]/60 border-l-4 border-[#D4AF37] italic text-xs sm:text-sm text-slate-200">
-                  "{selectedBook.sampleExcerpt}"
-                </div>
-              )}
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-2.5 text-xs text-slate-300 leading-relaxed font-sans-body">
+                {summaryBook.chapters && summaryBook.chapters.length > 0 ? (
+                  summaryBook.chapters.map((ch, idx) => (
+                    <div key={idx} className="flex items-start gap-2 border-b border-slate-900 pb-2 last:border-0 last:pb-0">
+                      <span className="text-[#E5C158] font-bold shrink-0">{idx + 1}.</span>
+                      <span>{ch.replace(/^Capítulo \d+:\s*/i, '')}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>Sumário estruturado em 6 capítulos práticos para orientação patrimonial.</p>
+                )}
+              </div>
             </div>
 
-            {/* Chapters / Table of Contents */}
-            {selectedBook.chapters && selectedBook.chapters.length > 0 && (
-              <div className="space-y-3 mb-8">
-                <h4 className="font-cinzel text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                  Sumário Capitular da Obra
-                </h4>
-                <div className="space-y-2">
-                  {selectedBook.chapters.map((chapter, idx) => (
-                    <div 
-                      key={idx}
-                      className="p-3 rounded-lg bg-[#050B14] border border-slate-800 flex items-start gap-3 text-xs text-slate-300"
-                    >
-                      <span className="w-5 h-5 rounded-full bg-[#D4AF37]/20 text-[#F6E27A] text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <span>{chapter}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Modal Actions */}
-            <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <button
-                  onClick={() => {
-                    const b = selectedBook;
-                    setSelectedBook(null);
-                    handleStartDownloadFlow(b);
-                  }}
-                  className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Baixar Livro Grátis (PDF)</span>
-                </button>
-
-                <button
-                  onClick={() => handleAcquireFreeViaWhatsApp(selectedBook.title)}
-                  className="flex-1 sm:flex-none px-6 py-2.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/60 text-[#F6E27A] font-bold text-xs uppercase tracking-wider hover:bg-[#1A3F5D] flex items-center justify-center gap-2 cursor-pointer"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span>Adquirir Livro Grátis</span>
-                </button>
-              </div>
-
+            {/* Primeiro botão dourado: BAIXAR LIVRO DIGITAL (Item 41) */}
+            <div className="pt-4 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">
               <button
-                onClick={() => setSelectedBook(null)}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white border border-slate-800 hover:bg-slate-800 cursor-pointer"
+                onClick={() => {
+                  const b = summaryBook;
+                  setSummaryBook(null);
+                  handleOpenForm(b);
+                }}
+                className="px-8 py-3 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-md"
               >
-                Fechar
+                BAIXAR LIVRO DIGITAL
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Instant Download Modal */}
-      {downloadModalBook && (
+      {/* Modal 2: FORMULÁRIO BAIXAR LIVRO DIGITAL (Item 41) */}
+      {formBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-lg bg-[#071122] rounded-2xl border border-[#D4AF37] shadow-2xl p-6 sm:p-8 text-slate-100">
+          <div className="relative w-full max-w-lg bg-[#071122] rounded-xl border border-[#D4AF37]/60 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-slate-100 text-left">
             <button
-              onClick={() => {
-                setDownloadModalBook(null);
-                setDownloadSuccess(false);
-              }}
-              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+              onClick={() => setFormBook(null)}
+              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Fechar"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {!downloadSuccess ? (
-              <>
-                <div className="text-center mb-6">
-                  <div className="w-12 h-12 mx-auto rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/50 flex items-center justify-center mb-3">
-                    <ArrowDownToLine className="w-6 h-6 text-[#F6E27A]" />
-                  </div>
-                  <h3 className="font-cinzel text-xl font-bold text-white">
-                    Download Imediato do E-Book
+            {submitSuccess ? (
+              /* Tela ENVIO CONCLUÍDO COM SUCESSO com botão NÃO RECEBI O LIVRO DIGITAL (Item 41) */
+              <div className="text-center py-6 space-y-4">
+                <div className="w-16 h-16 rounded-full bg-[#25D366]/20 border border-[#25D366] flex items-center justify-center text-[#25D366] mx-auto">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h3 className="font-cinzel text-xl font-bold text-white uppercase">
+                  ENVIO CONCLUÍDO COM SUCESSO
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto">
+                  Sua solicitação do livro digital <strong>"{formBook.title}"</strong> foi recebida e encaminhada ao Dr. Aldo Leão.
+                </p>
+                <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 my-4 text-xs text-slate-300">
+                  Em caso de dúvida ou não recebimento do seu livro digital clique no botão abaixo.
+                </div>
+                <div className="pt-2">
+                  <button
+                    onClick={handleNaoRecebi}
+                    className="w-full py-3.5 px-4 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-black text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>NÃO RECEBI O LIVRO DIGITAL</span>
+                  </button>
+                </div>
+                <button
+                  onClick={() => setFormBook(null)}
+                  className="mt-3 text-xs text-slate-400 hover:text-white cursor-pointer"
+                >
+                  Fechar janela
+                </button>
+              </div>
+            ) : (
+              <div>
+                <div className="border-b border-[#D4AF37]/25 pb-4 mb-5">
+                  <h3 className="font-cinzel text-xl font-bold text-white uppercase">
+                    BAIXAR LIVRO DIGITAL
                   </h3>
-                  <p className="text-xs text-[#E5C158] mt-1 font-semibold">
-                    "{downloadModalBook.title}"
+                  <p className="text-xs text-[#E5C158] mt-1 font-medium">
+                    {formBook.title}
                   </p>
-                  <p className="text-[11px] text-slate-400 mt-1">
-                    Insira seus dados para liberar o arquivo completo e receber atualizações jurídicas do Dr. Aldo Leão.
+                  <p className="text-xs text-slate-300 mt-2 font-light">
+                    Insira os dados solicitados e clique no botão ENVIAR para receber gratuitamente o seu Livro Digital.
                   </p>
                 </div>
 
-                <form onSubmit={handleConfirmDownload} className="space-y-4">
+                <form onSubmit={handleSubmitForm} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
-                      Seu Nome Completo *
+                    <label className="block text-xs font-semibold text-slate-200 mb-1">
+                      Nome Completo <span className="text-[#D4AF37]">*</span>
                     </label>
                     <input
                       type="text"
                       required
-                      placeholder="Ex: Carlos Eduardo Silveira"
-                      value={downloadName}
-                      onChange={(e) => setDownloadName(e.target.value)}
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Seu nome completo"
                       className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
-                      Seu E-mail Corporativo ou Pessoal *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="Ex: carlos@empresa.com.br"
-                      value={downloadEmail}
-                      onChange={(e) => setDownloadEmail(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
-                      WhatsApp para Envio (Opcional)
+                    <label className="block text-xs font-semibold text-slate-200 mb-1">
+                      WhatsApp <span className="text-[#D4AF37]">*</span>
                     </label>
                     <input
                       type="tel"
-                      placeholder="Ex: (51) 99999-9999"
-                      value={downloadPhone}
-                      onChange={(e) => setDownloadPhone(e.target.value)}
+                      required
+                      value={whatsApp}
+                      onChange={(e) => setWhatsApp(e.target.value)}
+                      placeholder="(DDD) 99999-9999"
                       className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                     />
                   </div>
 
-                  <div className="pt-2">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-200 mb-1">
+                      E-mail
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="seuemail@exemplo.com"
+                      className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
+                    />
+                  </div>
+
+                  <div className="pt-3">
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-lg bg-gradient-to-r from-[#D4AF37] via-[#F6E27A] to-[#D4AF37] text-slate-950 font-black text-xs uppercase tracking-wider hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/20 cursor-pointer"
+                      disabled={submitting}
+                      className="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 text-[#050B14] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg disabled:opacity-60"
                     >
-                      <Download className="w-4 h-4 text-slate-950" />
-                      <span>Baixar E-Book Gratuito Agora</span>
+                      <Send className="w-4 h-4" />
+                      <span>{submitting ? 'ENVIANDO...' : 'ENVIAR'}</span>
                     </button>
                   </div>
                 </form>
-              </>
-            ) : (
-              <div className="text-center py-6 space-y-4">
-                <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center">
-                  <CheckCircle2 className="w-8 h-8 text-emerald-400" />
-                </div>
-                <h3 className="font-cinzel text-xl font-bold text-white">
-                  Download Concluído com Sucesso!
-                </h3>
-                <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
-                  O material de <strong className="text-white">{downloadModalBook.title}</strong> foi baixado no seu dispositivo.
-                </p>
-
-                <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-xs text-slate-300 space-y-2">
-                  <p className="text-[#E5C158] font-bold">
-                    Deseja conversar diretamente com o Dr. Aldo Leão sobre o tema do livro?
-                  </p>
-                  <p className="text-[11px] text-slate-400">
-                    Nossa equipe pode analisar o seu caso patrimonial ou empresarial de forma personalizada.
-                  </p>
-                </div>
-
-                <div className="pt-2 flex flex-col sm:flex-row gap-2">
-                  <button
-                    onClick={() => {
-                      setDownloadModalBook(null);
-                      setDownloadSuccess(false);
-                      if (onOpenConsultation) {
-                        onOpenConsultation(downloadModalBook.area);
-                      }
-                    }}
-                    className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer"
-                  >
-                    Agendar Consulta
-                  </button>
-                  <button
-                    onClick={() => {
-                      setDownloadModalBook(null);
-                      setDownloadSuccess(false);
-                    }}
-                    className="flex-1 py-2.5 rounded-lg bg-slate-800 text-slate-300 font-medium text-xs hover:bg-slate-700 transition-colors cursor-pointer"
-                  >
-                    Fechar
-                  </button>
-                </div>
               </div>
             )}
           </div>

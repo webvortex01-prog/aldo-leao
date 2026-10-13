@@ -12,6 +12,7 @@ import {
   Lock
 } from 'lucide-react';
 import { Logo } from './Logo';
+import { UrgentHotlineFloat } from './UrgentHotlineFloat';
 import { useSite } from '../context/SiteContext';
 
 interface HoldingLandingPageProps {
@@ -432,12 +433,12 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <br />
             {contact.addressPortoAlegre}
           </p>
-          <div className="flex items-center justify-center gap-4 text-xs text-[#E5C158]">
-            <span>WhatsApp: {contact.whatsappNumber}</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-[#E5C158]">
+            <span>WhatsApp: (51) 99808-8998</span>
             <span>·</span>
-            <span>Telefone: {contact.phonePrimary}</span>
+            <span>Telefones: (51) 99808-8998 e (51) 99807-8998</span>
             <span>·</span>
-            <span>E-mail: aldoleao@hotmail.com</span>
+            <span>E-mail: aldoleaoadvocacia@gmail.com</span>
           </div>
           <div className="pt-4">
             <button
@@ -449,6 +450,9 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           </div>
         </div>
       </footer>
+
+      {/* Rodapé Fixo WhatsApp (Item 43) */}
+      <UrgentHotlineFloat onOpenConsultation={onOpenConsultation} />
     </div>
   );
 };

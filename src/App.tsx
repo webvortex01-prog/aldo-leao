@@ -4,12 +4,9 @@ import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
 import { NationalDigitalPresence } from './components/NationalDigitalPresence';
 import { CentennialLegacy } from './components/CentennialLegacy';
-import { ProfessionalExperienceCounter } from './components/ProfessionalExperienceCounter';
-import { Selo40AnosSection } from './components/Selo40AnosSection';
 import { HeadJuridico } from './components/HeadJuridico';
 import { PracticeAreas } from './components/PracticeAreas';
 import { ExcellenceSolutions } from './components/ExcellenceSolutions';
-import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
 import { DigitalConsultationCTA } from './components/DigitalConsultationCTA';
 import { HoldingFamiliarSection } from './components/HoldingFamiliarSection';
 import { PublicationsSection } from './components/PublicationsSection';
@@ -83,65 +80,60 @@ function AppContent() {
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
-        {/* 2. Página PRESENÇA NACIONAL DIGITAL (Item 4) */}
+        {/* 2. Página PRESENÇA NACIONAL DIGITAL (Item 4 e Item 30) */}
         <NationalDigitalPresence />
 
-        {/* 3. Página O LEGADO CENTENÁRIO (Item 5) */}
+        {/* 3. Página O LEGADO CENTENÁRIO com 40 Anos e Selo (Item 5, 31, 32, 33, 34) */}
         <CentennialLegacy />
 
-        {/* Deslocado para o final da página O LEGADO CENTENÁRIO abaixo da linha do tempo (Item 5) */}
-        <ProfessionalExperienceCounter />
-        <Selo40AnosSection onOpenConsultation={() => handleOpenConsultation()} />
-
-        {/* 4. Página HEAD JURÍDICO (Item 6) */}
+        {/* 4. Página HEAD JURÍDICO com Contador 40 Anos no final (Item 6, 21, 35) */}
         <HeadJuridico
           onOpenConsultation={() => handleOpenConsultation()}
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
-        {/* 5. Página ÁREAS DE ATUAÇÃO (Item 7) */}
+        {/* 5. Página ÁREAS DE ATUAÇÃO (Item 7 e Item 36) */}
         <PracticeAreas
           onGoToLandingPage={() => setCurrentView('holding-landing')}
           onOpenConsultation={() => handleOpenConsultation()}
         />
 
-        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8) & ACADEMIA LEÃO (Item 16) */}
+        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8 e Item 37 - Academia Leão abre via modal) */}
         <ExcellenceSolutions
           onGoToLandingPage={() => setCurrentView('holding-landing')}
           onOpenConsultation={() => handleOpenConsultation()}
         />
-        <AcademiaLeaoSection onOpenConsultation={(topic) => handleOpenConsultation(topic)} />
 
-        {/* 7. Página AGENDE A SUA CONSULTA DIGITAL (Item 9) */}
-        <DigitalConsultationCTA
-          onOpenConsultation={() => handleOpenConsultation()}
-        />
-
-        {/* 8. Página PLANEJAMENTO PATRIMONIAL 4.0 (Item 10) */}
+        {/* 7. Página PLANEJAMENTO PATRIMONIAL 4.0 (Item 10 e Item 40) */}
         <HoldingFamiliarSection
           onGoToLandingPage={() => setCurrentView('holding-landing')}
+        />
+
+        {/* 8. Página AGENDE A SUA CONSULTA DIGITAL (Item 9) */}
+        <DigitalConsultationCTA
+          onOpenConsultation={() => handleOpenConsultation()}
         />
 
         {/* 9. Página PUBLICAÇÕES (Item 11) */}
         <PublicationsSection />
 
-        {/* 10. Página LIVROS DIGITAIS (Item 12) */}
+        {/* 10. Página LIVROS DIGITAIS (Item 12 e Item 41) */}
         <DigitalBooksSection
           onOpenConsultation={(area) => handleOpenConsultation(area)}
         />
 
-        {/* 11. Página LOCALIZAÇÃO (Item 13) */}
+        {/* 11. Página CONTATO (Item 13 e Item 42) */}
         <LocationSection />
       </main>
 
-      {/* 12. Página RODAPÉ (Item 14) */}
+      {/* 12. Página RODAPÉ (Item 14 e Item 42) */}
       <Footer 
         onOpenAdmin={handleOpenAdmin} 
         onOpenTutorial={() => setIsTutorialOpen(true)}
         onOpenLandingPage={() => setCurrentView('holding-landing')}
       />
 
-      {/* Rodapé Fixo Centralizado (Item 1) */}
+      {/* Rodapé Fixo Centralizado com Balança Dourada (Item 1, 24, 43) */}
       <UrgentHotlineFloat onOpenConsultation={() => handleOpenConsultation()} />
 
       {/* Mini Menu Flutuante com Emojis & Hamburguinho (Bottom Right) */}
@@ -152,12 +144,12 @@ function AppContent() {
         onOpenLandingPage={() => setCurrentView('holding-landing')}
       />
 
-      {/* Modal de Autenticação / Login para Editor de Sites (Admin) */}
+      {/* Modal de Autenticação / Login para Estatísticas e Editor de Sites (Item 2) */}
       <AdminAuthModal
         isOpen={isAdminAuthOpen}
         onClose={() => setIsAdminAuthOpen(false)}
         onSuccess={handleAuthSuccess}
-        title="Editor de Sites · Acesso Restrito"
+        title="ESTATÍSTICAS · Acesso Restrito"
       />
 
       {/* Priority Strategic Consultation Modal */}

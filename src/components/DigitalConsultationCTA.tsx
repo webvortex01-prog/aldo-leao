@@ -1,6 +1,5 @@
 import React from 'react';
-import { ArrowRight, PhoneCall, ShieldCheck, Scale, Clock } from 'lucide-react';
-import { useSite } from '../context/SiteContext';
+import { ArrowRight, MessageSquare, Scale } from 'lucide-react';
 
 interface DigitalConsultationCTAProps {
   onOpenConsultation: () => void;
@@ -9,22 +8,20 @@ interface DigitalConsultationCTAProps {
 export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
   onOpenConsultation
 }) => {
-  const { siteConfig } = useSite();
-
   const handleWhatsApp = () => {
-    const phone = siteConfig.contact.whatsappNumber || '5551998088998';
+    const phone = '5551998088998';
     const text = encodeURIComponent(
-      'Olá Dr. Aldo Leão, gostaria de agendar uma Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA.'
+      'Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de falar com um Advogado especialista e agendar uma Consulta Virtual.'
     );
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   };
 
   return (
-    <section className="py-20 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden">
+    <section className="py-20 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/40 shadow-2xl bg-[#071122]">
           {/* Background image overlay */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 pointer-events-none">
             <img
               src="/img/dr-aldo-reuniao.jpg"
               alt="Ambiente de Atendimento Jurídico Digital Dr. Aldo Leão"
@@ -50,32 +47,38 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
               e a mesma excelência do atendimento presencial.
             </p>
 
+            {/* Ícones com balança da justiça e textos do Item 9 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               <div className="flex items-center gap-3 text-xs text-slate-200">
-                <Scale className="w-4 h-4 text-[#E5C158] shrink-0" />
+                <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37]/50 flex items-center justify-center shrink-0">
+                  <Scale className="w-4 h-4 text-[#E5C158]" />
+                </div>
                 <span>Agendamento prévio da consulta</span>
               </div>
               <div className="flex items-center gap-3 text-xs text-slate-200">
-                <Scale className="w-4 h-4 text-[#E5C158] shrink-0" />
+                <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37]/50 flex items-center justify-center shrink-0">
+                  <Scale className="w-4 h-4 text-[#E5C158]" />
+                </div>
                 <span>Consulta com hora marcada</span>
               </div>
             </div>
 
+            {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <button
                 onClick={onOpenConsultation}
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
               >
-                <span>AGENDAR CONSULTA DIGITAL</span>
+                <span>AGENDAR CONSULTA VIRTUAL</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
               <button
                 onClick={handleWhatsApp}
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded text-xs font-bold uppercase tracking-wider text-black bg-[#25D366] hover:bg-[#20ba59] transition-all cursor-pointer shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-black bg-[#25D366] hover:bg-[#20ba59] transition-all cursor-pointer shadow-md"
               >
-                <PhoneCall className="w-4 h-4" />
-                <span>Chamar no WhatsApp (51) 998088998</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Agendar pelo WhatsApp</span>
               </button>
             </div>
           </div>

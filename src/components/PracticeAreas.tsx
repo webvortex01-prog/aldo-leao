@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Scale, ArrowRight, X, Phone, MessageSquare, ShieldCheck } from 'lucide-react';
+import { Scale, ArrowRight, X, Phone, MessageSquare } from 'lucide-react';
 import { PracticeArea } from '../types';
 import { useSite } from '../context/SiteContext';
 
@@ -9,26 +9,73 @@ interface PracticeAreasProps {
 }
 
 export const PracticeAreas: React.FC<PracticeAreasProps> = ({
-  onGoToLandingPage,
-  onOpenConsultation
+  onGoToLandingPage
 }) => {
   const { siteConfig } = useSite();
   const [selectedAreaModal, setSelectedAreaModal] = useState<PracticeArea | null>(null);
 
-  const practiceAreas = siteConfig.practiceAreas;
+  const practiceAreas: PracticeArea[] = [
+    {
+      id: 'holding-40',
+      number: '01',
+      title: 'Planejamento Patrimonial 4.0',
+      subtitle: 'Proteção Patrimonial e Empresarial',
+      description: 'Estruturamos soluções jurídicas avançadas e personalizadas para proteger, organizar e perpetuar patrimônios e empresas por meio do ecossistema de Holding Familiar, governança, planejamento sucessório e inteligência jurídica estratégica.',
+      badge: '01',
+      isHoldingLandingLink: true
+    },
+    {
+      id: 'imobiliario',
+      number: '02',
+      title: 'Direito Imobiliário',
+      subtitle: 'Gestão Jurídica de Imóveis',
+      description: 'Atuação especializada e estratégica em due diligence, contratos, distratos, investimentos imobiliários, regularização de imóveis, incorporação e proteção patrimonial, proporcionando máxima segurança às operações.',
+      badge: 'Imóveis'
+    },
+    {
+      id: 'empresarial',
+      number: '03',
+      title: 'Direito Empresarial',
+      subtitle: 'EMPRESARIAL',
+      description: 'Soluções jurídicas empresariais estratégicas voltadas à governança corporativa, estruturação societária, prevenção de riscos, compliance, conformidade normativa e fortalecimento da segurança jurídica dos negócios.',
+      badge: 'EMPRESARIAL'
+    },
+    {
+      id: 'civil',
+      number: '04',
+      title: 'Direito Civil',
+      subtitle: 'Contratos Estratégicos, Família e Sucessões.',
+      description: 'Assessoria jurídica e advocacia estratégica em contratos de alta complexidade, distratos, responsabilidade civil, obrigações, Direito de Família e Sucessões, com foco na prevenção, segurança jurídica e perpetuação patrimonial.',
+      badge: 'Direito Civil'
+    },
+    {
+      id: 'consumo',
+      number: '05',
+      title: 'Relações de Consumo',
+      subtitle: 'Consumidor',
+      description: 'Desenvolvimento de estratégias preventivas em compliance consumerista, mitigação de riscos, prevenção de prejuízos financeiros (multas, indenizações) e adequação rigorosa das relações de consumo para empresas.',
+      badge: 'Consumidor'
+    }
+  ];
 
   const handleAreaClick = (area: PracticeArea) => {
-    if (area.isHoldingLandingLink) {
-      onGoToLandingPage();
+    if (area.id === 'holding-40') {
+      // Item 36: No card Planejamento Patrimonial 4.0 ao clicar em Saiba Mais abre a página Holding Familiar
+      const el = document.getElementById('holding-familiar');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        onGoToLandingPage();
+      }
     } else {
       setSelectedAreaModal(area);
     }
   };
 
-  const handleWhatsAppArea = (areaTitle: string) => {
-    const phone = siteConfig.contact.whatsappNumber || '5551998088998';
+  const handleWhatsApp = (areaTitle: string) => {
+    const phone = '5551998088998';
     const text = encodeURIComponent(
-      `Olá Dr. Aldo Leão, gostaria de agendar uma consulta sobre ${areaTitle} com a ALDO LEÃO ADVOCACIA ESTRATÉGICA.`
+      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de falar sobre ${areaTitle}.`
     );
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   };
@@ -46,37 +93,31 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
             ÁREAS DE <span className="gold-text-gradient">ATUAÇÃO</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body">
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
             Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração
-            da família na advocacia, a <strong className="text-white">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve
+            da família na advocacia, a <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve
             soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência
             técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:
           </p>
         </div>
 
-        {/* 5 Cards Grid (3 Columns on Desktop) */}
+        {/* 5 Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {practiceAreas.map((area, index) => {
-            const isFeatured = area.isHoldingLandingLink;
-
             return (
               <div
                 key={area.id || index}
                 onClick={() => handleAreaClick(area)}
-                className={`group relative rounded-xl p-7 transition-all duration-300 flex flex-col justify-between cursor-pointer border hover:-translate-y-1.5 shadow-xl ${
-                  isFeatured
-                    ? 'bg-gradient-to-b from-[#0E1F3D] to-[#071122] border-[#D4AF37] hover:shadow-[0_0_25px_rgba(212,175,55,0.35)]'
-                    : 'bg-[#071122] border-[#D4AF37]/25 hover:border-[#D4AF37]/60 hover:bg-[#0B1A35]'
-                }`}
+                className="group relative rounded-xl p-7 transition-all duration-300 flex flex-col justify-between cursor-pointer border bg-[#071122] border-[#D4AF37]/25 hover:border-[#D4AF37]/70 hover:bg-[#0B1A35] hover:-translate-y-1.5 shadow-xl text-left"
               >
                 <div>
                   {/* Top Bar of Card */}
                   <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/15 mb-5">
                     <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] group-hover:scale-110 transition-transform">
-                      <Scale className="w-5 h-5" />
+                      <Scale className="w-5 h-5 text-[#E5C158]" />
                     </div>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#E5C158]">
-                      {area.badge || `0${index + 1}`}
+                      {area.badge}
                     </span>
                   </div>
 
@@ -89,12 +130,12 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                   </p>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6">
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
                     {area.description}
                   </p>
                 </div>
 
-                {/* Bottom Action */}
+                {/* Bottom Action: SAIBA MAIS (Item 7) */}
                 <div className="pt-4 border-t border-[#D4AF37]/15 flex items-center justify-between">
                   <span className="text-xs font-bold text-[#F6E27A] group-hover:underline inline-flex items-center gap-1.5">
                     <span>SAIBA MAIS</span>
@@ -107,23 +148,21 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
         </div>
       </div>
 
-      {/* Internal Area Modal */}
+      {/* Internal Area Modal (Item 36: Sem "Especialidade jurídica estratégica", CENTRAL DE ATENDIMENTO, Telefones, Horário e botão "Fale Conosco") */}
       {selectedAreaModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-slate-100">
+          <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-slate-100 text-left">
             <button
               onClick={() => setSelectedAreaModal(null)}
-              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Fechar"
             >
               <X className="w-5 h-5" />
             </button>
 
+            {/* Cabeçalho sem "Especialidade jurídica estratégica" conforme Item 36 */}
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-              <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold">
-                Especialidade Jurídica Estratégica
-              </span>
-              <h3 className="font-cinzel text-2xl font-bold text-white mt-1">
+              <h3 className="font-cinzel text-2xl font-bold text-white">
                 {selectedAreaModal.title}
               </h3>
               <p className="text-xs text-[#E5C158] mt-1 uppercase font-semibold">
@@ -131,41 +170,35 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
               </p>
             </div>
 
-            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
+            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body font-light">
               <p>{selectedAreaModal.description}</p>
 
-              {/* Direct Office Contacts Box (from PDF Page 23) */}
-              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              {/* Box CENTRAL DE ATENDIMENTO conforme Item 36 */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
                 <div className="flex items-center gap-2 text-white font-bold text-xs uppercase font-cinzel">
                   <Phone className="w-4 h-4 text-[#E5C158]" />
-                  <span>Central de Atendimento Privativo</span>
+                  <span>CENTRAL DE ATENDIMENTO</span>
                 </div>
+
                 <div className="text-xs text-slate-300 space-y-1">
-                  <p>Telefone Principal: <strong className="text-white">+55 (51) 998.088.998</strong></p>
-                  <p>Telefone Secundário: <strong className="text-white">+55 (51) 998.078.998</strong></p>
-                  <p>Atendimento Digital: <strong className="text-[#F6E27A]">Segunda a Sexta-feira em todo o Brasil</strong></p>
+                  <p>
+                    <strong className="text-white">Telefones:</strong> (51) 99808-8998 e (51) 99807-8998
+                  </p>
+                  <p>
+                    <strong className="text-[#E5C158]">Atendimento Digital Brasil:</strong> De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs
+                  </p>
                 </div>
 
-                <button
-                  onClick={() => {
-                    handleWhatsAppArea(selectedAreaModal.title);
-                    setSelectedAreaModal(null);
-                  }}
-                  className="w-full py-3 rounded-lg text-xs font-bold uppercase tracking-wider text-black bg-[#25D366] hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Agendar Consulta sobre {selectedAreaModal.title} no WhatsApp</span>
-                </button>
+                <div className="pt-2">
+                  <button
+                    onClick={() => handleWhatsApp(selectedAreaModal.title)}
+                    className="px-5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Fale Conosco</span>
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">
-              <button
-                onClick={() => setSelectedAreaModal(null)}
-                className="px-5 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
-              >
-                Fechar
-              </button>
             </div>
           </div>
         </div>

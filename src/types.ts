@@ -123,11 +123,14 @@ export interface SiteConfig {
   };
   contact: {
     whatsappNumber: string; // 5551998088998
-    phonePrimary: string;   // (51) 998.088.998
-    phoneSecondary: string; // (51) 998.078.998
+    phonePrimary: string;   // (51) 99808-8998
+    phoneSecondary: string; // (51) 99807-8998
     emailPrimary: string;   // aldoleao.adv@gmail.com
     emailSecondary: string; // advaldoleaobr@gmail.com
-    emailHolding: string;   // holdingfamiliarbr@gmail.com
+    emailHolding?: string;   // holdingfamiliarbr@gmail.com
+    emailHolding1?: string;  // aldoleao.planejamento@gmail.com
+    emailHolding2?: string;  // holdingfamiliarbr@gmail.com
+    emailAcademia?: string;  // academialeaoferreira@gmail.com
     addressPortoAlegre: string;
     officeHours: string;
     spAddress?: string;
@@ -182,7 +185,9 @@ export interface SiteConfig {
     subtitle?: string;
     sub1908?: string;
     sub1935?: string;
+    sub1951?: string;
     sub1915?: string;
     sub1986?: string;
+    sub2026?: string;
   };
 }

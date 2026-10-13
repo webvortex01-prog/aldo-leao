@@ -1,44 +1,71 @@
-import React, { useState } from 'react';
-import { Award, BookOpen, Scale, Shield, CheckCircle2, FileText, ArrowRight, X, PhoneCall } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Scale, CheckCircle2, X, PhoneCall, BookOpen, ArrowRight } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 
 interface HeadJuridicoProps {
   onOpenConsultation: () => void;
-  onGoToLandingPage: () => void;
+  onGoToLandingPage?: () => void;
 }
 
 export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
-  onOpenConsultation,
-  onGoToLandingPage
+  onOpenConsultation
 }) => {
   const { siteConfig } = useSite();
-  const { founder } = siteConfig;
   const [curriculumModalOpen, setCurriculumModalOpen] = useState(false);
 
-  const aldoPhotos = [
-    { url: '/img/dr-aldo-portrait.jpg', label: 'Retrato Oficial' },
-    { url: '/img/dr-aldo-1.jpg', label: 'Dr. Aldo Forense' },
-    { url: '/img/dr-aldo-2.jpg', label: 'Dr. Aldo Escritório' },
-    { url: '/img/dr-aldo-3.jpg', label: 'Dr. Aldo Reunião' },
-    { url: '/img/dr-aldo-4.jpg', label: 'Dr. Aldo Estratégico' },
-    { url: '/img/dr-aldo-foco.jpg', label: 'Dr. Aldo Foco' },
-    { url: '/img/apresentacao-dr-aldo.jpg', label: 'Apresentação Corporativa' }
-  ];
+  // Contador de 40 anos animado (Item 21)
+  const currentYear = 2026;
+  const targetYears = currentYear - 1986; // 40
+  const [count, setCount] = useState<number>(0);
+  const [hasStarted, setHasStarted] = useState<boolean>(false);
+  const counterRef = useRef<HTMLDivElement>(null);
 
-  const [currentPhoto, setCurrentPhoto] = useState<string>(founder.photoUrl || '/img/dr-aldo-portrait.jpg');
-
-  const handleWhatsApp = () => {
-    const phone = siteConfig.contact.whatsappNumber || '5551998088998';
-    const text = encodeURIComponent(
-      'Olá Dr. Aldo Leão, gostaria de agendar uma Consulta Digital com o Head Jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting && !hasStarted) {
+          setHasStarted(true);
+        }
+      },
+      { threshold: 0.15 }
     );
-    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+
+    if (counterRef.current) {
+      observer.observe(counterRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    let start = 0;
+    const duration = 900;
+    const stepTime = Math.max(16, Math.floor(duration / targetYears));
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= targetYears) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+
+    return () => clearInterval(timer);
+  }, [hasStarted, targetYears]);
+
+  const scrollToLivros = () => {
+    setCurriculumModalOpen(false);
+    const el = document.getElementById('livros');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <section id="head-juridico" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Header da Seção: TERCEIRA GERAÇÃO DESDE 1986 (Item 6) */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
             <span>TERCEIRA GERAÇÃO DESDE 1986</span>
@@ -49,252 +76,188 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
           </h2>
         </div>
 
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Portrait & Badge with Real Photos Switcher */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
+        {/* Main Grid: Foto do escritório e Bio oficial */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+          {/* Coluna Esquerda: Imagem no escritório sem miniaturas, sem badge sobreposta, limpa e elegante (Item 35) */}
+          <div className="lg:col-span-5 relative flex justify-center">
+            <div className="relative w-full max-w-md">
               <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/30 to-transparent rounded-2xl blur-md" />
 
-              <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#091528]">
+              <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#071122]">
                 <div className="aspect-[3/4] relative overflow-hidden bg-[#0A1424]">
                   <img
-                    src={currentPhoto}
-                    alt={`${founder.name} - Head Jurídico`}
+                    src="/img/dr-aldo-reuniao.jpg"
+                    alt="Dr. Aldo Leão no Escritório"
                     className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-500"
                     onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-portrait.jpg';
+                      (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-foco.jpg';
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/30 to-transparent opacity-90" />
-
-                  {/* 40 Anos Badge overlay */}
-                  <a
-                    href="#selo-40-anos"
-                    className="absolute top-4 right-4 px-3 py-1 rounded-full bg-[#071122]/90 border border-[#D4AF37]/60 text-[10px] font-bold text-[#F6E27A] flex items-center gap-1.5 shadow-md hover:bg-[#0E1F3D] transition-colors"
-                  >
-                    <Award className="w-3.5 h-3.5 text-[#F6E27A]" />
-                    <span>40 Anos (1986–2026)</span>
-                  </a>
-
-                  {/* Name Tag on Portrait (Excluído PUCRS, Unisinos, OABRS, Procurador de 20 Municípios conforme Item 6) */}
-                  <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/35 text-center">
-                    <p className="font-cinzel text-xl font-bold text-white">
-                      {founder.name}
-                    </p>
-                    <p className="text-xs text-[#E5C158] font-semibold tracking-wider uppercase mt-0.5">
-                      Advocacia Estratégica
-                    </p>
-                  </div>
-                </div>
-
-                {/* Thumbnails of Dr. Aldo's photos */}
-                <div className="p-3 bg-[#060D1A] border-t border-[#D4AF37]/20 flex items-center justify-center gap-2 overflow-x-auto">
-                  {aldoPhotos.map((p, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentPhoto(p.url)}
-                      className={`relative w-11 h-11 rounded-lg overflow-hidden border-2 transition-all shrink-0 cursor-pointer ${
-                        currentPhoto === p.url
-                          ? 'border-[#F6E27A] scale-105 shadow-[0_0_10px_rgba(212,175,55,0.5)]'
-                          : 'border-slate-700 opacity-60 hover:opacity-100 hover:border-slate-500'
-                      }`}
-                      title={p.label}
-                    >
-                      <img
-                        src={p.url}
-                        alt={p.label}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </button>
-                  ))}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/20 to-transparent opacity-80" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Bio & Specialties */}
+          {/* Coluna Direita: Conteúdo Oficial Conforme Item 35 */}
           <div className="lg:col-span-7 text-left">
-            <div className="flex items-center gap-2 mb-3">
-              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
-                DR. ALDO LEÃO
+            {/* Título: Dr. ALDO LEÃO com ADVOCACIA ESTRATÉGICA em dourado logo abaixo (Item 35) */}
+            <div className="mb-4">
+              <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
+                Dr. ALDO LEÃO
               </h3>
-              <a
-                href="#selo-40-anos"
-                className="px-2.5 py-0.5 rounded bg-[#D4AF37]/15 border border-[#D4AF37]/40 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider"
-              >
-                Selo 40 Anos
-              </a>
+              <p className="font-cinzel text-sm sm:text-base font-bold text-[#E5C158] tracking-widest uppercase mt-1">
+                ADVOCACIA ESTRATÉGICA
+              </p>
             </div>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-4 font-light">
-              {founder.bioParagraph1}
-            </p>
+            {/* Texto exato da página conforme Item 35 */}
+            <div className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
+              <p>
+                Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.
+              </p>
+              <p>
+                A <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.
+              </p>
+              <p>
+                Com uma trajetória de mais de 40 anos de <strong className="text-[#F6E27A] font-medium">Excelência Jurídica</strong>, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.
+              </p>
+              <p>
+                O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.
+              </p>
+            </div>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-              {founder.bioParagraph2}
-            </p>
+            {/* Assinatura em tamanho maior, legível e centralizada (Item 35) */}
+            <div className="my-6 py-4 border-y border-[#D4AF37]/25 flex flex-col items-center justify-center">
+              <img
+                src="/img/assinatura-gold.png"
+                alt="Assinatura Dr. Aldo Leão"
+                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
+                }}
+              />
+              <button
+                onClick={() => setCurriculumModalOpen(true)}
+                className="mt-3 px-5 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/50 text-[#F6E27A] hover:bg-[#162D58] hover:text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md"
+              >
+                SAIBA MAIS
+              </button>
+            </div>
 
-            {/* Diferenciais List (from PDF Page 22) */}
+            {/* Diferenciais Estratégicos Mantidos (Item 35) */}
             <div className="space-y-2 mb-6">
               <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider mb-2">
                 Diferenciais Estratégicos:
               </h4>
-              {founder.differences.map((diff, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-200">
+              <div className="space-y-1.5 text-xs text-slate-200">
+                <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
-                  <span>{diff}</span>
+                  <span>Terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.</span>
                 </div>
-              ))}
-            </div>
-
-            {/* Signature & CTAs */}
-            <div className="mb-6 pb-4 border-b border-[#D4AF37]/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <img
-                  src="/img/assinatura-gold.png"
-                  alt="Assinatura Dr. Aldo Leão"
-                  className="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)] opacity-95"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
-                  }}
-                />
-                <span className="text-[11px] text-slate-400">
-                  Dr. Aldo Leão Ferreira Filho · OAB/RS
-                </span>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
+                  <span>Mais de quatro décadas de advocacia estratégica ininterrupta do Dr. Aldo Leão (desde 1986).</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
+                  <span>Referência nacional em Holding Familiar (Planejamento Patrimonial e Empresarial 4.0).</span>
+                </div>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
+                  <span>Atuação nacional por meio de atendimento jurídico 100% digital, seguro, confidencial e resolutivo.</span>
+                </div>
               </div>
-
-              <a
-                href="#academia-leao"
-                className="text-xs text-[#F6E27A] hover:underline inline-flex items-center gap-1 font-semibold"
-              >
-                <span>Academia Leão & Palestras</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
+            {/* Botões mantidos conforme Item 35: AGENDAR CONSULTA DIGITAL e LIVROS DIGITAIS */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
-                onClick={handleWhatsApp}
-                className="w-full sm:w-auto text-center px-6 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] cursor-pointer"
+                onClick={onOpenConsultation}
+                className="px-6 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(212,175,55,0.35)] flex items-center gap-2 cursor-pointer"
               >
-                AGENDAR CONSULTA DIGITAL
+                <PhoneCall className="w-4 h-4" />
+                <span>AGENDAR CONSULTA DIGITAL</span>
               </button>
 
-              <a
-                href="#livros"
-                className="w-full sm:w-auto justify-center px-5 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#F6E27A] border border-[#D4AF37]/50 bg-[#0E1F3D] hover:bg-[#1A3F5D] transition-colors flex items-center gap-2 cursor-pointer shadow-md"
+              <button
+                onClick={scrollToLivros}
+                className="px-6 py-3 rounded text-xs font-semibold uppercase tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-[#F6E27A] hover:border-[#D4AF37] transition-all flex items-center gap-2 cursor-pointer"
               >
-                <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                <BookOpen className="w-4 h-4 text-[#E5C158]" />
                 <span>LIVROS DIGITAIS</span>
-              </a>
-
-              <button
-                onClick={() => setCurriculumModalOpen(true)}
-                className="w-full sm:w-auto text-center px-5 py-3 rounded text-xs font-semibold uppercase tracking-wider text-slate-200 border border-slate-700 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-white transition-colors cursor-pointer"
-              >
-                Saiba Mais
               </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Item 21: Contador no final da página Head Jurídico, com a balança da justiça na cor azul-marinho e ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA */}
+        <div ref={counterRef} className="pt-8 border-t border-[#D4AF37]/25">
+          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div className="flex items-center gap-4">
+              {/* Ícone da balança da justiça na cor azul-marinho (fundo claro/dourado suave para contraste) */}
+              <div className="w-14 h-14 rounded-full bg-[#E5C158] flex items-center justify-center text-[#071122] shadow-[0_0_15px_rgba(212,175,55,0.4)] shrink-0">
+                <Scale className="w-7 h-7 text-[#071122]" />
+              </div>
+              <div>
+                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
+                  ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA
+                </p>
+                <p className="text-xs text-slate-300">
+                  Desde 1986 · Terceira Geração de Tradição Jurídica Familiar Centenária
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-baseline gap-2">
+              <span className="font-cinzel text-4xl sm:text-5xl font-black text-[#F6E27A] tabular-nums">
+                {count}
+              </span>
+              <span className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase">
+                Anos+
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Curriculum & Specialties Modal */}
+      {/* Modal de Currículo (Item 35): Título Dr. ALDO LEÃO, sem 'Currículo institucional completo', botão 'Livros Digitais Publicados' */}
       {curriculumModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-4xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-10 max-h-[88vh] overflow-y-auto text-slate-100">
+          <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto text-slate-100 text-left">
             <button
               onClick={() => setCurriculumModalOpen(false)}
-              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Fechar"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-              <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold">
-                Currículo Institucional Completo
-              </span>
-              <h3 className="font-cinzel text-2xl font-bold text-white mt-1">
-                Dr. Aldo Leão Ferreira Filho · Trajetória Profissional
+              <h3 className="font-cinzel text-2xl font-bold text-white">
+                Dr. ALDO LEÃO
               </h3>
+              <p className="font-cinzel text-xs text-[#E5C158] uppercase font-bold tracking-wider mt-1">
+                ADVOCACIA ESTRATÉGICA
+              </p>
             </div>
 
-            <div className="space-y-6 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-              <div>
-                <h4 className="font-cinzel text-base font-bold text-[#F6E27A] mb-2 uppercase">
-                  Especialidades Jurídicas de Alta Performance
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {founder.specialties.map((spec, i) => (
-                    <div key={i} className="p-3 rounded-lg bg-[#050B14] border border-slate-800">
-                      <p className="font-semibold text-white">{spec}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-cinzel text-base font-bold text-[#F6E27A] mb-2 uppercase">
-                  Trajetória Profissional & Atuação Pública
-                </h4>
-                <p>
-                  Graduado pela <strong>Pontifícia Universidade Católica do Rio Grande do Sul (PUC-RS)</strong>, com formação complementar
-                  e atuação multidisciplinar nas áreas patrimonial, empresarial, societária, imobiliária, civil e relações de consumo.
-                </p>
-                <p className="mt-2">
-                  Atuou com destacada relevância como <strong>Procurador Municipal de 20 Municípios no Rio Grande do Sul</strong>,
-                  <strong>Procurador do Banco do Brasil S/A</strong>, Consultor e Assessor Jurídico de conselhos empresariais,
-                  palestrante e membro do Instituto dos Advogados do Rio Grande do Sul (IARGS) e da OAB/RS.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-cinzel text-base font-bold text-[#F6E27A] mb-2 uppercase">
-                  Liderança Acadêmica & Docência Superior
-                </h4>
-                <p>
-                  Na vida acadêmica, atuou como <strong>Professor Universitário</strong>, orientador e examinador de monografias em instituições
-                  de ensino superior, incluindo a conceituada Faculdade de Direito da <strong>Universidade do Vale do Rio dos Sinos (Unisinos)</strong>,
-                  contribuindo para a formação de novas gerações de juristas.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="font-cinzel text-base font-bold text-[#F6E27A] mb-2 uppercase">
-                  Literatura Jurídica Produzida & Livros Publicados
-                </h4>
-                <p className="mb-3">
-                  Autor de mais de uma centena de artigos jurídicos e livros digitais de ampla circulação, com destaque para
-                  <em>"Planejamento Patrimonial 4.0 & o Alto Risco da Omissão"</em>, <em>"Holding Familiar e Imobiliária"</em>,
-                  <em>"Você tem Patrimônio e deseja protegê-lo juridicamente?"</em> e <em>"Os Sete Cuidados na Compra do Imóvel"</em>.
-                </p>
-                <a
-                  href="#livros"
-                  onClick={() => setCurriculumModalOpen(false)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#0E1F3D] border border-[#D4AF37]/50 text-xs font-bold text-[#F6E27A] hover:bg-[#1A3F5D] transition-colors"
-                >
-                  <BookOpen className="w-3.5 h-3.5" />
-                  <span>Acessar as 6 Obras & Baixar E-Books em PDF</span>
-                </a>
-              </div>
+            <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
+              <p>
+                Advogado atuante há mais de quatro décadas, líder da terceira geração da advocacia familiar iniciada em 1908.
+                Especialista em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.
+              </p>
+              <p>
+                Possui ampla experiência acadêmica e forense, tendo publicado mais de 100 artigos jurídicos especializados e 6 livros jurídicos digitais com foco em proteção patrimonial e segurança jurídica.
+              </p>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-slate-800 flex flex-col sm:flex-row justify-between gap-4 items-center">
+            <div className="mt-8 pt-5 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">
               <button
-                onClick={handleWhatsApp}
-                className="w-full sm:w-auto px-6 py-2.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-[#25D366] hover:bg-[#20ba59] transition-colors"
+                onClick={scrollToLivros}
+                className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 cursor-pointer shadow-md"
               >
-                Chamar Dr. Aldo no WhatsApp Oficial
-              </button>
-
-              <button
-                onClick={() => setCurriculumModalOpen(false)}
-                className="w-full sm:w-auto px-6 py-2.5 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
-              >
-                Fechar
+                Livros Digitais Publicados
               </button>
             </div>
           </div>

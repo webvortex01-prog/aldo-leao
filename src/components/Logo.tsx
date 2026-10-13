@@ -16,12 +16,27 @@ export const Logo: React.FC<LogoProps> = ({
   const getDimensions = () => {
     switch (size) {
       case 'sm':
-        return { shield: 32, imgHeight: 'h-8 sm:h-9', title: 'text-base', sub: 'text-[9px]' };
+        return { 
+          shield: 28, 
+          imgHeight: 'h-7 sm:h-8', 
+          title: 'text-sm sm:text-base', 
+          sub: 'text-[8px] sm:text-[9px] tracking-[0.14em] sm:tracking-[0.2em]' 
+        };
       case 'lg':
-        return { shield: 56, imgHeight: 'h-14 sm:h-16', title: 'text-2xl', sub: 'text-xs' };
+        return { 
+          shield: 56, 
+          imgHeight: 'h-12 sm:h-16', 
+          title: 'text-xl sm:text-2xl', 
+          sub: 'text-[10px] sm:text-xs tracking-[0.18em] sm:tracking-[0.24em]' 
+        };
       case 'md':
       default:
-        return { shield: 44, imgHeight: 'h-11 sm:h-12', title: 'text-lg md:text-xl', sub: 'text-[10px]' };
+        return { 
+          shield: 38, 
+          imgHeight: 'h-8 sm:h-11', 
+          title: 'text-sm sm:text-lg md:text-xl', 
+          sub: 'text-[8px] sm:text-[10px] tracking-[0.14em] sm:tracking-[0.24em]' 
+        };
     }
   };
 
@@ -34,7 +49,7 @@ export const Logo: React.FC<LogoProps> = ({
         <img
           src="/img/logo-symbol.png"
           alt="Aldo Leão Advocacia Estratégica"
-          className={`${imgHeight} w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.45)] transition-transform duration-300 group-hover:scale-105`}
+          className={`${imgHeight} w-auto max-h-full object-contain filter drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)] transition-transform duration-300 group-hover:scale-105`}
           onError={(e) => {
             const el = e.currentTarget as HTMLImageElement;
             if (!el.src.includes('logo.png')) {
@@ -51,7 +66,7 @@ export const Logo: React.FC<LogoProps> = ({
           viewBox="0 0 60 70"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="drop-shadow-[0_2px_10px_rgba(212,175,55,0.35)]"
+          className="drop-shadow-[0_2px_10px_rgba(212,175,55,0.35)] shrink-0"
         >
           <defs>
             <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -135,20 +150,20 @@ export const Logo: React.FC<LogoProps> = ({
   );
 
   if (variant === 'symbol') {
-    return <div className={`inline-flex ${className}`}>{ShieldEmblem}</div>;
+    return <div className={`inline-flex shrink-0 ${className}`}>{ShieldEmblem}</div>;
   }
 
   return (
-    <div className={`inline-flex items-center gap-3 group ${className}`}>
+    <div className={`inline-flex items-center gap-2 sm:gap-3 group min-w-0 max-w-full ${className}`}>
       {ShieldEmblem}
-      <div className="flex flex-col text-left">
+      <div className="flex flex-col text-left min-w-0 overflow-hidden">
         <span
-          className={`font-cinzel font-bold tracking-[0.08em] gold-text-gradient leading-tight ${title}`}
+          className={`font-cinzel font-bold tracking-[0.06em] sm:tracking-[0.08em] gold-text-gradient leading-tight truncate ${title}`}
         >
           Aldo Leão
         </span>
         <span
-          className={`font-cinzel tracking-[0.24em] font-semibold text-[#D4AF37]/80 uppercase leading-none mt-1 ${sub}`}
+          className={`font-cinzel font-semibold text-[#D4AF37]/80 uppercase leading-none mt-0.5 sm:mt-1 truncate ${sub}`}
         >
           Advocacia Estratégica
         </span>

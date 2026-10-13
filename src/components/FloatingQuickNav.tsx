@@ -42,11 +42,13 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
   const { siteConfig } = useSite();
   const [isFullMenuOpen, setIsFullMenuOpen] = useState(false);
   const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // Item 23: Barra inicia recolhida com a balança da justiça em dourado
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const scrollToSection = (id: string) => {
     setIsFullMenuOpen(false);
     setActiveTooltip(null);
+    setIsCollapsed(true);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -66,21 +68,21 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
       id: 'areas',
       emoji: '⚖️',
       label: 'Áreas de Atuação',
-      description: 'Direito Empresarial, Holding, Tributário e Agronegócio',
+      description: 'Soluções Jurídicas de Alta Performance',
       action: () => scrollToSection('areas-atuacao'),
     },
     {
-      id: 'selo40',
-      emoji: '🎖️',
-      label: 'Selo 40 Anos',
-      description: 'Experiência comprovada desde 1986',
-      action: () => scrollToSection('selo-40-anos'),
+      id: 'legado',
+      emoji: '🏛️',
+      label: 'Legado Centenário',
+      description: 'Tradição familiar desde 1908',
+      action: () => scrollToSection('legado'),
     },
     {
       id: 'holding',
       emoji: '🏢',
       label: 'Holding 4.0',
-      description: 'Proteção patrimonial e sucessão estratégica',
+      description: 'Planejamento patrimonial e sucessão estratégica',
       action: () => scrollToSection('holding-familiar'),
     },
     {
@@ -93,8 +95,8 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
     {
       id: 'livros',
       emoji: '📚',
-      label: 'Livros & Obras',
-      description: 'Biblioteca jurídica digital para download',
+      label: 'Livros Digitais',
+      description: 'Biblioteca jurídica digital para download gratuito',
       action: () => scrollToSection('livros'),
     },
     {
@@ -104,6 +106,7 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
       description: 'Fale direto pelo WhatsApp oficial',
       action: () => {
         setActiveTooltip(null);
+        setIsCollapsed(true);
         const text = encodeURIComponent(
           'Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de falar com um Advogado especialista.'
         );
@@ -115,12 +118,13 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
     },
     {
       id: 'admin',
-      emoji: '⚙️',
-      label: 'Editor de Sites',
-      description: 'Acesso restrito para editar o site (Admin)',
+      emoji: '📊',
+      label: 'Estatísticas',
+      description: 'Acesso restrito com senha (Estatísticas e Editor)',
       action: () => {
         setIsFullMenuOpen(false);
         setActiveTooltip(null);
+        setIsCollapsed(true);
         onOpenAdmin();
       },
     },
@@ -128,15 +132,15 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
 
   return (
     <>
-      {/* Floating Mini Menu Dock (Canto Inferior Direito) */}
+      {/* Floating Mini Menu Dock (Posicionado acima da barra inferior no mobile e no canto inferior no desktop) */}
       <div 
-        className="fixed bottom-4 right-3 sm:bottom-5 sm:right-6 z-50 flex flex-col items-end select-none"
+        className="fixed bottom-16 right-3 sm:bottom-5 sm:right-6 z-50 flex flex-col items-end select-none"
         aria-label="Menu Flutuante Rápido"
       >
         {/* Tooltip Card (Appears on Hover or Mobile Click/Tap) */}
         {activeTooltip && !isFullMenuOpen && (
           <div 
-            className="mb-2 sm:mb-2.5 mr-1 py-1.5 px-3 rounded-lg bg-[#071122]/98 border border-[#D4AF37] text-white text-xs shadow-[0_8px_30px_rgba(0,0,0,0.85)] backdrop-blur-md flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-150 max-w-[240px] sm:max-w-[260px] pointer-events-none"
+            className="mb-2 sm:mb-2.5 mr-1 py-1.5 px-3 rounded-lg bg-[#071122]/98 border border-[#D4AF37] text-white text-xs shadow-[0_8px_30px_rgba(0,0,0,0.85)] backdrop-blur-md flex items-center gap-2 animate-in fade-in slide-in-from-bottom-2 duration-150 max-w-[200px] sm:max-w-[260px] pointer-events-none"
           >
             <span className="text-base leading-none shrink-0">
               {navItems.find((item) => item.id === activeTooltip)?.emoji}
@@ -152,17 +156,16 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
           </div>
         )}
 
-        {/* Main Floating Capsule */}
+        {/* Main Floating Capsule: Recolhida por padrão com a Balança da Justiça em Dourado (Item 23) */}
         {isCollapsed ? (
-          // Collapsed single button
           <button
             onClick={() => setIsCollapsed(false)}
-            className="w-12 h-12 rounded-full bg-gradient-to-br from-[#102347] to-[#071122] border-2 border-[#D4AF37] text-[#F6E27A] shadow-[0_6px_25px_rgba(212,175,55,0.4)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer relative group"
-            title="Expandir menu rápido"
-            aria-label="Abrir menu flutuante"
+            className="w-12 h-12 rounded-full bg-gradient-to-br from-[#102347] to-[#071122] border-2 border-[#D4AF37] text-[#F6E27A] shadow-[0_6px_25px_rgba(212,175,55,0.45)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer relative group"
+            title="Abrir menu de opções rápidas"
+            aria-label="Abrir menu de opções rápidas"
           >
-            <span className="text-xl group-hover:rotate-12 transition-transform">🧭</span>
-            <span className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-[#25D366] border border-[#071122] animate-pulse" />
+            <Scale className="w-5 h-5 text-[#E5C158] group-hover:scale-110 transition-transform" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-[#25D366] border border-[#071122] animate-pulse" />
           </button>
         ) : (
           // Expanded Dock: Vertical (grows upwards) on mobile (flex-col-reverse), horizontal on desktop (sm:flex-row)

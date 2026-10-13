@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, CheckCircle2, ShieldCheck, TrendingDown, Scale, Building, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface HoldingFamiliarSectionProps {
   onGoToLandingPage: () => void;
@@ -17,24 +17,27 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             <span>PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0</span>
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance]">
             HOLDING <span className="gold-text-gradient">FAMILIAR</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-4">
-            O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas
-            voltadas à proteção patrimonial, organização societária, governança familiar e sucessão empresarial.
-          </p>
-
-          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans-body">
-            Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida para proteger
-            o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações sem os custos e conflitos do inventário.
-          </p>
+          {/* Texto abaixo do título conforme Item 40 */}
+          <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+            <p>
+              O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.
+            </p>
+            <p>
+              Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.
+            </p>
+            <p>
+              Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).
+            </p>
+          </div>
         </div>
 
         {/* What is and Benefits Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-16">
-          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl">
+          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
                 O QUE É O PLANEJAMENTO 4.0?
@@ -42,26 +45,26 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-4">
                 Metodologia Jurídica Estratégica Multidisciplinar
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
                 Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas,
                 reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário,
                 Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/20">
+            {/* Porque Planejar em Vida conforme Item 40 */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25">
               <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] mb-2 uppercase">
                 Por Que Planejar em Vida?
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Permite que decisões patrimoniais sejam tomadas com serenidade e segurança jurídica, eliminando brigas entre herdeiros,
-                bloqueios judiciais de contas e a venda forçada de imóveis com deságio para custear o inventário.
+              <p className="text-xs text-slate-300 leading-relaxed font-light">
+                Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.
               </p>
             </div>
           </div>
 
           {/* Benefits Checkmarks */}
-          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between">
+          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between text-left">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
                 VANTAGENS EXCLUSIVAS
@@ -105,6 +108,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               </div>
             </div>
 
+            {/* Link Saiba Mais conforme Item 10 */}
             <div className="pt-6 mt-6 border-t border-[#D4AF37]/20 flex items-center justify-between">
               <span className="text-xs text-slate-400">Estruturação personalizada para cada família.</span>
               <button
@@ -118,91 +122,67 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           </div>
         </div>
 
-        {/* TABELA COMPARATIVA DE CUSTOS (Inventário x Holding Familiar) */}
-        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-6 sm:p-10 shadow-2xl mb-12">
-          <div className="text-center max-w-2xl mx-auto mb-8">
+        {/* TABELA COMPARATIVA DE CUSTOS (INVENTÁRIO x HOLDING FAMILIAR) - Item 10 e Item 40 (coluna direita não cortada) */}
+        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12">
+          <div className="text-center max-w-3xl mx-auto mb-8">
             <h3 className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase">
               INVENTÁRIO x HOLDING FAMILIAR
             </h3>
-            <p className="text-xs text-slate-300 mt-2">
+            <p className="text-xs sm:text-sm text-slate-300 mt-2 font-light">
               A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.
             </p>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-xs sm:text-sm text-left border-collapse">
+          {/* Tabela com overflow suave e colunas perfeitamente distribuídas sem corte */}
+          <div className="w-full overflow-x-auto rounded-xl border border-[#D4AF37]/35 shadow-inner">
+            <table className="w-full min-w-[540px] text-xs sm:text-sm text-left border-collapse">
               <thead>
                 <tr className="border-b border-[#D4AF37]/30 text-white font-cinzel">
-                  <th className="py-3 px-4 uppercase tracking-wider text-slate-300">Despesa Sucessória</th>
-                  <th className="py-3 px-4 text-center bg-red-950/40 border-x border-[#D4AF37]/20 uppercase tracking-wider text-red-300">
+                  <th className="py-3.5 px-4 uppercase tracking-wider text-slate-200">Despesa Sucessória</th>
+                  <th className="py-3.5 px-4 text-center bg-red-950/40 border-x border-[#D4AF37]/20 uppercase tracking-wider text-red-300">
                     Processo de Inventário
                   </th>
-                  <th className="py-3 px-4 text-center bg-[#D4AF37]/20 uppercase tracking-wider text-[#F6E27A] font-bold">
+                  <th className="py-3.5 px-4 text-center bg-[#D4AF37]/20 uppercase tracking-wider text-[#F6E27A] font-bold">
                     Holding Familiar 4.0
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800 font-sans-body">
+              <tbody className="divide-y divide-[#D4AF37]/15 text-slate-300 bg-[#050B14]">
                 <tr>
-                  <td className="py-3 px-4 text-slate-200">ITCD / ITCMD</td>
-                  <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                    R$ 75.000,00 (5%)
+                  <td className="py-3.5 px-4 font-medium">ITCMD (Alíquota Tributária)</td>
+                  <td className="py-3.5 px-4 text-center bg-red-950/20 text-red-300 border-x border-[#D4AF37]/15">
+                    R$ 120.000,00 <span className="text-[10px] block text-red-400">(8% sobre mercado)</span>
                   </td>
-                  <td className="py-3 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
-                    R$ 60.000,00 (4%)
+                  <td className="py-3.5 px-4 text-center text-[#25D366] font-semibold bg-[#25D366]/5">
+                    R$ 40.000,00 <span className="text-[10px] block text-emerald-400">(4% sobre IRPF)</span>
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 text-slate-200">Honorários Advocatícios</td>
-                  <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                    R$ 120.000,00 (8%)
+                  <td className="py-3.5 px-4 font-medium">Custas Judiciais e Cartorárias</td>
+                  <td className="py-3.5 px-4 text-center bg-red-950/20 text-red-300 border-x border-[#D4AF37]/15">
+                    R$ 27.000,00
                   </td>
-                  <td className="py-3 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
-                    R$ 70.000,00
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 text-slate-200">Custas de Cartório</td>
-                  <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                    R$ 12.000,00
-                  </td>
-                  <td className="py-3 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
-                    R$ 0,00
+                  <td className="py-3.5 px-4 text-center text-[#25D366] font-semibold bg-[#25D366]/5">
+                    R$ 8.000,00
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3 px-4 text-slate-200">Certidões Forenses</td>
-                  <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                    R$ 3.000,00
+                  <td className="py-3.5 px-4 font-medium">Honorários Advocatícios</td>
+                  <td className="py-3.5 px-4 text-center bg-red-950/20 text-red-300 border-x border-[#D4AF37]/15">
+                    R$ 150.000,00 <span className="text-[10px] block text-red-400">(10% sobre R$ 1,5M)</span>
                   </td>
-                  <td className="py-3 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
-                    R$ 0,00
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 px-4 text-slate-200">I.R. Ganho de Capital</td>
-                  <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                    R$ 75.000,00
-                  </td>
-                  <td className="py-3 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
-                    R$ 0,00
+                  <td className="py-3.5 px-4 text-center text-[#25D366] font-semibold bg-[#25D366]/5">
+                    R$ 85.000,00 <span className="text-[10px] block text-emerald-400">(Estruturação)</span>
                   </td>
                 </tr>
-                <tr>
-                  <td className="py-3 px-4 text-slate-200">Registro de Imóveis</td>
-                  <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                    R$ 12.000,00
+                <tr className="bg-[#0E1F3D]/80 font-bold border-t-2 border-[#D4AF37]/40">
+                  <td className="py-4 px-4 text-white uppercase font-cinzel text-xs sm:text-sm">
+                    Custo Total Estimado
                   </td>
-                  <td className="py-3 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
-                    R$ 3.000,00
-                  </td>
-                </tr>
-                <tr className="border-t-2 border-[#D4AF37]/40 font-bold text-sm">
-                  <td className="py-3.5 px-4 text-white uppercase font-cinzel">Custo Total</td>
-                  <td className="py-3.5 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20">
+                  <td className="py-4 px-4 text-center text-red-400 border-x border-[#D4AF37]/20 text-sm sm:text-base">
                     R$ 297.000,00
                   </td>
-                  <td className="py-3.5 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-base">
+                  <td className="py-4 px-4 text-center text-[#25D366] text-sm sm:text-base">
                     R$ 133.000,00
                   </td>
                 </tr>
@@ -210,26 +190,32 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             </table>
           </div>
 
-          {/* Destaque Gigante de Economia */}
-          <div className="mt-8 p-6 rounded-xl bg-gradient-to-r from-[#0E1F3D] via-[#0B1A35] to-[#0E1F3D] border border-[#D4AF37] text-center shadow-lg">
-            <p className="text-xs uppercase tracking-widest text-[#E5C158] font-bold mb-1">
-              Economia com a Holding Familiar
-            </p>
-            <p className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-black text-[#25D366] tabular-nums">
-              R$ 164.000,00
-            </p>
-            <p className="text-xs sm:text-sm text-slate-200 mt-1 font-semibold uppercase tracking-wider">
-              correspondente a 55,21%.
-            </p>
+          {/* Economia com a Holding Familiar conforme Item 10 */}
+          <div className="mt-6 p-4 rounded-xl bg-[#25D366]/15 border border-[#25D366]/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div>
+              <p className="text-white text-xs sm:text-sm font-bold uppercase font-cinzel">
+                Economia com a Holding Familiar
+              </p>
+              <p className="text-[11px] text-emerald-300">
+                Preservação imediata de patrimônio e liquidez para as próximas gerações.
+              </p>
+            </div>
+            <div className="text-right">
+              <span className="text-[#25D366] font-cinzel font-black text-xl sm:text-2xl block">
+                R$ 164.000,00
+              </span>
+              <span className="text-xs text-white font-semibold block">
+                correspondente a 55,21%
+              </span>
+            </div>
           </div>
 
-          {/* Single CTA to Landing Page */}
-          <div className="text-center mt-8">
+          <div className="mt-6 text-center">
             <button
               onClick={onGoToLandingPage}
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(212,175,55,0.4)] cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all shadow-lg cursor-pointer"
             >
-              <span>AGENDAR DIAGNÓSTICO DE VIABILIDADE</span>
+              <span>Saiba mais</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
