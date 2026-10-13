@@ -89,35 +89,28 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               {/* Item 26: Excluir no início do slide "Desde 1908" em dourado. Deixar "ALDO LEÃO" na primeira frase e "ADVOCACIA ESTRATÉGICA" logo abaixo */}
               <div className="mb-4">
                 <span className="block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
-                  ALDO LEÃO
+                  {siteConfig.hero.kicker || 'ALDO LEÃO'}
                 </span>
                 <span className="block font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.16em] sm:tracking-[0.28em] text-[#D4AF37]/80 uppercase mt-0.5">
-                  ADVOCACIA ESTRATÉGICA
+                  {siteConfig.hero.kickerSub || 'ADVOCACIA ESTRATÉGICA'}
                 </span>
               </div>
 
               {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
               <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance]">
-                TRADIÇÃO JURÍDICA{' '}
-                <span className="gold-text-gradient">DESDE 1908</span>
+                {siteConfig.hero.titlePart1 || 'TRADIÇÃO JURÍDICA'}{' '}
+                <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
               </h1>
 
               {/* Descrição */}
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-                Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica,
-                experiência e inovação na proteção e perpetuação de legados familiares.
-                Com sede em Porto Alegre e atuação digital em todo o território nacional, o{' '}
-                <strong className="text-white font-medium">Dr. Aldo Leão</strong> representa a
-                terceira geração da família na Advocacia Estratégica (1986), sendo referência em{' '}
-                <strong className="text-[#F6E27A] font-medium">
-                  Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial
-                </strong>.
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light whitespace-pre-line">
+                {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
               </p>
 
               {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
               <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md">
                 <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES
+                  {siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
                 </p>
               </div>
 
@@ -127,7 +120,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   onClick={handleWhatsAppSlide1}
                   className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
                 >
-                  <span>AGENDAR CONSULTA DIGITAL</span>
+                  <span>{siteConfig.hero.cta1Text || 'AGENDAR CONSULTA DIGITAL'}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -135,7 +128,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   onClick={onGoToLandingPage}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-semibold tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-[#F6E27A] hover:border-[#D4AF37] transition-all cursor-pointer"
                 >
-                  <span>CONHEÇA O PLANEJAMENTO 4.0</span>
+                  <span>{siteConfig.hero.cta2Text || 'CONHEÇA O PLANEJAMENTO 4.0'}</span>
                 </button>
               </div>
 
@@ -163,7 +156,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
                   <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative">
                     <img
-                      src={heroLionImg}
+                      src={siteConfig.hero.heroImageUrl || heroLionImg}
                       alt="Leão de Ouro e Balança da Justiça - Aldo Leão Advocacia Estratégica"
                       className="w-full h-full object-cover object-center"
                       referrerPolicy="no-referrer"
@@ -174,7 +167,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                         <Scale className="w-5 h-5 text-[#E5C158]" />
                         <div>
                           <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                            O Escritório Mais Antigo do Brasil
+                            {siteConfig.hero.badgeText || 'O Escritório Mais Antigo do Brasil'}
                           </p>
                           <p className="text-[10px] text-slate-300">
                             1908 – 2026 · Três Gerações de Excelência
@@ -198,35 +191,35 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               {/* Texto acima do título: HOLDING FAMILIAR (Item 3) */}
               <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
-                <span>HOLDING FAMILIAR</span>
+                <span>{siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}</span>
               </div>
 
               {/* Título: PLANEJAMENTO PATRIMONIAL 4.0 com PATRIMONIAL 4.0 em dourado (Item 25) */}
               <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-4 [text-wrap:balance]">
-                PLANEJAMENTO{' '}
-                <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
+                {siteConfig.slide2?.title || 'PLANEJAMENTO'}{' '}
+                <span className="gold-text-gradient">{siteConfig.slide2?.titleHighlight || 'PATRIMONIAL 4.0'}</span>
               </h1>
 
               {/* Texto principal do Slide 2 conforme Item 27 */}
               <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
                 <p>
-                  Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.
+                  {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
                 </p>
                 <p>
-                  A <strong className="text-[#F6E27A] font-semibold">Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
+                  {siteConfig.slide2?.paragraph2 || 'A Holding Familiar é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.'}
                 </p>
                 <p>
-                  Com expertise centenária, a <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.
+                  {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
                 </p>
                 <p>
-                  Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.
+                  {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
                 </p>
               </div>
 
               {/* Box do Slide 2 conforme Item 3 e 27 */}
               <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md">
                 <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?
+                  {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
                 </p>
               </div>
 
@@ -236,7 +229,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   onClick={onGoToLandingPage}
                   className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] cursor-pointer"
                 >
-                  <span>Planejamento Patrimonial 4.0</span>
+                  <span>{siteConfig.slide2?.buttonText || 'Planejamento Patrimonial 4.0'}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -248,23 +241,23 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               <div className="p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left">
                 <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
                   <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
-                    Comparativo de Custos entre o processo de Inventário e o Planejamento Patrimonial 4.0 via Holding Familiar
+                    {siteConfig.slide2?.rightCardTitle || 'Comparativo de Custos entre o processo de Inventário e o Planejamento Patrimonial 4.0 via Holding Familiar'}
                   </h3>
                 </div>
 
                 <p className="text-xs text-slate-300 leading-relaxed mb-5 font-light">
-                  Você conhece o Alto Custo do processo de Inventário para os seus herdeiros ? Os números são incontestáveis.
+                  {siteConfig.slide2?.rightCardSub || 'Você conhece o Alto Custo do processo de Inventário para os seus herdeiros? Os números são incontestáveis.'}
                 </p>
 
                 <p className="text-[11px] text-slate-400 leading-relaxed mb-5">
-                  Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).
+                  {siteConfig.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
                 </p>
 
                 <button
                   onClick={() => setIsCostModalOpen(true)}
                   className="w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer shadow-lg"
                 >
-                  VER OS CUSTOS
+                  {siteConfig.slide2?.rightCardBtn || 'VER OS CUSTOS'}
                 </button>
               </div>
 
@@ -276,15 +269,15 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                   <div>
                     <p className="font-cinzel text-xs font-bold text-white uppercase">
-                      Aldo Leão Advocacia Estratégica
+                      {siteConfig.slide2?.badgeTitle || 'Aldo Leão Advocacia Estratégica'}
                     </p>
                     <p className="text-[10px] text-[#E5C158]">
-                      Desde 1908 · Tradição Jurídica Centenária
+                      {siteConfig.slide2?.badgeSubtitle || 'Desde 1908 · Tradição Jurídica Centenária'}
                     </p>
                   </div>
                 </div>
                 <span className="font-cinzel text-xs text-[#E5C158] font-bold">
-                  118 Anos
+                  {siteConfig.slide2?.badgeYears || '118 Anos'}
                 </span>
               </div>
             </div>
@@ -327,7 +320,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
             <div className="p-6 space-y-4 text-left">
               <p className="text-xs text-slate-300 leading-relaxed font-sans-body">
-                A título de exemplo, consideramos um patrimônio adquirido por <strong>R$ 1.000.000,00</strong>, com valor de mercado atual de <strong>R$ 1.500.000,00</strong>, tem um ganho de capital de <strong>R$ 500.000,00</strong>:
+                A título de exemplo, consideramos um patrimônio adquirido por <strong>{siteConfig.slide2?.sampleAcquisition || 'R$ 1.000.000,00'}</strong>, com valor de mercado atual de <strong>{siteConfig.slide2?.sampleMarket || 'R$ 1.500.000,00'}</strong>, tem um ganho de capital de <strong>{siteConfig.slide2?.sampleCapitalGain || 'R$ 500.000,00'}</strong>:
               </p>
 
               <div className="overflow-x-auto rounded-lg border border-[#D4AF37]/30">
@@ -357,8 +350,8 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     </tr>
                     <tr className="bg-[#0E1F3D]/60 font-bold">
                       <td className="p-3 text-white">Custo Total Estimado</td>
-                      <td className="p-3 text-red-400">R$ 297.000,00</td>
-                      <td className="p-3 text-[#25D366]">R$ 133.000,00</td>
+                      <td className="p-3 text-red-400">{siteConfig.slide2?.inventoryTotal || 'R$ 297.000,00'}</td>
+                      <td className="p-3 text-[#25D366]">{siteConfig.slide2?.holdingTotal || 'R$ 133.000,00'}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -367,7 +360,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               <div className="p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
                 <span className="text-white font-medium">Economia com a Holding Familiar:</span>
                 <span className="text-[#25D366] font-bold text-sm">
-                  R$ 164.000,00 (correspondente a 55,21%)
+                  {siteConfig.slide2?.savingsAmount || 'R$ 164.000,00'} (correspondente a {siteConfig.slide2?.savingsPercentage || '55,21%'})
                 </span>
               </div>
             </div>

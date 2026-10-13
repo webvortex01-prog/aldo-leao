@@ -1,38 +1,41 @@
 import React, { useState } from 'react';
 import { X, Scale } from 'lucide-react';
+import { useSite } from '../context/SiteContext';
 
 export const CentennialLegacy: React.FC = () => {
+  const { siteConfig } = useSite();
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
+  const cl = siteConfig.centennialLegacy;
 
-  const timelineEvents = [
+  const timelineEvents = cl?.events && cl.events.length > 0 ? cl.events : [
     {
       year: '1908',
       title: 'Fundação do Escritório',
-      lawyers: ['Prof. Dr. Arnaldo da Silva Ferreira'],
+      lawyers: [cl?.sub1908 || 'Prof. Dr. Arnaldo da Silva Ferreira'],
       description: 'Precursor da advocacia empresarial no RS e fundador do escritório de advocacia mais antigo do Brasil.',
     },
     {
       year: '1935',
       title: 'CONTINUIDADE DO LEGADO JURÍDICO',
-      lawyers: ['Dr. Mário de Castilhos Ferreira', 'Dr. Ney de Castilhos Ferreira'],
+      lawyers: [cl?.sub1935 || 'Dr. Mário de Castilhos Ferreira e Dr. Ney de Castilhos Ferreira'],
       description: 'Expansão da atuação jurídica de excelência técnica no cenário nacional.',
     },
     {
       year: '1951',
       title: 'Consolidação Institucional',
-      lawyers: ['Prof. Dr. Aldo Leão Ferreira'],
+      lawyers: [cl?.sub1951 || 'Prof. Dr. Aldo Leão Ferreira'],
       description: 'Procurador do Estado do RS e Professor Universitário, unindo a academia à prática jurídica.',
     },
     {
       year: '1986',
       title: 'Advocacia Estratégica',
-      lawyers: ['Prof. Dr. Aldo Leão Ferreira Filho'],
+      lawyers: [cl?.sub1986 || 'Prof. Dr. Aldo Leão Ferreira Filho'],
       description: 'Início da terceira geração familiar, inovando ao estruturar a moderna Advocacia Estratégica e o Planejamento Patrimonial 4.0 (Holding Familiar).',
     },
     {
       year: '2026',
       title: 'Presença Nacional Digital',
-      lawyers: ['Aldo Leão Advocacia Estratégica'],
+      lawyers: [cl?.sub2026 || 'Aldo Leão Advocacia Estratégica'],
       description: 'Atuação 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.',
     }
   ];
@@ -43,22 +46,22 @@ export const CentennialLegacy: React.FC = () => {
         {/* Section Header: O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL · DESDE 1908 (Item 31) */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.24em] text-[#E5C158] font-bold mb-3 text-center">
-            <span>O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL</span>
+            <span>{cl?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL'}</span>
             <span className="text-[#D4AF37]/50 hidden sm:inline" aria-hidden="true">·</span>
-            <span>DESDE 1908</span>
+            <span>{cl?.subtitle || 'DESDE 1908'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance]">
-            O LEGADO <span className="gold-text-gradient">CENTENÁRIO</span>
+            {cl?.title || 'O LEGADO'} <span className="gold-text-gradient">{cl?.titleHighlight || 'CENTENÁRIO'}</span>
           </h2>
 
           {/* Texto do projeto conforme Item 31 */}
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
             <p>
-              A história da <strong className="text-white font-medium">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.
+              {cl?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
             </p>
             <p>
-              Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.
+              {cl?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
             </p>
           </div>
         </div>
@@ -106,13 +109,13 @@ export const CentennialLegacy: React.FC = () => {
               onClick={() => setHistoryModalOpen(true)}
               className="px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 transition-all cursor-pointer shadow-md"
             >
-              Saiba Mais
+              {cl?.buttonText || 'Saiba Mais'}
             </button>
 
             {/* Assinatura do Dr. Aldo Leão ampliada e nítida (Item 32) */}
             <div className="flex items-center gap-3">
               <img
-                src="/img/assinatura-gold.png"
+                src={cl?.signatureImageUrl || '/img/assinatura-gold.png'}
                 alt="Assinatura Dr. Aldo Leão"
                 className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95"
                 onError={(e) => {
@@ -127,16 +130,16 @@ export const CentennialLegacy: React.FC = () => {
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/40 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
-              <span>ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA</span>
+              <span>{cl?.card40Kicker || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}</span>
             </div>
 
             <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 leading-snug">
-              40 Anos + de Excelência Jurídica na Advocacia Estratégica
+              {cl?.card40Title || '40 Anos + de Excelência Jurídica na Advocacia Estratégica'}
             </h3>
 
             {/* Texto conforme Item 33 */}
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-8 font-light max-w-3xl mx-auto">
-              Iniciada em 1986, a atuação do Dr. Aldo Leão na terceira geração de advogados da família, consolidou uma das trajetórias mais respeitadas na proteção patrimonial e empresarial no país, unindo o rigor acadêmico, a experiência de mais de quatro décadas e a inteligência jurídica na prestação de serviços de vanguarda.
+              {cl?.card40Text || 'Iniciada em 1986, a atuação do Dr. Aldo Leão na terceira geração de advogados da família, consolidou uma das trajetórias mais respeitadas na proteção patrimonial e empresarial no país, unindo o rigor acadêmico, a experiência de mais de quatro décadas e a inteligência jurídica na prestação de serviços de vanguarda.'}
             </p>
 
             {/* Selo inserido no lugar dos dois boxes removidos (Item 34) */}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useSite } from '../context/SiteContext';
 
 interface HoldingFamiliarSectionProps {
   onGoToLandingPage: () => void;
@@ -8,29 +9,44 @@ interface HoldingFamiliarSectionProps {
 export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
   onGoToLandingPage
 }) => {
+  const { siteConfig } = useSite();
+  const hf = siteConfig.holdingFamiliar;
+  const s2 = siteConfig.slide2;
+
+  const benefitsList = hf?.benefits && hf.benefits.length > 0 ? hf.benefits : [
+    'Proteção Jurídica Patrimonial',
+    'Planejamento Sucessório Corporativo',
+    'Governança Familiar Estruturada',
+    'Redução Expressiva da Carga Tributária',
+    'Evita a Perda Financeira do Inventário',
+    'Segurança e Continuidade dos Negócios',
+    'Gestão Estratégica dos Ativos',
+    'Harmonia e Preservação da Paz Familiar'
+  ];
+
   return (
     <section id="holding-familiar" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
-            <span>PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0</span>
+            <span>{hf?.sectionKicker || 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance]">
-            HOLDING <span className="gold-text-gradient">FAMILIAR</span>
+            {hf?.sectionTitle || 'HOLDING'} <span className="gold-text-gradient">{hf?.sectionHighlight || 'FAMILIAR'}</span>
           </h2>
 
           {/* Texto abaixo do título conforme Item 40 */}
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
             <p>
-              O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.
+              {hf?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
             </p>
             <p>
-              Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.
+              {hf?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
             </p>
             <p>
-              Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).
+              {hf?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
             </p>
           </div>
         </div>
@@ -40,25 +56,23 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
-                O QUE É O PLANEJAMENTO 4.0?
+                {hf?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
               </span>
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-4">
-                Metodologia Jurídica Estratégica Multidisciplinar
+                {hf?.boxWhatIsHeading || 'Metodologia Jurídica Estratégica Multidisciplinar'}
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-                Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas,
-                reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário,
-                Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.
+                {hf?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
               </p>
             </div>
 
             {/* Porque Planejar em Vida conforme Item 40 */}
             <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25">
               <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] mb-2 uppercase">
-                Por Que Planejar em Vida?
+                {hf?.boxWhyTitle || 'Por Que Planejar em Vida?'}
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed font-light">
-                Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.
+                {hf?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
               </p>
             </div>
           </div>
@@ -70,41 +84,15 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
                 VANTAGENS EXCLUSIVAS
               </span>
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-4">
-                Principais Benefícios da Holding Familiar
+                {hf?.benefitsTitle || 'Principais Benefícios da Holding Familiar'}
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-200">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Proteção Jurídica Patrimonial</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Planejamento Sucessório Corporativo</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Governança Familiar Estruturada</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Redução Expressiva da Carga Tributária</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Evita a Perda Financeira do Inventário</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Segurança e Continuidade dos Negócios</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Gestão Estratégica dos Ativos</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
-                  <span>Harmonia e Preservação da Paz Familiar</span>
-                </div>
+                {benefitsList.map((benefit, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0" />
+                    <span>{benefit}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -126,10 +114,10 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
         <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12">
           <div className="text-center max-w-3xl mx-auto mb-8">
             <h3 className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase">
-              INVENTÁRIO x HOLDING FAMILIAR
+              {hf?.tableTitle || 'INVENTÁRIO x HOLDING FAMILIAR'}
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 font-light">
-              A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.
+              {hf?.tableSubtitle || `A título de exemplo, consideramos um patrimônio adquirido por ${s2?.sampleAcquisition || 'R$ 1.000.000,00'}, com valor de mercado atual de ${s2?.sampleMarket || 'R$ 1.500.000,00'}, tem um ganho de capital de ${s2?.sampleCapitalGain || 'R$ 500.000,00'}.`}
             </p>
           </div>
 
@@ -180,10 +168,10 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
                     Custo Total Estimado
                   </td>
                   <td className="py-4 px-4 text-center text-red-400 border-x border-[#D4AF37]/20 text-sm sm:text-base">
-                    R$ 297.000,00
+                    {s2?.inventoryTotal || 'R$ 297.000,00'}
                   </td>
                   <td className="py-4 px-4 text-center text-[#25D366] text-sm sm:text-base">
-                    R$ 133.000,00
+                    {s2?.holdingTotal || 'R$ 133.000,00'}
                   </td>
                 </tr>
               </tbody>
@@ -202,10 +190,10 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             </div>
             <div className="text-right">
               <span className="text-[#25D366] font-cinzel font-black text-xl sm:text-2xl block">
-                R$ 164.000,00
+                {s2?.savingsAmount || 'R$ 164.000,00'}
               </span>
               <span className="text-xs text-white font-semibold block">
-                correspondente a 55,21%
+                correspondente a {s2?.savingsPercentage || '55,21%'}
               </span>
             </div>
           </div>

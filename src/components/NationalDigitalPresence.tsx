@@ -13,34 +13,31 @@ export const NationalDigitalPresence: React.FC = () => {
           {/* Left Column: Content */}
           <div className="lg:col-span-7 text-left">
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
-              <span>ATENDIMENTO JURÍDICO DE EXCELÊNCIA EM TODO O BRASIL</span>
+              <span>{np?.kicker || 'ATENDIMENTO JURÍDICO DE EXCELÊNCIA EM TODO O BRASIL'}</span>
             </div>
 
             {/* Title */}
             <h2 className="font-cinzel text-3xl sm:text-4xl md:text-4.5xl font-bold text-white tracking-tight leading-tight mb-6 [text-wrap:balance]">
-              PRESENÇA NACIONAL <span className="gold-text-gradient">DIGITAL</span>
+              {np?.title || 'PRESENÇA NACIONAL'}{' '}
+              <span className="gold-text-gradient">{np?.titleHighlight || 'DIGITAL'}</span>
             </h2>
 
-            {/* Text from PDF */}
+            {/* Text from Config */}
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-              Com sede em Porto Alegre, a <strong className="text-white font-medium">Advocacia Estratégica Dr. Aldo Leão</strong> rompe
-              as fronteiras geográficas para levar a Excelência Jurídica Centenária a clientes de todo o território nacional.
+              {np?.paragraph1 || 'Com sede em Porto Alegre, a Advocacia Estratégica Dr. Aldo Leão rompe as fronteiras geográficas para levar a Excelência Jurídica Centenária a clientes de todo o território nacional.'}
             </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-              Por meio de uma infraestrutura tecnológica de última geração e de processos 100% digitais, disponibilizamos uma advocacia
-              estratégica moderna, segura e eficiente, proporcionando atendimento virtual com a mesma qualidade, proximidade e
-              excelência do atendimento presencial.
+              {np?.paragraph2 || 'Por meio de uma infraestrutura tecnológica de última geração e de processos 100% digitais, disponibilizamos uma advocacia estratégica moderna, segura e eficiente, proporcionando atendimento virtual com a mesma qualidade, proximidade e excelência do atendimento presencial.'}
             </p>
 
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-              Nosso modelo de atuação elimina deslocamentos desnecessários, otimiza o tempo dos clientes e amplia o acesso a soluções
-              jurídicas especializadas, sem abrir mão da segurança, da confidencialidade e da excelência profissional.
+              {np?.paragraph3 || 'Nosso modelo de atuação elimina deslocamentos desnecessários, otimiza o tempo dos clientes e amplia o acesso a soluções jurídicas especializadas, sem abrir mão da segurança, da confidencialidade e da excelência profissional.'}
             </p>
 
             <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/30 mb-8">
               <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                EXPERIMENTE A ADVOCACIA ESTRATÉGICA DO FUTURO, HOJE.
+                {np?.quoteBox || 'EXPERIMENTE A ADVOCACIA ESTRATÉGICA DO FUTURO, HOJE.'}
               </p>
             </div>
 
@@ -83,22 +80,22 @@ export const NationalDigitalPresence: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
                   <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider font-cinzel">
-                    Atendimento 100% Digital Ativo
+                    {np?.badgeStatus || 'Atendimento 100% Digital Ativo'}
                   </span>
                 </div>
-                <span className="text-[10px] text-slate-400 font-medium">27 Estados</span>
+                <span className="text-[10px] text-slate-400 font-medium">{np?.badgeStates || '27 Estados'}</span>
               </div>
 
               {/* Imagem Oficial da Presença Nacional Digital enviada */}
               <div className="relative w-full overflow-hidden rounded-xl border border-[#D4AF37]/40 shadow-inner bg-[#050B14] my-2 group">
                 <img
-                  src="/img/presencanacional.jpeg"
+                  src={np?.mapImageUrl || '/presencadigital.jpeg'}
                   alt="Presença Nacional Digital - Aldo Leão Advocacia Estratégica"
                   className="w-full h-auto object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
                     if (!target.src.includes('presencadigital.jpeg')) {
-                      target.src = '/img/presencadigital.jpeg';
+                      target.src = '/presencadigital.jpeg';
                     }
                   }}
                 />

@@ -150,6 +150,15 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                   </div>
 
                   <div className="p-6">
+                    {book.coverImage && (
+                      <div className="mb-4 aspect-[16/10] rounded-lg overflow-hidden border border-[#D4AF37]/35 bg-[#050B14] shadow-md">
+                        <img
+                          src={book.coverImage}
+                          alt={book.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    )}
                     {/* Title */}
                     <h3 className="font-cinzel text-base sm:text-lg font-bold text-white group-hover:text-[#F6E27A] transition-colors leading-snug mb-2">
                       {book.title}

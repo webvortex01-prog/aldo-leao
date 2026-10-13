@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { Scale, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { Logo } from './Logo';
+import { useSite } from '../context/SiteContext';
 
 export const LocationSection: React.FC = () => {
+  const { siteConfig } = useSite();
+  const c = siteConfig.contact;
+
   const [formSent, setFormSent] = useState(false);
   const [nome, setNome] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -12,7 +16,9 @@ export const LocationSection: React.FC = () => {
   const [urgencia, setUrgencia] = useState('Normal');
   const [mensagem, setMensagem] = useState('');
 
-  const handleWhatsApp = (num: string = '5551998088998', customMsg?: string) => {
+  const officialWhatsApp = c?.whatsappNumber || '5551998088998';
+
+  const handleWhatsApp = (num: string = officialWhatsApp, customMsg?: string) => {
     const text = encodeURIComponent(
       customMsg || 'Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de falar com um Advogado especialista.'
     );
@@ -32,7 +38,7 @@ export const LocationSection: React.FC = () => {
       (mensagem ? `📝 *Mensagem:* ${mensagem}` : '')
     );
     try {
-      window.open(`https://wa.me/5551998088998?text=${text}`, '_blank');
+      window.open(`https://wa.me/${officialWhatsApp}?text=${text}`, '_blank');
     } catch (err) {
       console.warn(err);
     }
@@ -50,16 +56,16 @@ export const LocationSection: React.FC = () => {
 
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
             <Scale className="w-4 h-4 text-[#F6E27A]" />
-            <span>ATENDIMENTO DIGITAL EM TODO O BRASIL</span>
+            <span>{c?.sectionKicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
-            CONTATO
+            {c?.sectionTitle || 'CONTATO'}
           </h2>
 
           {/* Frase inicial em dourado conforme Item 42 */}
           <p className="text-xs sm:text-sm text-[#F6E27A] font-medium leading-relaxed font-sans-body max-w-2xl mx-auto">
-            Escolha o canal de relacionamento com a ALDO LEÃO ADVOCACIA ESTRATÉGICA da sua preferência para o seu atendimento digital em todo o Brasil.
+            {c?.introGold || 'Escolha o canal de relacionamento com a ALDO LEÃO ADVOCACIA ESTRATÉGICA da sua preferência para o seu atendimento digital em todo o Brasil.'}
           </p>
         </div>
 
@@ -72,15 +78,15 @@ export const LocationSection: React.FC = () => {
                 <Clock className="w-6 h-6 text-[#E5C158]" />
               </div>
               <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase">
-                ATENDIMENTO VIRTUAL BRASIL
+                {c?.boxVirtualTitle || 'ATENDIMENTO VIRTUAL BRASIL'}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light">
-                Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp.
+                {c?.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp.'}
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
               <button
-                onClick={() => handleWhatsApp('5551998088998')}
+                onClick={() => handleWhatsApp(officialWhatsApp)}
                 className="w-full py-2 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
@@ -102,7 +108,7 @@ export const LocationSection: React.FC = () => {
                 PORTO ALEGRE/RS
               </p>
               <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light">
-                Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011
+                {c?.addressPortoAlegre || 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS'}
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 text-[11px] text-[#F6E27A] font-semibold">
@@ -121,25 +127,25 @@ export const LocationSection: React.FC = () => {
               </h3>
               <div className="space-y-1.5 text-xs text-slate-300 font-sans-body">
                 <p className="font-semibold text-white">
-                  (51) 99808-8998
+                  {c?.phonePrimary || '(51) 99808-8998'}
                 </p>
                 <p className="font-semibold text-white">
-                  (51) 99807-8998
+                  {c?.phoneSecondary || '(51) 99807-8998'}
                 </p>
               </div>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 space-y-2">
               <button
-                onClick={() => handleWhatsApp('5551998088998')}
+                onClick={() => handleWhatsApp(c?.phonePrimary?.replace(/\D/g, '') || officialWhatsApp)}
                 className="w-full py-1.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
-                <span>WhatsApp: (51) 99808-8998</span>
+                <span>WhatsApp: {c?.phonePrimary || '(51) 99808-8998'}</span>
               </button>
               <button
-                onClick={() => handleWhatsApp('5551998078998')}
+                onClick={() => handleWhatsApp(c?.phoneSecondary?.replace(/\D/g, '') || '5551998078998')}
                 className="w-full py-1.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
-                <span>WhatsApp: (51) 99807-8998</span>
+                <span>WhatsApp: {c?.phoneSecondary || '(51) 99807-8998'}</span>
               </button>
             </div>
           </div>
@@ -156,30 +162,30 @@ export const LocationSection: React.FC = () => {
               <div className="space-y-3 text-xs text-slate-300 font-sans-body">
                 <div>
                   <span className="font-semibold text-white block">Geral:</span>
-                  <a href="mailto:aldoleaoadvocacia@gmail.com" className="text-[#F6E27A] hover:underline text-[11px] break-all">
-                    aldoleaoadvocacia@gmail.com
+                  <a href={`mailto:${c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] break-all">
+                    {c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}
                   </a>
                 </div>
                 <div>
                   <span className="font-semibold text-white block">Holding Familiar:</span>
-                  <a href="mailto:aldoleao.planejamento@gmail.com" className="text-[#F6E27A] hover:underline text-[11px] block break-all">
-                    aldoleao.planejamento@gmail.com
+                  <a href={`mailto:${c?.emailHolding1 || 'aldoleao.planejamento@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] block break-all">
+                    {c?.emailHolding1 || 'aldoleao.planejamento@gmail.com'}
                   </a>
-                  <a href="mailto:holdingfamiliarbr@gmail.com" className="text-[#F6E27A] hover:underline text-[11px] block break-all mt-0.5">
-                    holdingfamiliarbr@gmail.com
+                  <a href={`mailto:${c?.emailHolding2 || 'holdingfamiliarbr@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] block break-all mt-0.5">
+                    {c?.emailHolding2 || 'holdingfamiliarbr@gmail.com'}
                   </a>
                 </div>
                 <div>
                   <span className="font-semibold text-white block">Academia Leão Ferreira:</span>
-                  <a href="mailto:academialeaoferreira@gmail.com" className="text-[#F6E27A] hover:underline text-[11px] break-all">
-                    academialeaoferreira@gmail.com
+                  <a href={`mailto:${c?.emailAcademia || 'academialeaoferreira@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] break-all">
+                    {c?.emailAcademia || 'academialeaoferreira@gmail.com'}
                   </a>
                 </div>
               </div>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
               <a
-                href="mailto:aldoleaoadvocacia@gmail.com"
+                href={`mailto:${c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}`}
                 className="w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-semibold hover:bg-[#1A365D] hover:text-white transition-colors flex items-center justify-center gap-1.5"
               >
                 <Mail className="w-3.5 h-3.5" />
@@ -200,17 +206,17 @@ export const LocationSection: React.FC = () => {
                 WHATSAPP BUSINESS
               </h3>
               <p className="text-xs text-slate-300">
-                Atendimento Rápido e Confidencial com Especialistas: (51) 99808-8998
+                Atendimento Rápido e Confidencial com Especialistas: {c?.phonePrimary || '(51) 99808-8998'}
               </p>
             </div>
           </div>
 
           <button
-            onClick={() => handleWhatsApp('5551998088998')}
+            onClick={() => handleWhatsApp(officialWhatsApp)}
             className="px-6 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-black text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg shrink-0"
           >
             <MessageSquare className="w-4 h-4" />
-            <span>Falar no WhatsApp Business</span>
+            <span>FALAR NO WHATSAPP</span>
           </button>
         </div>
 

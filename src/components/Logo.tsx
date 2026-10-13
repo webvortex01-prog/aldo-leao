@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSite } from '../context/SiteContext';
 
 interface LogoProps {
   className?: string;
@@ -12,6 +13,9 @@ export const Logo: React.FC<LogoProps> = ({
   variant = 'full',
 }) => {
   const [imgFailed, setImgFailed] = useState(false);
+  const { siteConfig } = useSite();
+  const logoTitle = siteConfig?.navbar?.logoTitle || 'Aldo Leão';
+  const logoSubtitle = siteConfig?.navbar?.logoSubtitle || 'Advocacia Estratégica';
 
   const getDimensions = () => {
     switch (size) {
@@ -41,13 +45,14 @@ export const Logo: React.FC<LogoProps> = ({
   };
 
   const { shield, imgHeight, title, sub } = getDimensions();
+  const logoImageSrc = siteConfig?.navbar?.logoImageUrl || '/img/logo-symbol.png';
 
   // Official Lion Emblem (from Dr. Aldo Leão logo without background) or SVG Fallback
   const ShieldEmblem = (
     <div className="relative shrink-0 flex items-center justify-center">
       {!imgFailed ? (
         <img
-          src="/img/logo-symbol.png"
+          src={logoImageSrc}
           alt="Aldo Leão Advocacia Estratégica"
           className={`${imgHeight} w-auto max-h-full object-contain filter drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)] transition-transform duration-300 group-hover:scale-105`}
           onError={(e) => {
@@ -160,12 +165,12 @@ export const Logo: React.FC<LogoProps> = ({
         <span
           className={`font-cinzel font-bold tracking-[0.06em] sm:tracking-[0.08em] gold-text-gradient leading-tight truncate ${title}`}
         >
-          Aldo Leão
+          {logoTitle}
         </span>
         <span
           className={`font-cinzel font-semibold text-[#D4AF37]/80 uppercase leading-none mt-0.5 sm:mt-1 truncate ${sub}`}
         >
-          Advocacia Estratégica
+          {logoSubtitle}
         </span>
       </div>
     </div>
