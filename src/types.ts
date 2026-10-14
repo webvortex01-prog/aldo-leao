@@ -247,6 +247,7 @@ export interface SiteConfig {
       description: string;
     }[];
     signatureImageUrl?: string;
+    sealImageUrl?: string;
     buttonText?: string;
     card40Title?: string;
     card40Kicker?: string;

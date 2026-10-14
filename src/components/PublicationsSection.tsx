@@ -13,12 +13,24 @@ export const PublicationsSection: React.FC = () => {
 
   const publications = siteConfig.publications;
 
+  const normalize = (str: string) =>
+    (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
   const filteredPublications = useMemo(() => {
+    const raw = searchTerm.trim();
+    const tokens = raw ? normalize(raw).split(/\s+/).filter(Boolean) : [];
+
     return publications.filter(pub => {
-      const matchesSearch = 
-        pub.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        pub.area.toLowerCase().includes(searchTerm.toLowerCase());
+      let matchesSearch = true;
+      if (tokens.length > 0) {
+        const searchable = normalize(
+          `${pub.title} ${pub.excerpt} ${pub.area} ${pub.content || ''} ${pub.date || ''}`
+        );
+        matchesSearch = tokens.every(token => searchable.includes(token));
+      }
 
       const matchesType = typeFilter === 'todos' || pub.type === typeFilter;
       const matchesArea = areaFilter === 'todas' || pub.area === areaFilter;
@@ -58,17 +70,29 @@ export const PublicationsSection: React.FC = () => {
         <div className="p-4 sm:p-5 rounded-xl bg-[#071122] border border-[#D4AF37]/30 shadow-xl mb-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           {/* Search Box */}
           <div className="flex-1 relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Pesquisar publicações (ex: holding, ITCMD, imóveis)..."
+              placeholder="Pesquisar publicações (ex: holding, ITCMD, imóveis, sucessão, STJ)..."
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
+              className="w-full pl-10 pr-20 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
             />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchTerm('');
+                  setCurrentPage(1);
+                }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+              >
+                Limpar
+              </button>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-3">

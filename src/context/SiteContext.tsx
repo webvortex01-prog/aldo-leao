@@ -645,7 +645,7 @@ const DEFAULT_CONFIG: SiteConfig = {
     card3Text: 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.',
     badgeStatus: 'Atendimento 100% Digital Ativo',
     badgeStates: '27 Estados',
-    mapImageUrl: '/img/presencanacional.jpeg'
+    mapImageUrl: '/img/presencadigital.jpeg'
   },
   centennialLegacy: {
     goldKicker: 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL',

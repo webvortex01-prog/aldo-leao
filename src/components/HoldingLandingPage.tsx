@@ -63,7 +63,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
   return (
     <div className="min-h-screen bg-[#050B14] text-slate-100 flex flex-col font-sans-body selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
       {/* Top Bar for Landing Page */}
-      <header className="sticky top-0 z-50 w-full border-b border-[#D4AF37]/20 bg-[#050B14]/95 backdrop-blur-md">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#D4AF37]/20 bg-[#050B14]/95 backdrop-blur-md shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <button
@@ -96,6 +96,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           </div>
         </div>
       </header>
+      {/* Spacer for fixed header */}
+      <div className="h-20 w-full shrink-0" aria-hidden="true" />
 
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 overflow-hidden border-b border-[#D4AF37]/20">

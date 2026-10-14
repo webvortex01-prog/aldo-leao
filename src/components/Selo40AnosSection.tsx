@@ -84,7 +84,7 @@ export const Selo40AnosSection: React.FC<Selo40AnosSectionProps> = ({ onOpenCons
                   <div className="absolute w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-[#D4AF37]/15 blur-2xl pointer-events-none" />
 
                   <img
-                    src="/img/selo-40-anos.png"
+                    src={siteConfig.centennialLegacy?.sealImageUrl || '/img/selo-40-anos.png'}
                     alt="Selo Comemorativo de 40 Anos de Advocacia - Dr. Aldo Leão (1986-2026)"
                     className="relative max-h-full max-w-full object-contain filter drop-shadow-[0_12px_30px_rgba(212,175,55,0.45)] group-hover:scale-105 transition-transform duration-700"
                     onError={(e) => {

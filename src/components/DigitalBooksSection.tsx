@@ -31,11 +31,23 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
 
   const books = siteConfig.digitalBooks || [];
 
+  const normalize = (str: string) =>
+    (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
   const filteredBooks = useMemo(() => {
+    const raw = searchTerm.trim();
+    if (!raw) return books;
+    const tokens = normalize(raw).split(/\s+/).filter(Boolean);
+
     return books.filter((b) => {
-      const match = b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        b.area.toLowerCase().includes(searchTerm.toLowerCase());
-      return match;
+      const chaptersText = (b.chapters || []).join(' ');
+      const searchable = normalize(
+        `${b.title} ${b.area} ${b.author} ${b.description || ''} ${b.sampleExcerpt || ''} ${chaptersText}`
+      );
+      return tokens.every((token) => searchable.includes(token));
     });
   }, [books, searchTerm]);
 
@@ -113,19 +125,39 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
           </div>
 
           <div className="relative flex-1 w-full">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Buscar livro por título ou área (ex: holding, imóvel, proteção)..."
+              placeholder="Buscar livro por título ou área (ex: holding, imóvel, proteção, condomínio, LGPD)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#D4AF37]"
+              className="w-full pl-10 pr-20 py-2.5 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#D4AF37]"
             />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm('')}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+              >
+                Limpar
+              </button>
+            )}
           </div>
         </div>
 
         {/* 6 Livros Digitais Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredBooks.length === 0 ? (
+          <div className="py-16 text-center text-slate-400 p-8 rounded-2xl bg-[#071122] border border-slate-800">
+            <p className="text-sm">Nenhum livro digital encontrado para "{searchTerm}".</p>
+            <button
+              onClick={() => setSearchTerm('')}
+              className="mt-3 px-4 py-2 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors cursor-pointer"
+            >
+              Ver todos os livros
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredBooks.map((book) => {
             return (
               <div
@@ -203,7 +235,8 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
             );
           })}
         </div>
-      </div>
+      )}
+    </div>
 
       {/* Modal 1: VER SUMÁRIO (Item 12 e Item 41) */}
       {summaryBook && (

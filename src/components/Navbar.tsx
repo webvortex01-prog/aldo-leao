@@ -40,13 +40,20 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = window.innerWidth >= 640 ? 80 : 64;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full max-w-full overflow-hidden border-b border-[#D4AF37]/25 bg-[#050B14]/95 backdrop-blur-md shadow-lg">
-      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#D4AF37]/25 bg-[#050B14]/95 backdrop-blur-md shadow-xl transition-all duration-300">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
         {/* Zone 1: Logomarca Oficial (Inteira, sem corte) */}
         <a 
           href="#" 
@@ -179,5 +186,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       )}
     </header>
+      {/* Spacer to prevent fixed header from overlapping the content */}
+      <div className="h-16 sm:h-20 w-full shrink-0" aria-hidden="true" />
+    </>
   );
 };

@@ -381,6 +381,9 @@ export const CmsEditor: React.FC = () => {
     check(formData.hero?.heroImageUrl, 'Imagem do Slide 1', 'all_images');
     check(formData.nationalPresence?.mapImageUrl, 'Imagem do Mapa Presença Digital', 'all_images');
     check(formData.founder.photoUrl, 'Foto do Dr. Aldo Leão', 'all_images');
+    check(formData.centennialLegacy?.sealImageUrl, 'Selo 40 Anos de Advocacia', 'all_images');
+    check(formData.founder.signatureImageUrl, 'Assinatura Dr. Aldo Leão', 'all_images');
+    check(formData.digitalConsultation?.bgImageUrl, 'Fundo Consulta Digital', 'all_images');
 
     // Identidade
     check(formData.navbar?.logoTitle, 'Logo · Nome do Escritório', 'identidade');
@@ -528,6 +531,20 @@ export const CmsEditor: React.FC = () => {
     { id: 'footer', label: '13. Rodapé & OAB', icon: Scale },
   ] as const;
 
+  const handleSelectSearchResult = (targetTab: typeof activeTab) => {
+    setActiveTab(targetTab);
+    setTimeout(() => {
+      const container = document.getElementById('cms-editor-active-tab-container');
+      if (container) {
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        container.classList.add('ring-2', 'ring-[#F6E27A]', 'ring-offset-2', 'ring-offset-[#071122]');
+        setTimeout(() => {
+          container.classList.remove('ring-2', 'ring-[#F6E27A]', 'ring-offset-2', 'ring-offset-[#071122]');
+        }, 2500);
+      }
+    }, 120);
+  };
+
   return (
     <div className="space-y-6">
       {/* Top Header & Actions */}
@@ -627,7 +644,7 @@ export const CmsEditor: React.FC = () => {
                       Encontrado em {searchResults.length} local(is) no site para "{searchQuery}":
                     </span>
                     <span className="text-[10px] text-slate-400 font-normal">
-                      Clique em qualquer resultado para abrir a aba correspondente
+                      Clique em qualquer resultado para ir direto à aba
                     </span>
                   </div>
 
@@ -635,9 +652,7 @@ export const CmsEditor: React.FC = () => {
                     {searchResults.map((res, idx) => (
                       <div
                         key={idx}
-                        onClick={() => {
-                          setActiveTab(res.tab);
-                        }}
+                        onClick={() => handleSelectSearchResult(res.tab)}
                         className="p-2.5 rounded-lg bg-[#050B14] hover:bg-[#12264C] cursor-pointer flex items-center justify-between gap-3 text-xs border border-slate-800 hover:border-[#D4AF37]/60 transition-all group"
                       >
                         <div className="min-w-0 flex-1">
@@ -649,7 +664,7 @@ export const CmsEditor: React.FC = () => {
                           </span>
                         </div>
                         <span className="text-[10px] font-bold bg-[#D4AF37]/25 text-[#F6E27A] group-hover:bg-[#D4AF37] group-hover:text-black px-2.5 py-1 rounded-md whitespace-nowrap shrink-0 border border-[#D4AF37]/50 transition-colors">
-                          Editar na Aba →
+                          Ir para Aba e Editar →
                         </span>
                       </div>
                     ))}
@@ -684,6 +699,7 @@ export const CmsEditor: React.FC = () => {
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
+          const tabMatches = searchResults.filter((r) => r.tab === tab.id).length;
           return (
             <button
               key={tab.id}
@@ -696,10 +712,18 @@ export const CmsEditor: React.FC = () => {
             >
               <Icon className="w-3.5 h-3.5" />
               <span>{tab.label}</span>
+              {tabMatches > 0 && (
+                <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-[#D4AF37] text-black">
+                  {tabMatches}
+                </span>
+              )}
             </button>
           );
         })}
       </div>
+
+      {/* Container Principal com ID para auto-scroll */}
+      <div id="cms-editor-active-tab-container" className="rounded-xl transition-all duration-300">
 
       {/* ABA 0: CENTRAL DE TODAS AS IMAGENS DO SITE */}
       {activeTab === 'all_images' && (
@@ -788,12 +812,47 @@ export const CmsEditor: React.FC = () => {
               })}
             />
 
-            {/* 6. Capas dos 6 Livros Digitais */}
+            {/* 6. Selo Oficial de 40 Anos de Advocacia */}
+            <ImageUploadField
+              label="6. Selo Comemorativo de 40 Anos (1986–2026)"
+              description="Chancela e selo oficial de 40 Anos de Advocacia exibido na página O Legado Centenário e na seção do Selo."
+              currentValue={formData.centennialLegacy?.sealImageUrl}
+              defaultValue="/img/selo-40-anos.png"
+              aspectRatio="square"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Selo 40 Anos (PNG Transparente)', url: '/img/selo-40-anos.png' },
+                { label: 'Selo Dourado Oficial', url: '/img/selode40anos.jpg.jpeg' },
+              ]}
+            />
+
+            {/* 7. Assinatura Oficial do Dr. Aldo Leão */}
+            <ImageUploadField
+              label="7. Assinatura do Dr. Aldo Leão (Dourada / Transparente)"
+              description="Assinatura manuscrita oficial exibida na página Head Jurídico e no final da linha do tempo do Legado Centenário."
+              currentValue={formData.founder?.signatureImageUrl || formData.centennialLegacy?.signatureImageUrl}
+              defaultValue="/img/assinatura-gold.png"
+              aspectRatio="auto"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, signatureImageUrl: newUrl },
+                centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Assinatura Dourada Oficial', url: '/img/assinatura-gold.png' },
+                { label: 'Assinatura Original', url: '/img/assinatura.png' },
+              ]}
+            />
+
+            {/* 8. Capas dos 6 Livros Digitais */}
             <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
               <div>
                 <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
                   <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-                  <span>6. Capas dos Livros Digitais (Download Gratuito)</span>
+                  <span>8. Capas dos Livros Digitais (Download Gratuito)</span>
                 </h4>
                 <p className="text-[11px] text-slate-300 mt-0.5">
                   Você pode fazer o upload da imagem da capa para cada um dos 6 livros digitais do Dr. Aldo Leão.
@@ -2643,6 +2702,7 @@ export const CmsEditor: React.FC = () => {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };
