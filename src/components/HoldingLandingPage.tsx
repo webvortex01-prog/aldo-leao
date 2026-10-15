@@ -14,6 +14,7 @@ import {
 import { Logo } from './Logo';
 import { UrgentHotlineFloat } from './UrgentHotlineFloat';
 import { useSite } from '../context/SiteContext';
+import { cleanAndFormatPhone } from '../utils/phoneUtils';
 
 interface HoldingLandingPageProps {
   onBackToSite: () => void;
@@ -436,11 +437,11 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             {contact.addressPortoAlegre}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-[#E5C158]">
-            <span>WhatsApp: (51) 99808-8998</span>
+            <span>WhatsApp: {cleanAndFormatPhone(contact.phonePrimary, '(51) 99808-8998')}</span>
             <span>·</span>
-            <span>Telefones: (51) 99808-8998 e (51) 99807-8998</span>
+            <span>Telefones: {cleanAndFormatPhone(contact.phonePrimary, '(51) 99808-8998')} e {cleanAndFormatPhone(contact.phoneSecondary, '(51) 99807-8998')}</span>
             <span>·</span>
-            <span>E-mail: aldoleaoadvocacia@gmail.com</span>
+            <span>E-mail: {contact.emailPrimary || 'aldoleaoadvocacia@gmail.com'}</span>
           </div>
           <div className="pt-4">
             <button

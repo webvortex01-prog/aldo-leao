@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Scale, ArrowRight, X, Phone, MessageSquare } from 'lucide-react';
 import { PracticeArea } from '../types';
 import { useSite } from '../context/SiteContext';
+import { cleanAndFormatPhone } from '../utils/phoneUtils';
 
 interface PracticeAreasProps {
   onGoToLandingPage: () => void;
@@ -21,14 +22,14 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       title: 'Planejamento Patrimonial 4.0',
       subtitle: 'Proteção Patrimonial e Empresarial',
       description: 'Estruturamos soluções jurídicas avançadas e personalizadas para proteger, organizar e perpetuar patrimônios e empresas por meio do ecossistema de Holding Familiar, governança, planejamento sucessório e inteligência jurídica estratégica.',
-      badge: '01',
+      badge: 'HOLDING FAMILIAR',
       isHoldingLandingLink: true
     },
     {
       id: 'imobiliario',
       number: '02',
       title: 'Direito Imobiliário',
-      subtitle: 'Gestão Jurídica de Imóveis',
+      subtitle: 'GESTÃO JURÍDICA IMOBILIÁRIA',
       description: 'Atuação especializada e estratégica em due diligence, contratos, distratos, investimentos imobiliários, regularização de imóveis, incorporação e proteção patrimonial, proporcionando máxima segurança às operações.',
       badge: 'Imóveis'
     },
@@ -36,7 +37,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       id: 'empresarial',
       number: '03',
       title: 'Direito Empresarial',
-      subtitle: 'EMPRESARIAL',
+      subtitle: 'GESTÃO JURÍDICA EMPRESARIAL',
       description: 'Soluções jurídicas empresariais estratégicas voltadas à governança corporativa, estruturação societária, prevenção de riscos, compliance, conformidade normativa e fortalecimento da segurança jurídica dos negócios.',
       badge: 'EMPRESARIAL'
     },
@@ -44,17 +45,17 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       id: 'civil',
       number: '04',
       title: 'Direito Civil',
-      subtitle: 'Contratos Estratégicos, Família e Sucessões.',
+      subtitle: 'GESTÃO DAS RELAÇÕES CÍVEIS',
       description: 'Assessoria jurídica e advocacia estratégica em contratos de alta complexidade, distratos, responsabilidade civil, obrigações, Direito de Família e Sucessões, com foco na prevenção, segurança jurídica e perpetuação patrimonial.',
-      badge: 'Direito Civil'
+      badge: 'CIVIL'
     },
     {
       id: 'consumo',
       number: '05',
       title: 'Relações de Consumo',
-      subtitle: 'Consumidor',
+      subtitle: 'Compliance Consumerista & Mitigação de Riscos',
       description: 'Desenvolvimento de estratégias preventivas em compliance consumerista, mitigação de riscos, prevenção de prejuízos financeiros (multas, indenizações) e adequação rigorosa das relações de consumo para empresas.',
-      badge: 'Consumidor'
+      badge: 'GESTÃO CONSUMERISTA'
     }
   ];
 
@@ -186,7 +187,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
 
                 <div className="text-xs text-slate-300 space-y-1">
                   <p>
-                    <strong className="text-white">Telefones:</strong> (51) 99808-8998 e (51) 99807-8998
+                    <strong className="text-white">Telefones:</strong> {cleanAndFormatPhone(siteConfig.contact?.phonePrimary, '(51) 99808-8998')} e {cleanAndFormatPhone(siteConfig.contact?.phoneSecondary, '(51) 99807-8998')}
                   </p>
                   <p>
                     <strong className="text-[#E5C158]">Atendimento Digital Brasil:</strong> De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs

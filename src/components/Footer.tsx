@@ -2,6 +2,7 @@ import React from 'react';
 import { Logo } from './Logo';
 import { Lock } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
 interface FooterProps {
   onOpenAdmin?: () => void;
@@ -14,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
   const c = siteConfig.contact;
   const f = siteConfig.footer;
 
-  const officialWhatsApp = c?.whatsappNumber || '5551998088998';
+  const officialWhatsApp = getCleanWhatsAppDigits(c?.whatsappNumber, '5551998088998');
 
   const navLinks = [
     { label: 'Home', href: '#' },
@@ -103,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
 
               <div>
                 <strong className="text-white block font-medium">Telefones:</strong>
-                <p>{c?.phonePrimary || '(51) 99808-8998'} e {c?.phoneSecondary || '(51) 99807-8998'}</p>
+                <p>{cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')} e {cleanAndFormatPhone(c?.phoneSecondary, '(51) 99807-8998')}</p>
               </div>
 
               <div>
@@ -114,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
                   rel="noopener noreferrer"
                   className="text-[#25D366] font-semibold hover:underline"
                 >
-                  {c?.phonePrimary || '(51) 99808-8998'}
+                  {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}
                 </a>
               </div>
 

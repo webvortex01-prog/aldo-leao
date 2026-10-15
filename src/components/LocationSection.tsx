@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Scale, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { Logo } from './Logo';
 import { useSite } from '../context/SiteContext';
+import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
 export const LocationSection: React.FC = () => {
   const { siteConfig } = useSite();
@@ -16,7 +17,7 @@ export const LocationSection: React.FC = () => {
   const [urgencia, setUrgencia] = useState('Normal');
   const [mensagem, setMensagem] = useState('');
 
-  const officialWhatsApp = c?.whatsappNumber || '5551998088998';
+  const officialWhatsApp = getCleanWhatsAppDigits(c?.whatsappNumber, '5551998088998');
 
   const handleWhatsApp = (num: string = officialWhatsApp, customMsg?: string) => {
     const text = encodeURIComponent(
@@ -127,25 +128,25 @@ export const LocationSection: React.FC = () => {
               </h3>
               <div className="space-y-1.5 text-xs text-slate-300 font-sans-body">
                 <p className="font-semibold text-white">
-                  {c?.phonePrimary || '(51) 99808-8998'}
+                  {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}
                 </p>
                 <p className="font-semibold text-white">
-                  {c?.phoneSecondary || '(51) 99807-8998'}
+                  {cleanAndFormatPhone(c?.phoneSecondary, '(51) 99807-8998')}
                 </p>
               </div>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 space-y-2">
               <button
-                onClick={() => handleWhatsApp(c?.phonePrimary?.replace(/\D/g, '') || officialWhatsApp)}
+                onClick={() => handleWhatsApp(getCleanWhatsAppDigits(c?.phonePrimary, officialWhatsApp))}
                 className="w-full py-1.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
-                <span>WhatsApp: {c?.phonePrimary || '(51) 99808-8998'}</span>
+                <span>WhatsApp: {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}</span>
               </button>
               <button
-                onClick={() => handleWhatsApp(c?.phoneSecondary?.replace(/\D/g, '') || '5551998078998')}
+                onClick={() => handleWhatsApp(getCleanWhatsAppDigits(c?.phoneSecondary, '5551998078998'))}
                 className="w-full py-1.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
-                <span>WhatsApp: {c?.phoneSecondary || '(51) 99807-8998'}</span>
+                <span>WhatsApp: {cleanAndFormatPhone(c?.phoneSecondary, '(51) 99807-8998')}</span>
               </button>
             </div>
           </div>
@@ -206,7 +207,7 @@ export const LocationSection: React.FC = () => {
                 WHATSAPP BUSINESS
               </h3>
               <p className="text-xs text-slate-300">
-                Atendimento Rápido e Confidencial com Especialistas: {c?.phonePrimary || '(51) 99808-8998'}
+                Atendimento Rápido e Confidencial com Especialistas: {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}
               </p>
             </div>
           </div>

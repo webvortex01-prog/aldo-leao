@@ -104,14 +104,14 @@ function AppContent() {
           onOpenConsultation={() => handleOpenConsultation()}
         />
 
-        {/* 7. Página PLANEJAMENTO PATRIMONIAL 4.0 (Item 10 e Item 40) */}
-        <HoldingFamiliarSection
-          onGoToLandingPage={() => setCurrentView('holding-landing')}
-        />
-
-        {/* 8. Página AGENDE A SUA CONSULTA DIGITAL (Item 9) */}
+        {/* 7. Página AGENDE A SUA CONSULTA DIGITAL (Item 8 e 9 do PDF) */}
         <DigitalConsultationCTA
           onOpenConsultation={() => handleOpenConsultation()}
+        />
+
+        {/* 8. Página PLANEJAMENTO PATRIMONIAL 4.0 (HOLDING FAMILIAR) */}
+        <HoldingFamiliarSection
+          onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
         {/* 9. Página PUBLICAÇÕES (Item 11) */}

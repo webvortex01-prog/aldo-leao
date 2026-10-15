@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Scale, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
 interface ConsultationModalProps {
   isOpen: boolean;
@@ -68,7 +69,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
       ndaAccepted: true
     });
 
-    const targetPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+    const targetPhone = getCleanWhatsAppDigits(siteConfig.contact?.whatsappNumber, '5551998088998');
     const waUrl = `https://wa.me/${targetPhone}?text=${buildWhatsAppMessage()}`;
     try {
       window.open(waUrl, '_blank');
@@ -83,7 +84,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   };
 
   const handleWhatsAppDirect = () => {
-    const targetPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+    const targetPhone = getCleanWhatsAppDigits(siteConfig.contact?.whatsappNumber, '5551998088998');
     window.open(`https://wa.me/${targetPhone}?text=${buildWhatsAppMessage()}`, '_blank');
   };
 

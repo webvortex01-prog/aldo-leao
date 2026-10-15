@@ -67,10 +67,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
   return (
     <section id="head-juridico" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header da Seção: TERCEIRA GERAÇÃO DESDE 1986 (Item 6) */}
+        {/* Header da Seção: GESTÃO JURÍDICA DE VANGUARDA (Item 50) */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
-            <span>{f?.sectionKicker || 'TERCEIRA GERAÇÃO DESDE 1986'}</span>
+            <span>{f?.sectionKicker || 'GESTÃO JURÍDICA DE VANGUARDA'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-3">
@@ -147,18 +147,18 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               </button>
             </div>
 
-            {/* Diferenciais Estratégicos Mantidos (Item 35) */}
+            {/* Diferenciais Estratégicos Conforme Item 50 */}
             <div className="space-y-2 mb-6">
               <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider mb-2">
                 Diferenciais Estratégicos:
               </h4>
-              <div className="space-y-1.5 text-xs text-slate-200">
-                {(f?.differences && f.differences.length > 0 ? f.differences : [
-                  'Terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.',
-                  'Mais de quatro décadas de advocacia estratégica ininterrupta do Dr. Aldo Leão (desde 1986).',
-                  'Referência nacional em Holding Familiar (Planejamento Patrimonial e Empresarial 4.0).',
-                  'Atuação nacional por meio de atendimento jurídico 100% digital, seguro, confidencial e resolutivo.'
-                ]).map((diff, i) => (
+              <div className="space-y-2 text-xs text-slate-200">
+                {[
+                  '40 + Anos de Advocacia Estratégica num legado jurídico centenário',
+                  'Autor de Livros e Artigos Jurídicos Publicados',
+                  'Referência nacional em Planejamento Patrimonial via Holding Familiar',
+                  'Atendimento e processos 100% digitais no Brasil'
+                ].map((diff, i) => (
                   <div key={i} className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
                     <span>{diff}</span>
@@ -188,7 +188,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
           </div>
         </div>
 
-        {/* Item 21: Contador no final da página Head Jurídico, com a balança da justiça na cor azul-marinho e ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA */}
+        {/* Item 21 e 53: Contador no final da página Head Jurídico, com a balança da justiça na cor azul-marinho e ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA */}
         <div ref={counterRef} className="pt-8 border-t border-[#D4AF37]/25">
           <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-4">
@@ -198,10 +198,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               </div>
               <div>
                 <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                  {f?.counterTitle || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}
+                  ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA
                 </p>
-                <p className="text-xs text-slate-300">
-                  {f?.counterSub || 'Desde 1986 · Terceira Geração de Tradição Jurídica Familiar Centenária'}
+                <p className="text-xs text-white font-medium">
+                  DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO.
                 </p>
               </div>
             </div>

@@ -33,7 +33,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
   };
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-8 md:py-14 bg-[#050B14]">
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background ambient luxury lighting */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-40 right-10 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[140px]" />
@@ -86,13 +86,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
         {currentSlide === 0 && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center animate-fadeIn">
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              {/* Item 26: Excluir no início do slide "Desde 1908" em dourado. Deixar "ALDO LEÃO" na primeira frase e "ADVOCACIA ESTRATÉGICA" logo abaixo */}
+              {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
               <div className="mb-4">
-                <span className="block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
-                  {siteConfig.hero.kicker || 'ALDO LEÃO'}
-                </span>
-                <span className="block font-cinzel text-[10px] sm:text-xs font-semibold tracking-[0.16em] sm:tracking-[0.28em] text-[#D4AF37]/80 uppercase mt-0.5">
-                  {siteConfig.hero.kickerSub || 'ADVOCACIA ESTRATÉGICA'}
+                <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
+                  ALDO LEÃO <strong className="font-black text-white">ADVOCACIA ESTRATÉGICA</strong>
                 </span>
               </div>
 
@@ -149,28 +146,34 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
 
-            {/* Right Column Visual (Imagem completa da logomarca/leão conforme Item 22) */}
+            {/* Right Column Visual (Foto Dr. Aldo Leão / Slide 1) */}
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-md lg:max-w-none">
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#D4AF37]/40 via-[#F6E27A]/20 to-transparent rounded-2xl blur-lg opacity-70" />
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center">
                     <img
-                      src={siteConfig.hero.heroImageUrl || heroLionImg}
-                      alt="Leão de Ouro e Balança da Justiça - Aldo Leão Advocacia Estratégica"
-                      className="w-full h-full object-cover object-center"
-                      referrerPolicy="no-referrer"
+                      src={
+                        siteConfig.hero.heroImageUrl && !siteConfig.hero.heroImageUrl.includes('logo')
+                          ? siteConfig.hero.heroImageUrl
+                          : '/img/dr-aldo-1.jpg'
+                      }
+                      alt="Dr. Aldo Leão - Advocacia Estratégica"
+                      className="w-full h-full object-cover object-top filter brightness-95 contrast-105"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-portrait.jpg';
+                      }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-85" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-80" />
                     <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/40 flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
                         <Scale className="w-5 h-5 text-[#E5C158]" />
                         <div>
                           <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                            {siteConfig.hero.badgeText || 'O Escritório Mais Antigo do Brasil'}
+                            Dr. Aldo Leão · Desde 1986
                           </p>
                           <p className="text-[10px] text-slate-300">
-                            1908 – 2026 · Três Gerações de Excelência
+                            Advocacia Estratégica · Três Gerações
                           </p>
                         </div>
                       </div>
@@ -194,10 +197,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 <span>{siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}</span>
               </div>
 
-              {/* Título: PLANEJAMENTO PATRIMONIAL 4.0 com PATRIMONIAL 4.0 em dourado (Item 25) */}
-              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-4 [text-wrap:balance]">
-                {siteConfig.slide2?.title || 'PLANEJAMENTO'}{' '}
-                <span className="gold-text-gradient">{siteConfig.slide2?.titleHighlight || 'PATRIMONIAL 4.0'}</span>
+              {/* Título: PLANEJAMENTO PATRIMONIAL 4.0 100% em dourado (Item 3, 25 e 62) */}
+              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight gold-text-gradient leading-[1.12] mb-4 [text-wrap:balance]">
+                {siteConfig.slide2?.titleHighlight || 'PLANEJAMENTO PATRIMONIAL 4.0'}
               </h1>
 
               {/* Texto principal do Slide 2 conforme Item 27 */}
@@ -206,7 +208,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
                 </p>
                 <p>
-                  {siteConfig.slide2?.paragraph2 || 'A Holding Familiar é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.'}
+                  <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
                 </p>
                 <p>
                   {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
@@ -223,7 +225,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </p>
               </div>
 
-              {/* Botão azul/dourado "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
+              {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
                 <button
                   onClick={onGoToLandingPage}
@@ -235,50 +237,56 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
 
-            {/* Right Column Slide 2: Card de Custos e Box com Logo do Leão (Item 28 e Item 29) */}
-            <div className="lg:col-span-5 relative flex flex-col gap-6 justify-center">
-              {/* Card Comparativo de Custos (Item 28) */}
-              <div className="p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left">
+            {/* Right Column Slide 2: Card de Custos e Box com Logo do Leão (Item 28, 29 e 45) */}
+            <div className="lg:col-span-5 relative flex flex-col gap-5 justify-center">
+              {/* Card Comparativo de Custos (Item 28 e 45) */}
+              <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left">
                 <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
                   <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
-                    {siteConfig.slide2?.rightCardTitle || 'Comparativo de Custos entre o processo de Inventário e o Planejamento Patrimonial 4.0 via Holding Familiar'}
+                    COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
                   </h3>
                 </div>
 
-                <p className="text-xs text-slate-300 leading-relaxed mb-5 font-light">
-                  {siteConfig.slide2?.rightCardSub || 'Você conhece o Alto Custo do processo de Inventário para os seus herdeiros? Os números são incontestáveis.'}
-                </p>
-
-                <p className="text-[11px] text-slate-400 leading-relaxed mb-5">
-                  {siteConfig.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
+                <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
+                  Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?
                 </p>
 
                 <button
                   onClick={() => setIsCostModalOpen(true)}
                   className="w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer shadow-lg"
                 >
-                  {siteConfig.slide2?.rightCardBtn || 'VER OS CUSTOS'}
+                  VER OS CUSTOS
                 </button>
               </div>
 
-              {/* Item 29: Inserir no slide 2 o box com a logo do leão, como consta no slide 1 */}
-              <div className="rounded-xl overflow-hidden border border-[#D4AF37]/40 bg-[#070F1E] p-3.5 flex items-center justify-between shadow-xl">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
-                    <Scale className="w-5 h-5 text-[#E5C158]" />
-                  </div>
-                  <div>
-                    <p className="font-cinzel text-xs font-bold text-white uppercase">
-                      {siteConfig.slide2?.badgeTitle || 'Aldo Leão Advocacia Estratégica'}
-                    </p>
-                    <p className="text-[10px] text-[#E5C158]">
-                      {siteConfig.slide2?.badgeSubtitle || 'Desde 1908 · Tradição Jurídica Centenária'}
-                    </p>
+              {/* Item 29 e 45: Box com a logomarca do leão e na parte inferior box da balança com textos exatos */}
+              <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
+                <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-4">
+                  <img
+                    src={siteConfig.hero.heroImageUrl || '/img/logo.jpg'}
+                    alt="Aldo Leão Advocacia Estratégica"
+                    className="w-full h-full object-contain object-center"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = '/img/logo-symbol.png';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-85" />
+                  
+                  {/* Banner inferior com Ícone da Balança e textos do Item 45 */}
+                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/50 flex items-center gap-3 text-left">
+                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
+                      <Scale className="w-4 h-4 text-[#E5C158]" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
+                        O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
+                      </p>
+                      <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
+                        VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <span className="font-cinzel text-xs text-[#E5C158] font-bold">
-                  {siteConfig.slide2?.badgeYears || '118 Anos'}
-                </span>
               </div>
             </div>
           </div>

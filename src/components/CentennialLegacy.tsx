@@ -51,8 +51,9 @@ export const CentennialLegacy: React.FC = () => {
             <span>{cl?.subtitle || 'DESDE 1908'}</span>
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance]">
-            {cl?.title || 'O LEGADO'} <span className="gold-text-gradient">{cl?.titleHighlight || 'CENTENÁRIO'}</span>
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5 [text-wrap:balance]">
+            <span className="text-white">O LEGADO</span>{' '}
+            <span className="gold-text-gradient">CENTENÁRIO</span>
           </h2>
 
           {/* Texto do projeto conforme Item 31 */}
@@ -66,7 +67,7 @@ export const CentennialLegacy: React.FC = () => {
           </div>
         </div>
 
-        {/* TIMELINE SECTION (Item 5 e Item 32) */}
+        {/* TIMELINE SECTION (Item 5, 32 e 48) */}
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/35 bg-[#071122] p-6 sm:p-10 lg:p-12 shadow-2xl mb-16">
           <div className="relative">
             {/* Horizontal Line on Desktop */}
@@ -94,8 +95,8 @@ export const CentennialLegacy: React.FC = () => {
                     ))}
                   </div>
 
-                  {/* Description */}
-                  <p className="text-[11px] text-slate-400 leading-relaxed font-sans-body">
+                  {/* Description em Negrito (Item 48) */}
+                  <p className="text-[11px] sm:text-xs text-slate-200 leading-relaxed font-sans-body font-bold">
                     {evt.description}
                   </p>
                 </div>
@@ -103,7 +104,7 @@ export const CentennialLegacy: React.FC = () => {
             </div>
           </div>
 
-          {/* Footer da Timeline: Botão Saiba Mais e Assinatura Legível (Item 32) */}
+          {/* Footer da Timeline: Botão Saiba Mais e Assinatura Legível Ampliada (Item 32 e 48) */}
           <div className="mt-12 pt-8 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
             <button
               onClick={() => setHistoryModalOpen(true)}
@@ -112,12 +113,12 @@ export const CentennialLegacy: React.FC = () => {
               {cl?.buttonText || 'Saiba Mais'}
             </button>
 
-            {/* Assinatura do Dr. Aldo Leão ampliada e nítida (Item 32) */}
-            <div className="flex items-center gap-3">
+            {/* Assinatura do Dr. Aldo Leão ampliada e centralizada (Item 32 e 48) */}
+            <div className="flex items-center justify-center">
               <img
                 src={cl?.signatureImageUrl || '/img/assinatura-gold.png'}
                 alt="Assinatura Dr. Aldo Leão"
-                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95"
+                className="h-20 sm:h-24 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] opacity-95"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
                 }}
@@ -126,7 +127,7 @@ export const CentennialLegacy: React.FC = () => {
           </div>
         </div>
 
-        {/* 40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA (Deslocada para o final do Legado, Item 5, 33, 34) */}
+        {/* 40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA (Item 33, 34 e 49) */}
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/40 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
@@ -134,12 +135,12 @@ export const CentennialLegacy: React.FC = () => {
             </div>
 
             <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 leading-snug">
-              {cl?.card40Title || '40 Anos + de Excelência Jurídica na Advocacia Estratégica'}
+              40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA
             </h3>
 
-            {/* Texto conforme Item 33 */}
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-8 font-light max-w-3xl mx-auto">
-              {cl?.card40Text || 'Iniciada em 1986, a atuação do Dr. Aldo Leão na terceira geração de advogados da família, consolidou uma das trajetórias mais respeitadas na proteção patrimonial e empresarial no país, unindo o rigor acadêmico, a experiência de mais de quatro décadas e a inteligência jurídica na prestação de serviços de vanguarda.'}
+            {/* Texto exato conforme Item 49 */}
+            <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto">
+              A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do <strong className="text-white font-bold">Dr. ALDO LEÃO</strong>, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.
             </p>
 
             {/* Selo inserido no lugar dos dois boxes removidos (Item 34) */}

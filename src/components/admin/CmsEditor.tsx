@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
 import { PracticeArea, DigitalBook, Publication } from '../../types';
+import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
 
 // Componente Especializado para Upload e Gerenciamento de Imagens
 interface ImageUploadFieldProps {
@@ -2525,10 +2526,16 @@ export const CmsEditor: React.FC = () => {
                 value={formData.contact.phonePrimary}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contact: { ...formData.contact, phonePrimary: e.target.value }
+                  contact: { ...formData.contact, phonePrimary: e.target.value.replace(/\./g, '') }
                 })}
+                onBlur={(e) => setFormData({
+                  ...formData,
+                  contact: { ...formData.contact, phonePrimary: cleanAndFormatPhone(e.target.value, '(51) 99808-8998') }
+                })}
+                placeholder="(51) 99808-8998"
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
               />
+              <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99808-8998</p>
             </div>
 
             <div>
@@ -2540,10 +2547,16 @@ export const CmsEditor: React.FC = () => {
                 value={formData.contact.phoneSecondary}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contact: { ...formData.contact, phoneSecondary: e.target.value }
+                  contact: { ...formData.contact, phoneSecondary: e.target.value.replace(/\./g, '') }
                 })}
+                onBlur={(e) => setFormData({
+                  ...formData,
+                  contact: { ...formData.contact, phoneSecondary: cleanAndFormatPhone(e.target.value, '(51) 99807-8998') }
+                })}
+                placeholder="(51) 99807-8998"
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
               />
+              <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99807-8998</p>
             </div>
           </div>
 

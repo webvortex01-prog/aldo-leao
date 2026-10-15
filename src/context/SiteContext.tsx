@@ -10,6 +10,7 @@ import {
   CaseStudy
 } from '../types';
 import realPartnerImg from '../assets/images/aldo_leao_portrait_real_1791572566625.jpg';
+import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
 const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
   {
@@ -516,10 +517,12 @@ const DEFAULT_CONFIG: SiteConfig = {
   navbar: {
     logoTitle: 'Aldo Leão',
     logoSubtitle: 'Advocacia Estratégica',
+    logoImageUrl: '/img/logo.png',
     btnConsultation: 'Consulta Digital',
     oabNumber: 'OAB/RS 48.452'
   },
   hero: {
+    heroImageUrl: '/img/dr-aldo-1.jpg',
     kicker: 'ALDO LEÃO',
     kickerSub: 'ADVOCACIA ESTRATÉGICA',
     titlePart1: 'TRADIÇÃO JURÍDICA',
@@ -815,15 +818,32 @@ const SiteContext = createContext<SiteContextType | undefined>(undefined);
 export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     try {
-      const saved = localStorage.getItem('aldoleao_site_config_v6') || localStorage.getItem('aldoleao_site_config_v5');
+      const saved = localStorage.getItem('aldoleao_site_config_v8') || localStorage.getItem('aldoleao_site_config_v7') || localStorage.getItem('aldoleao_site_config_v6') || localStorage.getItem('aldoleao_site_config_v5');
       if (saved) {
         const parsed = JSON.parse(saved);
+        const heroConfig = { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) };
+        if (heroConfig.heroImageUrl && (heroConfig.heroImageUrl.includes('logo') || heroConfig.heroImageUrl === '')) {
+          heroConfig.heroImageUrl = '/img/dr-aldo-1.jpg';
+        }
+        const navbarConfig = { ...DEFAULT_CONFIG.navbar, ...(parsed.navbar || {}) };
+        if (!navbarConfig.logoImageUrl) {
+          navbarConfig.logoImageUrl = '/img/logo.png';
+        }
+
+        const contactConfig = { ...DEFAULT_CONFIG.contact, ...(parsed.contact || {}) };
+        contactConfig.phonePrimary = cleanAndFormatPhone(contactConfig.phonePrimary, '(51) 99808-8998');
+        contactConfig.phoneSecondary = cleanAndFormatPhone(contactConfig.phoneSecondary, '(51) 99807-8998');
+        contactConfig.spPhone = cleanAndFormatPhone(contactConfig.spPhone, '(51) 99808-8998');
+        contactConfig.bsbPhone = cleanAndFormatPhone(contactConfig.bsbPhone, '(51) 99807-8998');
+        contactConfig.cwbPhone = cleanAndFormatPhone(contactConfig.cwbPhone, '(51) 99808-8998');
+        contactConfig.whatsappNumber = getCleanWhatsAppDigits(contactConfig.whatsappNumber, '5551998088998');
+
         return {
           ...DEFAULT_CONFIG,
           ...parsed,
-          navbar: { ...DEFAULT_CONFIG.navbar, ...(parsed.navbar || {}) },
-          hero: { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) },
-          contact: { ...DEFAULT_CONFIG.contact, ...(parsed.contact || {}) },
+          navbar: navbarConfig,
+          hero: heroConfig,
+          contact: contactConfig,
           founder: { ...DEFAULT_CONFIG.founder, ...(parsed.founder || {}) },
           slide2: { ...DEFAULT_CONFIG.slide2, ...(parsed.slide2 || {}) },
           nationalPresence: { ...DEFAULT_CONFIG.nationalPresence, ...(parsed.nationalPresence || {}) },
@@ -855,7 +875,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save changes to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('aldoleao_site_config_v5', JSON.stringify(siteConfig));
+      localStorage.setItem('aldoleao_site_config_v8', JSON.stringify(siteConfig));
     } catch (e) {
       console.error('Error persisting site config:', e);
     }

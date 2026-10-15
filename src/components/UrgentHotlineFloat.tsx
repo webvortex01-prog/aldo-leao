@@ -37,7 +37,7 @@ export const UrgentHotlineFloat: React.FC<HotlineProps> = () => {
         <button
           onClick={handleWhatsApp}
           className="px-2.5 sm:px-4 py-1 sm:py-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-black text-[10px] sm:text-xs font-bold transition-all flex items-center gap-1 sm:gap-1.5 shadow-md cursor-pointer shrink-0"
-          title="Falar no WhatsApp Oficial (51 998088998)"
+          title="Falar no WhatsApp Oficial ((51) 99808-8998)"
           aria-label="WhatsApp Oficial"
         >
           <svg

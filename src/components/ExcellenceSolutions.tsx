@@ -62,15 +62,12 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
             SOLUÇÕES DE <span className="gold-text-gradient">EXCELÊNCIA</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-4 font-light">
-            A <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve soluções jurídicas inovadoras
-            que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e
-            empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light">
+            A <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.
           </p>
 
           <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans-body font-light">
             A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.
-            Cada solução é estruturada de forma personalizada para antecipar riscos e transformar decisões jurídicas em vantagem competitiva.
           </p>
         </div>
 

@@ -75,15 +75,14 @@ export const NationalDigitalPresence: React.FC = () => {
           {/* Right Column: Mapa do Brasil com inscrição Presença Nacional Digital (Item 30) */}
           <div className="lg:col-span-5 relative flex justify-center">
             <div className="relative w-full rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-gradient-to-b from-[#09152B] via-[#071122] to-[#050B14] p-6 sm:p-8 flex flex-col items-center text-center">
-              {/* Inscrição Superior */}
-              <div className="w-full border-b border-[#D4AF37]/25 pb-4 mb-5 flex items-center justify-between">
+              {/* Inscrição Superior (Item 47: ATENDIMENTO 100% DIGITAL, sem 27 estados) */}
+              <div className="w-full border-b border-[#D4AF37]/25 pb-4 mb-5 flex items-center justify-center">
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#25D366] animate-pulse" />
-                  <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider font-cinzel">
-                    {np?.badgeStatus || 'Atendimento 100% Digital Ativo'}
+                  <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider font-cinzel">
+                    ATENDIMENTO 100% DIGITAL
                   </span>
                 </div>
-                <span className="text-[10px] text-slate-400 font-medium">{np?.badgeStates || '27 Estados'}</span>
               </div>
 
               {/* Imagem Oficial da Presença Nacional Digital enviada */}
@@ -101,13 +100,13 @@ export const NationalDigitalPresence: React.FC = () => {
                 />
               </div>
 
-              {/* Inscrição Principal Solicitada no Item 30 */}
+              {/* Inscrição Principal Solicitada no Item 30 e 47 */}
               <div className="w-full mt-4 pt-4 border-t border-[#D4AF37]/30 text-center">
                 <p className="font-cinzel text-base sm:text-lg font-bold text-white tracking-wider uppercase">
                   Presença Nacional Digital
                 </p>
-                <p className="text-xs text-[#E5C158] font-medium mt-1">
-                  Atuação Estratégica em Todo o Brasil com Sede em Porto Alegre
+                <p className="text-xs text-[#E5C158] font-bold mt-1">
+                  Atuação Estratégica em todo o Brasil.
                 </p>
               </div>
             </div>

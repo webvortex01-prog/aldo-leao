@@ -17,15 +17,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   const { siteConfig } = useSite();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Ordem rigorosa dos menus solicitada no Item 16:
-  // Home, Presença Digital, Legado, Head Jurídico, Atuação, Serviços (soluções), Planejamento, Publicações, Livros e Contato
+  // Ordem rigorosa dos menus solicitada no Item 44:
+  // Home, Presença Nacional, Legado, Head, Atuação, Soluções, Consulta, Planejamento, Publicações, Livros e Contato
   const navLinks = [
     { label: 'Home', href: '#' },
-    { label: 'Presença Digital', href: '#presenca-nacional' },
+    { label: 'Presença Nacional', href: '#presenca-nacional' },
     { label: 'Legado', href: '#legado' },
-    { label: 'Head Jurídico', href: '#head-juridico' },
+    { label: 'Head', href: '#head-juridico' },
     { label: 'Atuação', href: '#areas-atuacao' },
-    { label: 'Serviços', href: '#solucoes-excelencia' },
+    { label: 'Soluções', href: '#solucoes-excelencia' },
+    { label: 'Consulta', href: '#consulta-digital' },
     { label: 'Planejamento', href: '#holding-familiar' },
     { label: 'Publicações', href: '#publicacoes' },
     { label: 'Livros', href: '#livros' },
@@ -54,17 +55,29 @@ export const Navbar: React.FC<NavbarProps> = ({
     <>
       <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#D4AF37]/25 bg-[#050B14]/95 backdrop-blur-md shadow-xl transition-all duration-300">
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
-        {/* Zone 1: Logomarca Oficial (Inteira, sem corte) */}
+        {/* Zone 1: Identidade Visual com Imagem do Logo Oficial Inteiro (Sem Cortes) */}
         <a 
           href="#" 
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className="shrink min-w-0 transition-opacity hover:opacity-95 flex items-center" 
+          className="shrink-0 transition-opacity hover:opacity-95 flex items-center py-1 group" 
           aria-label="Aldo Leão Advocacia Estratégica"
         >
-          <Logo size="md" />
+          <img
+            src={siteConfig?.navbar?.logoImageUrl || '/img/logo.png'}
+            alt="Aldo Leão Advocacia Estratégica"
+            className="h-11 sm:h-14 md:h-16 w-auto max-h-full max-w-[200px] sm:max-w-[280px] object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.45)] transition-transform duration-200 group-hover:scale-[1.02]"
+            onError={(e) => {
+              const el = e.currentTarget as HTMLImageElement;
+              if (!el.src.includes('logo-oficial.png')) {
+                el.src = '/img/logo-oficial.png';
+              } else if (!el.src.includes('logo.jpg')) {
+                el.src = '/img/logo.jpg';
+              }
+            }}
+          />
         </a>
 
         {/* Zone 2: Navigation Links seguindo estritamente a ordem do Item 16 (Desktop XL) */}
