@@ -71,17 +71,17 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <button
                 onClick={onOpenConsultation}
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
+                className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
               >
                 <span>{dc?.btnSchedule || 'AGENDAR CONSULTA VIRTUAL'}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
 
               <button
                 onClick={handleWhatsApp}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-black bg-[#25D366] hover:bg-[#20ba59] transition-all cursor-pointer shadow-md"
+                className="btn-gold-luxury group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-black bg-[#25D366] hover:bg-[#20ba59] transition-all cursor-pointer shadow-[0_0_20px_rgba(37,211,102,0.35)]"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                 <span>{dc?.btnWhatsApp || 'Agendar pelo WhatsApp'}</span>
               </button>
             </div>

@@ -20,6 +20,7 @@ import { useSite } from '../context/SiteContext';
 
 interface AcademiaLeaoSectionProps {
   onOpenConsultation?: (topic?: string) => void;
+  onBackToSite?: () => void;
 }
 
 interface LecturePhoto {
@@ -32,9 +33,13 @@ interface LecturePhoto {
   badge: string;
 }
 
-export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpenConsultation }) => {
+export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpenConsultation, onBackToSite }) => {
   const { siteConfig } = useSite();
   const [selectedPhoto, setSelectedPhoto] = useState<LecturePhoto | null>(null);
+
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
 
   const handleWhatsAppLecture = (topic?: string) => {
     const phone = siteConfig.contact.whatsappNumber || '5551998088998';
@@ -137,9 +142,14 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
         <div className="mb-8">
           <button
             onClick={() => {
-              const el = document.getElementById('solucoes-excelencia');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-              else window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (onBackToSite) {
+                onBackToSite();
+                window.scrollTo({ top: 0, behavior: 'instant' });
+              } else {
+                const el = document.getElementById('solucoes-excelencia');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-xs font-semibold text-[#F6E27A] hover:bg-[#1A365D] hover:text-white transition-all cursor-pointer shadow"
           >

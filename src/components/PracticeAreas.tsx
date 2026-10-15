@@ -22,7 +22,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       title: 'Planejamento Patrimonial 4.0',
       subtitle: 'Proteção Patrimonial e Empresarial',
       description: 'Estruturamos soluções jurídicas avançadas e personalizadas para proteger, organizar e perpetuar patrimônios e empresas por meio do ecossistema de Holding Familiar, governança, planejamento sucessório e inteligência jurídica estratégica.',
-      badge: 'HOLDING FAMILIAR',
+      badge: '01',
       isHoldingLandingLink: true
     },
     {
@@ -31,7 +31,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       title: 'Direito Imobiliário',
       subtitle: 'GESTÃO JURÍDICA IMOBILIÁRIA',
       description: 'Atuação especializada e estratégica em due diligence, contratos, distratos, investimentos imobiliários, regularização de imóveis, incorporação e proteção patrimonial, proporcionando máxima segurança às operações.',
-      badge: 'Imóveis'
+      badge: '02'
     },
     {
       id: 'empresarial',
@@ -39,7 +39,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       title: 'Direito Empresarial',
       subtitle: 'GESTÃO JURÍDICA EMPRESARIAL',
       description: 'Soluções jurídicas empresariais estratégicas voltadas à governança corporativa, estruturação societária, prevenção de riscos, compliance, conformidade normativa e fortalecimento da segurança jurídica dos negócios.',
-      badge: 'EMPRESARIAL'
+      badge: '03'
     },
     {
       id: 'civil',
@@ -47,7 +47,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       title: 'Direito Civil',
       subtitle: 'GESTÃO DAS RELAÇÕES CÍVEIS',
       description: 'Assessoria jurídica e advocacia estratégica em contratos de alta complexidade, distratos, responsabilidade civil, obrigações, Direito de Família e Sucessões, com foco na prevenção, segurança jurídica e perpetuação patrimonial.',
-      badge: 'CIVIL'
+      badge: '04'
     },
     {
       id: 'consumo',
@@ -55,7 +55,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
       title: 'Relações de Consumo',
       subtitle: 'Compliance Consumerista & Mitigação de Riscos',
       description: 'Desenvolvimento de estratégias preventivas em compliance consumerista, mitigação de riscos, prevenção de prejuízos financeiros (multas, indenizações) e adequação rigorosa das relações de consumo para empresas.',
-      badge: 'GESTÃO CONSUMERISTA'
+      badge: '05'
     }
   ];
 
@@ -121,8 +121,8 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                     <div className="w-10 h-10 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] group-hover:scale-110 transition-transform">
                       <Scale className="w-5 h-5 text-[#E5C158]" />
                     </div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#E5C158]">
-                      {area.badge}
+                    <span className="font-cinzel text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E5C158] tabular-nums">
+                      {area.number || (index === 0 ? '01' : index === 1 ? '02' : index === 2 ? '03' : index === 3 ? '04' : '05')}
                     </span>
                   </div>
 
@@ -144,7 +144,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                 <div className="pt-4 border-t border-[#D4AF37]/15 flex items-center justify-between">
                   <span className="text-xs font-bold text-[#F6E27A] group-hover:underline inline-flex items-center gap-1.5">
                     <span>SAIBA MAIS</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37] group-hover:translate-x-1.5 transition-transform duration-300" />
                   </span>
                 </div>
               </div>
@@ -197,9 +197,9 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                 <div className="pt-2">
                   <button
                     onClick={() => handleWhatsApp(selectedAreaModal.title)}
-                    className="px-5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                    className="btn-gold-luxury group px-5 py-2.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_18px_rgba(37,211,102,0.4)]"
                   >
-                    <MessageSquare className="w-4 h-4" />
+                    <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                     <span>Fale Conosco</span>
                   </button>
                 </div>

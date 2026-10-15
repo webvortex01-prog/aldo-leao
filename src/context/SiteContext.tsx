@@ -28,7 +28,7 @@ const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
     title: 'Direito Imobiliário',
     subtitle: 'Gestão Jurídica de Ativos Imobiliários',
     description: 'Atuação especializada e estratégica em due diligence, contratos, distratos, investimentos imobiliários, regularização de imóveis, incorporação e proteção patrimonial, proporcionando máxima segurança às operações.',
-    badge: 'Imóveis'
+    badge: '02'
   },
   {
     id: 'empresarial',
@@ -36,7 +36,7 @@ const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
     title: 'Direito Empresarial',
     subtitle: 'Governança Corporativa & Societário',
     description: 'Soluções jurídicas empresariais estratégicas voltadas à governança corporativa, estruturação societária, prevenção de riscos, compliance, conformidade normativa e fortalecimento da segurança jurídica dos negócios.',
-    badge: 'EMPRESARIAL'
+    badge: '03'
   },
   {
     id: 'civil',
@@ -44,7 +44,7 @@ const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
     title: 'Direito Civil',
     subtitle: 'Contratos Estratégicos, Família e Sucessões.',
     description: 'Assessoria jurídica e advocacia estratégica em contratos de alta complexidade, distratos, responsabilidade civil, obrigações, Direito de Família e Sucessões, com foco na prevenção, segurança jurídica e perpetuação patrimonial.',
-    badge: 'Direito Civil'
+    badge: '04'
   },
   {
     id: 'consumo',
@@ -52,7 +52,7 @@ const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
     title: 'Relações de Consumo',
     subtitle: 'Compliance Consumerista & Mitigação de Passivos',
     description: 'Desenvolvimento de estratégias preventivas em compliance consumerista, mitigação de riscos, prevenção de prejuízos financeiros (multas, indenizações) e adequação rigorosa das relações de consumo para empresas.',
-    badge: 'Consumidor'
+    badge: '05'
   }
 ];
 
@@ -838,12 +838,26 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
         contactConfig.cwbPhone = cleanAndFormatPhone(contactConfig.cwbPhone, '(51) 99808-8998');
         contactConfig.whatsappNumber = getCleanWhatsAppDigits(contactConfig.whatsappNumber, '5551998088998');
 
+        const practiceAreas = (parsed.practiceAreas && parsed.practiceAreas.length === 5)
+          ? parsed.practiceAreas.map((pa: any, i: number) => ({
+              ...pa,
+              number: `0${i + 1}`,
+              badge: `0${i + 1}`
+            }))
+          : DEFAULT_PRACTICE_AREAS;
+
+        const digitalBooks = (parsed.digitalBooks && parsed.digitalBooks.length >= 6)
+          ? parsed.digitalBooks
+          : DEFAULT_DIGITAL_BOOKS;
+
         return {
           ...DEFAULT_CONFIG,
           ...parsed,
           navbar: navbarConfig,
           hero: heroConfig,
           contact: contactConfig,
+          practiceAreas,
+          digitalBooks,
           founder: { ...DEFAULT_CONFIG.founder, ...(parsed.founder || {}) },
           slide2: { ...DEFAULT_CONFIG.slide2, ...(parsed.slide2 || {}) },
           nationalPresence: { ...DEFAULT_CONFIG.nationalPresence, ...(parsed.nationalPresence || {}) },

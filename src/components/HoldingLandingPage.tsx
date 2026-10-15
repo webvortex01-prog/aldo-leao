@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -11,7 +11,6 @@ import {
   Clock, 
   Lock
 } from 'lucide-react';
-import { Logo } from './Logo';
 import { UrgentHotlineFloat } from './UrgentHotlineFloat';
 import { useSite } from '../context/SiteContext';
 import { cleanAndFormatPhone } from '../utils/phoneUtils';
@@ -30,6 +29,11 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
   const { siteConfig } = useSite();
   const { contact } = siteConfig;
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  // Garante que a landing page sempre abre no início (topo) conforme Itens 9 e v
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
 
   const handleWhatsApp = () => {
     const text = encodeURIComponent(
@@ -66,7 +70,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       {/* Top Bar for Landing Page */}
       <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#D4AF37]/20 bg-[#050B14]/95 backdrop-blur-md shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <button
               onClick={onBackToSite}
               className="p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/35 text-[#F6E27A] hover:bg-[#0E1F3D] hover:border-[#D4AF37] transition-all flex items-center gap-2 text-xs font-bold uppercase tracking-wider cursor-pointer"
@@ -74,7 +78,14 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
               <ArrowLeft className="w-4 h-4" />
               <span>Voltar</span>
             </button>
-            <Logo size="sm" variant="symbol" />
+            <div className="flex flex-col text-left">
+              <span className="font-cinzel text-xs sm:text-sm font-bold text-[#E5C158] uppercase tracking-wider">
+                ALDO LEÃO
+              </span>
+              <span className="font-cinzel text-[9px] sm:text-[10px] font-black text-white uppercase tracking-wider font-bold">
+                ADVOCACIA ESTRATÉGICA
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -89,10 +100,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
 
             <button
               onClick={handleWhatsApp}
-              className="px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center gap-2 cursor-pointer"
+              className="btn-gold-luxury group px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.3)] flex items-center gap-2 cursor-pointer"
             >
-              <MessageSquare className="w-3.5 h-3.5 fill-current" />
-              <span>Falar com o Dr. Aldo</span>
+              <MessageSquare className="w-3.5 h-3.5 fill-current group-hover:scale-110 transition-transform duration-300" />
+              <span>SAIBA MAIS</span>
             </button>
           </div>
         </div>
@@ -127,15 +138,15 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={handleWhatsApp}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-gold-luxury group w-full sm:w-auto px-8 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>CONSULTA JURÍDICA DIGITAL</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </button>
 
               <a
                 href="#tabela-comparativa"
-                className="w-full sm:w-auto px-6 py-4 rounded-xl text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-[#F6E27A] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-secondary-luxury w-full sm:w-auto px-6 py-4 rounded-xl text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Ver Comparativo de Custos</span>
               </a>
@@ -226,7 +237,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 ESTUDO COMPARATIVO DE CUSTOS
               </span>
               <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">
-                INVENTÁRIO x HOLDING FAMILIAR
+                CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 mt-2 font-sans-body">
                 A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.
@@ -237,7 +248,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
               <table className="w-full text-xs sm:text-sm text-left border-collapse">
                 <thead>
                   <tr className="border-b border-[#D4AF37]/40 text-white font-cinzel">
-                    <th className="py-3.5 px-4 uppercase tracking-wider text-slate-300">Despesa Sucessória</th>
+                    <th className="py-3.5 px-4 uppercase tracking-wider text-slate-300">DESPESA</th>
                     <th className="py-3.5 px-4 text-center bg-red-950/40 border-x border-[#D4AF37]/20 uppercase tracking-wider text-red-300">
                       Processo de Inventário
                     </th>
@@ -304,7 +315,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   <tr className="border-t-2 border-[#D4AF37]/50 font-bold text-sm">
                     <td className="py-4 px-4 text-white uppercase font-cinzel text-base">Custo Total</td>
                     <td className="py-4 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20 text-base">
-                      R$ 297.000,00
+                      <div>R$ 297.000,00</div>
+                      <div className="flex justify-end mt-1 pr-2">
+                        <ArrowRight className="w-4 h-4 text-white inline-block" />
+                      </div>
                     </td>
                     <td className="py-4 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-lg">
                       R$ 133.000,00
@@ -343,15 +357,15 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={handleWhatsApp}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg cursor-pointer"
+                className="btn-gold-luxury group w-full sm:w-auto px-8 py-3.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(2,132,199,0.4)] cursor-pointer"
               >
                 <span>CONSULTA JURÍDICA DIGITAL</span>
               </button>
               <button
                 onClick={handleWhatsApp}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-gold-luxury group w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(37,211,102,0.4)] flex items-center justify-center gap-2 cursor-pointer"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                 <span>AGENDAR PELO WHATSAPP</span>
               </button>
             </div>
@@ -411,15 +425,15 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <button
                 onClick={handleWhatsApp}
-                className="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow cursor-pointer whitespace-nowrap"
+                className="btn-gold-luxury group px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(2,132,199,0.35)] cursor-pointer whitespace-nowrap"
               >
                 <span>AGENDE A SUA CONSULTA DIGITAL</span>
               </button>
               <button
                 onClick={handleWhatsApp}
-                className="px-6 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black font-bold text-xs uppercase tracking-wider transition-colors shadow flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
+                className="btn-gold-luxury group px-6 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(37,211,102,0.35)] flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap"
               >
-                <MessageSquare className="w-3.5 h-3.5" />
+                <MessageSquare className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-300" />
                 <span>AGENDAR PELO WHATSAPP</span>
               </button>
             </div>
@@ -430,10 +444,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       {/* Footer of Landing Page */}
       <footer className="bg-[#040810] border-t border-[#D4AF37]/20 py-10 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 space-y-4">
-          <Logo size="sm" />
+          <p className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+            © 2026 ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS AUTORAIS RESERVADOS
+          </p>
           <p className="max-w-xl mx-auto text-slate-400 text-xs">
-            ALDO LEÃO ADVOCACIA ESTRATÉGICA · Tradição Jurídica Centenária Desde 1908
-            <br />
             {contact.addressPortoAlegre}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-[#E5C158]">

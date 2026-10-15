@@ -46,19 +46,19 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentSlide(0)}
-              className={`h-2 rounded-full transition-all cursor-pointer ${
+              className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
                 currentSlide === 0
-                  ? 'w-10 bg-gradient-to-r from-[#F6E27A] to-[#D4AF37]'
-                  : 'w-2.5 bg-slate-700 hover:bg-slate-500'
+                  ? 'w-12 bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.6)]'
+                  : 'w-3 bg-slate-700/80 hover:bg-slate-500'
               }`}
               aria-label="Slide 1 - Tradição Jurídica Desde 1908"
             />
             <button
               onClick={() => setCurrentSlide(1)}
-              className={`h-2 rounded-full transition-all cursor-pointer ${
+              className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
                 currentSlide === 1
-                  ? 'w-10 bg-gradient-to-r from-[#F6E27A] to-[#D4AF37]'
-                  : 'w-2.5 bg-slate-700 hover:bg-slate-500'
+                  ? 'w-12 bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.6)]'
+                  : 'w-3 bg-slate-700/80 hover:bg-slate-500'
               }`}
               aria-label="Slide 2 - Planejamento Patrimonial 4.0"
             />
@@ -67,101 +67,104 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentSlide((prev) => (prev === 0 ? 1 : 0))}
-              className="p-2 rounded-full bg-[#0A1730] border border-[#D4AF37]/35 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37] transition-all cursor-pointer"
+              className="p-2.5 rounded-full bg-[#0A1730] border border-[#D4AF37]/40 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37] hover:scale-110 active:scale-95 transition-all duration-300 shadow-md cursor-pointer group"
               aria-label="Slide anterior"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
             </button>
             <button
               onClick={() => setCurrentSlide((prev) => (prev === 0 ? 1 : 0))}
-              className="p-2 rounded-full bg-[#0A1730] border border-[#D4AF37]/35 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37] transition-all cursor-pointer"
+              className="p-2.5 rounded-full bg-[#0A1730] border border-[#D4AF37]/40 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37] hover:scale-110 active:scale-95 transition-all duration-300 shadow-md cursor-pointer group"
               aria-label="Próximo slide"
             >
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
         </div>
 
-        {/* SLIDE 1: Tradição Jurídica Desde 1908 */}
-        {currentSlide === 0 && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center animate-fadeIn">
-            <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
-              <div className="mb-4">
-                <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
-                  ALDO LEÃO <strong className="font-black text-white">ADVOCACIA ESTRATÉGICA</strong>
-                </span>
-              </div>
+        {/* Animated Slides Container */}
+        <div className="relative min-h-[580px] sm:min-h-[520px] lg:min-h-[460px]">
+          {/* SLIDE 1: Tradição Jurídica Desde 1908 */}
+          <div
+            className={`w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-all duration-700 ease-in-out ${
+              currentSlide === 0
+                ? 'opacity-100 translate-y-0 scale-100 relative z-10 pointer-events-auto'
+                : 'opacity-0 translate-y-4 scale-[0.99] absolute inset-0 pointer-events-none z-0'
+            }`}
+          >
+                <div className="lg:col-span-7 flex flex-col justify-center text-left">
+                  {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
+                  <div className="mb-4">
+                    <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
+                      ALDO LEÃO <strong className="font-black text-white">ADVOCACIA ESTRATÉGICA</strong>
+                    </span>
+                  </div>
 
-              {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
-              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance]">
-                {siteConfig.hero.titlePart1 || 'TRADIÇÃO JURÍDICA'}{' '}
-                <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
-              </h1>
+                  {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
+                  <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance]">
+                    {siteConfig.hero.titlePart1 || 'TRADIÇÃO JURÍDICA'}{' '}
+                    <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
+                  </h1>
 
-              {/* Descrição */}
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light whitespace-pre-line">
-                {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
-              </p>
-
-              {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
-              <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md">
-                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  {siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
-                </p>
-              </div>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
-                <button
-                  onClick={handleWhatsAppSlide1}
-                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.35)] cursor-pointer"
-                >
-                  <span>{siteConfig.hero.cta1Text || 'AGENDAR CONSULTA DIGITAL'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={onGoToLandingPage}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-semibold tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] hover:bg-[#0E1F3D] hover:text-[#F6E27A] hover:border-[#D4AF37] transition-all cursor-pointer"
-                >
-                  <span>{siteConfig.hero.cta2Text || 'CONHEÇA O PLANEJAMENTO 4.0'}</span>
-                </button>
-              </div>
-
-              {/* Box 1: ADVOCACIA ESTRATÉGICA (Box 2 excluído conforme Item 3) */}
-              <div className="w-full">
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left">
-                  <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
-                    Excelência Jurídica Centenária
-                  </span>
-                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
-                    ADVOCACIA ESTRATÉGICA
-                  </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body">
-                    Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em
-                    uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.
+                  {/* Descrição */}
+                  <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light whitespace-pre-line">
+                    {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
                   </p>
-                </div>
-              </div>
-            </div>
 
-            {/* Right Column Visual (Foto Dr. Aldo Leão / Slide 1) */}
+                  {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
+                  <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive">
+                    <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
+                      {siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
+                    </p>
+                  </div>
+
+                  {/* CTAs */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
+                    <button
+                      onClick={handleWhatsAppSlide1}
+                      className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.35)]"
+                    >
+                      <span>{siteConfig.hero.cta1Text || 'AGENDAR CONSULTA DIGITAL'}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </button>
+
+                    <button
+                      onClick={onGoToLandingPage}
+                      className="btn-secondary-luxury inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-semibold tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] cursor-pointer"
+                    >
+                      <span>{siteConfig.hero.cta2Text || 'CONHEÇA O PLANEJAMENTO 4.0'}</span>
+                    </button>
+                  </div>
+
+                  {/* Box 1: ADVOCACIA ESTRATÉGICA (Box 2 excluído conforme Item 3) */}
+                  <div className="w-full">
+                    <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left card-hover-interactive">
+                      <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
+                        Excelência Jurídica Centenária
+                      </span>
+                      <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
+                        ADVOCACIA ESTRATÉGICA
+                      </h4>
+                      <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body">
+                        Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em
+                        uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+            {/* Right Column Visual (Logomarca Oficial do Leão - Item 2) */}
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-md lg:max-w-none">
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#D4AF37]/40 via-[#F6E27A]/20 to-transparent rounded-2xl blur-lg opacity-70" />
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-6">
                     <img
-                      src={
-                        siteConfig.hero.heroImageUrl && !siteConfig.hero.heroImageUrl.includes('logo')
-                          ? siteConfig.hero.heroImageUrl
-                          : '/img/dr-aldo-1.jpg'
-                      }
-                      alt="Dr. Aldo Leão - Advocacia Estratégica"
-                      className="w-full h-full object-cover object-top filter brightness-95 contrast-105"
+                      src="/img/logo.jpg"
+                      alt="Aldo Leão Advocacia Estratégica"
+                      className="w-full h-full object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)]"
                       onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-portrait.jpg';
+                        (e.currentTarget as HTMLImageElement).src = '/img/logo.png';
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-80" />
@@ -170,10 +173,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                         <Scale className="w-5 h-5 text-[#E5C158]" />
                         <div>
                           <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                            Dr. Aldo Leão · Desde 1986
+                            ALDO LEÃO ADVOCACIA ESTRATÉGICA
                           </p>
-                          <p className="text-[10px] text-slate-300">
-                            Advocacia Estratégica · Três Gerações
+                          <p className="text-[10px] text-[#E5C158] font-bold">
+                            Desde 1908 · Tradição Jurídica Centenária
                           </p>
                         </div>
                       </div>
@@ -186,111 +189,117 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
           </div>
-        )}
 
-        {/* SLIDE 2: Planejamento Patrimonial 4.0 */}
-        {currentSlide === 1 && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center animate-fadeIn">
+          {/* SLIDE 2: Planejamento Patrimonial 4.0 */}
+          <div
+            className={`w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-all duration-700 ease-in-out ${
+              currentSlide === 1
+                ? 'opacity-100 translate-y-0 scale-100 relative z-10 pointer-events-auto'
+                : 'opacity-0 translate-y-4 scale-[0.99] absolute inset-0 pointer-events-none z-0'
+            }`}
+          >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              {/* Texto acima do título: HOLDING FAMILIAR (Item 3) */}
-              <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
-                <span>{siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}</span>
-              </div>
+                  {/* Texto acima do título com letra 'A' em branco (Item III) */}
+                  <div className="flex items-center gap-1.5 text-xs uppercase tracking-[0.24em] font-bold mb-3">
+                    <span className="text-white">A</span>
+                    <span className="text-[#E5C158]">{siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}</span>
+                  </div>
 
-              {/* Título: PLANEJAMENTO PATRIMONIAL 4.0 100% em dourado (Item 3, 25 e 62) */}
-              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight gold-text-gradient leading-[1.12] mb-4 [text-wrap:balance]">
-                {siteConfig.slide2?.titleHighlight || 'PLANEJAMENTO PATRIMONIAL 4.0'}
-              </h1>
+                  {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Itens 3 e I) */}
+                  <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-4 [text-wrap:balance]">
+                    <span className="text-white">PLANEJAMENTO </span>
+                    <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
+                  </h1>
 
-              {/* Texto principal do Slide 2 conforme Item 27 */}
-              <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-                <p>
-                  {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
-                </p>
-                <p>
-                  <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
-                </p>
-                <p>
-                  {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
-                </p>
-                <p>
-                  {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
-                </p>
-              </div>
+                  {/* Texto principal do Slide 2 conforme Item 27 e Item III */}
+                  <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
+                    <p>
+                      {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
+                    </p>
+                    <p>
+                      <span className="text-white font-medium">A </span><strong className="text-[#F6E27A] font-semibold">Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
+                    </p>
+                    <p>
+                      {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
+                    </p>
+                    <p>
+                      {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
+                    </p>
+                  </div>
 
-              {/* Box do Slide 2 conforme Item 3 e 27 */}
-              <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md">
-                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
-                </p>
-              </div>
+                  {/* Box do Slide 2 conforme Item 3 e 27 */}
+                  <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive">
+                    <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
+                      {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
+                    </p>
+                  </div>
 
-              {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
-                <button
-                  onClick={onGoToLandingPage}
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_25px_rgba(212,175,55,0.4)] cursor-pointer"
-                >
-                  <span>{siteConfig.slide2?.buttonText || 'Planejamento Patrimonial 4.0'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right Column Slide 2: Card de Custos e Box com Logo do Leão (Item 28, 29 e 45) */}
-            <div className="lg:col-span-5 relative flex flex-col gap-5 justify-center">
-              {/* Card Comparativo de Custos (Item 28 e 45) */}
-              <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left">
-                <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
-                  <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
-                    COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
-                  </h3>
+                  {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
+                    <button
+                      onClick={onGoToLandingPage}
+                      className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.4)]"
+                    >
+                      <span>{siteConfig.slide2?.buttonText || 'Planejamento Patrimonial 4.0'}</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </button>
+                  </div>
                 </div>
 
-                <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
-                  Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?
-                </p>
-
-                <button
-                  onClick={() => setIsCostModalOpen(true)}
-                  className="w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all text-center cursor-pointer shadow-lg"
-                >
-                  VER OS CUSTOS
-                </button>
-              </div>
-
-              {/* Item 29 e 45: Box com a logomarca do leão e na parte inferior box da balança com textos exatos */}
-              <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
-                <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-4">
-                  <img
-                    src={siteConfig.hero.heroImageUrl || '/img/logo.jpg'}
-                    alt="Aldo Leão Advocacia Estratégica"
-                    className="w-full h-full object-contain object-center"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = '/img/logo-symbol.png';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-85" />
-                  
-                  {/* Banner inferior com Ícone da Balança e textos do Item 45 */}
-                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/50 flex items-center gap-3 text-left">
-                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
-                      <Scale className="w-4 h-4 text-[#E5C158]" />
+                {/* Right Column Slide 2: Card de Custos e Box com Logo do Leão (Item 28, 29 e 45) */}
+                <div className="lg:col-span-5 relative flex flex-col gap-5 justify-center">
+                  {/* Card Comparativo de Custos (Item 28 e 45) */}
+                  <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left card-hover-interactive">
+                    <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
+                      <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
+                        COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
+                      </h3>
                     </div>
-                    <div className="min-w-0">
-                      <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
-                        O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
-                      </p>
-                      <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
-                        VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
-                      </p>
-                    </div>
+
+                    <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
+                      Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?
+                    </p>
+
+                    <button
+                      onClick={() => setIsCostModalOpen(true)}
+                      className="btn-gold-luxury w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-center cursor-pointer shadow-lg"
+                    >
+                      VER OS CUSTOS
+                    </button>
                   </div>
+
+                  {/* Item 29 e 45: Box com a logomarca do leão e na parte inferior box da balança com textos exatos */}
+                  <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive">
+                    <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-4">
+                      <img
+                        src={siteConfig.hero.heroImageUrl || '/img/logo.jpg'}
+                        alt="Aldo Leão Advocacia Estratégica"
+                        className="w-full h-full object-contain object-center"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = '/img/logo-symbol.png';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-85" />
+                      
+                      {/* Banner inferior com Ícone da Balança e textos do Item 45 */}
+                      <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/50 flex items-center gap-3 text-left">
+                        <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
+                          <Scale className="w-4 h-4 text-[#E5C158]" />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
+                            O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
+                          </p>
+                          <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
+                            VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
+                          </p>
+                        </div>
+                      </div>
                 </div>
               </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
 
       {/* Modal Tabela Comparativa de Custos Completa (Inventário x Holding Familiar) */}

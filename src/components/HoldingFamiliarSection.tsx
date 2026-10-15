@@ -53,7 +53,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
 
         {/* What is and Benefits Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-16">
-          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left">
+          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left card-hover-interactive">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
                 {hf?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
@@ -78,7 +78,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           </div>
 
           {/* Benefits Checkmarks */}
-          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between text-left">
+          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between text-left card-hover-interactive">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
                 VANTAGENS EXCLUSIVAS
@@ -101,20 +101,20 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <span className="text-xs text-slate-400">Estruturação personalizada para cada família.</span>
               <button
                 onClick={onGoToLandingPage}
-                className="text-xs font-bold text-[#F6E27A] hover:underline inline-flex items-center gap-1 cursor-pointer"
+                className="text-xs font-bold text-[#F6E27A] hover:underline inline-flex items-center gap-1 cursor-pointer group"
               >
                 <span>Saiba mais</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
         </div>
 
         {/* TABELA COMPARATIVA DE CUSTOS (INVENTÁRIO x HOLDING FAMILIAR) - Item 10 e Item 40 (coluna direita não cortada) */}
-        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12">
+        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12 card-hover-interactive">
           <div className="text-center max-w-3xl mx-auto mb-8">
             <h3 className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase">
-              {hf?.tableTitle || 'INVENTÁRIO x HOLDING FAMILIAR'}
+              CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 mt-2 font-light">
               {hf?.tableSubtitle || `A título de exemplo, consideramos um patrimônio adquirido por ${s2?.sampleAcquisition || 'R$ 1.000.000,00'}, com valor de mercado atual de ${s2?.sampleMarket || 'R$ 1.500.000,00'}, tem um ganho de capital de ${s2?.sampleCapitalGain || 'R$ 500.000,00'}.`}
@@ -126,7 +126,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             <table className="w-full min-w-[540px] text-xs sm:text-sm text-left border-collapse">
               <thead>
                 <tr className="border-b border-[#D4AF37]/30 text-white font-cinzel">
-                  <th className="py-3.5 px-4 uppercase tracking-wider text-slate-200">Despesa Sucessória</th>
+                  <th className="py-3.5 px-4 uppercase tracking-wider text-slate-200">DESPESA</th>
                   <th className="py-3.5 px-4 text-center bg-red-950/40 border-x border-[#D4AF37]/20 uppercase tracking-wider text-red-300">
                     Processo de Inventário
                   </th>
@@ -168,7 +168,10 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
                     Custo Total Estimado
                   </td>
                   <td className="py-4 px-4 text-center text-red-400 border-x border-[#D4AF37]/20 text-sm sm:text-base">
-                    {s2?.inventoryTotal || 'R$ 297.000,00'}
+                    <div>{s2?.inventoryTotal || 'R$ 297.000,00'}</div>
+                    <div className="flex justify-end mt-1 pr-2">
+                      <ArrowRight className="w-4 h-4 text-white inline-block" />
+                    </div>
                   </td>
                   <td className="py-4 px-4 text-center text-[#25D366] text-sm sm:text-base">
                     {s2?.holdingTotal || 'R$ 133.000,00'}
@@ -201,10 +204,10 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           <div className="mt-6 text-center">
             <button
               onClick={onGoToLandingPage}
-              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all shadow-lg cursor-pointer"
+              className="btn-gold-luxury group inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-lg"
             >
               <span>Saiba mais</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
         </div>

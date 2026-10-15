@@ -20,9 +20,10 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 import { AdminAuthModal } from './components/admin/AdminAuthModal';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
+import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
 
 function AppContent() {
-  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'holding-landing'>('site');
+  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'holding-landing' | 'academia'>('site');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isAdminAuthOpen, setIsAdminAuthOpen] = useState(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
@@ -58,6 +59,24 @@ function AppContent() {
         onOpenAdmin={handleOpenAdmin}
         onOpenConsultation={() => handleOpenConsultation()}
       />
+    );
+  }
+
+  // View: Página Completa da ACADEMIA LEÃO FERREIRA (Item VIII)
+  if (currentView === 'academia') {
+    return (
+      <div className="min-h-screen bg-[#050B14] text-slate-100 flex flex-col font-sans-body selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
+        <AcademiaLeaoSection 
+          onBackToSite={() => setCurrentView('site')}
+          onOpenConsultation={(topic) => handleOpenConsultation(topic || 'Academia Leão Ferreira')}
+        />
+        <Footer 
+          onOpenAdmin={handleOpenAdmin} 
+          onOpenTutorial={() => setIsTutorialOpen(true)}
+          onOpenLandingPage={() => setCurrentView('holding-landing')}
+        />
+        <UrgentHotlineFloat onOpenConsultation={() => handleOpenConsultation()} />
+      </div>
     );
   }
 
@@ -98,10 +117,11 @@ function AppContent() {
           onOpenConsultation={() => handleOpenConsultation()}
         />
 
-        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8 e Item 37 - Academia Leão abre via modal) */}
+        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8, 37 e Item VIII - abre página da Academia Leão Ferreira) */}
         <ExcellenceSolutions
           onGoToLandingPage={() => setCurrentView('holding-landing')}
           onOpenConsultation={() => handleOpenConsultation()}
+          onGoToAcademia={() => setCurrentView('academia')}
         />
 
         {/* 7. Página AGENDE A SUA CONSULTA DIGITAL (Item 8 e 9 do PDF) */}

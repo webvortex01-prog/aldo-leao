@@ -6,10 +6,12 @@ import { useSite } from '../context/SiteContext';
 interface ExcellenceSolutionsProps {
   onGoToLandingPage: () => void;
   onOpenConsultation: () => void;
+  onGoToAcademia?: () => void;
 }
 
 export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
-  onGoToLandingPage
+  onGoToLandingPage,
+  onGoToAcademia
 }) => {
   const { siteConfig } = useSite();
   const [selectedSolution, setSelectedSolution] = useState<ExcellenceSolution | null>(null);
@@ -25,9 +27,13 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
       } else {
         onGoToLandingPage();
       }
-    } else if (sol.id === 'academia-leao-ferreira' || sol.title.toLowerCase().includes('academia')) {
-      // Item 37: abre modal tela ACADEMIA LEÃO FERREIRA
-      setIsAcademiaModalOpen(true);
+    } else if (sol.id === 'academia-leao-ferreira' || sol.title.toLowerCase().includes('academia') || sol.number === '14') {
+      // Item VIII: ao ser clicado em "QUERO SABER MAIS" abre a página da ACADEMIA LEÃO FERREIRA
+      if (onGoToAcademia) {
+        onGoToAcademia();
+      } else {
+        setIsAcademiaModalOpen(true);
+      }
     } else {
       setSelectedSolution(sol);
     }
@@ -111,9 +117,9 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
 
                 {/* Bottom Action: QUERO SABER MAIS */}
                 <div className="pt-3 border-t border-[#D4AF37]/15 flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#F6E27A] group-hover:underline inline-flex items-center gap-1">
+                  <span className="text-xs font-bold text-[#F6E27A] group-hover:underline inline-flex items-center gap-1.5">
                     <span>QUERO SABER MAIS</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37] group-hover:translate-x-1.5 transition-transform duration-300" />
                   </span>
                 </div>
               </div>
@@ -231,9 +237,9 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
             <div className="pt-4 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">
               <button
                 onClick={handleWhatsAppPalestra}
-                className="px-8 py-3.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all cursor-pointer shadow-lg flex items-center justify-center gap-2"
+                className="btn-gold-luxury group px-8 py-3.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider cursor-pointer shadow-lg flex items-center justify-center gap-2"
               >
-                <PhoneCall className="w-4 h-4" />
+                <PhoneCall className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
                 <span>SOLICITAR PALESTRA</span>
               </button>
             </div>

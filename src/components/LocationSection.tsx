@@ -49,12 +49,8 @@ export const LocationSection: React.FC = () => {
   return (
     <section id="contato" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header: Logomarca do leão e Título CONTATO (Item 13 e Item 42) */}
+        {/* Section Header: Título CONTATO (Itens 11 e X) */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="flex justify-center mb-4">
-            <Logo size="md" />
-          </div>
-
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
             <Scale className="w-4 h-4 text-[#F6E27A]" />
             <span>{c?.sectionKicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}</span>
@@ -64,8 +60,8 @@ export const LocationSection: React.FC = () => {
             {c?.sectionTitle || 'CONTATO'}
           </h2>
 
-          {/* Frase inicial em dourado conforme Item 42 */}
-          <p className="text-xs sm:text-sm text-[#F6E27A] font-medium leading-relaxed font-sans-body max-w-2xl mx-auto">
+          {/* O texto que está abaixo do título CONTATO deve ser grafado na cor branca (Item X) */}
+          <p className="text-xs sm:text-sm text-white font-normal leading-relaxed font-sans-body max-w-2xl mx-auto">
             {c?.introGold || 'Escolha o canal de relacionamento com a ALDO LEÃO ADVOCACIA ESTRATÉGICA da sua preferência para o seu atendimento digital em todo o Brasil.'}
           </p>
         </div>
@@ -187,7 +183,7 @@ export const LocationSection: React.FC = () => {
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
               <a
                 href={`mailto:${c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}`}
-                className="w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-semibold hover:bg-[#1A365D] hover:text-white transition-colors flex items-center justify-center gap-1.5"
+                className="btn-secondary-luxury w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-semibold hover:bg-[#1A365D] hover:text-white transition-all flex items-center justify-center gap-1.5"
               >
                 <Mail className="w-3.5 h-3.5" />
                 <span>Enviar E-mail</span>
@@ -197,7 +193,7 @@ export const LocationSection: React.FC = () => {
         </div>
 
         {/* Box WHATSAPP BUSINESS (Item 13 e 42) */}
-        <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left card-hover-interactive">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-[#25D366] text-black flex items-center justify-center shrink-0 shadow-lg">
               <MessageSquare className="w-6 h-6" />
@@ -214,9 +210,9 @@ export const LocationSection: React.FC = () => {
 
           <button
             onClick={() => handleWhatsApp(officialWhatsApp)}
-            className="px-6 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-black text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg shrink-0"
+            className="btn-gold-luxury group px-6 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-black text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(37,211,102,0.4)] shrink-0"
           >
-            <MessageSquare className="w-4 h-4" />
+            <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
             <span>FALAR NO WHATSAPP</span>
           </button>
         </div>
@@ -362,9 +358,9 @@ export const LocationSection: React.FC = () => {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-98 text-[#050B14] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+                  className="btn-gold-luxury group w-full py-3.5 px-4 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-lg"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300" />
                   <span>ENVIAR</span>
                 </button>
               </div>

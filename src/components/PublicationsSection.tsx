@@ -68,31 +68,43 @@ export const PublicationsSection: React.FC = () => {
 
         {/* Filter and Search Bar */}
         <div className="p-4 sm:p-5 rounded-xl bg-[#071122] border border-[#D4AF37]/30 shadow-xl mb-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-          {/* Search Box */}
-          <div className="flex-1 relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Pesquisar publicações (ex: holding, ITCMD, imóveis, sucessão, STJ)..."
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setCurrentPage(1);
-              }}
-              className="w-full pl-10 pr-20 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
-            />
-            {searchTerm && (
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchTerm('');
-                  setCurrentPage(1);
+          {/* Search Box com Botão PESQUISAR (Item VI) */}
+          <div className="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+            <div className="relative flex-1">
+              <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Pesquisar publicações (ex: holding, ITCMD, imóveis, sucessão, STJ)..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setCurrentPage(1);
+                  }
                 }}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
-              >
-                Limpar
-              </button>
-            )}
+                className="w-full pl-10 pr-20 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm('');
+                    setCurrentPage(1);
+                  }}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 px-2 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+                >
+                  Limpar
+                </button>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={() => setCurrentPage(1)}
+              className="btn-gold-luxury group px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] font-black text-xs uppercase tracking-wider shadow-md shrink-0 flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <Search className="w-3.5 h-3.5 group-hover:scale-110 transition-transform duration-300" />
+              <span>PESQUISAR</span>
+            </button>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -142,7 +154,7 @@ export const PublicationsSection: React.FC = () => {
               return (
                 <article
                   key={pub.id}
-                  className="rounded-xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/60 shadow-lg group text-left"
+                  className="rounded-xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:border-[#D4AF37]/60 shadow-lg group text-left card-hover-interactive"
                 >
                   <div>
                     {/* Header Banner */}
@@ -196,7 +208,7 @@ export const PublicationsSection: React.FC = () => {
                       className="text-xs font-bold text-[#F6E27A] group-hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
                       <span>Ler</span>
-                      <ArrowRight className="w-3 h-3 text-[#D4AF37]" />
+                      <ArrowRight className="w-3 h-3 text-[#D4AF37] group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
                   </div>
                 </article>

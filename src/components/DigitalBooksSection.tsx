@@ -118,20 +118,17 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
           </p>
         </div>
 
-        {/* Campo de Busca e Botão Todos os Livros Digitais sem número (Item 12 e 41) */}
-        <div className="max-w-3xl mx-auto mb-12 flex flex-col sm:flex-row items-center gap-4">
-          <div className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shrink-0 w-full sm:w-auto text-center">
-            TODOS OS LIVROS DIGITAIS
-          </div>
-
+        {/* Campo BUSCAR LIVRO..., Botão BUSCAR e Botão TODOS OS LIVROS DIGITAIS (Itens 10 e VII) */}
+        <div className="max-w-4xl mx-auto mb-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          {/* 1. Campo 'BUSCAR LIVRO...' (no lugar onde ficava o botão) */}
           <div className="relative flex-1 w-full">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Buscar livro por título ou área (ex: holding, imóvel, proteção, condomínio, LGPD)..."
+              placeholder="BUSCAR LIVRO... (digite o título ou palavra-chave)"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-20 py-2.5 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#D4AF37]"
+              className="w-full pl-10 pr-20 py-3 rounded-xl bg-[#071122] border border-[#D4AF37]/40 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-[#D4AF37]"
             />
             {searchTerm && (
               <button
@@ -143,6 +140,27 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
               </button>
             )}
           </div>
+
+          {/* 2. Botão 'BUSCAR' para executar a pesquisa */}
+          <button
+            type="button"
+            onClick={() => {}}
+            className="btn-gold-luxury group px-6 py-3 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shrink-0 w-full sm:w-auto text-center cursor-pointer flex items-center justify-center gap-2"
+          >
+            <Search className="w-4 h-4 text-black group-hover:scale-110 transition-transform duration-300" />
+            <span>BUSCAR</span>
+          </button>
+
+          {/* 3. Botão 'TODOS OS LIVROS DIGITAIS' para exibir todos os livros publicados */}
+          <button
+            type="button"
+            onClick={() => setSearchTerm('')}
+            className="btn-secondary-luxury px-5 py-3 rounded-xl bg-[#0A1730] border border-[#D4AF37]/45 text-[#F6E27A] font-bold text-xs uppercase tracking-wider shadow-md shrink-0 w-full sm:w-auto text-center cursor-pointer transition-all flex items-center justify-center gap-1.5"
+            title="Mostrar todos os livros publicados"
+          >
+            <BookOpen className="w-3.5 h-3.5 text-[#E5C158]" />
+            <span>TODOS OS LIVROS DIGITAIS</span>
+          </button>
         </div>
 
         {/* 6 Livros Digitais Grid */}
@@ -219,14 +237,14 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                 <div className="p-5 pt-0 flex flex-col gap-2.5">
                   <button
                     onClick={() => handleOpenForm(book)}
-                    className="w-full py-3 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 text-[#050B14] text-xs font-bold uppercase tracking-wider transition-all text-center cursor-pointer shadow-md"
+                    className="btn-gold-luxury w-full py-3 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider text-center cursor-pointer shadow-md"
                   >
                     Baixar Livro Digital
                   </button>
 
                   <button
                     onClick={() => setSummaryBook(book)}
-                    className="w-full py-2.5 rounded-lg bg-[#0A1730] hover:bg-[#0E1F3D] border border-[#D4AF37]/35 text-[#F6E27A] hover:text-white text-xs font-semibold uppercase tracking-wider transition-all text-center cursor-pointer"
+                    className="btn-secondary-luxury w-full py-2.5 rounded-lg bg-[#0A1730] border border-[#D4AF37]/35 text-[#F6E27A] text-xs font-semibold uppercase tracking-wider text-center cursor-pointer"
                   >
                     VER SUMÁRIO
                   </button>

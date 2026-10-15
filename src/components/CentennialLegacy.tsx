@@ -108,7 +108,7 @@ export const CentennialLegacy: React.FC = () => {
           <div className="mt-12 pt-8 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
             <button
               onClick={() => setHistoryModalOpen(true)}
-              className="px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 transition-all cursor-pointer shadow-md"
+              className="btn-gold-luxury px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-md"
             >
               {cl?.buttonText || 'Saiba Mais'}
             </button>
