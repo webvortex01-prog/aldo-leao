@@ -16,11 +16,11 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isCostModalOpen, setIsCostModalOpen] = useState(false);
 
-  // Auto advance slide every 14 seconds
+  // Auto advance slide every 18 seconds (Item d do dia 15/10/26)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
-    }, 14000);
+    }, 18000);
     return () => clearInterval(timer);
   }, []);
 
@@ -153,9 +153,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                 </div>
 
-            {/* Right Column Visual (Logomarca Oficial do Leão - Item 2) */}
-            <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-full max-w-md lg:max-w-none">
+            {/* Right Column Visual (Logomarca Oficial do Leão - Item b do dia 15/10/26: card abaixo do box da imagem para total visibilidade) */}
+            <div className="lg:col-span-5 relative flex flex-col justify-center">
+              <div className="relative w-full max-w-md lg:max-w-none mx-auto">
                 <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#D4AF37]/40 via-[#F6E27A]/20 to-transparent rounded-2xl blur-lg opacity-70" />
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
                   <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-6">
@@ -167,22 +167,22 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                         (e.currentTarget as HTMLImageElement).src = '/img/logo.png';
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-80" />
-                    <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/40 flex items-center justify-between">
-                      <div className="flex items-center gap-2.5">
-                        <Scale className="w-5 h-5 text-[#E5C158]" />
-                        <div>
-                          <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                            ALDO LEÃO ADVOCACIA ESTRATÉGICA
-                          </p>
-                          <p className="text-[10px] text-[#E5C158] font-bold">
-                            Desde 1908 · Tradição Jurídica Centenária
-                          </p>
-                        </div>
-                      </div>
-                      <span className="font-cinzel text-xs text-[#E5C158] font-bold tabular-nums">
-                        118 Anos
-                      </span>
+                  </div>
+                </div>
+
+                {/* Card logo abaixo do box da logomarca totalmente visível (Item b) */}
+                <div className="mt-3.5 p-3.5 rounded-xl bg-[#070F1E] border border-[#D4AF37]/45 flex items-center justify-between shadow-xl">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
+                      <Scale className="w-4 h-4 text-[#E5C158]" />
+                    </div>
+                    <div>
+                      <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
+                        ALDO LEÃO ADVOCACIA ESTRATÉGICA
+                      </p>
+                      <p className="text-[10px] text-[#E5C158] font-bold">
+                        Excelência Jurídica Desde 1908
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -199,10 +199,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                  {/* Texto acima do título com letra 'A' em branco (Item III) */}
-                  <div className="flex items-center gap-1.5 text-xs uppercase tracking-[0.24em] font-bold mb-3">
-                    <span className="text-white">A</span>
-                    <span className="text-[#E5C158]">{siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}</span>
+                  {/* Texto acima do título: HOLDING FAMILIAR em dourado sem a letra 'A' (Item c do dia 15/10/26) */}
+                  <div className="text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158]">
+                    {siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}
                   </div>
 
                   {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Itens 3 e I) */}
@@ -211,13 +210,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
                   </h1>
 
-                  {/* Texto principal do Slide 2 conforme Item 27 e Item III */}
+                  {/* Texto principal do Slide 2 conforme Item 27 */}
                   <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
                     <p>
                       {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
                     </p>
                     <p>
-                      <span className="text-white font-medium">A </span><strong className="text-[#F6E27A] font-semibold">Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
+                      <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
                     </p>
                     <p>
                       {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
@@ -246,9 +245,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                 </div>
 
-                {/* Right Column Slide 2: Card de Custos e Box com Logo do Leão (Item 28, 29 e 45) */}
-                <div className="lg:col-span-5 relative flex flex-col gap-5 justify-center">
-                  {/* Card Comparativo de Custos (Item 28 e 45) */}
+                {/* Right Column Slide 2: Card de Custos e Foto de Dr. Aldo com 2 pessoas com card abaixo (Item c do dia 15/10/26) */}
+                <div className="lg:col-span-5 relative flex flex-col gap-4 justify-center">
+                  {/* Card Comparativo de Custos */}
                   <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left card-hover-interactive">
                     <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
                       <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
@@ -268,39 +267,38 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     </button>
                   </div>
 
-                  {/* Item 29 e 45: Box com a logomarca do leão e na parte inferior box da balança com textos exatos */}
+                  {/* Foto Dr. Aldo com duas pessoas com card abaixo totalmente visível (Item c) */}
                   <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive">
-                    <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-4">
+                    <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center">
                       <img
-                        src={siteConfig.hero.heroImageUrl || '/img/logo.jpg'}
-                        alt="Aldo Leão Advocacia Estratégica"
-                        className="w-full h-full object-contain object-center"
+                        src="/img/dr-aldo-reuniao.jpg"
+                        alt="Dr. Aldo Leão - Consultoria Estratégica"
+                        className="w-full h-full object-cover object-top"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = '/img/logo-symbol.png';
+                          (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-consultoria.jpg';
                         }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-transparent opacity-85" />
-                      
-                      {/* Banner inferior com Ícone da Balança e textos do Item 45 */}
-                      <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#070F1E]/95 backdrop-blur-md border border-[#D4AF37]/50 flex items-center gap-3 text-left">
-                        <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
-                          <Scale className="w-4 h-4 text-[#E5C158]" />
-                        </div>
-                        <div className="min-w-0">
-                          <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
-                            O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
-                          </p>
-                          <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
-                            VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
-                          </p>
-                        </div>
-                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card com a balança e os textos logo abaixo do box da foto (Item c) */}
+                  <div className="p-3.5 rounded-xl bg-[#070F1E] border border-[#D4AF37]/50 flex items-center gap-3 text-left shadow-xl">
+                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
+                      <Scale className="w-4 h-4 text-[#E5C158]" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
+                        O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
+                      </p>
+                      <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
+                        VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
-      </div>
 
       {/* Modal Tabela Comparativa de Custos Completa (Inventário x Holding Familiar) */}
       {isCostModalOpen && (
@@ -340,45 +338,105 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 A título de exemplo, consideramos um patrimônio adquirido por <strong>{siteConfig.slide2?.sampleAcquisition || 'R$ 1.000.000,00'}</strong>, com valor de mercado atual de <strong>{siteConfig.slide2?.sampleMarket || 'R$ 1.500.000,00'}</strong>, tem um ganho de capital de <strong>{siteConfig.slide2?.sampleCapitalGain || 'R$ 500.000,00'}</strong>:
               </p>
 
-              <div className="overflow-x-auto rounded-lg border border-[#D4AF37]/30">
-                <table className="w-full text-xs text-left">
-                  <thead className="bg-[#0E1F3D] text-[#F6E27A] border-b border-[#D4AF37]/30">
+              <div className="overflow-x-auto rounded-lg border border-[#D4AF37]/35">
+                <table className="w-full text-xs sm:text-sm text-left border-collapse">
+                  <thead className="bg-[#0E1F3D] text-white font-cinzel border-b border-[#D4AF37]/30">
                     <tr>
-                      <th className="p-3">Etapa de Despesa</th>
-                      <th className="p-3 text-red-400">Processo de Inventário</th>
-                      <th className="p-3 text-[#25D366]">Holding Familiar 4.0</th>
+                      <th className="py-3 px-4 uppercase tracking-wider text-slate-300">DESPESA</th>
+                      <th className="py-3 px-4 text-center bg-red-950/40 border-x border-[#D4AF37]/20 uppercase tracking-wider text-red-300">
+                        Processo de Inventário
+                      </th>
+                      <th className="py-3 px-4 text-center bg-[#D4AF37]/20 uppercase tracking-wider text-[#F6E27A] font-bold">
+                        Holding Familiar 4.0
+                      </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#D4AF37]/15 text-slate-300 bg-[#050B14]">
+                  <tbody className="divide-y divide-slate-800 font-sans-body bg-[#050B14]">
                     <tr>
-                      <td className="p-3 font-medium">ITCMD (Alíquota Tributária)</td>
-                      <td className="p-3 text-red-300">R$ 120.000,00 (8% sobre valor de mercado)</td>
-                      <td className="p-3 text-[#25D366]">R$ 40.000,00 (4% sobre valor histórico IRPF)</td>
+                      <td className="py-3 px-4 text-slate-200">ITCD / ITCMD</td>
+                      <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                        R$ 75.000,00 (5%)
+                      </td>
+                      <td className="py-3 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
+                        R$ 60.000,00 (4%)
+                      </td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-medium">Custas Judiciais / Cartorárias</td>
-                      <td className="p-3 text-red-300">R$ 27.000,00</td>
-                      <td className="p-3 text-[#25D366]">R$ 8.000,00</td>
+                      <td className="py-3 px-4 text-slate-200">Honorários Advocatícios</td>
+                      <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                        R$ 120.000,00 (8%)
+                      </td>
+                      <td className="py-3 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
+                        R$ 70.000,00
+                      </td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-medium">Honorários Advocatícios</td>
-                      <td className="p-3 text-red-300">R$ 150.000,00 (10% sobre R$ 1,5M)</td>
-                      <td className="p-3 text-[#25D366]">R$ 85.000,00 (Estruturação Técnica)</td>
+                      <td className="py-3 px-4 text-slate-200">Custas de Cartório</td>
+                      <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                        R$ 12.000,00
+                      </td>
+                      <td className="py-3 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
+                        R$ 0,00
+                      </td>
                     </tr>
-                    <tr className="bg-[#0E1F3D]/60 font-bold">
-                      <td className="p-3 text-white">Custo Total Estimado</td>
-                      <td className="p-3 text-red-400">{siteConfig.slide2?.inventoryTotal || 'R$ 297.000,00'}</td>
-                      <td className="p-3 text-[#25D366]">{siteConfig.slide2?.holdingTotal || 'R$ 133.000,00'}</td>
+                    <tr>
+                      <td className="py-3 px-4 text-slate-200">Certidões Forenses</td>
+                      <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                        R$ 3.000,00
+                      </td>
+                      <td className="py-3 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
+                        R$ 0,00
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-slate-200">I.R. Ganho de Capital</td>
+                      <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                        R$ 75.000,00
+                      </td>
+                      <td className="py-3 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
+                        R$ 0,00
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 text-slate-200">Registro de Imóveis</td>
+                      <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                        R$ 12.000,00
+                      </td>
+                      <td className="py-3 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
+                        R$ 3.000,00
+                      </td>
+                    </tr>
+                    <tr className="border-t-2 border-[#D4AF37]/50 font-bold text-sm bg-[#0E1F3D]/70">
+                      <td className="py-3.5 px-4 text-white uppercase font-cinzel text-sm">Custo Total</td>
+                      <td className="py-3.5 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20 text-sm sm:text-base">
+                        <div>R$ 297.000,00</div>
+                        <div className="flex justify-end mt-1 pr-2">
+                          <ArrowRight className="w-4 h-4 text-white inline-block" />
+                        </div>
+                      </td>
+                      <td className="py-3.5 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-base sm:text-lg">
+                        R$ 133.000,00
+                      </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-              <div className="p-3.5 rounded-lg bg-[#25D366]/10 border border-[#25D366]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
-                <span className="text-white font-medium">Economia com a Holding Familiar:</span>
-                <span className="text-[#25D366] font-bold text-sm">
-                  {siteConfig.slide2?.savingsAmount || 'R$ 164.000,00'} (correspondente a {siteConfig.slide2?.savingsPercentage || '55,21%'})
-                </span>
+              <div className="p-4 rounded-xl bg-gradient-to-r from-[#0E1F3D] to-[#071122] border border-[#D4AF37]/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block">
+                    Economia com a Holding Familiar
+                  </span>
+                  <span className="text-[11px] text-slate-300">Preservação patrimonial e liquidez garantida</span>
+                </div>
+                <div className="text-right">
+                  <span className="font-cinzel text-xl sm:text-2xl font-black text-[#25D366] block tabular-nums">
+                    R$ 164.000,00
+                  </span>
+                  <span className="text-xs text-white font-semibold block">
+                    correspondente a 55,21%
+                  </span>
+                </div>
               </div>
             </div>
 

@@ -125,8 +125,8 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           <div className="w-full overflow-x-auto rounded-xl border border-[#D4AF37]/35 shadow-inner">
             <table className="w-full min-w-[540px] text-xs sm:text-sm text-left border-collapse">
               <thead>
-                <tr className="border-b border-[#D4AF37]/30 text-white font-cinzel">
-                  <th className="py-3.5 px-4 uppercase tracking-wider text-slate-200">DESPESA</th>
+                <tr className="border-b border-[#D4AF37]/40 text-white font-cinzel bg-[#0E1F3D]">
+                  <th className="py-3.5 px-4 uppercase tracking-wider text-slate-300">DESPESA</th>
                   <th className="py-3.5 px-4 text-center bg-red-950/40 border-x border-[#D4AF37]/20 uppercase tracking-wider text-red-300">
                     Processo de Inventário
                   </th>
@@ -135,46 +135,73 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#D4AF37]/15 text-slate-300 bg-[#050B14]">
+              <tbody className="divide-y divide-slate-800 font-sans-body bg-[#050B14]">
                 <tr>
-                  <td className="py-3.5 px-4 font-medium">ITCMD (Alíquota Tributária)</td>
-                  <td className="py-3.5 px-4 text-center bg-red-950/20 text-red-300 border-x border-[#D4AF37]/15">
-                    R$ 120.000,00 <span className="text-[10px] block text-red-400">(8% sobre mercado)</span>
+                  <td className="py-3.5 px-4 text-slate-200">ITCD / ITCMD</td>
+                  <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                    R$ 75.000,00 (5%)
                   </td>
-                  <td className="py-3.5 px-4 text-center text-[#25D366] font-semibold bg-[#25D366]/5">
-                    R$ 40.000,00 <span className="text-[10px] block text-emerald-400">(4% sobre IRPF)</span>
+                  <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
+                    R$ 60.000,00 (4%)
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 font-medium">Custas Judiciais e Cartorárias</td>
-                  <td className="py-3.5 px-4 text-center bg-red-950/20 text-red-300 border-x border-[#D4AF37]/15">
-                    R$ 27.000,00
+                  <td className="py-3.5 px-4 text-slate-200">Honorários Advocatícios</td>
+                  <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                    R$ 120.000,00 (8%)
                   </td>
-                  <td className="py-3.5 px-4 text-center text-[#25D366] font-semibold bg-[#25D366]/5">
-                    R$ 8.000,00
+                  <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
+                    R$ 70.000,00
                   </td>
                 </tr>
                 <tr>
-                  <td className="py-3.5 px-4 font-medium">Honorários Advocatícios</td>
-                  <td className="py-3.5 px-4 text-center bg-red-950/20 text-red-300 border-x border-[#D4AF37]/15">
-                    R$ 150.000,00 <span className="text-[10px] block text-red-400">(10% sobre R$ 1,5M)</span>
+                  <td className="py-3.5 px-4 text-slate-200">Custas de Cartório</td>
+                  <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                    R$ 12.000,00
                   </td>
-                  <td className="py-3.5 px-4 text-center text-[#25D366] font-semibold bg-[#25D366]/5">
-                    R$ 85.000,00 <span className="text-[10px] block text-emerald-400">(Estruturação)</span>
+                  <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
+                    R$ 0,00
                   </td>
                 </tr>
-                <tr className="bg-[#0E1F3D]/80 font-bold border-t-2 border-[#D4AF37]/40">
+                <tr>
+                  <td className="py-3.5 px-4 text-slate-200">Certidões Forenses</td>
+                  <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                    R$ 3.000,00
+                  </td>
+                  <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
+                    R$ 0,00
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 text-slate-200">I.R. Ganho de Capital</td>
+                  <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                    R$ 75.000,00
+                  </td>
+                  <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
+                    R$ 0,00
+                  </td>
+                </tr>
+                <tr>
+                  <td className="py-3.5 px-4 text-slate-200">Registro de Imóveis</td>
+                  <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
+                    R$ 12.000,00
+                  </td>
+                  <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
+                    R$ 3.000,00
+                  </td>
+                </tr>
+                <tr className="border-t-2 border-[#D4AF37]/50 font-bold text-sm bg-[#0E1F3D]/80">
                   <td className="py-4 px-4 text-white uppercase font-cinzel text-xs sm:text-sm">
-                    Custo Total Estimado
+                    Custo Total
                   </td>
-                  <td className="py-4 px-4 text-center text-red-400 border-x border-[#D4AF37]/20 text-sm sm:text-base">
-                    <div>{s2?.inventoryTotal || 'R$ 297.000,00'}</div>
+                  <td className="py-4 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20 text-sm sm:text-base">
+                    <div>R$ 297.000,00</div>
                     <div className="flex justify-end mt-1 pr-2">
                       <ArrowRight className="w-4 h-4 text-white inline-block" />
                     </div>
                   </td>
-                  <td className="py-4 px-4 text-center text-[#25D366] text-sm sm:text-base">
-                    {s2?.holdingTotal || 'R$ 133.000,00'}
+                  <td className="py-4 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-base sm:text-lg">
+                    R$ 133.000,00
                   </td>
                 </tr>
               </tbody>

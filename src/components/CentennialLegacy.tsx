@@ -7,7 +7,7 @@ export const CentennialLegacy: React.FC = () => {
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
   const cl = siteConfig.centennialLegacy;
 
-  const timelineEvents = cl?.events && cl.events.length > 0 ? cl.events : [
+  const rawEvents = cl?.events && cl.events.length > 0 ? cl.events : [
     {
       year: '1908',
       title: 'Fundação do Escritório',
@@ -33,12 +33,19 @@ export const CentennialLegacy: React.FC = () => {
       description: 'Início da terceira geração familiar, inovando ao estruturar a moderna Advocacia Estratégica e o Planejamento Patrimonial 4.0 (Holding Familiar).',
     },
     {
-      year: '2026',
+      year: '2020',
       title: 'Presença Nacional Digital',
       lawyers: [cl?.sub2026 || 'Aldo Leão Advocacia Estratégica'],
       description: 'Atuação 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.',
     }
   ];
+
+  // Garante que o último marco SEMPRE seja 2020 (Item f do dia 15/10/26)
+  const timelineEvents = rawEvents.map((evt, idx) => 
+    (idx === rawEvents.length - 1 || evt.title === 'Presença Nacional Digital' || evt.year === '2026')
+      ? { ...evt, year: '2020' }
+      : evt
+  );
 
   return (
     <section id="legado" className="py-20 md:py-24 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
@@ -74,11 +81,13 @@ export const CentennialLegacy: React.FC = () => {
             <div className="hidden lg:block absolute top-8 left-10 right-10 h-0.5 bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37] to-[#D4AF37]/20" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative z-10">
-              {timelineEvents.map((evt, idx) => (
+              {timelineEvents.map((evt, idx) => {
+                const displayYear = (idx === 4 || evt.title?.toLowerCase().includes('presença nacional digital') || evt.year === '2026') ? '2020' : evt.year;
+                return (
                 <div key={idx} className="flex flex-col items-center text-center">
-                  {/* Year Ball */}
+                  {/* Year Ball (Item f do dia 15/10/26: 2020) */}
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F6E27A] via-[#E5C158] to-[#D4AF37] border-2 border-white flex items-center justify-center text-[#050B14] font-cinzel font-black text-base shadow-[0_0_20px_rgba(212,175,55,0.4)] mb-4 shrink-0 tabular-nums">
-                    {evt.year}
+                    {displayYear}
                   </div>
 
                   {/* Title */}
@@ -100,7 +109,8 @@ export const CentennialLegacy: React.FC = () => {
                     {evt.description}
                   </p>
                 </div>
-              ))}
+              );
+            })}
             </div>
           </div>
 

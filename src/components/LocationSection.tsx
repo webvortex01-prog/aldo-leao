@@ -113,36 +113,31 @@ export const LocationSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Box 3: NOSSOS TELEFONES */}
+          {/* Box 3: TELEFONE & WHATSAPP (Apenas 1 número oficial) */}
           <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Phone className="w-6 h-6 text-[#E5C158]" />
               </div>
               <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase">
-                NOSSOS TELEFONES
+                TELEFONE / WHATSAPP
               </h3>
               <div className="space-y-1.5 text-xs text-slate-300 font-sans-body">
-                <p className="font-semibold text-white">
+                <p className="font-semibold text-white text-sm">
                   {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}
                 </p>
-                <p className="font-semibold text-white">
-                  {cleanAndFormatPhone(c?.phoneSecondary, '(51) 99807-8998')}
+                <p className="text-[11px] text-slate-400">
+                  Atendimento oficial em todo o território nacional
                 </p>
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 space-y-2">
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
               <button
-                onClick={() => handleWhatsApp(getCleanWhatsAppDigits(c?.phonePrimary, officialWhatsApp))}
-                className="w-full py-1.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                onClick={() => handleWhatsApp(officialWhatsApp)}
+                className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
+                <MessageSquare className="w-4 h-4" />
                 <span>WhatsApp: {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}</span>
-              </button>
-              <button
-                onClick={() => handleWhatsApp(getCleanWhatsAppDigits(c?.phoneSecondary, '5551998078998'))}
-                className="w-full py-1.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
-              >
-                <span>WhatsApp: {cleanAndFormatPhone(c?.phoneSecondary, '(51) 99807-8998')}</span>
               </button>
             </div>
           </div>
