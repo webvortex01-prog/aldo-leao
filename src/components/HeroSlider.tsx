@@ -347,7 +347,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                         Processo de Inventário
                       </th>
                       <th className="py-3 px-4 text-center bg-[#D4AF37]/20 uppercase tracking-wider text-[#F6E27A] font-bold">
-                        Holding Familiar 4.0
+                        Holding Familiar
                       </th>
                     </tr>
                   </thead>
@@ -380,7 +380,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                       </td>
                     </tr>
                     <tr>
-                      <td className="py-3 px-4 text-slate-200">Certidões Forenses</td>
+                      <td className="py-3 px-4 text-slate-200">Certidões</td>
                       <td className="py-3 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
                         R$ 3.000,00
                       </td>
@@ -409,10 +409,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     <tr className="border-t-2 border-[#D4AF37]/50 font-bold text-sm bg-[#0E1F3D]/70">
                       <td className="py-3.5 px-4 text-white uppercase font-cinzel text-sm">Custo Total</td>
                       <td className="py-3.5 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20 text-sm sm:text-base">
-                        <div>R$ 297.000,00</div>
-                        <div className="flex justify-end mt-1 pr-2">
-                          <ArrowRight className="w-4 h-4 text-white inline-block" />
-                        </div>
+                        R$ 297.000,00
                       </td>
                       <td className="py-3.5 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-base sm:text-lg">
                         R$ 133.000,00

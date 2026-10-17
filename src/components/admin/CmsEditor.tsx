@@ -880,6 +880,19 @@ export const CmsEditor: React.FC = () => {
                 ))}
               </div>
             </div>
+
+            {/* 9. Foto da Palestra / Conferência Presencial (Item II) */}
+            <ImageUploadField
+              label="9. Foto da Palestra / Conferência Presencial (Academia Leão Ferreira)"
+              description="Foto exibida na seção Academia Leão Ferreira com o Dr. Aldo Leão ministrando a palestra magna 'Planejamento Patrimonial 4.0 & O Alto Custo da Omissão'."
+              currentValue={formData.academiaLeao?.lecturePhotoUrl}
+              defaultValue="/img/palestra-1.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
+              })}
+            />
           </div>
         </div>
       )}
@@ -1736,6 +1749,53 @@ export const CmsEditor: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                Kicker da Seção
+              </label>
+              <input
+                type="text"
+                value={formData.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, sectionKicker: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                Título em Branco
+              </label>
+              <input
+                type="text"
+                value={(formData.founder as any).titleWhite || 'Dr. ALDO'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, titleWhite: e.target.value } as any
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                Título em Dourado
+              </label>
+              <input
+                type="text"
+                value={(formData.founder as any).titleGold || 'LEÃO'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, titleGold: e.target.value } as any
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
                 Nome de Apresentação
               </label>
               <input
@@ -2019,6 +2079,146 @@ export const CmsEditor: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Configuração da Página da Academia Leão Ferreira (Item II) */}
+          <div className="pt-6 border-t border-[#D4AF37]/30 space-y-4">
+            <div className="flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-[#E5C158]" />
+              <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider">
+                Página Exclusiva: Academia Leão Ferreira
+              </h4>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Card Inicial (Tagline)
+                </label>
+                <input
+                  type="text"
+                  value={formData.academiaLeao?.kicker || 'CENTRO DE ESTUDOS JURÍDICOS SUPERIORES'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    academiaLeao: { ...(formData.academiaLeao || {}), kicker: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Frase Dourada
+                </label>
+                <input
+                  type="text"
+                  value={formData.academiaLeao?.phraseGold || 'CONFERENCISTA E PALESTRANTE NACIONAL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    academiaLeao: { ...(formData.academiaLeao || {}), phraseGold: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                Texto do Palestrante (Dr. Aldo Leão)
+              </label>
+              <textarea
+                rows={2}
+                value={formData.academiaLeao?.speakerText || 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  academiaLeao: { ...(formData.academiaLeao || {}), speakerText: e.target.value }
+                })}
+                className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3">
+              <h5 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                Box da Foto da Palestra com Plateia
+              </h5>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Título do Box
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.academiaLeao?.lectureBoxTitle || 'PLANEJAMENTO PATRIMONIAL 4.0 & O ALTO CUSTO DA OMISSÃO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), lectureBoxTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                {/* Upload da Foto da Palestra */}
+                <div className="sm:col-span-2">
+                  <ImageUploadField
+                    label="Foto da Palestra / Conferência com Plateia"
+                    description="Carregue a foto do Dr. Aldo Leão em conferência presencial a partir do seu dispositivo."
+                    currentValue={formData.academiaLeao?.lecturePhotoUrl || '/img/palestra-1.jpg'}
+                    aspectRatio="video"
+                    onChange={(newUrl) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
+                    })}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Legenda em Branco Abaixo da Foto
+                </label>
+                <input
+                  type="text"
+                  value={formData.academiaLeao?.lectureCaption || 'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    academiaLeao: { ...(formData.academiaLeao || {}), lectureCaption: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="sm:col-span-2">
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Frase Convite para Agendamento de Conferência (Dourada)
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={formData.academiaLeao?.ctaPrompt || 'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), ctaPrompt: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Texto do Botão
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.academiaLeao?.ctaButtonText || 'AGENDAR CONFERÊNCIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), ctaButtonText: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -2447,20 +2647,34 @@ export const CmsEditor: React.FC = () => {
 
                   <div>
                     <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Páginas / Formato
+                      Número de Páginas (Editável pelo Dr. Aldo Leão)
                     </label>
                     <input
                       type="text"
-                      value={book.pages || 'Edição Digital Completa'}
+                      value={book.pages || '144 páginas'}
                       onChange={(e) => {
                         const updated = [...(formData.digitalBooks || [])];
                         updated[idx].pages = e.target.value;
                         setFormData({ ...formData, digitalBooks: updated });
                       }}
+                      placeholder="Ex: 144 páginas"
                       className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                     />
                   </div>
                 </div>
+
+                {/* Upload das Páginas do Sumário (Item III: foto/imagem das páginas do sumário) */}
+                <ImageUploadField
+                  label={`Foto/Imagem das Páginas do Sumário: ${book.title}`}
+                  description="Carregue a foto ou digitalização das páginas do sumário deste livro para exibição na janela de Ver Sumário."
+                  currentValue={book.summaryImage}
+                  aspectRatio="portrait"
+                  onChange={(newUrl) => {
+                    const updated = [...(formData.digitalBooks || [])];
+                    updated[idx].summaryImage = newUrl;
+                    setFormData({ ...formData, digitalBooks: updated });
+                  }}
+                />
 
                 <div>
                   <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
@@ -2635,6 +2849,60 @@ export const CmsEditor: React.FC = () => {
               })}
               className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
             />
+          </div>
+
+          {/* Seção Formulário de Contato (Item 10) */}
+          <div className="pt-4 border-t border-slate-800 space-y-4">
+            <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider">
+              Textos do Formulário de Contato
+            </h4>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                Frase em Dourado no Topo do Formulário
+              </label>
+              <textarea
+                rows={2}
+                value={formData.contact.formPrompt || 'Preencha os campos abaixo para o seu atendimento estratégico por um de nossos Advogados especialistas.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  contact: { ...formData.contact, formPrompt: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Placeholder do Nome Completo
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.formNamePlaceholder || 'Nome Completo'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, formNamePlaceholder: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Rótulo do Campo de Consulta
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.formConsultationLabel || 'Tipo de Consulta'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, formConsultationLabel: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
           </div>
         </div>
       )}

@@ -281,23 +281,59 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
               </p>
             </div>
 
-            {/* Seção Sumário (Item 12 e 41) */}
+            {/* Seção Sumário (Item 12, 41 e Item III: exibição de imagem das páginas do sumário) */}
             <div className="mb-6">
-              <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider mb-3">
-                Sumário
-              </h4>
-              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-2.5 text-xs text-slate-300 leading-relaxed font-sans-body">
-                {summaryBook.chapters && summaryBook.chapters.length > 0 ? (
-                  summaryBook.chapters.map((ch, idx) => (
-                    <div key={idx} className="flex items-start gap-2 border-b border-slate-900 pb-2 last:border-0 last:pb-0">
-                      <span className="text-[#E5C158] font-bold shrink-0">{idx + 1}.</span>
-                      <span>{ch.replace(/^Capítulo \d+:\s*/i, '')}</span>
-                    </div>
-                  ))
-                ) : (
-                  <p>Sumário estruturado em 6 capítulos práticos para orientação patrimonial.</p>
-                )}
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                  Páginas do Sumário Oficial
+                </h4>
+                <span className="text-[10px] text-slate-400">
+                  {summaryBook.pages || 'Edição Completa'}
+                </span>
               </div>
+
+              {summaryBook.summaryImage ? (
+                <div className="rounded-xl overflow-hidden border border-[#D4AF37]/35 bg-[#050B14] shadow-inner max-h-[60vh] overflow-y-auto">
+                  <img
+                    src={summaryBook.summaryImage}
+                    alt={`Sumário de ${summaryBook.title}`}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="rounded-xl overflow-hidden border border-[#D4AF37]/35 bg-gradient-to-b from-[#0A1424] to-[#050B14] p-5 shadow-inner">
+                  <div className="border border-[#D4AF37]/20 p-5 rounded-lg bg-[#070F1E] space-y-3">
+                    <div className="text-center pb-3 border-b border-[#D4AF37]/20">
+                      <p className="font-cinzel text-xs uppercase tracking-widest text-[#E5C158] font-bold">
+                        SUMÁRIO GERAL DA OBRA
+                      </p>
+                      <p className="text-[11px] text-slate-400 mt-0.5">
+                        {summaryBook.title}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2.5 text-xs text-slate-200 font-sans-body">
+                      {summaryBook.chapters && summaryBook.chapters.length > 0 ? (
+                        summaryBook.chapters.map((ch, idx) => (
+                          <div key={idx} className="flex items-center justify-between border-b border-slate-800/80 pb-2 last:border-0 last:pb-0 text-slate-300">
+                            <span className="flex items-center gap-2">
+                              <span className="text-[#E5C158] font-bold">{idx + 1}.</span>
+                              <span>{ch.replace(/^Capítulo \d+:\s*/i, '')}</span>
+                            </span>
+                            <span className="text-slate-500 text-[10px] tabular-nums font-mono">
+                              pág. {(idx + 1) * 15}
+                            </span>
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-center text-slate-400 py-3">
+                          Sumário estruturado em capítulos práticos e temáticos para orientação patrimonial.
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Primeiro botão dourado: BAIXAR LIVRO DIGITAL (Item 41) */}

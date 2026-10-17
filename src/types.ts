@@ -79,6 +79,7 @@ export interface DigitalBook {
   downloadCount?: string;
   badge?: string;
   chapters?: string[];
+  summaryImage?: string;
   sampleExcerpt?: string;
 }
 
@@ -158,6 +159,9 @@ export interface SiteConfig {
     bsbPhone?: string;
     cwbPhone?: string;
     email?: string;
+    formPrompt?: string;
+    formNamePlaceholder?: string;
+    formConsultationLabel?: string;
   };
   founder: {
     sectionKicker?: string;
@@ -302,5 +306,20 @@ export interface SiteConfig {
     title?: string;
     phoneText?: string;
     oabText?: string;
+  };
+  academiaLeao?: {
+    kicker?: string;
+    title?: string;
+    paragraph1?: string;
+    paragraph2?: string;
+    paragraph3?: string;
+    phraseGold?: string;
+    speakerText?: string;
+    btnWhatsApp?: string;
+    lectureBoxTitle?: string;
+    lecturePhotoUrl?: string;
+    lectureCaption?: string;
+    ctaPrompt?: string;
+    ctaButtonText?: string;
   };
 }

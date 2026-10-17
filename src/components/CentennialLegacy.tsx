@@ -141,7 +141,7 @@ export const CentennialLegacy: React.FC = () => {
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/40 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
-              <span>{cl?.card40Kicker || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}</span>
+              <span>{cl?.card40Kicker || 'ADVOCACIA ESTRATÉGICA'}</span>
             </div>
 
             <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-5 leading-snug">
@@ -180,7 +180,7 @@ export const CentennialLegacy: React.FC = () => {
         </div>
       </div>
 
-      {/* Complete History Modal (Saiba Mais) */}
+      {/* Complete History Modal (Saiba Mais - Item 6) */}
       {historyModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
           <div className="relative w-full max-w-3xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-10 max-h-[85vh] overflow-y-auto text-slate-100 text-left">
@@ -194,10 +194,10 @@ export const CentennialLegacy: React.FC = () => {
 
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
               <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold">
-                Memória Histórica Centenária
+                O LEGADO CENTENÁRIO · DESDE 1908
               </span>
               <h3 className="font-cinzel text-2xl font-bold text-white mt-1">
-                A Trajetória da Família Leão Ferreira no Direito Brasileiro
+                A Trajetória Centenária do Escritório Mais Antigo do Brasil
               </h3>
             </div>
 
@@ -207,17 +207,26 @@ export const CentennialLegacy: React.FC = () => {
                 ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.
               </p>
               <p>
-                <strong>Primeira Geração (1908):</strong> O legado teve início com o <em>Prof. Dr. Arnaldo da Silva Ferreira</em>,
-                fundador do escritório de advocacia mais antigo do Brasil e precursor da advocacia empresarial no Rio Grande do Sul.
+                Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.
               </p>
-              <p>
-                <strong>Segunda Geração (1935 e 1951):</strong> Continuidade do legado com o <em>Dr. Mario de Castilhos Ferreira</em>,
-                o <em>Dr. Ney de Castilhos Ferreira</em> e o <em>Prof. Dr. Aldo Leão Ferreira</em> (Procurador do Estado do RS e Professor Universitário).
-              </p>
-              <p>
-                <strong>Terceira Geração (desde 1986):</strong> Conduzida pelo <em>Prof. Dr. Aldo Leão Ferreira Filho</em>, unindo tradição jurídica,
-                inovação e inteligência estratégica no Planejamento Patrimonial 4.0 via Holding Familiar e advocacia de alta performance.
-              </p>
+              
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3 mt-4">
+                <p>
+                  <strong className="text-[#F6E27A]">1908 – Fundação do Escritório:</strong> <em>Prof. Dr. Arnaldo da Silva Ferreira</em>. Precursor da advocacia empresarial no RS e fundador do escritório de advocacia mais antigo do Brasil.
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">1935 – Continuidade do Legado Jurídico:</strong> <em>Dr. Mário de Castilhos Ferreira e Dr. Ney de Castilhos Ferreira</em>. Expansão da atuação jurídica de excelência técnica no cenário nacional.
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">1951 – Consolidação Institucional:</strong> <em>Prof. Dr. Aldo Leão Ferreira</em>. Procurador do Estado do RS e Professor Universitário, unindo a academia à prática jurídica.
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">1986 – Advocacia Estratégica:</strong> <em>Prof. Dr. Aldo Leão Ferreira Filho</em>. Início da terceira geração familiar, inovando ao estruturar a moderna Advocacia Estratégica e o Planejamento Patrimonial 4.0 (Holding Familiar).
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">2020 – Presença Nacional Digital:</strong> <em>Aldo Leão Advocacia Estratégica</em>. Atuação 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.
+                </p>
+              </div>
             </div>
           </div>
         </div>

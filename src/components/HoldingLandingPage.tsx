@@ -377,7 +377,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                       Processo de Inventário
                     </th>
                     <th className="py-3.5 px-4 text-center bg-[#D4AF37]/20 uppercase tracking-wider text-[#F6E27A] font-bold">
-                      Holding Familiar 4.0
+                      Holding Familiar
                     </th>
                   </tr>
                 </thead>
@@ -410,7 +410,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3.5 px-4 text-slate-200">Certidões Forenses</td>
+                    <td className="py-3.5 px-4 text-slate-200">Certidões</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
                       R$ 3.000,00
                     </td>
@@ -439,10 +439,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   <tr className="border-t-2 border-[#D4AF37]/50 font-bold text-sm bg-[#0E1F3D]/80">
                     <td className="py-4 px-4 text-white uppercase font-cinzel text-base">Custo Total</td>
                     <td className="py-4 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20 text-base">
-                      <div>R$ 297.000,00</div>
-                      <div className="flex justify-end mt-1 pr-2">
-                        <ArrowRight className="w-4 h-4 text-white inline-block" />
-                      </div>
+                      R$ 297.000,00
                     </td>
                     <td className="py-4 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-lg">
                       R$ 133.000,00
@@ -640,31 +637,24 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           </div>
 
           {/* 10. Box final: AINDA TEM ALGUMA DÚVIDA? (Item i) */}
+          {/* 10. Box final: ALGUMA DÚVIDA? (Item IV) */}
           <div className="p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border-2 border-[#D4AF37]/50 shadow-2xl text-center">
-            {/* AINDA TEM ALGUMA DÚVIDA? em dourado (Item i) */}
+            {/* ALGUMA DÚVIDA? em dourado (Item IV) */}
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#F6E27A] mb-2 uppercase">
-              AINDA TEM ALGUMA DÚVIDA?
+              ALGUMA DÚVIDA?
             </h3>
-            {/* Texto em branco: Se tiver dúvida, entre em contato... (Item i) */}
+            {/* Texto em branco: Se tiver dúvida, entre em contato... (Item i e IV) */}
             <p className="text-xs sm:text-sm text-white mb-6 font-light max-w-xl mx-auto">
               Se tiver dúvida, entre em contato com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              {/* Botão dourado: FALAR COM O ESPECIALISTA (Item i) */}
+            <div className="flex items-center justify-center">
+              {/* Botão dourado: FALAR COM O ESPECIALISTA (Item IV: único botão no card) */}
               <button
                 onClick={() => handleDirectWhatsApp('Olá, gostaria de falar com um especialista sobre o Planejamento Patrimonial 4.0.')}
-                className="btn-gold-luxury group w-full sm:w-auto px-7 py-3 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-lg cursor-pointer"
-              >
-                FALAR COM O ESPECIALISTA
-              </button>
-
-              {/* Botão: FALAR PELO WHATSAPP (Item i) */}
-              <button
-                onClick={() => handleDirectWhatsApp()}
-                className="w-full sm:w-auto px-7 py-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(37,211,102,0.35)] flex items-center justify-center gap-2 cursor-pointer"
+                className="btn-gold-luxury group w-full sm:w-auto px-8 py-3.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-lg cursor-pointer flex items-center justify-center gap-2"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>FALAR PELO WHATSAPP</span>
+                <span>FALAR COM O ESPECIALISTA</span>
               </button>
             </div>
           </div>
@@ -707,9 +697,6 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase">
                 DIAGNÓSTICO DE VIABILIDADE
               </h3>
-              <p className="text-xs text-slate-300 mt-1 font-light">
-                Informe seus dados para agendar sua Sessão de Viabilidade com o Dr. Aldo Leão.
-              </p>
             </div>
 
             <form onSubmit={handleSubmitViabilidade} className="space-y-3.5">

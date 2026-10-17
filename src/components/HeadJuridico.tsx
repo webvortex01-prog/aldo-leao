@@ -41,8 +41,8 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
   useEffect(() => {
     if (!hasStarted) return;
     let start = 0;
-    const duration = 900;
-    const stepTime = Math.max(16, Math.floor(duration / targetYears));
+    const duration = 2800; // Item 8: velocidade reduzida do contador para leitura suave
+    const stepTime = Math.max(30, Math.floor(duration / targetYears));
     const timer = setInterval(() => {
       start += 1;
       setCount(start);
@@ -67,14 +67,14 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
   return (
     <section id="head-juridico" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header da Seção: GESTÃO JURÍDICA DE VANGUARDA (Item 50) */}
+        {/* Header da Seção: ADVOCACIA ESTRATÉGICA DESDE 1986 e Dr. ALDO LEÃO (Item IV) */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
-            <span>{f?.sectionKicker || 'GESTÃO JURÍDICA DE VANGUARDA'}</span>
+            <span>ADVOCACIA ESTRATÉGICA DESDE 1986</span>
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-3">
-            {f?.sectionTitle || 'HEAD'} <span className="gold-text-gradient">{f?.sectionHighlight || 'JURÍDICO'}</span>
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-3">
+            <span className="text-white">Dr. ALDO</span> <span className="gold-text-gradient">LEÃO</span>
           </h2>
         </div>
 
@@ -101,14 +101,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
             </div>
           </div>
 
-          {/* Coluna Direita: Conteúdo Oficial Conforme Item 35 */}
+          {/* Coluna Direita: Conteúdo Oficial Conforme Item 35 e Item IV (Sem repetição do nome) */}
           <div className="lg:col-span-7 text-left">
-            {/* Título: Dr. ALDO LEÃO com ADVOCACIA ESTRATÉGICA em dourado logo abaixo (Item 35) */}
             <div className="mb-4">
-              <h3 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
-                {f?.name || 'Dr. ALDO LEÃO'}
-              </h3>
-              <p className="font-cinzel text-sm sm:text-base font-bold text-[#E5C158] tracking-widest uppercase mt-1">
+              <p className="font-cinzel text-sm sm:text-base font-bold text-[#E5C158] tracking-widest uppercase">
                 {f?.title || 'ADVOCACIA ESTRATÉGICA'}
               </p>
             </div>
@@ -141,9 +137,9 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               />
               <button
                 onClick={() => setCurriculumModalOpen(true)}
-                className="mt-3 px-5 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/50 text-[#F6E27A] hover:bg-[#162D58] hover:text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md"
+                className="mt-3 px-6 py-2.5 rounded-lg bg-[#060D1A] border-2 border-[#D4AF37] text-[#F6E27A] hover:bg-[#0E1F3D] hover:text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md"
               >
-                {f?.saibaMaisBtn || 'SAIBA MAIS'}
+                SAIBA MAIS
               </button>
             </div>
 
@@ -218,10 +214,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
         </div>
       </div>
 
-      {/* Modal de Currículo (Item 35): Título Dr. ALDO LEÃO, sem 'Currículo institucional completo', botão 'Livros Digitais Publicados' */}
+      {/* Modal de Currículo Completo do Dr. Aldo Leão (Item 5) */}
       {curriculumModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto text-slate-100 text-left">
+          <div className="relative w-full max-w-3xl bg-[#071122] rounded-2xl border-2 border-[#D4AF37]/60 shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto text-slate-100 text-left">
             <button
               onClick={() => setCurriculumModalOpen(false)}
               className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
@@ -230,28 +226,63 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               <X className="w-5 h-5" />
             </button>
 
-            <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-              <h3 className="font-cinzel text-2xl font-bold text-white">
-                {f?.name || 'Dr. ALDO LEÃO'}
+            <div className="border-b border-[#D4AF37]/30 pb-5 mb-6">
+              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
+                Dr. ALDO LEÃO
               </h3>
-              <p className="font-cinzel text-xs text-[#E5C158] uppercase font-bold tracking-wider mt-1">
-                {f?.title || 'ADVOCACIA ESTRATÉGICA'}
+              <p className="font-cinzel text-xs sm:text-sm text-[#E5C158] uppercase font-bold tracking-widest mt-1">
+                ADVOCACIA ESTRATÉGICA · 3ª GERAÇÃO DESDE 1986
               </p>
             </div>
 
-            <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-              <p>
-                {f?.modalBio1 || 'Advogado atuante há mais de quatro décadas, líder da terceira geração da advocacia familiar iniciada em 1908. Especialista em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
-              </p>
-              <p>
-                {f?.modalBio2 || 'Possui ampla experiência acadêmica e forense, tendo publicado mais de 100 artigos jurídicos especializados e 6 livros jurídicos digitais com foco em proteção patrimonial e segurança jurídica.'}
+            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-2">
+                <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                  Síntese Curricular e Trajetória Profissional
+                </h4>
+                <p>
+                  O <strong>Dr. Aldo Leão Ferreira Filho</strong> representa a terceira geração familiar de uma linhagem jurídica iniciada em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira, no escritório jurídico mais antigo do Brasil.
+                </p>
+                <p>
+                  Atuando na advocacia desde 1986, construiu uma carreira sólida pautada pelo rigor técnico, ética inegociável e pioneirismo na estruturação de soluções jurídicas preventivas e estratégicas.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-[#0A1424] border border-slate-800 space-y-2">
+                  <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
+                    Especialização & Vanguarda
+                  </h4>
+                  <ul className="space-y-1.5 text-slate-300 list-disc list-inside">
+                    <li>Planejamento Patrimonial 4.0 via Holding Familiar</li>
+                    <li>Proteção Patrimonial e Sucessória Estratégica</li>
+                    <li>Direito Empresarial e Reestruturação Societária</li>
+                    <li>Governança e Continuidade de Grupos Familiares</li>
+                  </ul>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#0A1424] border border-slate-800 space-y-2">
+                  <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
+                    Produção Científica & Docência
+                  </h4>
+                  <ul className="space-y-1.5 text-slate-300 list-disc list-inside">
+                    <li>Autor de mais de uma centena de Artigos Jurídicos</li>
+                    <li>Autor de 8 Livros Digitais Publicados</li>
+                    <li>Docência no Ensino Superior Jurídico</li>
+                    <li>Conferencista e Palestrante de âmbito nacional</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p className="text-slate-300">
+                Pioneiro na transição para a advocacia 100% digital, assegura atendimento reservado, ágil e de alta tecnologia a famílias empresárias e patriarcais em todo o território nacional.
               </p>
             </div>
 
             <div className="mt-8 pt-5 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">
               <button
                 onClick={scrollToLivros}
-                className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 cursor-pointer shadow-md"
+                className="btn-gold-luxury px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 cursor-pointer shadow-md"
               >
                 Livros Digitais Publicados
               </button>

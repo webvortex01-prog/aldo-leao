@@ -168,7 +168,7 @@ export const Logo: React.FC<LogoProps> = ({
           {logoTitle}
         </span>
         <span
-          className={`font-cinzel font-semibold text-[#D4AF37]/80 uppercase leading-none mt-0.5 sm:mt-1 truncate ${sub}`}
+          className={`font-cinzel font-semibold text-white uppercase leading-none mt-0.5 sm:mt-1 truncate ${sub}`}
         >
           {logoSubtitle}
         </span>

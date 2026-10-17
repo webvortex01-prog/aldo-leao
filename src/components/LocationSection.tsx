@@ -142,7 +142,7 @@ export const LocationSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Box 4: E-MAILS */}
+          {/* Box 4: E-MAILS (Item 3, 4 e V: sem links clicáveis e sem botão Enviar E-mail) */}
           <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
@@ -154,40 +154,34 @@ export const LocationSection: React.FC = () => {
               <div className="space-y-3 text-xs text-slate-300 font-sans-body">
                 <div>
                   <span className="font-semibold text-white block">Geral:</span>
-                  <a href={`mailto:${c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] break-all">
+                  <span className="text-[#F6E27A] text-[11px] break-all select-all font-medium">
                     {c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}
-                  </a>
+                  </span>
                 </div>
                 <div>
                   <span className="font-semibold text-white block">Holding Familiar:</span>
-                  <a href={`mailto:${c?.emailHolding1 || 'aldoleao.planejamento@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] block break-all">
+                  <span className="text-[#F6E27A] text-[11px] block break-all select-all font-medium">
                     {c?.emailHolding1 || 'aldoleao.planejamento@gmail.com'}
-                  </a>
-                  <a href={`mailto:${c?.emailHolding2 || 'holdingfamiliarbr@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] block break-all mt-0.5">
+                  </span>
+                  <span className="text-[#F6E27A] text-[11px] block break-all mt-0.5 select-all font-medium">
                     {c?.emailHolding2 || 'holdingfamiliarbr@gmail.com'}
-                  </a>
+                  </span>
                 </div>
                 <div>
                   <span className="font-semibold text-white block">Academia Leão Ferreira:</span>
-                  <a href={`mailto:${c?.emailAcademia || 'academialeaoferreira@gmail.com'}`} className="text-[#F6E27A] hover:underline text-[11px] break-all">
+                  <span className="text-[#F6E27A] text-[11px] break-all select-all font-medium">
                     {c?.emailAcademia || 'academialeaoferreira@gmail.com'}
-                  </a>
+                  </span>
                 </div>
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
-              <a
-                href={`mailto:${c?.emailPrimary || 'aldoleaoadvocacia@gmail.com'}`}
-                className="btn-secondary-luxury w-full py-2 px-3 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-semibold hover:bg-[#1A365D] hover:text-white transition-all flex items-center justify-center gap-1.5"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                <span>Enviar E-mail</span>
-              </a>
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 text-[11px] text-slate-400">
+              Canais diretos e confidenciais
             </div>
           </div>
         </div>
 
-        {/* Box WHATSAPP BUSINESS (Item 13 e 42) */}
+        {/* Box WHATSAPP BUSINESS (Item 9 e V: excluir ":(51) 99808-8998") */}
         <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left card-hover-interactive">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-[#25D366] text-black flex items-center justify-center shrink-0 shadow-lg">
@@ -198,7 +192,7 @@ export const LocationSection: React.FC = () => {
                 WHATSAPP BUSINESS
               </h3>
               <p className="text-xs text-slate-300">
-                Atendimento Rápido e Confidencial com Especialistas: {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}
+                Atendimento Rápido e Confidencial com Especialistas
               </p>
             </div>
           </div>
@@ -212,14 +206,14 @@ export const LocationSection: React.FC = () => {
           </button>
         </div>
 
-        {/* FORMULÁRIO DE CONTATO conforme Item 13 & 42 */}
+        {/* FORMULÁRIO DE CONTATO (Item 10) */}
         <div className="max-w-3xl mx-auto rounded-2xl border-2 border-[#D4AF37]/50 bg-[#071122] p-6 sm:p-10 shadow-2xl text-left">
           <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase tracking-wider">
               FORMULÁRIO DE CONTATO
             </h3>
             <p className="text-xs text-[#E5C158] mt-1 font-medium">
-              Preencha os campos abaixo para atendimento estratégico personalizado.
+              {c?.formPrompt || 'Preencha os campos abaixo para o seu atendimento estratégico por um de nossos Advogados especialistas.'}
             </p>
           </div>
 
@@ -253,7 +247,7 @@ export const LocationSection: React.FC = () => {
                   required
                   value={nome}
                   onChange={(e) => setNome(e.target.value)}
-                  placeholder="Nome completo ou Razão Social"
+                  placeholder={c?.formNamePlaceholder || 'Nome Completo'}
                   className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37]"
                 />
               </div>
@@ -301,7 +295,7 @@ export const LocationSection: React.FC = () => {
                 />
               </div>
 
-              {/* Área de Atuação e Urgência */}
+              {/* Área de Atuação e Tipo de Consulta (Item 10) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
@@ -322,15 +316,17 @@ export const LocationSection: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
-                    Urgência
+                    {c?.formConsultationLabel || 'Tipo de Consulta'}
                   </label>
                   <select
                     value={urgencia}
                     onChange={(e) => setUrgencia(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
                   >
-                    <option value="Normal">Normal</option>
-                    <option value="Urgente">Urgente</option>
+                    <option value="Consulta Inicial">Consulta Inicial</option>
+                    <option value="Consulta Estratégica">Consulta Estratégica</option>
+                    <option value="Sessão de Viabilidade (Holding)">Sessão de Viabilidade (Holding)</option>
+                    <option value="Atendimento Imediato">Atendimento Imediato</option>
                   </select>
                 </div>
               </div>

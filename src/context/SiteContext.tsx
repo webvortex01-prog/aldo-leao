@@ -597,6 +597,9 @@ const DEFAULT_CONFIG: SiteConfig = {
     emailAcademia: 'academialeaoferreira@gmail.com',
     emailSecondary: 'aldoleao.planejamento@gmail.com',
     emailHolding: 'holdingfamiliarbr@gmail.com',
+    formPrompt: 'Preencha os campos abaixo para o seu atendimento estratégico por um de nossos Advogados especialistas.',
+    formNamePlaceholder: 'Nome Completo',
+    formConsultationLabel: 'Tipo de Consulta',
     addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     officeHours: 'De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs',
     boxVirtualTitle: 'ATENDIMENTO VIRTUAL BRASIL',
@@ -792,6 +795,21 @@ const DEFAULT_CONFIG: SiteConfig = {
     title: 'Atendimento em Todo o Brasil',
     phoneText: '(51) 99808-8998',
     oabText: 'OAB/RS 48.452'
+  },
+  academiaLeao: {
+    kicker: 'CENTRO DE ESTUDOS JURÍDICOS SUPERIORES',
+    title: 'ACADEMIA LEÃO FERREIRA',
+    paragraph1: 'Centro de Estudos Jurídicos Superiores da Aldo Leão Advocacia Estratégica, dedicado à produção e difusão do conhecimento jurídico especializado.',
+    paragraph2: 'A Academia realiza a publicação de artigos jurídicos, de livros digitais, promove a realização de palestras, cursos, treinamentos, mentorias, workshops e seminários especializados.',
+    paragraph3: 'Nossa missão é transformar o conhecimento jurídico especializado em uma ferramenta de evolução pessoal e transformação.',
+    phraseGold: 'CONFERENCISTA E PALESTRANTE NACIONAL',
+    speakerText: 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.',
+    btnWhatsApp: 'FALAR COM A ACADEMIA',
+    lectureBoxTitle: 'PLANEJAMENTO PATRIMONIAL 4.0 & O ALTO CUSTO DA OMISSÃO',
+    lecturePhotoUrl: '/img/palestra-1.jpg',
+    lectureCaption: 'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão',
+    ctaPrompt: 'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.',
+    ctaButtonText: 'AGENDAR CONFERÊNCIA'
   }
 };
 
@@ -919,6 +937,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           digitalConsultation: { ...DEFAULT_CONFIG.digitalConsultation, ...(parsed.digitalConsultation || {}) },
           footer: { ...DEFAULT_CONFIG.footer, ...(parsed.footer || {}) },
           urgentHotline: { ...DEFAULT_CONFIG.urgentHotline, ...(parsed.urgentHotline || {}) },
+          academiaLeao: { ...DEFAULT_CONFIG.academiaLeao, ...(parsed.academiaLeao || {}) },
         };
       }
     } catch (e) {
