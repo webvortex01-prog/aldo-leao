@@ -707,7 +707,7 @@ const DEFAULT_CONFIG: SiteConfig = {
     signatureImageUrl: '/img/assinatura-gold.png',
     buttonText: 'Saiba Mais',
     card40Title: '40 Anos + de Excelência Jurídica na Advocacia Estratégica',
-    card40Kicker: 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA',
+    card40Kicker: 'ADVOCACIA ESTRATÉGICA',
     card40Text: 'Iniciada em 1986, a atuação do Dr. Aldo Leão na terceira geração de advogados da família, consolidou uma das trajetórias mais respeitadas na proteção patrimonial e empresarial no país, unindo o rigor acadêmico, a experiência de mais de quatro décadas e a inteligência jurídica na prestação de serviços de vanguarda.',
     events: [
       {

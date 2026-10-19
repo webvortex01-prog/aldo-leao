@@ -528,19 +528,15 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       {/* 8. Seção: HEAD JURÍDICO (Item i) */}
       <section className="py-20 bg-[#050B14] border-b border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Frase inicial em dourado: ADVOCACIA ESTRATÉGICA DESDE 1986 (Item i) */}
+          {/* Frase inicial em dourado: ADVOCACIA ESTRATÉGICA DESDE 1986 (Item 4 do dia 19/10/26) */}
           <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
             ADVOCACIA ESTRATÉGICA DESDE 1986
           </span>
-          {/* Título: HEAD (branca) JURÍDICO (dourada) (Item i) */}
-          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold mb-2">
-            <span className="text-white">HEAD </span>
-            <span className="gold-text-gradient">JURÍDICO</span>
+          {/* Título: Dr. ALDO LEÃO abaixo de ADVOCACIA ESTRATÉGICA DESDE 1986 */}
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
+            <span className="text-white">Dr. ALDO </span>
+            <span className="gold-text-gradient">LEÃO</span>
           </h2>
-          {/* Subtítulo: DR. ALDO LEÃO (Item i) */}
-          <h3 className="font-cinzel text-lg sm:text-xl font-bold text-[#F6E27A] uppercase tracking-wider mb-6">
-            DR. ALDO LEÃO
-          </h3>
 
           {/* Texto exato da página Head Jurídico conforme Item i */}
           <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 font-sans-body leading-relaxed text-justify sm:text-center font-light mb-8 max-w-3xl mx-auto">
