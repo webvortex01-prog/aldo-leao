@@ -267,15 +267,15 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     </button>
                   </div>
 
-                  {/* Foto Dr. Aldo com duas pessoas com card abaixo totalmente visível (Item c) */}
+                  {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 */}
                   <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive">
                     <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center">
                       <img
-                        src="/img/dr-aldo-reuniao.jpg"
-                        alt="Dr. Aldo Leão - Consultoria Estratégica"
+                        src="/img/holding-familiar-1.jpg"
+                        alt="Holding Familiar - Planejamento Patrimonial 4.0"
                         className="w-full h-full object-cover object-top"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-consultoria.jpg';
+                          (e.currentTarget as HTMLImageElement).src = '/img/holding-familiar-2.jpg';
                         }}
                       />
                     </div>

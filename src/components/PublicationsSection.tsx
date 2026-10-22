@@ -197,9 +197,9 @@ export const PublicationsSection: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <Calendar className="w-3.5 h-3.5 text-[#D4AF37]" />
                       <span>{pub.date}</span>
-                      {/* Item 5 do dia 19/10/26: ao lado da data, espaço, excluir "Por", nome "Dr. Aldo Leão" */}
+                      {/* Item 11: Em Artigos Jurídicos deixar Dr. Aldo Leão (sem 'Aldo Leão Advocacia Estratégica') */}
                       {isArtigo && (
-                        <span className="text-slate-300 font-medium"> Dr. Aldo Leão</span>
+                        <span className="text-slate-300 font-medium">· Por Dr. Aldo Leão</span>
                       )}
                     </div>
 
@@ -284,13 +284,16 @@ export const PublicationsSection: React.FC = () => {
                 {activePubModal.title}
               </h3>
 
-              <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400 mt-2">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400 mt-2">
                 <span>{activePubModal.date}</span>
-                {activePubModal.type === 'artigo' && (
-                  <span className="text-white font-medium">Dr. Aldo Leão</span>
-                )}
                 <span>·</span>
                 <span className="text-[#E5C158]">{activePubModal.area}</span>
+                {activePubModal.type === 'artigo' && (
+                  <>
+                    <span>·</span>
+                    <span className="text-white font-medium">Por Dr. Aldo Leão</span>
+                  </>
+                )}
               </div>
             </div>
 

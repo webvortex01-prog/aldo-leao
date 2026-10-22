@@ -193,31 +193,40 @@ export const CentennialLegacy: React.FC = () => {
             </button>
 
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-              <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold block mb-1">
-                O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL · DESDE 1908
+              <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold">
+                O LEGADO CENTENÁRIO · DESDE 1908
               </span>
-              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white uppercase">
-                O LEGADO CENTENÁRIO
+              <h3 className="font-cinzel text-2xl font-bold text-white mt-1">
+                A Trajetória Centenária do Escritório Mais Antigo do Brasil
               </h3>
-              <p className="font-cinzel text-xs text-[#F6E27A] uppercase font-bold tracking-widest mt-1">
-                TRADIÇÃO JURÍDICA CENTENÁRIA · 3 GERAÇÕES FAMILIARES
-              </p>
             </div>
 
-            {/* Texto constante do projeto (Item 3 do dia 19/10/26) */}
             <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-              <p className="text-white font-medium text-sm sm:text-base leading-relaxed">
-                A história da <strong>Aldo Leão Advocacia Estratégica</strong> começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.
+              <p>
+                A história da <strong>Aldo Leão Advocacia Estratégica</strong> começou em 1908 e atravessa mais de um século de dedicação
+                ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.
               </p>
               <p>
                 Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.
               </p>
-              <p>
-                A terceira geração de advogados do escritório jurídico mais antigo do Brasil teve início em 1986, através do <strong className="text-white">Dr. ALDO LEÃO</strong>, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.
-              </p>
-              <p>
-                Com mais de 40 anos de prática jurídica de excelência, nossa trajetória une a solidez dos precedentes históricos nos tribunais à moderna advocacia 100% digital, assegurando a famílias patriarcais e grupos empresariais a mais alta segurança jurídica, confidencialidade e governança patrimonial em todo o território nacional.
-              </p>
+              
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3 mt-4">
+                <p>
+                  <strong className="text-[#F6E27A]">1908 – Fundação do Escritório:</strong> <em>Prof. Dr. Arnaldo da Silva Ferreira</em>. Precursor da advocacia empresarial no RS e fundador do escritório de advocacia mais antigo do Brasil.
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">1935 – Continuidade do Legado Jurídico:</strong> <em>Dr. Mário de Castilhos Ferreira e Dr. Ney de Castilhos Ferreira</em>. Expansão da atuação jurídica de excelência técnica no cenário nacional.
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">1951 – Consolidação Institucional:</strong> <em>Prof. Dr. Aldo Leão Ferreira</em>. Procurador do Estado do RS e Professor Universitário, unindo a academia à prática jurídica.
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">1986 – Advocacia Estratégica:</strong> <em>Prof. Dr. Aldo Leão Ferreira Filho</em>. Início da terceira geração familiar, inovando ao estruturar a moderna Advocacia Estratégica e o Planejamento Patrimonial 4.0 (Holding Familiar).
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A]">2020 – Presença Nacional Digital:</strong> <em>Aldo Leão Advocacia Estratégica</em>. Atuação 100% digital em todo o território nacional, com alta tecnologia, segurança e a mesma excelência centenária.
+                </p>
+              </div>
             </div>
           </div>
         </div>

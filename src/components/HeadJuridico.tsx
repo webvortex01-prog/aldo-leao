@@ -227,84 +227,56 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
             </button>
 
             <div className="border-b border-[#D4AF37]/30 pb-5 mb-6">
-              <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold block mb-1">
-                ADVOCACIA ESTRATÉGICA DESDE 1986
-              </span>
-              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white uppercase">
-                HEAD JURÍDICO
+              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
+                Dr. ALDO LEÃO
               </h3>
-              <p className="font-cinzel text-xs sm:text-sm text-[#F6E27A] uppercase font-bold tracking-widest mt-1">
-                Dr. ALDO LEÃO · 3ª GERAÇÃO FAMILIAR
+              <p className="font-cinzel text-xs sm:text-sm text-[#E5C158] uppercase font-bold tracking-widest mt-1">
+                ADVOCACIA ESTRATÉGICA · 3ª GERAÇÃO DESDE 1986
               </p>
             </div>
 
             <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-              {/* Texto da página conforme o projeto */}
-              <div className="space-y-3.5 text-slate-200">
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-2">
+                <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                  Síntese Curricular e Trajetória Profissional
+                </h4>
                 <p>
-                  Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.
+                  O <strong>Dr. Aldo Leão Ferreira Filho</strong> representa a terceira geração familiar de uma linhagem jurídica iniciada em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira, no escritório jurídico mais antigo do Brasil.
                 </p>
                 <p>
-                  A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.
-                </p>
-                <p>
-                  Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.
-                </p>
-                <p>
-                  O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.
+                  Atuando na advocacia desde 1986, construiu uma carreira sólida pautada pelo rigor técnico, ética inegociável e pioneirismo na estruturação de soluções jurídicas preventivas e estratégicas.
                 </p>
               </div>
 
-              {/* Diferenciais e Currículo Completo */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-[#0A1424] border border-[#D4AF37]/30 space-y-2">
-                  <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
-                    Especialização & Liderança Jurídica
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-[#0A1424] border border-slate-800 space-y-2">
+                  <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
+                    Especialização & Vanguarda
                   </h4>
-                  <ul className="space-y-1.5 text-slate-300 text-xs">
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>40+ Anos de Advocacia Estratégica ininterrupta (desde 1986)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Terceira geração familiar no escritório jurídico mais antigo do Brasil (1908)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Pioneiro e referência em Planejamento Patrimonial 4.0 via Holding Familiar</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Atendimento e processos 100% digitais em todo o território nacional</span>
-                    </li>
+                  <ul className="space-y-1.5 text-slate-300 list-disc list-inside">
+                    <li>Planejamento Patrimonial 4.0 via Holding Familiar</li>
+                    <li>Proteção Patrimonial e Sucessória Estratégica</li>
+                    <li>Direito Empresarial e Reestruturação Societária</li>
+                    <li>Governança e Continuidade de Grupos Familiares</li>
                   </ul>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[#0A1424] border border-[#D4AF37]/30 space-y-2">
-                  <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
-                    Produção Intelectual & Docência
+                <div className="p-4 rounded-xl bg-[#0A1424] border border-slate-800 space-y-2">
+                  <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
+                    Produção Científica & Docência
                   </h4>
-                  <ul className="space-y-1.5 text-slate-300 text-xs">
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Autor de mais de uma centena de Artigos Jurídicos publicados</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Autor de 8 Livros Digitais especializados (disponíveis para download)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Docência no Ensino Superior Jurídico e conferencista nacional</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#E5C158] font-bold">✓</span>
-                      <span>Inscrição na OAB/RS 48.452 com sólida atuação nos tribunais superiores</span>
-                    </li>
+                  <ul className="space-y-1.5 text-slate-300 list-disc list-inside">
+                    <li>Autor de mais de uma centena de Artigos Jurídicos</li>
+                    <li>Autor de 8 Livros Digitais Publicados</li>
+                    <li>Docência no Ensino Superior Jurídico</li>
+                    <li>Conferencista e Palestrante de âmbito nacional</li>
                   </ul>
                 </div>
               </div>
+
+              <p className="text-slate-300">
+                Pioneiro na transição para a advocacia 100% digital, assegura atendimento reservado, ágil e de alta tecnologia a famílias empresárias e patriarcais em todo o território nacional.
+              </p>
             </div>
 
             <div className="mt-8 pt-5 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">

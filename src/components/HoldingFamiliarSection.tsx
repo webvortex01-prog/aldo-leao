@@ -110,6 +110,57 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           </div>
         </div>
 
+        {/* Visual Showcase - As Duas Faces da Holding Familiar */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/45 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
+            <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden relative">
+              <img
+                src="/img/holding-familiar-1.jpg"
+                alt="Estruturação e Proteção Patrimonial - Holding Familiar"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
+              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3 py-1 rounded-full">
+                <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Patrimônio & Ativos
+                </span>
+              </div>
+            </div>
+            <div className="p-5 border-t border-[#D4AF37]/25 bg-[#071122]">
+              <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
+                Estruturação e Proteção dos Bens
+              </h4>
+              <p className="text-xs text-slate-300 font-light leading-relaxed">
+                Organização societária e governança para blindar ativos, empresas e patrimônio com máxima eficiência tributária.
+              </p>
+            </div>
+          </div>
+
+          <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/45 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
+            <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden relative">
+              <img
+                src="/img/holding-familiar-2.jpg"
+                alt="Harmonia, Paz Familiar e Sucessão sem Inventário"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
+              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3 py-1 rounded-full">
+                <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Harmonia & Sucessão
+                </span>
+              </div>
+            </div>
+            <div className="p-5 border-t border-[#D4AF37]/25 bg-[#071122]">
+              <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
+                Preservação e Paz Familiar
+              </h4>
+              <p className="text-xs text-slate-300 font-light leading-relaxed">
+                Sucessão planejada em vida para eliminar inventários desgastantes, litígios e a alta perda financeira entre herdeiros.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* TABELA COMPARATIVA DE CUSTOS (INVENTÁRIO x HOLDING FAMILIAR) - Item 10 e Item 40 (coluna direita não cortada) */}
         <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12 card-hover-interactive">
           <div className="text-center max-w-3xl mx-auto mb-8">

@@ -252,7 +252,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             </div>
 
             {/* Botões do Hero: AGENDAR SESSÃO DE VIABILIDADE e CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0 (Item i) */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <button
                 onClick={handleOpenViabilidadeModal}
                 className="btn-gold-luxury group w-full sm:w-auto px-8 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
@@ -267,6 +267,57 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
               >
                 <span>CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0</span>
               </a>
+            </div>
+
+            {/* Showcase Visual - As Duas Faces da Holding Familiar */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto text-left">
+              <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-[0_12px_35px_rgba(0,0,0,0.7)] card-hover-interactive">
+                <div className="aspect-[4/3] w-full overflow-hidden relative">
+                  <img
+                    src="/img/holding-familiar-1.jpg"
+                    alt="Estruturação, Proteção Patrimonial e Sucessão - Holding Familiar"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-85" />
+                  <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3 py-1 rounded-full shadow-md">
+                    <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                      Patrimônio & Ativos
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5 border-t border-[#D4AF37]/25 bg-[#071122]">
+                  <h3 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
+                    Estruturação e Proteção do Patrimônio
+                  </h3>
+                  <p className="text-xs text-slate-300 font-light leading-relaxed">
+                    Blindagem preventiva de empresas, imóveis e ativos de alto padrão, assegurando solidez jurídica e governança para a perpetuação do legado.
+                  </p>
+                </div>
+              </div>
+
+              <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-[0_12px_35px_rgba(0,0,0,0.7)] card-hover-interactive">
+                <div className="aspect-[4/3] w-full overflow-hidden relative">
+                  <img
+                    src="/img/holding-familiar-2.jpg"
+                    alt="Harmonia Familiar e Sucessão sem Inventário"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-85" />
+                  <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3 py-1 rounded-full shadow-md">
+                    <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                      Harmonia & Sucessão
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5 border-t border-[#D4AF37]/25 bg-[#071122]">
+                  <h3 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
+                    Paz Familiar e Sucessão sem Inventário
+                  </h3>
+                  <p className="text-xs text-slate-300 font-light leading-relaxed">
+                    Transmissão tranquila e organizada em vida, eliminando litígios e evitando a perda de até 40% do patrimônio com inventário.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -528,15 +579,19 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       {/* 8. Seção: HEAD JURÍDICO (Item i) */}
       <section className="py-20 bg-[#050B14] border-b border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Frase inicial em dourado: ADVOCACIA ESTRATÉGICA DESDE 1986 (Item 4 do dia 19/10/26) */}
+          {/* Frase inicial em dourado: ADVOCACIA ESTRATÉGICA DESDE 1986 (Item i) */}
           <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
             ADVOCACIA ESTRATÉGICA DESDE 1986
           </span>
-          {/* Título: Dr. ALDO LEÃO abaixo de ADVOCACIA ESTRATÉGICA DESDE 1986 */}
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-6">
-            <span className="text-white">Dr. ALDO </span>
-            <span className="gold-text-gradient">LEÃO</span>
+          {/* Título: HEAD (branca) JURÍDICO (dourada) (Item i) */}
+          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold mb-2">
+            <span className="text-white">HEAD </span>
+            <span className="gold-text-gradient">JURÍDICO</span>
           </h2>
+          {/* Subtítulo: DR. ALDO LEÃO (Item i) */}
+          <h3 className="font-cinzel text-lg sm:text-xl font-bold text-[#F6E27A] uppercase tracking-wider mb-6">
+            DR. ALDO LEÃO
+          </h3>
 
           {/* Texto exato da página Head Jurídico conforme Item i */}
           <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 font-sans-body leading-relaxed text-justify sm:text-center font-light mb-8 max-w-3xl mx-auto">
