@@ -275,7 +275,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                         alt="Holding Familiar - Planejamento Patrimonial 4.0"
                         className="w-full h-full object-cover object-top"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = '/img/holding-familiar-2.jpg';
+                          (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-consultoria.jpg';
                         }}
                       />
                     </div>
