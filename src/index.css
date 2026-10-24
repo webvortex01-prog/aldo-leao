@@ -251,13 +251,13 @@
   will-change: transform, filter;
 }
 
-/* Zoom suave na foto do casal no portão dourado (Holding Familiar) */
+/* Zoom suave e sutil na foto de Holding Familiar */
 @keyframes photoSoftZoom {
   0%, 100% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.045);
+    transform: scale(1.012);
   }
 }
 

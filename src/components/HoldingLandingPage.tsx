@@ -272,11 +272,11 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             {/* Showcase Visual - Holding Familiar */}
             <div className="max-w-2xl lg:max-w-3xl mx-auto text-left">
               <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-[0_12px_40px_rgba(0,0,0,0.8)] card-hover-interactive">
-                <div className="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden relative">
+                <div className="aspect-[4/3] sm:aspect-[16/11] md:aspect-[16/10] w-full overflow-hidden relative">
                   <img
                     src="/img/holding-familiar-1.jpg"
                     alt="Estruturação, Proteção Patrimonial e Sucessão - Holding Familiar"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-[center_28%]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-85" />
                   <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full shadow-md">

@@ -54,11 +54,11 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
         {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL vem ANTES de O QUE É O PLANEJAMENTO 4.0? (Item 3 do dia 23/10/26) */}
         <div className="max-w-2xl lg:max-w-3xl mx-auto mb-14">
           <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
-            <div className="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden relative">
+            <div className="aspect-[4/3] sm:aspect-[16/11] md:aspect-[16/10] w-full overflow-hidden relative">
               <img
                 src="/img/holding-familiar-1.jpg"
                 alt="Estruturação e Proteção Patrimonial - Holding Familiar"
-                className="w-full h-full object-cover animate-photo-soft-zoom group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-[center_28%]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
               {/* Badge alterada para PLANEJAMENTO 4.0 (Item 3) */}
