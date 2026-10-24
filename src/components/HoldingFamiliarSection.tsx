@@ -33,7 +33,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             <span>{hf?.sectionKicker || 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0'}</span>
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance]">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance] animate-title-blink-fix">
             {hf?.sectionTitle || 'HOLDING'} <span className="gold-text-gradient">{hf?.sectionHighlight || 'FAMILIAR'}</span>
           </h2>
 
@@ -48,6 +48,35 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             <p>
               {hf?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
             </p>
+          </div>
+        </div>
+
+        {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL vem ANTES de O QUE É O PLANEJAMENTO 4.0? (Item 3 do dia 23/10/26) */}
+        <div className="max-w-2xl lg:max-w-3xl mx-auto mb-14">
+          <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
+            <div className="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden relative">
+              <img
+                src="/img/holding-familiar-1.jpg"
+                alt="Estruturação e Proteção Patrimonial - Holding Familiar"
+                className="w-full h-full object-cover animate-photo-soft-zoom group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
+              {/* Badge alterada para PLANEJAMENTO 4.0 (Item 3) */}
+              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full">
+                <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                  PLANEJAMENTO 4.0
+                </span>
+              </div>
+            </div>
+            {/* Título e Texto solicitados no Item 3 */}
+            <div className="p-5 sm:p-6 border-t border-[#D4AF37]/25 bg-[#071122]">
+              <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
+                ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+                Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -106,33 +135,6 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
                 <span>Saiba mais</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Visual Showcase - Holding Familiar */}
-        <div className="max-w-2xl lg:max-w-3xl mx-auto mb-16">
-          <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/45 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
-            <div className="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden relative">
-              <img
-                src="/img/holding-familiar-1.jpg"
-                alt="Estruturação e Proteção Patrimonial - Holding Familiar"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
-              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full">
-                <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
-                  Patrimônio & Ativos
-                </span>
-              </div>
-            </div>
-            <div className="p-5 sm:p-6 border-t border-[#D4AF37]/25 bg-[#071122]">
-              <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
-                Estruturação e Proteção dos Bens Familiares
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Organização societária e governança para blindar ativos, empresas e patrimônio com máxima segurança jurídica e eficiência tributária.
-              </p>
             </div>
           </div>
         </div>

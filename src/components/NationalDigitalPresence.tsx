@@ -85,12 +85,12 @@ export const NationalDigitalPresence: React.FC = () => {
                 </div>
               </div>
 
-              {/* Imagem Oficial da Presença Nacional Digital enviada */}
-              <div className="relative w-full overflow-hidden rounded-xl border border-[#D4AF37]/40 shadow-inner bg-[#050B14] my-2 group">
+              {/* Imagem Oficial da Presença Nacional Digital enviada com animação sofisticada */}
+              <div className="relative w-full overflow-hidden rounded-xl border border-[#D4AF37]/40 shadow-inner bg-[#050B14] my-2 group animate-map-glow">
                 <img
                   src={np?.mapImageUrl || '/presencadigital.jpeg'}
                   alt="Presença Nacional Digital - Aldo Leão Advocacia Estratégica"
-                  className="w-full h-auto object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                  className="w-full h-auto object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
                     if (!target.src.includes('presencadigital.jpeg')) {

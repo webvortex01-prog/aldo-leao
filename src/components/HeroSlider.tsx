@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Scale } from 'lucide-react';
 import heroLionImg from '../assets/images/hero_lion_gold_law_1791570163709.jpg';
+import officeBoardroomImg from '../assets/images/office_boardroom_luxury_1791570183507.jpg';
 import { useSite } from '../context/SiteContext';
 
 interface HeroSliderProps {
@@ -34,10 +35,43 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
-      {/* Background ambient luxury lighting */}
+      {/* Background Pan-Zoom Images with Luxury Gradients (Item 5 e Inspiração Decision Revolution Slider) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Slide 1 Background */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            currentSlide === 0 ? 'opacity-70' : 'opacity-0'
+          }`}
+        >
+          <img
+            src={heroLionImg}
+            alt="Ambiente Jurídico Centenário"
+            className="w-full h-full object-cover object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
+          />
+        </div>
+
+        {/* Slide 2 Background */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            currentSlide === 1 ? 'opacity-65' : 'opacity-0'
+          }`}
+        >
+          <img
+            src={officeBoardroomImg}
+            alt="Gestão Patrimonial e Societária"
+            className="w-full h-full object-cover object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
+          />
+        </div>
+
+        {/* Cinematic Filmic Overlays: Garante legibilidade do texto à esquerda e máxima visibilidade e brilho à direita */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#050B14]/95 via-[#050B14]/70 to-[#050B14]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/30" />
+      </div>
+
+      {/* Background ambient luxury lighting - brilho dourado e azul nobre vibrante */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 right-10 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[140px]" />
-        <div className="absolute -bottom-32 left-10 w-[450px] h-[450px] bg-[#0E1F3D]/40 rounded-full blur-[160px]" />
+        <div className="absolute top-10 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/20 rounded-full blur-[140px]" />
+        <div className="absolute -bottom-20 left-10 w-[500px] h-[500px] bg-[#0E1F3D]/60 rounded-full blur-[160px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -156,13 +190,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             {/* Right Column Visual (Logomarca Oficial do Leão - Item b do dia 15/10/26: card abaixo do box da imagem para total visibilidade) */}
             <div className="lg:col-span-5 relative flex flex-col justify-center">
               <div className="relative w-full max-w-md lg:max-w-none mx-auto">
-                <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#D4AF37]/40 via-[#F6E27A]/20 to-transparent rounded-2xl blur-lg opacity-70" />
+                <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/60 via-[#F6E27A]/30 to-[#D4AF37]/15 rounded-2xl blur-xl opacity-85" />
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
                   <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-6">
                     <img
                       src="/img/logo.jpg"
                       alt="Aldo Leão Advocacia Estratégica"
-                      className="w-full h-full object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)]"
+                      className="w-full h-full object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] animate-lion-breath"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = '/img/logo.png';
                       }}
@@ -273,7 +307,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                       <img
                         src="/img/holding-familiar-1.jpg"
                         alt="Holding Familiar - Planejamento Patrimonial 4.0"
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-top animate-photo-soft-zoom"
                         onError={(e) => {
                           (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-consultoria.jpg';
                         }}

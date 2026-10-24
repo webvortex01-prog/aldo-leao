@@ -185,4 +185,141 @@
   box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.18);
 }
 
+/* === DECISION INSPIRED ANIMATIONS & VISUAL REFINEMENTS === */
+
+/* Ken Burns Pan-Zoom de fundo nos slides do Hero (estilo Revolution Slider) */
+@keyframes kenBurnsZoom {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.14) translate3d(-1.5%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.07) translate3d(1%, 0.5%, 0);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurnsZoom 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Abertura suave de títulos nas seções ao rolar a página */
+@keyframes titleRevealFade {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-title-reveal {
+  animation: titleRevealFade 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Título pisca na abertura e depois fica fixo (Holding Familiar) */
+@keyframes titleBlinkThenFix {
+  0% { opacity: 0.2; filter: brightness(0.8); }
+  25% { opacity: 1; filter: brightness(1.4) drop-shadow(0 0 20px rgba(246, 226, 122, 0.7)); }
+  50% { opacity: 0.35; filter: brightness(0.9); }
+  75% { opacity: 1; filter: brightness(1.3) drop-shadow(0 0 25px rgba(212, 175, 55, 0.8)); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+.animate-title-blink-fix {
+  animation: titleBlinkThenFix 1.4s ease-out forwards;
+}
+
+/* Imagem da Logomarca do Leão no Slide 1: respiração nobre e iluminação dourada viva */
+@keyframes lionImageBreath {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 18px rgba(212, 175, 55, 0.45));
+  }
+  50% {
+    transform: scale(1.035);
+    filter: drop-shadow(0 10px 38px rgba(246, 226, 122, 0.85));
+  }
+}
+
+.animate-lion-breath {
+  animation: lionImageBreath 5s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+/* Zoom suave na foto do casal no portão dourado (Holding Familiar) */
+@keyframes photoSoftZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+.animate-photo-soft-zoom {
+  animation: photoSoftZoom 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Mapa do Brasil: floating suave com pulso luminoso */
+@keyframes mapGlowPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.25));
+  }
+  50% {
+    transform: scale(1.018);
+    filter: drop-shadow(0 0 35px rgba(246, 226, 122, 0.55));
+  }
+}
+
+.animate-map-glow {
+  animation: mapGlowPulse 5s ease-in-out infinite;
+}
+
+/* Assinatura do Dr. Aldo Leão: surge com traço iluminado e depois fica fixa */
+@keyframes signatureGlowFix {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+    filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+    filter: drop-shadow(0 0 22px rgba(246, 226, 122, 0.85));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  }
+}
+
+.animate-signature-glow {
+  animation: signatureGlowFix 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Timeline anos: realce visual nobre e elegante (Decision style) */
+@keyframes yearBadgePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(246, 226, 122, 0.7);
+  }
+}
+
+.animate-year-badge {
+  animation: yearBadgePulse 3.5s ease-in-out infinite;
+}
+
+
 

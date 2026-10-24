@@ -97,8 +97,8 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
                     </span>
                   </div>
 
-                  {/* Title & Subtitle (Box 2 subtitle é HOLDING FAMILIAR conforme Item 37) */}
-                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-white group-hover:text-[#F6E27A] transition-colors mb-1">
+                  {/* Title & Subtitle com animação de abertura que fica fixa (Item 6) */}
+                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-white group-hover:text-[#F6E27A] transition-colors mb-1 animate-title-reveal">
                     {sol.title}
                   </h3>
                   {sol.subtitle && (

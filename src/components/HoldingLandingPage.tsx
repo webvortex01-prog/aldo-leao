@@ -585,23 +585,46 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             </p>
           </div>
 
-          {/* Assinatura do Dr. Aldo Leão centralizada e maior (Item i) */}
+          {/* Foto de palestra do Dr. Aldo Leão (Item 2 do dia 23/10/26: foto exclusiva sem repetir com o site) */}
+          <div className="max-w-md mx-auto mb-8 rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#070F1E] group">
+            <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden relative">
+              <img
+                src="/img/palestra-1.jpg"
+                alt="Dr. Aldo Leão em Palestra sobre Planejamento Patrimonial 4.0"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = '/img/palestra-2.jpg';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-60" />
+            </div>
+            <div className="p-3 bg-[#071122] border-t border-[#D4AF37]/25 text-center">
+              <p className="font-cinzel text-xs font-bold text-[#F6E27A] tracking-wider uppercase">
+                ALDO LEÃO · DESDE 1986 ADVOCACIA ESTRATÉGICA
+              </p>
+              <p className="text-[10px] text-slate-300 font-light mt-0.5">
+                Conferência e Liderança em Planejamento Patrimonial 4.0
+              </p>
+            </div>
+          </div>
+
+          {/* Assinatura do Dr. Aldo Leão centralizada e maior com animação iluminada (Item i e Item 6) */}
           <div className="flex justify-center mb-8">
             <img
               src="/img/assinatura-gold.png"
               alt="Assinatura Dr. Aldo Leão"
-              className="h-20 sm:h-24 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)]"
+              className="h-20 sm:h-24 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] animate-signature-glow"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
               }}
             />
           </div>
 
-          {/* Botão azul SAIBA MAIS (abre currículo) e Botão dourado AGENDAR DIAGNÓSTICO DE VIABILIDADE (Item i) */}
+          {/* Botão azul-marinho com texto dourado SAIBA MAIS e Botão dourado AGENDAR DIAGNÓSTICO (Item 2 do dia 23/10/26) */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setIsCurriculoModalOpen(true)}
-              className="w-full sm:w-auto px-7 py-3 rounded-lg bg-sky-700 hover:bg-sky-600 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#071122] hover:bg-[#0B1A35] text-[#F6E27A] border-2 border-[#D4AF37] hover:border-[#F6E27A] font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer flex items-center justify-center"
             >
               SAIBA MAIS
             </button>

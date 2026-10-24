@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, ArrowUpRight, X, Clock, Calendar, Share2 } from 'lucide-react';
 import { Article } from '../types';
+import { ArticleSignature } from './ArticleSignature';
 
 export const LegalIntelligence: React.FC = () => {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
@@ -149,6 +150,11 @@ Em casos conduzidos por Aldo Leão, a atuação técnica rápida evitou a parali
                   {paragraph}
                 </p>
               ))}
+            </div>
+
+            {/* Assinatura Automática ao Final de Cada Parecer ou Artigo */}
+            <div className="mt-8 pt-6 border-t border-[#D4AF37]/20">
+              <ArticleSignature publicationTitle={activeArticle.title} />
             </div>
 
             {/* Bottom Actions */}

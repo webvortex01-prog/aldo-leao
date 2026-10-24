@@ -64,6 +64,18 @@ export interface Publication {
   image?: string;
 }
 
+export interface ArticleSignatureConfig {
+  enabled: boolean;
+  line1: string;          // e.g. "Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA" (#FFFFFF)
+  line1Color?: string;    // #FFFFFF
+  line2: string;          // e.g. "Excelência Jurídica Desde 1908" (#D4AF37)
+  line2Color?: string;    // #D4AF37
+  buttonText: string;     // e.g. "AGENDAR CONSULTA" (#E0E6ED)
+  buttonTextColor?: string; // #E0E6ED
+  whatsappNumber?: string; // optional override, otherwise uses contact.whatsappNumber
+  whatsappMessage?: string; // pre-filled WhatsApp message
+}
+
 export interface DigitalBook {
   id: string;
   title: string;
@@ -322,4 +334,5 @@ export interface SiteConfig {
     ctaPrompt?: string;
     ctaButtonText?: string;
   };
+  articleSignature?: ArticleSignatureConfig;
 }

@@ -74,11 +74,11 @@ export const LocationSection: React.FC = () => {
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Clock className="w-6 h-6 text-[#E5C158]" />
               </div>
-              <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase">
+              <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase animate-title-reveal">
                 {c?.boxVirtualTitle || 'ATENDIMENTO VIRTUAL BRASIL'}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light">
-                {c?.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp.'}
+                {c?.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2ª à 6ª feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
@@ -98,7 +98,7 @@ export const LocationSection: React.FC = () => {
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Scale className="w-6 h-6 text-[#E5C158]" />
               </div>
-              <h3 className="font-cinzel text-base font-bold text-white mb-1 uppercase">
+              <h3 className="font-cinzel text-base font-bold text-white mb-1 uppercase animate-title-reveal">
                 ESCRITÓRIO DIGITAL BRASIL
               </h3>
               <p className="font-cinzel text-xs font-bold text-[#E5C158] uppercase mb-2">
@@ -113,20 +113,23 @@ export const LocationSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Box 3: TELEFONE & WHATSAPP (Apenas 1 número oficial) */}
+          {/* Box 3: TELEFONES (Itens 1 e 6: dois números de atendimento) */}
           <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Phone className="w-6 h-6 text-[#E5C158]" />
               </div>
-              <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase">
-                TELEFONE / WHATSAPP
+              <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase animate-title-reveal">
+                TELEFONES
               </h3>
               <div className="space-y-1.5 text-xs text-slate-300 font-sans-body">
                 <p className="font-semibold text-white text-sm">
-                  {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}
+                  (51) 998.088.998
                 </p>
-                <p className="text-[11px] text-slate-400">
+                <p className="font-semibold text-slate-300 text-sm">
+                  (51) 998.078.998
+                </p>
+                <p className="text-[11px] text-slate-400 pt-1">
                   Atendimento oficial em todo o território nacional
                 </p>
               </div>
@@ -137,7 +140,7 @@ export const LocationSection: React.FC = () => {
                 className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp: {cleanAndFormatPhone(c?.phonePrimary, '(51) 99808-8998')}</span>
+                <span>Agendar pelo WhatsApp</span>
               </button>
             </div>
           </div>
@@ -148,7 +151,7 @@ export const LocationSection: React.FC = () => {
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Mail className="w-6 h-6 text-[#E5C158]" />
               </div>
-              <h3 className="font-cinzel text-base font-bold text-white mb-3 uppercase">
+              <h3 className="font-cinzel text-base font-bold text-white mb-3 uppercase animate-title-reveal">
                 E-MAILS
               </h3>
               <div className="space-y-3 text-xs text-slate-300 font-sans-body">
@@ -181,14 +184,14 @@ export const LocationSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Box WHATSAPP BUSINESS (Item 9 e V: excluir ":(51) 99808-8998") */}
+        {/* Box WHATSAPP BUSINESS com animação de abertura (Item 6) */}
         <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left card-hover-interactive">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-[#25D366] text-black flex items-center justify-center shrink-0 shadow-lg">
               <MessageSquare className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-cinzel text-lg font-bold text-white uppercase">
+              <h3 className="font-cinzel text-lg font-bold text-white uppercase animate-title-reveal">
                 WHATSAPP BUSINESS
               </h3>
               <p className="text-xs text-slate-300">
@@ -206,10 +209,10 @@ export const LocationSection: React.FC = () => {
           </button>
         </div>
 
-        {/* FORMULÁRIO DE CONTATO (Item 10) */}
+        {/* FORMULÁRIO DE CONTATO (Item 10 e Item 6) */}
         <div className="max-w-3xl mx-auto rounded-2xl border-2 border-[#D4AF37]/50 bg-[#071122] p-6 sm:p-10 shadow-2xl text-left">
           <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase tracking-wider">
+            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase tracking-wider animate-title-reveal">
               FORMULÁRIO DE CONTATO
             </h3>
             <p className="text-xs text-[#E5C158] mt-1 font-medium">

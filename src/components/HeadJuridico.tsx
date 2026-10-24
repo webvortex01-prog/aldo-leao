@@ -90,7 +90,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                   <img
                     src={f?.photoUrl || '/img/dr-aldo-reuniao.jpg'}
                     alt={`${f?.name || 'Dr. Aldo Leão'} no Escritório`}
-                    className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top animate-photo-soft-zoom hover:scale-105 transition-transform duration-700"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-foco.jpg';
                     }}
@@ -125,12 +125,12 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               </p>
             </div>
 
-            {/* Assinatura em tamanho maior, legível e centralizada (Item 35) */}
+            {/* Assinatura em tamanho maior com animação iluminada que surge e fica fixa (Item 35 e Item 6) */}
             <div className="my-6 py-4 border-y border-[#D4AF37]/25 flex flex-col items-center justify-center">
               <img
                 src={f?.signatureImageUrl || '/img/assinatura-gold.png'}
                 alt="Assinatura Dr. Aldo Leão"
-                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95"
+                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95 animate-signature-glow"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
                 }}

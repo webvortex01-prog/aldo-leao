@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Search, Calendar, Clock, ArrowRight, X, ChevronRight, ChevronLeft, BookOpen } from 'lucide-react';
 import { Publication } from '../types';
 import { useSite } from '../context/SiteContext';
+import { ArticleSignature } from './ArticleSignature';
 
 export const PublicationsSection: React.FC = () => {
   const { siteConfig } = useSite();
@@ -39,6 +40,14 @@ export const PublicationsSection: React.FC = () => {
     });
   }, [publications, searchTerm, typeFilter, areaFilter]);
 
+  const availableAreas = useMemo(() => {
+    const set = new Set<string>();
+    publications.forEach((p) => {
+      if (p.area) set.add(p.area);
+    });
+    return Array.from(set).sort();
+  }, [publications]);
+
   const itemsPerPage = 6;
   const totalPages = Math.ceil(filteredPublications.length / itemsPerPage) || 1;
   const currentPublications = filteredPublications.slice(
@@ -55,7 +64,7 @@ export const PublicationsSection: React.FC = () => {
             <span>ARTIGOS JURÍDICOS E NOTÍCIAS</span>
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance] animate-title-reveal">
             PUBLICAÇÕES <span className="gold-text-gradient">JURÍDICAS</span>
           </h2>
 
@@ -131,12 +140,12 @@ export const PublicationsSection: React.FC = () => {
               }}
               className="px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
             >
-              <option value="todas">Todas as Áreas</option>
-              <option value="Planejamento Patrimonial">Planejamento Patrimonial</option>
-              <option value="Direito Imobiliário">Direito Imobiliário</option>
-              <option value="Direito Empresarial">Direito Empresarial</option>
-              <option value="Direito Civil">Direito Civil</option>
-              <option value="Relações de Consumo">Relações de Consumo</option>
+              <option value="todas">Todas as Áreas ({publications.length})</option>
+              {availableAreas.map((area) => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -301,7 +310,12 @@ export const PublicationsSection: React.FC = () => {
               {activePubModal.content || activePubModal.excerpt}
             </div>
 
-            <div className="mt-8 pt-4 border-t border-[#D4AF37]/20 flex justify-end">
+            {/* Assinatura Automática ao Final de Cada Artigo ou Notícia */}
+            <div className="mt-8 pt-6 border-t border-[#D4AF37]/20">
+              <ArticleSignature publicationTitle={activePubModal.title} />
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-slate-800 flex justify-end">
               <button
                 onClick={() => setActivePubModal(null)}
                 className="px-6 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/40 text-slate-200 hover:text-white text-xs font-semibold cursor-pointer"

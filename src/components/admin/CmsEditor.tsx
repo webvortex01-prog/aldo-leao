@@ -25,6 +25,7 @@ import {
 import { useSite } from '../../context/SiteContext';
 import { PracticeArea, DigitalBook, Publication } from '../../types';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
+import { ArticleSignature } from '../ArticleSignature';
 
 // Componente Especializado para Upload e Gerenciamento de Imagens
 interface ImageUploadFieldProps {
@@ -479,6 +480,11 @@ export const CmsEditor: React.FC = () => {
     check(formData.digitalConsultation?.description, 'CTA Consulta · Descrição', 'consultation');
     check(formData.digitalConsultation?.btnSchedule, 'CTA Consulta · Botão Agendar', 'consultation');
     check(formData.digitalConsultation?.btnWhatsApp, 'CTA Consulta · Botão WhatsApp', 'consultation');
+
+    // Assinatura Automática dos Artigos
+    check(formData.articleSignature?.line1, 'Assinatura Artigos · Linha 1 (Núcleo de Comunicação)', 'publications');
+    check(formData.articleSignature?.line2, 'Assinatura Artigos · Linha 2 (Excelência Jurídica)', 'publications');
+    check(formData.articleSignature?.buttonText, 'Assinatura Artigos · Botão CTA Agendar Consulta', 'publications');
 
     // Publicações
     (formData.publications || []).forEach((pub, i) => {
@@ -2454,42 +2460,378 @@ export const CmsEditor: React.FC = () => {
 
       {/* TAB 10: PUBLICAÇÕES & ARTIGOS */}
       {activeTab === 'publications' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
             <div>
-              <h3 className="font-cinzel text-base font-bold text-white">
-                Página 9 · Publicações, Artigos & Notícias Jurídicas
+              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-[#F6E27A]" />
+                <span>Página 9 · Publicações, Artigos & Notícias Jurídicas</span>
               </h3>
-              <p className="text-xs text-slate-400">
-                Gerencie todos os artigos e notícias exibidos na seção de publicações.
+              <p className="text-xs text-slate-400 mt-1">
+                Configure a assinatura automática de captação de leads e gerencie todos os artigos e notícias exibidos no portal.
               </p>
             </div>
             <button
               onClick={handleAddPublication}
-              className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Adicionar Artigo</span>
+              <span>Adicionar Publicação</span>
             </button>
           </div>
 
+          {/* SEÇÃO EXCLUSIVA: ASSINATURA AUTOMÁTICA DOS ARTIGOS E NOTÍCIAS */}
+          <div className="p-5 sm:p-6 rounded-xl bg-[#050B14] border-2 border-[#D4AF37]/60 shadow-2xl space-y-5 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-32 bg-[#D4AF37]/5 blur-3xl pointer-events-none rounded-full" />
+
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800 relative z-10">
+              <div className="flex items-start gap-3">
+                <div className="p-2.5 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] mt-0.5">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h4 className="font-cinzel text-base font-bold text-white">
+                      Assinatura Automática dos Artigos e Notícias
+                    </h4>
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                      Captação de Leads
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                    Esta assinatura é inserida <strong>automaticamente ao final de cada notícia ou artigo</strong>, sem necessidade de digitação em cada texto.
+                    Se quiser alterar o texto ou as cores da assinatura, basta digitar nos campos específicos abaixo.
+                  </p>
+                </div>
+              </div>
+
+              {/* Switch Ativar / Desativar */}
+              <label className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-[#071122] border border-slate-700 hover:border-[#D4AF37]/60 cursor-pointer transition-colors self-start sm:self-auto shrink-0">
+                <input
+                  type="checkbox"
+                  checked={formData.articleSignature?.enabled ?? true}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      articleSignature: {
+                        ...(formData.articleSignature || {
+                          enabled: true,
+                          line1: 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line1Color: '#FFFFFF',
+                          line2: 'Excelência Jurídica Desde 1908',
+                          line2Color: '#D4AF37',
+                          buttonText: 'AGENDAR CONSULTA',
+                          buttonTextColor: '#E0E6ED',
+                          whatsappNumber: '',
+                          whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
+                        }),
+                        enabled: e.target.checked
+                      }
+                    });
+                  }}
+                  className="w-4 h-4 rounded text-[#D4AF37] accent-[#D4AF37] cursor-pointer"
+                />
+                <span className="text-xs font-semibold text-white">
+                  {formData.articleSignature?.enabled !== false ? 'Assinatura Ativada' : 'Assinatura Desativada'}
+                </span>
+              </label>
+            </div>
+
+            {/* Controles de Configuração da Assinatura */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+              {/* Linha 1 */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Linha 1 da Assinatura (Institucional / Núcleo)
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={formData.articleSignature?.line1 ?? 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {}),
+                          enabled: formData.articleSignature?.enabled ?? true,
+                          line1: e.target.value,
+                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                          line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                        }
+                      });
+                    }}
+                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                    placeholder="Ex: Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA"
+                  />
+                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 1">
+                    <input
+                      type="color"
+                      value={formData.articleSignature?.line1Color || '#FFFFFF'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1Color: e.target.value,
+                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          }
+                        });
+                      }}
+                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                    />
+                    <span className="text-[10px] text-slate-400 font-mono pr-1">
+                      {formData.articleSignature?.line1Color || '#FFFFFF'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Linha 2 */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Linha 2 da Assinatura (Tradição / Slogan)
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={formData.articleSignature?.line2 ?? 'Excelência Jurídica Desde 1908'}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {}),
+                          enabled: formData.articleSignature?.enabled ?? true,
+                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                          line2: e.target.value,
+                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                        }
+                      });
+                    }}
+                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                    placeholder="Ex: Excelência Jurídica Desde 1908"
+                  />
+                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 2">
+                    <input
+                      type="color"
+                      value={formData.articleSignature?.line2Color || '#D4AF37'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                            line2Color: e.target.value,
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          }
+                        });
+                      }}
+                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                    />
+                    <span className="text-[10px] text-slate-400 font-mono pr-1">
+                      {formData.articleSignature?.line2Color || '#D4AF37'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Botão CTA WhatsApp */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto do Botão de Agendamento (WhatsApp)
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={formData.articleSignature?.buttonText ?? 'AGENDAR CONSULTA'}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {}),
+                          enabled: formData.articleSignature?.enabled ?? true,
+                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                          line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          buttonText: e.target.value,
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                        }
+                      });
+                    }}
+                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                    placeholder="Ex: AGENDAR CONSULTA"
+                  />
+                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor do Texto do Botão">
+                    <input
+                      type="color"
+                      value={formData.articleSignature?.buttonTextColor || '#E0E6ED'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: e.target.value,
+                          }
+                        });
+                      }}
+                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                    />
+                    <span className="text-[10px] text-slate-400 font-mono pr-1">
+                      {formData.articleSignature?.buttonTextColor || '#E0E6ED'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* WhatsApp Específico para Leads de Artigos */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  WhatsApp para Atendimento dos Artigos (Opcional)
+                </label>
+                <input
+                  type="text"
+                  value={formData.articleSignature?.whatsappNumber ?? ''}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      articleSignature: {
+                        ...(formData.articleSignature || {}),
+                        enabled: formData.articleSignature?.enabled ?? true,
+                        line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                        line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                        line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                        line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                        buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                        buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                        whatsappNumber: e.target.value,
+                      }
+                    });
+                  }}
+                  className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                  placeholder="Deixe em branco para usar o WhatsApp oficial do site: (51) 99808-8998"
+                />
+              </div>
+
+              {/* Mensagem Pré-definida */}
+              <div className="md:col-span-2">
+                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Mensagem Pré-definida enviada no WhatsApp
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.articleSignature?.whatsappMessage ?? 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'}
+                  onChange={(e) => {
+                    setFormData({
+                      ...formData,
+                      articleSignature: {
+                        ...(formData.articleSignature || {}),
+                        enabled: formData.articleSignature?.enabled ?? true,
+                        line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                        line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                        line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                        line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                        buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                        buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                        whatsappMessage: e.target.value,
+                      }
+                    });
+                  }}
+                  className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white focus:border-[#D4AF37] focus:outline-none leading-relaxed"
+                  placeholder="Mensagem padrão enviada quando o lead clica no botão AGENDAR CONSULTA"
+                />
+                <p className="text-[10px] text-slate-400 mt-1">
+                  Ao clicar, o WhatsApp é aberto com essa mensagem pré-preenchida, informando inclusive qual artigo o leitor estava consultando.
+                </p>
+              </div>
+            </div>
+
+            {/* Prévia Visual ao Vivo */}
+            <div className="pt-4 border-t border-slate-800 relative z-10">
+              <span className="block text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold mb-2 flex items-center gap-1.5">
+                <Eye className="w-3.5 h-3.5" />
+                <span>Prévia Visual em Tempo Real (Como aparecerá ao final de cada artigo e notícia):</span>
+              </span>
+              <ArticleSignature
+                previewMode={true}
+                customConfig={formData.articleSignature}
+                publicationTitle="A Nova Disciplina do ITCMD e o Impacto Imediato na Estruturação de Holdings Familiares"
+              />
+            </div>
+          </div>
+
+          {/* LISTA DE PUBLICAÇÕES (ARTIGOS E NOTÍCIAS) */}
           <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs uppercase tracking-wider font-bold text-slate-300">
+                Lista de Publicações Cadastradas ({formData.publications?.length || 0})
+              </h4>
+            </div>
+
             {(formData.publications || []).map((pub, idx) => (
-              <div key={pub.id || idx} className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#E5C158] uppercase">
-                    {pub.type === 'artigo' ? 'Artigo Jurídico' : 'Notícia Jurídica'} #{idx + 1}
-                  </span>
+              <div key={pub.id || idx} className="p-5 rounded-xl bg-[#050B14] border border-slate-800 hover:border-[#D4AF37]/40 transition-colors space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                      pub.type === 'artigo' ? 'bg-[#D4AF37] text-black font-black' : 'bg-slate-700 text-slate-200'
+                    }`}>
+                      {pub.type === 'artigo' ? 'Artigo Jurídico' : 'Notícia Jurídica'}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-400">
+                      Publicação #{idx + 1}
+                    </span>
+                  </div>
+
                   <button
                     onClick={() => handleRemovePublication(idx)}
-                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
+                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Remover</span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                  {/* Tipo de Publicação */}
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Tipo de Conteúdo
+                    </label>
+                    <select
+                      value={pub.type || 'artigo'}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].type = e.target.value as 'artigo' | 'noticia';
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    >
+                      <option value="artigo">Artigo Jurídico (Dr. Aldo Leão)</option>
+                      <option value="noticia">Notícia Jurídica</option>
+                    </select>
+                  </div>
+
+                  {/* Título */}
                   <div className="sm:col-span-2">
                     <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
                       Título da Publicação
@@ -2505,6 +2847,8 @@ export const CmsEditor: React.FC = () => {
                       className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
                     />
                   </div>
+
+                  {/* Área */}
                   <div>
                     <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
                       Área Jurídica
@@ -2522,9 +2866,45 @@ export const CmsEditor: React.FC = () => {
                   </div>
                 </div>
 
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Data da Publicação
+                    </label>
+                    <input
+                      type="text"
+                      value={pub.date || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].date = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      placeholder="Ex: 10 de Outubro de 2026"
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Tempo de Leitura Estimado
+                    </label>
+                    <input
+                      type="text"
+                      value={pub.readTime || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].readTime = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      placeholder="Ex: 5 min de leitura"
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Resumo / Excerpt
+                    Resumo / Excerpt (Exibido no Cartão da Seção)
                   </label>
                   <textarea
                     rows={2}
@@ -2535,6 +2915,24 @@ export const CmsEditor: React.FC = () => {
                       setFormData({ ...formData, publications: updated });
                     }}
                     className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 flex items-center justify-between">
+                    <span>Conteúdo Completo (Texto Integral do Artigo / Notícia)</span>
+                    <span className="text-[10px] text-slate-500 font-normal">A assinatura automática é anexada ao final deste texto</span>
+                  </label>
+                  <textarea
+                    rows={5}
+                    value={pub.content || ''}
+                    onChange={(e) => {
+                      const updated = [...(formData.publications || [])];
+                      updated[idx].content = e.target.value;
+                      setFormData({ ...formData, publications: updated });
+                    }}
+                    placeholder="Cole aqui o texto integral do artigo ou parecer jurídico..."
+                    className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-sans font-light"
                   />
                 </div>
               </div>

@@ -108,7 +108,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
             <span>BIBLIOTECA JURÍDICA</span>
           </div>
 
-          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
+          <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance] animate-title-reveal">
             LIVROS <span className="gold-text-gradient">JURÍDICOS DIGITAIS</span>
           </h2>
 
@@ -151,7 +151,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
             <span>BUSCAR</span>
           </button>
 
-          {/* 3. Botão 'TODOS OS LIVROS DIGITAIS' para exibir todos os livros publicados */}
+          {/* 3. Botão 'TODOS OS LIVROS DIGITAIS' para exibir todos os livros publicados com contagem */}
           <button
             type="button"
             onClick={() => setSearchTerm('')}
@@ -159,7 +159,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
             title="Mostrar todos os livros publicados"
           >
             <BookOpen className="w-3.5 h-3.5 text-[#E5C158]" />
-            <span>TODOS OS LIVROS DIGITAIS</span>
+            <span>TODOS OS LIVROS DIGITAIS ({books.length})</span>
           </button>
         </div>
 

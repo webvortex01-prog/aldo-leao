@@ -43,7 +43,7 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
               <span>{dc?.sectionKicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}</span>
             </div>
 
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
+            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance] animate-title-reveal">
               {dc?.sectionTitle || 'AGENDE SUA'} <span className="gold-text-gradient">{dc?.sectionHighlight || 'CONSULTA DIGITAL'}</span>
             </h2>
 

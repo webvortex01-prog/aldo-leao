@@ -11,6 +11,7 @@ import {
 } from '../types';
 import realPartnerImg from '../assets/images/aldo_leao_portrait_real_1791572566625.jpg';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
+import { OFFICIAL_PUBLICATIONS_2024_2025 } from '../data/officialPublications2024_2025';
 
 const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
   {
@@ -172,155 +173,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
   }
 ];
 
-const DEFAULT_PUBLICATIONS: Publication[] = [
-  {
-    id: 'pub-1',
-    type: 'artigo',
-    title: 'A Nova Disciplina do ITCMD e o Impacto Imediato na Estruturação de Holdings Familiares',
-    area: 'Planejamento Patrimonial',
-    date: '10 de Outubro de 2026',
-    readTime: '6 min de leitura',
-    slug: 'itcmd-holding-familiar',
-    excerpt: 'Com a progressividade obrigatória de alíquotas do ITCMD de até 16% em diversos estados, o custo da inércia sucessória tornou-se exponencial. Como antecipar a doação com segurança jurídica.',
-    content: `A recente evolução da legislação tributária estadual e os entendimentos firmados no Supremo Tribunal Federal impuseram uma nova realidade às famílias de alto patrimônio no Brasil. A elevação das alíquotas de ITCMD e a taxação progressiva de heranças e doações exigem que patriarcas e matriarcas abandonem a postura passiva.
-
-Ao estruturar uma Holding Familiar com cisão patrimonial e governança antecipada, é possível não apenas mitigar o impacto tributário direto de inventários conturbados, mas assegurar a perpetuidade dos ativos operacionais e imobiliários contra litígios sucessórios e contingências conjugais de herdeiros.
-
-Pontos críticos avaliados pelo Dr. Aldo Leão:
-1. Cláusulas de incomunicabilidade e inalienabilidade com eficácia reforçada.
-2. Reserva vitalícia de usufruto com poderes irrestritos de administração.
-3. Acordo parassocial de quotistas regulando direito de preferência e resolução de impasses.
-
-A inércia não é prudência; é exposição desnecessária de um legado construído ao longo de décadas.`
-  },
-  {
-    id: 'pub-2',
-    type: 'noticia',
-    title: 'STJ Reconhece Ilegalidade de Redirecionamento de Execução Fiscal sem Prova de Dolo',
-    area: 'Direito Empresarial',
-    date: '04 de Outubro de 2026',
-    readTime: '4 min de leitura',
-    slug: 'stj-redirecionamento-fiscal',
-    excerpt: 'Decisão unânime da Primeira Seção reafirma que o mero inadimplemento de tributos não autoriza a invasão do patrimônio pessoal dos administradores sob o art. 135 do CTN.',
-    content: `Em julgamento histórico, o Superior Tribunal de Justiça consolidou a aplicação estrita das teses firmadas nos Temas 962 e 981. O tribunal determinou a desconstituição de penhoras online realizadas contra pessoas físicas que não exerceram atos de gestão com dolo ou excesso de poderes comprovados.
-
-A decisão reforça a necessidade de blindagem preventiva de ativos lícitos e a relevância de estruturas societárias segregadas para evitar constrangimentos a dirigentes corporativos.`
-  },
-  {
-    id: 'pub-3',
-    type: 'artigo',
-    title: 'Os Sete Cuidados Jurídicos Fundamentais na Aquisição de Imóveis de Alto Padrão',
-    area: 'Direito Imobiliário',
-    date: '28 de Setembro de 2026',
-    readTime: '7 min de leitura',
-    slug: 'cuidados-compra-imovel',
-    excerpt: 'Análise minuciosa de certidões, cadeia dominial vintenária, passivos trabalhistas e fiscais ocultos do vendedor para afastar em definitivo o risco de fraude contra credores.',
-    content: `A compra de ativos imobiliários exige muito mais do que a simples checagem da matrícula atualizada. A complexidade do sistema jurídico brasileiro impõe a realização de Due Diligence Imobiliária completa, abrangendo certidões de distribuição de feitos cíveis, trabalhistas, federais e ambientais de todos os alienantes anteriores dentro do prazo decadencial.
-
-A assessoria jurídica especializada da Aldo Leão assegura a higidez do investimento e a tranquilidade registral do adquirente.`
-  },
-  {
-    id: 'pub-4',
-    type: 'noticia',
-    title: 'Governança Familiar: Pesquisa Revela que Apenas 5% das Empresas Sobrevivem à 3ª Geração',
-    area: 'Planejamento Patrimonial',
-    date: '15 de Setembro de 2026',
-    readTime: '5 min de leitura',
-    slug: 'governanca-familiar-terceira-geracao',
-    excerpt: 'Falta de planejamento sucessório em vida e inexistência de acordo de acionistas respondem pela expressiva taxa de mortalidade empresarial no país.',
-    content: `Dados compilados por institutos empresariais confirmam que 90% das empresas no Brasil são de perfil familiar e geram mais de 60% do PIB nacional. No entanto, a desarmonia entre herdeiros e a falta de profissionalização da sucessão geram o colapso dos negócios logo após o falecimento do fundador.
-
-A Aldo Leão Advocacia Estratégica, fundada em 1908 e já consolidada em sua terceira geração desde 1986, exemplifica na prática o poder da continuidade planejada e da advocacia estratégica 4.0.`
-  },
-  {
-    id: 'pub-5',
-    type: 'artigo',
-    title: 'Compliance Consumerista como Escudo Contra Multas e Danos Reputacionais',
-    area: 'Relações de Consumo',
-    date: '02 de Setembro de 2026',
-    readTime: '5 min de leitura',
-    slug: 'compliance-consumerista-mitigacao',
-    excerpt: 'Como a revisão preventiva de termos de uso, contratos de adesão e práticas de SAC reduz em até 70% as ações indenizatórias perante os Juizados Especiais Cíveis.',
-    content: `Empresas que atuam no varejo e prestação de serviços enfrentam custos crescentes com litígios consumeristas em massa. A implementação de governança e auditoria preventiva nas rotinas de atendimento permite neutralizar causas de pedir recorrentes, blindando o fluxo de caixa corporativo.`
-  },
-  {
-    id: 'pub-6',
-    type: 'artigo',
-    title: 'Cláusulas Restritivas na Doação com Reserva de Usufruto: Inalienabilidade e Incomunicabilidade',
-    area: 'Direito Civil',
-    date: '20 de Agosto de 2026',
-    readTime: '8 min de leitura',
-    slug: 'clausulas-doacao-usufruto',
-    excerpt: 'Mecanismos contratuais avançados para garantir que os pais permaneçam com o poder total decisório e que os bens nunca se comuniquem com cônjuges de herdeiros.',
-    content: `Na estruturação da Holding Familiar e do Planejamento 4.0, a doação de quotas com reserva de usufruto permite aos genitores manter os direitos políticos, voto qualificado (Golden Share) e percepção integral de dividendos em vida, resguardando o legado com inalienabilidade e impenhorabilidade.`
-  },
-  {
-    id: 'pub-7',
-    type: 'noticia',
-    title: 'Reforma Tributária e a Tributação Progressiva de Heranças: O Que Muda para Famílias Empresárias',
-    area: 'Planejamento Patrimonial',
-    date: '10 de Agosto de 2026',
-    readTime: '5 min de leitura',
-    slug: 'reforma-tributaria-herancas',
-    excerpt: 'A Emenda Constitucional da Reforma Tributária fixou a progressividade obrigatória do ITCMD com impacto direto no patrimônio familiar.',
-    content: `Com a obrigatoriedade da progressividade do ITCMD em todos os estados da federação, o planejamento sucessório via Holding Familiar tornou-se um imperativo urgente para mitigar custos tributários astronômicos no inventário.`
-  },
-  {
-    id: 'pub-8',
-    type: 'artigo',
-    title: 'A Proteção Patrimonial de Bens Imóveis Rurais e Agronegócio Familiar',
-    area: 'Direito Imobiliário',
-    date: '01 de Agosto de 2026',
-    readTime: '7 min de leitura',
-    slug: 'protecao-patrimonial-rural',
-    excerpt: 'Estratégias societárias para segregar riscos da atividade agropecuária e perpetuar fazendas e terras familiares por gerações.',
-    content: `O agronegócio envolve riscos climáticos, contratuais e de mercado. A criação de uma holding imobiliária rural segregada da empresa operacional rural resguarda a terra nua de eventuais contingências da produção.`
-  },
-  {
-    id: 'pub-9',
-    type: 'noticia',
-    title: 'Tribunais Confirmam Validade da Golden Share em Holdings Familiares',
-    area: 'Direito Empresarial',
-    date: '22 de Julho de 2026',
-    readTime: '4 min de leitura',
-    slug: 'validade-golden-share',
-    excerpt: 'Adoção de ações preferenciais de classe especial garante aos patriarcas o poder de veto em decisões estratégicas fundamentais.',
-    content: `A jurisprudência tem referendado a utilização da Golden Share em sociedades empresárias familiares, garantindo que os fundadores preservem o controle e veto sobre venda de ativos e alteração do contrato social.`
-  },
-  {
-    id: 'pub-10',
-    type: 'artigo',
-    title: 'Contratos Estratégicos e a Prevenção de Conflitos Societários',
-    area: 'Direito Civil',
-    date: '15 de Julho de 2026',
-    readTime: '6 min de leitura',
-    slug: 'contratos-estrategicos-prevencao',
-    excerpt: 'Como a redação precisa de cláusulas de resolução de impasses (Buy or Sell, Shotgun) pacifica a convivência societária.',
-    content: `A previsão de regras claras para a saída de sócios, apuração de haveres e resolução de impasses contratuais previne dissoluções litigiosas prejudiciais aos negócios.`
-  },
-  {
-    id: 'pub-11',
-    type: 'noticia',
-    title: 'CFOAB Destaca Importância da Advocacia Preventiva na Redução de Litígios Judiciais',
-    area: 'Relações de Consumo',
-    date: '05 de Julho de 2026',
-    readTime: '4 min de leitura',
-    slug: 'advocacia-preventiva-oab',
-    excerpt: 'Relatório aponta que empresas assessoradas preventivamente têm 80% menos litígios e custos jurídicos.',
-    content: `A advocacia preventiva e estratégica consolida-se como o melhor investimento corporativo para empresas que buscam longevidade e segurança jurídica no Brasil.`
-  },
-  {
-    id: 'pub-12',
-    type: 'artigo',
-    title: 'A Sucessão Digital e a Gestão de Ativos Eletrônicos no Planejamento Patrimonial',
-    area: 'Planejamento Patrimonial',
-    date: '25 de Junho de 2026',
-    readTime: '6 min de leitura',
-    slug: 'sucessao-digital-ativos',
-    excerpt: 'Como incluir criptoativos, propriedade intelectual digital, marcas e contas no planejamento da Holding Familiar 4.0.',
-    content: `A economia digital demanda a inclusão de ativos virtuais, softwares, canais digitais e criptoativos no planejamento sucessório em vida, garantindo transferência segura aos herdeiros.`
-  }
-];
+const DEFAULT_PUBLICATIONS: Publication[] = OFFICIAL_PUBLICATIONS_2024_2025;
 
 const DEFAULT_DIGITAL_BOOKS: DigitalBook[] = [
   {
@@ -810,6 +663,17 @@ const DEFAULT_CONFIG: SiteConfig = {
     lectureCaption: 'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão',
     ctaPrompt: 'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.',
     ctaButtonText: 'AGENDAR CONFERÊNCIA'
+  },
+  articleSignature: {
+    enabled: true,
+    line1: 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+    line1Color: '#FFFFFF',
+    line2: 'Excelência Jurídica Desde 1908',
+    line2Color: '#D4AF37',
+    buttonText: 'AGENDAR CONSULTA',
+    buttonTextColor: '#E0E6ED',
+    whatsappNumber: '',
+    whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
   }
 };
 
@@ -921,6 +785,10 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           );
         }
 
+        const publications = (parsed.publications && parsed.publications.length >= 26)
+          ? parsed.publications
+          : DEFAULT_PUBLICATIONS;
+
         return {
           ...DEFAULT_CONFIG,
           ...parsed,
@@ -929,6 +797,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           contact: contactConfig,
           practiceAreas,
           digitalBooks,
+          publications,
           founder: { ...DEFAULT_CONFIG.founder, ...(parsed.founder || {}) },
           slide2: { ...DEFAULT_CONFIG.slide2, ...(parsed.slide2 || {}) },
           nationalPresence: { ...DEFAULT_CONFIG.nationalPresence, ...(parsed.nationalPresence || {}) },
@@ -938,6 +807,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           footer: { ...DEFAULT_CONFIG.footer, ...(parsed.footer || {}) },
           urgentHotline: { ...DEFAULT_CONFIG.urgentHotline, ...(parsed.urgentHotline || {}) },
           academiaLeao: { ...DEFAULT_CONFIG.academiaLeao, ...(parsed.academiaLeao || {}) },
+          articleSignature: { ...DEFAULT_CONFIG.articleSignature, ...(parsed.articleSignature || {}) },
         };
       }
     } catch (e) {

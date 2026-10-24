@@ -84,9 +84,9 @@ export const CentennialLegacy: React.FC = () => {
               {timelineEvents.map((evt, idx) => {
                 const displayYear = (idx === 4 || evt.title?.toLowerCase().includes('presença nacional digital') || evt.year === '2026') ? '2020' : evt.year;
                 return (
-                <div key={idx} className="flex flex-col items-center text-center">
-                  {/* Year Ball (Item f do dia 15/10/26: 2020) */}
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F6E27A] via-[#E5C158] to-[#D4AF37] border-2 border-white flex items-center justify-center text-[#050B14] font-cinzel font-black text-base shadow-[0_0_20px_rgba(212,175,55,0.4)] mb-4 shrink-0 tabular-nums">
+                <div key={idx} className="flex flex-col items-center text-center group">
+                  {/* Year Ball com Animação (Item 6 das solicitações e inspiração Decision) */}
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F6E27A] via-[#E5C158] to-[#D4AF37] border-2 border-white flex items-center justify-center text-[#050B14] font-cinzel font-black text-base shadow-[0_0_20px_rgba(212,175,55,0.4)] mb-4 shrink-0 tabular-nums animate-year-badge group-hover:scale-110 transition-transform duration-300">
                     {displayYear}
                   </div>
 
@@ -114,7 +114,7 @@ export const CentennialLegacy: React.FC = () => {
             </div>
           </div>
 
-          {/* Footer da Timeline: Botão Saiba Mais e Assinatura Legível Ampliada (Item 32 e 48) */}
+          {/* Footer da Timeline: Botão Saiba Mais e Assinatura Legível Ampliada com Animação (Item 32, 48 e 6) */}
           <div className="mt-12 pt-8 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
             <button
               onClick={() => setHistoryModalOpen(true)}
@@ -123,12 +123,12 @@ export const CentennialLegacy: React.FC = () => {
               {cl?.buttonText || 'Saiba Mais'}
             </button>
 
-            {/* Assinatura do Dr. Aldo Leão ampliada e centralizada (Item 32 e 48) */}
+            {/* Assinatura do Dr. Aldo Leão ampliada com animação que surge e fica fixa (Item 6) */}
             <div className="flex items-center justify-center">
               <img
                 src={cl?.signatureImageUrl || '/img/assinatura-gold.png'}
                 alt="Assinatura Dr. Aldo Leão"
-                className="h-20 sm:h-24 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] opacity-95"
+                className="h-20 sm:h-24 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.6)] opacity-95 animate-signature-glow"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
                 }}
