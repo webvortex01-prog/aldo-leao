@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Scale } from 'lucide-react';
 import heroLionImg from '../assets/images/hero_lion_gold_law_1791570163709.jpg';
+import heroLionMobileImg from '../assets/images/hero_lion_gold_law_mobile.jpg';
+import drAldoConsultoriaMobileImg from '../assets/images/dr_aldo_consultoria_mobile.jpg';
 import officeBoardroomImg from '../assets/images/office_boardroom_luxury_1791570183507.jpg';
 import { useSite } from '../context/SiteContext';
 
@@ -40,31 +42,37 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
         {/* Slide 1 Background */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-70' : 'opacity-0'
+            currentSlide === 0 ? 'opacity-75 sm:opacity-70' : 'opacity-0'
           }`}
         >
-          <img
-            src={heroLionImg}
-            alt="Ambiente Jurídico Centenário"
-            className="w-full h-full object-cover object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
-          />
+          <picture className="w-full h-full block">
+            <source media="(max-width: 768px)" srcSet={heroLionMobileImg} />
+            <img
+              src={heroLionImg}
+              alt="Ambiente Jurídico Centenário"
+              className="w-full h-full object-cover object-top sm:object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
+            />
+          </picture>
         </div>
 
-        {/* Slide 2 Background */}
+        {/* Slide 2 Background: Dr. Aldo Leão em Consultoria Estratégica na Sala de Reunião */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-65' : 'opacity-0'
+            currentSlide === 1 ? 'opacity-75 sm:opacity-65' : 'opacity-0'
           }`}
         >
-          <img
-            src={officeBoardroomImg}
-            alt="Gestão Patrimonial e Societária"
-            className="w-full h-full object-cover object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
-          />
+          <picture className="w-full h-full block">
+            <source media="(max-width: 768px)" srcSet={drAldoConsultoriaMobileImg} />
+            <img
+              src="/img/dr-aldo-consultoria.jpg"
+              alt="Dr. Aldo Leão - Consultoria Estratégica em Planejamento Patrimonial 4.0"
+              className="w-full h-full object-cover object-top sm:object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
+            />
+          </picture>
         </div>
 
-        {/* Cinematic Filmic Overlays: Garante legibilidade do texto à esquerda e máxima visibilidade e brilho à direita */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#050B14]/95 via-[#050B14]/70 to-[#050B14]/30" />
+        {/* Cinematic Filmic Overlays: No mobile gradiente vertical suave para destacar a arte no topo; no desktop gradiente horizontal para o texto à esquerda */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/40 via-[#050B14]/80 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14]/95 md:via-[#050B14]/70 md:to-[#050B14]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/30" />
       </div>
 
