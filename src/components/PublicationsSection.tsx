@@ -48,6 +48,9 @@ export const PublicationsSection: React.FC = () => {
     return Array.from(set).sort();
   }, [publications]);
 
+  const artigosCount = useMemo(() => publications.filter((p) => p.type === 'artigo').length, [publications]);
+  const noticiasCount = useMemo(() => publications.filter((p) => p.type === 'noticia').length, [publications]);
+
   const itemsPerPage = 6;
   const totalPages = Math.ceil(filteredPublications.length / itemsPerPage) || 1;
   const currentPublications = filteredPublications.slice(
@@ -126,9 +129,9 @@ export const PublicationsSection: React.FC = () => {
               }}
               className="px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
             >
-              <option value="todos">Todas as Publicações</option>
-              <option value="artigo">Artigos Jurídicos</option>
-              <option value="noticia">Notícias Jurídicas</option>
+              <option value="todos">Todas as Publicações ({publications.length})</option>
+              <option value="artigo">Artigos Jurídicos ({artigosCount})</option>
+              <option value="noticia">Notícias Jurídicas ({noticiasCount})</option>
             </select>
 
             {/* Area Filter */}
@@ -226,27 +229,19 @@ export const PublicationsSection: React.FC = () => {
           )}
         </div>
 
-        {/* Paginação com botão e seta para a direita para ver as outras 6 publicações (Item 11) */}
+        {/* Paginação com números acima e botões dourados ANTERIORES e PRÓXIMAS abaixo */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 pt-6 border-t border-[#D4AF37]/20">
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 rounded-lg bg-[#071122] border border-[#D4AF37]/35 text-slate-300 hover:text-white hover:border-[#D4AF37] disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider cursor-pointer"
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span>Anterior</span>
-            </button>
-
-            <div className="flex items-center gap-1.5 px-3">
+          <div className="pt-8 border-t border-[#D4AF37]/20 flex flex-col items-center gap-5">
+            {/* Números das páginas */}
+            <div className="flex items-center justify-center gap-2">
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-8 h-8 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  className={`w-9 h-9 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     currentPage === i + 1
-                      ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black shadow-md'
-                      : 'bg-[#071122] text-slate-400 hover:text-white border border-slate-800'
+                      ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black shadow-md scale-105'
+                      : 'bg-[#071122] text-slate-300 hover:text-white border border-[#D4AF37]/30 hover:border-[#D4AF37]'
                   }`}
                 >
                   {i + 1}
@@ -254,14 +249,26 @@ export const PublicationsSection: React.FC = () => {
               ))}
             </div>
 
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              className="px-5 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider cursor-pointer shadow-md"
-            >
-              <span>Próximas Publicações</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            {/* Botões dourados abaixo dos números das páginas: ANTERIORES na esquerda e PRÓXIMAS na direita */}
+            <div className="w-full max-w-lg flex items-center justify-between gap-4 px-2">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="btn-gold-luxury px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] hover:brightness-110 disabled:opacity-35 disabled:cursor-not-allowed transition-all flex items-center gap-2 text-xs font-black uppercase tracking-wider cursor-pointer shadow-md"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>ANTERIORES</span>
+              </button>
+
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="btn-gold-luxury px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] hover:brightness-110 disabled:opacity-35 disabled:cursor-not-allowed transition-all flex items-center gap-2 text-xs font-black uppercase tracking-wider cursor-pointer shadow-md ml-auto"
+              >
+                <span>PRÓXIMAS</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         )}
       </div>

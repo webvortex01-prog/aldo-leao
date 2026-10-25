@@ -785,7 +785,9 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           );
         }
 
-        const publications = (parsed.publications && parsed.publications.length >= 26)
+        // Assegura que notícias e artigos estejam presentes; se o cache do navegador estiver antigo (sem notícias), sincroniza com DEFAULT_PUBLICATIONS
+        const hasNoticias = parsed.publications?.some((p: any) => p.type === 'noticia');
+        const publications = (parsed.publications && parsed.publications.length >= 26 && hasNoticias)
           ? parsed.publications
           : DEFAULT_PUBLICATIONS;
 

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Scale } from 'lucide-react';
 import heroLionImg from '../assets/images/hero_lion_gold_law_1791570163709.jpg';
 import heroLionMobileImg from '../assets/images/hero_lion_gold_law_mobile.jpg';
-import drAldoConsultoriaMobileImg from '../assets/images/dr_aldo_consultoria_mobile.jpg';
-import officeBoardroomImg from '../assets/images/office_boardroom_luxury_1791570183507.jpg';
 import { useSite } from '../context/SiteContext';
 
 interface HeroSliderProps {
@@ -37,12 +35,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
-      {/* Background Pan-Zoom Images with Luxury Gradients (Item 5 e Inspiração Decision Revolution Slider) */}
+      {/* Background Images ajustadas para aparecerem integralmente em cada slide conforme solicitado */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1 Background */}
+        {/* Slide 1: Imagem do Leão e Balança da Justiça integralmente dimensionada */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-75 sm:opacity-70' : 'opacity-0'
+            currentSlide === 0 ? 'opacity-80 sm:opacity-75' : 'opacity-0'
           }`}
         >
           <picture className="w-full h-full block">
@@ -50,30 +48,27 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={heroLionImg}
               alt="Ambiente Jurídico Centenário"
-              className="w-full h-full object-cover object-top sm:object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
+              className="w-full h-full object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
             />
           </picture>
         </div>
 
-        {/* Slide 2 Background: Dr. Aldo Leão em Consultoria Estratégica na Sala de Reunião */}
+        {/* Slide 2: Imagem da Família com o Portão Atrás (Holding Familiar) integralmente dimensionada */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-75 sm:opacity-65' : 'opacity-0'
+            currentSlide === 1 ? 'opacity-85 sm:opacity-80' : 'opacity-0'
           }`}
         >
-          <picture className="w-full h-full block">
-            <source media="(max-width: 768px)" srcSet={drAldoConsultoriaMobileImg} />
-            <img
-              src="/img/dr-aldo-consultoria.jpg"
-              alt="Dr. Aldo Leão - Consultoria Estratégica em Planejamento Patrimonial 4.0"
-              className="w-full h-full object-cover object-top sm:object-center animate-ken-burns scale-105 filter brightness-105 contrast-105"
-            />
-          </picture>
+          <img
+            src="/img/holding-familiar-1.jpg"
+            alt="Holding Familiar - Família e Portão Dourado"
+            className="w-full h-full object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
+          />
         </div>
 
-        {/* Cinematic Filmic Overlays: No mobile gradiente vertical suave para destacar a arte no topo; no desktop gradiente horizontal para o texto à esquerda */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/40 via-[#050B14]/80 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14]/95 md:via-[#050B14]/70 md:to-[#050B14]/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/30" />
+        {/* Overlays cinematográficos suaves para garantir legibilidade dos textos e máxima visibilidade das artes */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/40 via-[#050B14]/80 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14] md:via-[#050B14]/75 md:to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/25" />
       </div>
 
       {/* Background ambient luxury lighting - brilho dourado e azul nobre vibrante */}
@@ -309,15 +304,15 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     </button>
                   </div>
 
-                  {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 */}
+                  {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 (Aparece integralmente) */}
                   <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive">
-                    <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center">
+                    <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-2">
                       <img
                         src="/img/holding-familiar-1.jpg"
                         alt="Holding Familiar - Planejamento Patrimonial 4.0"
-                        className="w-full h-full object-cover object-[center_28%]"
+                        className="w-full h-full object-contain"
                         onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-consultoria.jpg';
+                          (e.currentTarget as HTMLImageElement).src = '/img/holding-familiar-1.jpg';
                         }}
                       />
                     </div>

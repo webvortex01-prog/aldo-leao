@@ -150,7 +150,7 @@ VANTAGENS QUE A HOLDING FAMILIAR OPORTUNIZA:
   },
   {
     id: 'pub-06',
-    type: 'artigo',
+    type: 'noticia',
     title: 'DESISTÊNCIA DA COMPRA IMOBILIÁRIA GERA DEVOLUÇÃO DE 75% DO VALOR PAGO',
     area: 'Direito Imobiliário',
     date: '08/05/2025',
@@ -167,7 +167,7 @@ A decisão reforça a jurisprudência consolidada no sentido de assegurar o dire
   },
   {
     id: 'pub-07',
-    type: 'artigo',
+    type: 'noticia',
     title: 'REFORMA TRIBUTÁRIA AUMENTA O ALTO CUSTO DO INVENTÁRIO',
     area: 'Direito Tributário',
     date: '07/05/2025',
@@ -186,7 +186,7 @@ A HOLDING FAMILIAR surge como a alternativa ao altíssimo custo do Inventário e
   },
   {
     id: 'pub-08',
-    type: 'artigo',
+    type: 'noticia',
     title: 'HOMOLOGAÇÃO DE PARTILHA AMIGÁVEL DISPENSA O PAGAMENTO IMEDIATO DO ITCMD',
     area: 'Sucessões e Inventário',
     date: '06/05/2025',
@@ -203,7 +203,7 @@ O relator destacou que a norma assegura a razoável duração do processo e a co
   },
   {
     id: 'pub-09',
-    type: 'artigo',
+    type: 'noticia',
     title: 'AUTÔNOMO FINANCIA IMÓVEL COM DECLARAÇÃO DO IMPOSTO DE RENDA',
     area: 'Direito Imobiliário',
     date: '27/03/2025',
@@ -218,7 +218,7 @@ A comprovação via declaração do IRPF agiliza a análise cadastral, confere s
   },
   {
     id: 'pub-10',
-    type: 'artigo',
+    type: 'noticia',
     title: 'PRODUTOR RURAL PAGARÁ MAIS R$ 155 MIL POR DESMATAMENTO NA AMAZÔNIA',
     area: 'Direito Ambiental',
     date: '17/03/2025',
@@ -233,7 +233,7 @@ A decisão evidencia a importância de compliance ambiental rigoroso nas ativida
   },
   {
     id: 'pub-11',
-    type: 'artigo',
+    type: 'noticia',
     title: 'PROJETO AUTORIZA ADVOGADO INTERMEDIAR A VENDA, LOCAÇÃO E AVALIAÇÃO IMOBILIÁRIA',
     area: 'Direito Imobiliário',
     date: '07/03/2025',
@@ -264,7 +264,7 @@ Para evitar essa instabilidade, a solução jurídica consiste em constituir a s
   },
   {
     id: 'pub-13',
-    type: 'artigo',
+    type: 'noticia',
     title: 'COMPLIANCE TEM CRESCIMENTO EXPONENCIAL NO BRASIL',
     area: 'Direito Empresarial',
     date: '28/02/2025',
@@ -279,7 +279,7 @@ Além de garantir conformidade legal, o compliance fortalece a reputação corpo
   },
   {
     id: 'pub-14',
-    type: 'artigo',
+    type: 'noticia',
     title: 'O BLOQUEIO JUDICIAL DE IMÓVEIS DO DEVEDOR PELA CNIB',
     area: 'Direito Imobiliário',
     date: '17/02/2025',
@@ -294,7 +294,7 @@ Isso reduz a insegurança jurídica e previne constrições indevidas em imóvei
   },
   {
     id: 'pub-15',
-    type: 'artigo',
+    type: 'noticia',
     title: 'REFORMA TRIBUTÁRIA: IMPACTOS DA REGULAMENTAÇÃO NA LOCAÇÃO E NA COMPRA E VENDA IMOBILIÁRIA POR PJ',
     area: 'Direito Tributário Imobiliário',
     date: '14/02/2025',
@@ -324,7 +324,7 @@ Dessa forma, os bens permanecem preservados dentro da linha sucessória da famí
   },
   {
     id: 'pub-17',
-    type: 'artigo',
+    type: 'noticia',
     title: 'O ABANDONO DE PAIS IDOSOS EXCLUI O HERDEIRO DO TESTAMENTO',
     area: 'Direito de Família e Sucessões',
     date: '30/12/2024',
@@ -337,7 +337,7 @@ A medida também eleva a pena de reclusão pelo crime de abandono de incapaz pre
   },
   {
     id: 'pub-18',
-    type: 'artigo',
+    type: 'noticia',
     title: 'PESSOAS FÍSICAS PAGARÃO MAIS IMPOSTOS NA LOCAÇÃO E NA COMPRA E VENDA IMOBILIÁRIA',
     area: 'Direito Imobiliário',
     date: '12/12/2024',
@@ -350,7 +350,7 @@ Enquanto na pessoa física a tributação da renda pode chegar a 27,5%, a estrut
   },
   {
     id: 'pub-19',
-    type: 'artigo',
+    type: 'noticia',
     title: 'DISTRITO FEDERAL REDUZ A ALÍQUOTA DO ITBI',
     area: 'Direito Imobiliário',
     date: '09/12/2024',
@@ -363,7 +363,7 @@ A medida desonera o adquirente, estimula a construção civil e fomenta a formal
   },
   {
     id: 'pub-20',
-    type: 'artigo',
+    type: 'noticia',
     title: 'A EXIGÊNCIA DE REGISTRO DOS SÍNDICOS NO CRA',
     area: 'Direito Condominial',
     date: '28/11/2024',
@@ -376,7 +376,7 @@ A exigência carece de sustentação legal, haja vista que a profissão de sínd
   },
   {
     id: 'pub-21',
-    type: 'artigo',
+    type: 'noticia',
     title: 'O AUMENTO DO ITCMD E A MAJORAÇÃO DO ALTO CUSTO DO INVENTÁRIO',
     area: 'Planejamento Sucessório',
     date: '27/11/2024',
@@ -445,7 +445,7 @@ Vantagens estratégicas:
   },
   {
     id: 'pub-025',
-    type: 'artigo',
+    type: 'noticia',
     title: 'O SÓCIO QUE SE RETIRA DA EMPRESA NÃO ESTÁ SUJEITO À EXECUÇÃO',
     area: 'Direito Empresarial e Tributário',
     date: '27/02/2024',
@@ -458,7 +458,7 @@ O sócio que se afastou regularmente da sociedade antes da dissolução não pod
   },
   {
     id: 'pub-026',
-    type: 'artigo',
+    type: 'noticia',
     title: 'PROJETO DE LEI TORNA CRIME DEIXAR CRIANÇAS SOZINHAS EM CONDOMÍNIO',
     area: 'Direito Condominial',
     date: '29/01/2024',
@@ -468,5 +468,49 @@ O sócio que se afastou regularmente da sociedade antes da dissolução não pod
     content: `A Comissão de Desenvolvimento Urbano da Câmara dos Deputados aprovou o Projeto de Lei 4309/20, que tipifica infração e estabelece sanções administrativas no Estatuto da Criança e do Adolescente (ECA) para responsáveis que deixarem menores de 12 anos desacompanhados em áreas comuns de condomínios.
 
 A medida prevê multas de até 20 salários mínimos e estabelece deveres de orientação e prevenção a síndicos e gestores condominiais, visando a segurança infantil em piscinas, coberturas e elevadores.`
+  },
+  {
+    "id": "pub-ai-01",
+    "type": "noticia",
+    "title": "STJ RECONHECE ILEGALIDADE DE REDIRECIONAMENTO DE EXECUÇÃO FISCAL SEM PROVA DE DOLO",
+    "area": "Direito Empresarial",
+    "date": "18/10/2026",
+    "readTime": "5 min de leitura",
+    "slug": "stj-reconhece-ilegalidade-redirecionamento-execucao-fiscal",
+    "excerpt": "Superior Tribunal de Justiça reafirma que o mero inadimplemento de tributo não autoriza constrição de bens pessoais de sócios e diretores.",
+    "content": "A Primeira Seção do Superior Tribunal de Justiça (STJ), sob a égide do rito dos recursos repetitivos (Tema 962), reafirmou que o simples inadimplemento de tributo não configura, por si só, ato praticado com excesso de poderes ou infração de lei apto a justificar o redirecionamento da execução fiscal para o patrimônio pessoal dos sócios ou administradores.\n\nPara que haja a responsabilização pessoal dos sócios (art. 135 do CTN), é indispensável a comprovação inequívoca de dolo, fraude ou dissolução irregular da sociedade empresária. A decisão confere substancial segurança jurídica ao empresariado nacional, resguardando a higidez do patrimônio familiar e as estruturas societárias regularmente estabelecidas."
+  },
+  {
+    "id": "pub-ai-02",
+    "type": "noticia",
+    "title": "GOVERNANÇA FAMILIAR: PESQUISA REVELA QUE APENAS 5% DAS EMPRESAS SOBREVIVEM À 3ª GERAÇÃO",
+    "area": "Planejamento Patrimonial",
+    "date": "10/10/2026",
+    "readTime": "4 min de leitura",
+    "slug": "governanca-familiar-apenas-5-sobrevivem-3-geracao",
+    "excerpt": "Estudos globais e nacionais confirmam que a falta de planejamento sucessório e acordo de sócios é a principal causa da extinção de negócios familiares.",
+    "content": "Levantamento divulgado por institutos de governança corporativa e sucessão familiar revela que menos de 30% das empresas familiares brasileiras chegam à segunda geração, e somente 5% alcançam a terceira geração com êxito e rentabilidade.\n\nO principal fator de mortalidade precoce de empresas familiares não é a crise econômica ou concorrência, mas sim conflitos internos entre herdeiros, disputas de inventário e ausência de protocolos de governança.\n\nA estruturação de Holdings Familiares, acompanhada de Acordos Parassociais de Sócios e cláusulas de usufruto, erige-se como o instrumento mais eficaz para superar a estatística e perenizar o patrimônio e a atividade empresarial."
+  },
+  {
+    "id": "pub-ai-03",
+    "type": "noticia",
+    "title": "TRIBUNAIS CONFIRMAM VALIDADE DA GOLDEN SHARE EM HOLDINGS FAMILIARES",
+    "area": "Direito Empresarial",
+    "date": "02/10/2026",
+    "readTime": "4 min de leitura",
+    "slug": "tribunais-confirmam-validade-golden-share-holding-familiar",
+    "excerpt": "Jurisprudência reconhece a legitimidade de ações preferenciais de classe especial para assegurar aos patriarcas o poder de veto permanente.",
+    "content": "Decisões recentes dos Tribunais de Justiça estaduais têm confirmado a plena validade da instituição de quotas ou ações preferenciais com direitos políticos diferenciados (Golden Share) em sociedades de holding familiar.\n\nA ferramenta permite que os fundadores, mesmo após realizarem a doação da quase totalidade das cotas aos filhos e herdeiros, conservem o poder de veto sobre deliberações estruturantes, como venda de imóveis, endividamento, ingresso de terceiros e alteração do contrato social, garantindo estabilidade e soberania aos instituidores."
+  },
+  {
+    "id": "pub-ai-04",
+    "type": "noticia",
+    "title": "CFOAB DESTACA IMPORTÂNCIA DA ADVOCACIA PREVENTIVA NA REDUÇÃO DE LITÍGIOS JUDICIAIS",
+    "area": "Relações de Consumo",
+    "date": "25/09/2026",
+    "readTime": "4 min de leitura",
+    "slug": "cfoab-advocacia-preventiva-reducao-litigios",
+    "excerpt": "Relatório aponta que empresas e famílias assessoradas preventivamente por especialistas reduzem em até 80% suas despesas com litígios e contingências.",
+    "content": "O Conselho Federal da Ordem dos Advogados do Brasil (CFOAB) ressaltou em evento nacional a relevância da advocacia preventiva e estratégica para o desenvolvimento econômico e a desjudicialização no país.\n\nEmpresas e grupos familiares que investem em consultoria jurídica preventiva, auditoria contratual e modelagem societária preventiva reduzem em até 80% o índice de litígios em tribunais, além de resguardarem a imagem institucional e a liquidez patrimonial."
   }
 ];
