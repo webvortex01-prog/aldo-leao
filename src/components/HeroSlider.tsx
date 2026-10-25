@@ -3,6 +3,7 @@ import { ArrowRight, ChevronLeft, ChevronRight, Scale } from 'lucide-react';
 import heroLionImg from '../assets/images/hero_lion_gold_law_1791570163709.jpg';
 import heroLionMobileImg from '../assets/images/hero_lion_gold_law_mobile.jpg';
 import holdingFamilyHeroBg from '../assets/images/holding_family_hero_bg.jpg';
+import holdingFamilyMobileBg from '../assets/images/holding_family_mobile.jpg';
 import { useSite } from '../context/SiteContext';
 
 interface HeroSliderProps {
@@ -36,12 +37,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
-      {/* Background Images ajustadas */}
+      {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem do Leão e Balança da Justiça integralmente dimensionada */}
+        {/* Slide 1: Imagem do Leão e Balança da Justiça otimizada para Mobile e Desktop */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-80 sm:opacity-75' : 'opacity-0'
+            currentSlide === 0 ? 'opacity-85 sm:opacity-75' : 'opacity-0'
           }`}
         >
           <picture className="w-full h-full block">
@@ -49,22 +50,25 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={heroLionImg}
               alt="Ambiente Jurídico Centenário"
-              className="w-full h-full object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
+              className="w-full h-full object-cover object-center md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
             />
           </picture>
         </div>
 
-        {/* Slide 2: Imagem da Família Multigeracional cobrindo a tela inteira em 16:9 widescreen, sutilmente mais escura */}
+        {/* Slide 2: Imagem da Família Multigeracional com versão Mobile 9:16 e Desktop 16:9 */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-70 sm:opacity-65' : 'opacity-0'
+            currentSlide === 1 ? 'opacity-75 sm:opacity-65' : 'opacity-0'
           }`}
         >
-          <img
-            src={holdingFamilyHeroBg}
-            alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-            className="w-full h-full object-cover object-[center_25%] md:object-[center_20%] filter brightness-90 contrast-105"
-          />
+          <picture className="w-full h-full block">
+            <source media="(max-width: 768px)" srcSet={holdingFamilyMobileBg} />
+            <img
+              src={holdingFamilyHeroBg}
+              alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
+              className="w-full h-full object-cover object-center md:object-[center_20%] filter brightness-90 contrast-105"
+            />
+          </picture>
           {/* Película sutil para escurecer suavemente o fundo conforme pedido do RD */}
           <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
         </div>

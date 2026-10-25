@@ -22,12 +22,17 @@ import { AdminAuthModal } from './components/admin/AdminAuthModal';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
 import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { PrivacyPolicyModal, TermsOfUseModal, OabDisclaimerModal } from './components/LegalModals';
 
 function AppContent() {
   const [currentView, setCurrentView] = useState<'site' | 'admin' | 'holding-landing' | 'academia'>('site');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isAdminAuthOpen, setIsAdminAuthOpen] = useState(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
+  const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isOabDisclaimerOpen, setIsOabDisclaimerOpen] = useState(false);
   const [presetArea, setPresetArea] = useState<string>('Planejamento Patrimonial 4.0');
   const [presetUrgency, setPresetUrgency] = useState<string>('media');
   const [presetValue, setPresetValue] = useState<string>('R$ 2M - R$ 5M');
@@ -155,6 +160,29 @@ function AppContent() {
         onOpenAdmin={handleOpenAdmin} 
         onOpenTutorial={() => setIsTutorialOpen(true)}
         onOpenLandingPage={() => setCurrentView('holding-landing')}
+        onOpenPrivacyPolicy={() => setIsPrivacyOpen(true)}
+        onOpenTerms={() => setIsTermsOpen(true)}
+        onOpenOabDisclaimer={() => setIsOabDisclaimerOpen(true)}
+      />
+
+      {/* Banner de Consentimento de Cookies e Privacidade LGPD */}
+      <CookieConsentBanner
+        onOpenPrivacyPolicy={() => setIsPrivacyOpen(true)}
+        onOpenTerms={() => setIsTermsOpen(true)}
+      />
+
+      {/* Modais de Conformidade Legal, LGPD e Ética OAB */}
+      <PrivacyPolicyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
+      />
+      <TermsOfUseModal
+        isOpen={isTermsOpen}
+        onClose={() => setIsTermsOpen(false)}
+      />
+      <OabDisclaimerModal
+        isOpen={isOabDisclaimerOpen}
+        onClose={() => setIsOabDisclaimerOpen(false)}
       />
 
       {/* Rodapé Fixo Centralizado com Balança Dourada (Item 1, 24, 43) */}

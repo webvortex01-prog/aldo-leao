@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Scale, Send, CheckCircle2, MessageSquare } from 'lucide-react';
+import { X, Scale, Send, CheckCircle2, MessageSquare, Lock } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
@@ -238,6 +238,20 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                 />
               </div>
 
+              {/* Consentimento LGPD & Sigilo Profissional */}
+              <div className="flex items-start gap-2 pt-1 text-left">
+                <input
+                  type="checkbox"
+                  id="lgpdConsent"
+                  required
+                  defaultChecked
+                  className="mt-0.5 rounded border-slate-700 text-[#D4AF37] focus:ring-[#D4AF37] focus:ring-offset-0 bg-[#050B14] cursor-pointer"
+                />
+                <label htmlFor="lgpdConsent" className="text-[11px] text-slate-300 leading-snug cursor-pointer">
+                  Autorizo o tratamento destes dados estritamente para contato e agendamento prévio nos termos da <strong>LGPD (Lei 13.709/18)</strong>, resguardado o <strong>Sigilo Profissional da Advocacia (art. 7º, II do Estatuto da OAB)</strong>.
+                </label>
+              </div>
+
               {/* Botão AGENDAR CONSULTA VIRTUAL */}
               <div className="pt-2">
                 <button
@@ -260,6 +274,12 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Agendar pelo WhatsApp</span>
                 </button>
+              </div>
+
+              {/* Selo de Segurança e Sigilo Ético */}
+              <div className="pt-2 text-center text-[10px] text-slate-400 flex items-center justify-center gap-1.5">
+                <Lock className="w-3 h-3 text-[#D4AF37]" />
+                <span>Atendimento 100% confidencial · Protegido por criptografia e sigilo ético</span>
               </div>
             </form>
           </div>
