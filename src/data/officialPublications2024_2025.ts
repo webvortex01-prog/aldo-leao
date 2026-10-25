@@ -512,5 +512,139 @@ A medida prevê multas de até 20 salários mínimos e estabelece deveres de ori
     "slug": "cfoab-advocacia-preventiva-reducao-litigios",
     "excerpt": "Relatório aponta que empresas e famílias assessoradas preventivamente por especialistas reduzem em até 80% suas despesas com litígios e contingências.",
     "content": "O Conselho Federal da Ordem dos Advogados do Brasil (CFOAB) ressaltou em evento nacional a relevância da advocacia preventiva e estratégica para o desenvolvimento econômico e a desjudicialização no país.\n\nEmpresas e grupos familiares que investem em consultoria jurídica preventiva, auditoria contratual e modelagem societária preventiva reduzem em até 80% o índice de litígios em tribunais, além de resguardarem a imagem institucional e a liquidez patrimonial."
+  },
+
+  // === ARTIGOS E NOTÍCIAS RECUPERADOS (DOUTRINA DR. ALDO LEÃO & PRECEDENTES STF/STJ) ===
+  {
+    id: "art-rec-01",
+    type: "artigo",
+    title: "A Nova Disciplina do ITCMD e o Impacto Imediato na Estruturação de Holdings Familiares",
+    area: "Planejamento 4.0 (Holding Familiar)",
+    date: "10/10/2026",
+    readTime: "6 min de leitura",
+    slug: "itcmd-holding-familiar",
+    excerpt: "Com a progressividade obrigatória de alíquotas do ITCMD de até 16% em diversos estados, o custo da inércia sucessória tornou-se exponencial. Como antecipar a doação com segurança jurídica.",
+    content: "A recente evolução da legislação tributária estadual e os entendimentos firmados no Supremo Tribunal Federal impuseram uma nova realidade às famílias de alto patrimônio no Brasil. A elevação das alíquotas de ITCMD e a taxação progressiva de heranças e doações exigem que patriarcas e matriarcas abandonem a postura passiva.\n\nAo estruturar uma Holding Familiar com cisão patrimonial e governança antecipada, é possível não apenas mitigar o impacto tributário direto de inventários conturbados, mas assegurar a perpetuidade dos ativos operacionais e imobiliários contra litígios sucessórios e contingências conjugais de herdeiros.\n\nPontos críticos avaliados pelo Dr. Aldo Leão:\n1. Cláusulas de incomunicabilidade e inalienabilidade com eficácia reforçada.\n2. Reserva vitalícia de usufruto com poderes irrestritos de administração.\n3. Acordo parassocial de quotistas regulando direito de preferência e resolução de impasses.\n\nA inércia não é prudência; é exposição desnecessária de um legado construído ao longo de décadas."
+  },
+  {
+    id: "art-rec-02",
+    type: "artigo",
+    title: "Os Sete Cuidados Jurídicos Fundamentais na Aquisição de Imóveis de Alto Padrão",
+    area: "Direito Imobiliário",
+    date: "28/09/2026",
+    readTime: "7 min de leitura",
+    slug: "cuidados-compra-imovel",
+    excerpt: "Análise minuciosa de certidões, cadeia dominial vintenária, passivos trabalhistas e fiscais ocultos do vendedor para afastar em definitivo o risco de fraude contra credores.",
+    content: "A compra de ativos imobiliários exige muito mais do que a simples checagem da matrícula atualizada. A complexidade do sistema jurídico brasileiro impõe a realização de Due Diligence Imobiliária completa, abrangendo certidões de distribuição de feitos cíveis, trabalhistas, federais e ambientais de todos os alienantes anteriores dentro do prazo decadencial.\n\nA assessoria jurídica especializada da Aldo Leão assegura a higidez do investimento e a tranquilidade registral do adquirente."
+  },
+  {
+    id: "art-rec-03",
+    type: "artigo",
+    title: "Compliance Consumerista como Escudo Contra Multas e Danos Reputacionais",
+    area: "Relações de Consumo",
+    date: "02/09/2026",
+    readTime: "5 min de leitura",
+    slug: "compliance-consumerista-mitigacao",
+    excerpt: "Como a revisão preventiva de termos de uso, contratos de adesão e práticas de SAC reduz em até 70% as ações indenizatórias perante os Juizados Especiais Cíveis.",
+    content: "Empresas que atuam no varejo e prestação de serviços enfrentam custos crescentes com litígios consumeristas em massa. A implementação de governança e auditoria preventiva nas rotinas de atendimento permite neutralizar causas de pedir recorrentes, blindando o fluxo de caixa corporativo."
+  },
+  {
+    id: "art-rec-04",
+    type: "artigo",
+    title: "Cláusulas Restritivas na Doação com Reserva de Usufruto: Inalienabilidade e Incomunicabilidade",
+    area: "Direito Civil",
+    date: "20/08/2026",
+    readTime: "8 min de leitura",
+    slug: "clausulas-doacao-usufruto",
+    excerpt: "Mecanismos contratuais avançados para garantir que os pais permaneçam com o poder total decisório e que os bens nunca se comuniquem com cônjuges de herdeiros.",
+    content: "Na estruturação da Holding Familiar e do Planejamento 4.0, a doação de quotas com reserva de usufruto permite aos genitores manter os direitos políticos, voto qualificado (Golden Share) e percepção integral de dividendos em vida, resguardando o legado com inalienabilidade e impenhorabilidade."
+  },
+  {
+    id: "art-rec-05",
+    type: "artigo",
+    title: "A Proteção Patrimonial de Bens Imóveis Rurais e Agronegócio Familiar",
+    area: "Direito Imobiliário",
+    date: "01/08/2026",
+    readTime: "6 min de leitura",
+    slug: "protecao-rural-agronegocio",
+    excerpt: "Estratégias societárias para segregar riscos da atividade agropecuária e perpetuar fazendas e terras familiares por gerações.",
+    content: "O agronegócio envolve riscos climáticos, contratuais e de mercado. A criação de uma holding imobiliária rural segregada da empresa operacional rural resguarda a terra nua de eventuais contingências da produção."
+  },
+  {
+    id: "art-rec-06",
+    type: "artigo",
+    title: "Contratos Estratégicos e a Prevenção de Conflitos Societários",
+    area: "Direito Civil",
+    date: "15/07/2026",
+    readTime: "6 min de leitura",
+    slug: "contratos-estrategicos-prevencao",
+    excerpt: "Como a redação precisa de cláusulas de resolução de impasses (Buy or Sell, Shotgun) pacifica a convivência societária.",
+    content: "A previsão de regras claras para a saída de sócios, apuração de haveres e resolução de impasses contratuais previne dissoluções litigiosas prejudiciais aos negócios."
+  },
+  {
+    id: "art-rec-07",
+    type: "artigo",
+    title: "A Sucessão Digital e a Gestão de Ativos Eletrônicos no Planejamento Patrimonial",
+    area: "Planejamento 4.0 (Holding Familiar)",
+    date: "25/06/2026",
+    readTime: "5 min de leitura",
+    slug: "sucessao-digital-holding",
+    excerpt: "Como incluir criptoativos, propriedade intelectual digital, marcas e contas no planejamento da Holding Familiar 4.0.",
+    content: "A economia digital demanda a inclusão de ativos virtuais, softwares, canais digitais e criptoativos no planejamento sucessório em vida, garantindo transferência segura aos herdeiros."
+  },
+  {
+    id: "not-rec-01",
+    type: "noticia",
+    title: "STJ Reconhece Ilegalidade de Redirecionamento de Execução Fiscal sem Prova de Dolo",
+    area: "Direito Empresarial e Tributário",
+    date: "04/10/2026",
+    readTime: "4 min de leitura",
+    slug: "stj-redirecionamento-fiscal",
+    excerpt: "Decisão unânime da Primeira Seção reafirma que o mero inadimplemento de tributos não autoriza a invasão do patrimônio pessoal dos administradores sob o art. 135 do CTN.",
+    content: "Em julgamento histórico, o Superior Tribunal de Justiça consolidou a aplicação estrita das teses firmadas nos Temas 962 e 981. O tribunal determinou a desconstituição de penhoras online realizadas contra pessoas físicas que não exerceram atos de gestão com dolo ou excesso de poderes comprovados.\n\nA decisão reforça a necessidade de blindagem preventiva de ativos lícitos e a relevância de estruturas societárias segregadas para evitar constrangimentos a dirigentes corporativos."
+  },
+  {
+    id: "not-rec-02",
+    type: "noticia",
+    title: "Governança Familiar: Pesquisa Revela que Apenas 5% das Empresas Sobrevivem à 3ª Geração",
+    area: "Planejamento 4.0 (Holding Familiar)",
+    date: "15/09/2026",
+    readTime: "5 min de leitura",
+    slug: "governanca-familiar-terceira-geracao",
+    excerpt: "Falta de planejamento sucessório em vida e inexistência de acordo de acionistas respondem pela expressiva taxa de mortalidade empresarial no país.",
+    content: "Dados compilados por institutos empresariais confirmam que 90% das empresas no Brasil são de perfil familiar e geram mais de 60% do PIB nacional. No entanto, a desarmonia entre herdeiros e a falta de profissionalização da sucessão geram o colapso dos negócios logo após o falecimento do fundador.\n\nA Aldo Leão Advocacia Estratégica, fundada em 1908 e já consolidada em sua terceira geração desde 1986, exemplifica na prática o poder da continuidade planejada e da advocacia estratégica 4.0."
+  },
+  {
+    id: "not-rec-03",
+    type: "noticia",
+    title: "Reforma Tributária e a Tributação Progressiva de Heranças: O Que Muda para Famílias Empresárias",
+    area: "Direito Tributário e Sucessões",
+    date: "29/09/2026",
+    readTime: "5 min de leitura",
+    slug: "reforma-tributaria-herancas",
+    excerpt: "A emenda constitucional impõe a progressividade obrigatória do ITCMD com tetos de até 16% nos estados, exigindo antecipação via holding familiar.",
+    content: "A promulgação da Reforma Tributária estabeleceu que todos os Estados da Federação e o Distrito Federal adotem alíquotas progressivas para o Imposto sobre Transmissão Causa Mortis e Doação (ITCMD). Estados que antes cobravam alíquota fixa de 4% já preparam projetos de lei para elevar a cobrança para patamares de até 8% e 16%.\n\nFamílias empresárias que estruturam sua Holding Familiar antes da entrada em vigor das novas tabelas garantem a aplicação da legislação vigente mais benéfica, preservando milhões em patrimônio líquido."
+  },
+  {
+    id: "not-rec-04",
+    type: "noticia",
+    title: "Tribunais Confirmam Validade da Golden Share em Holdings Familiares",
+    area: "Direito Empresarial",
+    date: "18/09/2026",
+    readTime: "4 min de leitura",
+    slug: "validade-golden-share-holding",
+    excerpt: "Jurisprudência assegura que patriarcas e matriarcas mantenham direito a veto absoluto e controle societário permanente mesmo após doação total das cotas aos herdeiros.",
+    content: "Decisões recentes de Tribunais de Justiça e do Superior Tribunal de Justiça ratificaram a legalidade de cláusulas de ação especial com poder de veto (Golden Share) em sociedades patrimoniais limitadas e anônimas.\n\nO mecanismo permite que os pais transmitam a propriedade nua dos bens aos filhos sem jamais perder a governança, a gestão e a prerrogativa de vetar vendas de imóveis ou admissão de terceiros na sociedade familiar."
+  },
+  {
+    id: "not-rec-05",
+    type: "noticia",
+    title: "CFOAB Destaca Importância da Advocacia Preventiva na Redução de Litígios Judiciais",
+    area: "Advocacia Preventiva e Gestão",
+    date: "08/09/2026",
+    readTime: "4 min de leitura",
+    slug: "cfoab-advocacia-preventiva",
+    excerpt: "Conselho Federal ressalta que consultoria estratégica e planejamento contratual antecipado evitam processos judiciais que levam mais de uma década no judiciário.",
+    content: "Relatório divulgado pelo Conselho Federal da Ordem dos Advogados do Brasil enfatizou que a atuação do advogado preventivo e consultivo representa a forma mais inteligente e econômica de gestão patrimonial e empresarial.\n\nProcessos contenciosos de inventário ou cobrança fiscal prolongam-se por até 15 anos nos tribunais, gerando desvalorização de bens e despesas elevadas. A estrutura preventiva soluciona previamente impasses societários e sucessórios."
   }
 ];

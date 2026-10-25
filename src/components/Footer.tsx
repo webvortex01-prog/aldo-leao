@@ -25,7 +25,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
     { label: 'Atuação', href: '#areas-atuacao' },
     { label: 'Serviços', href: '#solucoes-excelencia' },
     { label: 'Planejamento', href: '#holding-familiar' },
-    { label: 'Publicações', href: '#publicacoes' },
+    { label: 'Artigos Jurídicos', href: '#artigos' },
+    { label: 'Notícias Jurídicas', href: '#noticias' },
     { label: 'Livros', href: '#livros' },
     { label: 'Contato', href: '#contato' },
   ];

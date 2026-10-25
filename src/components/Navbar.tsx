@@ -28,7 +28,8 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Soluções', href: '#solucoes-excelencia' },
     { label: 'Consulta', href: '#consulta-digital' },
     { label: 'Planejamento', href: '#holding-familiar' },
-    { label: 'Publicações', href: '#publicacoes' },
+    { label: 'Artigos', href: '#artigos' },
+    { label: 'Notícias', href: '#noticias' },
     { label: 'Livros', href: '#livros' },
     { label: 'Contato', href: '#contato' },
   ];

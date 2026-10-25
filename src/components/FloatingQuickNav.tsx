@@ -344,6 +344,36 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
                 </button>
 
                 <button
+                  onClick={() => scrollToSection('artigos')}
+                  className="p-3 rounded-xl bg-[#0B1A33]/80 hover:bg-[#132A54] border border-[#D4AF37]/25 hover:border-[#D4AF37] flex items-center gap-3 text-left transition-all cursor-pointer group"
+                >
+                  <span className="text-2xl group-hover:scale-110 transition-transform">📜</span>
+                  <div>
+                    <div className="text-xs font-bold text-white group-hover:text-[#F6E27A]">
+                      Artigos Jurídicos
+                    </div>
+                    <div className="text-[10px] text-slate-400">
+                      Doutrina Dr. Aldo Leão
+                    </div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => scrollToSection('noticias')}
+                  className="p-3 rounded-xl bg-[#0B1A33]/80 hover:bg-[#132A54] border border-[#D4AF37]/25 hover:border-[#D4AF37] flex items-center gap-3 text-left transition-all cursor-pointer group"
+                >
+                  <span className="text-2xl group-hover:scale-110 transition-transform">⚖️</span>
+                  <div>
+                    <div className="text-xs font-bold text-white group-hover:text-[#F6E27A]">
+                      Notícias Jurídicas
+                    </div>
+                    <div className="text-[10px] text-slate-400">
+                      STF, STJ e Tribunais
+                    </div>
+                  </div>
+                </button>
+
+                <button
                   onClick={() => scrollToSection('livros')}
                   className="p-3 rounded-xl bg-[#0B1A33]/80 hover:bg-[#132A54] border border-[#D4AF37]/25 hover:border-[#D4AF37] flex items-center gap-3 text-left transition-all cursor-pointer group"
                 >
