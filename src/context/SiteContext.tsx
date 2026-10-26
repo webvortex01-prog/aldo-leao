@@ -177,62 +177,72 @@ const DEFAULT_PUBLICATIONS: Publication[] = OFFICIAL_PUBLICATIONS_2024_2025;
 
 const DEFAULT_DIGITAL_BOOKS: DigitalBook[] = [
   {
-    id: 'livro-1',
-    title: 'Como resolver as dívidas bancárias em tempos de Covid-19?',
+    id: 'livro-planejamento-patrimonial-4-0',
+    title: 'Planejamento Patrimonial 4.0 & o Alto Custo da Omissão',
     author: 'Dr. Aldo Leão',
-    area: 'Direito Bancário e Recuperação Financeira',
-    description: 'Estratégias jurídicas avançadas para renegociação, revisão de contratos bancários, suspensão de execuções e preservação da saúde financeira empresarial e familiar.',
-    pages: '128 páginas',
+    area: 'Planejamento Patrimonial & Sucessório',
+    description: 'Guia definitivo e prático sobre como constituir a Holding Familiar em vida, eliminar o inventário judicial e evitar a perda de até 40% do patrimônio com ITCMD progressivo, honorários e litígios entre herdeiros.',
+    pages: '168 páginas',
     year: '2026',
-    isbn: '978-65-89412-08-3',
+    publicationMonth: 12,
+    publicationOrder: 1,
+    isbn: '978-65-89412-01-4',
     format: 'Livro Digital (PDF)',
     downloadAvailable: true,
-    downloadCount: '3.120 downloads',
-    badge: 'Disponível para Download',
+    downloadCount: '3.420 downloads',
+    badge: 'Mais Recente',
+    coverImage: '/img/livros/livro-planejamento-patrimonial-4-0.jpeg',
     chapters: [
-      'Capítulo 1: O Cenário Extraordinário e a Teoria da Imprevisão nos Contratos Bancários',
-      'Capítulo 2: Juros Abusivos e Tarifas Ilegais: Como Identificar e Reaver Valores',
-      'Capítulo 3: Suspensão de Ações de Busca e Apreensão e Execuções Fiscais/Bancárias',
-      'Capítulo 4: Negociação Direta com Instituições Financeiras e Termos de Acordo Seguros',
-      'Capítulo 5: Blindagem do Capital de Giro e Proteção dos Ativos Familiares do Fiador'
+      'Capítulo 1: O Custo Oculto da Morte e a Guilhotina Tributária do Inventário',
+      'Capítulo 2: A Arquitetura da Holding Familiar: Célula Cofre, Operacional e Veículo',
+      'Capítulo 3: Doação de Quotas com Reserva de Usufruto e Cláusulas Restritivas',
+      'Capítulo 4: Cláusula de Reversão, Impenhorabilidade, Incomunicabilidade e Inalienabilidade',
+      'Capítulo 5: Golden Share e Acordo de Sócios: Mantendo o Poder Político em Vida',
+      'Capítulo 6: O Cronograma em 4 Etapas: Diagnóstico, Modelagem, Registro e Governança'
     ],
-    sampleExcerpt: 'A reestruturação do passivo bancário exige postura técnica, base em jurisprudência consolidada dos Tribunais Superiores e ação preventiva antes da consolidação de penhoras...'
+    sampleExcerpt: 'Deixar para resolver a sucessão após a morte não é um ato de prudência, mas de transferência cruel de conflitos e custas escorchantes aos seus filhos. O inventário consome em média de 20% a 40% de todo o patrimônio acumulado por uma vida de trabalho...'
   },
   {
-    id: 'livro-2',
-    title: 'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+    id: 'livro-voce-tem-patrimonio',
+    title: 'Você Tem Patrimônio e Deseja Protegê-lo Juridicamente?',
     author: 'Dr. Aldo Leão',
-    area: 'Proteção de Dados & Compliance Digital',
-    description: 'Análise dogmática e processual detalhada da primeira decisão condenatória sob a Lei Geral de Proteção de Dados (Lei 13.709/2018), com manual de adequação corporativa.',
-    pages: '154 páginas',
-    year: '2026',
-    isbn: '978-65-89412-06-9',
+    area: 'Proteção e Blindagem Patrimonial Ética',
+    description: 'Manual de estratégias jurídicas preventivas para empresários, produtores rurais, médicos e investidores de alto patrimônio. Como blindar bens de forma lícita antes do surgimento de crises ou passivos.',
+    pages: '132 páginas',
+    year: '2024',
+    publicationMonth: 10,
+    publicationOrder: 2,
+    isbn: '978-65-89412-03-8',
     format: 'Livro Digital (PDF)',
     downloadAvailable: true,
-    downloadCount: '2.450 downloads',
+    downloadCount: '2.140 downloads',
     badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-voce-tem-patrimonio.jpeg',
     chapters: [
-      'Capítulo 1: O Caso Paradigmático e os Fundamentos da Decisão Condenatória',
-      'Capítulo 2: O Compartilhamento Não Autorizado com Parceiros Comerciais e o Dano Moral',
-      'Capítulo 3: O Dano Moral In Re Ipsa na Violação de Dados Pessoais',
-      'Capítulo 4: Políticas de Privacidade, Termos de Consentimento e Legítimo Interesse',
-      'Capítulo 5: O Plano de Resposta a Incidentes e Relatório de Impacto (RIPD)'
+      'Capítulo 1: A Linha Divisória entre Planejamento Lícito e Fraude à Execução',
+      'Capítulo 2: Desconsideração da Personalidade Jurídica: Aplicação do art. 50 do Código Civil',
+      'Capítulo 3: Proteção de Ativos do Agronegócio e Maquinários Produtivos',
+      'Capítulo 4: Riscos Médicos e Profissionais: Responsabilidade Civil Individual e Patrimônio Familiar',
+      'Capítulo 5: Segregação Patrimonial Estratégica e Blindagem Internacional Lícita'
     ],
-    sampleExcerpt: 'A primeira condenação judicial por violação à LGPD no Brasil marcou o encerramento da fase de complacência no tratamento de dados. Empresas que não estruturam sua governança digital respondem objetivamente por vazamentos...'
+    sampleExcerpt: 'Proteger o patrimônio não é ocultar bens; é estruturá-los legalmente antes que qualquer risco iminente se materialize. O empresário de sucesso não espera a crise chegar para pensar na segurança de sua família...'
   },
   {
-    id: 'livro-3',
+    id: 'livro-mercado-de-carbono',
     title: 'Mercado de Carbono: Construindo um Futuro Sustentável',
     author: 'Dr. Aldo Leão',
     area: 'Direito Ambiental e Sustentabilidade Corporativa',
     description: 'Guia jurídico especializado sobre créditos de carbono, certificações internacionais, governança ESG e monetização sustentável para produtores rurais e empresas.',
     pages: '140 páginas',
-    year: '2026',
+    year: '2024',
+    publicationMonth: 6,
+    publicationOrder: 3,
     isbn: '978-65-89412-07-6',
     format: 'Livro Digital (PDF)',
     downloadAvailable: true,
     downloadCount: '1.870 downloads',
     badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-mercado-de-carbono.jpeg',
     chapters: [
       'Capítulo 1: Marcos Regulatórios do Mercado Regulado e Voluntário de Carbono no Brasil',
       'Capítulo 2: Titularidade dos Créditos em Terras Produtivas e de Preservação',
@@ -243,18 +253,71 @@ const DEFAULT_DIGITAL_BOOKS: DigitalBook[] = [
     sampleExcerpt: 'A descarbonização da economia não é apenas um compromisso ecológico, mas uma das maiores avenidas de valorização patrimonial e segurança regulatória da década...'
   },
   {
-    id: 'livro-4',
+    id: 'livro-sindico-prospero',
+    title: 'Síndico Próspero: Administrando o Condomínio com Alta Performance',
+    author: 'Dr. Aldo Leão',
+    area: 'Direito Condominial & Governança',
+    description: 'Manual de governança jurídica condominial, mitigação de passivos trabalhistas, cobrança ágil de inadimplência e segurança decisória para síndicos e administradoras.',
+    pages: '198 páginas',
+    year: '2023',
+    publicationMonth: 11,
+    publicationOrder: 4,
+    isbn: '978-65-89412-05-2',
+    format: 'Livro Digital (PDF)',
+    downloadAvailable: true,
+    downloadCount: '1.980 downloads',
+    badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-sindico-prospero.jpeg',
+    chapters: [
+      'Capítulo 1: Responsabilidade Civil e Criminal do Síndico na Gestão do Condomínio',
+      'Capítulo 2: Assembleias Gerais Inatacáveis: Edital, Quórum e Impugnações',
+      'Capítulo 3: Cobrança Extrajudicial e Execução Rápida de Despesas Condominiais',
+      'Capítulo 4: Terceirização de Serviços e o Risco de Responsabilidade Subsidiária',
+      'Capítulo 5: Obras Estruturais, Contratos de Manutenção e Prestação de Contas'
+    ],
+    sampleExcerpt: 'A administração de condomínios modernos se assemelha à gestão de médias empresas. A falta de amparo jurídico transforma a nobre função do síndico em um polo passivo de litígios e cobranças indenizatórias...'
+  },
+  {
+    id: 'livro-holding-familiar-e-imobiliaria',
+    title: 'Holding Familiar e Imobiliária',
+    author: 'Dr. Aldo Leão',
+    area: 'Direito Societário e Imobiliário',
+    description: 'A modelagem jurídica completa para integralização de bens imóveis no capital social de pessoa jurídica, segregação patrimonial de riscos de locação e economia tributária de até 60% na tributação de aluguéis e vendas.',
+    pages: '144 páginas',
+    year: '2023',
+    publicationMonth: 4,
+    publicationOrder: 5,
+    isbn: '978-65-89412-02-1',
+    format: 'Livro Digital (PDF)',
+    downloadAvailable: true,
+    downloadCount: '2.890 downloads',
+    badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-holding-familiar-e-imobiliaria.jpeg',
+    chapters: [
+      'Capítulo 1: A Tributação de Imóveis: Pessoa Física (27,5%) vs. Holding Imobiliária (11,33% a 14,53%)',
+      'Capítulo 2: Integralização de Imóveis a Valor Histórico do IRPF sem Ganho de Capital',
+      'Capítulo 3: Imunidade de ITBI: Estratégias Jurisprudenciais Pós-Tema 796 do STF',
+      'Capítulo 4: Blindagem Operacional: Célula de Locação vs. Célula de Propriedade',
+      'Capítulo 5: Venda de Imóveis por Empresa Patrimonial e o Lucro Presumido'
+    ],
+    sampleExcerpt: 'A exploração de imóveis para locação na pessoa física chega à alíquota esmagadora de 27,5% no IRPF, além da exposição direta a ações cíveis e trabalhistas. A Holding Imobiliária profissionaliza a gestão e reduz legalmente a carga para cerca de 11,33%...'
+  },
+  {
+    id: 'livro-sete-cuidados-compra-imovel',
     title: 'Sete Cuidados na Compra do Imóvel',
     author: 'Dr. Aldo Leão',
     area: 'Direito Imobiliário & Due Diligence',
     description: 'Checklist prático e indispensável para Due Diligence imobiliária de alta precisão. Como blindar compradores e investidores contra penhoras ocultas, ações de fraude contra credores e nulidades registrais.',
     pages: '116 páginas',
-    year: '2026',
+    year: '2022',
+    publicationMonth: 9,
+    publicationOrder: 6,
     isbn: '978-65-89412-04-5',
     format: 'Livro Digital (PDF)',
     downloadAvailable: true,
     downloadCount: '3.110 downloads',
     badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-sete-cuidados-compra-imovel.jpeg',
     chapters: [
       'Capítulo 1: A Matrícula Atualizada e o Histórico Vintenário do Imóvel',
       'Capítulo 2: Certidões de Feitos Ajuizados de Alienantes Anteriores',
@@ -267,93 +330,54 @@ const DEFAULT_DIGITAL_BOOKS: DigitalBook[] = [
     sampleExcerpt: 'A certidão negativa do Registro de Imóveis é apenas o primeiro passo. Mais de 38% dos compradores desavisados enfrentam constrições judiciais por passivos do antigo proprietário que poderiam ter sido evitados com uma auditoria jurídica prévia...'
   },
   {
-    id: 'livro-5',
-    title: 'Síndico Próspero: Administrando o Condomínio com Alta Performance',
+    id: 'livro-lgpd-primeira-condenacao',
+    title: 'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
     author: 'Dr. Aldo Leão',
-    area: 'Direito Condominial & Governança',
-    description: 'Manual de governança jurídica condominial, mitigação de passivos trabalhistas, cobrança ágil de inadimplência e segurança decisória para síndicos e administradoras.',
-    pages: '198 páginas',
-    year: '2026',
-    isbn: '978-65-89412-05-2',
+    area: 'Proteção de Dados & Compliance Digital',
+    description: 'Análise dogmática e processual detalhada da primeira decisão condenatória sob a Lei Geral de Proteção de Dados (Lei 13.709/2018), com manual de adequação corporativa.',
+    pages: '154 páginas',
+    year: '2021',
+    publicationMonth: 8,
+    publicationOrder: 7,
+    isbn: '978-65-89412-06-9',
     format: 'Livro Digital (PDF)',
     downloadAvailable: true,
-    downloadCount: '1.980 downloads',
+    downloadCount: '2.450 downloads',
     badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-lgpd-primeira-condenacao.jpeg',
     chapters: [
-      'Capítulo 1: Responsabilidade Civil e Criminal do Síndico na Gestão do Condomínio',
-      'Capítulo 2: Assembleias Gerais Inatacáveis: Edital, Quórum e Impugnações',
-      'Capítulo 3: Cobrança Extrajudicial e Execução Rápida de Despesas Condominiais',
-      'Capítulo 4: Terceirização de Serviços e o Risco de Responsabilidade Subsidiária',
-      'Capítulo 5: Obras Estruturais, Contratos de Manutenção e Prestação de Contas'
+      'Capítulo 1: O Caso Paradigmático e os Fundamentos da Decisão Condenatória',
+      'Capítulo 2: O Compartilhamento Não Autorizado com Parceiros Comerciais e o Dano Moral',
+      'Capítulo 3: O Dano Moral In Re Ipsa na Violação de Dados Pessoais',
+      'Capítulo 4: Políticas de Privacidade, Termos de Consentimento e Legítimo Interesse',
+      'Capítulo 5: O Plano de Resposta a Incidentes e Relatório de Impacto (RIPD)'
     ],
-    sampleExcerpt: 'A administração de condomínios modernos se assemelha à gestão de médias empresas. A falta de amparo jurídico transforma a nobre função do síndico em um polo passivo de litígios e cobranças indenizatórias...'
+    sampleExcerpt: 'A primeira condenação judicial por violação à LGPD no Brasil marcou o encerramento da fase de complacência no tratamento de dados. Empresas que não estruturam sua governança digital respondem objetivamente por vazamentos...'
   },
   {
-    id: 'livro-6',
-    title: 'Holding Familiar e Imobiliária',
+    id: 'livro-dividas-bancarias-covid',
+    title: 'Como resolver as dívidas bancárias em tempos de Covid-19?',
     author: 'Dr. Aldo Leão',
-    area: 'Direito Societário e Imobiliário',
-    description: 'A modelagem jurídica completa para integralização de bens imóveis no capital social de pessoa jurídica, segregação patrimonial de riscos de locação e economia tributária de até 60% na tributação de aluguéis e vendas.',
-    pages: '144 páginas',
-    year: '2026',
-    isbn: '978-65-89412-02-1',
+    area: 'Direito Bancário e Recuperação Financeira',
+    description: 'Estratégias jurídicas avançadas para renegociação, revisão de contratos bancários, suspensão de execuções e preservação da saúde financeira empresarial e familiar.',
+    pages: '128 páginas',
+    year: '2020',
+    publicationMonth: 5,
+    publicationOrder: 8,
+    isbn: '978-65-89412-08-3',
     format: 'Livro Digital (PDF)',
     downloadAvailable: true,
-    downloadCount: '2.890 downloads',
+    downloadCount: '3.120 downloads',
     badge: 'Disponível para Download',
+    coverImage: '/img/livros/livro-dividas-bancarias-covid.jpeg',
     chapters: [
-      'Capítulo 1: A Tributação de Imóveis: Pessoa Física (27,5%) vs. Holding Imobiliária (11,33% a 14,53%)',
-      'Capítulo 2: Integralização de Imóveis a Valor Histórico do IRPF sem Ganho de Capital',
-      'Capítulo 3: Imunidade de ITBI: Estratégias Jurisprudenciais Pós-Tema 796 do STF',
-      'Capítulo 4: Blindagem Operacional: Célula de Locação vs. Célula de Propriedade',
-      'Capítulo 5: Venda de Imóveis por Empresa Patrimonial e o Lucro Presumido'
+      'Capítulo 1: O Cenário Extraordinário e a Teoria da Imprevisão nos Contratos Bancários',
+      'Capítulo 2: Juros Abusivos e Tarifas Ilegais: Como Identificar e Reaver Valores',
+      'Capítulo 3: Suspensão de Ações de Busca e Apreensão e Execuções Fiscais/Bancárias',
+      'Capítulo 4: Negociação Direta com Instituições Financeiras e Termos de Acordo Seguros',
+      'Capítulo 5: Blindagem do Capital de Giro e Proteção dos Ativos Familiares do Fiador'
     ],
-    sampleExcerpt: 'A exploração de imóveis para locação na pessoa física chega à alíquota esmagadora de 27,5% no IRPF, além da exposição direta a ações cíveis e trabalhistas. A Holding Imobiliária profissionaliza a gestão e reduz legalmente a carga para cerca de 11,33%...'
-  },
-  {
-    id: 'livro-7',
-    title: 'Você Tem Patrimônio e Deseja Protegê-lo Juridicamente?',
-    author: 'Dr. Aldo Leão',
-    area: 'Proteção e Blindagem Patrimonial Ética',
-    description: 'Manual de estratégias jurídicas preventivas para empresários, produtores rurais, médicos e investidores de alto patrimônio. Como blindar bens de forma lícita antes do surgimento de crises ou passivos.',
-    pages: '132 páginas',
-    year: '2026',
-    isbn: '978-65-89412-03-8',
-    format: 'Livro Digital (PDF)',
-    downloadAvailable: true,
-    downloadCount: '2.140 downloads',
-    badge: 'Disponível para Download',
-    chapters: [
-      'Capítulo 1: A Linha Divisória entre Planejamento Lícito e Fraude à Execução',
-      'Capítulo 2: Desconsideração da Personalidade Jurídica: Aplicação do art. 50 do Código Civil',
-      'Capítulo 3: Proteção de Ativos do Agronegócio e Maquinários Produtivos',
-      'Capítulo 4: Riscos Médicos e Profissionais: Responsabilidade Civil Individual e Patrimônio Familiar',
-      'Capítulo 5: Segregação Patrimonial Estratégica e Blindagem Internacional Lícita'
-    ],
-    sampleExcerpt: 'Proteger o patrimônio não é ocultar bens; é estruturá-los legalmente antes que qualquer risco iminente se materialize. O empresário de sucesso não espera a crise chegar para pensar na segurança de sua família...'
-  },
-  {
-    id: 'livro-8',
-    title: 'Planejamento Patrimonial 4.0 & o Alto Custo da Omissão',
-    author: 'Dr. Aldo Leão',
-    area: 'Planejamento Patrimonial & Sucessório',
-    description: 'Guia definitivo e prático sobre como constituir a Holding Familiar em vida, eliminar o inventário judicial e evitar a perda de até 40% do patrimônio com ITCMD progressivo, honorários e litígios entre herdeiros.',
-    pages: '168 páginas',
-    year: '2026',
-    isbn: '978-65-89412-01-4',
-    format: 'Livro Digital (PDF)',
-    downloadAvailable: true,
-    downloadCount: '3.420 downloads',
-    badge: 'Disponível para Download',
-    chapters: [
-      'Capítulo 1: O Custo Oculto da Morte e a Guilhotina Tributária do Inventário',
-      'Capítulo 2: A Arquitetura da Holding Familiar: Célula Cofre, Operacional e Veículo',
-      'Capítulo 3: Doação de Quotas com Reserva de Usufruto e Cláusulas Restritivas',
-      'Capítulo 4: Cláusula de Reversão, Impenhorabilidade, Incomunicabilidade e Inalienabilidade',
-      'Capítulo 5: Golden Share e Acordo de Sócios: Mantendo o Poder Político em Vida',
-      'Capítulo 6: O Cronograma em 4 Etapas: Diagnóstico, Modelagem, Registro e Governança'
-    ],
-    sampleExcerpt: 'Deixar para resolver a sucessão após a morte não é um ato de prudência, mas de transferência cruel de conflitos e custas escorchantes aos seus filhos. O inventário consome em média de 20% a 40% de todo o patrimônio acumulado por uma vida de trabalho...'
+    sampleExcerpt: 'A reestruturação do passivo bancário exige postura técnica, base em jurisprudência consolidada dos Tribunais Superiores e ação preventiva antes da consolidação de penhoras...'
   }
 ];
 
@@ -772,9 +796,17 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }))
           : DEFAULT_PRACTICE_AREAS;
 
-        const digitalBooks = (parsed.digitalBooks && parsed.digitalBooks.length >= 8)
-          ? parsed.digitalBooks
-          : DEFAULT_DIGITAL_BOOKS;
+        const digitalBooks = DEFAULT_DIGITAL_BOOKS.map(defaultBook => {
+          const cached = parsed.digitalBooks?.find((b: any) => b.id === defaultBook.id || b.title?.toLowerCase().trim() === defaultBook.title?.toLowerCase().trim());
+          return {
+            ...defaultBook,
+            ...(cached || {}),
+            coverImage: defaultBook.coverImage,
+            year: defaultBook.year,
+            publicationMonth: defaultBook.publicationMonth,
+            publicationOrder: defaultBook.publicationOrder,
+          };
+        }).sort((a, b) => (a.publicationOrder || 0) - (b.publicationOrder || 0));
 
         const centennialLegacy = { ...DEFAULT_CONFIG.centennialLegacy, ...(parsed.centennialLegacy || {}) };
         if (centennialLegacy.events && centennialLegacy.events.length > 0) {

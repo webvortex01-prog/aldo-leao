@@ -85,6 +85,8 @@ export interface DigitalBook {
   coverImage?: string;
   pages?: string;
   year?: string;
+  publicationMonth?: number;
+  publicationOrder?: number;
   isbn?: string;
   format?: string;
   downloadAvailable?: boolean;
