@@ -443,7 +443,10 @@ const DEFAULT_CONFIG: SiteConfig = {
     oabNumber: 'OAB/RS 48.452'
   },
   hero: {
-    heroImageUrl: '/img/dr-aldo-1.jpg',
+    heroImageUrl: '/img/novofundohero.jpg',
+    heroImageMobileUrl: '/img/novofundohero_mobile.jpg',
+    heroSlide2ImageUrl: '/img/holding-familiar-1.jpg',
+    heroSlide2ImageMobileUrl: '/img/holding-familiar-1.jpg',
     kicker: 'ALDO LEÃO',
     kickerSub: 'ADVOCACIA ESTRATÉGICA',
     titlePart1: 'TRADIÇÃO JURÍDICA',
@@ -497,7 +500,8 @@ const DEFAULT_CONFIG: SiteConfig = {
     fullName: 'Dr. Aldo Leão',
     title: 'ADVOCACIA ESTRATÉGICA',
     credentials: 'Desde 1986 · Terceira Geração · Mais de 40 Anos de Excelência Jurídica',
-    photoUrl: '/img/dr-aldo-reuniao.jpg',
+    photoUrl: '/img/dr-aldo-portrait.jpg',
+    secondaryPhotoUrl: '/img/dr-aldo-reuniao.jpg',
     bioParagraph1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira. A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.',
     bioParagraph2: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado. O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.',
     bioParagraph3: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.',
@@ -630,6 +634,10 @@ const DEFAULT_CONFIG: SiteConfig = {
     paragraph1: 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.',
     paragraph2: 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.',
     paragraph3: 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).',
+    cardImageUrl: '/img/holding-familiar-1.jpg',
+    cardTitle: 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL',
+    cardText: 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.',
+    cardBadge: 'PLANEJAMENTO 4.0',
     boxWhatIsTitle: 'O QUE É O PLANEJAMENTO 4.0?',
     boxWhatIsHeading: 'Metodologia Jurídica Estratégica Multidisciplinar',
     boxWhatIsText: 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.',
@@ -649,6 +657,35 @@ const DEFAULT_CONFIG: SiteConfig = {
     tableTitle: 'INVENTÁRIO x HOLDING FAMILIAR',
     tableSubtitle: 'A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.',
     tableSavingsText: 'R$ 164.000,00 (correspondente a 55,21%)'
+  },
+  practiceAreasHeader: {
+    kicker: 'SOLUÇÕES JURÍDICAS DE ALTA PERFORMANCE',
+    title: 'ÁREAS DE',
+    titleHighlight: 'ATUAÇÃO',
+    description: 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'
+  },
+  excellenceSolutionsHeader: {
+    kicker: 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO',
+    title: 'SOLUÇÕES DE',
+    titleHighlight: 'EXCELÊNCIA',
+    description1: 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.',
+    description2: 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'
+  },
+  publicationsSection: {
+    kicker: 'NOTÍCIAS E ARTIGOS JURÍDICOS',
+    titleWhite: 'PUBLICAÇÕES',
+    titleGold: 'JURÍDICAS',
+    paragraph1: 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.',
+    paragraph2: 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.',
+    paragraph3: 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'
+  },
+  booksSection: {
+    goldKicker: 'Acervo de Livros Digitais Publicados',
+    titleWhite: 'LIVROS',
+    titleGold: 'DIGITAIS',
+    paragraph1: 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.',
+    paragraph2: 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.',
+    paragraph3: 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'
   },
   digitalConsultation: {
     sectionKicker: 'ATENDIMENTO DIGITAL EM TODO O BRASIL',
@@ -837,6 +874,10 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           nationalPresence: { ...DEFAULT_CONFIG.nationalPresence, ...(parsed.nationalPresence || {}) },
           centennialLegacy,
           holdingFamiliar: { ...DEFAULT_CONFIG.holdingFamiliar, ...(parsed.holdingFamiliar || {}) },
+          practiceAreasHeader: { ...DEFAULT_CONFIG.practiceAreasHeader, ...(parsed.practiceAreasHeader || {}) },
+          excellenceSolutionsHeader: { ...DEFAULT_CONFIG.excellenceSolutionsHeader, ...(parsed.excellenceSolutionsHeader || {}) },
+          publicationsSection: { ...DEFAULT_CONFIG.publicationsSection, ...(parsed.publicationsSection || {}) },
+          booksSection: { ...DEFAULT_CONFIG.booksSection, ...(parsed.booksSection || {}) },
           digitalConsultation: { ...DEFAULT_CONFIG.digitalConsultation, ...(parsed.digitalConsultation || {}) },
           footer: { ...DEFAULT_CONFIG.footer, ...(parsed.footer || {}) },
           urgentHotline: { ...DEFAULT_CONFIG.urgentHotline, ...(parsed.urgentHotline || {}) },

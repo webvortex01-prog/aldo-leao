@@ -81,22 +81,23 @@ export const PublicationsSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
             <BookOpen className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>NOTÍCIAS E ARTIGOS JURÍDICOS</span>
+            <span>{siteConfig.publicationsSection?.kicker || 'NOTÍCIAS E ARTIGOS JURÍDICOS'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance] animate-title-reveal">
-            PUBLICAÇÕES <span className="gold-text-gradient">JURÍDICAS</span>
+            {siteConfig.publicationsSection?.titleWhite || 'PUBLICAÇÕES'}{' '}
+            <span className="gold-text-gradient">{siteConfig.publicationsSection?.titleGold || 'JURÍDICAS'}</span>
           </h2>
 
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
             <p>
-              A produção de conhecimento jurídico faz parte da tradição centenária da <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong>.
+              {siteConfig.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
             </p>
             <p>
-              Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.
+              {siteConfig.publicationsSection?.paragraph2 || 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'}
             </p>
             <p>
-              Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.
+              {siteConfig.publicationsSection?.paragraph3 || 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'}
             </p>
           </div>
         </div>

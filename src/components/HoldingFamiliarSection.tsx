@@ -56,25 +56,25 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
             <div className="aspect-[4/3] sm:aspect-[16/11] md:aspect-[16/10] w-full overflow-hidden relative">
               <img
-                src="/img/holding-familiar-1.jpg"
-                alt="Estruturação e Proteção Patrimonial - Holding Familiar"
+                src={hf?.cardImageUrl || '/img/holding-familiar-1.jpg'}
+                alt={hf?.cardTitle || 'Estruturação e Proteção Patrimonial - Holding Familiar'}
                 className="w-full h-full object-cover object-[center_28%] transition-transform duration-1000 ease-out group-hover:scale-106 animate-section-photo-float"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
               {/* Badge alterada para PLANEJAMENTO 4.0 (Item 3) com Levitação Nobre */}
               <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full animate-float-gentle shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                 <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
-                  PLANEJAMENTO 4.0
+                  {hf?.cardBadge || 'PLANEJAMENTO 4.0'}
                 </span>
               </div>
             </div>
             {/* Título e Texto solicitados no Item 3 */}
             <div className="p-5 sm:p-6 border-t border-[#D4AF37]/25 bg-[#071122]">
               <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
-                ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL
+                {hf?.cardTitle || 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL'}
               </h4>
               <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.
+                {hf?.cardText || 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.'}
               </p>
             </div>
           </div>

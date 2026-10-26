@@ -157,24 +157,25 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
           {/* Frase em dourado acima do título */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0E1F3D]/80 border border-[#D4AF37]/40 text-xs sm:text-sm uppercase tracking-[0.22em] text-[#E5C158] font-bold mb-4 shadow-inner">
             <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-            <span>Acervo de Livros Digitais Publicados</span>
+            <span>{siteConfig.booksSection?.goldKicker || 'Acervo de Livros Digitais Publicados'}</span>
           </div>
 
           {/* Título da página: LIVROS (em branco) DIGITAIS (em dourado) */}
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-5 [text-wrap:balance] animate-title-reveal">
-            LIVROS <span className="gold-text-gradient">DIGITAIS</span>
+            {siteConfig.booksSection?.titleWhite || 'LIVROS'}{' '}
+            <span className="gold-text-gradient">{siteConfig.booksSection?.titleGold || 'DIGITAIS'}</span>
           </h2>
 
           {/* Texto oficial da página */}
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
             <p>
-              A produção intelectual sempre fez parte da tradição da <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong>.
+              {siteConfig.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
             </p>
             <p>
-              Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar <strong className="text-[#F6E27A] font-semibold">GRATUITAMENTE</strong> o conhecimento jurídico com soluções estratégicas e boas práticas.
+              {siteConfig.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
             </p>
             <p>
-              Cada obra publicada pela <strong className="text-white font-medium">Academia Leão Ferreira</strong> representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.
+              {siteConfig.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
             </p>
           </div>
         </div>

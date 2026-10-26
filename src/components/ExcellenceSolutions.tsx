@@ -61,19 +61,20 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
-            <span>INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO</span>
+            <span>{siteConfig.excellenceSolutionsHeader?.kicker || 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
-            SOLUÇÕES DE <span className="gold-text-gradient">EXCELÊNCIA</span>
+            {siteConfig.excellenceSolutionsHeader?.title || 'SOLUÇÕES DE'}{' '}
+            <span className="gold-text-gradient">{siteConfig.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light">
-            A <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.
+            {siteConfig.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
           </p>
 
           <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans-body font-light">
-            A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.
+            {siteConfig.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
           </p>
         </div>
 

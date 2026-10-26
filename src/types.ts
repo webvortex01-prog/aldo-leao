@@ -139,6 +139,9 @@ export interface SiteConfig {
     description: string;
     tagline: string;
     heroImageUrl?: string;
+    heroImageMobileUrl?: string;
+    heroSlide2ImageUrl?: string;
+    heroSlide2ImageMobileUrl?: string;
     foundingYear?: string;
     experienceYears?: string;
     oabNumber?: string;
@@ -193,6 +196,7 @@ export interface SiteConfig {
     specialties: string[];
     differences: string[];
     signatureImageUrl?: string;
+    secondaryPhotoUrl?: string;
     saibaMaisBtn?: string;
     btnConsultation?: string;
     btnLivros?: string;
@@ -284,6 +288,10 @@ export interface SiteConfig {
     paragraph1?: string;
     paragraph2?: string;
     paragraph3?: string;
+    cardImageUrl?: string;
+    cardTitle?: string;
+    cardText?: string;
+    cardBadge?: string;
     boxWhatIsTitle?: string;
     boxWhatIsHeading?: string;
     boxWhatIsText?: string;
@@ -294,6 +302,35 @@ export interface SiteConfig {
     tableTitle?: string;
     tableSubtitle?: string;
     tableSavingsText?: string;
+  };
+  practiceAreasHeader?: {
+    kicker?: string;
+    title?: string;
+    titleHighlight?: string;
+    description?: string;
+  };
+  excellenceSolutionsHeader?: {
+    kicker?: string;
+    title?: string;
+    titleHighlight?: string;
+    description1?: string;
+    description2?: string;
+  };
+  publicationsSection?: {
+    kicker?: string;
+    titleWhite?: string;
+    titleGold?: string;
+    paragraph1?: string;
+    paragraph2?: string;
+    paragraph3?: string;
+  };
+  booksSection?: {
+    goldKicker?: string;
+    titleWhite?: string;
+    titleGold?: string;
+    paragraph1?: string;
+    paragraph2?: string;
+    paragraph3?: string;
   };
   digitalConsultation?: {
     sectionKicker?: string;

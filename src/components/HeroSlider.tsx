@@ -46,10 +46,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
-            <source media="(max-width: 768px)" srcSet={heroNovoFundoMobileImg} />
+            <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroImageMobileUrl || heroNovoFundoMobileImg} />
             <img
               key={`slide1-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
-              src={heroNovoFundoImg}
+              src={siteConfig.hero?.heroImageUrl || heroNovoFundoImg}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
               className={`w-full h-full object-cover object-top md:object-[68%_35%] filter brightness-90 contrast-105 transform-gpu origin-[50%_15%] md:origin-[70%_40%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
@@ -67,10 +67,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
-            <source media="(max-width: 768px)" srcSet={holdingFamilyMobileBg} />
+            <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroSlide2ImageMobileUrl || holdingFamilyMobileBg} />
             <img
               key={`family-hero-img-${currentSlide === 1 ? 'active' : 'idle'}`}
-              src={holdingFamilyHeroBg}
+              src={siteConfig.hero?.heroSlide2ImageUrl || holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
               className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-80 contrast-105 transform-gpu origin-[50%_25%] ${
                 currentSlide === 1 ? 'animate-hero-panzoom-2' : ''

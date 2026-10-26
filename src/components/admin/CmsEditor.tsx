@@ -214,7 +214,6 @@ export const CmsEditor: React.FC = () => {
   const { siteConfig, updateSiteConfig, resetSiteConfigToDefault } = useSite();
   const [formData, setFormData] = useState(siteConfig);
   const [activeTab, setActiveTab] = useState<
-    | 'all_images'
     | 'identidade'
     | 'hero'
     | 'digital_presence'
@@ -222,13 +221,14 @@ export const CmsEditor: React.FC = () => {
     | 'founder'
     | 'services'
     | 'solutions'
-    | 'holding'
     | 'consultation'
+    | 'holding'
     | 'publications'
     | 'books'
     | 'contact'
     | 'footer'
-  >('all_images');
+    | 'all_images'
+  >('identidade');
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -380,7 +380,11 @@ export const CmsEditor: React.FC = () => {
 
     // Imagens
     check(formData.navbar?.logoImageUrl, 'Imagem do Logo', 'all_images');
-    check(formData.hero?.heroImageUrl, 'Imagem do Slide 1', 'all_images');
+    check(formData.hero?.heroImageUrl, 'Imagem do Slide 1 (Desktop)', 'all_images');
+    check(formData.hero?.heroImageMobileUrl, 'Imagem do Slide 1 (Mobile)', 'all_images');
+    check(formData.hero?.heroSlide2ImageUrl, 'Imagem do Slide 2 (Holding Desktop)', 'all_images');
+    check(formData.hero?.heroSlide2ImageMobileUrl, 'Imagem do Slide 2 (Holding Mobile)', 'all_images');
+    check(formData.holdingFamiliar?.cardImageUrl, 'Foto Card Estruturação Holding', 'all_images');
     check(formData.nationalPresence?.mapImageUrl, 'Imagem do Mapa Presença Digital', 'all_images');
     check(formData.founder.photoUrl, 'Foto do Dr. Aldo Leão', 'all_images');
     check(formData.centennialLegacy?.sealImageUrl, 'Selo 40 Anos de Advocacia', 'all_images');
@@ -452,6 +456,9 @@ export const CmsEditor: React.FC = () => {
     check(formData.founder.counterSub, 'Dr. Aldo · Contador 40 Anos Legenda', 'founder');
 
     // Áreas de Atuação
+    check(formData.practiceAreasHeader?.kicker, 'Áreas de Atuação · Kicker Superior', 'services');
+    check(formData.practiceAreasHeader?.title, 'Áreas de Atuação · Título', 'services');
+    check(formData.practiceAreasHeader?.description, 'Áreas de Atuação · Texto Introdutório', 'services');
     (formData.practiceAreas || []).forEach((area, i) => {
       check(area.title, `Área ${i + 1} · ${area.title}`, 'services');
       check(area.subtitle, `Área ${i + 1} · Subtítulo`, 'services');
@@ -459,20 +466,15 @@ export const CmsEditor: React.FC = () => {
     });
 
     // Soluções
+    check(formData.excellenceSolutionsHeader?.kicker, 'Soluções · Kicker Superior', 'solutions');
+    check(formData.excellenceSolutionsHeader?.title, 'Soluções · Título', 'solutions');
+    check(formData.excellenceSolutionsHeader?.description1, 'Soluções · Introdução 1', 'solutions');
+    check(formData.excellenceSolutionsHeader?.description2, 'Soluções · Introdução 2', 'solutions');
     (formData.excellenceSolutions || []).forEach((sol, i) => {
       check(sol.title, `Solução ${i + 1} · ${sol.title}`, 'solutions');
       check(sol.subtitle, `Solução ${i + 1} · Subtítulo`, 'solutions');
       check(sol.description, `Solução ${i + 1} · Descrição`, 'solutions');
     });
-
-    // Holding Familiar
-    check(formData.holdingFamiliar?.sectionKicker, 'Holding Familiar · Kicker', 'holding');
-    check(formData.holdingFamiliar?.sectionTitle, 'Holding Familiar · Título', 'holding');
-    check(formData.holdingFamiliar?.boxWhatIsTitle, 'Holding Familiar · O Que É Título', 'holding');
-    check(formData.holdingFamiliar?.boxWhatIsHeading, 'Holding Familiar · O Que É Cabeçalho', 'holding');
-    check(formData.holdingFamiliar?.boxWhatIsText, 'Holding Familiar · O Que É Explicação', 'holding');
-    check(formData.holdingFamiliar?.boxWhyTitle, 'Holding Familiar · Por Que Fazer Título', 'holding');
-    check(formData.holdingFamiliar?.boxWhyText, 'Holding Familiar · Por Que Fazer Alerta', 'holding');
 
     // CTA Consulta
     check(formData.digitalConsultation?.sectionKicker, 'CTA Consulta · Kicker', 'consultation');
@@ -481,12 +483,27 @@ export const CmsEditor: React.FC = () => {
     check(formData.digitalConsultation?.btnSchedule, 'CTA Consulta · Botão Agendar', 'consultation');
     check(formData.digitalConsultation?.btnWhatsApp, 'CTA Consulta · Botão WhatsApp', 'consultation');
 
+    // Holding Familiar
+    check(formData.holdingFamiliar?.sectionKicker, 'Holding Familiar · Kicker', 'holding');
+    check(formData.holdingFamiliar?.sectionTitle, 'Holding Familiar · Título', 'holding');
+    check(formData.holdingFamiliar?.cardTitle, 'Holding Familiar · Card Estruturação Título', 'holding');
+    check(formData.holdingFamiliar?.cardText, 'Holding Familiar · Card Estruturação Texto', 'holding');
+    check(formData.holdingFamiliar?.boxWhatIsTitle, 'Holding Familiar · O Que É Título', 'holding');
+    check(formData.holdingFamiliar?.boxWhatIsHeading, 'Holding Familiar · O Que É Cabeçalho', 'holding');
+    check(formData.holdingFamiliar?.boxWhatIsText, 'Holding Familiar · O Que É Explicação', 'holding');
+    check(formData.holdingFamiliar?.boxWhyTitle, 'Holding Familiar · Por Que Fazer Título', 'holding');
+    check(formData.holdingFamiliar?.boxWhyText, 'Holding Familiar · Por Que Fazer Alerta', 'holding');
+
+    // Publicações
+    check(formData.publicationsSection?.kicker, 'Publicações · Kicker Notícias e Artigos', 'publications');
+    check(formData.publicationsSection?.titleWhite, 'Publicações · Título', 'publications');
+    check(formData.publicationsSection?.paragraph1, 'Publicações · Parágrafo 1', 'publications');
+    check(formData.publicationsSection?.paragraph2, 'Publicações · Parágrafo 2', 'publications');
+    check(formData.publicationsSection?.paragraph3, 'Publicações · Parágrafo 3', 'publications');
     // Assinatura Automática dos Artigos
     check(formData.articleSignature?.line1, 'Assinatura Artigos · Linha 1 (Núcleo de Comunicação)', 'publications');
     check(formData.articleSignature?.line2, 'Assinatura Artigos · Linha 2 (Excelência Jurídica)', 'publications');
     check(formData.articleSignature?.buttonText, 'Assinatura Artigos · Botão CTA Agendar Consulta', 'publications');
-
-    // Publicações
     (formData.publications || []).forEach((pub, i) => {
       check(pub.title, `Publicação ${i + 1} · ${pub.title}`, 'publications');
       check(pub.area, `Publicação ${i + 1} · Área (${pub.area})`, 'publications');
@@ -494,6 +511,11 @@ export const CmsEditor: React.FC = () => {
     });
 
     // Livros
+    check(formData.booksSection?.goldKicker, 'Livros · Frase Dourada Superior', 'books');
+    check(formData.booksSection?.titleWhite, 'Livros · Título Livros Digitais', 'books');
+    check(formData.booksSection?.paragraph1, 'Livros · Parágrafo 1', 'books');
+    check(formData.booksSection?.paragraph2, 'Livros · Parágrafo 2', 'books');
+    check(formData.booksSection?.paragraph3, 'Livros · Parágrafo 3', 'books');
     (formData.digitalBooks || []).forEach((book, i) => {
       check(book.title, `Livro ${i + 1} · ${book.title}`, 'books');
       check(book.author, `Livro ${i + 1} · Autor (${book.author})`, 'books');
@@ -522,20 +544,20 @@ export const CmsEditor: React.FC = () => {
   }, [searchQuery, formData]);
 
   const tabs = [
-    { id: 'all_images', label: '🖼️ Todas as Imagens (Upload)', icon: ImageIcon },
     { id: 'identidade', label: '1. Logo & Topo', icon: Sparkles },
-    { id: 'hero', label: '2. Slides 1 e 2 (Custos)', icon: FileText },
-    { id: 'digital_presence', label: '3. Presença Digital', icon: Compass },
+    { id: 'hero', label: '2. Hero Slider (Slides 1 e 2)', icon: FileText },
+    { id: 'digital_presence', label: '3. Presença Nacional Digital', icon: Compass },
     { id: 'legacy', label: '4. O Legado Centenário', icon: Trophy },
-    { id: 'founder', label: '5. Dr. Aldo & 40 Anos', icon: ImageIcon },
+    { id: 'founder', label: '5. Head Jurídico (Dr. Aldo & 40 Anos)', icon: ImageIcon },
     { id: 'services', label: '6. Áreas de Atuação', icon: Briefcase },
-    { id: 'solutions', label: '7. Soluções & Academia', icon: GraduationCap },
-    { id: 'holding', label: '8. Holding Familiar 4.0', icon: Layers },
-    { id: 'consultation', label: '9. CTA Consulta', icon: PhoneCall },
-    { id: 'publications', label: '10. Publicações', icon: BookOpen },
-    { id: 'books', label: '11. Livros Digitais', icon: BookOpen },
-    { id: 'contact', label: '12. Telefones & WhatsApp', icon: PhoneCall },
-    { id: 'footer', label: '13. Rodapé & OAB', icon: Scale },
+    { id: 'solutions', label: '7. Soluções & Academia Leão', icon: GraduationCap },
+    { id: 'consultation', label: '8. Agende sua Consulta Digital', icon: PhoneCall },
+    { id: 'holding', label: '9. Planejamento Patrimonial (Holding 4.0)', icon: Layers },
+    { id: 'publications', label: '10. Publicações Jurídicas (Artigos & Notícias)', icon: BookOpen },
+    { id: 'books', label: '11. Livros Digitais (Acervo de 8 Obras)', icon: BookOpen },
+    { id: 'contact', label: '12. Telefones, WhatsApp & Endereço', icon: PhoneCall },
+    { id: 'footer', label: '13. Rodapé, LGPD & OAB', icon: Scale },
+    { id: 'all_images', label: '14. Central de Fotos & Mídia', icon: ImageIcon },
   ] as const;
 
   const handleSelectSearchResult = (targetTab: typeof activeTab) => {
@@ -731,178 +753,6 @@ export const CmsEditor: React.FC = () => {
 
       {/* Container Principal com ID para auto-scroll */}
       <div id="cms-editor-active-tab-container" className="rounded-xl transition-all duration-300">
-
-      {/* ABA 0: CENTRAL DE TODAS AS IMAGENS DO SITE */}
-      {activeTab === 'all_images' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-4">
-            <h3 className="font-cinzel text-base sm:text-lg font-bold text-white flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-[#F6E27A]" />
-              <span>Central de Todas as Imagens do Site</span>
-            </h3>
-            <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-              Aqui você pode visualizar e alterar <strong>cada imagem de qualquer lugar do site</strong>. Clique em <strong>"Carregar do Computador / Celular"</strong> para selecionar uma foto dos seus arquivos, ou cole qualquer link/URL.
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {/* 1. Logomarca Oficial */}
-            <ImageUploadField
-              label="1. Logomarca Oficial (Leão Dourado / Símbolo do Topo e Rodapé)"
-              description="Exibida na barra de navegação no topo, nas seções e no rodapé do portal."
-              currentValue={formData.navbar?.logoImageUrl}
-              defaultValue="/img/logo-symbol.png"
-              aspectRatio="square"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                navbar: { ...(formData.navbar || {}), logoImageUrl: newUrl }
-              })}
-            />
-
-            {/* 2. Foto Principal do Slide 1 */}
-            <ImageUploadField
-              label="2. Imagem Principal do Slide 1 (Tradição Jurídica Centenária Desde 1908)"
-              description="Foto em destaque na coluna direita do primeiro slide na abertura do site."
-              currentValue={formData.hero.heroImageUrl}
-              defaultValue="/img/hero-advocacia-bg.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, heroImageUrl: newUrl }
-              })}
-            />
-
-            {/* 3. Mapa de Presença Nacional Digital */}
-            <ImageUploadField
-              label="3. Mapa da Presença Nacional Digital (Atualmente: presencadigital.jpeg)"
-              description="Mapa do Brasil exibido na página 2 de Presença Nacional Digital. Para trocar o mapa, basta clicar em Carregar e escolher o novo arquivo."
-              currentValue={formData.nationalPresence?.mapImageUrl}
-              defaultValue="/presencadigital.jpeg"
-              aspectRatio="auto"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                nationalPresence: { ...(formData.nationalPresence || {}), mapImageUrl: newUrl }
-              })}
-            />
-
-            {/* 4. Retrato Oficial do Dr. Aldo Leão */}
-            <ImageUploadField
-              label="4. Retrato do Dr. Aldo Leão (Head Jurídico · 40 Anos)"
-              description="Foto principal do advogado Dr. Aldo Leão na seção Head Jurídico. Você pode carregar uma foto nova do seu computador ou escolher entre os 6 retratos forenses da galeria."
-              currentValue={formData.founder.photoUrl}
-              defaultValue="/img/dr-aldo-portrait.jpg"
-              aspectRatio="portrait"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, photoUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Retrato Formal', url: '/img/dr-aldo-portrait.jpg' },
-                { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
-                { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
-                { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
-                { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
-                { label: 'Alta Definição', url: '/img/dr-aldo-foco.jpg' },
-              ]}
-            />
-
-            {/* 5. Imagem de Fundo do CTA de Consulta Digital */}
-            <ImageUploadField
-              label="5. Imagem de Fundo do CTA Agende Sua Consulta Digital"
-              description="Plano de fundo ou ilustração do bloco de agendamento online de consulta."
-              currentValue={formData.digitalConsultation?.bgImageUrl}
-              defaultValue=""
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
-              })}
-            />
-
-            {/* 6. Selo Oficial de 40 Anos de Advocacia */}
-            <ImageUploadField
-              label="6. Selo Comemorativo de 40 Anos (1986–2026)"
-              description="Chancela e selo oficial de 40 Anos de Advocacia exibido na página O Legado Centenário e na seção do Selo."
-              currentValue={formData.centennialLegacy?.sealImageUrl}
-              defaultValue="/img/selo-40-anos.png"
-              aspectRatio="square"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Selo 40 Anos (PNG Transparente)', url: '/img/selo-40-anos.png' },
-                { label: 'Selo Dourado Oficial', url: '/img/selode40anos.jpg.jpeg' },
-              ]}
-            />
-
-            {/* 7. Assinatura Oficial do Dr. Aldo Leão */}
-            <ImageUploadField
-              label="7. Assinatura do Dr. Aldo Leão (Dourada / Transparente)"
-              description="Assinatura manuscrita oficial exibida na página Head Jurídico e no final da linha do tempo do Legado Centenário."
-              currentValue={formData.founder?.signatureImageUrl || formData.centennialLegacy?.signatureImageUrl}
-              defaultValue="/img/assinatura-gold.png"
-              aspectRatio="auto"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, signatureImageUrl: newUrl },
-                centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Assinatura Dourada Oficial', url: '/img/assinatura-gold.png' },
-                { label: 'Assinatura Original', url: '/img/assinatura.png' },
-              ]}
-            />
-
-            {/* 8. Capas dos 6 Livros Digitais */}
-            <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
-              <div>
-                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-                  <span>8. Capas dos Livros Digitais (Download Gratuito)</span>
-                </h4>
-                <p className="text-[11px] text-slate-300 mt-0.5">
-                  Você pode fazer o upload da imagem da capa para cada um dos 6 livros digitais do Dr. Aldo Leão.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(formData.digitalBooks || []).map((book, idx) => (
-                  <div key={book.id || idx} className="p-3.5 rounded-lg bg-[#071122] border border-slate-800 space-y-2">
-                    <span className="text-xs font-bold text-[#E5C158] block truncate">
-                      Livro #{idx + 1} · {book.title}
-                    </span>
-                    <ImageUploadField
-                      label={`Capa do Livro #${idx + 1}`}
-                      currentValue={book.coverImage}
-                      aspectRatio="video"
-                      onChange={(newUrl) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].coverImage = newUrl;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 9. Foto da Palestra / Conferência Presencial (Item II) */}
-            <ImageUploadField
-              label="9. Foto da Palestra / Conferência Presencial (Academia Leão Ferreira)"
-              description="Foto exibida na seção Academia Leão Ferreira com o Dr. Aldo Leão ministrando a palestra magna 'Planejamento Patrimonial 4.0 & O Alto Custo da Omissão'."
-              currentValue={formData.academiaLeao?.lecturePhotoUrl}
-              defaultValue="/img/palestra-1.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
-              })}
-            />
-          </div>
-        </div>
-      )}
-
       {/* TAB 1: IDENTIDADE & LOGOMARCA */}
       {activeTab === 'identidade' && (
         <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
@@ -1004,18 +854,32 @@ export const CmsEditor: React.FC = () => {
               <span className="text-[#E5C158]">SLIDE 1</span> · Tradição Jurídica Desde 1908
             </h3>
 
-            {/* Imagem do Slide 1 com Upload */}
-            <ImageUploadField
-              label="Imagem Principal do Slide 1 (Coluna Direita)"
-              description="Foto do Leão com a Balança da Justiça ou outra imagem representativa do escritório."
-              currentValue={formData.hero.heroImageUrl}
-              defaultValue="/img/hero-advocacia-bg.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, heroImageUrl: newUrl }
-              })}
-            />
+            {/* Imagens do Slide 1 (Desktop e Mobile) com Upload */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ImageUploadField
+                label="Imagem do Slide 1 · Desktop (Computadores)"
+                description="Foto exibida em telas grandes (computadores e notebooks)."
+                currentValue={formData.hero.heroImageUrl}
+                defaultValue="/img/novofundohero.jpg"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  hero: { ...formData.hero, heroImageUrl: newUrl }
+                })}
+              />
+
+              <ImageUploadField
+                label="Imagem do Slide 1 · Mobile (Smartphones)"
+                description="Versão vertical otimizada para smartphones (mostra as duas estátuas sem zoom excessivo)."
+                currentValue={formData.hero.heroImageMobileUrl}
+                defaultValue="/img/novofundohero_mobile.jpg"
+                aspectRatio="portrait"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  hero: { ...formData.hero, heroImageMobileUrl: newUrl }
+                })}
+              />
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -1164,6 +1028,33 @@ export const CmsEditor: React.FC = () => {
             <h3 className="font-cinzel text-base font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
               <span className="text-[#E5C158]">SLIDE 2</span> · Holding Familiar & Planejamento Patrimonial 4.0
             </h3>
+
+            {/* Imagens do Slide 2 (Desktop e Mobile) com Upload */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ImageUploadField
+                label="Imagem de Fundo Slide 2 · Desktop (Computadores)"
+                description="Foto de fundo do Slide 2 em telas grandes (BMW e portão dourado)."
+                currentValue={formData.hero.heroSlide2ImageUrl}
+                defaultValue="/img/holding-familiar-1.jpg"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  hero: { ...formData.hero, heroSlide2ImageUrl: newUrl }
+                })}
+              />
+
+              <ImageUploadField
+                label="Imagem de Fundo Slide 2 · Mobile (Smartphones)"
+                description="Versão vertical otimizada para celulares do Slide 2."
+                currentValue={formData.hero.heroSlide2ImageMobileUrl}
+                defaultValue="/img/holding-familiar-1.jpg"
+                aspectRatio="portrait"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  hero: { ...formData.hero, heroSlide2ImageMobileUrl: newUrl }
+                })}
+              />
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -1935,7 +1826,7 @@ export const CmsEditor: React.FC = () => {
                 Página 5 · Áreas de Atuação Especializadas
               </h3>
               <p className="text-xs text-slate-400">
-                Gerencie títulos, subtítulos, selos e descrições dos serviços jurídicos.
+                Gerencie o cabeçalho da seção e os títulos, subtítulos, selos e descrições dos serviços jurídicos.
               </p>
             </div>
             <button
@@ -1945,6 +1836,74 @@ export const CmsEditor: React.FC = () => {
               <Plus className="w-3.5 h-3.5" />
               <span>Adicionar Área</span>
             </button>
+          </div>
+
+          {/* Cabeçalho da Seção Áreas de Atuação */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+              Cabeçalho & Introdução da Seção (Página 5)
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Frase Dourada Superior (Kicker)
+                </label>
+                <input
+                  type="text"
+                  value={formData.practiceAreasHeader?.kicker || 'SOLUÇÕES JURÍDICAS DE ALTA PERFORMANCE'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), kicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={formData.practiceAreasHeader?.title || 'ÁREAS DE'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), title: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={formData.practiceAreasHeader?.titleHighlight || 'ATUAÇÃO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), titleHighlight: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                Texto de Introdução das Especialidades
+              </label>
+              <textarea
+                rows={3}
+                value={formData.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), description: e.target.value }
+                })}
+                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+              />
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -2026,8 +1985,93 @@ export const CmsEditor: React.FC = () => {
               Página 6 · Soluções de Excelência & Academia Leão Ferreira
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
-              Altere os cards das soluções de excelência e os detalhes da Academia Leão Ferreira.
+              Altere o cabeçalho da seção, os 14 cards de soluções de excelência e os detalhes da Academia Leão Ferreira.
             </p>
+          </div>
+
+          {/* Cabeçalho da Seção Soluções de Excelência */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+              Cabeçalho & Textos de Introdução (Página 6)
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Frase Dourada Superior (Kicker)
+                </label>
+                <input
+                  type="text"
+                  value={formData.excellenceSolutionsHeader?.kicker || 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), kicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={formData.excellenceSolutionsHeader?.title || 'SOLUÇÕES DE'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), title: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={formData.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), titleHighlight: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 1 de Introdução
+                </label>
+                <textarea
+                  rows={3}
+                  value={formData.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description1: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 2 de Introdução (Slogan de Excelência)
+                </label>
+                <textarea
+                  rows={3}
+                  value={formData.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description2: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -2229,135 +2273,13 @@ export const CmsEditor: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 8: HOLDING FAMILIAR & PLANEJAMENTO 4.0 */}
-      {activeTab === 'holding' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#F6E27A]" />
-              <span>Página 7 · Seção Holding Familiar & Planejamento Patrimonial 4.0</span>
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Edite todos os textos da seção explicativa de Holding, as caixas O Que É, Por Que Fazer e as vantagens.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Kicker da Seção
-              </label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.sectionKicker || 'HOLDING FAMILIAR'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionKicker: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Título Principal
-              </label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.sectionTitle || 'PLANEJAMENTO PATRIMONIAL 4.0'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionTitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-          </div>
-
-          {/* Box O QUE É? */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
-              Box 1: O Que É o Planejamento Patrimonial da Família?
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Etiqueta do Box</label>
-                <input
-                  type="text"
-                  value={formData.holdingFamiliar?.boxWhatIsTitle || 'O QUE É?'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsTitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Cabeçalho</label>
-                <input
-                  type="text"
-                  value={formData.holdingFamiliar?.boxWhatIsHeading || 'Estruturação Jurídica Inteligente e Preventiva'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsHeading: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Texto Explicativo</label>
-              <textarea
-                rows={3}
-                value={formData.holdingFamiliar?.boxWhatIsText || 'O Planejamento Patrimonial 4.0 é um sistema jurídico integrado que organiza o patrimônio da família em estruturas societárias seguras (Holding Familiar), permitindo a transferência do patrimônio aos herdeiros em vida, com reserva de usufruto e controle total dos pais, sem a necessidade do caro e demorado processo de inventário.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
-              />
-            </div>
-          </div>
-
-          {/* Box POR QUE FAZER? */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
-              Box 2: Por Que Fazer? (Eliminação da Perda de 40%)
-            </h4>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Título do Box</label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.boxWhyTitle || 'POR QUE FAZER O PLANEJAMENTO PATRIMONIAL 4.0?'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyTitle: e.target.value }
-                })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Texto de Alerta e Conscientização</label>
-              <textarea
-                rows={3}
-                value={formData.holdingFamiliar?.boxWhyText || 'No inventário tradicional, a família chega a perder até 40% de todo o patrimônio acumulado em uma vida de trabalho com impostos (ITCMD), cartórios, certidões e honorários. Além disso, a alíquota do ITCMD já foi autorizada a subir de 8% para até 16% ou 20%. Com o Planejamento 4.0, a família economiza até 75% e garante paz e harmonia entre os herdeiros.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 9: CTA CONSULTA DIGITAL */}
+      {/* TAB 8: AGENDE SUA CONSULTA DIGITAL */}
       {activeTab === 'consultation' && (
         <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
           <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white">
-              Página 8 · Bloco de Agendamento da Consulta Digital
+            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+              <PhoneCall className="w-4 h-4 text-[#F6E27A]" />
+              <span>Aba 8 · Agende a sua Consulta Digital (Página 7 do Site)</span>
             </h3>
             <p className="text-xs text-slate-400 mt-0.5">
               Configure os textos, chamada para ação, imagem de fundo e garantias de confidencialidade da consulta online.
@@ -2369,7 +2291,7 @@ export const CmsEditor: React.FC = () => {
             label="Imagem de Fundo do Bloco de Consulta"
             description="Imagem sutil de fundo para a seção de agendamento de consulta digital."
             currentValue={formData.digitalConsultation?.bgImageUrl}
-            defaultValue=""
+            defaultValue="/img/dr-aldo-reuniao.jpg"
             aspectRatio="video"
             onChange={(newUrl) => setFormData({
               ...formData,
@@ -2377,14 +2299,14 @@ export const CmsEditor: React.FC = () => {
             })}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Kicker
+                Frase Superior (Kicker)
               </label>
               <input
                 type="text"
-                value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO ONLINE EM TODO O BRASIL'}
+                value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}
                 onChange={(e) => setFormData({
                   ...formData,
                   digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: e.target.value }
@@ -2394,15 +2316,30 @@ export const CmsEditor: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Título do Bloco
+              <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
+                Título em Branco
               </label>
               <input
                 type="text"
-                value={formData.digitalConsultation?.sectionTitle || 'AGENDE A SUA CONSULTA DIGITAL'}
+                value={formData.digitalConsultation?.sectionTitle || 'AGENDE SUA'}
                 onChange={(e) => setFormData({
                   ...formData,
                   digitalConsultation: { ...(formData.digitalConsultation || {}), sectionTitle: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                Destaque Dourado do Título
+              </label>
+              <input
+                type="text"
+                value={formData.digitalConsultation?.sectionHighlight || 'CONSULTA DIGITAL'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  digitalConsultation: { ...(formData.digitalConsultation || {}), sectionHighlight: e.target.value }
                 })}
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
               />
@@ -2415,7 +2352,7 @@ export const CmsEditor: React.FC = () => {
             </label>
             <textarea
               rows={3}
-              value={formData.digitalConsultation?.description || 'Agende agora uma consulta digital personalizada com o Dr. Aldo Leão Ferreira Filho para analisar o seu caso com total sigilo, segurança e comodidade, diretamente de onde você estiver.'}
+              value={formData.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
               onChange={(e) => setFormData({
                 ...formData,
                 digitalConsultation: { ...(formData.digitalConsultation || {}), description: e.target.value }
@@ -2427,16 +2364,16 @@ export const CmsEditor: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Texto do Botão Principal
+                Texto do Botão Principal (Agendar Consulta)
               </label>
               <input
                 type="text"
-                value={formData.digitalConsultation?.btnSchedule || 'Agendar Consulta Digital Agora'}
+                value={formData.digitalConsultation?.btnSchedule || 'AGENDAR CONSULTA VIRTUAL'}
                 onChange={(e) => setFormData({
                   ...formData,
                   digitalConsultation: { ...(formData.digitalConsultation || {}), btnSchedule: e.target.value }
                 })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
               />
             </div>
 
@@ -2446,12 +2383,253 @@ export const CmsEditor: React.FC = () => {
               </label>
               <input
                 type="text"
-                value={formData.digitalConsultation?.btnWhatsApp || 'Falar pelo WhatsApp'}
+                value={formData.digitalConsultation?.btnWhatsApp || 'Agendar pelo WhatsApp'}
                 onChange={(e) => setFormData({
                   ...formData,
                   digitalConsultation: { ...(formData.digitalConsultation || {}), btnWhatsApp: e.target.value }
                 })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 9: HOLDING FAMILIAR & PLANEJAMENTO 4.0 */}
+      {activeTab === 'holding' && (
+        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+          <div className="border-b border-slate-800 pb-3">
+            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+              <Layers className="w-4 h-4 text-[#F6E27A]" />
+              <span>Aba 9 · Planejamento Patrimonial 4.0 (Holding Familiar) · Página 8 do Site</span>
+            </h3>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Edite todos os textos da seção explicativa de Holding, a foto do card de estruturação (BMW oficial), as caixas O Que É, Por Que Fazer e as vantagens.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                Frase Superior (Kicker)
+              </label>
+              <input
+                type="text"
+                value={formData.holdingFamiliar?.sectionKicker || 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionKicker: e.target.value }
+                })}
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
+                Título em Branco
+              </label>
+              <input
+                type="text"
+                value={formData.holdingFamiliar?.sectionTitle || 'HOLDING'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionTitle: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                Destaque Dourado do Título
+              </label>
+              <input
+                type="text"
+                value={formData.holdingFamiliar?.sectionHighlight || 'FAMILIAR'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionHighlight: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+              />
+            </div>
+          </div>
+
+          {/* 3 Parágrafos Explicativos da Seção */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+              3 Parágrafos Explicativos Abaixo do Título
+            </span>
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Parágrafo 1</label>
+              <textarea
+                rows={2}
+                value={formData.holdingFamiliar?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph1: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Parágrafo 2</label>
+              <textarea
+                rows={2}
+                value={formData.holdingFamiliar?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph2: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Parágrafo 3</label>
+              <textarea
+                rows={2}
+                value={formData.holdingFamiliar?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph3: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+          </div>
+
+          {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL (Foto BMW oficial) */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 space-y-4">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
+              Card de Destaque: Estruturação e Proteção Patrimonial (Foto BMW)
+            </span>
+
+            <ImageUploadField
+              label="Foto Oficial do Card (Família, Edifício Corporativo e Carro BMW Dourado)"
+              description="Imagem oficial aprovada pelo Dr. Aldo Leão para o card de destaque da Holding Familiar."
+              currentValue={formData.holdingFamiliar?.cardImageUrl || '/img/holding-familiar-1.jpg'}
+              defaultValue="/img/holding-familiar-1.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardImageUrl: newUrl }
+              })}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Selo / Badge do Card</label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.cardBadge || 'PLANEJAMENTO 4.0'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardBadge: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Título do Card</label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.cardTitle || 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Descrição do Card</label>
+              <textarea
+                rows={2}
+                value={formData.holdingFamiliar?.cardText || 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardText: e.target.value }
+                })}
+                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+          </div>
+
+          {/* Box O QUE É? */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
+              Box 1: O Que É o Planejamento 4.0?
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Etiqueta do Box</label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Cabeçalho</label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.boxWhatIsHeading || 'Metodologia Jurídica Estratégica Multidisciplinar'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsHeading: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Texto Explicativo</label>
+              <textarea
+                rows={3}
+                value={formData.holdingFamiliar?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsText: e.target.value }
+                })}
+                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
+              />
+            </div>
+          </div>
+
+          {/* Box POR QUE PLANEJAR EM VIDA? */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
+              Box 2: Por Que Planejar em Vida?
+            </h4>
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Título do Box</label>
+              <input
+                type="text"
+                value={formData.holdingFamiliar?.boxWhyTitle || 'Por Que Planejar em Vida?'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyTitle: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] text-slate-400 mb-1">Texto de Alerta e Conscientização</label>
+              <textarea
+                rows={3}
+                value={formData.holdingFamiliar?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyText: e.target.value }
+                })}
+                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
               />
             </div>
           </div>
@@ -2465,10 +2643,10 @@ export const CmsEditor: React.FC = () => {
             <div>
               <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-[#F6E27A]" />
-                <span>Página 9 · Publicações, Artigos & Notícias Jurídicas</span>
+                <span>Aba 10 · Publicações Jurídicas (Artigos & Notícias) · Página 9 do Site</span>
               </h3>
               <p className="text-xs text-slate-400 mt-1">
-                Configure a assinatura automática de captação de leads e gerencie todos os artigos e notícias exibidos no portal.
+                Edite o cabeçalho e os textos introdutórios oficiais, configure a assinatura automática e gerencie todos os artigos e notícias.
               </p>
             </div>
             <button
@@ -2478,6 +2656,106 @@ export const CmsEditor: React.FC = () => {
               <Plus className="w-3.5 h-3.5" />
               <span>Adicionar Publicação</span>
             </button>
+          </div>
+
+          {/* Cabeçalho da Seção Publicações Jurídicas */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+              Cabeçalho & 3 Parágrafos Oficiais da Seção (Página 9)
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Frase Dourada Superior (Kicker)
+                </label>
+                <input
+                  type="text"
+                  value={formData.publicationsSection?.kicker || 'NOTÍCIAS E ARTIGOS JURÍDICOS'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    publicationsSection: { ...(formData.publicationsSection || {}), kicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={formData.publicationsSection?.titleWhite || 'PUBLICAÇÕES'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    publicationsSection: { ...(formData.publicationsSection || {}), titleWhite: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={formData.publicationsSection?.titleGold || 'JURÍDICAS'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    publicationsSection: { ...(formData.publicationsSection || {}), titleGold: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 1 Oficial
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    publicationsSection: { ...(formData.publicationsSection || {}), paragraph1: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 2 Oficial
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.publicationsSection?.paragraph2 || 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    publicationsSection: { ...(formData.publicationsSection || {}), paragraph2: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 3 Oficial
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.publicationsSection?.paragraph3 || 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    publicationsSection: { ...(formData.publicationsSection || {}), paragraph3: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+            </div>
           </div>
 
           {/* SEÇÃO EXCLUSIVA: ASSINATURA AUTOMÁTICA DOS ARTIGOS E NOTÍCIAS */}
@@ -2944,23 +3222,123 @@ export const CmsEditor: React.FC = () => {
       {/* TAB 11: LIVROS DIGITAIS */}
       {activeTab === 'books' && (
         <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
             <div>
               <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-[#F6E27A]" />
-                <span>Página 10 · Livros Digitais e Obras do Dr. Aldo Leão</span>
+                <span>Aba 11 · Livros Digitais (Acervo de 8 Obras) · Página 10 do Site</span>
               </h3>
-              <p className="text-xs text-slate-400">
-                Todos os 6 livros digitais disponibilizados para download gratuito aos clientes, com suporte a capa personalizada.
+              <p className="text-xs text-slate-400 mt-0.5">
+                Edite os textos do cabeçalho oficial da página e gerencie os 8 livros digitais publicados com download gratuito e capas personalizadas.
               </p>
             </div>
             <button
               onClick={handleAddBook}
-              className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Adicionar Livro</span>
             </button>
+          </div>
+
+          {/* Cabeçalho Oficial da Seção Livros Digitais */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+              Cabeçalho & 3 Parágrafos Oficiais da Página (Página 10)
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Frase Dourada Superior (Pill)
+                </label>
+                <input
+                  type="text"
+                  value={formData.booksSection?.goldKicker || 'Acervo de Livros Digitais Publicados'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), goldKicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={formData.booksSection?.titleWhite || 'LIVROS'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), titleWhite: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={formData.booksSection?.titleGold || 'DIGITAIS'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), titleGold: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 1 Oficial
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), paragraph1: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 2 Oficial
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), paragraph2: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                  Parágrafo 3 Oficial
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), paragraph3: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-6">
@@ -3377,6 +3755,265 @@ export const CmsEditor: React.FC = () => {
                 })}
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
               />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB 14: CENTRAL DE TODAS AS IMAGENS DO SITE */}
+      {activeTab === 'all_images' && (
+        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
+          <div className="border-b border-slate-800 pb-4">
+            <h3 className="font-cinzel text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              <ImageIcon className="w-5 h-5 text-[#F6E27A]" />
+              <span>14. Central de Todas as Imagens & Fotos do Portal</span>
+            </h3>
+            <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+              Aqui você tem visão panorâmica e controle total sobre <strong>todas as imagens, fotos e capas de livros de todas as seções do site</strong>. Clique em <strong>"Carregar do Computador / Celular"</strong> para selecionar qualquer arquivo ou cole o link/URL.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {/* 1. Logomarca Oficial */}
+            <ImageUploadField
+              label="1. Logomarca Oficial (Leão Dourado / Símbolo do Topo e Rodapé)"
+              description="Exibida na barra de navegação no topo, nas seções e no rodapé do portal."
+              currentValue={formData.navbar?.logoImageUrl}
+              defaultValue="/img/logo-symbol.png"
+              aspectRatio="square"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                navbar: { ...(formData.navbar || {}), logoImageUrl: newUrl }
+              })}
+            />
+
+            {/* 2. Slide 1 Desktop */}
+            <ImageUploadField
+              label="2. Slide 1 - Imagem Principal Tradição Jurídica Centenária (Computador / Desktop)"
+              description="Foto de abertura em alta resolução exibida no primeiro slide em telas de computador."
+              currentValue={formData.hero.heroImageUrl}
+              defaultValue="/img/hero-advocacia-bg.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                hero: { ...formData.hero, heroImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Imagem Atual com Estátuas', url: '/img/hero-advocacia-bg.jpg' },
+                { label: 'Versão Otimizada Mobile', url: '/img/hero-advocacia-bg-mobile.jpg' },
+              ]}
+            />
+
+            {/* 3. Slide 1 Mobile */}
+            <ImageUploadField
+              label="3. Slide 1 - Imagem Tradição Jurídica Centenária (Smartphones / Celular)"
+              description="Versão enquadrada perfeitamente na vertical para celulares (sem cortar as estátuas da justiça)."
+              currentValue={formData.hero.heroImageMobileUrl}
+              defaultValue="/img/hero-advocacia-bg-mobile.jpg"
+              aspectRatio="portrait"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                hero: { ...formData.hero, heroImageMobileUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Versão Otimizada Mobile', url: '/img/hero-advocacia-bg-mobile.jpg' },
+                { label: 'Versão Desktop', url: '/img/hero-advocacia-bg.jpg' },
+              ]}
+            />
+
+            {/* 4. Slide 2 Desktop */}
+            <ImageUploadField
+              label="4. Slide 2 - Imagem Holding Familiar & Planejamento 4.0 (Computador / Desktop)"
+              description="Foto oficial aprovada com a família em frente ao edifício e carro BMW dourado."
+              currentValue={formData.hero.heroSlide2ImageUrl}
+              defaultValue="/img/holding-familiar-1.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                hero: { ...formData.hero, heroSlide2ImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
+              ]}
+            />
+
+            {/* 5. Slide 2 Mobile */}
+            <ImageUploadField
+              label="5. Slide 2 - Imagem Holding Familiar (Smartphones / Celular)"
+              description="Foto otimizada para celulares no slide 2 de Planejamento Patrimonial 4.0."
+              currentValue={formData.hero.heroSlide2ImageMobileUrl}
+              defaultValue="/img/holding-familiar-1.jpg"
+              aspectRatio="portrait"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                hero: { ...formData.hero, heroSlide2ImageMobileUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
+              ]}
+            />
+
+            {/* 6. Card Estruturação Holding BMW */}
+            <ImageUploadField
+              label="6. Foto do Card de Estruturação & Proteção Patrimonial (Página 9)"
+              description="Foto em destaque no card central com badge 'ESTRUTURAÇÃO & PROTEÇÃO' na seção Planejamento Patrimonial 4.0."
+              currentValue={formData.holdingFamiliar?.cardImageUrl}
+              defaultValue="/img/holding-familiar-1.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
+              ]}
+            />
+
+            {/* 7. Mapa de Presença Nacional Digital */}
+            <ImageUploadField
+              label="7. Mapa da Presença Nacional Digital (Página 3)"
+              description="Mapa do Brasil com os estados e capitais atendidas pelo escritório digital."
+              currentValue={formData.nationalPresence?.mapImageUrl}
+              defaultValue="/presencadigital.jpeg"
+              aspectRatio="auto"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                nationalPresence: { ...(formData.nationalPresence || {}), mapImageUrl: newUrl }
+              })}
+            />
+
+            {/* 8. Retrato Oficial do Dr. Aldo Leão */}
+            <ImageUploadField
+              label="8. Retrato Principal do Dr. Aldo Leão (Head Jurídico · 40 Anos)"
+              description="Foto principal do Dr. Aldo Leão na seção Head Jurídico e apresentações institucionais."
+              currentValue={formData.founder.photoUrl}
+              defaultValue="/img/dr-aldo-portrait.jpg"
+              aspectRatio="portrait"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, photoUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Retrato Formal', url: '/img/dr-aldo-portrait.jpg' },
+                { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
+                { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
+                { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
+                { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
+                { label: 'Alta Definição', url: '/img/dr-aldo-foco.jpg' },
+              ]}
+            />
+
+            {/* 9. Foto Secundária Reunião / Gabinete */}
+            <ImageUploadField
+              label="9. Foto Secundária do Dr. Aldo Leão (Ambiente Executivo / Reunião)"
+              description="Foto de apoio do Dr. Aldo Leão em reunião estratégica com clientes."
+              currentValue={formData.founder.secondaryPhotoUrl}
+              defaultValue="/img/dr-aldo-2.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, secondaryPhotoUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
+                { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
+                { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
+                { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
+              ]}
+            />
+
+            {/* 10. Imagem de Fundo do CTA de Consulta Digital */}
+            <ImageUploadField
+              label="10. Imagem de Fundo do CTA Agende Sua Consulta Digital (Página 8)"
+              description="Plano de fundo ou ilustração do bloco de agendamento online de consulta."
+              currentValue={formData.digitalConsultation?.bgImageUrl}
+              defaultValue=""
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
+              })}
+            />
+
+            {/* 11. Selo Oficial de 40 Anos de Advocacia */}
+            <ImageUploadField
+              label="11. Selo Comemorativo de 40 Anos de Advocacia (1986–2026)"
+              description="Chancela e selo oficial de 40 Anos de Advocacia exibido na página O Legado Centenário e na seção do Selo."
+              currentValue={formData.centennialLegacy?.sealImageUrl}
+              defaultValue="/img/selo-40-anos.png"
+              aspectRatio="square"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Selo 40 Anos (PNG Transparente)', url: '/img/selo-40-anos.png' },
+                { label: 'Selo Dourado Oficial', url: '/img/selode40anos.jpg.jpeg' },
+              ]}
+            />
+
+            {/* 12. Assinatura Oficial do Dr. Aldo Leão */}
+            <ImageUploadField
+              label="12. Assinatura do Dr. Aldo Leão (Dourada / Transparente)"
+              description="Assinatura manuscrita oficial exibida na página Head Jurídico e no final da linha do tempo do Legado Centenário."
+              currentValue={formData.founder?.signatureImageUrl || formData.centennialLegacy?.signatureImageUrl}
+              defaultValue="/img/assinatura-gold.png"
+              aspectRatio="auto"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, signatureImageUrl: newUrl },
+                centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Assinatura Dourada Oficial', url: '/img/assinatura-gold.png' },
+                { label: 'Assinatura Original', url: '/img/assinatura.png' },
+              ]}
+            />
+
+            {/* 13. Foto da Palestra / Conferência Presencial */}
+            <ImageUploadField
+              label="13. Foto da Palestra Presencial (Academia Leão Ferreira)"
+              description="Foto exibida na seção Academia Leão Ferreira com o Dr. Aldo Leão ministrando a palestra magna 'Planejamento Patrimonial 4.0 & O Alto Custo da Omissão'."
+              currentValue={formData.academiaLeao?.lecturePhotoUrl}
+              defaultValue="/img/palestra-1.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
+              })}
+            />
+
+            {/* 14. Capas dos 8 Livros Digitais */}
+            <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+              <div>
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                  <span>14. Capas dos 8 Livros Digitais Publicados (Acervo Completo)</span>
+                </h4>
+                <p className="text-[11px] text-slate-300 mt-0.5">
+                  Faça o upload ou altere a imagem da capa de cada uma das 8 obras digitais disponíveis para download gratuito.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {(formData.digitalBooks || []).map((book, idx) => (
+                  <div key={book.id || idx} className="p-3.5 rounded-lg bg-[#071122] border border-slate-800 space-y-2">
+                    <span className="text-xs font-bold text-[#E5C158] block truncate">
+                      Livro #{idx + 1} · {book.title}
+                    </span>
+                    <ImageUploadField
+                      label={`Capa do Livro #${idx + 1}`}
+                      currentValue={book.coverImage}
+                      aspectRatio="video"
+                      onChange={(newUrl) => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        updated[idx].coverImage = newUrl;
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

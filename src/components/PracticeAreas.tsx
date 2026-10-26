@@ -91,18 +91,16 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
-            <span>SOLUÇÕES JURÍDICAS DE ALTA PERFORMANCE</span>
+            <span>{siteConfig.practiceAreasHeader?.kicker || 'SOLUÇÕES JURÍDICAS DE ALTA PERFORMANCE'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
-            ÁREAS DE <span className="gold-text-gradient">ATUAÇÃO</span>
+            {siteConfig.practiceAreasHeader?.title || 'ÁREAS DE'}{' '}
+            <span className="gold-text-gradient">{siteConfig.practiceAreasHeader?.titleHighlight || 'ATUAÇÃO'}</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração
-            da família na advocacia, a <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> desenvolve
-            soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência
-            técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:
+            {siteConfig.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
           </p>
         </div>
 
