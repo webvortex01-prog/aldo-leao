@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, Scale } from 'lucide-react';
-import heroLionImg from '../assets/images/hero_lion_gold_law_1791570163709.jpg';
-import heroLionMobileImg from '../assets/images/hero_lion_gold_law_mobile.jpg';
+import heroNovoFundoImg from '../assets/images/novofundohero.jpg';
 import holdingFamilyHeroBg from '../assets/images/holding_family_hero_bg.jpg';
 import holdingFamilyMobileBg from '../assets/images/holding_family_mobile.jpg';
 import { useSite } from '../context/SiteContext';
@@ -39,19 +38,18 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem do Leão e Balança da Justiça com Pan-Zoom Flutuante e fundo equilibrado */}
+        {/* Slide 1: Nova Imagem da Justiça e Balança com Pan-Zoom Flutuante e fundo equilibrado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-65 sm:opacity-50 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-70 sm:opacity-55 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
-            <source media="(max-width: 768px)" srcSet={heroLionMobileImg} />
             <img
-              key={`lion-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
-              src={heroLionImg}
-              alt="Ambiente Jurídico Centenário"
-              className={`w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-85 contrast-105 transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
+              key={`slide1-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
+              src={heroNovoFundoImg}
+              alt="Ambiente Jurídico Centenário - Tradição e Justiça"
+              className={`w-full h-full object-cover object-[58%_25%] md:object-[68%_35%] filter brightness-90 contrast-105 transform-gpu origin-[50%_25%] md:origin-[70%_40%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
