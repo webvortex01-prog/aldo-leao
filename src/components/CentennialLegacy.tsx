@@ -155,11 +155,11 @@ export const CentennialLegacy: React.FC = () => {
 
             {/* Selo inserido no lugar dos dois boxes removidos (Item 34) */}
             <div className="pt-6 border-t border-[#D4AF37]/25 flex flex-col items-center justify-center">
-              <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-[#D4AF37] p-2 bg-[#050B14]/80 shadow-[0_0_35px_rgba(212,175,55,0.35)] flex items-center justify-center">
+              <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-[#D4AF37] p-2 bg-[#050B14]/80 shadow-[0_0_35px_rgba(212,175,55,0.35)] flex items-center justify-center animate-luxury-float">
                 <img
                   src={cl?.sealImageUrl || '/img/selo-40-anos.png'}
                   alt="Selo 40 Anos Dr. Aldo Leão"
-                  className="w-full h-full object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)]"
+                  className="w-full h-full object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] transition-transform duration-700 hover:scale-105"
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = '/img/selode40anos.jpg.jpeg';
                   }}

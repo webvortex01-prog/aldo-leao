@@ -21,12 +21,12 @@ export const AboutLeadership: React.FC<AboutLeadershipProps> = ({ onOpenConsulta
               {/* Subtle gold border aura */}
               <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/30 to-transparent rounded-2xl blur-md" />
               
-              <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 shadow-2xl bg-[#091528]">
+              <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 shadow-2xl bg-[#091528] group">
                 <div className="aspect-[3/4] relative overflow-hidden">
                   <img
                     src={founder.photoUrl}
                     alt={`${founder.name} - ${founder.title}`}
-                    className="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-106 animate-section-photo-float"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       (e.target as HTMLElement).style.display = 'none';
@@ -35,8 +35,8 @@ export const AboutLeadership: React.FC<AboutLeadershipProps> = ({ onOpenConsulta
                   {/* Subtle contrast gradient scrim */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/30 to-transparent opacity-90" />
 
-                  {/* Name tag overlay on portrait */}
-                  <div className="absolute bottom-5 left-5 right-5 p-4 rounded bg-[#070F1E]/90 backdrop-blur-md border border-[#D4AF37]/30">
+                  {/* Name tag overlay on portrait com Levitação Sutil */}
+                  <div className="absolute bottom-5 left-5 right-5 p-4 rounded bg-[#070F1E]/90 backdrop-blur-md border border-[#D4AF37]/30 shadow-xl animate-float-gentle">
                     <p className="font-cinzel text-lg font-bold text-white">
                       {founder.name}
                     </p>

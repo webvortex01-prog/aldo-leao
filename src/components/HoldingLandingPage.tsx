@@ -276,10 +276,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   <img
                     src="/img/holding-familiar-1.jpg"
                     alt="Estruturação, Proteção Patrimonial e Sucessão - Holding Familiar"
-                    className="w-full h-full object-cover object-[center_28%]"
+                    className="w-full h-full object-cover object-[center_28%] transition-transform duration-1000 ease-out group-hover:scale-106 animate-section-photo-float"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-85" />
-                  <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full shadow-md">
+                  <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full shadow-md animate-float-gentle">
                     <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
                       Patrimônio, Empresas & Família
                     </span>

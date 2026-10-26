@@ -58,11 +58,11 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <img
                 src="/img/holding-familiar-1.jpg"
                 alt="Estruturação e Proteção Patrimonial - Holding Familiar"
-                className="w-full h-full object-cover object-[center_28%]"
+                className="w-full h-full object-cover object-[center_28%] transition-transform duration-1000 ease-out group-hover:scale-106 animate-section-photo-float"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
-              {/* Badge alterada para PLANEJAMENTO 4.0 (Item 3) */}
-              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full">
+              {/* Badge alterada para PLANEJAMENTO 4.0 (Item 3) com Levitação Nobre */}
+              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full animate-float-gentle shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                 <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
                   PLANEJAMENTO 4.0
                 </span>

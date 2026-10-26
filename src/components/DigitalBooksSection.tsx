@@ -205,7 +205,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                         <img
                           src={book.coverImage}
                           alt={book.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                         />
                       </div>
                     )}

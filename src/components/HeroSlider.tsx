@@ -37,38 +37,52 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
   return (
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
-      {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) */}
+      {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem do Leão e Balança da Justiça otimizada para Mobile e Desktop */}
+        {/* Slide 1: Imagem do Leão e Balança da Justiça com Pan-Zoom Flutuante */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-85 sm:opacity-75' : 'opacity-0'
+            currentSlide === 0 ? 'opacity-85 sm:opacity-75 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
-          <picture className="w-full h-full block">
-            <source media="(max-width: 768px)" srcSet={heroLionMobileImg} />
-            <img
-              src={heroLionImg}
-              alt="Ambiente Jurídico Centenário"
-              className="w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
-            />
-          </picture>
+          <div
+            key={`hero-bg-slide0-${currentSlide === 0 ? 'active' : 'idle'}`}
+            className={`w-full h-full transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
+              currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
+            }`}
+          >
+            <picture className="w-full h-full block">
+              <source media="(max-width: 768px)" srcSet={heroLionMobileImg} />
+              <img
+                src={heroLionImg}
+                alt="Ambiente Jurídico Centenário"
+                className="w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
+              />
+            </picture>
+          </div>
         </div>
 
-        {/* Slide 2: Imagem da Família Multigeracional com versão Mobile 9:16 e Desktop 16:9 */}
+        {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-75 sm:opacity-65' : 'opacity-0'
+            currentSlide === 1 ? 'opacity-75 sm:opacity-65 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
-          <picture className="w-full h-full block">
-            <source media="(max-width: 768px)" srcSet={holdingFamilyMobileBg} />
-            <img
-              src={holdingFamilyHeroBg}
-              alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-              className="w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105"
-            />
-          </picture>
+          <div
+            key={`hero-bg-slide1-${currentSlide === 1 ? 'active' : 'idle'}`}
+            className={`w-full h-full transform-gpu origin-[50%_25%] ${
+              currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
+            }`}
+          >
+            <picture className="w-full h-full block">
+              <source media="(max-width: 768px)" srcSet={holdingFamilyMobileBg} />
+              <img
+                src={holdingFamilyHeroBg}
+                alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
+                className="w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105"
+              />
+            </picture>
+          </div>
           {/* Película sutil para escurecer suavemente o fundo conforme pedido do RD */}
           <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
         </div>
@@ -137,70 +151,98 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 : 'opacity-0 translate-y-4 scale-[0.99] absolute inset-0 pointer-events-none z-0'
             }`}
           >
-                <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                  {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
-                  <div className="mb-4">
-                    <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
-                      ALDO LEÃO <strong className="font-black text-white">ADVOCACIA ESTRATÉGICA</strong>
-                    </span>
-                  </div>
+            <div className="lg:col-span-7 flex flex-col justify-center text-left">
+              {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
+              <div
+                className={`mb-4 transition-all duration-700 ease-out delay-100 transform ${
+                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+                }`}
+              >
+                <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
+                  ALDO LEÃO <strong className="font-black text-white">ADVOCACIA ESTRATÉGICA</strong>
+                </span>
+              </div>
 
-                  {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
-                  <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance]">
-                    {siteConfig.hero.titlePart1 || 'TRADIÇÃO JURÍDICA'}{' '}
-                    <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
-                  </h1>
+              {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
+              <h1
+                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance] transition-all duration-700 ease-out delay-200 transform ${
+                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                {siteConfig.hero.titlePart1 || 'TRADIÇÃO JURÍDICA'}{' '}
+                <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
+              </h1>
 
-                  {/* Descrição */}
-                  <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light whitespace-pre-line">
-                    {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
+              {/* Descrição */}
+              <p
+                className={`text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light whitespace-pre-line transition-all duration-700 ease-out delay-300 transform ${
+                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
+              </p>
+
+              {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
+              <div
+                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-700 ease-out delay-400 transform ${
+                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
+                  {siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
+                </p>
+              </div>
+
+              {/* CTAs */}
+              <div
+                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-700 ease-out delay-500 transform ${
+                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <button
+                  onClick={handleWhatsAppSlide1}
+                  className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.35)]"
+                >
+                  <span>{siteConfig.hero.cta1Text || 'AGENDAR CONSULTA DIGITAL'}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+
+                <button
+                  onClick={onGoToLandingPage}
+                  className="btn-secondary-luxury inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-semibold tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] cursor-pointer"
+                >
+                  <span>{siteConfig.hero.cta2Text || 'CONHEÇA O PLANEJAMENTO 4.0'}</span>
+                </button>
+              </div>
+
+              {/* Box 1: ADVOCACIA ESTRATÉGICA (Box 2 excluído conforme Item 3) */}
+              <div
+                className={`w-full transition-all duration-700 ease-out delay-600 transform ${
+                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left card-hover-interactive">
+                  <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
+                    Excelência Jurídica Centenária
+                  </span>
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
+                    ADVOCACIA ESTRATÉGICA
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body">
+                    Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em
+                    uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.
                   </p>
-
-                  {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
-                  <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive">
-                    <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                      {siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
-                    </p>
-                  </div>
-
-                  {/* CTAs */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
-                    <button
-                      onClick={handleWhatsAppSlide1}
-                      className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.35)]"
-                    >
-                      <span>{siteConfig.hero.cta1Text || 'AGENDAR CONSULTA DIGITAL'}</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
-
-                    <button
-                      onClick={onGoToLandingPage}
-                      className="btn-secondary-luxury inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded text-xs font-semibold tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] cursor-pointer"
-                    >
-                      <span>{siteConfig.hero.cta2Text || 'CONHEÇA O PLANEJAMENTO 4.0'}</span>
-                    </button>
-                  </div>
-
-                  {/* Box 1: ADVOCACIA ESTRATÉGICA (Box 2 excluído conforme Item 3) */}
-                  <div className="w-full">
-                    <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left card-hover-interactive">
-                      <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
-                        Excelência Jurídica Centenária
-                      </span>
-                      <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
-                        ADVOCACIA ESTRATÉGICA
-                      </h4>
-                      <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body">
-                        Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em
-                        uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.
-                      </p>
-                    </div>
-                  </div>
                 </div>
+              </div>
+            </div>
 
-            {/* Right Column Visual (Logomarca Oficial do Leão - Item b do dia 15/10/26: card abaixo do box da imagem para total visibilidade) */}
-            <div className="lg:col-span-5 relative flex flex-col justify-center">
-              <div className="relative w-full max-w-md lg:max-w-none mx-auto">
+            {/* Right Column Visual (Logomarca Oficial do Leão - com Levitação Nobre 3D) */}
+            <div
+              className={`lg:col-span-5 relative flex flex-col justify-center transition-all duration-700 ease-out delay-300 transform ${
+                currentSlide === 0 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
+              }`}
+            >
+              <div className="relative w-full max-w-md lg:max-w-none mx-auto animate-luxury-float">
                 <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/60 via-[#F6E27A]/30 to-[#D4AF37]/15 rounded-2xl blur-xl opacity-85" />
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
                   <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-6">
@@ -244,106 +286,132 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-                  {/* Texto acima do título: HOLDING FAMILIAR em dourado sem a letra 'A' (Item c do dia 15/10/26) */}
-                  <div className="text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158]">
-                    {siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}
+              {/* Texto acima do título: HOLDING FAMILIAR em dourado sem a letra 'A' (Item c do dia 15/10/26) */}
+              <div
+                className={`text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158] transition-all duration-700 ease-out delay-100 transform ${
+                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+                }`}
+              >
+                {siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}
+              </div>
+
+              {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Itens 3 e I) */}
+              <h1
+                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-4 [text-wrap:balance] transition-all duration-700 ease-out delay-200 transform ${
+                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <span className="text-white">PLANEJAMENTO </span>
+                <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
+              </h1>
+
+              {/* Texto principal do Slide 2 conforme Item 27 */}
+              <div
+                className={`space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light transition-all duration-700 ease-out delay-300 transform ${
+                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <p>
+                  {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
+                </p>
+                <p>
+                  <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
+                </p>
+                <p>
+                  {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
+                </p>
+                <p>
+                  {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
+                </p>
+              </div>
+
+              {/* Box do Slide 2 conforme Item 3 e 27 */}
+              <div
+                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-700 ease-out delay-400 transform ${
+                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
+                  {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
+                </p>
+              </div>
+
+              {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
+              <div
+                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-700 ease-out delay-500 transform ${
+                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
+                <button
+                  onClick={onGoToLandingPage}
+                  className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.4)]"
+                >
+                  <span>{siteConfig.slide2?.buttonText || 'Planejamento Patrimonial 4.0'}</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
+            </div>
+
+            {/* Right Column Slide 2: Card de Custos e Foto de Dr. Aldo com 2 pessoas com card abaixo (com Flutuação e Zoom Vivo) */}
+            <div
+              className={`lg:col-span-5 relative flex flex-col gap-4 justify-center transition-all duration-700 ease-out delay-300 transform ${
+                currentSlide === 1 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
+              }`}
+            >
+              <div className="animate-luxury-float flex flex-col gap-4">
+                {/* Card Comparativo de Custos */}
+                <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left card-hover-interactive">
+                  <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
+                    <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
+                      COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
+                    </h3>
                   </div>
 
-                  {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Itens 3 e I) */}
-                  <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-4 [text-wrap:balance]">
-                    <span className="text-white">PLANEJAMENTO </span>
-                    <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
-                  </h1>
+                  <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
+                    Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?
+                  </p>
 
-                  {/* Texto principal do Slide 2 conforme Item 27 */}
-                  <div className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-                    <p>
-                      {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
-                    </p>
-                    <p>
-                      <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
-                    </p>
-                    <p>
-                      {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
-                    </p>
-                    <p>
-                      {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
-                    </p>
-                  </div>
+                  <button
+                    onClick={() => setIsCostModalOpen(true)}
+                    className="btn-gold-luxury w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-center cursor-pointer shadow-lg"
+                  >
+                    VER OS CUSTOS
+                  </button>
+                </div>
 
-                  {/* Box do Slide 2 conforme Item 3 e 27 */}
-                  <div className="p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive">
-                    <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                      {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
-                    </p>
-                  </div>
-
-                  {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
-                    <button
-                      onClick={onGoToLandingPage}
-                      className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.4)]"
-                    >
-                      <span>{siteConfig.slide2?.buttonText || 'Planejamento Patrimonial 4.0'}</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
+                {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 (Aparece integralmente com zoom flutuante sutil) */}
+                <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive group">
+                  <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-2">
+                    <img
+                      src="/img/holding-familiar-1.jpg"
+                      alt="Holding Familiar - Planejamento Patrimonial 4.0"
+                      className="w-full h-full object-contain animate-section-photo-float group-hover:scale-105 transition-transform duration-700 ease-out"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = '/img/holding-familiar-1.jpg';
+                      }}
+                    />
                   </div>
                 </div>
 
-                {/* Right Column Slide 2: Card de Custos e Foto de Dr. Aldo com 2 pessoas com card abaixo (Item c do dia 15/10/26) */}
-                <div className="lg:col-span-5 relative flex flex-col gap-4 justify-center">
-                  {/* Card Comparativo de Custos */}
-                  <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left card-hover-interactive">
-                    <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
-                      <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
-                        COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
-                      </h3>
-                    </div>
-
-                    <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
-                      Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?
+                {/* Card com a balança e os textos logo abaixo do box da foto (Item c) */}
+                <div className="p-3.5 rounded-xl bg-[#070F1E] border border-[#D4AF37]/50 flex items-center gap-3 text-left shadow-xl">
+                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
+                    <Scale className="w-4 h-4 text-[#E5C158]" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
+                      O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
                     </p>
-
-                    <button
-                      onClick={() => setIsCostModalOpen(true)}
-                      className="btn-gold-luxury w-full py-3 px-4 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-center cursor-pointer shadow-lg"
-                    >
-                      VER OS CUSTOS
-                    </button>
-                  </div>
-
-                  {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 (Aparece integralmente) */}
-                  <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive">
-                    <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-2">
-                      <img
-                        src="/img/holding-familiar-1.jpg"
-                        alt="Holding Familiar - Planejamento Patrimonial 4.0"
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          (e.currentTarget as HTMLImageElement).src = '/img/holding-familiar-1.jpg';
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Card com a balança e os textos logo abaixo do box da foto (Item c) */}
-                  <div className="p-3.5 rounded-xl bg-[#070F1E] border border-[#D4AF37]/50 flex items-center gap-3 text-left shadow-xl">
-                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
-                      <Scale className="w-4 h-4 text-[#E5C158]" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
-                        O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
-                      </p>
-                      <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
-                        VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
-                      </p>
-                    </div>
+                    <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
+                      VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
+                    </p>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
+      </div>
 
       {/* Modal Tabela Comparativa de Custos Completa (Inventário x Holding Familiar) */}
       {isCostModalOpen && (
