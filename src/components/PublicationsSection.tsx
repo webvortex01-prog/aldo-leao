@@ -81,17 +81,24 @@ export const PublicationsSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
             <BookOpen className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>CONHECIMENTO JURÍDICO & PRECEDENTES DOS TRIBUNAIS</span>
+            <span>NOTÍCIAS E ARTIGOS JURÍDICOS</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance] animate-title-reveal">
             PUBLICAÇÕES <span className="gold-text-gradient">JURÍDICAS</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            A produção doutrinária e o acompanhamento jurisprudencial fazem parte da tradição secular da <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong>. 
-            Nesta seção você encontra artigos técnicos de autoria do <strong className="text-white font-medium">Dr. Aldo Leão Ferreira Filho</strong> e notícias estratégicas com decisões relevantes do <strong className="text-white font-medium">STF, STJ, Reforma Tributária</strong> e tribunais do país.
-          </p>
+          <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+            <p>
+              A produção de conhecimento jurídico faz parte da tradição centenária da <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong>.
+            </p>
+            <p>
+              Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.
+            </p>
+            <p>
+              Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.
+            </p>
+          </div>
         </div>
 
         {/* Filter and Search Bar */}
