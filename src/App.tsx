@@ -10,7 +10,6 @@ import { ExcellenceSolutions } from './components/ExcellenceSolutions';
 import { DigitalConsultationCTA } from './components/DigitalConsultationCTA';
 import { HoldingFamiliarSection } from './components/HoldingFamiliarSection';
 import { PublicationsSection } from './components/PublicationsSection';
-import { LegalNewsSection } from './components/LegalNewsSection';
 import { DigitalBooksSection } from './components/DigitalBooksSection';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
@@ -140,13 +139,10 @@ function AppContent() {
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
-        {/* 9. Página ARTIGOS JURÍDICOS (Dr. Aldo Leão) */}
+        {/* 9. Página PUBLICAÇÕES JURÍDICAS (Artigos & Notícias Unificados) */}
         <PublicationsSection />
 
-        {/* 10. Página NOTÍCIAS JURÍDICAS (STF / STJ / Tribunais Superiores) */}
-        <LegalNewsSection />
-
-        {/* 11. Página LIVROS DIGITAIS (Item 12 e Item 41) */}
+        {/* 10. Página LIVROS DIGITAIS (Item 12 e Item 41) */}
         <DigitalBooksSection
           onOpenConsultation={(area) => handleOpenConsultation(area)}
         />

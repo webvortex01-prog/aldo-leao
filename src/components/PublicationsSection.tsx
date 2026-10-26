@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Calendar, Clock, ArrowRight, X, ChevronRight, ChevronLeft, BookOpen } from 'lucide-react';
+import { Search, Calendar, Clock, ArrowRight, X, ChevronRight, ChevronLeft, BookOpen, Scale, MessageSquare } from 'lucide-react';
 import { Publication } from '../types';
 import { useSite } from '../context/SiteContext';
 import { ArticleSignature } from './ArticleSignature';
@@ -7,14 +7,12 @@ import { ArticleSignature } from './ArticleSignature';
 export const PublicationsSection: React.FC = () => {
   const { siteConfig } = useSite();
   const [searchTerm, setSearchTerm] = useState('');
+  const [typeFilter, setTypeFilter] = useState<'todas' | 'artigo' | 'noticia'>('todas');
   const [areaFilter, setAreaFilter] = useState('todas');
   const [currentPage, setCurrentPage] = useState(1);
   const [activePubModal, setActivePubModal] = useState<Publication | null>(null);
 
-  // Filtra exclusivamente os Artigos Jurídicos (Doutrina, Análises Técnicas e Pareceres do Dr. Aldo Leão)
-  const articlesList = useMemo(() => {
-    return (siteConfig.publications || []).filter((p) => p.type === 'artigo');
-  }, [siteConfig.publications]);
+  const publications = siteConfig.publications || [];
 
   const normalize = (str: string) =>
     (str || '')
@@ -22,11 +20,14 @@ export const PublicationsSection: React.FC = () => {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
 
-  const filteredArticles = useMemo(() => {
+  const artigosCount = useMemo(() => publications.filter((p) => p.type === 'artigo').length, [publications]);
+  const noticiasCount = useMemo(() => publications.filter((p) => p.type === 'noticia').length, [publications]);
+
+  const filteredPublications = useMemo(() => {
     const raw = searchTerm.trim();
     const tokens = raw ? normalize(raw).split(/\s+/).filter(Boolean) : [];
 
-    return articlesList.filter((item) => {
+    return publications.filter((item) => {
       let matchesSearch = true;
       if (tokens.length > 0) {
         const searchable = normalize(
@@ -35,31 +36,41 @@ export const PublicationsSection: React.FC = () => {
         matchesSearch = tokens.every((token) => searchable.includes(token));
       }
 
+      const matchesType = typeFilter === 'todas' || item.type === typeFilter;
       const matchesArea = areaFilter === 'todas' || item.area === areaFilter;
 
-      return matchesSearch && matchesArea;
+      return matchesSearch && matchesType && matchesArea;
     });
-  }, [articlesList, searchTerm, areaFilter]);
+  }, [publications, searchTerm, typeFilter, areaFilter]);
 
   const availableAreas = useMemo(() => {
     const set = new Set<string>();
-    articlesList.forEach((p) => {
+    publications.forEach((p) => {
       if (p.area) set.add(p.area);
     });
     return Array.from(set).sort();
-  }, [articlesList]);
+  }, [publications]);
 
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(filteredArticles.length / itemsPerPage) || 1;
-  const currentArticles = filteredArticles.slice(
+  const totalPages = Math.ceil(filteredPublications.length / itemsPerPage) || 1;
+  const currentPublications = filteredPublications.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
+  const handleConsultAboutNews = (title: string) => {
+    const phone = siteConfig.contact.whatsappNumber || '5551998088998';
+    const text = encodeURIComponent(
+      `Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, li a notícia "${title}" no portal e gostaria de consultar sobre o impacto disso no meu patrimônio/empresa.`
+    );
+    window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+  };
+
   return (
-    <section id="artigos" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
-      {/* Anchor de compatibilidade para #publicacoes */}
-      <span id="publicacoes" className="absolute -top-24 left-0 pointer-events-none" />
+    <section id="publicacoes" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
+      {/* Âncoras de compatibilidade para links externos e atalhos rápidos */}
+      <span id="artigos" className="absolute -top-24 left-0 pointer-events-none" />
+      <span id="noticias" className="absolute -top-24 left-0 pointer-events-none" />
 
       {/* Background ambient luxury lighting */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[140px] pointer-events-none" />
@@ -70,16 +81,16 @@ export const PublicationsSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
             <BookOpen className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>DOUTRINA & ANÁLISES TÉCNICAS ESTRATÉGICAS</span>
+            <span>CONHECIMENTO JURÍDICO & PRECEDENTES DOS TRIBUNAIS</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance] animate-title-reveal">
-            ARTIGOS <span className="gold-text-gradient">JURÍDICOS</span>
+            PUBLICAÇÕES <span className="gold-text-gradient">JURÍDICAS</span>
           </h2>
 
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            A produção intelectual e doutrinária assinada pelo <strong className="text-white font-medium">Dr. Aldo Leão Ferreira Filho</strong>. 
-            Estudos aprofundados sobre Planejamento Patrimonial 4.0, Holding Familiar, Blindagem Patrimonial Lícita, Direito Imobiliário e Sucessão Empresarial.
+            A produção doutrinária e o acompanhamento jurisprudencial fazem parte da tradição secular da <strong className="text-white font-medium">ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong>. 
+            Nesta seção você encontra artigos técnicos de autoria do <strong className="text-white font-medium">Dr. Aldo Leão Ferreira Filho</strong> e notícias estratégicas com decisões relevantes do <strong className="text-white font-medium">STF, STJ, Reforma Tributária</strong> e tribunais do país.
           </p>
         </div>
 
@@ -91,7 +102,7 @@ export const PublicationsSection: React.FC = () => {
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
-                placeholder="Pesquisar artigos jurídicos (ex: holding, ITCMD, imóveis, sucessão, cotas)..."
+                placeholder="Pesquisar publicações (ex: holding, ITCMD, STJ, reforma, inventário, imóveis)..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => {
@@ -125,6 +136,20 @@ export const PublicationsSection: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            {/* Type Filter: Todas, Artigos ou Notícias */}
+            <select
+              value={typeFilter}
+              onChange={(e) => {
+                setTypeFilter(e.target.value as any);
+                setCurrentPage(1);
+              }}
+              className="px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
+            >
+              <option value="todas">Todas as Publicações ({publications.length})</option>
+              <option value="artigo">Artigos Jurídicos ({artigosCount})</option>
+              <option value="noticia">Notícias Jurídicas ({noticiasCount})</option>
+            </select>
+
             {/* Area Filter */}
             <select
               value={areaFilter}
@@ -134,7 +159,7 @@ export const PublicationsSection: React.FC = () => {
               }}
               className="px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
             >
-              <option value="todas">Todas as Áreas ({articlesList.length} Artigos)</option>
+              <option value="todas">Todas as Áreas ({availableAreas.length})</option>
               {availableAreas.map((area) => (
                 <option key={area} value={area}>
                   {area}
@@ -146,23 +171,33 @@ export const PublicationsSection: React.FC = () => {
 
         {/* 6 Cards Grid (3 Columns x 2 Rows) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-10">
-          {currentArticles.length === 0 ? (
+          {currentPublications.length === 0 ? (
             <div className="col-span-3 py-16 text-center text-slate-400">
-              Nenhum artigo jurídico encontrado para os critérios selecionados.
+              Nenhuma publicação encontrada para os critérios selecionados.
             </div>
           ) : (
-            currentArticles.map((pub) => {
+            currentPublications.map((pub) => {
+              const isArtigo = pub.type === 'artigo';
+
               return (
                 <article
                   key={pub.id}
                   className="rounded-xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/60 shadow-lg group hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)]"
                 >
                   <div>
-                    {/* Header Banner */}
+                    {/* Header Banner com diferenciação clara entre Artigo e Notícia */}
                     <div className="p-3.5 bg-gradient-to-r from-[#0B1A35] to-[#071122] border-b border-[#D4AF37]/20 flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black font-black shadow-sm">
-                        ARTIGO JURÍDICO
-                      </span>
+                      {isArtigo ? (
+                        <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black font-black shadow-sm flex items-center gap-1">
+                          <BookOpen className="w-3 h-3 text-black" />
+                          <span>ARTIGO JURÍDICO</span>
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded bg-[#102347] text-[#F6E27A] border border-[#D4AF37]/40 shadow-sm flex items-center gap-1">
+                          <Scale className="w-3 h-3 text-[#E5C158]" />
+                          <span>NOTÍCIA JURÍDICA</span>
+                        </span>
+                      )}
 
                       <span className="text-[10px] font-semibold text-[#E5C158] uppercase truncate max-w-[170px]">
                         {pub.area}
@@ -191,13 +226,13 @@ export const PublicationsSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Card Footer: LER ARTIGO COMPLETO */}
+                  {/* Card Footer com Botão Específico */}
                   <div className="p-5 pt-0 border-t-0">
                     <button
                       onClick={() => setActivePubModal(pub)}
                       className="w-full py-2.5 px-4 rounded-lg bg-[#050B14] border border-[#D4AF37]/35 text-xs font-bold uppercase tracking-wider text-[#F6E27A] group-hover:bg-[#0E1F3D] group-hover:border-[#D4AF37] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                     >
-                      <span>LER ARTIGO COMPLETO</span>
+                      <span>{isArtigo ? 'LER ARTIGO COMPLETO' : 'LER NOTÍCIA COMPLETA'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -255,7 +290,7 @@ export const PublicationsSection: React.FC = () => {
         )}
       </div>
 
-      {/* Reader Modal para Artigo Jurídico */}
+      {/* Reader Modal: Abre tanto Artigo quanto Notícia */}
       {activePubModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
           <div className="relative w-full max-w-3xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-10 max-h-[88vh] overflow-y-auto text-slate-100">
@@ -269,9 +304,15 @@ export const PublicationsSection: React.FC = () => {
 
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
               <div className="flex items-center gap-2 text-xs text-[#E5C158] font-semibold mb-2">
-                <span className="px-2 py-0.5 rounded bg-[#D4AF37] text-black font-black text-[10px]">
-                  Artigo Jurídico
-                </span>
+                {activePubModal.type === 'artigo' ? (
+                  <span className="px-2 py-0.5 rounded bg-[#D4AF37] text-black font-black text-[10px]">
+                    Artigo Jurídico
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 rounded bg-[#102347] text-[#F6E27A] border border-[#D4AF37]/40 text-[10px]">
+                    Notícia Jurídica
+                  </span>
+                )}
                 <span>·</span>
                 <span>{activePubModal.area}</span>
                 <span>·</span>
@@ -281,7 +322,9 @@ export const PublicationsSection: React.FC = () => {
                 {activePubModal.title}
               </h3>
               <p className="text-xs text-[#D4AF37] mt-1.5 font-medium">
-                Autoria: Dr. Aldo Leão Ferreira Filho · Head Jurídico ALDO LEÃO ADVOCACIA ESTRATÉGICA
+                {activePubModal.type === 'artigo'
+                  ? 'Autoria: Dr. Aldo Leão Ferreira Filho · Head Jurídico ALDO LEÃO ADVOCACIA ESTRATÉGICA'
+                  : 'Fonte: Tribunais Superiores (STF/STJ) & Seleção Editorial Aldo Leão Advocacia Estratégica'}
               </p>
             </div>
 
@@ -291,19 +334,41 @@ export const PublicationsSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Assinatura Oficial com Botão de Consulta */}
-            <ArticleSignature 
-              publicationTitle={activePubModal.title} 
-            />
+            {/* Se for Artigo: exibe Assinatura Oficial do Dr. Aldo */}
+            {activePubModal.type === 'artigo' ? (
+              <ArticleSignature 
+                publicationTitle={activePubModal.title} 
+              />
+            ) : (
+              /* Se for Notícia: exibe botão de consulta rápida sobre o tema */
+              <div className="mt-8 pt-5 border-t border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <button
+                  onClick={() => handleConsultAboutNews(activePubModal.title)}
+                  className="btn-gold-luxury px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>CONSULTAR ADVOGADO SOBRE ESTA NOTÍCIA</span>
+                </button>
 
-            <div className="mt-8 pt-4 border-t border-slate-800 flex justify-end">
-              <button
-                onClick={() => setActivePubModal(null)}
-                className="px-6 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
-              >
-                Fechar
-              </button>
-            </div>
+                <button
+                  onClick={() => setActivePubModal(null)}
+                  className="px-6 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
+                >
+                  Fechar
+                </button>
+              </div>
+            )}
+
+            {activePubModal.type === 'artigo' && (
+              <div className="mt-8 pt-4 border-t border-slate-800 flex justify-end">
+                <button
+                  onClick={() => setActivePubModal(null)}
+                  className="px-6 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
+                >
+                  Fechar
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}

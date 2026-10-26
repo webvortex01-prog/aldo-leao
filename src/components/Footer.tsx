@@ -33,8 +33,7 @@ export const Footer: React.FC<FooterProps> = ({
     { label: 'Atuação', href: '#areas-atuacao' },
     { label: 'Serviços', href: '#solucoes-excelencia' },
     { label: 'Planejamento', href: '#holding-familiar' },
-    { label: 'Artigos Jurídicos', href: '#artigos' },
-    { label: 'Notícias Jurídicas', href: '#noticias' },
+    { label: 'Publicações', href: '#publicacoes' },
     { label: 'Livros', href: '#livros' },
     { label: 'Contato', href: '#contato' },
   ];

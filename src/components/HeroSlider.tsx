@@ -50,7 +50,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={heroLionImg}
               alt="Ambiente Jurídico Centenário"
-              className="w-full h-full object-cover object-center md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
+              className="w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
             />
           </picture>
         </div>
@@ -66,7 +66,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-              className="w-full h-full object-cover object-center md:object-[center_20%] filter brightness-90 contrast-105"
+              className="w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105"
             />
           </picture>
           {/* Película sutil para escurecer suavemente o fundo conforme pedido do RD */}
@@ -78,9 +78,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/25" />
       </div>
 
-      {/* Background ambient luxury lighting - brilho dourado e azul nobre vibrante */}
+      {/* Background ambient luxury lighting - suavizado no mobile para evitar clarão no topo */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-10 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/20 rounded-full blur-[140px]" />
+        <div className="hidden md:block absolute top-10 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/20 rounded-full blur-[140px]" />
+        <div className="md:hidden absolute top-24 right-1/4 w-[240px] h-[240px] bg-[#D4AF37]/10 rounded-full blur-[80px]" />
         <div className="absolute -bottom-20 left-10 w-[500px] h-[500px] bg-[#0E1F3D]/60 rounded-full blur-[160px]" />
       </div>
 
