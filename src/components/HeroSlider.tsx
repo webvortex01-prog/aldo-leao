@@ -39,10 +39,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem do Leão e Balança da Justiça com Pan-Zoom Flutuante e fundo profundamente esfumaçado */}
+        {/* Slide 1: Imagem do Leão e Balança da Justiça com Pan-Zoom Flutuante e fundo equilibrado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-45 sm:opacity-35 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-65 sm:opacity-50 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -51,19 +51,19 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               key={`lion-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
               src={heroLionImg}
               alt="Ambiente Jurídico Centenário"
-              className={`w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-70 contrast-110 transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
+              className={`w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-85 contrast-105 transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
           </picture>
-          {/* Película escura esfumaçada para manter o fundo imponente, escurecido e misterioso */}
-          <div className="absolute inset-0 bg-[#050B14]/60 pointer-events-none" />
+          {/* Película escura suave para manter o contraste sem apagar a imagem */}
+          <div className="absolute inset-0 bg-[#050B14]/40 pointer-events-none" />
         </div>
 
-        {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo profundamente esfumaçado */}
+        {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo equilibrado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-40 sm:opacity-30 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 1 ? 'opacity-60 sm:opacity-45 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -72,18 +72,18 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               key={`family-hero-img-${currentSlide === 1 ? 'active' : 'idle'}`}
               src={holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-65 contrast-110 transform-gpu origin-[50%_25%] ${
+              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-80 contrast-105 transform-gpu origin-[50%_25%] ${
                 currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
               }`}
             />
           </picture>
-          {/* Película escura esfumaçada reforçada */}
-          <div className="absolute inset-0 bg-[#050B14]/65 pointer-events-none" />
+          {/* Película escura suave */}
+          <div className="absolute inset-0 bg-[#050B14]/45 pointer-events-none" />
         </div>
 
-        {/* Overlays cinematográficos profundamente esfumaçados garantindo contraste total do dourado e fundo escuro */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/85 via-[#050B14]/70 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14] md:via-[#050B14]/90 md:to-[#050B14]/75 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/40 to-[#050B14]/70 pointer-events-none" />
+        {/* Overlays cinematográficos equilibrados garantindo nitidez das fotos e contraste dos textos */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/70 via-[#050B14]/55 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14] md:via-[#050B14]/85 md:to-[#050B14]/55 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/50 pointer-events-none" />
       </div>
 
       {/* Background ambient luxury lighting suave sem clarear o fundo */}
