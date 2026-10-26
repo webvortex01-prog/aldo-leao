@@ -39,10 +39,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem do Leão e Balança da Justiça com Pan-Zoom Flutuante */}
+        {/* Slide 1: Imagem do Leão e Balança da Justiça com Pan-Zoom Flutuante e fundo esfumaçado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-85 sm:opacity-75 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-65 sm:opacity-55 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -51,17 +51,19 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               key={`lion-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
               src={heroLionImg}
               alt="Ambiente Jurídico Centenário"
-              className={`w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105 transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
+              className={`w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-90 contrast-105 transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
           </picture>
+          {/* Película escura esfumaçada para manter o fundo imponente e escurecido */}
+          <div className="absolute inset-0 bg-[#050B14]/40 pointer-events-none" />
         </div>
 
-        {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante */}
+        {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo esfumaçado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-75 sm:opacity-65 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 1 ? 'opacity-60 sm:opacity-50 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -70,25 +72,25 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               key={`family-hero-img-${currentSlide === 1 ? 'active' : 'idle'}`}
               src={holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105 transform-gpu origin-[50%_25%] ${
+              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-80 contrast-105 transform-gpu origin-[50%_25%] ${
                 currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
               }`}
             />
           </picture>
-          {/* Película sutil para escurecer suavemente o fundo conforme pedido do RD */}
-          <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
+          {/* Película escura esfumaçada conforme solicitação do RD */}
+          <div className="absolute inset-0 bg-[#050B14]/50 pointer-events-none" />
         </div>
 
-        {/* Overlays cinematográficos suaves para garantir legibilidade dos textos e máxima visibilidade das artes */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/40 via-[#050B14]/80 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14] md:via-[#050B14]/75 md:to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/25" />
+        {/* Overlays cinematográficos esfumaçados garantindo legibilidade perfeita e mistério dark luxury */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/70 via-[#050B14]/55 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14] md:via-[#050B14]/85 md:to-[#050B14]/55 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/50 pointer-events-none" />
       </div>
 
-      {/* Background ambient luxury lighting - suavizado no mobile para evitar clarão no topo */}
+      {/* Background ambient luxury lighting suave sem clarear o fundo */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="hidden md:block absolute top-10 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/20 rounded-full blur-[140px]" />
-        <div className="md:hidden absolute top-24 right-1/4 w-[240px] h-[240px] bg-[#D4AF37]/10 rounded-full blur-[80px]" />
-        <div className="absolute -bottom-20 left-10 w-[500px] h-[500px] bg-[#0E1F3D]/60 rounded-full blur-[160px]" />
+        <div className="hidden md:block absolute top-10 right-1/4 w-[600px] h-[600px] bg-[#D4AF37]/10 rounded-full blur-[140px]" />
+        <div className="md:hidden absolute top-24 right-1/4 w-[240px] h-[240px] bg-[#D4AF37]/8 rounded-full blur-[80px]" />
+        <div className="absolute -bottom-20 left-10 w-[500px] h-[500px] bg-[#0E1F3D]/50 rounded-full blur-[160px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
