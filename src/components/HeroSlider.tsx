@@ -45,21 +45,17 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             currentSlide === 0 ? 'opacity-85 sm:opacity-75 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
-          <div
-            key={`hero-bg-slide0-${currentSlide === 0 ? 'active' : 'idle'}`}
-            className={`w-full h-full transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
-              currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
-            }`}
-          >
-            <picture className="w-full h-full block">
-              <source media="(max-width: 768px)" srcSet={heroLionMobileImg} />
-              <img
-                src={heroLionImg}
-                alt="Ambiente Jurídico Centenário"
-                className="w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105"
-              />
-            </picture>
-          </div>
+          <picture className="w-full h-full block overflow-hidden">
+            <source media="(max-width: 768px)" srcSet={heroLionMobileImg} />
+            <img
+              key={`lion-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
+              src={heroLionImg}
+              alt="Ambiente Jurídico Centenário"
+              className={`w-full h-full object-cover object-top md:object-contain md:object-right md:pr-8 filter brightness-105 contrast-105 transform-gpu origin-[50%_15%] md:origin-[80%_45%] ${
+                currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
+              }`}
+            />
+          </picture>
         </div>
 
         {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante */}
@@ -68,21 +64,17 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             currentSlide === 1 ? 'opacity-75 sm:opacity-65 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
-          <div
-            key={`hero-bg-slide1-${currentSlide === 1 ? 'active' : 'idle'}`}
-            className={`w-full h-full transform-gpu origin-[50%_25%] ${
-              currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
-            }`}
-          >
-            <picture className="w-full h-full block">
-              <source media="(max-width: 768px)" srcSet={holdingFamilyMobileBg} />
-              <img
-                src={holdingFamilyHeroBg}
-                alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-                className="w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105"
-              />
-            </picture>
-          </div>
+          <picture className="w-full h-full block overflow-hidden">
+            <source media="(max-width: 768px)" srcSet={holdingFamilyMobileBg} />
+            <img
+              key={`family-hero-img-${currentSlide === 1 ? 'active' : 'idle'}`}
+              src={holdingFamilyHeroBg}
+              alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
+              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105 transform-gpu origin-[50%_25%] ${
+                currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
+              }`}
+            />
+          </picture>
           {/* Película sutil para escurecer suavemente o fundo conforme pedido do RD */}
           <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
         </div>
