@@ -28,19 +28,20 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/45 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#071122]">
-          {/* Fundo da section meio esfumaçado com a imagem de consulta virtual (Foto do escritório/videoconferência) */}
+          {/* Fundo da section meio esfumaçado com a imagem de consulta virtual mais clara e com flutuação suave */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
               src="/img/consulta-virtual-2.jpg"
               alt="Atendimento Jurídico Digital Dr. Aldo Leão"
-              className="w-full h-full object-cover object-[center_20%] opacity-30 filter contrast-105 scale-105"
+              className="w-full h-full object-cover object-[center_20%] opacity-65 sm:opacity-55 filter brightness-110 contrast-105 animate-smoky-float"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-reuniao.jpg';
               }}
             />
-            {/* Overlay esfumaçado luxury com degradês escuros e neblina dourada sutil */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#071122] via-[#071122]/90 to-[#071122]/60 backdrop-blur-[1px]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#071122] via-transparent to-[#071122]/70" />
+            {/* Overlay esfumaçado luxury suave: escuro na esquerda pro texto, bem transparente na direita pra foto brilhar */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#071122] via-[#071122]/70 to-[#071122]/20 backdrop-blur-[0.5px]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071122]/80 via-transparent to-[#071122]/35" />
+            <div className="absolute -top-10 right-10 w-80 h-80 bg-[#D4AF37]/15 rounded-full blur-[100px]" />
           </div>
 
           <div className="relative z-10 p-6 sm:p-12 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center text-left">
@@ -98,9 +99,9 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
               </div>
             </div>
 
-            {/* Coluna Direita: Segunda imagem em moldura nobre de vidro com detalhes dourados */}
+            {/* Coluna Direita: Segunda imagem em moldura nobre de vidro flutuando suavemente */}
             <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-full max-w-sm rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-[0_15px_45px_rgba(0,0,0,0.8)] bg-[#070F1E] group card-hover-interactive">
+              <div className="relative w-full max-w-sm rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-[0_20px_50px_rgba(0,0,0,0.85)] bg-[#070F1E] group card-hover-interactive animate-card-float">
                 <div className="aspect-[4/3] sm:aspect-[14/10] w-full overflow-hidden relative">
                   <img
                     src="/img/consulta-virtual-1.jpg"
@@ -110,8 +111,8 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
                       (e.currentTarget as HTMLImageElement).src = '/img/consulta-virtual-2.jpg';
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-70" />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#050B14]/85 backdrop-blur-md border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-60" />
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#050B14]/85 backdrop-blur-md border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider shadow-md">
                     Atendimento 100% Digital
                   </div>
                 </div>

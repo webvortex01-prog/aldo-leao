@@ -270,6 +270,39 @@
   will-change: transform;
 }
 
+/* Flutuação suave para foto de fundo da Consulta Digital */
+@keyframes smokyPhotoFloat {
+  0% {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: scale(1.11) translate3d(-1.2%, -1%, 0);
+  }
+  100% {
+    transform: scale(1.06) translate3d(1%, 0.8%, 0);
+  }
+}
+
+.animate-smoky-float {
+  animation: smokyPhotoFloat 14s ease-in-out infinite alternate !important;
+  will-change: transform;
+}
+
+/* Flutuação suave e elegante para cards de destaque */
+@keyframes cardGentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.35deg);
+  }
+}
+
+.animate-card-float {
+  animation: cardGentleFloat 5s ease-in-out infinite !important;
+  will-change: transform;
+}
+
 /* Abertura suave de títulos nas seções ao rolar a página */
 @keyframes titleRevealFade {
   0% {
