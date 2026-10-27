@@ -37,7 +37,14 @@ export const PublicationsSection: React.FC = () => {
       }
 
       const matchesType = typeFilter === 'todas' || item.type === typeFilter;
-      const matchesArea = areaFilter === 'todas' || item.area === areaFilter;
+      const matchesArea =
+        areaFilter === 'todas' ||
+        item.area === areaFilter ||
+        (areaFilter.includes('Planejamento') && (item.area?.includes('Planejamento') || item.area?.includes('Holding'))) ||
+        (areaFilter.includes('Imobiliário') && item.area?.includes('Imobiliário')) ||
+        (areaFilter.includes('Empresarial') && item.area?.includes('Empresarial')) ||
+        (areaFilter.includes('Civil') && item.area?.includes('Civil')) ||
+        (areaFilter.includes('Consumo') && (item.area?.includes('Consumo') || item.area?.includes('Consumidor')));
 
       return matchesSearch && matchesType && matchesArea;
     });
@@ -158,7 +165,7 @@ export const PublicationsSection: React.FC = () => {
               <option value="noticia">Notícias Jurídicas ({noticiasCount})</option>
             </select>
 
-            {/* Area Filter */}
+            {/* Area Filter com as 6 opções oficiais (Item de 26/10) */}
             <select
               value={areaFilter}
               onChange={(e) => {
@@ -167,12 +174,12 @@ export const PublicationsSection: React.FC = () => {
               }}
               className="px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
             >
-              <option value="todas">Todas as Áreas ({availableAreas.length})</option>
-              {availableAreas.map((area) => (
-                <option key={area} value={area}>
-                  {area}
-                </option>
-              ))}
+              <option value="todas">Todas as Áreas</option>
+              <option value="Planejamento Patrimonial 4.0 (Holding Familiar)">Planejamento Patrimonial 4.0 (Holding Familiar)</option>
+              <option value="Direito Imobiliário">Direito Imobiliário</option>
+              <option value="Direito Empresarial">Direito Empresarial</option>
+              <option value="Direito Civil">Direito Civil</option>
+              <option value="Relações de Consumo e Direito">Relações de Consumo e Direito</option>
             </select>
           </div>
         </div>
@@ -213,13 +220,16 @@ export const PublicationsSection: React.FC = () => {
                     </div>
 
                     <div className="p-6">
-                      {/* Meta Date & Read Time */}
+                      {/* Meta Date & Autor / Sem Relógio nem Tempo de Leitura (Itens 16 e 39) */}
                       <div className="flex items-center gap-2 text-[11px] text-slate-400 mb-3">
                         <Calendar className="w-3.5 h-3.5 text-[#E5C158]" />
                         <span>{pub.date}</span>
-                        <span>·</span>
-                        <Clock className="w-3.5 h-3.5 text-[#E5C158]" />
-                        <span>{pub.readTime}</span>
+                        {isArtigo && (
+                          <>
+                            <span className="text-slate-600">·</span>
+                            <span className="text-[#E5C158] font-bold">Autor: Dr. ALDO LEÃO</span>
+                          </>
+                        )}
                       </div>
 
                       {/* Title */}
@@ -234,13 +244,13 @@ export const PublicationsSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Card Footer com Botão Específico */}
+                  {/* Card Footer com Botão Específico (Item 19: LER ARTIGO) */}
                   <div className="p-5 pt-0 border-t-0">
                     <button
                       onClick={() => setActivePubModal(pub)}
                       className="w-full py-2.5 px-4 rounded-lg bg-[#050B14] border border-[#D4AF37]/35 text-xs font-bold uppercase tracking-wider text-[#F6E27A] group-hover:bg-[#0E1F3D] group-hover:border-[#D4AF37] transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                     >
-                      <span>{isArtigo ? 'LER ARTIGO COMPLETO' : 'LER NOTÍCIA COMPLETA'}</span>
+                      <span>{isArtigo ? 'LER ARTIGO' : 'LER NOTÍCIA COMPLETA'}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -329,9 +339,10 @@ export const PublicationsSection: React.FC = () => {
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white leading-tight">
                 {activePubModal.title}
               </h3>
-              <p className="text-xs text-[#D4AF37] mt-1.5 font-medium">
+              {/* Item 19: abaixo do título em branco tem o texto dourado Autor: Dr. Aldo Leão */}
+              <p className="text-xs text-[#E5C158] mt-2 font-bold uppercase tracking-wider">
                 {activePubModal.type === 'artigo'
-                  ? 'Autoria: Dr. Aldo Leão Ferreira Filho · Head Jurídico ALDO LEÃO ADVOCACIA ESTRATÉGICA'
+                  ? 'Autor: Dr. Aldo Leão'
                   : 'Fonte: Tribunais Superiores (STF/STJ) & Seleção Editorial Aldo Leão Advocacia Estratégica'}
               </p>
             </div>
@@ -342,41 +353,19 @@ export const PublicationsSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Se for Artigo: exibe Assinatura Oficial do Dr. Aldo */}
-            {activePubModal.type === 'artigo' ? (
-              <ArticleSignature 
-                publicationTitle={activePubModal.title} 
-              />
-            ) : (
-              /* Se for Notícia: exibe botão de consulta rápida sobre o tema */
-              <div className="mt-8 pt-5 border-t border-slate-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                <button
-                  onClick={() => handleConsultAboutNews(activePubModal.title)}
-                  className="btn-gold-luxury px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-md"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>CONSULTAR ADVOGADO SOBRE ESTA NOTÍCIA</span>
-                </button>
+            {/* Assinatura Oficial Automatizada tanto em Artigo quanto em Notícia Jurídica (Itens 4 e 40) */}
+            <ArticleSignature 
+              publicationTitle={activePubModal.title} 
+            />
 
-                <button
-                  onClick={() => setActivePubModal(null)}
-                  className="px-6 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
-                >
-                  Fechar
-                </button>
-              </div>
-            )}
-
-            {activePubModal.type === 'artigo' && (
-              <div className="mt-8 pt-4 border-t border-slate-800 flex justify-end">
-                <button
-                  onClick={() => setActivePubModal(null)}
-                  className="px-6 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
-                >
-                  Fechar
-                </button>
-              </div>
-            )}
+            <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+              <button
+                onClick={() => setActivePubModal(null)}
+                className="px-6 py-2 rounded text-xs font-medium text-slate-300 border border-slate-700 hover:bg-slate-800 cursor-pointer"
+              >
+                Fechar
+              </button>
+            </div>
           </div>
         </div>
       )}

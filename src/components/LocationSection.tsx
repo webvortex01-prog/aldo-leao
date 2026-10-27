@@ -49,7 +49,7 @@ export const LocationSection: React.FC = () => {
   return (
     <section id="contato" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header: Título CONTATO (Itens 11 e X) */}
+        {/* Section Header: Título CONTATO (Itens 11, 42 e X) */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
             <Scale className="w-4 h-4 text-[#F6E27A]" />
@@ -60,19 +60,19 @@ export const LocationSection: React.FC = () => {
             {c?.sectionTitle || 'CONTATO'}
           </h2>
 
-          {/* O texto que está abaixo do título CONTATO deve ser grafado na cor branca (Item X) */}
+          {/* O texto que está abaixo do título CONTATO grafado na cor branca (Itens 42 e X) */}
           <p className="text-xs sm:text-sm text-white font-normal leading-relaxed font-sans-body max-w-2xl mx-auto">
-            {c?.introGold || 'Escolha o canal de relacionamento com a ALDO LEÃO ADVOCACIA ESTRATÉGICA da sua preferência para o seu atendimento digital em todo o Brasil.'}
+            {c?.introGold || 'Escolha o canal de relacionamento com a ALDO LEÃO ADVOCACIA ESTRATÉGICA da sua preferência, para o seu atendimento digital em todo o território nacional.'}
           </p>
         </div>
 
-        {/* Grid de Canais de Atendimento Conforme Item 13 e 42 */}
+        {/* Grid de Canais de Atendimento Conforme Item 13, 42, 43, 44, 45 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 text-left">
-          {/* Box 1: ATENDIMENTO VIRTUAL BRASIL */}
+          {/* Box 1: ATENDIMENTO VIRTUAL BRASIL com Balança da Justiça (Item 9, 1 e 43) */}
           <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
-                <Clock className="w-6 h-6 text-[#E5C158]" />
+                <Scale className="w-6 h-6 text-[#E5C158]" />
               </div>
               <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase animate-title-reveal">
                 {c?.boxVirtualTitle || 'ATENDIMENTO VIRTUAL BRASIL'}
@@ -84,10 +84,10 @@ export const LocationSection: React.FC = () => {
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">
               <button
                 onClick={() => handleWhatsApp(officialWhatsApp)}
-                className="w-full py-2 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                <span>Agendar no WhatsApp</span>
+                <span>AGENDAR CONSULTA DIGITAL</span>
               </button>
             </div>
           </div>
@@ -113,7 +113,7 @@ export const LocationSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Box 3: TELEFONES (Itens 1 e 6: dois números de atendimento) */}
+          {/* Box 3: TELEFONES (Itens 1, 8, 25 e 44: dois números de atendimento) */}
           <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
@@ -129,8 +129,8 @@ export const LocationSection: React.FC = () => {
                 <p className="font-semibold text-slate-300 text-sm">
                   (51) 998.078.998
                 </p>
-                <p className="text-[11px] text-slate-400 pt-1">
-                  Atendimento oficial em todo o território nacional
+                <p className="text-[11px] text-slate-300 pt-1">
+                  Se preferir, ligue para a ALDO LEÃO ADVOCACIA ESTRATÉGICA
                 </p>
               </div>
             </div>
@@ -140,12 +140,12 @@ export const LocationSection: React.FC = () => {
                 className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Agendar pelo WhatsApp</span>
+                <span>AGENDAR NO WHATSAPP</span>
               </button>
             </div>
           </div>
 
-          {/* Box 4: E-MAILS (Item 3, 4 e V: sem links clicáveis e sem botão Enviar E-mail) */}
+          {/* Box 4: E-MAILS (Itens 45 e V: sem links clicáveis e sem botão Enviar E-mail) */}
           <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
@@ -178,13 +178,13 @@ export const LocationSection: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 text-[11px] text-slate-400">
-              Canais diretos e confidenciais
+            <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 text-[11px] text-slate-300 font-medium">
+              Entre em contato enviando um e-mail, para o setor que deseja atendimento
             </div>
           </div>
         </div>
 
-        {/* Box WHATSAPP BUSINESS com animação de abertura (Item 6) */}
+        {/* Box WHATSAPP BUSINESS com animação de abertura (Item 46 e 6) */}
         <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left card-hover-interactive">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-[#25D366] text-black flex items-center justify-center shrink-0 shadow-lg">
@@ -195,7 +195,7 @@ export const LocationSection: React.FC = () => {
                 WHATSAPP BUSINESS
               </h3>
               <p className="text-xs text-slate-300">
-                Atendimento Rápido e Confidencial com Especialistas
+                Atendimento Rápido, com um de nossos Advogados Especialistas
               </p>
             </div>
           </div>
@@ -209,8 +209,8 @@ export const LocationSection: React.FC = () => {
           </button>
         </div>
 
-        {/* FORMULÁRIO DE CONTATO (Item 10 e Item 6) */}
-        <div className="max-w-3xl mx-auto rounded-2xl border-2 border-[#D4AF37]/50 bg-[#071122] p-6 sm:p-10 shadow-2xl text-left">
+        {/* FORMULÁRIO DE CONTATO (Item 10, 47 e Item 6) */}
+        <div className="max-w-3xl mx-auto rounded-2xl border-2 border-[#D4AF37]/50 bg-[#071122] p-6 sm:p-10 shadow-2xl text-left mb-16">
           <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase tracking-wider animate-title-reveal">
               FORMULÁRIO DE CONTATO
@@ -240,10 +240,10 @@ export const LocationSection: React.FC = () => {
             </div>
           ) : (
             <form onSubmit={handleFormSubmit} className="space-y-4">
-              {/* Nome Completo */}
+              {/* Nome Completo (sem asterisco conforme Itens 10 e 47) */}
               <div>
                 <label className="block text-xs font-semibold text-slate-200 mb-1">
-                  Nome Completo <span className="text-[#D4AF37]">*</span>
+                  Nome Completo
                 </label>
                 <input
                   type="text"
@@ -255,11 +255,11 @@ export const LocationSection: React.FC = () => {
                 />
               </div>
 
-              {/* WhatsApp e Telefone */}
+              {/* WhatsApp e Telefone (WhatsApp sem asterisco conforme Itens 10 e 47) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
-                    WhatsApp <span className="text-[#D4AF37]">*</span>
+                    WhatsApp
                   </label>
                   <input
                     type="tel"
@@ -298,7 +298,7 @@ export const LocationSection: React.FC = () => {
                 />
               </div>
 
-              {/* Área de Atuação e Tipo de Consulta (Item 10) */}
+              {/* Área de Atuação e Tipo de Consulta (Item 10 e 60) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-200 mb-1">
@@ -309,7 +309,7 @@ export const LocationSection: React.FC = () => {
                     onChange={(e) => setArea(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
                   >
-                    <option value="Advocacia">Advocacia</option>
+                    <option value="Advocacia Estratégica">Advocacia Estratégica</option>
                     <option value="Planejamento Patrimonial">Planejamento Patrimonial</option>
                     <option value="Direito Imobiliário">Direito Imobiliário</option>
                     <option value="Direito Empresarial">Direito Empresarial</option>
@@ -326,10 +326,10 @@ export const LocationSection: React.FC = () => {
                     onChange={(e) => setUrgencia(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-slate-200 focus:outline-none focus:border-[#D4AF37]"
                   >
+                    <option value="Normal">Normal</option>
+                    <option value="Urgente">Urgente</option>
                     <option value="Consulta Inicial">Consulta Inicial</option>
-                    <option value="Consulta Estratégica">Consulta Estratégica</option>
                     <option value="Sessão de Viabilidade (Holding)">Sessão de Viabilidade (Holding)</option>
-                    <option value="Atendimento Imediato">Atendimento Imediato</option>
                   </select>
                 </div>
               </div>
@@ -360,6 +360,19 @@ export const LocationSection: React.FC = () => {
               </div>
             </form>
           )}
+        </div>
+
+        {/* Rodapé da Seção Contato com Logomarca sem cortes e Textos do Item 48 */}
+        <div className="max-w-3xl mx-auto pt-8 border-t border-[#D4AF37]/25 flex flex-col items-center text-center">
+          <div className="mb-4">
+            <Logo size="md" />
+          </div>
+          <p className="text-xs sm:text-sm text-slate-200 font-sans-body leading-relaxed font-light mb-3 max-w-2xl">
+            A história da <strong className="text-[#F6E27A] font-bold">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.
+          </p>
+          <p className="text-xs sm:text-sm text-[#E5C158] font-sans-body leading-relaxed font-semibold max-w-2xl">
+            Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.
+          </p>
         </div>
       </div>
     </section>

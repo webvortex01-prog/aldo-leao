@@ -34,17 +34,18 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
     return null;
   }
 
-  const line1 = config.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA';
+  const line1 = config.line1 || 'Núcleo de Comunicação';
   const line1Color = config.line1Color || '#FFFFFF';
-  const line2 = config.line2 || 'Excelência Jurídica Desde 1908';
+  const line2 = config.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA';
   const line2Color = config.line2Color || '#D4AF37';
-  const buttonText = config.buttonText || 'AGENDAR CONSULTA';
-  const buttonTextColor = config.buttonTextColor || '#E0E6ED';
+  const line3 = (config as any).line3 || 'Excelência Jurídica Desde 1908';
+  const line3Color = (config as any).line3Color || '#F8F8F8';
+  const buttonText = config.buttonText || 'AGENDAR CONSULTA VIRTUAL';
 
   const rawNumber = config.whatsappNumber || siteConfig?.contact?.whatsappNumber || '5551998088998';
   const cleanPhone = rawNumber.replace(/\D/g, '');
 
-  const baseMessage = config.whatsappMessage || 'Olá! Li um artigo no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.';
+  const baseMessage = config.whatsappMessage || 'Olá! Li uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.';
   const finalMessage = publicationTitle
     ? `${baseMessage}\n\n(Referência: "${publicationTitle}")`
     : baseMessage;
@@ -62,7 +63,7 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
       <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-24 bg-[#D4AF37]/5 blur-2xl pointer-events-none rounded-full" />
 
       <div className="relative z-10 flex flex-col items-center">
-        {/* Linha 1: Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA */}
+        {/* Frase 1: Núcleo de Comunicação (#FFFFFF) */}
         <p
           className="text-xs sm:text-sm font-semibold tracking-wider uppercase leading-snug drop-shadow-sm font-sans"
           style={{ color: line1Color }}
@@ -70,32 +71,31 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
           {line1}
         </p>
 
-        {/* Small center divider dot */}
-        <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/70 my-2" />
-
-        {/* Linha 2: Excelência Jurídica Desde 1908 */}
+        {/* Frase 2: ALDO LEÃO ADVOCACIA ESTRATÉGICA (#D4AF37) */}
         <p
-          className="font-cinzel text-sm sm:text-base md:text-lg font-bold tracking-wide drop-shadow-sm"
+          className="font-cinzel text-sm sm:text-base md:text-lg font-bold tracking-wide drop-shadow-sm mt-1"
           style={{ color: line2Color }}
         >
           {line2}
         </p>
 
-        {/* Botão de Agendamento WhatsApp */}
+        {/* Frase 3: Excelência Jurídica Desde 1908 (#F8F8F8) - sem ponto dourado antes */}
+        <p
+          className="text-xs sm:text-sm tracking-wider font-medium drop-shadow-sm mt-1"
+          style={{ color: line3Color }}
+        >
+          {line3}
+        </p>
+
+        {/* Botão de Agendamento WhatsApp (Item 4 e 40: Dourado com ícone, sem "| WhatsApp", texto AGENDAR CONSULTA VIRTUAL) */}
         <div className="mt-5">
           {previewMode ? (
             <div
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-lg bg-gradient-to-r from-[#0C1D38] via-[#10274B] to-[#0C1D38] border border-[#D4AF37]/70 shadow-lg cursor-default select-none"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] shadow-lg cursor-default select-none"
             >
-              <MessageCircle className="w-4 h-4 text-[#25D366]" />
-              <span
-                className="font-bold text-xs sm:text-sm tracking-wider uppercase font-sans"
-                style={{ color: buttonTextColor }}
-              >
+              <MessageCircle className="w-4 h-4 text-[#050B14] fill-current" />
+              <span className="font-black text-xs sm:text-sm tracking-wider uppercase font-sans text-[#050B14]">
                 {buttonText}
-              </span>
-              <span className="text-[10px] text-slate-400 font-sans tracking-normal font-normal border-l border-slate-700/80 pl-2">
-                WhatsApp
               </span>
             </div>
           ) : (
@@ -110,17 +110,9 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
               <span className="font-black text-xs sm:text-sm tracking-wider uppercase font-sans text-[#050B14]">
                 {buttonText}
               </span>
-              <span className="text-[10px] text-[#050B14]/80 font-sans tracking-normal font-bold border-l border-[#050B14]/30 pl-2">
-                WhatsApp
-              </span>
             </a>
           )}
         </div>
-
-        {/* Micro footer disclaimer */}
-        <p className="text-[10px] text-slate-400 font-sans mt-3.5 tracking-wide">
-          Atendimento Jurídico Personalizado · Agendamento Direto
-        </p>
       </div>
     </div>
   );

@@ -62,7 +62,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'advocacia-estrategica',
     number: '01',
     title: 'Advocacia Estratégica',
-    subtitle: 'Prevenção & Vantagem Competitiva',
+    subtitle: 'EXCELÊNCIA & INTELIGÊNCIA JURÍDICA',
     description: 'Muito mais do que solucionar conflitos, a Advocacia Estratégica antecipa riscos, protege patrimônios, fortalece empresas e transforma decisões jurídicas em vantagem competitiva por meio de soluções inteligentes, preventivas e legais.',
     extendedText: 'Atuação preventiva voltada à proteção patrimonial, segurança jurídica e decisões corporativas estratégicas de alta performance.'
   },
@@ -79,7 +79,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'inteligencia-juridica',
     number: '03',
     title: 'Inteligência Jurídica',
-    subtitle: 'Análise Estratégica & Apoio Decisório',
+    subtitle: 'ESTRATÉGIAS AVANÇADAS COM A INTELIGÊNCIA DE ESPECIALISTAS',
     description: 'A Inteligência Jurídica utiliza análise estratégica, planejamento e visão preventiva para reduzir riscos, perdas patrimoniais e financeiras, ampliando a segurança das decisões patrimoniais e empresariais.',
     extendedText: 'Estratégias jurídicas voltadas à prevenção de imprevistos e mitigação de vulnerabilidades com apoio integral a conselhos e famílias empresárias.'
   },
@@ -103,7 +103,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'gestao-imobiliaria',
     number: '06',
     title: 'Gestão Jurídica Imobiliária',
-    subtitle: 'Proteção & Valorização de Ativos Imobiliários',
+    subtitle: 'MITIGAÇÃO DE RISCOS E VALORIZAÇÃO DE ATIVOS',
     description: 'Estruturação jurídica de ativos imobiliários para compradores e vendedores imobiliários, investidores, construtoras e incorporadoras com foco na prevenção de riscos e prejuízos.',
     extendedText: 'Atuação estratégica em due diligence aquisitiva, regularização fundiária, loteamentos e operações imobiliárias estruturadas.'
   },
@@ -111,7 +111,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'gestao-empresarial',
     number: '07',
     title: 'Gestão Jurídica Empresarial',
-    subtitle: 'Governança & Suporte Estratégico',
+    subtitle: 'SUPORTE JURÍDICO PARA MAXIMIZAÇÃO DE RESULTADOS, COM SEGURANÇA',
     description: 'Estruturação jurídica de empresas e processos, governança corporativa, conformidade normativa, sucessão empresarial e suporte jurídico especializado à tomada de decisão executiva.',
     extendedText: 'Soluções desenvolvidas para fortalecer negócios, mitigar passivos trabalhistas e tributários e impulsionar a longevidade corporativa.'
   },
@@ -127,7 +127,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'gestao-projetos',
     number: '09',
     title: 'Gestão Estratégica de Projetos',
-    subtitle: 'Acompanhamento do Início à Conclusão',
+    subtitle: 'SUPORTE AVANÇADO PARA PROJETOS EXITOSOS',
     description: 'Planejamento, organização, conformidade normativa e acompanhamento jurídico rigoroso de projetos patrimoniais, societários e de expansão empresarial durante todas as etapas de implantação.',
     extendedText: 'Estruturação jurídica de novos projetos, compliance preventivo e validação de contratos e marcos regulatórios.'
   },
@@ -135,7 +135,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'gestao-documental',
     number: '10',
     title: 'Gestão Jurídica Documental',
-    subtitle: 'Padronização & Segurança da Informação',
+    subtitle: 'SEGURANÇA JURÍDICA QUE EVITA PREJUÍZOS E DANOS',
     description: 'Gestão Jurídica de documentos, organização, elaboração, análise, alteração, padronização e administração jurídica estratégica documental.',
     extendedText: 'Padronização de minutas, contratos, acórdãos e governança eletrônica de arquivos estratégicos com rigor e segurança jurídica.'
   },
@@ -143,7 +143,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'gestao-negocios',
     number: '11',
     title: 'Gestão Estratégica de Negócios',
-    subtitle: 'Suporte a Investimentos & M&A',
+    subtitle: 'ASSESSORIA QUE FACILITA DECISÕES COM REDUÇÃO DOS RISCOS',
     description: 'Suporte jurídico especializado para decisões empresariais, patrimoniais, sucessórias corporativas, investimentos, expansão de negócios, financiamentos, planejamento, reorganização e proteção de ativos, estruturação jurídica de negócios.',
     extendedText: 'Apoio em modelagens contratuais, parcerias societárias e operações de crescimento de patrimônios e corporações.'
   },
@@ -159,7 +159,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'consulta-digital',
     number: '13',
     title: 'Consulta Digital Brasil',
-    subtitle: 'Atendimento 100% Digital com Hora Marcada',
+    subtitle: 'ATENDIMENTO DIGITAL COM A EXCELÊNCIA DO PRESENCIAL',
     description: 'Atendimento jurídico especializado 100% digital, em todo o Brasil, com a mesma excelência centenária do atendimento presencial, com máxima confidencialidade e conforto.',
     extendedText: 'Agendamento prévio com hora marcada e atendimento via videoconferência segura diretamente com Dr. Aldo Leão.'
   },
@@ -167,7 +167,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'academia-leao-ferreira',
     number: '14',
     title: 'Academia Leão Ferreira',
-    subtitle: 'Centro de Produção e Difusão do Conhecimento Jurídico',
+    subtitle: 'CENTRO DE ESTUDOS SUPERIORES COM "EXPERTISE" CENTENÁRIA',
     description: 'Centro de produção e difusão do conhecimento jurídico especializado de vanguarda, que reúne palestras de especialistas, a publicação de artigos e livros jurídicos digitais com o propósito de compartilhar a cultura e o conhecimento jurídico.',
     extendedText: 'Produção bibliográfica de vanguarda, livros jurídicos digitais gratuitos e palestras de alta relevância com Dr. Aldo Leão.'
   }
@@ -727,12 +727,14 @@ const DEFAULT_CONFIG: SiteConfig = {
   },
   articleSignature: {
     enabled: true,
-    line1: 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+    line1: 'Núcleo de Comunicação',
     line1Color: '#FFFFFF',
-    line2: 'Excelência Jurídica Desde 1908',
+    line2: 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
     line2Color: '#D4AF37',
-    buttonText: 'AGENDAR CONSULTA',
-    buttonTextColor: '#E0E6ED',
+    line3: 'Excelência Jurídica Desde 1908',
+    line3Color: '#F8F8F8',
+    buttonText: 'AGENDAR CONSULTA VIRTUAL',
+    buttonTextColor: '#050B14',
     whatsappNumber: '',
     whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
   }
@@ -805,7 +807,7 @@ const SiteContext = createContext<SiteContextType | undefined>(undefined);
 export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     try {
-      const saved = localStorage.getItem('aldoleao_site_config_v10') || localStorage.getItem('aldoleao_site_config_v9');
+      const saved = localStorage.getItem('aldoleao_site_config_v12') || localStorage.getItem('aldoleao_site_config_v10');
       if (saved) {
         const parsed = JSON.parse(saved);
         const heroConfig = { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) };
@@ -825,38 +827,37 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
         contactConfig.cwbPhone = cleanAndFormatPhone(contactConfig.cwbPhone, '(51) 99808-8998');
         contactConfig.whatsappNumber = getCleanWhatsAppDigits(contactConfig.whatsappNumber, '5551998088998');
 
-        const practiceAreas = (parsed.practiceAreas && parsed.practiceAreas.length === 5)
+        const practiceAreas = (parsed.practiceAreas && Array.isArray(parsed.practiceAreas) && parsed.practiceAreas.length > 0)
           ? parsed.practiceAreas.map((pa: any, i: number) => ({
               ...pa,
-              number: `0${i + 1}`,
-              badge: `0${i + 1}`
+              number: pa.number || `0${i + 1}`,
+              badge: pa.badge || `0${i + 1}`
             }))
           : DEFAULT_PRACTICE_AREAS;
 
-        const digitalBooks = DEFAULT_DIGITAL_BOOKS.map(defaultBook => {
-          const cached = parsed.digitalBooks?.find((b: any) => b.id === defaultBook.id || b.title?.toLowerCase().trim() === defaultBook.title?.toLowerCase().trim());
-          return {
-            ...defaultBook,
-            ...(cached || {}),
-            coverImage: defaultBook.coverImage,
-            year: defaultBook.year,
-            publicationMonth: defaultBook.publicationMonth,
-            publicationOrder: defaultBook.publicationOrder,
-          };
-        }).sort((a, b) => (a.publicationOrder || 0) - (b.publicationOrder || 0));
+        // Preserva os livros salvos pelo usuário, mantendo capas customizadas e livros novos adicionados
+        const digitalBooks = (parsed.digitalBooks && Array.isArray(parsed.digitalBooks) && parsed.digitalBooks.length > 0)
+          ? parsed.digitalBooks.map((savedBook: any) => {
+              const defaultMatch = DEFAULT_DIGITAL_BOOKS.find(b => b.id === savedBook.id);
+              return {
+                ...(defaultMatch || {}),
+                ...savedBook,
+                coverImage: savedBook.coverImage || defaultMatch?.coverImage || ''
+              };
+            })
+          : DEFAULT_DIGITAL_BOOKS;
 
         const centennialLegacy = { ...DEFAULT_CONFIG.centennialLegacy, ...(parsed.centennialLegacy || {}) };
         if (centennialLegacy.events && centennialLegacy.events.length > 0) {
-          centennialLegacy.events = centennialLegacy.events.map((ev: any, idx: number) => 
-            (idx === 4 || ev.title?.toLowerCase().includes('presença nacional digital') || ev.year === '2026')
+          centennialLegacy.events = centennialLegacy.events.map((ev: any) => 
+            (ev.title?.toLowerCase().includes('presença nacional digital') && ev.year === '2026')
               ? { ...ev, year: '2020' }
               : ev
           );
         }
 
-        // Assegura que todas as notícias e artigos estejam presentes; se o cache do navegador estiver desatualizado, sincroniza com DEFAULT_PUBLICATIONS
-        const hasNoticias = parsed.publications?.some((p: any) => p.type === 'noticia');
-        const publications = (parsed.publications && parsed.publications.length >= DEFAULT_PUBLICATIONS.length && hasNoticias)
+        // Assegura que publicações editadas pelo usuário sejam mantidas com fidelidade
+        const publications = (parsed.publications && Array.isArray(parsed.publications) && parsed.publications.length > 0)
           ? parsed.publications
           : DEFAULT_PUBLICATIONS;
 
@@ -906,7 +907,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save changes to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('aldoleao_site_config_v10', JSON.stringify(siteConfig));
+      localStorage.setItem('aldoleao_site_config_v12', JSON.stringify(siteConfig));
     } catch (e) {
       console.error('Error persisting site config:', e);
     }

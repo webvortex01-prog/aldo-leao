@@ -1,13 +1,27 @@
-import React from 'react';
-import { ArrowLeft, ShieldCheck, FileEdit } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowLeft, ShieldCheck, FileEdit, Sparkles, Layers } from 'lucide-react';
 import { Logo } from '../Logo';
 import { CmsEditor } from './CmsEditor';
+import { VisualCanvasEditor } from './VisualCanvasEditor';
 
 interface AdminDashboardProps {
   onBackToSite: () => void;
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) => {
+  const [editorMode, setEditorMode] = useState<'canvas' | 'form'>('canvas');
+
+  // Modo 1: Editor Visual Estilo Canva (Navegação ao vivo pelo site com clique para editar)
+  if (editorMode === 'canvas') {
+    return (
+      <VisualCanvasEditor
+        onSwitchToFormMode={() => setEditorMode('form')}
+        onBackToSite={onBackToSite}
+      />
+    );
+  }
+
+  // Modo 2: Editor Estruturado por Abas e Formulários Completos
   return (
     <div className="min-h-screen bg-[#040810] text-slate-100 flex flex-col font-sans-body">
       {/* Top Header */}
@@ -27,6 +41,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Botão de Alternar para o Modo Canva */}
+            <button
+              onClick={() => setEditorMode('canvas')}
+              className="px-3.5 py-1.5 rounded-lg text-xs font-bold text-black bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] hover:brightness-110 transition-all shadow-md flex items-center gap-1.5 cursor-pointer"
+              title="Abrir Editor Visual Interativo Estilo Canva"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Modo Visual (Estilo Canva)</span>
+            </button>
+
             <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 text-[11px] font-medium">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>Sessão Admin Ativa</span>
@@ -46,7 +70,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
 
       {/* Main Container - Visual Site Editor (CMS Live) */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow space-y-6">
-        <CmsEditor />
+        <CmsEditor onSwitchToCanvasMode={() => setEditorMode('canvas')} />
       </main>
     </div>
   );

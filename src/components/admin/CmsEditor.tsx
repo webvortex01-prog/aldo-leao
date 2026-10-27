@@ -210,7 +210,11 @@ const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
   );
 };
 
-export const CmsEditor: React.FC = () => {
+interface CmsEditorProps {
+  onSwitchToCanvasMode?: () => void;
+}
+
+export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) => {
   const { siteConfig, updateSiteConfig, resetSiteConfigToDefault } = useSite();
   const [formData, setFormData] = useState(siteConfig);
   const [activeTab, setActiveTab] = useState<
@@ -593,7 +597,18 @@ export const CmsEditor: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+            {onSwitchToCanvasMode && (
+              <button
+                onClick={onSwitchToCanvasMode}
+                className="px-4 py-2.5 rounded-lg text-xs font-bold text-black bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] hover:brightness-110 active:scale-[0.98] transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
+                title="Abrir o site ao vivo para navegar e editar com 1 clique"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Editor Visual (Estilo Canva)</span>
+              </button>
+            )}
+
             <button
               onClick={handleReset}
               className="px-4 py-2.5 rounded-lg border border-slate-700 text-xs font-semibold text-slate-300 hover:bg-slate-800 transition-colors flex items-center gap-1.5 cursor-pointer"

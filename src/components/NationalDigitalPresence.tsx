@@ -106,7 +106,7 @@ export const NationalDigitalPresence: React.FC = () => {
                   Presença Nacional Digital
                 </p>
                 <p className="text-xs text-[#E5C158] font-bold mt-1">
-                  Atuação Estratégica em todo o Brasil.
+                  Atuação Estratégica em todo o Brasil
                 </p>
               </div>
             </div>

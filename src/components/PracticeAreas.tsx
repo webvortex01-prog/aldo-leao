@@ -132,10 +132,16 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                     {area.subtitle}
                   </p>
 
-                  {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-                    {area.description}
-                  </p>
+                  {/* Description (Item 29: Holding Familiar em negrito e dourado) */}
+                  <p 
+                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light"
+                    dangerouslySetInnerHTML={{
+                      __html: area.description.replace(
+                        /Holding Familiar/g,
+                        '<strong class="text-[#F6E27A] font-bold">Holding Familiar</strong>'
+                      )
+                    }}
+                  />
                 </div>
 
                 {/* Bottom Action: SAIBA MAIS (Item 7) */}
@@ -151,7 +157,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
         </div>
       </div>
 
-      {/* Internal Area Modal (Item 36: Sem "Especialidade jurídica estratégica", CENTRAL DE ATENDIMENTO, Telefones, Horário e botão "Fale Conosco") */}
+      {/* Internal Area Modal (Item 36 & Item 25: CENTRAL DE ATENDIMENTO com Telefones: (51) 99808.8998 e 99807.8998) */}
       {selectedAreaModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
           <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-slate-100 text-left">
@@ -174,9 +180,16 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
             </div>
 
             <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body font-light">
-              <p>{selectedAreaModal.description}</p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: selectedAreaModal.description.replace(
+                    /Holding Familiar/g,
+                    '<strong class="text-[#F6E27A] font-bold">Holding Familiar</strong>'
+                  )
+                }}
+              />
 
-              {/* Box CENTRAL DE ATENDIMENTO conforme Item 36 */}
+              {/* Box CENTRAL DE ATENDIMENTO conforme Item 25 e 36 */}
               <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
                 <div className="flex items-center gap-2 text-white font-bold text-xs uppercase font-cinzel">
                   <Phone className="w-4 h-4 text-[#E5C158]" />
@@ -185,7 +198,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
 
                 <div className="text-xs text-slate-300 space-y-1">
                   <p>
-                    <strong className="text-white">Telefone / WhatsApp:</strong> {cleanAndFormatPhone(siteConfig.contact?.phonePrimary, '(51) 99808-8998')}
+                    <strong className="text-white">Telefones:</strong> (51) 99808.8998 e 99807.8998
                   </p>
                   <p>
                     <strong className="text-[#E5C158]">Atendimento Digital Brasil:</strong> De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs

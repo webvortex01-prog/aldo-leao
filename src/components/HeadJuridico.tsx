@@ -197,7 +197,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                   ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA
                 </p>
                 <p className="text-xs text-white font-medium">
-                  DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO.
+                  DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO
                 </p>
               </div>
             </div>
@@ -214,10 +214,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
         </div>
       </div>
 
-      {/* Modal de Currículo Completo do Dr. Aldo Leão (Item 5) */}
+      {/* Modal de Currículo Completo do Dr. Aldo Leão (Item 20) */}
       {curriculumModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-3xl bg-[#071122] rounded-2xl border-2 border-[#D4AF37]/60 shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto text-slate-100 text-left">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="relative w-full max-w-4xl bg-[#071122] rounded-2xl border-2 border-[#D4AF37]/60 shadow-2xl p-6 sm:p-10 max-h-[90vh] overflow-y-auto text-slate-100 text-left">
             <button
               onClick={() => setCurriculumModalOpen(false)}
               className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
@@ -226,57 +226,185 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               <X className="w-5 h-5" />
             </button>
 
+            {/* Cabeçalho do Modal (Item 20: Título Dr. ALDO LEÃO em branco e Frase dourada ADVOCACIA ESTRATÉGICA DESDE 1986) */}
             <div className="border-b border-[#D4AF37]/30 pb-5 mb-6">
               <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
                 Dr. ALDO LEÃO
               </h3>
               <p className="font-cinzel text-xs sm:text-sm text-[#E5C158] uppercase font-bold tracking-widest mt-1">
-                ADVOCACIA ESTRATÉGICA · 3ª GERAÇÃO DESDE 1986
+                ADVOCACIA ESTRATÉGICA DESDE 1986
               </p>
             </div>
 
-            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-2">
-                <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
-                  Síntese Curricular e Trajetória Profissional
+            <div className="space-y-6 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
+              {/* Box/Card: TRAJETÓRIA PROFISSIONAL (Texto 1) */}
+              <div className="p-5 sm:p-6 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <h4 className="font-cinzel text-sm sm:text-base font-bold text-[#F6E27A] uppercase tracking-wider">
+                  TRAJETÓRIA PROFISSIONAL
                 </h4>
-                <p>
-                  O <strong>Dr. Aldo Leão Ferreira Filho</strong> representa a terceira geração familiar de uma linhagem jurídica iniciada em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira, no escritório jurídico mais antigo do Brasil.
-                </p>
-                <p>
-                  Atuando na advocacia desde 1986, construiu uma carreira sólida pautada pelo rigor técnico, ética inegociável e pioneirismo na estruturação de soluções jurídicas preventivas e estratégicas.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-[#0A1424] border border-slate-800 space-y-2">
-                  <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                    Especialização & Vanguarda
-                  </h4>
-                  <ul className="space-y-1.5 text-slate-300 list-disc list-inside">
-                    <li>Planejamento Patrimonial 4.0 via Holding Familiar</li>
-                    <li>Proteção Patrimonial e Sucessória Estratégica</li>
-                    <li>Direito Empresarial e Reestruturação Societária</li>
-                    <li>Governança e Continuidade de Grupos Familiares</li>
-                  </ul>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#0A1424] border border-slate-800 space-y-2">
-                  <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                    Produção Científica & Docência
-                  </h4>
-                  <ul className="space-y-1.5 text-slate-300 list-disc list-inside">
-                    <li>Autor de mais de uma centena de Artigos Jurídicos</li>
-                    <li>Autor de 8 Livros Digitais Publicados</li>
-                    <li>Docência no Ensino Superior Jurídico</li>
-                    <li>Conferencista e Palestrante de âmbito nacional</li>
-                  </ul>
+                <div className="space-y-3 text-slate-200 font-light">
+                  <p>
+                    A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.
+                  </p>
+                  <p>
+                    Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.
+                  </p>
+                  <p>
+                    Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.
+                  </p>
+                  <p>
+                    A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.
+                  </p>
+                  <p className="text-[#F6E27A] font-semibold">
+                    Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.
+                  </p>
                 </div>
               </div>
 
-              <p className="text-slate-300">
-                Pioneiro na transição para a advocacia 100% digital, assegura atendimento reservado, ágil e de alta tecnologia a famílias empresárias e patriarcais em todo o território nacional.
-              </p>
+              {/* Grid: Especialização & Cargos e Funções */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Box/Card ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA */}
+                <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
+                    ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA
+                  </h4>
+                  <ul className="space-y-2 text-slate-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>40 + Anos de Advocacia Estratégica (1986)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Escritório de Advocacia mais antigo do Brasil (3ª Geração)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Proteção Jurídica Patrimonial</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Direito Imobiliário & Ativos</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Direito Empresarial & Sucessão Corporativa</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Direito Civil</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37] font-bold">◙</span>
+                      <span>Relações de Consumo</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Box/Card CARGOS & FUNÇÕES INSTITUCIONAIS */}
+                <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
+                    CARGOS & FUNÇÕES INSTITUCIONAIS
+                  </h4>
+                  <ul className="space-y-1.5 text-slate-300 text-xs">
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Advogado Estratégico</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Gestor Jurídico Patrimonial</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Gestor Jurídico Empresarial</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Palestrante e Coach Jurídico</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Procurador Municipal (20 Municípios no RS)</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Procurador do Banco do Brasil S/A</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro da Associação Nacional dos Gestores Ambientais</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro do Instituto dos Advogados do RS</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Presidente da Associação Brasileira do Meio Ambiente</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Assessor Jurídico da Assembleia Legislativa do RS</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Conselheiro do DMAE (Águas e Esgotos de POA)</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Diretor do Depto. de Direito Empresarial do IARGS</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Conselheiro do CONDECON POA (Defesa do Consumidor)</span></li>
+                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro da 3ª Comissão de Ética e Disciplina da OABRS</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Grid: Literatura Jurídica & Docência */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {/* Box/Card LITERATURA JURÍDICA & PALESTRAS */}
+                <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
+                    LITERATURA JURÍDICA & PALESTRAS
+                  </h4>
+                  <p className="text-slate-200 font-medium">
+                    ◙ Autor de mais de uma centena de Artigos Jurídicos Publicados
+                  </p>
+                  <p className="text-[#F6E27A] font-semibold mt-1">
+                    ◙ Autor de Livros Digitais Publicados:
+                  </p>
+                  <ul className="space-y-1 text-slate-300 text-xs pl-2">
+                    <li>► Planejamento Patrimonial 4.0 & o Alto Risco da Omissão</li>
+                    <li>► Holding Familiar e Imobiliária</li>
+                    <li>► Você tem Patrimônio e deseja protegê-lo juridicamente?</li>
+                    <li>► Os Sete Cuidados na Compra do Imóvel</li>
+                    <li>► Síndico Próspero: Administrando o Condomínio em Alta Performance</li>
+                    <li>► Mercado de Carbono: Construindo um Futuro Sustentável</li>
+                    <li>► LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados</li>
+                    <li>► Como Resolver as Dívidas Bancárias em Tempos de COVID-19?</li>
+                  </ul>
+                  <div className="pt-2 flex flex-wrap gap-2 text-xs text-[#E5C158] font-bold">
+                    <span>◙ Palestras</span>
+                    <span>·</span>
+                    <span>◙ Cursos</span>
+                    <span>·</span>
+                    <span>◙ Mentorias</span>
+                    <span>·</span>
+                    <span>◙ Workshops</span>
+                  </div>
+                </div>
+
+                {/* Box/Card DOCÊNCIA */}
+                <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
+                    DOCÊNCIA UNIVERSITÁRIA
+                  </h4>
+                  <ul className="space-y-2 text-slate-300">
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37]">◙</span>
+                      <span>Prof. da Faculdade de Direito da UNISINOS</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37]">◙</span>
+                      <span>Prof. da Escola Superior de Estudos Jurídicos do IARGS</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37]">◙</span>
+                      <span>Prof. da Escola Superior de Advocacia da OABRS</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37]">◙</span>
+                      <span>Prof. do Centro de Estudos do Trabalho – CETRA</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37]">◙</span>
+                      <span>Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-[#D4AF37]">◙</span>
+                      <span>Prof. da Academia Leão Ferreira</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Texto 2: Síntese de Encerramento Oficial */}
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-slate-300 text-xs sm:text-sm space-y-2.5">
+                <p>
+                  "Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica."
+                </p>
+                <p>
+                  "Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado."
+                </p>
+              </div>
             </div>
 
             <div className="mt-8 pt-5 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">

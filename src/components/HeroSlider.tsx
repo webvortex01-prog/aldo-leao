@@ -48,7 +48,6 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           <picture className="w-full h-full block overflow-hidden">
             <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroImageMobileUrl || heroNovoFundoMobileImg} />
             <img
-              key={`slide1-hero-img-${currentSlide === 0 ? 'active' : 'idle'}`}
               src={siteConfig.hero?.heroImageUrl || heroNovoFundoImg}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
               className={`w-full h-full object-cover object-top md:object-[68%_35%] filter brightness-90 contrast-105 transform-gpu origin-[50%_15%] md:origin-[70%_40%] ${
@@ -69,7 +68,6 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           <picture className="w-full h-full block overflow-hidden">
             <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroSlide2ImageMobileUrl || holdingFamilyMobileBg} />
             <img
-              key={`family-hero-img-${currentSlide === 1 ? 'active' : 'idle'}`}
               src={siteConfig.hero?.heroSlide2ImageUrl || holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
               className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-80 contrast-105 transform-gpu origin-[50%_25%] ${
@@ -228,13 +226,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
 
-            {/* Right Column Visual (Logomarca Oficial do Leão - com Levitação Nobre 3D) */}
+            {/* Right Column Visual (Logomarca Oficial do Leão - Box Estático com Respiração Nobre da Logo) */}
             <div
               className={`lg:col-span-5 relative flex flex-col justify-center transition-all duration-700 ease-out delay-300 transform ${
                 currentSlide === 0 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
               }`}
             >
-              <div className="relative w-full max-w-md lg:max-w-none mx-auto animate-luxury-float">
+              <div className="relative w-full max-w-md lg:max-w-none mx-auto">
                 <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/60 via-[#F6E27A]/30 to-[#D4AF37]/15 rounded-2xl blur-xl opacity-85" />
                 <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl">
                   <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-6">
@@ -344,13 +342,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
 
-            {/* Right Column Slide 2: Card de Custos e Foto de Dr. Aldo com 2 pessoas com card abaixo (com Flutuação e Zoom Vivo) */}
+            {/* Right Column Slide 2: Card de Custos e Foto de Dr. Aldo com 2 pessoas com card abaixo (Boxes Estáticos com Zoom Interno Sutil) */}
             <div
               className={`lg:col-span-5 relative flex flex-col gap-4 justify-center transition-all duration-700 ease-out delay-300 transform ${
                 currentSlide === 1 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
               }`}
             >
-              <div className="animate-luxury-float flex flex-col gap-4">
+              <div className="flex flex-col gap-4">
                 {/* Card Comparativo de Custos */}
                 <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left card-hover-interactive">
                   <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">

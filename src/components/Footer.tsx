@@ -27,12 +27,13 @@ export const Footer: React.FC<FooterProps> = ({
 
   const navLinks = [
     { label: 'Home', href: '#' },
-    { label: 'Presença Digital', href: '#presenca-nacional' },
+    { label: 'Presença Nacional Digital', href: '#presenca-nacional' },
     { label: 'Legado', href: '#legado' },
     { label: 'Head Jurídico', href: '#head-juridico' },
     { label: 'Atuação', href: '#areas-atuacao' },
-    { label: 'Serviços', href: '#solucoes-excelencia' },
-    { label: 'Planejamento', href: '#holding-familiar' },
+    { label: 'Soluções de Excelência', href: '#solucoes-excelencia' },
+    { label: 'Consulta Digital', href: '#consulta-digital' },
+    { label: 'Planejamento Patrimonial', href: '#holding-familiar' },
     { label: 'Publicações', href: '#publicacoes' },
     { label: 'Livros', href: '#livros' },
     { label: 'Contato', href: '#contato' },
@@ -54,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Grid com Coluna Institucional e Navegação com Acesso Restrito (Itens 11 e XI) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-[#D4AF37]/20 text-left">
-          {/* Coluna 1: Logo e Texto Institucional do Projeto (Item 14) */}
+          {/* Coluna 1: Logo e Texto Institucional do Projeto (Item 14 e 48) */}
           <div className="md:col-span-7 flex flex-col justify-start">
             <div className="mb-4">
               <Logo size="md" />
@@ -66,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({
               {f?.institutionalParagraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
             </p>
 
-            {/* Links de Proteção Jurídica e Compliance (LGPD, Direitos Autorais, OAB) */}
+            {/* Links de Proteção Jurídica e Compliance (LGPD, Termos de Uso e Cookies - Item 11) */}
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2 text-xs font-semibold">
               <button
                 type="button"
@@ -81,20 +82,12 @@ export const Footer: React.FC<FooterProps> = ({
                 onClick={onOpenTerms}
                 className="text-[#E5C158] hover:text-[#F6E27A] hover:underline underline-offset-2 transition-colors cursor-pointer text-left"
               >
-                ⚖️ Termos de Uso & Direitos Autorais
-              </button>
-              <span className="text-slate-600 hidden sm:inline">·</span>
-              <button
-                type="button"
-                onClick={onOpenOabDisclaimer}
-                className="text-[#E5C158] hover:text-[#F6E27A] hover:underline underline-offset-2 transition-colors cursor-pointer text-left"
-              >
-                📜 Aviso Legal & Ética OAB
+                ⚖️ Termos de Uso e Cookies
               </button>
             </div>
           </div>
 
-          {/* Coluna 2: Navegação na Ordem Rigorosa do Projeto e Link ACESSO RESTRITO (Itens 11, 14 e 16) */}
+          {/* Coluna 2: Navegação na Ordem Rigorosa do Projeto e Link ACESSO RESTRITO (Itens 11, 14, 44 e 60) */}
           <div className="md:col-span-5">
             <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-[#D4AF37]/30 pb-2">
               Navegação
@@ -127,19 +120,13 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        {/* Nota de Blindagem Jurídica e Direitos Autorais */}
-        <div className="pt-8 pb-4 text-center max-w-4xl mx-auto space-y-3">
-          <p className="text-[11px] text-slate-400 font-sans-body leading-relaxed font-light">
-            Todo o conteúdo deste portal (marca nominativa, logomarca, textos doutrinários, artigos jurídicos, livros digitais e elementos audiovisuais) 
-            é protegido pela <strong>Lei de Direitos Autorais (Lei nº 9.610/1998)</strong> e pela <strong>Lei de Propriedade Industrial (Lei nº 9.279/1996)</strong>. 
-            É expressamente vedada a reprodução total ou parcial desautorizada. As matérias e notícias publicadas possuem finalidade exclusivamente educativa e 
-            informativa em rigorosa observância ao <strong>Código de Ética e Disciplina da OAB</strong> e ao <strong>Provimento nº 205/2021 do Conselho Federal da OAB</strong>, 
-            não configurando captação de clientela nem promessa de resultado. Tratamento de dados pessoais resguardado pela <strong>LGPD (Lei nº 13.709/2018)</strong> 
-            e pelo <strong>Sigilo Profissional da Advocacia (art. 7º, II da Lei nº 8.906/1994)</strong>.
+        {/* Nota de Direitos Autorais Simplificada e Direta Conforme Itens 11, XI e 60 */}
+        <div className="pt-8 pb-4 text-center max-w-4xl mx-auto space-y-2">
+          <p className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+            © 1908 – 2026 ALDO LEÃO ADVOCACIA ESTRATÉGICA
           </p>
-
-          <p className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase tracking-wider pt-2">
-            © 1908–2026 ALDO LEÃO ADVOCACIA ESTRATÉGICA · 3ª GERAÇÃO FAMILIAR · TODOS OS DIREITOS RESERVADOS
+          <p className="font-cinzel text-[11px] sm:text-xs font-bold text-[#E5C158] uppercase tracking-widest">
+            TODOS OS DIREITOS AUTORAIS RESERVADOS
           </p>
         </div>
       </div>

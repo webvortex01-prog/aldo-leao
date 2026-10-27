@@ -73,7 +73,8 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
             {siteConfig.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
           </p>
 
-          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans-body font-light">
+          {/* Item 24 & Item 26: Parágrafo 2 com a mesma fonte e o mesmo destaque do parágrafo 1 */}
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
             {siteConfig.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
           </p>
         </div>
@@ -155,13 +156,13 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
               )}
             </div>
 
-            {/* Box preto para o texto conforme Item 37 */}
+            {/* Box preto para o texto conforme Item 37 e Item 26 */}
             <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 mb-6">
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
                 {selectedSolution.description}
               </p>
               {selectedSolution.extendedText && (
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800">
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800">
                   {selectedSolution.extendedText}
                 </p>
               )}

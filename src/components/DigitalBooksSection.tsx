@@ -175,7 +175,22 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
               {siteConfig.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
             </p>
             <p>
-              {siteConfig.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
+              {siteConfig.booksSection?.paragraph3 ? (
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: siteConfig.booksSection.paragraph3.replace(
+                      /Academia Le[ãa]o Ferreira/gi,
+                      '<strong class="text-[#F6E27A] font-semibold">Academia Leão Ferreira</strong>'
+                    )
+                  }}
+                />
+              ) : (
+                <>
+                  Cada obra publicada pela{' '}
+                  <strong className="text-[#F6E27A] font-semibold">Academia Leão Ferreira</strong>{' '}
+                  representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.
+                </>
+              )}
             </p>
           </div>
         </div>
@@ -249,13 +264,13 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                   className="rounded-2xl overflow-hidden bg-[#071122] border border-[#D4AF37]/35 hover:border-[#D4AF37] transition-all duration-300 shadow-2xl flex flex-col justify-between group text-left hover:-translate-y-1.5"
                 >
                   <div>
-                    {/* Capa do Livro Digital (Proporção vertical elegante de livro) */}
-                    <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#050B14] border-b border-[#D4AF37]/30">
+                    {/* Capa do Livro Digital (Itens 13, 18, 41: Exibição integral sem cortes via object-contain em fundo escuro nobre, sem selos sobre a capa) */}
+                    <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#030710] border-b border-[#D4AF37]/30 flex items-center justify-center p-3">
                       {book.coverImage ? (
                         <img
                           src={book.coverImage}
                           alt={`Capa do livro: ${book.title}`}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_8px_24px_rgba(0,0,0,0.85)]"
                           loading="lazy"
                         />
                       ) : (
@@ -264,11 +279,6 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                           <h4 className="font-cinzel text-lg text-white font-bold">{book.title}</h4>
                         </div>
                       )}
-
-                      {/* Selo discreto sobre a capa */}
-                      <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-[#050B14]/85 backdrop-blur-md border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider shadow-lg">
-                        {book.badge || 'Livro Digital'}
-                      </div>
                     </div>
 
                     {/* Dados do Livro: Título, Autor, Ano da Edição e Área Jurídica */}

@@ -116,9 +116,9 @@ export const PrivacyPolicyModal: React.FC<LegalModalProps> = ({ isOpen, onClose 
             </p>
             <div className="mt-3 p-3.5 rounded-xl bg-[#0B1A35] border border-[#D4AF37]/30 text-xs">
               <p className="text-white font-semibold">Gabinete de Governança e Privacidade</p>
-              <p className="text-[#E5C158] mt-0.5">E-mail: aldoleao.adv@gmail.com</p>
-              <p className="text-slate-300 mt-0.5">WhatsApp Institucional: +55 (51) 99808-8998</p>
-              <p className="text-slate-400 text-[11px] mt-1">Sede Central: Av. Borges de Medeiros, 2105, 14º andar, Praia de Belas, Porto Alegre/RS.</p>
+              <p className="text-[#E5C158] mt-0.5">E-mail: aldoleaoadvocacia@gmail.com</p>
+              <p className="text-slate-300 mt-0.5">WhatsApp: +55 (51) 99808-8998</p>
+              <p className="text-slate-300 text-[11px] mt-1">ESCRITÓRIO DIGITAL BRASIL: PORTO ALEGRE, Av. Cel. Lucas de Oliveira, 1255/502, 5º Andar, Bela Vista, 90440-011.</p>
             </div>
           </section>
         </div>
@@ -129,7 +129,7 @@ export const PrivacyPolicyModal: React.FC<LegalModalProps> = ({ isOpen, onClose 
             onClick={onClose}
             className="btn-gold-luxury px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-black uppercase tracking-wider cursor-pointer shadow-md"
           >
-            Compreendido e Fechar
+            CIENTE E DE ACORDO
           </button>
         </div>
       </div>
@@ -138,7 +138,7 @@ export const PrivacyPolicyModal: React.FC<LegalModalProps> = ({ isOpen, onClose 
 };
 
 /**
- * Modal: Termos de Uso e Propriedade Intelectual (Lei nº 9.610/98 e Lei nº 9.279/96)
+ * Modal: Termos de Uso e Cookies (Item 11)
  */
 export const TermsOfUseModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -160,17 +160,17 @@ export const TermsOfUseModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) 
           <X className="w-5 h-5" />
         </button>
 
-        {/* Header */}
+        {/* Header (Item 11: Termos de Uso e Cookies) */}
         <div className="border-b border-[#D4AF37]/25 pb-5 mb-6 text-left">
           <div className="flex items-center gap-2 text-xs text-[#E5C158] font-bold uppercase tracking-wider mb-2">
             <Lock className="w-4 h-4 text-[#D4AF37]" />
-            <span>Direitos Autorais (Lei 9.610/98) & Propriedade Industrial (Lei 9.279/96)</span>
+            <span>Termos de Uso e Cookies</span>
           </div>
           <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-white leading-tight">
-            TERMOS DE USO & <span className="gold-text-gradient">PROPRIEDADE INTELECTUAL</span>
+            TERMOS DE USO E <span className="gold-text-gradient">COOKIES</span>
           </h2>
           <p className="text-xs text-slate-400 mt-2 font-sans-body">
-            Acordo Jurídico Vinculante · ALDO LEÃO ADVOCACIA ESTRATÉGICA
+            ALDO LEÃO ADVOCACIA ESTRATÉGICA
           </p>
         </div>
 
@@ -196,12 +196,11 @@ export const TermsOfUseModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) 
 
           <section>
             <h3 className="font-cinzel text-sm sm:text-base font-bold text-[#F6E27A] mb-2">
-              2. LICENÇAS E ELEMENTOS VISUAIS
+              2. POLÍTICA DE COOKIES E NAVEGAÇÃO
             </h3>
             <p>
-              As fotografias oficiais do Dr. Aldo Leão são de sua titularidade e consentimento expressos. As ilustrações artísticas, ambientações conceituais 
-              de arquitetura e imagens de apoio foram concebidas e licenciadas exclusivamente para uso do escritório sob licença comercial proprietária. 
-              Qualquer utilização desautorizada em materiais promocionais ou sites de terceiros configura violação a direitos autorais e direito de imagem (art. 5º, X da CF/88 e art. 20 do Código Civil).
+              Este portal utiliza exclusivamente cookies técnicos e operacionais essenciais destinados a assegurar estabilidade, segurança na transmissão 
+              de dados e integridade no acesso ao sistema. Não utilizamos cookies intrusivos ou comercialização de perfis comportamentais com redes de terceiros.
             </p>
           </section>
 
@@ -231,13 +230,13 @@ export const TermsOfUseModal: React.FC<LegalModalProps> = ({ isOpen, onClose }) 
           </section>
         </div>
 
-        {/* Footer */}
+        {/* Footer com Botão CIENTE E DE ACORDO (Item 11) */}
         <div className="mt-8 pt-5 border-t border-slate-800 flex justify-end">
           <button
             onClick={onClose}
             className="btn-gold-luxury px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-black uppercase tracking-wider cursor-pointer shadow-md"
           >
-            Compreendido e Fechar
+            CIENTE E DE ACORDO
           </button>
         </div>
       </div>
