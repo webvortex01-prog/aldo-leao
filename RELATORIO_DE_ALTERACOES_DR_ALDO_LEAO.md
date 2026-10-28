@@ -206,9 +206,45 @@ Esses campos ficam integrados ao código-fonte e salvos no sistema, visíveis ex
 
 ---
 
+### N. Landing Page Exclusiva de Holding Familiar 4.0 (`/1208/`)
+- [X] **Abertura Sempre no Topo:** A Landing Page abre instantaneamente no início (topo da página), eliminando qualquer abertura no meio ou no fim da tela.
+- [X] **Acesso Direto por Rota e Links:** Acesso implementado via rota direta `https://aldo-leao.vercel.app/1208` ou `https://aldo-leao.vercel.app/1208/`, além de todos os botões "Saiba Mais" / "Planejamento Patrimonial 4.0" do portal.
+- [X] **Cabeçalho Fixo Exclusivo:**
+  - Botão `Voltar` à esquerda (retorna ao portal principal limpando a rota).
+  - Lettering institucional de luxo à direita em duas linhas: `ALDO LEÃO` (dourado) e `ADVOCACIA ESTRATÉGICA` (branco em negrito), sem corte de logomarca e sem botões redundantes.
+- [X] **Hero & Títulos Oficiais:**
+  - Kicker centralizado: `HOLDING FAMILIAR` (em dourado).
+  - Título principal: `PLANEJAMENTO PATRIMONIAL 4.0` (com *PATRIMONIAL* em dourado).
+  - Subtítulo em dourado: `O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS`.
+  - Texto fidedigno sobre o impacto da perda patrimonial no inventário, deságio de 20% e a majoração do ITCMD para até 30%.
+- [X] **Botões do Hero:**
+  - Botão Dourado: `AGENDAR SESSÃO DE VIABILIDADE` (abre o formulário completo).
+  - Botão Azul-marinho: `CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0` (leva direto à tabela comparativa).
+- [X] **Seção "Alguns Problemas do Inventário":** Os 7 cards estruturados com alertas e ícones sobre morosidade, perda de 40%, deságio de 20%, brigas familiares e aumento do ITCMD.
+- [X] **Seção "O Planejamento 4.0 Evita o Inventário e Perpetua o seu Legado":** Texto institucional integral e os 18 cards das Vantagens Exclusivas com checks dourados.
+- [X] **Tabela Comparativa Oficial de Custos:**
+  - Kicker: `ESTUDO COMPARATIVO`.
+  - Título em branco: `CUSTOS: INVENTÁRIO X HOLDING FAMILIAR`.
+  - Exemplo do patrimônio de R$ 1.500.000,00 com ganho de capital de R$ 500.000,00.
+  - Tabela integral com os 6 itens (ITCD/ITCMD, Honorários, Custas de Cartório, Certidões, I.R. Ganho de Capital e Registro de Imóveis) e box de economia destacada de R$ 164.000,00 (55,21%).
+- [X] **Box "Faça o seu Planejamento 4.0":** Título `FAÇA O SEU PLANEJAMENTO 4.0`, texto de chamada para diagnóstico, botão dourado `AGENDAR DIAGNÓSTICO DE VIABILIDADE` e botão verde de WhatsApp.
+- [X] **Público-Alvo:** 8 categorias em destaque (Empresários, Proprietários de bens, Pais, Famílias empresárias, Investidores, Autônomos, Atividades de risco e Agronegócio).
+- [X] **Seção "Dr. Aldo Leão":**
+  - Kicker: `ADVOCACIA ESTRATÉGICA DESDE 1986` e Título: `Dr. ALDO LEÃO`.
+  - Foto exclusiva de conferência/palestra do Dr. Aldo.
+  - Assinatura ampliada com efeito glow.
+  - Botão azul-marinho com borda dourada `SAIBA MAIS` abrindo o currículo completo com botão de retorno.
+  - Botão dourado `AGENDAR DIAGNÓSTICO DE VIABILIDADE`.
+- [X] **Perguntas Frequentes (FAQ):** Sanfona interativa (accordion) com as 8 perguntas e respostas na íntegra.
+- [X] **Box "Alguma Dúvida?":** Título em dourado `ALGUMA DÚVIDA?`, texto institucional e botão único `FALAR COM O ESPECIALISTA`.
+- [X] **Rodapé da Landing Page:** Apenas o texto oficial de direitos autorais e o link discreto para retorno ao portal.
+
+---
+
 ## 3. LINK DE HOMOLOGAÇÃO
-O portal está publicado e pronto para sua apreciação com todas as melhorias ativas:
-👉 **Ambiente de Homologação:** [https://aldo-leao.vercel.app/](https://aldo-leao.vercel.app/)
+O portal e a landing page estão publicados e prontos para sua apreciação:
+👉 **Portal Institucional:** [https://aldo-leao.vercel.app/](https://aldo-leao.vercel.app/)  
+👉 **Landing Page Holding Familiar 4.0:** [https://aldo-leao.vercel.app/1208/](https://aldo-leao.vercel.app/1208/)
 
 Permanecemos à inteira disposição para qualquer alinhamento final e para dar início à publicação no domínio principal da HostGator / Hostinger.
 

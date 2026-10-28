@@ -127,11 +127,32 @@ Esclarecimento Técnico: Sim, o procedimento é 100% viável e seguro. A partir 
 - Removidas duplicações de textos institucionais acima de Política de Privacidade e Termos de Uso.
 - Copyright oficial: "© 1908 – 2026 ALDO LEÃO ADVOCACIA ESTRATÉGICA · TODOS OS DIREITOS AUTORAIS RESERVADOS".
 
+[OK] Landing Page Exclusiva (Holding Familiar 4.0 - Rota /1208/):
+- Abertura sempre no topo da página (window.scrollTo 0).
+- Acesso por rota direta /1208/ e pelos botões de conversão do site.
+- Cabeçalho fixo com botão "Voltar" e lettering "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em duas linhas, sem cortes.
+- Kicker "HOLDING FAMILIAR" e título "PLANEJAMENTO PATRIMONIAL 4.0" (com PATRIMONIAL em dourado).
+- Subtítulo em dourado: "O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS".
+- Texto completo sobre a perda de 40%, o deságio de 20% e o aumento iminente do ITCMD para até 30%.
+- Botões: "AGENDAR SESSÃO DE VIABILIDADE" (abre formulário) e "CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0" (leva para a tabela).
+- Seção "ALGUNS PROBLEMAS DO INVENTÁRIO" com os 7 cards com ícones de alerta.
+- Seção "O PLANEJAMENTO 4.0 EVITA O INVENTÁRIO..." com os 3 parágrafos e as 18 Vantagens Exclusivas.
+- Tabela Comparativa de Custos completa com os 6 itens (R$ 297.000 vs R$ 133.000) e economia de R$ 164.000 (55,21%).
+- Box "FAÇA O SEU PLANEJAMENTO 4.0" com botões de agendamento e WhatsApp.
+- Público-Alvo estruturado em 8 cards para fácil leitura.
+- Seção "Dr. ALDO LEÃO" com foto exclusiva de palestra, assinatura ampliada com glow e botão "SAIBA MAIS" (abre currículo completo).
+- Sanfona de Perguntas Frequentes (FAQ) com as 8 perguntas e respostas na íntegra.
+- Box "ALGUMA DÚVIDA?" com botão único "FALAR COM O ESPECIALISTA".
+- Rodapé exclusivo contendo apenas os direitos autorais.
+
 ====================================================================
 3. AMBIENTE DE HOMOLOGAÇÃO
 ====================================================================
-Portal atualizado em tempo real:
+Portal Institucional atualizado em tempo real:
 https://aldo-leao.vercel.app/
+
+Landing Page Holding Familiar 4.0 (Acesso Direto):
+https://aldo-leao.vercel.app/1208/
 
 Estamos à total disposição para a aprovação final e publicação no domínio principal.
 
