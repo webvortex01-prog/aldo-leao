@@ -445,8 +445,8 @@ const DEFAULT_CONFIG: SiteConfig = {
   hero: {
     heroImageUrl: '/img/novofundohero.jpg',
     heroImageMobileUrl: '/img/novofundohero_mobile.jpg',
-    heroSlide2ImageUrl: '/img/holding-familiar-1.jpg',
-    heroSlide2ImageMobileUrl: '/img/holding-familiar-1.jpg',
+    heroSlide2ImageUrl: '/img/holding-family-hero-bg.jpg',
+    heroSlide2ImageMobileUrl: '/img/holding-family-mobile.jpg',
     kicker: 'ALDO LEÃO',
     kickerSub: 'ADVOCACIA ESTRATÉGICA',
     titlePart1: 'TRADIÇÃO JURÍDICA',
@@ -802,7 +802,7 @@ interface SiteContextType {
   resetSiteConfigToDefault: () => void;
 }
 
-const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v20';
+const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v21';
 
 // Purga de chaves antigas de cache para garantir que todos os navegadores carreguem a versão mais recente
 try {
@@ -822,7 +822,8 @@ try {
     'aldoleao_site_config_v12',
     'aldoleao_site_config_v13',
     'aldoleao_site_config_v14',
-    'aldoleao_site_config_v15'
+    'aldoleao_site_config_v15',
+    'aldoleao_site_config_v20'
   ];
   legacyKeys.forEach(k => localStorage.removeItem(k));
 } catch (e) {
