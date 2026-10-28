@@ -199,6 +199,10 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
                 <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#F6E27A] uppercase tracking-wider">
                   Estilo Canva
                 </span>
+                <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-950/70 border border-emerald-500/50 text-emerald-300 uppercase tracking-wider flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Nuvem Ativa</span>
+                </span>
               </div>
               <p className="text-[10px] text-slate-400 hidden sm:block">
                 Navegue pelo site, clique em qualquer bloco para editar e veja o resultado na hora.

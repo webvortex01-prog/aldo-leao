@@ -13,6 +13,7 @@ import {
 import realPartnerImg from '../assets/images/aldo_leao_portrait_real_1791572566625.jpg';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
 import { OFFICIAL_PUBLICATIONS_2024_2025 } from '../data/officialPublications2024_2025';
+import { saveSiteConfigToFirebase, subscribeToSiteConfig, saveLeadToFirebase } from '../lib/firebase';
 
 const DEFAULT_PRACTICE_AREAS: PracticeArea[] = [
   {
@@ -1143,7 +1144,53 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return INITIAL_LEADS;
   });
 
-  // Save changes to localStorage
+  // Sincronização em tempo real na nuvem via Firebase Firestore
+  useEffect(() => {
+    const unsubscribe = subscribeToSiteConfig((cloudConfig) => {
+      if (cloudConfig && typeof cloudConfig === 'object') {
+        setSiteConfig(prev => {
+          // Merge seguro para não perder nenhuma chave oficial
+          const updated: SiteConfig = {
+            ...prev,
+            ...cloudConfig,
+            navbar: { ...(prev.navbar || {}), ...(cloudConfig.navbar || {}) },
+            hero: { ...(prev.hero || {}), ...(cloudConfig.hero || {}) },
+            slide2: { ...(prev.slide2 || {}), ...(cloudConfig.slide2 || {}) },
+            contact: { ...(prev.contact || {}), ...(cloudConfig.contact || {}) },
+            founder: { ...(prev.founder || {}), ...(cloudConfig.founder || {}) },
+            nationalPresence: { ...(prev.nationalPresence || {}), ...(cloudConfig.nationalPresence || {}) },
+            centennialLegacy: { ...(prev.centennialLegacy || {}), ...(cloudConfig.centennialLegacy || {}) },
+            holdingFamiliar: { ...(prev.holdingFamiliar || {}), ...(cloudConfig.holdingFamiliar || {}) },
+            digitalConsultation: { ...(prev.digitalConsultation || {}), ...(cloudConfig.digitalConsultation || {}) },
+            footer: { ...(prev.footer || {}), ...(cloudConfig.footer || {}) },
+            academiaLeao: { ...(prev.academiaLeao || {}), ...(cloudConfig.academiaLeao || {}) },
+            holdingLanding: { ...(prev.holdingLanding || {}), ...(cloudConfig.holdingLanding || {}) },
+            practiceAreas: (cloudConfig.practiceAreas && cloudConfig.practiceAreas.length > 0)
+              ? cloudConfig.practiceAreas
+              : prev.practiceAreas,
+            excellenceSolutions: (cloudConfig.excellenceSolutions && cloudConfig.excellenceSolutions.length > 0)
+              ? cloudConfig.excellenceSolutions
+              : prev.excellenceSolutions,
+            digitalBooks: (cloudConfig.digitalBooks && cloudConfig.digitalBooks.length > 0)
+              ? cloudConfig.digitalBooks
+              : prev.digitalBooks,
+            publications: (cloudConfig.publications && cloudConfig.publications.length > 0)
+              ? cloudConfig.publications
+              : prev.publications,
+          };
+          return updated;
+        });
+      }
+    });
+
+    return () => {
+      if (typeof unsubscribe === 'function') {
+        unsubscribe();
+      }
+    };
+  }, []);
+
+  // Salva no localStorage local para carregamento instantâneo offline
   useEffect(() => {
     try {
       localStorage.setItem(CURRENT_CONFIG_KEY, JSON.stringify(siteConfig));
@@ -1169,6 +1216,10 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
       internalNotes: ''
     };
     setLeads(prev => [newLead, ...prev]);
+    // Registra lead na nuvem Firebase Firestore
+    saveLeadToFirebase(newLead).catch(err => {
+      console.warn('[Firebase] Não foi possível sincronizar o lead na nuvem:', err);
+    });
   };
 
   const updateLeadStatus = (id: string, status: LeadStatus) => {
@@ -1184,11 +1235,21 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateSiteConfig = (newConfig: Partial<SiteConfig>) => {
-    setSiteConfig(prev => ({ ...prev, ...newConfig }));
+    setSiteConfig(prev => {
+      const merged = { ...prev, ...newConfig };
+      // Sincroniza imediatamente na nuvem Firebase Firestore
+      saveSiteConfigToFirebase(merged).catch(err => {
+        console.warn('[Firebase] Não foi possível sincronizar alterações na nuvem:', err);
+      });
+      return merged;
+    });
   };
 
   const resetSiteConfigToDefault = () => {
     setSiteConfig(DEFAULT_CONFIG);
+    saveSiteConfigToFirebase(DEFAULT_CONFIG).catch(err => {
+      console.warn('[Firebase] Não foi possível sincronizar reset na nuvem:', err);
+    });
   };
 
   return (

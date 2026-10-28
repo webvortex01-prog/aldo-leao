@@ -592,6 +592,10 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               <span className="text-[11px] font-sans text-[#F6E27A] font-bold uppercase tracking-wider bg-[#D4AF37]/20 px-2.5 py-0.5 rounded-full border border-[#D4AF37]/50">
                 100% Editável: Textos + Imagens
               </span>
+              <span className="text-[11px] font-sans text-emerald-300 font-bold uppercase tracking-wider bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-500/50 flex items-center gap-1.5 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Nuvem Firebase Ativa</span>
+              </span>
             </div>
             <p className="text-xs text-slate-300 mt-1 max-w-3xl leading-relaxed">
               Você pode alterar qualquer texto ou imagem do site. Use a barra de pesquisa abaixo para encontrar na hora qualquer palavra ou foto que queira editar.
