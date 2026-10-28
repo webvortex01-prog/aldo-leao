@@ -36,6 +36,40 @@ function AppContent() {
   const [presetUrgency, setPresetUrgency] = useState<string>('media');
   const [presetValue, setPresetValue] = useState<string>('R$ 2M - R$ 5M');
 
+  // Suporte a acesso direto via URL /1208/ ou hash (requisito do Dr. Aldo Leão)
+  React.useEffect(() => {
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+
+    if (
+      path.includes('1208') || 
+      path.includes('landing') || 
+      path.includes('holding-landing') || 
+      hash.includes('1208') || 
+      hash.includes('holding-landing') ||
+      hash.includes('holding')
+    ) {
+      setCurrentView('holding-landing');
+    } else if (path.includes('academia') || hash.includes('academia')) {
+      setCurrentView('academia');
+    }
+
+    const handlePopState = () => {
+      const currentPath = window.location.pathname.toLowerCase();
+      const currentHash = window.location.hash.toLowerCase();
+      if (currentPath.includes('1208') || currentHash.includes('1208') || currentHash.includes('holding-landing')) {
+        setCurrentView('holding-landing');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    window.addEventListener('hashchange', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('hashchange', handlePopState);
+    };
+  }, []);
+
   const handleOpenConsultation = (area?: string) => {
     if (area) setPresetArea(area);
     setIsConsultationOpen(true);
@@ -60,7 +94,12 @@ function AppContent() {
   if (currentView === 'holding-landing') {
     return (
       <HoldingLandingPage
-        onBackToSite={() => setCurrentView('site')}
+        onBackToSite={() => {
+          if (window.location.pathname.includes('1208') || window.location.hash.includes('holding')) {
+            window.history.pushState(null, '', '/');
+          }
+          setCurrentView('site');
+        }}
         onOpenAdmin={handleOpenAdmin}
         onOpenConsultation={() => handleOpenConsultation()}
       />
