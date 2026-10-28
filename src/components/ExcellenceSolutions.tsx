@@ -7,11 +7,13 @@ interface ExcellenceSolutionsProps {
   onGoToLandingPage: () => void;
   onOpenConsultation: () => void;
   onGoToAcademia?: () => void;
+  onGoToGestaoJuridica?: () => void;
 }
 
 export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
   onGoToLandingPage,
-  onGoToAcademia
+  onGoToAcademia,
+  onGoToGestaoJuridica
 }) => {
   const { siteConfig } = useSite();
   const [selectedSolution, setSelectedSolution] = useState<ExcellenceSolution | null>(null);
@@ -26,6 +28,17 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
         el.scrollIntoView({ behavior: 'smooth' });
       } else {
         onGoToLandingPage();
+      }
+    } else if (
+      sol.id === 'gestao-juridica-40' || 
+      sol.title.toLowerCase().includes('gestão jurídica 4.0') || 
+      sol.number === '08'
+    ) {
+      // Ao ser clicado no card ou botão da GESTÃO JURÍDICA 4.0, abre a página oficial dedicada
+      if (onGoToGestaoJuridica) {
+        onGoToGestaoJuridica();
+      } else {
+        setSelectedSolution(sol);
       }
     } else if (sol.id === 'academia-leao-ferreira' || sol.title.toLowerCase().includes('academia') || sol.number === '14') {
       // Item VIII: ao ser clicado em "QUERO SABER MAIS" abre a página da ACADEMIA LEÃO FERREIRA
@@ -169,6 +182,18 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-end pt-2">
+              {(selectedSolution.number === '08' || selectedSolution.id === 'gestao-juridica-40') && onGoToGestaoJuridica && (
+                <button
+                  onClick={() => {
+                    setSelectedSolution(null);
+                    onGoToGestaoJuridica();
+                  }}
+                  className="px-6 py-2.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#132A52] cursor-pointer shadow-md flex items-center justify-center gap-2"
+                >
+                  <span>Acessar Página Completa 4.0</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-[#E5C158]" />
+                </button>
+              )}
               <button
                 onClick={() => handleWhatsAppSolution(selectedSolution.title)}
                 className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 cursor-pointer shadow-md flex items-center justify-center gap-2"

@@ -22,10 +22,11 @@ import { AdminAuthModal } from './components/admin/AdminAuthModal';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
 import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
+import { GestaoJuridicaPage } from './components/GestaoJuridicaPage';
 import { PrivacyPolicyModal, TermsOfUseModal, OabDisclaimerModal } from './components/LegalModals';
 
 function AppContent() {
-  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'admin-login' | 'holding-landing' | 'academia'>('site');
+  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'admin-login' | 'holding-landing' | 'academia' | 'gestao-juridica'>('site');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isAdminAuthOpen, setIsAdminAuthOpen] = useState(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
@@ -42,16 +43,28 @@ function AppContent() {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
 
-      // 1. Rota Secreta de Administração e Estatísticas (Link exclusivo para Dr. Aldo e RD)
+      // 1. Rota Exclusiva da Página GESTÃO JURÍDICA 4.0 (/gestao-juridica, #gestao-juridica, #gestao-40)
+      if (
+        path.includes('gestao-juridica') || 
+        hash.includes('gestao-juridica') || 
+        hash.includes('gestao-40') ||
+        path.includes('gestao-40')
+      ) {
+        setCurrentView('gestao-juridica');
+        return;
+      }
+
+      // 2. Rota Secreta de Administração e Estatísticas (Link exclusivo para Dr. Aldo e RD)
       const isAdminRoute = 
         path.includes('admin') || 
-        path.includes('gestao') || 
         path.includes('editor') || 
         path.includes('estatisticas') ||
+        path === '/gestao' ||
+        path === '/gestao/' ||
         hash.includes('admin') || 
-        hash.includes('gestao') || 
         hash.includes('editor') || 
-        hash.includes('estatisticas');
+        hash.includes('estatisticas') ||
+        hash === '#gestao';
 
       if (isAdminRoute) {
         const sessionToken = sessionStorage.getItem('aldo_auth_session');
@@ -127,6 +140,11 @@ function AppContent() {
     setCurrentView('site');
   };
 
+  const handleOpenGestaoJuridica = () => {
+    window.history.pushState(null, '', '#gestao-juridica');
+    setCurrentView('gestao-juridica');
+  };
+
   // View: Login Administrativo Seguro (Gatekeeper de Cibersegurança)
   if (currentView === 'admin-login') {
     return (
@@ -154,6 +172,16 @@ function AppContent() {
         onBackToSite={handleBackToSite}
         onOpenAdmin={handleOpenAdmin}
         onOpenConsultation={() => handleOpenConsultation()}
+      />
+    );
+  }
+
+  // View: Página Completa GESTÃO JURÍDICA 4.0
+  if (currentView === 'gestao-juridica') {
+    return (
+      <GestaoJuridicaPage
+        onBackToSite={handleBackToSite}
+        onOpenConsultation={() => handleOpenConsultation('Gestão Jurídica 4.0')}
       />
     );
   }
@@ -213,11 +241,12 @@ function AppContent() {
           onOpenConsultation={() => handleOpenConsultation()}
         />
 
-        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8, 37 e Item VIII - abre página da Academia Leão Ferreira) */}
+        {/* 6. Página SOLUÇÕES DE EXCELÊNCIA (Item 8, 37 e Item VIII - abre página da Academia Leão Ferreira e Gestão Jurídica 4.0) */}
         <ExcellenceSolutions
           onGoToLandingPage={() => setCurrentView('holding-landing')}
           onOpenConsultation={() => handleOpenConsultation()}
           onGoToAcademia={() => setCurrentView('academia')}
+          onGoToGestaoJuridica={handleOpenGestaoJuridica}
         />
 
         {/* 7. Página AGENDE A SUA CONSULTA DIGITAL (Item 8 e 9 do PDF) */}
