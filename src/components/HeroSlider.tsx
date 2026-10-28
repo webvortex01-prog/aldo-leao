@@ -42,7 +42,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
         {/* Slide 1: Imagem da Justiça e Balança cobrindo a página até o final abaixo do box (Itens 7 e 51) */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-95 sm:opacity-85 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-95 sm:opacity-90 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -50,13 +50,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroImageUrl || '/img/novofundohero.jpg'}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
-              className={`w-full h-full object-cover object-top md:object-[70%_15%] filter brightness-105 contrast-105 transform-gpu origin-[65%_25%] ${
+              className={`w-full h-full object-cover object-center md:object-[75%_center] filter brightness-105 contrast-105 transform-gpu origin-[70%_40%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
           </picture>
           {/* Película escura suave apenas para legibilidade dos textos à esquerda sem escurecer a base */}
-          <div className="absolute inset-0 bg-[#050B14]/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#050B14]/15 pointer-events-none" />
         </div>
 
         {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo equilibrado */}
@@ -164,7 +164,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
               {/* Descrição com fundo sutilmente escurecido (solicitação Dr. Aldo) */}
               <div
-                className={`p-3.5 sm:p-4 rounded-xl bg-[#040914]/75 border border-[#D4AF37]/30 backdrop-blur-[4px] shadow-xl mb-5 transition-all duration-700 ease-out delay-300 transform ${
+                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-700 ease-out delay-300 transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -296,24 +296,26 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
               </h1>
 
-              {/* Texto principal do Slide 2 conforme Item 27 */}
+              {/* Texto principal do Slide 2 com fundo sutilmente escurecido */}
               <div
-                className={`space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-5 font-light transition-all duration-700 ease-out delay-300 transform ${
+                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-700 ease-out delay-300 transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                <p>
-                  {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
-                </p>
-                <p>
-                  <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
-                </p>
-                <p>
-                  {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
-                </p>
-                <p>
-                  {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
-                </p>
+                <div className="space-y-2.5 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans-body font-light">
+                  <p>
+                    {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
+                  </p>
+                  <p>
+                    <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
+                  </p>
+                  <p>
+                    {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
+                  </p>
+                  <p>
+                    {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
+                  </p>
+                </div>
               </div>
 
               {/* Box do Slide 2 conforme Item 3 e 27 */}
