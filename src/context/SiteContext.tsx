@@ -802,12 +802,39 @@ interface SiteContextType {
   resetSiteConfigToDefault: () => void;
 }
 
+const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v20';
+
+// Purga de chaves antigas de cache para garantir que todos os navegadores carreguem a versão mais recente
+try {
+  const legacyKeys = [
+    'aldoleao_site_config',
+    'aldoleao_site_config_v1',
+    'aldoleao_site_config_v2',
+    'aldoleao_site_config_v3',
+    'aldoleao_site_config_v4',
+    'aldoleao_site_config_v5',
+    'aldoleao_site_config_v6',
+    'aldoleao_site_config_v7',
+    'aldoleao_site_config_v8',
+    'aldoleao_site_config_v9',
+    'aldoleao_site_config_v10',
+    'aldoleao_site_config_v11',
+    'aldoleao_site_config_v12',
+    'aldoleao_site_config_v13',
+    'aldoleao_site_config_v14',
+    'aldoleao_site_config_v15'
+  ];
+  legacyKeys.forEach(k => localStorage.removeItem(k));
+} catch (e) {
+  // Ignora erros em ambientes restritos
+}
+
 const SiteContext = createContext<SiteContextType | undefined>(undefined);
 
 export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     try {
-      const saved = localStorage.getItem('aldoleao_site_config_v15') || localStorage.getItem('aldoleao_site_config_v12');
+      const saved = localStorage.getItem(CURRENT_CONFIG_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         const heroConfig = { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) };
@@ -918,7 +945,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save changes to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('aldoleao_site_config_v15', JSON.stringify(siteConfig));
+      localStorage.setItem(CURRENT_CONFIG_KEY, JSON.stringify(siteConfig));
     } catch (e) {
       console.error('Error persisting site config:', e);
     }
