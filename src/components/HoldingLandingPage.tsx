@@ -20,7 +20,7 @@ import { useSite } from '../context/SiteContext';
 
 interface HoldingLandingPageProps {
   onBackToSite: () => void;
-  onOpenAdmin: () => void;
+  onOpenAdmin?: () => void;
   onOpenConsultation?: () => void;
 }
 
@@ -186,17 +186,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             </button>
           </div>
 
-          {/* Direita: Botão Admin e Texto ALDO LEÃO ADVOCACIA ESTRATÉGICA em duas linhas (Item 63 / XIV) */}
+          {/* Direita: Texto ALDO LEÃO ADVOCACIA ESTRATÉGICA em duas linhas (Item 63 / XIV) */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={onOpenAdmin}
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold text-[#E5C158] hover:text-[#F6E27A] bg-[#0A1730] border border-[#D4AF37]/30 transition-colors cursor-pointer"
-              title="Editor de Sites (Acesso Restrito)"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>Admin</span>
-            </button>
-
             <div className="flex flex-col text-right">
               <span className="font-cinzel text-xs sm:text-sm font-bold text-[#E5C158] uppercase tracking-wider">
                 ALDO LEÃO

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Logo } from './Logo';
-import { Lock } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
@@ -104,15 +103,6 @@ export const Footer: React.FC<FooterProps> = ({
                   </a>
                 </div>
               ))}
-            </div>
-            <div className="pt-4 mt-2 border-t border-[#D4AF37]/15">
-              <button
-                onClick={onOpenAdmin}
-                className="text-xs font-bold text-[#E5C158] hover:text-[#F6E27A] flex items-center gap-1.5 cursor-pointer uppercase transition-colors"
-              >
-                <Lock className="w-3.5 h-3.5" />
-                <span>CADEADO ACESSO RESTRITO</span>
-              </button>
             </div>
           </div>
         </div>

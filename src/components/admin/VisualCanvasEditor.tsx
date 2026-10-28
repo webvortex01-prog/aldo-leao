@@ -23,7 +23,8 @@ import {
   ShieldCheck,
   Plus,
   Trash2,
-  RefreshCw
+  RefreshCw,
+  LogOut
 } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
 import { Navbar } from '../Navbar';
@@ -49,6 +50,7 @@ import { VisualDrawerContent } from './VisualDrawerContent';
 interface VisualCanvasEditorProps {
   onSwitchToFormMode: () => void;
   onBackToSite: () => void;
+  onLogout?: () => void;
 }
 
 type EditableSectionKey = 
@@ -70,7 +72,8 @@ type EditableSectionKey =
 
 export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
   onSwitchToFormMode,
-  onBackToSite
+  onBackToSite,
+  onLogout
 }) => {
   const { siteConfig, updateSiteConfig, resetSiteConfigToDefault } = useSite();
 
@@ -324,8 +327,19 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
             <button
               onClick={onBackToSite}
               className="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white border border-slate-700/80 bg-[#050B14] hover:bg-slate-800 transition-colors cursor-pointer"
+              title="Voltar à visualização normal do portal"
             >
-              Sair
+              Ver Site
+            </button>
+
+            {/* Encerrar Sessão / Logout */}
+            <button
+              onClick={onLogout || onBackToSite}
+              className="px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 hover:text-white border border-rose-900/50 bg-rose-950/40 hover:bg-rose-900/60 transition-colors cursor-pointer flex items-center gap-1.5"
+              title="Encerrar sessão administrativa segura"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Sair</span>
             </button>
           </div>
 

@@ -19,7 +19,7 @@ import { useSite } from '../context/SiteContext';
 
 interface FloatingQuickNavProps {
   onOpenConsultation: () => void;
-  onOpenAdmin: () => void;
+  onOpenAdmin?: () => void;
   onOpenTutorial?: () => void;
   onOpenLandingPage?: () => void;
 }
@@ -114,18 +114,6 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
           `https://wa.me/${siteConfig.contact.whatsappNumber || '5551998088998'}?text=${text}`,
           '_blank'
         );
-      },
-    },
-    {
-      id: 'admin',
-      emoji: '📊',
-      label: 'Estatísticas',
-      description: 'Acesso restrito com senha (Estatísticas e Editor)',
-      action: () => {
-        setIsFullMenuOpen(false);
-        setActiveTooltip(null);
-        setIsCollapsed(true);
-        onOpenAdmin();
       },
     },
   ];
@@ -409,37 +397,21 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
                   </button>
                 )}
 
-                <div className="grid grid-cols-2 gap-2">
+                {onOpenTutorial && (
                   <button
                     onClick={() => {
                       setIsFullMenuOpen(false);
-                      onOpenAdmin();
+                      onOpenTutorial();
                     }}
-                    className="p-2.5 rounded-xl bg-[#0A1730] hover:bg-[#12244a] border border-[#D4AF37]/40 text-left cursor-pointer transition-all flex items-center gap-2"
+                    className="w-full p-2.5 rounded-xl bg-sky-950/60 hover:bg-sky-900/60 border border-sky-500/40 text-left cursor-pointer transition-all flex items-center gap-2"
                   >
-                    <span className="text-base">⚙️</span>
+                    <span className="text-base">📘</span>
                     <div>
-                      <div className="text-[11px] font-bold text-[#E5C158]">Editor de Sites</div>
-                      <div className="text-[9px] text-slate-400">Admin com Senha</div>
+                      <div className="text-[11px] font-bold text-sky-300">Guia do Projeto</div>
+                      <div className="text-[9px] text-slate-400">Manual Interativo e Conformidade</div>
                     </div>
                   </button>
-
-                  {onOpenTutorial && (
-                    <button
-                      onClick={() => {
-                        setIsFullMenuOpen(false);
-                        onOpenTutorial();
-                      }}
-                      className="p-2.5 rounded-xl bg-sky-950/60 hover:bg-sky-900/60 border border-sky-500/40 text-left cursor-pointer transition-all flex items-center gap-2"
-                    >
-                      <span className="text-base">📘</span>
-                      <div>
-                        <div className="text-[11px] font-bold text-sky-300">Guia do Projeto</div>
-                        <div className="text-[9px] text-slate-400">Manual Interativo</div>
-                      </div>
-                    </button>
-                  )}
-                </div>
+                )}
               </div>
             </div>
 

@@ -17,6 +17,7 @@ import { ConsultationModal } from './components/ConsultationModal';
 import { UrgentHotlineFloat } from './components/UrgentHotlineFloat';
 import { FloatingQuickNav } from './components/FloatingQuickNav';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { AdminLoginPage } from './components/admin/AdminLoginPage';
 import { AdminAuthModal } from './components/admin/AdminAuthModal';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
@@ -25,7 +26,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { PrivacyPolicyModal, TermsOfUseModal, OabDisclaimerModal } from './components/LegalModals';
 
 function AppContent() {
-  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'holding-landing' | 'academia'>('site');
+  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'admin-login' | 'holding-landing' | 'academia'>('site');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isAdminAuthOpen, setIsAdminAuthOpen] = useState(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
@@ -36,37 +37,60 @@ function AppContent() {
   const [presetUrgency, setPresetUrgency] = useState<string>('media');
   const [presetValue, setPresetValue] = useState<string>('R$ 2M - R$ 5M');
 
-  // Suporte a acesso direto via URL /1208/ ou hash (requisito do Dr. Aldo Leão)
+  // Suporte a rotas diretas via URL ou hash (/admin, /gestao, /editor, /estatisticas, /1208/)
   React.useEffect(() => {
-    const path = window.location.pathname.toLowerCase();
-    const hash = window.location.hash.toLowerCase();
+    const checkRoute = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
 
-    if (
-      path.includes('1208') || 
-      path.includes('landing') || 
-      path.includes('holding-landing') || 
-      hash.includes('1208') || 
-      hash.includes('holding-landing') ||
-      hash.includes('holding')
-    ) {
-      setCurrentView('holding-landing');
-    } else if (path.includes('academia') || hash.includes('academia')) {
-      setCurrentView('academia');
-    }
+      // 1. Rota Secreta de Administração e Estatísticas (Link exclusivo para Dr. Aldo e RD)
+      const isAdminRoute = 
+        path.includes('admin') || 
+        path.includes('gestao') || 
+        path.includes('editor') || 
+        path.includes('estatisticas') ||
+        hash.includes('admin') || 
+        hash.includes('gestao') || 
+        hash.includes('editor') || 
+        hash.includes('estatisticas');
 
-    const handlePopState = () => {
-      const currentPath = window.location.pathname.toLowerCase();
-      const currentHash = window.location.hash.toLowerCase();
-      if (currentPath.includes('1208') || currentHash.includes('1208') || currentHash.includes('holding-landing')) {
+      if (isAdminRoute) {
+        const sessionToken = sessionStorage.getItem('aldo_auth_session');
+        if (sessionToken) {
+          setCurrentView('admin');
+        } else {
+          setCurrentView('admin-login');
+        }
+        return;
+      }
+
+      // 2. Rota da Landing Page Exclusiva de Holding Familiar 4.0 (/1208/ ou #1208)
+      if (
+        path.includes('1208') || 
+        path.includes('landing') || 
+        path.includes('holding-landing') || 
+        hash.includes('1208') || 
+        hash.includes('holding-landing') ||
+        hash.includes('holding')
+      ) {
         setCurrentView('holding-landing');
+        return;
+      }
+
+      // 3. Rota da Academia Leão Ferreira
+      if (path.includes('academia') || hash.includes('academia')) {
+        setCurrentView('academia');
+        return;
       }
     };
 
-    window.addEventListener('popstate', handlePopState);
-    window.addEventListener('hashchange', handlePopState);
+    checkRoute();
+
+    window.addEventListener('popstate', checkRoute);
+    window.addEventListener('hashchange', checkRoute);
     return () => {
-      window.removeEventListener('popstate', handlePopState);
-      window.removeEventListener('hashchange', handlePopState);
+      window.removeEventListener('popstate', checkRoute);
+      window.removeEventListener('hashchange', checkRoute);
     };
   }, []);
 
@@ -76,8 +100,12 @@ function AppContent() {
   };
 
   const handleOpenAdmin = () => {
-    // Exige login e senha para acessar o Editor de Sites (Admin)
-    setIsAdminAuthOpen(true);
+    const sessionToken = sessionStorage.getItem('aldo_auth_session');
+    if (sessionToken) {
+      setCurrentView('admin');
+    } else {
+      setCurrentView('admin-login');
+    }
   };
 
   const handleAuthSuccess = () => {
@@ -85,21 +113,46 @@ function AppContent() {
     setCurrentView('admin');
   };
 
-  // View: Editor de Sites (CMS Live)
+  const handleBackToSite = () => {
+    if (window.location.pathname !== '/' || window.location.hash) {
+      window.history.pushState(null, '', '/');
+    }
+    setCurrentView('site');
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('aldo_auth_session');
+    if (window.location.pathname !== '/' || window.location.hash) {
+      window.history.pushState(null, '', '/');
+    }
+    setCurrentView('site');
+  };
+
+  // View: Login Administrativo Seguro (Gatekeeper de Cibersegurança)
+  if (currentView === 'admin-login') {
+    return (
+      <AdminLoginPage
+        onSuccess={handleAuthSuccess}
+        onBackToSite={handleBackToSite}
+      />
+    );
+  }
+
+  // View: Editor de Sites & Estatísticas (CMS Live + Canvas)
   if (currentView === 'admin') {
-    return <AdminDashboard onBackToSite={() => setCurrentView('site')} />;
+    return (
+      <AdminDashboard 
+        onBackToSite={handleBackToSite} 
+        onLogout={handleLogout}
+      />
+    );
   }
 
   // View: Landing Page Exclusiva de Holding Familiar 4.0
   if (currentView === 'holding-landing') {
     return (
       <HoldingLandingPage
-        onBackToSite={() => {
-          if (window.location.pathname.includes('1208') || window.location.hash.includes('holding')) {
-            window.history.pushState(null, '', '/');
-          }
-          setCurrentView('site');
-        }}
+        onBackToSite={handleBackToSite}
         onOpenAdmin={handleOpenAdmin}
         onOpenConsultation={() => handleOpenConsultation()}
       />

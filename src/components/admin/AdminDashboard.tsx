@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShieldCheck, FileEdit, Sparkles, Layers } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, FileEdit, Sparkles, LogOut } from 'lucide-react';
 import { Logo } from '../Logo';
 import { CmsEditor } from './CmsEditor';
 import { VisualCanvasEditor } from './VisualCanvasEditor';
 
 interface AdminDashboardProps {
   onBackToSite: () => void;
+  onLogout?: () => void;
 }
 
-export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) => {
+export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite, onLogout }) => {
   const [editorMode, setEditorMode] = useState<'canvas' | 'form'>('canvas');
 
   // Modo 1: Editor Visual Estilo Canva (Navegação ao vivo pelo site com clique para editar)
@@ -17,6 +18,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
       <VisualCanvasEditor
         onSwitchToFormMode={() => setEditorMode('form')}
         onBackToSite={onBackToSite}
+        onLogout={onLogout}
       />
     );
   }
@@ -64,6 +66,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite }) 
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Voltar ao Site</span>
             </button>
+
+            {onLogout && (
+              <button
+                onClick={onLogout}
+                className="px-3 py-2 rounded-lg text-xs font-semibold text-rose-300 border border-rose-500/40 bg-rose-950/40 hover:bg-rose-900/60 hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer shadow-sm"
+                title="Encerrar Sessão Segura"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Sair</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
