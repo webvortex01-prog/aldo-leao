@@ -46,9 +46,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
-            <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroImageMobileUrl || heroNovoFundoMobileImg} />
+            <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroImageMobileUrl || '/img/novofundohero.jpg'} />
             <img
-              src={siteConfig.hero?.heroImageUrl || heroNovoFundoImg}
+              src={siteConfig.hero?.heroImageUrl || '/img/novofundohero.jpg'}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
               className={`w-full h-full object-cover object-top md:object-[70%_15%] filter brightness-105 contrast-105 transform-gpu origin-[65%_25%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
@@ -162,14 +162,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
               </h1>
 
-              {/* Descrição */}
-              <p
-                className={`text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light whitespace-pre-line transition-all duration-700 ease-out delay-300 transform ${
+              {/* Descrição com fundo sutilmente escurecido (solicitação Dr. Aldo) */}
+              <div
+                className={`p-3.5 sm:p-4 rounded-xl bg-[#040914]/75 border border-[#D4AF37]/30 backdrop-blur-[4px] shadow-xl mb-5 transition-all duration-700 ease-out delay-300 transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
-              </p>
+                <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light whitespace-pre-line">
+                  {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
+                </p>
+              </div>
 
               {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
               <div
@@ -246,10 +248,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                 </div>
 
-                {/* Card logo abaixo do box da logomarca totalmente visível (Item b) */}
-                <div className="mt-3.5 p-3.5 rounded-xl bg-[#070F1E] border border-[#D4AF37]/45 flex items-center justify-between shadow-xl">
+                {/* Card logo abaixo do box da logomarca em cor azul-marinho (solicitação Dr. Aldo) */}
+                <div className="mt-3.5 p-3.5 rounded-xl bg-[#0B1E3D] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-[#D4AF37]/25 border border-[#D4AF37]/70 flex items-center justify-center text-[#F6E27A] shrink-0">
                       <Scale className="w-4 h-4 text-[#E5C158]" />
                     </div>
                     <div>

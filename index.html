@@ -3,19 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Aldo Leão | Advocacia Estratégica</title>
+    <title>Aldo Leão Advocacia Estratégica</title>
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="apple-touch-icon" href="/img/logo.png" />
     <meta name="description" content="Escritório de advocacia estratégica de alta complexidade e defesa corporativa para grandes empresas e famílias de alto patrimônio." />
-    <meta property="og:title" content="Aldo Leão | Advocacia Estratégica" />
+    <meta property="og:title" content="Aldo Leão Advocacia Estratégica" />
     <meta property="og:description" content="Escritório de advocacia estratégica de alta complexidade e defesa corporativa para grandes empresas e famílias de alto patrimônio." />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="/img/logo.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- Preload imediato das imagens de fundo dos slides para evitar qualquer delay ou fundo azul -->
-    <link rel="preload" as="image" href="/img/novofundohero.jpg" />
+    <!-- Preload prioritário da imagem da Themis para eliminar qualquer flash ou delay inicial -->
+    <link rel="preload" as="image" href="/img/novofundohero.jpg" fetchpriority="high" />
     <link rel="preload" as="image" href="/img/holding-family-hero-bg.jpg" />
     <link rel="preload" as="image" href="/img/holding-familiar-1.jpg" />
+    <link rel="preload" as="image" href="/img/logo.png" />
+    <style>
+      /* Renderização instantânea do fundo antes mesmo do React hidratar para eliminar 100% o flash azul */
+      #root:empty {
+        min-height: 100vh;
+        background-color: #050B14;
+        background-image: url('/img/novofundohero.jpg');
+        background-size: cover;
+        background-position: top center;
+        background-repeat: no-repeat;
+      }
+    </style>
   </head>
   <body class="bg-[#050B14] text-slate-100 antialiased selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
     <div id="root"></div>
