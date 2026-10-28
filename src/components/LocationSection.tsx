@@ -124,10 +124,10 @@ export const LocationSection: React.FC = () => {
               </h3>
               <div className="space-y-1.5 text-xs text-slate-300 font-sans-body">
                 <p className="font-semibold text-white text-sm">
-                  (51) 998.088.998
+                  (51) 99808-8998
                 </p>
                 <p className="font-semibold text-slate-300 text-sm">
-                  (51) 998.078.998
+                  (51) 99807-8998
                 </p>
                 <p className="text-[11px] text-slate-300 pt-1">
                   Se preferir, ligue para a ALDO LEÃO ADVOCACIA ESTRATÉGICA
