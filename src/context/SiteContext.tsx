@@ -7,7 +7,8 @@ import {
   ExcellenceSolution, 
   Publication, 
   DigitalBook,
-  CaseStudy
+  CaseStudy,
+  HoldingLandingConfig
 } from '../types';
 import realPartnerImg from '../assets/images/aldo_leao_portrait_real_1791572566625.jpg';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
@@ -434,6 +435,143 @@ const DEFAULT_CASE_STUDIES: CaseStudy[] = [
   }
 ];
 
+export const DEFAULT_HOLDING_LANDING: HoldingLandingConfig = {
+  heroEyebrow: 'HOLDING FAMILIAR',
+  heroTitle: 'PLANEJAMENTO',
+  heroSubtitle: 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS',
+  heroParagraph1: 'Muitas famílias somente descobrem a elevada perda patrimonial e o alto custo do processo de inventário quando já é tarde.',
+  heroParagraph2: 'Além dos tributos, honorários, despesas cartorárias, registros imobiliários e demais custos sucessórios, o inventário frequentemente fomenta conflitos familiares, disputas pelo patrimônio e divergências entre os herdeiros.',
+  heroParagraph3: 'A prática forense demonstra que, em muitos inventários, a necessidade de liquidez imediata leva os herdeiros à venda acelerada de bens, com deságio médio de 20% em relação ao respectivo valor de mercado, o que só faz aumentar a alta perda dos herdeiros.',
+  heroParagraph4: 'Além disso, o ITCMD – Imposto de Transmissão Causa Mortis e Doação terá a sua alíquota máxima de 8%, majorada para 18% (Projeto de Resolução do Senado Federal N. 57/19) ou 20% (CONFAZ) ou 30% (Governo Federal) onerando ainda mais o inventário para os herdeiros.',
+  heroParagraph5: 'O resultado prático é a elevada perda patrimonial e financeira dos herdeiros, causada pelo inventário, justamente no momento mais delicado para a família, quando ela mais necessita de tranquilidade, segurança jurídica, estabilidade, paz e organização.',
+  heroBtnViabilidade: 'AGENDAR SESSÃO DE VIABILIDADE',
+  heroBtnCustos: 'CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0',
+  showcaseTitle: 'Estruturação e Proteção do Patrimônio Familiar',
+  showcaseText: 'Blindagem preventiva de ativos, governança societária e planejamento sucessório em vida, garantindo a perpetuação do legado e evitando a perda de até 40% do patrimônio no inventário.',
+  showcaseBadge: 'Patrimônio, Empresas & Família',
+  problemsTitle: 'ALGUNS PROBLEMAS DO INVENTÁRIO',
+  problemsSubtitle: 'DIAGNÓSTICO PREVENTIVO',
+  problemsList: [
+    'Morosidade judicial do processo',
+    'Alta perda patrimonial e financeira dos herdeiros',
+    'Elevado custo do processo',
+    'Venda rápida de bens, com deságio médio 20% para quitar o inventário',
+    'Conflitos entre os herdeiros e familiares',
+    'Aumento iminente do ITCMD de 8% para até 30%',
+    'Indisponibilidade de bens até a partilha no final do inventário'
+  ],
+  strategyKicker: 'ARQUITETURA JURÍDICA ESTRATÉGICA',
+  strategyTitle: 'O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO',
+  strategyParagraph1: 'O Planejamento Patrimonial 4.0 via Holding Familiar consiste na engenharia jurídica societária (empresas) e patrimonial avançada e legal, voltada à estruturação, organização e proteção, realizada em vida e extrajudicialmente, que proporciona a perpetuação do seu legado, através do planejamento estratégico, que evita o inventário e seus prejuízos aos herdeiros.',
+  strategyParagraph2: 'A Holding Familiar possibilita centralizar e profissionalizar a gestão dos bens e empresas; planejar e executar a sucessão empresarial; reduzir os tributos; proteger o patrimônio e as empresas; planejar em vida, a perpetuação do seu legado, para as futuras gerações.',
+  strategyParagraph3: 'Cada estrutura societária e patrimonial é minuciosamente planejada e executada de forma personalizada, conforme os objetivos, as necessidades e as situações existentes (família, patrimônio, empresas, ativos, passivos e etc.).',
+  advantagesTitle: 'VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR)',
+  advantagesList: [
+    'Proteção jurídica patrimonial e empresarial',
+    'Planejamento sucessório empresarial',
+    'Planejamento patrimonial e empresarial',
+    'Expressiva economia tributária',
+    'Evita os problemas do inventário',
+    'Governança profissional',
+    'Otimização da gestão',
+    'Facilita a internacionalização patrimonial',
+    'Conformidade legal',
+    'Segurança jurídica',
+    'Gestão estratégica de ativos',
+    'Estruturação e captação de investimentos',
+    'Harmonia e paz familiar',
+    'Otimização de investimento (taxas maiores)',
+    'Pleno controle do doador (pais) das cotas sociais aos filhos',
+    'Cláusulas protetivas na doação das cotas aos filhos',
+    'Acordo de sócios',
+    'Captação de recursos para a empresa com investidores'
+  ],
+  tableKicker: 'ESTUDO COMPARATIVO',
+  tableTitle: 'CUSTOS: INVENTÁRIO X HOLDING FAMILIAR',
+  tableSubtitle: 'A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.',
+  itcmdInventario: 'R$ 75.000,00 (5%)',
+  itcmdHolding: 'R$ 60.000,00 (4%)',
+  honorariosInventario: 'R$ 120.000,00 (8%)',
+  honorariosHolding: 'R$ 70.000,00',
+  custasInventario: 'R$ 12.000,00',
+  custasHolding: 'R$ 0,00',
+  certidoesInventario: 'R$ 3.000,00',
+  certidoesHolding: 'R$ 0,00',
+  ganhoCapitalInventario: 'R$ 75.000,00',
+  ganhoCapitalHolding: 'R$ 0,00',
+  registroInventario: 'R$ 12.000,00',
+  registroHolding: 'R$ 3.000,00',
+  totalInventario: 'R$ 297.000,00',
+  totalHolding: 'R$ 133.000,00',
+  economiaValor: 'R$ 164.000,00',
+  economiaPercentual: '55,21%',
+  ctaBoxTitle: 'FAÇA O SEU PLANEJAMENTO 4.0',
+  ctaBoxText: 'Agende, hoje mesmo, o seu Diagnóstico de Viabilidade e saiba porque o PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR é a sua melhor opção para perpetuar o seu legado.',
+  ctaBoxBtnViabilidade: 'AGENDAR DIAGNÓSTICO DE VIABILIDADE',
+  ctaBoxBtnWhatsApp: 'AGENDAR PELO WHATSAPP',
+  targetTitle: 'PARA QUEM É A HOLDING FAMILIAR?',
+  targetSubtitle: 'PERFIL E ABRANGÊNCIA',
+  targetIntro: 'O PLANEJAMENTO PATRIMONIAL 4.0 foi desenvolvido para quem já tem ou pretende adquirir patrimônio, já tem ou pretende ter filhos e para:',
+  targetList: [
+    'Empresários',
+    'Proprietários de bens (ativos)',
+    'Pais',
+    'Famílias empresárias',
+    'Investidores imobiliários',
+    'Autônomos',
+    'Profissionais de atividades de risco',
+    'Agronegócio (Produtores Rurais)'
+  ],
+  drAldoKicker: 'ADVOCACIA ESTRATÉGICA DESDE 1986',
+  drAldoTitle: 'Dr. ALDO LEÃO',
+  drAldoPhotoUrl: '/img/palestra-1.jpg',
+  drAldoCaption: 'Conferência e Liderança em Planejamento Patrimonial 4.0',
+  drAldoBio1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.',
+  drAldoBio2: 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.',
+  drAldoBio3: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.',
+  drAldoBio4: 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.',
+  faqKicker: 'DÚVIDAS',
+  faqTitle: 'PERGUNTAS FREQUENTES',
+  faqs: [
+    {
+      q: 'Como ocorre o atendimento da ALDO LEÃO ADVOCACIA ESTRATÉGICA?',
+      a: 'Rompendo as fronteiras geográficas de um país continental, para levar a Excelência Jurídica Centenária a clientes de todo o território nacional, desde 2020 o nosso atendimento é realizado 100% digital, para clientes de todo o território nacional, com a mesma excelência jurídica, confidencialidade e segurança do atendimento presencial.'
+    },
+    {
+      q: 'O que é a Holding Familiar (Planejamento Patrimonial 4.0)?',
+      a: 'É uma estrutura societária e patrimonial especializada, avançada e inteligente utilizada para proteger juridicamente, organizar e bem administrar o patrimônio e o negócio familiar, planejando em vida para evitar a alta perda patrimonial e financeira dos herdeiros no inventário (em média 40%).'
+    },
+    {
+      q: 'Quem pode fazer o Planejamento Patrimonial 4.0?',
+      a: 'Em tese, qualquer pessoa física ou jurídica, que possui ou pretende adquirir patrimônio, já tem ou pretende ter filhos, já tem ou pretende casar ou ter uma união estável, Startups e etc., dependendo do resultado do Diagnóstico de Viabilidade.'
+    },
+    {
+      q: 'A Holding Familiar (Planejamento Patrimonial 4.0) elimina o inventário?',
+      a: 'Sim, a estruturação do ecossistema societário e patrimonial da Holding Familiar, feita por advogados especialistas, evita a alta perda patrimonial e financeira dos herdeiros no inventário (em média 40% do patrimônio).'
+    },
+    {
+      q: 'O Planejamento Patrimonial 4.0 é exclusividade dos ricos?',
+      a: 'Não. Qualquer pessoa que possua ou pretenda adquirir patrimônio e ter herdeiros, deve realizar, hoje e em vida, o seu Planejamento Patrimonial 4.0, dadas as vantagens exclusivas desta modelagem societária e patrimonial avançada e inteligente, que evita o aumento do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (CONFAZ) ou 30% (Governo Federal). Cada projeto é desenvolvido de forma personalizada, considerando as características e os objetivos específicos de cada cliente e família.'
+    },
+    {
+      q: 'Como saber se o Planejamento Patrimonial 4.0 é indicado para mim?',
+      a: 'Agendando, agora mesmo, o seu Diagnóstico de Viabilidade com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA para evitar o aumento da carga tributária provocado pela reforma.'
+    },
+    {
+      q: 'Há algum suporte após a entrega do ecossistema Holding Familiar?',
+      a: 'Sim. O Escritório disponibiliza a contratação do serviço de Suporte Jurídico e Administrativo Profissional para assegurar a tranquilidade e a perpetuação do legado familiar.'
+    },
+    {
+      q: 'Como ocorre o Planejamento Patrimonial 4.0 via Holding Familiar?',
+      a: 'O planejamento, a estruturação e a implantação do ecossistema Holding Familiar é feito em três fases obrigatórias e sequenciais:\n\n1. DIAGNÓSTICO DE VIABILIDADE: Coleta de informações e documentos com análise completa e confidencial da situação familiar, patrimonial, jurídica, financeira e empresarial. É o ponto de partida do Planejamento Patrimonial 4.0.\n\n2. MODELAGENS ESTRUTURAIS: A seguir, são apresentadas as três melhores opções estruturais do sistema Holding Familiar, para a escolha pelo cliente (família) da modelagem que melhor atende as suas necessidades e objetivos.\n\n3. IMPLANTAÇÃO DA MODELAGEM: É a última fase do Planejamento Patrimonial 4.0, que culmina com a entrega do ecossistema societário e patrimonial (Holding Familiar).\n\nSUPORTE JURÍDICO-ADMINISTRATIVO: Opcionalmente, após a entrega do sistema Holding Familiar, disponibilizamos a contratação da solução de excelência relativa ao suporte jurídico-administrativo.'
+    }
+  ],
+  doubtTitle: 'ALGUMA DÚVIDA?',
+  doubtText: 'Se tiver dúvida, entre em contato com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA.',
+  doubtBtnText: 'FALAR COM O ESPECIALISTA',
+  footerCopyright: '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'
+};
+
 const DEFAULT_CONFIG: SiteConfig = {
   navbar: {
     logoTitle: 'Aldo Leão',
@@ -522,6 +660,65 @@ const DEFAULT_CONFIG: SiteConfig = {
       'Direito Empresarial e Societário',
       'Direito Civil, Família e Sucessões',
       'Relações de Consumo e Direito'
+    ],
+    differentials: [
+      '40 + Anos de Advocacia Estratégica num legado jurídico centenário',
+      'Autor de Livros e Artigos Jurídicos Publicados',
+      'Referência nacional em Planejamento Patrimonial via Holding Familiar',
+      'Atendimento e processos 100% digitais no Brasil'
+    ],
+    curriculumTrajectoryP1: 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.',
+    curriculumTrajectoryP2: 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.',
+    curriculumTrajectoryP3: 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.',
+    curriculumTrajectoryP4: 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.',
+    curriculumTrajectoryP5: 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.',
+    curriculumLeadershipItems: [
+      '40 + Anos de Advocacia Estratégica (1986)',
+      'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+      'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+      'Proteção Jurídica Patrimonial',
+      'Direito Imobiliário & Ativos',
+      'Direito Empresarial & Sucessão Corporativa',
+      'Direito Civil',
+      'Relações de Consumo'
+    ],
+    curriculumTrajectoryItems: [
+      'Advogado Estratégico',
+      'Gestor Jurídico Patrimonial',
+      'Gestor Jurídico Empresarial',
+      'Palestrante e Coach Jurídico',
+      'Procurador Municipal (20 Municípios no RS)',
+      'Procurador do Banco do Brasil S/A',
+      'Membro da Associação Nacional dos Gestores Ambientais',
+      'Membro do Instituto dos Advogados do RS',
+      'Presidente da Associação Brasileira do Meio Ambiente',
+      'Assessor Jurídico da Assembleia Legislativa do RS',
+      'Conselheiro do DMAE (Águas e Esgotos de POA)',
+      'Diretor do Depto. de Direito Empresarial do IARGS',
+      'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+      'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+    ],
+    curriculumLiteratureItems: [
+      'Autor de mais de uma centena de Artigos Jurídicos Publicados',
+      'Autor de Livros Digitais Publicados:'
+    ],
+    curriculumBooksList: [
+      'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+      'Holding Familiar e Imobiliária',
+      'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+      'Os Sete Cuidados na Compra do Imóvel',
+      'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+      'Mercado de Carbono: Construindo um Futuro Sustentável',
+      'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+      'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+    ],
+    curriculumDocenciaItems: [
+      'Prof. da Faculdade de Direito da UNISINOS',
+      'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+      'Prof. da Escola Superior de Advocacia da OABRS',
+      'Prof. do Centro de Estudos do Trabalho – CETRA',
+      'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+      'Prof. da Academia Leão Ferreira'
     ],
     differences: [
       'Terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.',
@@ -737,7 +934,8 @@ const DEFAULT_CONFIG: SiteConfig = {
     buttonTextColor: '#050B14',
     whatsappNumber: '',
     whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
-  }
+  },
+  holdingLanding: DEFAULT_HOLDING_LANDING
 };
 
 const INITIAL_LEADS: ConsultationRequest[] = [
@@ -802,7 +1000,7 @@ interface SiteContextType {
   resetSiteConfigToDefault: () => void;
 }
 
-const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v21';
+const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v22';
 
 // Purga de chaves antigas de cache para garantir que todos os navegadores carreguem a versão mais recente
 try {
@@ -823,7 +1021,8 @@ try {
     'aldoleao_site_config_v13',
     'aldoleao_site_config_v14',
     'aldoleao_site_config_v15',
-    'aldoleao_site_config_v20'
+    'aldoleao_site_config_v20',
+    'aldoleao_site_config_v21'
   ];
   legacyKeys.forEach(k => localStorage.removeItem(k));
 } catch (e) {
@@ -923,6 +1122,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           urgentHotline: { ...DEFAULT_CONFIG.urgentHotline, ...(parsed.urgentHotline || {}) },
           academiaLeao: { ...DEFAULT_CONFIG.academiaLeao, ...(parsed.academiaLeao || {}) },
           articleSignature: { ...DEFAULT_CONFIG.articleSignature, ...(parsed.articleSignature || {}) },
+          holdingLanding: { ...DEFAULT_HOLDING_LANDING, ...(parsed.holdingLanding || {}) },
         };
       }
     } catch (e) {

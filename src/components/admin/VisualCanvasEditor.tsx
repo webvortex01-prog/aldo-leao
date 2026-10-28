@@ -497,6 +497,25 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
           {/* Conteúdo com scroll dos campos da seção ativa */}
           <div className="flex-grow overflow-y-auto p-4 sm:p-6 space-y-6 text-left">
 
+            {/* Atalho para o Modo Formulário de Abas Completo */}
+            <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 flex items-center justify-between gap-3 shadow-md">
+              <div className="min-w-0">
+                <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">
+                  Prefere ver todos os campos e abas?
+                </span>
+                <span className="text-[10px] text-slate-400 block line-clamp-1">
+                  Abra o painel com pesquisa global de A a Z.
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={onSwitchToFormMode}
+                className="px-3 py-1.5 rounded-lg bg-[#0E1F3D] hover:bg-[#D4AF37] text-[#F6E27A] hover:text-black border border-[#D4AF37]/50 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap shadow shrink-0"
+              >
+                Abrir Abas →
+              </button>
+            </div>
+
             {/* SEÇÃO 1: NAVBAR & IDENTIDADE */}
             {activeSection === 'navbar' && (
               <div className="space-y-4">
@@ -1074,70 +1093,234 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
 
             {/* SEÇÃO 9: HOLDING FAMILIAR */}
             {activeSection === 'holding' && (
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                    Kicker
-                  </label>
-                  <input
-                    type="text"
-                    value={siteConfig.holdingFamiliar?.sectionKicker || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), sectionKicker: e.target.value }
-                    })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-sm"
-                  />
+              <div className="space-y-5">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-800">
+                  <span className="text-xs font-bold text-[#E5C158] uppercase">
+                    {activePage === 'holding-landing' ? 'Landing Page Holding 4.0 (/1208/)' : 'Seção Holding na Home'}
+                  </span>
+                  <button
+                    onClick={() => setActivePage(activePage === 'holding-landing' ? 'home' : 'holding-landing')}
+                    className="text-[11px] text-[#F6E27A] hover:underline cursor-pointer"
+                  >
+                    Alternar para {activePage === 'holding-landing' ? 'Home' : 'Landing Page'}
+                  </button>
                 </div>
 
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                    Título
-                  </label>
-                  <input
-                    type="text"
-                    value={siteConfig.holdingFamiliar?.sectionTitle || 'HOLDING'}
-                    onChange={(e) => updateSiteConfig({
-                      holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), sectionTitle: e.target.value }
-                    })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-sm"
-                  />
-                </div>
+                {activePage === 'holding-landing' ? (
+                  <div className="space-y-4">
+                    <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">1. Topo & Hero da Landing Page</span>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Eyebrow Dourado</label>
+                      <input
+                        type="text"
+                        value={siteConfig.holdingLanding?.heroEyebrow || 'HOLDING FAMILIAR'}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroEyebrow: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-[#D4AF37]/40 text-xs text-[#F6E27A]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Título do Hero</label>
+                      <input
+                        type="text"
+                        value={siteConfig.holdingLanding?.heroTitle || 'PLANEJAMENTO'}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroTitle: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo do Hero</label>
+                      <input
+                        type="text"
+                        value={siteConfig.holdingLanding?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS'}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroSubtitle: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-[#E5C158]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
+                      <textarea
+                        rows={2}
+                        value={siteConfig.holdingLanding?.heroParagraph1 || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph1: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
+                      <textarea
+                        rows={2}
+                        value={siteConfig.holdingLanding?.heroParagraph2 || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph2: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
+                      <textarea
+                        rows={2}
+                        value={siteConfig.holdingLanding?.heroParagraph3 || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph3: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4</label>
+                      <textarea
+                        rows={2}
+                        value={siteConfig.holdingLanding?.heroParagraph4 || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph4: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5 (Destaque Branco)</label>
+                      <textarea
+                        rows={2}
+                        value={siteConfig.holdingLanding?.heroParagraph5 || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph5: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                    Imagem Oficial Aprovada
-                  </label>
-                  <div className="flex items-center gap-3">
-                    <img 
-                      src={siteConfig.holdingFamiliar?.cardImageUrl || '/img/holding-familiar-1.jpg'} 
-                      alt="Holding" 
-                      className="w-16 h-12 object-cover rounded-lg border border-[#D4AF37]/50" 
-                    />
-                    <button
-                      type="button"
-                      onClick={() => handleImageUpload((url) => updateSiteConfig({
-                        holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), cardImageUrl: url }
-                      }))}
-                      className="px-3 py-1.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/50 text-xs text-[#F6E27A] hover:bg-[#D4AF37] hover:text-black transition-colors"
-                    >
-                      Trocar Imagem
-                    </button>
+                    <div className="pt-2 border-t border-slate-800">
+                      <span className="text-[11px] font-bold text-[#F6E27A] uppercase block mb-2">2. Botões & Seções da Landing Page</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">Botão Agendar Viabilidade</label>
+                          <input
+                            type="text"
+                            value={siteConfig.holdingLanding?.heroBtnViabilidade || 'AGENDAR SESSÃO DE VIABILIDADE'}
+                            onChange={(e) => updateSiteConfig({
+                              holdingLanding: { ...(siteConfig.holdingLanding || {}), heroBtnViabilidade: e.target.value }
+                            })}
+                            className="w-full p-1.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">Botão Tabela de Custos</label>
+                          <input
+                            type="text"
+                            value={siteConfig.holdingLanding?.heroBtnCustos || 'CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0'}
+                            onChange={(e) => updateSiteConfig({
+                              holdingLanding: { ...(siteConfig.holdingLanding || {}), heroBtnCustos: e.target.value }
+                            })}
+                            className="w-full p-1.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-2 border-t border-slate-800">
+                      <span className="text-[11px] font-bold text-[#F6E27A] uppercase block mb-1">3. Tabela Comparativa de Custos</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">Economia em R$</label>
+                          <input
+                            type="text"
+                            value={siteConfig.holdingLanding?.economiaValor || 'R$ 380.000,00'}
+                            onChange={(e) => updateSiteConfig({
+                              holdingLanding: { ...(siteConfig.holdingLanding || {}), economiaValor: e.target.value }
+                            })}
+                            className="w-full p-1.5 rounded bg-[#050B14] border border-emerald-500/50 text-xs text-emerald-300 font-bold"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] text-slate-400 mb-0.5">Economia Percentual (%)</label>
+                          <input
+                            type="text"
+                            value={siteConfig.holdingLanding?.economiaPercentual || '82,6%'}
+                            onChange={(e) => updateSiteConfig({
+                              holdingLanding: { ...(siteConfig.holdingLanding || {}), economiaPercentual: e.target.value }
+                            })}
+                            className="w-full p-1.5 rounded bg-[#050B14] border border-emerald-500/50 text-xs text-emerald-300 font-bold"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                        Kicker
+                      </label>
+                      <input
+                        type="text"
+                        value={siteConfig.holdingFamiliar?.sectionKicker || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), sectionKicker: e.target.value }
+                        })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-sm"
+                      />
+                    </div>
 
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                    Parágrafo 1
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={siteConfig.holdingFamiliar?.paragraph1 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph1: e.target.value }
-                    })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-xs leading-relaxed"
-                  />
-                </div>
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                        Título
+                      </label>
+                      <input
+                        type="text"
+                        value={siteConfig.holdingFamiliar?.sectionTitle || 'HOLDING'}
+                        onChange={(e) => updateSiteConfig({
+                          holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), sectionTitle: e.target.value }
+                        })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                        Imagem Oficial Aprovada
+                      </label>
+                      <div className="flex items-center gap-3">
+                        <img 
+                          src={siteConfig.holdingFamiliar?.cardImageUrl || '/img/holding-familiar-1.jpg'} 
+                          alt="Holding" 
+                          className="w-16 h-12 object-cover rounded-lg border border-[#D4AF37]/50" 
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleImageUpload((url) => updateSiteConfig({
+                            holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), cardImageUrl: url }
+                          }))}
+                          className="px-3 py-1.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37]/50 text-xs text-[#F6E27A] hover:bg-[#D4AF37] hover:text-black transition-colors"
+                        >
+                          Trocar Imagem
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                        Parágrafo 1
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={siteConfig.holdingFamiliar?.paragraph1 || ''}
+                        onChange={(e) => updateSiteConfig({
+                          holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph1: e.target.value }
+                        })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-xs leading-relaxed"
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

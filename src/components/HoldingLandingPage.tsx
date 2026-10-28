@@ -31,6 +31,9 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
 }) => {
   const { siteConfig } = useSite();
   const { contact } = siteConfig;
+  const hl = siteConfig.holdingLanding;
+  const f = siteConfig.founder;
+
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCurriculoModalOpen, setIsCurriculoModalOpen] = useState(false);
@@ -86,8 +89,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
     }, 400);
   };
 
-  // As 8 Perguntas Frequentes Exatas do Projeto (Página 16 do documento)
-  const faqs = [
+  // Perguntas Frequentes do CMS ou Padrão Oficial
+  const faqs = (hl?.faqs && hl.faqs.length > 0) ? hl.faqs : [
     {
       q: 'Como ocorre o atendimento da ALDO LEÃO ADVOCACIA ESTRATÉGICA?',
       a: 'Rompendo as fronteiras geográficas de um país continental, para levar a Excelência Jurídica Centenária a clientes de todo o território nacional, desde 2020 o nosso atendimento é realizado 100% digital, para clientes de todo o território nacional, com a mesma excelência jurídica, confidencialidade e segurança do atendimento presencial.'
@@ -122,8 +125,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
     }
   ];
 
-  // As 18 Vantagens Exclusivas Exatas (Página 21 do documento)
-  const vantagensExclusivas = [
+  // As 18 Vantagens Exclusivas do CMS ou Padrão Oficial
+  const vantagensExclusivas = (hl?.advantagesList && hl.advantagesList.length > 0) ? hl.advantagesList : [
     'Proteção jurídica patrimonial e empresarial',
     'Planejamento sucessório empresarial',
     'Planejamento patrimonial e empresarial',
@@ -144,8 +147,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
     'Captação de recursos para a empresa com investidores'
   ];
 
-  // Alguns Problemas do Inventário (Página 20/21 do documento)
-  const problemasInventario = [
+  // Alguns Problemas do Inventário do CMS ou Padrão Oficial
+  const problemasInventario = (hl?.problemsList && hl.problemsList.length > 0) ? hl.problemsList : [
     'Morosidade judicial do processo',
     'Alta perda patrimonial e financeira dos herdeiros',
     'Elevado custo do processo',
@@ -155,8 +158,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
     'Indisponibilidade de bens até a partilha no final do inventário'
   ];
 
-  // Público-alvo (Página 22 do documento)
-  const publicoAlvo = [
+  // Público-alvo do CMS ou Padrão Oficial
+  const publicoAlvo = (hl?.targetList && hl.targetList.length > 0) ? hl.targetList : [
     'Empresários',
     'Proprietários de bens (ativos)',
     'Pais',
@@ -219,35 +222,35 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           <div className="max-w-4xl mx-auto">
             {/* Texto em dourado centralizado antes do título: HOLDING FAMILIAR (Item i) */}
             <div className="text-xs sm:text-sm uppercase tracking-[0.28em] text-[#E5C158] font-bold mb-3">
-              HOLDING FAMILIAR
+              {hl?.heroEyebrow || 'HOLDING FAMILIAR'}
             </div>
 
             {/* Título: PLANEJAMENTO PATRIMONIAL 4.0 com PATRIMONIAL em dourado (Item i) */}
             <h1 className="font-cinzel text-3xl sm:text-5xl md:text-5.5xl font-black text-white leading-[1.14] mb-4 tracking-tight [text-wrap:balance]">
-              PLANEJAMENTO <span className="gold-text-gradient">PATRIMONIAL</span> 4.0
+              {hl?.heroTitle || 'PLANEJAMENTO'} <span className="gold-text-gradient">PATRIMONIAL</span> 4.0
             </h1>
 
             {/* Subtítulo em dourado: O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS (Item i) */}
             <h2 className="font-cinzel text-base sm:text-xl md:text-2xl font-bold text-[#F6E27A] uppercase tracking-wide mb-6">
-              O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS
+              {hl?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS'}
             </h2>
 
             {/* Texto do projeto conforme Item i do dia 15/10/26 */}
             <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-sans-body max-w-3xl mx-auto font-light mb-8 text-justify sm:text-center">
               <p>
-                Muitas famílias somente descobrem a elevada perda patrimonial e o alto custo do processo de inventário quando já é tarde.
+                {hl?.heroParagraph1 || 'Muitas famílias somente descobrem a elevada perda patrimonial e o alto custo do processo de inventário quando já é tarde.'}
               </p>
               <p>
-                Além dos tributos, honorários, despesas cartorárias, registros imobiliários e demais custos sucessórios, o inventário frequentemente fomenta conflitos familiares, disputas pelo patrimônio e divergências entre os herdeiros.
+                {hl?.heroParagraph2 || 'Além dos tributos, honorários, despesas cartorárias, registros imobiliários e demais custos sucessórios, o inventário frequentemente fomenta conflitos familiares, disputas pelo patrimônio e divergências entre os herdeiros.'}
               </p>
               <p>
-                A prática forense demonstra que, em muitos inventários, a necessidade de liquidez imediata leva os herdeiros à venda acelerada de bens, com deságio médio de 20% em relação ao respectivo valor de mercado, o que só faz aumentar a alta perda dos herdeiros.
+                {hl?.heroParagraph3 || 'A prática forense demonstra que, em muitos inventários, a necessidade de liquidez imediata leva os herdeiros à venda acelerada de bens, com deságio médio de 20% em relação ao respectivo valor de mercado, o que só faz aumentar a alta perda dos herdeiros.'}
               </p>
               <p>
-                Além disso, o ITCMD – Imposto de Transmissão Causa Mortis e Doação terá a sua alíquota máxima de 8%, majorada para 18% (Projeto de Resolução do Senado Federal N. 57/19) ou 20% (CONFAZ) ou 30% (Governo Federal) onerando ainda mais o inventário para os herdeiros.
+                {hl?.heroParagraph4 || 'Além disso, o ITCMD – Imposto de Transmissão Causa Mortis e Doação terá a sua alíquota máxima de 8%, majorada para 18% (Projeto de Resolução do Senado Federal N. 57/19) ou 20% (CONFAZ) ou 30% (Governo Federal) onerando ainda mais o inventário para os herdeiros.'}
               </p>
               <p className="font-medium text-white">
-                O resultado prático é a elevada perda patrimonial e financeira dos herdeiros, causada pelo inventário, justamente no momento mais delicado para a família, quando ela mais necessita de tranquilidade, segurança jurídica, estabilidade, paz e organização.
+                {hl?.heroParagraph5 || 'O resultado prático é a elevada perda patrimonial e financeira dos herdeiros, causada pelo inventário, justamente no momento mais delicado para a família, quando ela mais necessita de tranquilidade, segurança jurídica, estabilidade, paz e organização.'}
               </p>
             </div>
 
@@ -257,7 +260,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 onClick={handleOpenViabilidadeModal}
                 className="btn-gold-luxury group w-full sm:w-auto px-8 py-4 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-[0_0_25px_rgba(212,175,55,0.4)] flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>AGENDAR SESSÃO DE VIABILIDADE</span>
+                <span>{hl?.heroBtnViabilidade || 'AGENDAR SESSÃO DE VIABILIDADE'}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </button>
 
@@ -265,7 +268,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 href="#tabela-comparativa"
                 className="btn-secondary-luxury w-full sm:w-auto px-6 py-4 rounded-xl text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-200 border border-[#D4AF37]/40 bg-[#0A1730] flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0</span>
+                <span>{hl?.heroBtnCustos || 'CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0'}</span>
               </a>
             </div>
 
@@ -281,16 +284,16 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-85" />
                   <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full shadow-md animate-float-gentle">
                     <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
-                      Patrimônio, Empresas & Família
+                      {hl?.showcaseBadge || 'Patrimônio, Empresas & Família'}
                     </span>
                   </div>
                 </div>
                 <div className="p-5 sm:p-6 border-t border-[#D4AF37]/25 bg-[#071122]">
                   <h3 className="font-cinzel text-sm sm:text-base md:text-lg font-bold text-white mb-1.5 uppercase">
-                    Estruturação e Proteção do Patrimônio Familiar
+                    {hl?.showcaseTitle || 'Estruturação e Proteção do Patrimônio Familiar'}
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                    Blindagem preventiva de ativos, governança societária e planejamento sucessório em vida, garantindo a perpetuação do legado e evitando a perda de até 40% do patrimônio no inventário.
+                    {hl?.showcaseText || 'Blindagem preventiva de ativos, governança societária e planejamento sucessório em vida, garantindo a perpetuação do legado e evitando a perda de até 40% do patrimônio no inventário.'}
                   </p>
                 </div>
               </div>
@@ -298,16 +301,15 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           </div>
         </div>
       </section>
-
       {/* 3. Seção ALGUNS PROBLEMAS DO INVENTÁRIO (Item i do dia 15/10/26) */}
       <section className="py-16 bg-[#060D1A] border-b border-[#D4AF37]/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-              DIAGNÓSTICO PREVENTIVO
+              {hl?.problemsSubtitle || 'DIAGNÓSTICO PREVENTIVO'}
             </span>
             <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              ALGUNS PROBLEMAS DO INVENTÁRIO
+              {hl?.problemsTitle || 'ALGUNS PROBLEMAS DO INVENTÁRIO'}
             </h2>
           </div>
 
@@ -334,28 +336,28 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto mb-14">
             <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-              ARQUITETURA JURÍDICA ESTRATÉGICA
+              {hl?.strategyKicker || 'ARQUITETURA JURÍDICA ESTRATÉGICA'}
             </span>
             <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight mb-5 leading-snug">
-              O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO
+              {hl?.strategyTitle || 'O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO'}
             </h2>
             <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 font-sans-body leading-relaxed text-justify sm:text-center font-light">
               <p>
-                O Planejamento Patrimonial 4.0 via Holding Familiar consiste na engenharia jurídica societária (empresas) e patrimonial avançada e legal, voltada à estruturação, organização e proteção, realizada em vida e extrajudicialmente, que proporciona a perpetuação do seu legado, através do planejamento estratégico, que evita o inventário e seus prejuízos aos herdeiros.
+                {hl?.strategyParagraph1 || 'O Planejamento Patrimonial 4.0 via Holding Familiar consiste na engenharia jurídica societária (empresas) e patrimonial avançada e legal, voltada à estruturação, organização e proteção, realizada em vida e extrajudicialmente, que proporciona a perpetuação do seu legado, através do planejamento estratégico, que evita o inventário e seus prejuízos aos herdeiros.'}
               </p>
               <p>
-                A Holding Familiar possibilita centralizar e profissionalizar a gestão dos bens e empresas; planejar e executar a sucessão empresarial; reduzir os tributos; proteger o patrimônio e as empresas; planejar em vida, a perpetuação do seu legado, para as futuras gerações.
+                {hl?.strategyParagraph2 || 'A Holding Familiar possibilita centralizar e profissionalizar a gestão dos bens e empresas; planejar e executar a sucessão empresarial; reduzir os tributos; proteger o patrimônio e as empresas; planejar em vida, a perpetuação do seu legado, para as futuras gerações.'}
               </p>
               <p className="font-medium text-white">
-                Cada estrutura societária e patrimonial é minuciosamente planejada e executada de forma personalizada, conforme os objetivos, as necessidades e as situações existentes (família, patrimônio, empresas, ativos, passivos e etc.).
+                {hl?.strategyParagraph3 || 'Cada estrutura societária e patrimonial é minuciosamente planejada e executada de forma personalizada, conforme os objetivos, as necessidades e as situações existentes (família, patrimônio, empresas, ativos, passivos e etc.).'}
               </p>
             </div>
           </div>
 
-          {/* VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR) - Os 18 Cards Exatos (Item i) */}
+          {/* VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR) */}
           <div className="mb-10 text-center">
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#F6E27A] uppercase tracking-wider mb-8">
-              VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR)
+              {hl?.advantagesTitle || 'VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR)'}
             </h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
@@ -382,16 +384,14 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-6 sm:p-10 shadow-2xl">
             <div className="text-center max-w-3xl mx-auto mb-10">
-              {/* Frase dourada antes do título em branco (Item i) */}
               <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-                ESTUDO COMPARATIVO
+                {hl?.tableKicker || 'ESTUDO COMPARATIVO'}
               </span>
-              {/* Título em branco (Item i) */}
               <h2 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">
-                CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
+                {hl?.tableTitle || 'CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 mt-2 font-sans-body">
-                A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.
+                {hl?.tableSubtitle || 'A título de exemplo, consideramos um patrimônio adquirido por R$ 1.000.000,00, com valor de mercado atual de R$ 1.500.000,00, tem um ganho de capital de R$ 500.000,00.'}
               </p>
             </div>
 
@@ -412,64 +412,64 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   <tr>
                     <td className="py-3.5 px-4 text-slate-200">ITCD / ITCMD</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                      R$ 75.000,00 (5%)
+                      {hl?.itcmdInventario || 'R$ 75.000,00 (5%)'}
                     </td>
                     <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
-                      R$ 60.000,00 (4%)
+                      {hl?.itcmdHolding || 'R$ 60.000,00 (4%)'}
                     </td>
                   </tr>
                   <tr>
                     <td className="py-3.5 px-4 text-slate-200">Honorários Advocatícios</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                      R$ 120.000,00 (8%)
+                      {hl?.honorariosInventario || 'R$ 120.000,00 (8%)'}
                     </td>
                     <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
-                      R$ 70.000,00
+                      {hl?.honorariosHolding || 'R$ 70.000,00'}
                     </td>
                   </tr>
                   <tr>
                     <td className="py-3.5 px-4 text-slate-200">Custas de Cartório</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                      R$ 12.000,00
+                      {hl?.custasInventario || 'R$ 12.000,00'}
                     </td>
                     <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
-                      R$ 0,00
+                      {hl?.custasHolding || 'R$ 0,00'}
                     </td>
                   </tr>
                   <tr>
                     <td className="py-3.5 px-4 text-slate-200">Certidões</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                      R$ 3.000,00
+                      {hl?.certidoesInventario || 'R$ 3.000,00'}
                     </td>
                     <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
-                      R$ 0,00
+                      {hl?.certidoesHolding || 'R$ 0,00'}
                     </td>
                   </tr>
                   <tr>
                     <td className="py-3.5 px-4 text-slate-200">I.R. Ganho de Capital</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                      R$ 75.000,00
+                      {hl?.ganhoCapitalInventario || 'R$ 75.000,00'}
                     </td>
                     <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-[#25D366] bg-[#D4AF37]/10">
-                      R$ 0,00
+                      {hl?.ganhoCapitalHolding || 'R$ 0,00'}
                     </td>
                   </tr>
                   <tr>
                     <td className="py-3.5 px-4 text-slate-200">Registro de Imóveis</td>
                     <td className="py-3.5 px-4 text-center tabular-nums text-slate-300 bg-red-950/20 border-x border-[#D4AF37]/15">
-                      R$ 12.000,00
+                      {hl?.registroInventario || 'R$ 12.000,00'}
                     </td>
                     <td className="py-3.5 px-4 text-center tabular-nums font-semibold text-white bg-[#D4AF37]/10">
-                      R$ 3.000,00
+                      {hl?.registroHolding || 'R$ 3.000,00'}
                     </td>
                   </tr>
                   <tr className="border-t-2 border-[#D4AF37]/50 font-bold text-sm bg-[#0E1F3D]/80">
                     <td className="py-4 px-4 text-white uppercase font-cinzel text-base">Custo Total</td>
                     <td className="py-4 px-4 text-center tabular-nums text-red-400 bg-red-950/40 border-x border-[#D4AF37]/20 text-base">
-                      R$ 297.000,00
+                      {hl?.totalInventario || 'R$ 297.000,00'}
                     </td>
                     <td className="py-4 px-4 text-center tabular-nums text-[#F6E27A] bg-[#D4AF37]/25 text-lg">
-                      R$ 133.000,00
+                      {hl?.totalHolding || 'R$ 133.000,00'}
                     </td>
                   </tr>
                 </tbody>
@@ -482,10 +482,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 ECONOMIA COM A HOLDING FAMILIAR
               </p>
               <p className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-black text-[#25D366] tabular-nums">
-                R$ 164.000,00
+                {hl?.economiaValor || 'R$ 164.000,00'}
               </p>
               <p className="text-xs sm:text-base text-slate-200 mt-2 font-semibold uppercase tracking-wider">
-                correspondente a 55,21%.
+                correspondente a {hl?.economiaPercentual || '55,21%'}.
               </p>
             </div>
           </div>
@@ -496,20 +496,18 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       <section className="py-16 bg-[#050B14] border-b border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="p-8 sm:p-12 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border-2 border-[#D4AF37]/50 shadow-2xl text-center">
-            {/* Título: FAÇA O SEU PLANEJAMENTO 4.0 em vez de "Agende a sua proteção patrimonial hoje mesmo" (Item i) */}
             <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-3">
-              FAÇA O SEU PLANEJAMENTO 4.0
+              {hl?.ctaBoxTitle || 'FAÇA O SEU PLANEJAMENTO 4.0'}
             </h3>
-            {/* Texto exato do Item i */}
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 font-light">
-              Agende, hoje mesmo, o seu Diagnóstico de Viabilidade e saiba porque o PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR é a sua melhor opção para perpetuar o seu legado.
+              {hl?.ctaBoxText || 'Agende, hoje mesmo, o seu Diagnóstico de Viabilidade e saiba porque o PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR é a sua melhor opção para perpetuar o seu legado.'}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={handleOpenViabilidadeModal}
                 className="btn-gold-luxury group w-full sm:w-auto px-8 py-3.5 rounded-lg text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] flex items-center justify-center gap-2 cursor-pointer shadow-lg"
               >
-                <span>AGENDAR DIAGNÓSTICO DE VIABILIDADE</span>
+                <span>{hl?.ctaBoxBtnViabilidade || 'AGENDAR DIAGNÓSTICO DE VIABILIDADE'}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
               <button
@@ -517,7 +515,7 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 className="btn-secondary-luxury group w-full sm:w-auto px-8 py-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-black font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(37,211,102,0.4)] flex items-center justify-center gap-2 cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-                <span>AGENDAR PELO WHATSAPP</span>
+                <span>{hl?.ctaBoxBtnWhatsApp || 'AGENDAR PELO WHATSAPP'}</span>
               </button>
             </div>
           </div>
@@ -528,13 +526,13 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       <section className="py-16 bg-[#060D1A] border-b border-[#D4AF37]/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-            PERFIL E ABRANGÊNCIA
+            {hl?.targetSubtitle || 'PERFIL E ABRANGÊNCIA'}
           </span>
           <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-4">
-            PARA QUEM É A HOLDING FAMILIAR?
+            {hl?.targetTitle || 'PARA QUEM É A HOLDING FAMILIAR?'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 font-light">
-            O PLANEJAMENTO PATRIMONIAL 4.0 foi desenvolvido para quem já tem ou pretende adquirir patrimônio, já tem ou pretende ter filhos e para:
+            {hl?.targetIntro || 'O PLANEJAMENTO PATRIMONIAL 4.0 foi desenvolvido para quem já tem ou pretende adquirir patrimônio, já tem ou pretende ter filhos e para:'}
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
@@ -552,40 +550,36 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
         </div>
       </section>
 
-      {/* 8. Seção: HEAD JURÍDICO (Item i) */}
+      {/* 8. Seção: HEAD JURÍDICO / Dr. ALDO LEÃO (Item i) */}
       <section className="py-20 bg-[#050B14] border-b border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Frase inicial em dourado: ADVOCACIA ESTRATÉGICA DESDE 1986 (Itens 14 e 15) */}
           <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-            ADVOCACIA ESTRATÉGICA DESDE 1986
+            {hl?.drAldoKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
           </span>
-          {/* Título: Dr. ALDO LEÃO (substituindo HEAD JURÍDICO conforme Itens 14 e 15) */}
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             <span className="text-white">Dr. ALDO </span>
             <span className="gold-text-gradient">LEÃO</span>
           </h2>
 
-          {/* Texto exato da página Head Jurídico conforme Item i */}
           <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 font-sans-body leading-relaxed text-justify sm:text-center font-light mb-8 max-w-3xl mx-auto">
             <p>
-              Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.
+              {hl?.drAldoBio1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
             </p>
             <p>
-              A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.
+              {hl?.drAldoBio2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.'}
             </p>
             <p>
-              Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.
+              {hl?.drAldoBio3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.'}
             </p>
             <p>
-              O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.
+              {hl?.drAldoBio4 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.'}
             </p>
           </div>
 
-          {/* Foto de palestra do Dr. Aldo Leão (Item 2 do dia 23/10/26: foto exclusiva sem repetir com o site) */}
           <div className="max-w-md mx-auto mb-8 rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#070F1E] group">
             <div className="aspect-[16/10] sm:aspect-[4/3] w-full overflow-hidden relative">
               <img
-                src="/img/palestra-1.jpg"
+                src={hl?.drAldoPhotoUrl || '/img/palestra-1.jpg'}
                 alt="Dr. Aldo Leão em Palestra sobre Planejamento Patrimonial 4.0"
                 className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                 onError={(e) => {
@@ -599,12 +593,11 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 ALDO LEÃO · DESDE 1986 ADVOCACIA ESTRATÉGICA
               </p>
               <p className="text-[10px] text-slate-300 font-light mt-0.5">
-                Conferência e Liderança em Planejamento Patrimonial 4.0
+                {hl?.drAldoCaption || 'Conferência e Liderança em Planejamento Patrimonial 4.0'}
               </p>
             </div>
           </div>
 
-          {/* Assinatura do Dr. Aldo Leão centralizada e maior com animação iluminada (Item i e Item 6) */}
           <div className="flex justify-center mb-8">
             <img
               src="/img/assinatura-gold.png"
@@ -616,7 +609,6 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             />
           </div>
 
-          {/* Botão azul-marinho com texto dourado SAIBA MAIS e Botão dourado AGENDAR DIAGNÓSTICO (Item 2 do dia 23/10/26) */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setIsCurriculoModalOpen(true)}
@@ -640,17 +632,14 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       <section className="py-20 bg-[#060D1A] border-b border-[#D4AF37]/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            {/* Primeira frase em dourado: DÚVIDAS (Item i) */}
             <span className="text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold block mb-2">
-              DÚVIDAS
+              {hl?.faqKicker || 'DÚVIDAS'}
             </span>
-            {/* Título em branco: PERGUNTAS FREQUENTES (Item i) */}
             <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              PERGUNTAS FREQUENTES
+              {hl?.faqTitle || 'PERGUNTAS FREQUENTES'}
             </h2>
           </div>
 
-          {/* Sanfona interativa com as 8 perguntas completas */}
           <div className="space-y-4 mb-14">
             {faqs.map((faq, index) => {
               const isOpen = openFaq === index;
@@ -682,36 +671,32 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             })}
           </div>
 
-          {/* 10. Box final: AINDA TEM ALGUMA DÚVIDA? (Item i) */}
           {/* 10. Box final: ALGUMA DÚVIDA? (Item IV) */}
           <div className="p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border-2 border-[#D4AF37]/50 shadow-2xl text-center">
-            {/* ALGUMA DÚVIDA? em dourado (Item IV) */}
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#F6E27A] mb-2 uppercase">
-              ALGUMA DÚVIDA?
+              {hl?.doubtTitle || 'ALGUMA DÚVIDA?'}
             </h3>
-            {/* Texto em branco: Se tiver dúvida, entre em contato... (Item i e IV) */}
             <p className="text-xs sm:text-sm text-white mb-6 font-light max-w-xl mx-auto">
-              Se tiver dúvida, entre em contato com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA.
+              {hl?.doubtText || 'Se tiver dúvida, entre em contato com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
             </p>
             <div className="flex items-center justify-center">
-              {/* Botão dourado: FALAR COM O ESPECIALISTA (Item IV: único botão no card) */}
               <button
                 onClick={() => handleDirectWhatsApp('Olá, gostaria de falar com um especialista sobre o Planejamento Patrimonial 4.0.')}
                 className="btn-gold-luxury group w-full sm:w-auto px-8 py-3.5 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] shadow-lg cursor-pointer flex items-center justify-center gap-2"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>FALAR COM O ESPECIALISTA</span>
+                <span>{hl?.doubtBtnText || 'FALAR COM O ESPECIALISTA'}</span>
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 11. Rodapé exclusivo da Landing Page conforme Item i: só fica o texto de direitos autorais */}
+      {/* 11. Rodapé exclusivo da Landing Page conforme Item i */}
       <footer className="bg-[#040810] border-t border-[#D4AF37]/20 py-8 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4">
           <p className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
-            © ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS
+            {hl?.footerCopyright || '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'}
           </p>
           <div className="pt-3">
             <button
@@ -875,19 +860,19 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 </h4>
                 <div className="space-y-3 text-slate-200 font-light">
                   <p>
-                    A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.
+                    {f?.curriculumTrajectoryP1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'}
                   </p>
                   <p>
-                    Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.
+                    {f?.curriculumTrajectoryP2 || 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'}
                   </p>
                   <p>
-                    Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.
+                    {f?.curriculumTrajectoryP3 || 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'}
                   </p>
                   <p>
-                    A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.
+                    {f?.curriculumTrajectoryP4 || 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'}
                   </p>
                   <p className="text-[#F6E27A] font-semibold">
-                    Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.
+                    {f?.curriculumTrajectoryP5 || 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'}
                   </p>
                 </div>
               </div>
@@ -900,14 +885,21 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                     ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA
                   </h4>
                   <ul className="space-y-2 text-slate-300">
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>40 + Anos de Advocacia Estratégica (1986)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Escritório de Advocacia mais antigo do Brasil (3ª Geração)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Proteção Jurídica Patrimonial</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Direito Imobiliário & Ativos</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Direito Empresarial & Sucessão Corporativa</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Direito Civil</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37] font-bold">◙</span><span>Relações de Consumo</span></li>
+                    {(f?.curriculumLeadershipItems && f.curriculumLeadershipItems.length > 0 ? f.curriculumLeadershipItems : [
+                      '40 + Anos de Advocacia Estratégica (1986)',
+                      'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+                      'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+                      'Proteção Jurídica Patrimonial',
+                      'Direito Imobiliário & Ativos',
+                      'Direito Empresarial & Sucessão Corporativa',
+                      'Direito Civil',
+                      'Relações de Consumo'
+                    ]).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#D4AF37] font-bold">◙</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
@@ -917,20 +909,27 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                     TRAJETÓRIA PROFISSIONAL
                   </h4>
                   <ul className="space-y-1.5 text-slate-300 text-xs">
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Advogado Estratégico</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Gestor Jurídico Patrimonial</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Gestor Jurídico Empresarial</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Palestrante e Coach Jurídico</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Procurador Municipal (20 Municípios no RS)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Procurador do Banco do Brasil S/A</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro da Associação Nacional dos Gestores Ambientais</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro do Instituto dos Advogados do RS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Presidente da Associação Brasileira do Meio Ambiente</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Assessor Jurídico da Assembleia Legislativa do RS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Conselheiro do DMAE (Águas e Esgotos de POA)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Diretor do Depto. de Direito Empresarial do IARGS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Conselheiro do CONDECON POA (Defesa do Consumidor)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro da 3ª Comissão de Ética e Disciplina da OABRS</span></li>
+                    {(f?.curriculumTrajectoryItems && f.curriculumTrajectoryItems.length > 0 ? f.curriculumTrajectoryItems : [
+                      'Advogado Estratégico',
+                      'Gestor Jurídico Patrimonial',
+                      'Gestor Jurídico Empresarial',
+                      'Palestrante e Coach Jurídico',
+                      'Procurador Municipal (20 Municípios no RS)',
+                      'Procurador do Banco do Brasil S/A',
+                      'Membro da Associação Nacional dos Gestores Ambientais',
+                      'Membro do Instituto dos Advogados do RS',
+                      'Presidente da Associação Brasileira do Meio Ambiente',
+                      'Assessor Jurídico da Assembleia Legislativa do RS',
+                      'Conselheiro do DMAE (Águas e Esgotos de POA)',
+                      'Diretor do Depto. de Direito Empresarial do IARGS',
+                      'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+                      'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+                    ]).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#D4AF37]">◙</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -949,14 +948,18 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                     ◙ Autor de Livros Digitais Publicados:
                   </p>
                   <ul className="space-y-1 text-slate-300 text-xs pl-2">
-                    <li>► Planejamento Patrimonial 4.0 & o Alto Risco da Omissão</li>
-                    <li>► Holding Familiar e Imobiliária</li>
-                    <li>► Você tem Patrimônio e deseja protegê-lo juridicamente?</li>
-                    <li>► Os Sete Cuidados na Compra do Imóvel</li>
-                    <li>► Síndico Próspero: Administrando o Condomínio em Alta Performance</li>
-                    <li>► Mercado de Carbono: Construindo um Futuro Sustentável</li>
-                    <li>► LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados</li>
-                    <li>► Como Resolver as Dívidas Bancárias em Tempos de COVID-19?</li>
+                    {(f?.curriculumBooksList && f.curriculumBooksList.length > 0 ? f.curriculumBooksList : [
+                      'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+                      'Holding Familiar e Imobiliária',
+                      'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+                      'Os Sete Cuidados na Compra do Imóvel',
+                      'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+                      'Mercado de Carbono: Construindo um Futuro Sustentável',
+                      'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+                      'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+                    ]).map((book, i) => (
+                      <li key={i}>► {book}</li>
+                    ))}
                   </ul>
                   <div className="pt-2 flex flex-wrap gap-2 text-xs text-[#E5C158] font-bold">
                     <span>◙ Palestras</span>
@@ -975,12 +978,19 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                     DOCÊNCIA
                   </h4>
                   <ul className="space-y-2 text-slate-300">
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. da Faculdade de Direito da UNISINOS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. da Escola Superior de Estudos Jurídicos do IARGS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. da Escola Superior de Advocacia da OABRS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. do Centro de Estudos do Trabalho – CETRA</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. da Academia Leão Ferreira</span></li>
+                    {(f?.curriculumDocenciaItems && f.curriculumDocenciaItems.length > 0 ? f.curriculumDocenciaItems : [
+                      'Prof. da Faculdade de Direito da UNISINOS',
+                      'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+                      'Prof. da Escola Superior de Advocacia da OABRS',
+                      'Prof. do Centro de Estudos do Trabalho – CETRA',
+                      'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+                      'Prof. da Academia Leão Ferreira'
+                    ]).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#D4AF37]">◙</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

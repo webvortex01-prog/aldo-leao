@@ -198,10 +198,10 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
 
                 <div className="text-xs text-slate-300 space-y-1">
                   <p>
-                    <strong className="text-white">Telefones:</strong> (51) 99808-8998 e (51) 99807-8998
+                    <strong className="text-white">Telefones:</strong> {cleanAndFormatPhone(siteConfig.contact.phonePrimary || '51998088998')} e {cleanAndFormatPhone(siteConfig.contact.phoneSecondary || '51998078998')}
                   </p>
                   <p>
-                    <strong className="text-[#E5C158]">Atendimento Digital Brasil:</strong> De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs
+                    <strong className="text-[#E5C158]">Atendimento Digital Brasil:</strong> {siteConfig.contact.officeHours || 'De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs'}
                   </p>
                 </div>
 

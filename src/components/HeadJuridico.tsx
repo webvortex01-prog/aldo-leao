@@ -149,12 +149,12 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 Diferenciais Estratégicos:
               </h4>
               <div className="space-y-2 text-xs text-slate-200">
-                {[
+                {(f?.differentials && f.differentials.length > 0 ? f.differentials : [
                   '40 + Anos de Advocacia Estratégica num legado jurídico centenário',
                   'Autor de Livros e Artigos Jurídicos Publicados',
                   'Referência nacional em Planejamento Patrimonial via Holding Familiar',
                   'Atendimento e processos 100% digitais no Brasil'
-                ].map((diff, i) => (
+                ]).map((diff, i) => (
                   <div key={i} className="flex items-start gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-[#E5C158] shrink-0 mt-0.5" />
                     <span>{diff}</span>
@@ -244,19 +244,19 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 </h4>
                 <div className="space-y-3 text-slate-200 font-light">
                   <p>
-                    A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.
+                    {f?.curriculumTrajectoryP1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'}
                   </p>
                   <p>
-                    Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.
+                    {f?.curriculumTrajectoryP2 || 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'}
                   </p>
                   <p>
-                    Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.
+                    {f?.curriculumTrajectoryP3 || 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'}
                   </p>
                   <p>
-                    A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.
+                    {f?.curriculumTrajectoryP4 || 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'}
                   </p>
                   <p className="text-[#F6E27A] font-semibold">
-                    Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.
+                    {f?.curriculumTrajectoryP5 || 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'}
                   </p>
                 </div>
               </div>
@@ -269,38 +269,21 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA
                   </h4>
                   <ul className="space-y-2 text-slate-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>40 + Anos de Advocacia Estratégica (1986)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Escritório de Advocacia mais antigo do Brasil (3ª Geração)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Proteção Jurídica Patrimonial</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Direito Imobiliário & Ativos</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Direito Empresarial & Sucessão Corporativa</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Direito Civil</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37] font-bold">◙</span>
-                      <span>Relações de Consumo</span>
-                    </li>
+                    {(f?.curriculumLeadershipItems && f.curriculumLeadershipItems.length > 0 ? f.curriculumLeadershipItems : [
+                      '40 + Anos de Advocacia Estratégica (1986)',
+                      'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+                      'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+                      'Proteção Jurídica Patrimonial',
+                      'Direito Imobiliário & Ativos',
+                      'Direito Empresarial & Sucessão Corporativa',
+                      'Direito Civil',
+                      'Relações de Consumo'
+                    ]).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#D4AF37] font-bold">◙</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
@@ -310,20 +293,27 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     TRAJETÓRIA PROFISSIONAL
                   </h4>
                   <ul className="space-y-1.5 text-slate-300 text-xs">
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Advogado Estratégico</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Gestor Jurídico Patrimonial</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Gestor Jurídico Empresarial</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Palestrante e Coach Jurídico</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Procurador Municipal (20 Municípios no RS)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Procurador do Banco do Brasil S/A</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro da Associação Nacional dos Gestores Ambientais</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro do Instituto dos Advogados do RS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Presidente da Associação Brasileira do Meio Ambiente</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Assessor Jurídico da Assembleia Legislativa do RS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Conselheiro do DMAE (Águas e Esgotos de POA)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Diretor do Depto. de Direito Empresarial do IARGS</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Conselheiro do CONDECON POA (Defesa do Consumidor)</span></li>
-                    <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Membro da 3ª Comissão de Ética e Disciplina da OABRS</span></li>
+                    {(f?.curriculumTrajectoryItems && f.curriculumTrajectoryItems.length > 0 ? f.curriculumTrajectoryItems : [
+                      'Advogado Estratégico',
+                      'Gestor Jurídico Patrimonial',
+                      'Gestor Jurídico Empresarial',
+                      'Palestrante e Coach Jurídico',
+                      'Procurador Municipal (20 Municípios no RS)',
+                      'Procurador do Banco do Brasil S/A',
+                      'Membro da Associação Nacional dos Gestores Ambientais',
+                      'Membro do Instituto dos Advogados do RS',
+                      'Presidente da Associação Brasileira do Meio Ambiente',
+                      'Assessor Jurídico da Assembleia Legislativa do RS',
+                      'Conselheiro do DMAE (Águas e Esgotos de POA)',
+                      'Diretor do Depto. de Direito Empresarial do IARGS',
+                      'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+                      'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+                    ]).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#D4AF37]">◙</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -342,14 +332,18 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     ◙ Autor de Livros Digitais Publicados:
                   </p>
                   <ul className="space-y-1 text-slate-300 text-xs pl-2">
-                    <li>► Planejamento Patrimonial 4.0 & o Alto Risco da Omissão</li>
-                    <li>► Holding Familiar e Imobiliária</li>
-                    <li>► Você tem Patrimônio e deseja protegê-lo juridicamente?</li>
-                    <li>► Os Sete Cuidados na Compra do Imóvel</li>
-                    <li>► Síndico Próspero: Administrando o Condomínio em Alta Performance</li>
-                    <li>► Mercado de Carbono: Construindo um Futuro Sustentável</li>
-                    <li>► LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados</li>
-                    <li>► Como Resolver as Dívidas Bancárias em Tempos de COVID-19?</li>
+                    {(f?.curriculumBooksList && f.curriculumBooksList.length > 0 ? f.curriculumBooksList : [
+                      'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+                      'Holding Familiar e Imobiliária',
+                      'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+                      'Os Sete Cuidados na Compra do Imóvel',
+                      'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+                      'Mercado de Carbono: Construindo um Futuro Sustentável',
+                      'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+                      'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+                    ]).map((book, i) => (
+                      <li key={i}>► {book}</li>
+                    ))}
                   </ul>
                   <div className="pt-2 flex flex-wrap gap-2 text-xs text-[#E5C158] font-bold">
                     <span>◙ Palestras</span>
@@ -368,30 +362,19 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     DOCÊNCIA
                   </h4>
                   <ul className="space-y-2 text-slate-300">
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37]">◙</span>
-                      <span>Prof. da Faculdade de Direito da UNISINOS</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37]">◙</span>
-                      <span>Prof. da Escola Superior de Estudos Jurídicos do IARGS</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37]">◙</span>
-                      <span>Prof. da Escola Superior de Advocacia da OABRS</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37]">◙</span>
-                      <span>Prof. do Centro de Estudos do Trabalho – CETRA</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37]">◙</span>
-                      <span>Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="text-[#D4AF37]">◙</span>
-                      <span>Prof. da Academia Leão Ferreira</span>
-                    </li>
+                    {(f?.curriculumDocenciaItems && f.curriculumDocenciaItems.length > 0 ? f.curriculumDocenciaItems : [
+                      'Prof. da Faculdade de Direito da UNISINOS',
+                      'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+                      'Prof. da Escola Superior de Advocacia da OABRS',
+                      'Prof. do Centro de Estudos do Trabalho – CETRA',
+                      'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+                      'Prof. da Academia Leão Ferreira'
+                    ]).map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#D4AF37]">◙</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>

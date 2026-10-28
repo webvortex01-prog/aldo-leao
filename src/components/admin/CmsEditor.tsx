@@ -1517,6 +1517,58 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
               />
             </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Selo (Nome)</label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealName: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo do Selo</label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#E5C158] font-bold"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <ImageUploadField
+                label="Imagem do Selo 40 Anos"
+                description="Upload do selo dourado comemorativo."
+                currentValue={formData.centennialLegacy?.sealImageUrl}
+                defaultValue="/img/selo-40-anos.png"
+                aspectRatio="square"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
+                })}
+              />
+              <ImageUploadField
+                label="Assinatura Dourada Dr. Aldo Leão"
+                description="Upload da assinatura institucional exibida no final da linha do tempo."
+                currentValue={formData.centennialLegacy?.signatureImageUrl}
+                defaultValue="/img/assinatura-gold.png"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
+                })}
+              />
+            </div>
           </div>
 
           {/* Marcos Históricos / Linha do Tempo */}
@@ -1796,6 +1848,345 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               })}
               className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
             />
+          </div>
+
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+              Biografia Institucional — Parágrafo 3 (Tradição & Rigor Técnico)
+            </label>
+            <textarea
+              rows={3}
+              value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.'}
+              onChange={(e) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph3: e.target.value }
+              })}
+              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+              Biografia Institucional — Parágrafo 4 (Produção Jurídica & Palestras)
+            </label>
+            <textarea
+              rows={3}
+              value={formData.founder.bioParagraph4 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.'}
+              onChange={(e) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph4: e.target.value }
+              })}
+              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+            />
+          </div>
+
+          {/* Diferenciais Estratégicos */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  Diferenciais Estratégicos (Exibidos abaixo da biografia)
+                </h4>
+                <p className="text-[11px] text-slate-400">
+                  Pontos fortes do Dr. Aldo Leão com ícones de verificação dourados.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const current = formData.founder.differentials || [];
+                  setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, differentials: [...current, 'Novo diferencial estratégico'] }
+                  });
+                }}
+                className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+              >
+                <Plus className="w-3 h-3" />
+                <span>Adicionar</span>
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              {(formData.founder.differentials || [
+                '40 + Anos de Advocacia Estratégica num legado jurídico centenário',
+                'Autor de Livros e Artigos Jurídicos Publicados',
+                'Referência nacional em Planejamento Patrimonial via Holding Familiar',
+                'Atendimento e processos 100% digitais no Brasil'
+              ]).map((diff, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={diff}
+                    onChange={(e) => {
+                      const current = [...(formData.founder.differentials || [])];
+                      current[idx] = e.target.value;
+                      setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, differentials: current }
+                      });
+                    }}
+                    className="flex-1 p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = (formData.founder.differentials || []).filter((_, i) => i !== idx);
+                      setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, differentials: current }
+                      });
+                    }}
+                    className="p-2 text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded transition-colors cursor-pointer"
+                    title="Remover Diferencial"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Currículo Oficial Completo do Dr. Aldo Leão (Modal Saiba Mais) */}
+          <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/45 space-y-4">
+            <div className="border-b border-[#D4AF37]/25 pb-2">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-[#D4AF37]" />
+                <span>Currículo Oficial do Dr. Aldo Leão (Modal 'Saiba Mais')</span>
+              </h4>
+              <p className="text-[11px] text-slate-400">
+                Edite os 5 parágrafos da Trajetória Profissional, listas de cargos, obras e docência superior.
+              </p>
+            </div>
+
+            {/* 5 Parágrafos da Trajetória */}
+            <div className="space-y-2.5">
+              <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
+                Trajetória Profissional — 5 Parágrafos Oficiais
+              </span>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1 (Convergência Centenária)</label>
+                <textarea
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP1 || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP1: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2 (Continuidade Desde 1986 e Avô Paterno)</label>
+                <textarea
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP2 || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP2: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3 (Rigor Técnico e Inteligência Jurídica)</label>
+                <textarea
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP3 || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP3: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4 (Artigos, Livros, Mentorias e Liderança)</label>
+                <textarea
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP4 || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP4: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5 (Frase Dourada de Encerramento)</label>
+                <input
+                  type="text"
+                  value={formData.founder.curriculumTrajectoryP5 || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP5: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-semibold"
+                />
+              </div>
+            </div>
+
+            {/* Especialização e Excelência Jurídica */}
+            <div className="pt-2 border-t border-slate-800 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase">
+                  Especialização e Excelência Jurídica
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.founder.curriculumLeadershipItems || [];
+                    setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, curriculumLeadershipItems: [...current, 'Nova especialização'] }
+                    });
+                  }}
+                  className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-2.5 h-2.5" /> Adicionar
+                </button>
+              </div>
+              <div className="space-y-1.5">
+                {(formData.founder.curriculumLeadershipItems || []).map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={item}
+                      onChange={(e) => {
+                        const current = [...(formData.founder.curriculumLeadershipItems || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumLeadershipItems: current }
+                        });
+                      }}
+                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.founder.curriculumLeadershipItems || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumLeadershipItems: current }
+                        });
+                      }}
+                      className="p-1.5 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Trajetória Profissional - Cargos e Funções */}
+            <div className="pt-2 border-t border-slate-800 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase">
+                  Trajetória Profissional — Cargos e Funções de Destaque
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.founder.curriculumTrajectoryItems || [];
+                    setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, curriculumTrajectoryItems: [...current, 'Novo cargo / função institucional'] }
+                    });
+                  }}
+                  className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-2.5 h-2.5" /> Adicionar
+                </button>
+              </div>
+              <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                {(formData.founder.curriculumTrajectoryItems || []).map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={item}
+                      onChange={(e) => {
+                        const current = [...(formData.founder.curriculumTrajectoryItems || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumTrajectoryItems: current }
+                        });
+                      }}
+                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.founder.curriculumTrajectoryItems || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumTrajectoryItems: current }
+                        });
+                      }}
+                      className="p-1.5 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Docência Superior */}
+            <div className="pt-2 border-t border-slate-800 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase">
+                  Docência Superior
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.founder.curriculumDocenciaItems || [];
+                    setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, curriculumDocenciaItems: [...current, 'Prof. em Instituição Jurídica'] }
+                    });
+                  }}
+                  className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-2.5 h-2.5" /> Adicionar
+                </button>
+              </div>
+              <div className="space-y-1.5">
+                {(formData.founder.curriculumDocenciaItems || []).map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={item}
+                      onChange={(e) => {
+                        const current = [...(formData.founder.curriculumDocenciaItems || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumDocenciaItems: current }
+                        });
+                      }}
+                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.founder.curriculumDocenciaItems || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumDocenciaItems: current }
+                        });
+                      }}
+                      className="p-1.5 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Contador de 40 Anos */}
@@ -2647,6 +3038,1119 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 })}
                 className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
               />
+            </div>
+          </div>
+
+          {/* ========================================================= */}
+          {/* SEÇÃO DEDICADA: LANDING PAGE HOLDING FAMILIAR 4.0 (/1208/) */}
+          {/* ========================================================= */}
+          <div className="mt-12 pt-8 border-t-2 border-[#D4AF37]/40 space-y-6">
+            <div className="bg-[#050B14] p-5 rounded-2xl border border-[#D4AF37]/50 shadow-xl">
+              <span className="text-[10px] uppercase tracking-widest text-[#E5C158] font-bold block mb-1">
+                PÁGINA DEDICADA EXCLUSIVA
+              </span>
+              <h3 className="font-cinzel text-lg sm:text-xl font-black text-white flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-[#F6E27A]" />
+                <span>LANDING PAGE HOLDING FAMILIAR 4.0 (ROTA /1208/)</span>
+              </h3>
+              <p className="text-xs text-slate-300 mt-1">
+                Gerencie todos os textos, perguntas frequentes, as 18 vantagens, os problemas do inventário e a tabela comparativa de custos da página oficial de conversão.
+              </p>
+            </div>
+
+            {/* 1. HERO DA LANDING PAGE */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                1. Hero Principal da Landing Page
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Frase Superior (Eyebrow)</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.heroEyebrow || 'HOLDING FAMILIAR'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroEyebrow: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Título em Branco</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.heroTitle || 'PLANEJAMENTO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Subtítulo em Dourado</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+              </div>
+
+              {/* 5 Parágrafos do Hero */}
+              <div className="space-y-2 pt-2 border-t border-slate-800">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
+                  Os 5 Parágrafos do Hero da Landing Page
+                </span>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.heroParagraph1 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph1: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.heroParagraph2 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph2: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.heroParagraph3 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph3: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.heroParagraph4 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph4: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5 (Destaque Final)</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.heroParagraph5 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph5: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              {/* Botões do Hero */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Botão Dourado (Viabilidade)</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.heroBtnViabilidade || 'AGENDAR SESSÃO DE VIABILIDADE'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroBtnViabilidade: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Botão Secundário (Custos)</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.heroBtnCustos || 'CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), heroBtnCustos: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 2. ALGUNS PROBLEMAS DO INVENTÁRIO */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-red-500/35 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-red-400 tracking-wider">
+                    2. Seção: Alguns Problemas do Inventário
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    Cards com ícone de alerta vermelho conscientizando o cliente sobre os riscos do inventário.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.holdingLanding?.problemsList || [];
+                    setFormData({
+                      ...formData,
+                      holdingLanding: {
+                        ...(formData.holdingLanding || {}),
+                        problemsList: [...current, 'Novo problema diagnosticado no inventário']
+                      }
+                    });
+                  }}
+                  className="px-2.5 py-1 rounded bg-red-950/40 border border-red-500 text-[11px] font-bold text-red-300 hover:bg-red-900/50 flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" /> Adicionar Problema
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker da Seção</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.problemsSubtitle || 'DIAGNÓSTICO PREVENTIVO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), problemsSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Título da Seção</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.problemsTitle || 'ALGUNS PROBLEMAS DO INVENTÁRIO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), problemsTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2 pt-2">
+                {(formData.holdingLanding?.problemsList || []).map((prob, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={prob}
+                      onChange={(e) => {
+                        const current = [...(formData.holdingLanding?.problemsList || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), problemsList: current }
+                        });
+                      }}
+                      className="flex-1 p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.holdingLanding?.problemsList || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), problemsList: current }
+                        });
+                      }}
+                      className="p-2 text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded transition-colors"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. ARQUITETURA JURÍDICA ESTRATÉGICA */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                3. Arquitetura Jurídica Estratégica (Perpetuação do Legado)
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Kicker Superior</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.strategyKicker || 'ARQUITETURA JURÍDICA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), strategyKicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Título</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.strategyTitle || 'O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), strategyTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.strategyParagraph1 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph1: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.strategyParagraph2 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph2: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.strategyParagraph3 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph3: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 4. AS 18 VANTAGENS EXCLUSIVAS */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                    4. As 18 Vantagens Exclusivas da Holding Familiar
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    Cards elegantes com check dourado apresentando os benefícios diretos do planejamento.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.holdingLanding?.advantagesList || [];
+                    setFormData({
+                      ...formData,
+                      holdingLanding: {
+                        ...(formData.holdingLanding || {}),
+                        advantagesList: [...current, 'Nova vantagem exclusiva']
+                      }
+                    });
+                  }}
+                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" /> Adicionar Vantagem
+                </button>
+              </div>
+
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-1">Título da Seção</label>
+                <input
+                  type="text"
+                  value={formData.holdingLanding?.advantagesTitle || 'VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR)'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingLanding: { ...(formData.holdingLanding || {}), advantagesTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+                {(formData.holdingLanding?.advantagesList || []).map((vant, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <span className="text-[11px] text-[#D4AF37] font-bold w-6 text-right shrink-0">
+                      #{idx + 1}
+                    </span>
+                    <input
+                      type="text"
+                      value={vant}
+                      onChange={(e) => {
+                        const current = [...(formData.holdingLanding?.advantagesList || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), advantagesList: current }
+                        });
+                      }}
+                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.holdingLanding?.advantagesList || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), advantagesList: current }
+                        });
+                      }}
+                      className="p-1.5 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 5. TABELA COMPARATIVA DE CUSTOS COMPLETA */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 space-y-4">
+              <div>
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  5. Tabela Comparativa de Custos: Inventário x Holding Familiar
+                </h4>
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  Edite os títulos, o caso exemplo e cada valor da tabela comparativa lado a lado.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.tableKicker || 'ESTUDO COMPARATIVO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), tableKicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Título da Tabela</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.tableTitle || 'CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), tableTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo / Caso Exemplo (R$ 1.000.000,00...)</label>
+                <textarea
+                  rows={2}
+                  value={formData.holdingLanding?.tableSubtitle || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingLanding: { ...(formData.holdingLanding || {}), tableSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              {/* Linhas da Tabela de Custos */}
+              <div className="space-y-3 pt-2 border-t border-slate-800">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
+                  Valores dos Custos (Inventário x Holding)
+                </span>
+
+                {/* ITCD */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-red-300 mb-0.5">ITCD / ITCMD · Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.itcmdInventario || 'R$ 75.000,00 (5%)'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), itcmdInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">ITCD / ITCMD · Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.itcmdHolding || 'R$ 60.000,00 (4%)'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), itcmdHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                {/* Honorários */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-red-300 mb-0.5">Honorários Advocatícios · Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.honorariosInventario || 'R$ 120.000,00 (8%)'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), honorariosInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Honorários Advocatícios · Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.honorariosHolding || 'R$ 70.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), honorariosHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                {/* Custas */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-red-300 mb-0.5">Custas de Cartório · Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.custasInventario || 'R$ 12.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), custasInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#25D366] mb-0.5">Custas de Cartório · Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.custasHolding || 'R$ 0,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), custasHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                </div>
+
+                {/* Certidões */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-red-300 mb-0.5">Certidões · Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.certidoesInventario || 'R$ 3.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), certidoesInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#25D366] mb-0.5">Certidões · Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.certidoesHolding || 'R$ 0,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), certidoesHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                </div>
+
+                {/* Ganho de Capital */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-red-300 mb-0.5">I.R. Ganho de Capital · Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.ganhoCapitalInventario || 'R$ 75.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), ganhoCapitalInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#25D366] mb-0.5">I.R. Ganho de Capital · Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.ganhoCapitalHolding || 'R$ 0,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), ganhoCapitalHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                </div>
+
+                {/* Registro */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-red-300 mb-0.5">Registro de Imóveis · Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.registroInventario || 'R$ 12.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), registroInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Registro de Imóveis · Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.registroHolding || 'R$ 3.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), registroHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                {/* Custo Total */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                  <div>
+                    <label className="block text-[10px] text-red-400 font-bold mb-0.5">Custo Total · Processo de Inventário</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.totalInventario || 'R$ 297.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), totalInventario: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-red-500/50 text-xs text-red-400 font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] font-bold mb-0.5">Custo Total · Holding Familiar</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.totalHolding || 'R$ 133.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), totalHolding: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                    />
+                  </div>
+                </div>
+
+                {/* Economia */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                  <div>
+                    <label className="block text-[10px] text-[#25D366] font-bold mb-0.5">Economia em R$ com a Holding</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.economiaValor || 'R$ 164.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), economiaValor: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-[#25D366]/50 text-xs text-[#25D366] font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-white font-bold mb-0.5">Percentual de Economia</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.economiaPercentual || '55,21%'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), economiaPercentual: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 6. BOX FAÇA O SEU PLANEJAMENTO 4.0 */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                6. Box: Faça o Seu Planejamento 4.0 (Chamada para Ação)
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Título do Box</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.ctaBoxTitle || 'FAÇA O SEU PLANEJAMENTO 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Botão Viabilidade</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.ctaBoxBtnViabilidade || 'AGENDAR DIAGNÓSTICO DE VIABILIDADE'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxBtnViabilidade: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Box</label>
+                <textarea
+                  rows={2}
+                  value={formData.holdingLanding?.ctaBoxText || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxText: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            {/* 7. PÚBLICO-ALVO (PARA QUEM É A HOLDING FAMILIAR?) */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                    7. Para Quem É a Holding Familiar? (Público-Alvo)
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    Perfis atendidos (Empresários, Proprietários de bens, Famílias empresárias, etc.).
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.holdingLanding?.targetList || [];
+                    setFormData({
+                      ...formData,
+                      holdingLanding: {
+                        ...(formData.holdingLanding || {}),
+                        targetList: [...current, 'Novo perfil de cliente']
+                      }
+                    });
+                  }}
+                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" /> Adicionar Perfil
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.targetSubtitle || 'PERFIL E ABRANGÊNCIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), targetSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Título</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.targetTitle || 'PARA QUEM É A HOLDING FAMILIAR?'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), targetTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Texto Introdutório</label>
+                <textarea
+                  rows={2}
+                  value={formData.holdingLanding?.targetIntro || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingLanding: { ...(formData.holdingLanding || {}), targetIntro: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {(formData.holdingLanding?.targetList || []).map((target, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={target}
+                      onChange={(e) => {
+                        const current = [...(formData.holdingLanding?.targetList || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), targetList: current }
+                        });
+                      }}
+                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.holdingLanding?.targetList || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), targetList: current }
+                        });
+                      }}
+                      className="p-1.5 text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 8. DR. ALDO LEÃO NA LANDING PAGE */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                8. Seção Dr. Aldo Leão na Landing Page
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker Superior</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.drAldoKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoKicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Legenda da Foto de Palestra</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.drAldoCaption || 'Conferência e Liderança em Planejamento Patrimonial 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoCaption: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <ImageUploadField
+                label="Foto de Palestra do Dr. Aldo Leão na Landing Page"
+                description="Foto exclusiva para a landing page (evita repetição da foto do site principal)."
+                currentValue={formData.holdingLanding?.drAldoPhotoUrl || '/img/palestra-1.jpg'}
+                defaultValue="/img/palestra-1.jpg"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  holdingLanding: { ...(formData.holdingLanding || {}), drAldoPhotoUrl: newUrl }
+                })}
+              />
+
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 1</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.drAldoBio1 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio1: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 2</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.drAldoBio2 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio2: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 3</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.drAldoBio3 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio3: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 4</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.drAldoBio4 || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio4: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* 9. PERGUNTAS FREQUENTES (FAQS COMPLETAS COM ADICIONAR E REMOVER) */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                    9. Perguntas Frequentes da Landing Page (Sanfona Interativa)
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    As 8 perguntas e respostas essenciais. Você pode alterar, excluir ou adicionar novas perguntas.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.holdingLanding?.faqs || [];
+                    setFormData({
+                      ...formData,
+                      holdingLanding: {
+                        ...(formData.holdingLanding || {}),
+                        faqs: [
+                          ...current,
+                          {
+                            q: 'Nova Pergunta Frequente sobre Holding Familiar?',
+                            a: 'Resposta detalhada com orientação jurídica clara e preventiva.'
+                          }
+                        ]
+                      }
+                    });
+                  }}
+                  className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 flex items-center gap-1.5 cursor-pointer shadow-md"
+                >
+                  <Plus className="w-3.5 h-3.5" /> Adicionar Pergunta
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker Superior</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.faqKicker || 'DÚVIDAS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), faqKicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Título da Seção</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.faqTitle || 'PERGUNTAS FREQUENTES'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), faqTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              {/* Lista de FAQs */}
+              <div className="space-y-4">
+                {(formData.holdingLanding?.faqs || []).map((faq, idx) => (
+                  <div key={idx} className="p-4 rounded-xl bg-[#071122] border border-slate-700 space-y-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-[#E5C158] uppercase">
+                        Pergunta #{idx + 1}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.holdingLanding?.faqs || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
+                          });
+                        }}
+                        className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 cursor-pointer"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" /> Remover
+                      </button>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Pergunta</label>
+                      <input
+                        type="text"
+                        value={faq.q}
+                        onChange={(e) => {
+                          const current = [...(formData.holdingLanding?.faqs || [])];
+                          current[idx] = { ...current[idx], q: e.target.value };
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
+                          });
+                        }}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] text-slate-400 mb-0.5">Resposta</label>
+                      <textarea
+                        rows={3}
+                        value={faq.a}
+                        onChange={(e) => {
+                          const current = [...(formData.holdingLanding?.faqs || [])];
+                          current[idx] = { ...current[idx], a: e.target.value };
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
+                          });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-slate-200 leading-relaxed"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 10. BOX ALGUMA DÚVIDA? E RODAPÉ */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                10. Box Final "Alguma Dúvida?" & Rodapé Exclusivo
+              </h4>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Título do Box</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.doubtTitle || 'ALGUMA DÚVIDA?'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), doubtTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Botão Especialista</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.doubtBtnText || 'FALAR COM O ESPECIALISTA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), doubtBtnText: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Rodapé Direitos Autorais</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.footerCopyright || '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), footerCopyright: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Texto de Orientação do Box</label>
+                <textarea
+                  rows={2}
+                  value={formData.holdingLanding?.doubtText || ''}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingLanding: { ...(formData.holdingLanding || {}), doubtText: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
             </div>
           </div>
         </div>

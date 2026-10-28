@@ -199,6 +199,17 @@ export interface SiteConfig {
     bioParagraph2: string;
     bioParagraph3?: string;
     bioParagraph4?: string;
+    differentials?: string[];
+    curriculumTrajectoryP1?: string;
+    curriculumTrajectoryP2?: string;
+    curriculumTrajectoryP3?: string;
+    curriculumTrajectoryP4?: string;
+    curriculumTrajectoryP5?: string;
+    curriculumLeadershipItems?: string[];
+    curriculumTrajectoryItems?: string[];
+    curriculumLiteratureItems?: string[];
+    curriculumBooksList?: string[];
+    curriculumDocenciaItems?: string[];
     specialties: string[];
     differences: string[];
     signatureImageUrl?: string;
@@ -280,6 +291,8 @@ export interface SiteConfig {
     card40Title?: string;
     card40Kicker?: string;
     card40Text?: string;
+    sealName?: string;
+    sealSubtitle?: string;
     sub1908?: string;
     sub1935?: string;
     sub1951?: string;
@@ -380,4 +393,78 @@ export interface SiteConfig {
     ctaButtonText?: string;
   };
   articleSignature?: ArticleSignatureConfig;
+  holdingLanding?: HoldingLandingConfig;
+}
+
+export interface HoldingLandingFaqItem {
+  q: string;
+  a: string;
+}
+
+export interface HoldingLandingConfig {
+  heroEyebrow?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroParagraph1?: string;
+  heroParagraph2?: string;
+  heroParagraph3?: string;
+  heroParagraph4?: string;
+  heroParagraph5?: string;
+  heroBtnViabilidade?: string;
+  heroBtnCustos?: string;
+  showcaseTitle?: string;
+  showcaseText?: string;
+  showcaseBadge?: string;
+  problemsTitle?: string;
+  problemsSubtitle?: string;
+  problemsList?: string[];
+  strategyKicker?: string;
+  strategyTitle?: string;
+  strategyParagraph1?: string;
+  strategyParagraph2?: string;
+  strategyParagraph3?: string;
+  advantagesTitle?: string;
+  advantagesList?: string[];
+  tableKicker?: string;
+  tableTitle?: string;
+  tableSubtitle?: string;
+  itcmdInventario?: string;
+  itcmdHolding?: string;
+  honorariosInventario?: string;
+  honorariosHolding?: string;
+  custasInventario?: string;
+  custasHolding?: string;
+  certidoesInventario?: string;
+  certidoesHolding?: string;
+  ganhoCapitalInventario?: string;
+  ganhoCapitalHolding?: string;
+  registroInventario?: string;
+  registroHolding?: string;
+  totalInventario?: string;
+  totalHolding?: string;
+  economiaValor?: string;
+  economiaPercentual?: string;
+  ctaBoxTitle?: string;
+  ctaBoxText?: string;
+  ctaBoxBtnViabilidade?: string;
+  ctaBoxBtnWhatsApp?: string;
+  targetTitle?: string;
+  targetSubtitle?: string;
+  targetIntro?: string;
+  targetList?: string[];
+  drAldoKicker?: string;
+  drAldoTitle?: string;
+  drAldoPhotoUrl?: string;
+  drAldoCaption?: string;
+  drAldoBio1?: string;
+  drAldoBio2?: string;
+  drAldoBio3?: string;
+  drAldoBio4?: string;
+  faqKicker?: string;
+  faqTitle?: string;
+  faqs?: HoldingLandingFaqItem[];
+  doubtTitle?: string;
+  doubtText?: string;
+  doubtBtnText?: string;
+  footerCopyright?: string;
 }
