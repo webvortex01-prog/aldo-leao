@@ -506,7 +506,8 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     check(formData.publicationsSection?.paragraph3, 'Publicações · Parágrafo 3', 'publications');
     // Assinatura Automática dos Artigos
     check(formData.articleSignature?.line1, 'Assinatura Artigos · Linha 1 (Núcleo de Comunicação)', 'publications');
-    check(formData.articleSignature?.line2, 'Assinatura Artigos · Linha 2 (Excelência Jurídica)', 'publications');
+    check(formData.articleSignature?.line2, 'Assinatura Artigos · Linha 2 (Aldo Leão Advocacia Estratégica)', 'publications');
+    check(formData.articleSignature?.line3, 'Assinatura Artigos · Linha 3 (Excelência Jurídica Desde 1908)', 'publications');
     check(formData.articleSignature?.buttonText, 'Assinatura Artigos · Botão CTA Agendar Consulta', 'publications');
     (formData.publications || []).forEach((pub, i) => {
       check(pub.title, `Publicação ${i + 1} · ${pub.title}`, 'publications');
@@ -2832,15 +2833,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
             {/* Controles de Configuração da Assinatura */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-              {/* Linha 1 */}
+              {/* Linha 1 (Item 56: "Núcleo de Comunicação" #FFFFFF) */}
               <div>
                 <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Linha 1 da Assinatura (Institucional / Núcleo)
+                  Linha 1 da Assinatura (Núcleo de Comunicação)
                 </label>
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
-                    value={formData.articleSignature?.line1 ?? 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                    value={formData.articleSignature?.line1 ?? 'Núcleo de Comunicação'}
                     onChange={(e) => {
                       setFormData({
                         ...formData,
@@ -2849,15 +2850,17 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                           enabled: formData.articleSignature?.enabled ?? true,
                           line1: e.target.value,
                           line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                          line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                          line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
                           line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                          line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
                           buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
                         }
                       });
                     }}
                     className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
-                    placeholder="Ex: Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA"
+                    placeholder="Ex: Núcleo de Comunicação"
                   />
                   <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 1">
                     <input
@@ -2869,12 +2872,14 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                           articleSignature: {
                             ...(formData.articleSignature || {}),
                             enabled: formData.articleSignature?.enabled ?? true,
-                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
                             line1Color: e.target.value,
-                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
                             line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
                             buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
                           }
                         });
                       }}
@@ -2887,32 +2892,34 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 </div>
               </div>
 
-              {/* Linha 2 */}
+              {/* Linha 2 (Item 56: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" #D4AF37) */}
               <div>
                 <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Linha 2 da Assinatura (Tradição / Slogan)
+                  Linha 2 da Assinatura (Escritório / Marca)
                 </label>
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
-                    value={formData.articleSignature?.line2 ?? 'Excelência Jurídica Desde 1908'}
+                    value={formData.articleSignature?.line2 ?? 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
                     onChange={(e) => {
                       setFormData({
                         ...formData,
                         articleSignature: {
                           ...(formData.articleSignature || {}),
                           enabled: formData.articleSignature?.enabled ?? true,
-                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
                           line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
                           line2: e.target.value,
                           line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                          line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
                           buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
                         }
                       });
                     }}
                     className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
-                    placeholder="Ex: Excelência Jurídica Desde 1908"
+                    placeholder="Ex: ALDO LEÃO ADVOCACIA ESTRATÉGICA"
                   />
                   <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 2">
                     <input
@@ -2924,12 +2931,14 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                           articleSignature: {
                             ...(formData.articleSignature || {}),
                             enabled: formData.articleSignature?.enabled ?? true,
-                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
                             line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
                             line2Color: e.target.value,
+                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
                             buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
                           }
                         });
                       }}
@@ -2937,6 +2946,65 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                     />
                     <span className="text-[10px] text-slate-400 font-mono pr-1">
                       {formData.articleSignature?.line2Color || '#D4AF37'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Linha 3 (Item 56: "Excelência Jurídica Desde 1908" #F8F8F8) */}
+              <div>
+                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Linha 3 da Assinatura (Slogan / Centenário)
+                </label>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={formData.articleSignature?.line3 ?? 'Excelência Jurídica Desde 1908'}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {}),
+                          enabled: formData.articleSignature?.enabled ?? true,
+                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                          line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          line3: e.target.value,
+                          line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
+                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                        }
+                      });
+                    }}
+                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                    placeholder="Ex: Excelência Jurídica Desde 1908"
+                  />
+                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 3">
+                    <input
+                      type="color"
+                      value={formData.articleSignature?.line3Color || '#F8F8F8'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                            line3Color: e.target.value,
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                          }
+                        });
+                      }}
+                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                    />
+                    <span className="text-[10px] text-slate-400 font-mono pr-1">
+                      {formData.articleSignature?.line3Color || '#F8F8F8'}
                     </span>
                   </div>
                 </div>
@@ -3227,6 +3295,69 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                     placeholder="Cole aqui o texto integral do artigo ou parecer jurídico..."
                     className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-sans font-light"
                   />
+                </div>
+
+                {/* Metadados SEO Ocultos para Indexação nos Buscadores (Itens 17 e 55) */}
+                <div className="p-4 rounded-lg bg-[#071122] border border-[#D4AF37]/25 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                      Metadados SEO para Buscadores (Google / Bing) · Campos Ocultos
+                    </span>
+                    <span className="text-[10px] text-slate-400">Indexado por robôs de busca sem poluir o layout</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Título SEO (Title Tag)
+                      </label>
+                      <input
+                        type="text"
+                        value={pub.seoTitle || ''}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].seoTitle = e.target.value;
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        placeholder={pub.title || "Ex: Holding Familiar e Proteção Patrimonial | Dr. Aldo Leão"}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Palavras-Chave (# Tags)
+                      </label>
+                      <input
+                        type="text"
+                        value={(pub.keywords || []).join(', ')}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].keywords = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        placeholder="Ex: #holding, #itcmd, #inventario, #planejamento"
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Meta Descrição (Meta Description)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={pub.metaDescription || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].metaDescription = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      placeholder={pub.excerpt || "Breve descrição otimizada para aparecer nos resultados de busca do Google (150 a 160 caracteres)..."}
+                      className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+                    />
+                  </div>
                 </div>
               </div>
             ))}

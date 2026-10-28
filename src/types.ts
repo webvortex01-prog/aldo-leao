@@ -62,6 +62,10 @@ export interface Publication {
   readTime: string;
   slug: string;
   image?: string;
+  // Campos SEO Ocultos para indexação nos buscadores (Itens 17 e 55)
+  seoTitle?: string;
+  metaDescription?: string;
+  keywords?: string[];
 }
 
 export interface ArticleSignatureConfig {

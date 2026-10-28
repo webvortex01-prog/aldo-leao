@@ -25,11 +25,11 @@ export const Footer: React.FC<FooterProps> = ({
 
   const officialWhatsApp = getCleanWhatsAppDigits(c?.whatsappNumber, '5551998088998');
 
-  const navLinks = [
+    const navLinks = [
     { label: 'Home', href: '#' },
     { label: 'Presença Nacional Digital', href: '#presenca-nacional' },
     { label: 'Legado', href: '#legado' },
-    { label: 'Head Jurídico', href: '#head-juridico' },
+    { label: 'Dr. Aldo Leão', href: '#head-juridico' },
     { label: 'Atuação', href: '#areas-atuacao' },
     { label: 'Soluções de Excelência', href: '#solucoes-excelencia' },
     { label: 'Consulta Digital', href: '#consulta-digital' },
@@ -53,22 +53,19 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <footer className="bg-[#03060C] text-slate-400 border-t border-[#D4AF37]/20 pt-16 pb-12 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Grid com Coluna Institucional e Navegação com Acesso Restrito (Itens 11 e XI) */}
+        {/* Grid com Coluna Institucional e Navegação com Acesso Restrito (Itens 11, 53 e 54) */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-[#D4AF37]/20 text-left">
-          {/* Coluna 1: Logo e Texto Institucional do Projeto (Item 14 e 48) */}
-          <div className="md:col-span-7 flex flex-col justify-start">
-            <div className="mb-4">
-              <Logo size="md" />
-            </div>
-            <p className="text-xs sm:text-sm text-slate-300 font-sans-body leading-relaxed font-light mb-4">
-              {f?.institutionalParagraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
-            </p>
-            <p className="text-xs text-[#E5C158] font-medium leading-relaxed font-sans-body mb-4">
-              {f?.institutionalParagraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
+          {/* Coluna 1: Conformidade Legal & Governança (Item 54: logo e texto duplicados excluídos) */}
+          <div className="md:col-span-7 flex flex-col justify-center">
+            <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider mb-2">
+              Conformidade Legal & Governança Digital
+            </h4>
+            <p className="text-xs text-slate-400 font-sans-body leading-relaxed font-light mb-4 max-w-lg">
+              Atuação jurídica estratégica pautada pela ética, segurança da informação e estrita conformidade com a LGPD e normativas do Conselho Federal da OAB.
             </p>
 
             {/* Links de Proteção Jurídica e Compliance (LGPD, Termos de Uso e Cookies - Item 11) */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2 text-xs font-semibold">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1 text-xs font-semibold">
               <button
                 type="button"
                 onClick={onOpenPrivacyPolicy}

@@ -44,7 +44,8 @@ export const PublicationsSection: React.FC = () => {
         (areaFilter.includes('Imobiliário') && item.area?.includes('Imobiliário')) ||
         (areaFilter.includes('Empresarial') && item.area?.includes('Empresarial')) ||
         (areaFilter.includes('Civil') && item.area?.includes('Civil')) ||
-        (areaFilter.includes('Consumo') && (item.area?.includes('Consumo') || item.area?.includes('Consumidor')));
+        (areaFilter === 'Relações de Consumo' && (item.area?.includes('Consumo') || item.area?.includes('Consumidor'))) ||
+        (areaFilter === 'Direito' && (item.area === 'Direito' || item.area?.includes('Direito')));
 
       return matchesSearch && matchesType && matchesArea;
     });
@@ -179,7 +180,8 @@ export const PublicationsSection: React.FC = () => {
               <option value="Direito Imobiliário">Direito Imobiliário</option>
               <option value="Direito Empresarial">Direito Empresarial</option>
               <option value="Direito Civil">Direito Civil</option>
-              <option value="Relações de Consumo e Direito">Relações de Consumo e Direito</option>
+              <option value="Relações de Consumo">Relações de Consumo</option>
+              <option value="Direito">Direito</option>
             </select>
           </div>
         </div>

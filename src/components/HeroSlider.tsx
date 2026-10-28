@@ -39,10 +39,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem da Justiça e Balança com versão dedicada Mobile e Pan-Zoom equilibrado */}
+        {/* Slide 1: Imagem da Justiça e Balança cobrindo a página até o final (Itens 7 e 51) */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-70 sm:opacity-55 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-85 sm:opacity-75 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -50,19 +50,19 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroImageUrl || heroNovoFundoImg}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
-              className={`w-full h-full object-cover object-top md:object-[68%_35%] filter brightness-90 contrast-105 transform-gpu origin-[50%_15%] md:origin-[70%_40%] ${
+              className={`w-full h-full object-cover object-[68%_40%] filter brightness-100 contrast-105 transform-gpu origin-[60%_35%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
           </picture>
-          {/* Película escura suave para manter o contraste sem apagar a imagem */}
-          <div className="absolute inset-0 bg-[#050B14]/40 pointer-events-none" />
+          {/* Película escura sutil apenas para garantir legibilidade dos textos sem cortar o fundo */}
+          <div className="absolute inset-0 bg-[#050B14]/30 pointer-events-none" />
         </div>
 
         {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo equilibrado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-60 sm:opacity-45 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 1 ? 'opacity-75 sm:opacity-65 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -70,18 +70,18 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroSlide2ImageUrl || holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-80 contrast-105 transform-gpu origin-[50%_25%] ${
+              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105 transform-gpu origin-[50%_25%] ${
                 currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
               }`}
             />
           </picture>
           {/* Película escura suave */}
-          <div className="absolute inset-0 bg-[#050B14]/45 pointer-events-none" />
+          <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
         </div>
 
-        {/* Overlays cinematográficos equilibrados garantindo nitidez das fotos e contraste dos textos */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/70 via-[#050B14]/55 to-[#050B14] md:bg-gradient-to-r md:from-[#050B14] md:via-[#050B14]/85 md:to-[#050B14]/55 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-transparent to-[#050B14]/50 pointer-events-none" />
+        {/* Overlays cinematográficos suaves: gradiente lateral para texto à esquerda e gradiente inferior bem suave para não cortar as imagens */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/50 via-transparent to-[#050B14]/40 md:bg-gradient-to-r md:from-[#050B14]/90 md:via-[#050B14]/65 md:to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14]/50 via-transparent to-transparent pointer-events-none" />
       </div>
 
       {/* Background ambient luxury lighting suave sem clarear o fundo */}

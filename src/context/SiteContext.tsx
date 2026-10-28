@@ -95,7 +95,7 @@ const DEFAULT_EXCELLENCE_SOLUTIONS: ExcellenceSolution[] = [
     id: 'arbitragem',
     number: '05',
     title: 'Arbitragem',
-    subtitle: 'Resolução Extrajudicial Rápida & Confidencial',
+    subtitle: 'RESOLUÇÃO EXTRAJUDICIAL DE CONFLITOS',
     description: 'Método privado de solução de conflitos que proporciona maior agilidade, confidencialidade e segurança jurídica com parecer de especialistas, reduzindo os impactos danosos e a morosidade do Judiciário.',
     extendedText: 'Atuação em câmaras arbitrais de prestígio para disputas societárias, contratuais e patrimoniais de alta envergadura.'
   },
@@ -733,7 +733,7 @@ const DEFAULT_CONFIG: SiteConfig = {
     line2Color: '#D4AF37',
     line3: 'Excelência Jurídica Desde 1908',
     line3Color: '#F8F8F8',
-    buttonText: 'AGENDAR CONSULTA VIRTUAL',
+    buttonText: 'AGENDAR CONSULTA',
     buttonTextColor: '#050B14',
     whatsappNumber: '',
     whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
@@ -807,7 +807,7 @@ const SiteContext = createContext<SiteContextType | undefined>(undefined);
 export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [siteConfig, setSiteConfig] = useState<SiteConfig>(() => {
     try {
-      const saved = localStorage.getItem('aldoleao_site_config_v12') || localStorage.getItem('aldoleao_site_config_v10');
+      const saved = localStorage.getItem('aldoleao_site_config_v15') || localStorage.getItem('aldoleao_site_config_v12');
       if (saved) {
         const parsed = JSON.parse(saved);
         const heroConfig = { ...DEFAULT_CONFIG.hero, ...(parsed.hero || {}) };
@@ -847,6 +847,16 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
             })
           : DEFAULT_DIGITAL_BOOKS;
 
+        // Assegura que as frases douradas oficiais de Soluções de Excelência estejam sempre atualizadas (Itens 30 a 37 e 59)
+        const excellenceSolutions = DEFAULT_EXCELLENCE_SOLUTIONS.map(defSol => {
+          const userSol = (parsed.excellenceSolutions || []).find((s: any) => s.id === defSol.id || s.number === defSol.number);
+          return {
+            ...defSol,
+            ...(userSol || {}),
+            subtitle: defSol.subtitle // Garante sempre o subtítulo dourado oficial atualizado
+          };
+        });
+
         const centennialLegacy = { ...DEFAULT_CONFIG.centennialLegacy, ...(parsed.centennialLegacy || {}) };
         if (centennialLegacy.events && centennialLegacy.events.length > 0) {
           centennialLegacy.events = centennialLegacy.events.map((ev: any) => 
@@ -868,6 +878,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           hero: heroConfig,
           contact: contactConfig,
           practiceAreas,
+          excellenceSolutions,
           digitalBooks,
           publications,
           founder: { ...DEFAULT_CONFIG.founder, ...(parsed.founder || {}) },
@@ -907,7 +918,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Save changes to localStorage
   useEffect(() => {
     try {
-      localStorage.setItem('aldoleao_site_config_v12', JSON.stringify(siteConfig));
+      localStorage.setItem('aldoleao_site_config_v15', JSON.stringify(siteConfig));
     } catch (e) {
       console.error('Error persisting site config:', e);
     }

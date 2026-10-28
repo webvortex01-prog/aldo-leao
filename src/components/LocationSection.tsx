@@ -87,7 +87,7 @@ export const LocationSection: React.FC = () => {
                 className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                <span>AGENDAR CONSULTA DIGITAL</span>
+                <span>AGENDAR CONSULTA</span>
               </button>
             </div>
           </div>

@@ -911,10 +911,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   </ul>
                 </div>
 
-                {/* Box/Card CARGOS & FUNÇÕES INSTITUCIONAIS */}
+                {/* Box/Card TRAJETÓRIA PROFISSIONAL (Item 57) */}
                 <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                    CARGOS & FUNÇÕES INSTITUCIONAIS
+                    TRAJETÓRIA PROFISSIONAL
                   </h4>
                   <ul className="space-y-1.5 text-slate-300 text-xs">
                     <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Advogado Estratégico</span></li>
@@ -969,10 +969,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   </div>
                 </div>
 
-                {/* Box/Card DOCÊNCIA */}
+                {/* Box/Card DOCÊNCIA (Item 58) */}
                 <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                    DOCÊNCIA UNIVERSITÁRIA
+                    DOCÊNCIA
                   </h4>
                   <ul className="space-y-2 text-slate-300">
                     <li className="flex items-start gap-2"><span className="text-[#D4AF37]">◙</span><span>Prof. da Faculdade de Direito da UNISINOS</span></li>

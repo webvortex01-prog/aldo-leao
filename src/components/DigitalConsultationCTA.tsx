@@ -119,10 +119,10 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
 
                 <div className="p-4 bg-[#071122] border-t border-[#D4AF37]/30 text-center">
                   <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                    CONSULTORIA ESTRATÉGICA ONLINE
+                    CONSULTA DIGITAL BRASIL
                   </p>
                   <p className="text-[11px] text-[#E5C158] font-medium mt-0.5">
-                    Segurança, Sigilo e Excelência em Todo o Brasil
+                    Segurança Digital, Sigilo e Excelência Jurídica Centenária.
                   </p>
                 </div>
               </div>

@@ -20,12 +20,14 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
 
   const config: ArticleSignatureConfig = customConfig || siteConfig?.articleSignature || {
     enabled: true,
-    line1: 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+    line1: 'Núcleo de Comunicação',
     line1Color: '#FFFFFF',
-    line2: 'Excelência Jurídica Desde 1908',
+    line2: 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
     line2Color: '#D4AF37',
+    line3: 'Excelência Jurídica Desde 1908',
+    line3Color: '#F8F8F8',
     buttonText: 'AGENDAR CONSULTA',
-    buttonTextColor: '#E0E6ED',
+    buttonTextColor: '#050B14',
     whatsappNumber: '',
     whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
   };
@@ -40,7 +42,7 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
   const line2Color = config.line2Color || '#D4AF37';
   const line3 = (config as any).line3 || 'Excelência Jurídica Desde 1908';
   const line3Color = (config as any).line3Color || '#F8F8F8';
-  const buttonText = config.buttonText || 'AGENDAR CONSULTA VIRTUAL';
+  const buttonText = config.buttonText || 'AGENDAR CONSULTA';
 
   const rawNumber = config.whatsappNumber || siteConfig?.contact?.whatsappNumber || '5551998088998';
   const cleanPhone = rawNumber.replace(/\D/g, '');
