@@ -50,7 +50,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroImageUrl || '/img/novofundohero.jpg'}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
-              className={`w-full h-full object-cover object-center md:object-[75%_center] filter brightness-105 contrast-105 transform-gpu origin-[70%_40%] ${
+              className={`w-full h-[125%] object-cover object-top md:object-[72%_top] scale-110 lg:scale-[1.22] origin-[70%_top] filter brightness-105 contrast-105 transform-gpu ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
