@@ -39,10 +39,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem da Justiça e Balança cobrindo a página até o final (Itens 7 e 51) */}
+        {/* Slide 1: Imagem da Justiça e Balança cobrindo a página até o final abaixo do box (Itens 7 e 51) */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-85 sm:opacity-75 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-95 sm:opacity-85 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -50,13 +50,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroImageUrl || heroNovoFundoImg}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
-              className={`w-full h-full object-cover object-[68%_40%] filter brightness-100 contrast-105 transform-gpu origin-[60%_35%] ${
+              className={`w-full h-full object-cover object-top md:object-[70%_15%] filter brightness-105 contrast-105 transform-gpu origin-[65%_25%] ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
           </picture>
-          {/* Película escura sutil apenas para garantir legibilidade dos textos sem cortar o fundo */}
-          <div className="absolute inset-0 bg-[#050B14]/30 pointer-events-none" />
+          {/* Película escura suave apenas para legibilidade dos textos à esquerda sem escurecer a base */}
+          <div className="absolute inset-0 bg-[#050B14]/20 pointer-events-none" />
         </div>
 
         {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo equilibrado */}
@@ -79,9 +79,8 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
         </div>
 
-        {/* Overlays cinematográficos suaves: gradiente lateral para texto à esquerda e gradiente inferior bem suave para não cortar as imagens */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/50 via-transparent to-[#050B14]/40 md:bg-gradient-to-r md:from-[#050B14]/90 md:via-[#050B14]/65 md:to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050B14]/50 via-transparent to-transparent pointer-events-none" />
+        {/* Overlays cinematográficos suaves: gradiente lateral para texto à esquerda mantendo a base totalmente nítida */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/40 via-transparent to-transparent md:bg-gradient-to-r md:from-[#050B14]/90 md:via-[#050B14]/55 md:to-transparent pointer-events-none" />
       </div>
 
       {/* Background ambient luxury lighting suave sem clarear o fundo */}

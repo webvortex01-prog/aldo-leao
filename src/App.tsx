@@ -22,7 +22,6 @@ import { AdminAuthModal } from './components/admin/AdminAuthModal';
 import { ExemplarTutorialModal } from './components/ExemplarTutorialModal';
 import { HoldingLandingPage } from './components/HoldingLandingPage';
 import { AcademiaLeaoSection } from './components/AcademiaLeaoSection';
-import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { PrivacyPolicyModal, TermsOfUseModal, OabDisclaimerModal } from './components/LegalModals';
 
 function AppContent() {
@@ -251,12 +250,6 @@ function AppContent() {
         onOpenPrivacyPolicy={() => setIsPrivacyOpen(true)}
         onOpenTerms={() => setIsTermsOpen(true)}
         onOpenOabDisclaimer={() => setIsOabDisclaimerOpen(true)}
-      />
-
-      {/* Banner de Consentimento de Cookies e Privacidade LGPD */}
-      <CookieConsentBanner
-        onOpenPrivacyPolicy={() => setIsPrivacyOpen(true)}
-        onOpenTerms={() => setIsTermsOpen(true)}
       />
 
       {/* Modais de Conformidade Legal, LGPD e Ética OAB */}
