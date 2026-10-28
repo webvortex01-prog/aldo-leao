@@ -88,7 +88,7 @@ export const FloatingQuickNav: React.FC<FloatingQuickNavProps> = ({
     {
       id: 'head',
       emoji: '👨‍⚖️',
-      label: 'Head Dr. Aldo',
+      label: 'Dr. Aldo Leão',
       description: 'Perfil e liderança do Dr. Aldo Leão',
       action: () => scrollToSection('head-juridico'),
     },

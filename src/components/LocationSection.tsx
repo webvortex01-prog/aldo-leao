@@ -4,7 +4,15 @@ import { Logo } from './Logo';
 import { useSite } from '../context/SiteContext';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
 
-export const LocationSection: React.FC = () => {
+interface LocationSectionProps {
+  onOpenPrivacyPolicy?: () => void;
+  onOpenTerms?: () => void;
+}
+
+export const LocationSection: React.FC<LocationSectionProps> = ({
+  onOpenPrivacyPolicy,
+  onOpenTerms,
+}) => {
   const { siteConfig } = useSite();
   const c = siteConfig.contact;
 
@@ -373,6 +381,25 @@ export const LocationSection: React.FC = () => {
           <p className="text-xs sm:text-sm text-[#E5C158] font-sans-body leading-relaxed font-semibold max-w-2xl">
             Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.
           </p>
+
+          {/* Links de Política de Privacidade e Termos de Uso e Cookies (Item 28/10 Dr. Aldo) */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-4 mt-2 border-t border-[#D4AF37]/20 text-xs font-semibold">
+            <button
+              type="button"
+              onClick={onOpenPrivacyPolicy}
+              className="text-[#E5C158] hover:text-[#F6E27A] hover:underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              Política de Privacidade
+            </button>
+            <span className="text-slate-600">·</span>
+            <button
+              type="button"
+              onClick={onOpenTerms}
+              className="text-[#E5C158] hover:text-[#F6E27A] hover:underline underline-offset-2 transition-colors cursor-pointer"
+            >
+              Termos de Uso e Cookies
+            </button>
+          </div>
         </div>
       </div>
     </section>

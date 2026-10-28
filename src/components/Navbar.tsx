@@ -21,15 +21,15 @@ export const Navbar: React.FC<NavbarProps> = ({
   // Home, Presença Nacional, Legado, Head, Atuação, Soluções, Consulta, Planejamento, Publicações, Livros e Contato
   const navLinks = [
     { label: 'Home', href: '#' },
-    { label: 'Presença Nacional', href: '#presenca-nacional' },
-    { label: 'Legado', href: '#legado' },
-    { label: 'Head', href: '#head-juridico' },
-    { label: 'Atuação', href: '#areas-atuacao' },
-    { label: 'Soluções', href: '#solucoes-excelencia' },
-    { label: 'Consulta', href: '#consulta-digital' },
-    { label: 'Planejamento', href: '#holding-familiar' },
-    { label: 'Publicações', href: '#publicacoes' },
-    { label: 'Livros', href: '#livros' },
+    { label: 'Presença Nacional Digital', href: '#presenca-nacional' },
+    { label: 'Legado Centenário', href: '#legado' },
+    { label: 'Dr. Aldo Leão', href: '#head-juridico' },
+    { label: 'Áreas de Atuação', href: '#areas-atuacao' },
+    { label: 'Soluções de Excelência', href: '#solucoes-excelencia' },
+    { label: 'Consulta Digital', href: '#consulta-digital' },
+    { label: 'Planejamento Patrimonial 4.0', href: '#holding-familiar' },
+    { label: 'Publicações Jurídicas', href: '#publicacoes' },
+    { label: 'Livros Digitais', href: '#livros' },
     { label: 'Contato', href: '#contato' },
   ];
 
@@ -54,7 +54,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#D4AF37]/25 bg-[#050B14]/95 backdrop-blur-md shadow-xl transition-all duration-300">
-        <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="w-full max-w-[1536px] mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
         {/* Zone 1: Identidade Visual com Imagem do Logo Oficial Inteiro (Sem Cortes) e Texto em Negrito (Itens 1 e II) */}
         <a 
           href="#" 
@@ -88,8 +88,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </a>
 
-        {/* Zone 2: Navigation Links seguindo estritamente a ordem do Item 16 (Desktop XL) */}
-        <nav className="hidden xl:flex items-center gap-4 text-[11px] tracking-wider uppercase font-medium text-slate-300">
+        {/* Zone 2: Navigation Links seguindo estritamente a ordem com os nomes completos (Desktop XL) */}
+        <nav className="hidden xl:flex items-center gap-2 2xl:gap-3 text-[10px] 2xl:text-[11px] tracking-wider uppercase font-medium text-slate-300">
           {navLinks.map((link) => (
             <a
               key={link.label}

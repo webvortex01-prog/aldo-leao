@@ -239,7 +239,10 @@ function AppContent() {
         />
 
         {/* 11. Página CONTATO (Item 13 e Item 42) */}
-        <LocationSection />
+        <LocationSection 
+          onOpenPrivacyPolicy={() => setIsPrivacyOpen(true)}
+          onOpenTerms={() => setIsTermsOpen(true)}
+        />
       </main>
 
       {/* 12. Página RODAPÉ (Item 14 e Item 42) */}
