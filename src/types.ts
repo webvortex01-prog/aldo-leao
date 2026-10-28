@@ -181,6 +181,10 @@ export interface SiteConfig {
     spPhone?: string;
     bsbPhone?: string;
     cwbPhone?: string;
+    phoneSaoPaulo?: string;
+    phoneBrasilia?: string;
+    phoneCuritiba?: string;
+    emailDrAldo?: string;
     email?: string;
     formPrompt?: string;
     formNamePlaceholder?: string;
@@ -325,6 +329,8 @@ export interface SiteConfig {
   practiceAreasHeader?: {
     kicker?: string;
     title?: string;
+    titleWhite?: string;
+    titleGold?: string;
     titleHighlight?: string;
     description?: string;
   };
@@ -412,9 +418,11 @@ export interface HoldingLandingConfig {
   heroParagraph5?: string;
   heroBtnViabilidade?: string;
   heroBtnCustos?: string;
+  heroBgUrl?: string;
   showcaseTitle?: string;
   showcaseText?: string;
   showcaseBadge?: string;
+  showcaseImageUrl?: string;
   problemsTitle?: string;
   problemsSubtitle?: string;
   problemsList?: string[];
