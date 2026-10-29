@@ -223,13 +223,22 @@ export const PublicationsSection: React.FC = () => {
 
                     <div className="p-6">
                       {/* Meta Date & Autor / Sem Relógio nem Tempo de Leitura (Itens 16 e 39) */}
-                      <div className="flex items-center gap-2 text-[11px] text-slate-400 mb-3">
-                        <Calendar className="w-3.5 h-3.5 text-[#E5C158]" />
-                        <span>{pub.date}</span>
-                        {isArtigo && (
+                      <div className="flex items-center justify-between text-[11px] mb-3">
+                        {isArtigo ? (
                           <>
-                            <span className="text-slate-600">·</span>
-                            <span className="text-[#E5C158] font-bold">Autor: Dr. ALDO LEÃO</span>
+                            <span className="text-[#E5C158] font-bold uppercase tracking-wider">AUTOR: Dr. ALDO LEÃO</span>
+                            <span className="text-[#E5C158] font-semibold flex items-center gap-1">
+                              <Calendar className="w-3 h-3 text-[#E5C158]" />
+                              <span>{pub.date}</span>
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-slate-400 font-semibold uppercase tracking-wider">NOTÍCIA</span>
+                            <span className="text-[#E5C158] font-semibold flex items-center gap-1">
+                              <Calendar className="w-3 h-3 text-[#E5C158]" />
+                              <span>{pub.date}</span>
+                            </span>
                           </>
                         )}
                       </div>
@@ -323,30 +332,41 @@ export const PublicationsSection: React.FC = () => {
             </button>
 
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-              <div className="flex items-center gap-2 text-xs text-[#E5C158] font-semibold mb-2">
+              {/* Primeira frase dourada: Tipo à esquerda e Área da publicação alinhada à direita */}
+              <div className="flex items-center justify-between text-xs text-[#E5C158] font-semibold mb-3">
                 {activePubModal.type === 'artigo' ? (
-                  <span className="px-2 py-0.5 rounded bg-[#D4AF37] text-black font-black text-[10px]">
-                    Artigo Jurídico
+                  <span className="px-2.5 py-0.5 rounded bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black font-black text-[10px] uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+                    <BookOpen className="w-3 h-3 text-black" />
+                    <span>ARTIGO JURÍDICO</span>
                   </span>
                 ) : (
-                  <span className="px-2 py-0.5 rounded bg-[#102347] text-[#F6E27A] border border-[#D4AF37]/40 text-[10px]">
-                    Notícia Jurídica
+                  <span className="px-2.5 py-0.5 rounded bg-[#102347] text-[#F6E27A] border border-[#D4AF37]/40 text-[10px] font-bold uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+                    <Scale className="w-3 h-3 text-[#E5C158]" />
+                    <span>NOTÍCIA JURÍDICA</span>
                   </span>
                 )}
-                <span>·</span>
-                <span>{activePubModal.area}</span>
-                <span>·</span>
-                <span>{activePubModal.date}</span>
+                <span className="text-right text-[#E5C158] font-semibold text-xs sm:text-sm">
+                  {activePubModal.area}
+                </span>
               </div>
-              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white leading-tight">
+
+              {/* Título da publicação (branco) */}
+              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white leading-tight mb-3">
                 {activePubModal.title}
               </h3>
-              {/* Item 19: abaixo do título em branco tem o texto dourado Autor: Dr. Aldo Leão */}
-              <p className="text-xs text-[#E5C158] mt-2 font-bold uppercase tracking-wider">
-                {activePubModal.type === 'artigo'
-                  ? 'Autor: Dr. Aldo Leão'
-                  : 'Fonte: Tribunais Superiores (STF/STJ) & Seleção Editorial Aldo Leão Advocacia Estratégica'}
-              </p>
+
+              {/* Segunda frase dourada: AUTOR: Dr. ALDO LEÃO à esquerda e Data alinhada à direita na mesma linha */}
+              <div className="flex items-center justify-between text-xs sm:text-sm text-[#E5C158] font-bold uppercase tracking-wider pt-1">
+                <span className="text-left">
+                  {activePubModal.type === 'artigo'
+                    ? 'AUTOR: Dr. ALDO LEÃO'
+                    : 'Fonte: Tribunais Superiores (STF/STJ) & Seleção Editorial'}
+                </span>
+                <span className="text-right text-[#E5C158] font-bold flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5 text-[#E5C158]" />
+                  <span>{activePubModal.date}</span>
+                </span>
+              </div>
             </div>
 
             <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
