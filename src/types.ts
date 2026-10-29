@@ -192,6 +192,7 @@ export interface SiteConfig {
   };
   founder: {
     sectionKicker?: string;
+    sectionSubtitle?: string;
     sectionTitle?: string;
     sectionHighlight?: string;
     name: string;
@@ -203,6 +204,8 @@ export interface SiteConfig {
     bioParagraph2: string;
     bioParagraph3?: string;
     bioParagraph4?: string;
+    bioParagraph5?: string;
+    bioParagraph6?: string;
     differentials?: string[];
     curriculumTrajectoryP1?: string;
     curriculumTrajectoryP2?: string;

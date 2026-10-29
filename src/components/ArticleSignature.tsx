@@ -56,7 +56,7 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
 
   return (
     <div
-      className={`relative rounded-xl p-6 sm:p-7 bg-gradient-to-b from-[#08152B] via-[#050B14] to-[#040810] border border-[#D4AF37]/45 shadow-2xl text-center overflow-hidden my-6 ${className}`}
+      className={`relative rounded-xl px-3 sm:px-7 py-6 sm:py-7 bg-gradient-to-b from-[#08152B] via-[#050B14] to-[#040810] border border-[#D4AF37]/45 shadow-2xl text-center overflow-hidden my-6 ${className}`}
     >
       {/* Decorative top gold hairline */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] w-36 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent pointer-events-none" />
@@ -73,9 +73,9 @@ export const ArticleSignature: React.FC<ArticleSignatureProps> = ({
           {line1}
         </p>
 
-        {/* Frase 2: ALDO LEÃO ADVOCACIA ESTRATÉGICA (#D4AF37) */}
+        {/* Frase 2: ALDO LEÃO ADVOCACIA ESTRATÉGICA (#D4AF37) - Sempre em linha única sem quebra */}
         <p
-          className="font-cinzel text-sm sm:text-base md:text-lg font-bold tracking-wide drop-shadow-sm mt-1"
+          className="font-cinzel text-[11px] sm:text-base md:text-lg font-bold tracking-normal sm:tracking-wide whitespace-nowrap drop-shadow-sm mt-1"
           style={{ color: line2Color }}
         >
           {line2}

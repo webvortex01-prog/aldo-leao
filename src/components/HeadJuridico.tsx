@@ -62,12 +62,21 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
     }
   };
 
+  const handleWhatsAppConsultation = () => {
+    const rawPhone = siteConfig.contact?.whatsappNumber || '5551998088998';
+    const cleanPhone = rawPhone.replace(/\D/g, '') || '5551998088998';
+    const message = encodeURIComponent(
+      'Olá ALDO LEÃO ADVOCACIA ESTRATÉGICA, gostaria de falar com um Advogado especialista e agendar uma Consulta Virtual.'
+    );
+    window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank', 'noopener,noreferrer');
+  };
+
   const f = siteConfig.founder;
 
   return (
     <section id="head-juridico" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header da Seção: ADVOCACIA ESTRATÉGICA DESDE 1986 e Dr. ALDO LEÃO (Item IV) */}
+        {/* Header da Seção: ADVOCACIA ESTRATÉGICA DESDE 1986, Dr. ALDO LEÃO e LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
             <span>ADVOCACIA ESTRATÉGICA DESDE 1986</span>
@@ -76,6 +85,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-3">
             <span className="text-white">Dr. ALDO</span> <span className="gold-text-gradient">LEÃO</span>
           </h2>
+
+          <p className="font-cinzel text-xs sm:text-sm md:text-base font-bold text-[#E5C158] tracking-[0.2em] uppercase mt-2">
+            {f?.sectionSubtitle || 'LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA'}
+          </p>
         </div>
 
         {/* Main Grid: Foto do escritório e Bio oficial */}
@@ -105,24 +118,34 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
           <div className="lg:col-span-7 text-left">
             <div className="mb-4">
               <p className="font-cinzel text-sm sm:text-base font-bold text-[#E5C158] tracking-widest uppercase">
-                {f?.title || 'ADVOCACIA ESTRATÉGICA'}
+                {f?.title && f.title !== 'ADVOCACIA ESTRATÉGICA' ? f.title : 'EXCELÊNCIA JURÍDICA CENTENÁRIA'}
               </p>
             </div>
 
-            {/* Texto exato da página conforme Item 35 */}
+            {/* Texto oficial da página Dr. ALDO LEÃO */}
             <div className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
               <p>
-                {f?.bioParagraph1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
+                {f?.bioParagraph1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração de um legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
               </p>
               <p>
-                {f?.bioParagraph2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.'}
+                {f?.bioParagraph2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência perfeita entre a tradição institucional centenária e a inovação tecnológica da advocacia avançada.'}
               </p>
               <p>
-                {f?.bioParagraph3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.'}
+                {f?.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
               </p>
               <p>
-                {f?.bioParagraph4 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.'}
+                {f?.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
               </p>
+              {f?.bioParagraph5 !== '' && (
+                <p>
+                  {f?.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
+                </p>
+              )}
+              {f?.bioParagraph6 !== '' && (
+                <p>
+                  {f?.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
+                </p>
+              )}
             </div>
 
             {/* Assinatura em tamanho maior com animação iluminada que surge e fica fixa (Item 35 e Item 6) */}
@@ -163,14 +186,14 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               </div>
             </div>
 
-            {/* Botões mantidos conforme Item 35: AGENDAR CONSULTA DIGITAL e LIVROS DIGITAIS */}
+            {/* Botões: AGENDAR CONSULTA VIRTUAL (WhatsApp) e LIVROS DIGITAIS */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
-                onClick={onOpenConsultation}
+                onClick={handleWhatsAppConsultation}
                 className="px-6 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(212,175,55,0.35)] flex items-center gap-2 cursor-pointer"
               >
                 <PhoneCall className="w-4 h-4" />
-                <span>{f?.btnConsultation || 'AGENDAR CONSULTA DIGITAL'}</span>
+                <span>{f?.btnConsultation && f.btnConsultation !== 'AGENDAR CONSULTA DIGITAL' ? f.btnConsultation : 'AGENDAR CONSULTA VIRTUAL'}</span>
               </button>
 
               <button

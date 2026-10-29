@@ -1144,21 +1144,33 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Título Profissional / Especialidade
+                Frase Dourada Abaixo da Imagem
               </label>
               <input
                 type="text"
-                value={siteConfig.founder.title || 'Head Jurídico · Especialista em Planejamento Patrimonial 4.0'}
+                value={siteConfig.founder.title || 'EXCELÊNCIA JURÍDICA CENTENÁRIA'}
                 onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, title: e.target.value } })}
                 className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs font-medium"
               />
             </div>
           </div>
 
-          {/* 4 Parágrafos de Biografia */}
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+              Frase Dourada Abaixo do Título da Página
+            </label>
+            <input
+              type="text"
+              value={siteConfig.founder.sectionSubtitle || 'LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA'}
+              onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, sectionSubtitle: e.target.value } })}
+              className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-medium"
+            />
+          </div>
+
+          {/* 6 Parágrafos de Biografia */}
           <div className="space-y-2.5">
             <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-              4 Parágrafos da Biografia Oficial
+              Parágrafos da Biografia Oficial
             </span>
             <div>
               <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
@@ -1179,20 +1191,38 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               />
             </div>
             <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3 (Tradição e Rigor Técnico)</label>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
               <textarea
                 rows={2}
-                value={siteConfig.founder.bioParagraph3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica...'}
+                value={siteConfig.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica...'}
                 onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph3: e.target.value } })}
                 className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
               />
             </div>
             <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4 (Produção Jurídica e Palestras)</label>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4</label>
               <textarea
                 rows={2}
-                value={siteConfig.founder.bioParagraph4 || 'O Dr. Aldo Leão possui extensa produção jurídica...'}
+                value={siteConfig.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
                 onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph4: e.target.value } })}
+                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5</label>
+              <textarea
+                rows={2}
+                value={siteConfig.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica...'}
+                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph5: e.target.value } })}
+                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 6</label>
+              <textarea
+                rows={2}
+                value={siteConfig.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão...'}
+                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph6: e.target.value } })}
                 className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
               />
             </div>

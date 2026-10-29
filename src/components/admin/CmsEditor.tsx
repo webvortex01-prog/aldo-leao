@@ -1809,19 +1809,36 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Título Profissional / Especialidade
-            </label>
-            <input
-              type="text"
-              value={formData.founder.title || 'Head Jurídico · Especialista em Planejamento Patrimonial 4.0'}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, title: e.target.value }
-              })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                Frase Dourada Abaixo do Título da Página
+              </label>
+              <input
+                type="text"
+                value={formData.founder.sectionSubtitle || 'LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, sectionSubtitle: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                Frase Dourada Abaixo da Imagem
+              </label>
+              <input
+                type="text"
+                value={formData.founder.title || 'EXCELÊNCIA JURÍDICA CENTENÁRIA'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, title: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
+              />
+            </div>
           </div>
 
           <div>
@@ -1856,11 +1873,11 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
           <div>
             <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 3 (Tradição & Rigor Técnico)
+              Biografia Institucional — Parágrafo 3
             </label>
             <textarea
               rows={3}
-              value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.'}
+              value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
               onChange={(e) => setFormData({
                 ...formData,
                 founder: { ...formData.founder, bioParagraph3: e.target.value }
@@ -1871,14 +1888,44 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
           <div>
             <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 4 (Produção Jurídica & Palestras)
+              Biografia Institucional — Parágrafo 4
             </label>
             <textarea
-              rows={3}
-              value={formData.founder.bioParagraph4 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.'}
+              rows={2}
+              value={formData.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
               onChange={(e) => setFormData({
                 ...formData,
                 founder: { ...formData.founder, bioParagraph4: e.target.value }
+              })}
+              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+              Biografia Institucional — Parágrafo 5
+            </label>
+            <textarea
+              rows={3}
+              value={formData.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
+              onChange={(e) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph5: e.target.value }
+              })}
+              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+              Biografia Institucional — Parágrafo 6
+            </label>
+            <textarea
+              rows={3}
+              value={formData.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
+              onChange={(e) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph6: e.target.value }
               })}
               className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
             />

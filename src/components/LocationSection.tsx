@@ -86,7 +86,9 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 {c?.boxVirtualTitle || 'ATENDIMENTO VIRTUAL BRASIL'}
               </h3>
               <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light">
-                {c?.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2ª à 6ª feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
+                {c?.boxVirtualText && c.boxVirtualText.includes('08:30')
+                  ? c.boxVirtualText
+                  : 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2ª à 6ª feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
               </p>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20">

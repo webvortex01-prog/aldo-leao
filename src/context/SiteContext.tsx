@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { 
-  SiteConfig, 
-  ConsultationRequest, 
-  LeadStatus, 
-  PracticeArea, 
-  ExcellenceSolution, 
-  Publication, 
+import {
+  SiteConfig,
+  ConsultationRequest,
+  LeadStatus,
+  PracticeArea,
+  ExcellenceSolution,
+  Publication,
   DigitalBook,
   CaseStudy,
   HoldingLandingConfig
@@ -622,7 +622,7 @@ const DEFAULT_CONFIG: SiteConfig = {
     addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     officeHours: 'De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs',
     boxVirtualTitle: 'ATENDIMENTO VIRTUAL BRASIL',
-    boxVirtualText: 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp.',
+    boxVirtualText: 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2ª à 6ª feira, das 08:30/11:30hs e das 13:30/18:30hs.',
     spAddress: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     bsbAddress: 'Atendimento Virtual Especializado com Hora Marcada em Todo o Brasil',
     cwbAddress: 'Escritório Digital Brasil · Atendimento em Todo o Território Nacional',
@@ -632,22 +632,25 @@ const DEFAULT_CONFIG: SiteConfig = {
     email: 'aldoleaoadvocacia@gmail.com'
   },
   founder: {
-    sectionKicker: 'TERCEIRA GERAÇÃO DESDE 1986',
+    sectionKicker: 'ADVOCACIA ESTRATÉGICA DESDE 1986',
+    sectionSubtitle: 'LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA',
     sectionTitle: 'HEAD',
     sectionHighlight: 'JURÍDICO',
     name: 'Dr. ALDO LEÃO',
     fullName: 'Dr. Aldo Leão',
-    title: 'ADVOCACIA ESTRATÉGICA',
+    title: 'EXCELÊNCIA JURÍDICA CENTENÁRIA',
     credentials: 'Desde 1986 · Terceira Geração · Mais de 40 Anos de Excelência Jurídica',
     photoUrl: '/img/dr-aldo-portrait.jpg',
     secondaryPhotoUrl: '/img/dr-aldo-reuniao.jpg',
-    bioParagraph1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira. A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.',
-    bioParagraph2: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado. O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.',
-    bioParagraph3: 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.',
-    bioParagraph4: 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior.',
+    bioParagraph1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração de um legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.',
+    bioParagraph2: 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência perfeita entre a tradição institucional centenária e a inovação tecnológica da advocacia avançada.',
+    bioParagraph3: 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.',
+    bioParagraph4: 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.',
+    bioParagraph5: 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.',
+    bioParagraph6: 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.',
     signatureImageUrl: '/img/assinatura-gold.png',
     saibaMaisBtn: 'SAIBA MAIS',
-    btnConsultation: 'AGENDAR CONSULTA DIGITAL',
+    btnConsultation: 'AGENDAR CONSULTA VIRTUAL',
     btnLivros: 'LIVROS DIGITAIS',
     counterTitle: 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA',
     counterSub: 'Desde 1986 · Terceira Geração de Tradição Jurídica Familiar Centenária',
@@ -1001,7 +1004,44 @@ interface SiteContextType {
   resetSiteConfigToDefault: () => void;
 }
 
-const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v22';
+const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v24';
+
+const normalizeContactConfig = (rawContact: any) => {
+  const c = { ...DEFAULT_CONFIG.contact, ...(rawContact || {}) };
+  if (!c.boxVirtualText || !c.boxVirtualText.includes('08:30')) {
+    c.boxVirtualText = DEFAULT_CONFIG.contact.boxVirtualText;
+  }
+  return c;
+};
+
+const normalizeFounderConfig = (rawFounder: any) => {
+  const f = { ...DEFAULT_CONFIG.founder, ...(rawFounder || {}) };
+  if (!f.sectionSubtitle || f.sectionSubtitle === 'ADVOCACIA ESTRATÉGICA') {
+    f.sectionSubtitle = DEFAULT_CONFIG.founder.sectionSubtitle;
+  }
+  if (!f.title || f.title === 'ADVOCACIA ESTRATÉGICA') {
+    f.title = DEFAULT_CONFIG.founder.title;
+  }
+  if (!f.btnConsultation || f.btnConsultation === 'AGENDAR CONSULTA DIGITAL') {
+    f.btnConsultation = DEFAULT_CONFIG.founder.btnConsultation;
+  }
+  // Atualiza textos legados da biografia para o novo texto oficial do Dr. Aldo Leão
+  if (
+    !f.bioParagraph1 ||
+    f.bioParagraph1.includes('terceira geração do legado jurídico familiar') ||
+    !f.bioParagraph2 ||
+    f.bioParagraph2.includes('tradição jurídica centenária de três gerações') ||
+    f.bioParagraph2.includes('Com uma trajetória de mais de 40 anos')
+  ) {
+    f.bioParagraph1 = DEFAULT_CONFIG.founder.bioParagraph1;
+    f.bioParagraph2 = DEFAULT_CONFIG.founder.bioParagraph2;
+    f.bioParagraph3 = DEFAULT_CONFIG.founder.bioParagraph3;
+    f.bioParagraph4 = DEFAULT_CONFIG.founder.bioParagraph4;
+    f.bioParagraph5 = DEFAULT_CONFIG.founder.bioParagraph5;
+    f.bioParagraph6 = DEFAULT_CONFIG.founder.bioParagraph6;
+  }
+  return f;
+};
 
 // Purga de chaves antigas de cache para garantir que todos os navegadores carreguem a versão mais recente
 try {
@@ -1023,7 +1063,9 @@ try {
     'aldoleao_site_config_v14',
     'aldoleao_site_config_v15',
     'aldoleao_site_config_v20',
-    'aldoleao_site_config_v21'
+    'aldoleao_site_config_v21',
+    'aldoleao_site_config_v22',
+    'aldoleao_site_config_v23'
   ];
   legacyKeys.forEach(k => localStorage.removeItem(k));
 } catch (e) {
@@ -1047,7 +1089,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           navbarConfig.logoImageUrl = '/img/logo.png';
         }
 
-        const contactConfig = { ...DEFAULT_CONFIG.contact, ...(parsed.contact || {}) };
+        const contactConfig = normalizeContactConfig(parsed.contact);
         contactConfig.phonePrimary = cleanAndFormatPhone(contactConfig.phonePrimary, '(51) 99808-8998');
         contactConfig.phoneSecondary = cleanAndFormatPhone(contactConfig.phoneSecondary, '(51) 99807-8998');
         contactConfig.spPhone = cleanAndFormatPhone(contactConfig.spPhone, '(51) 99808-8998');
@@ -1057,22 +1099,22 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         const practiceAreas = (parsed.practiceAreas && Array.isArray(parsed.practiceAreas) && parsed.practiceAreas.length > 0)
           ? parsed.practiceAreas.map((pa: any, i: number) => ({
-              ...pa,
-              number: pa.number || `0${i + 1}`,
-              badge: pa.badge || `0${i + 1}`
-            }))
+            ...pa,
+            number: pa.number || `0${i + 1}`,
+            badge: pa.badge || `0${i + 1}`
+          }))
           : DEFAULT_PRACTICE_AREAS;
 
         // Preserva os livros salvos pelo usuário, mantendo capas customizadas e livros novos adicionados
         const digitalBooks = (parsed.digitalBooks && Array.isArray(parsed.digitalBooks) && parsed.digitalBooks.length > 0)
           ? parsed.digitalBooks.map((savedBook: any) => {
-              const defaultMatch = DEFAULT_DIGITAL_BOOKS.find(b => b.id === savedBook.id);
-              return {
-                ...(defaultMatch || {}),
-                ...savedBook,
-                coverImage: savedBook.coverImage || defaultMatch?.coverImage || ''
-              };
-            })
+            const defaultMatch = DEFAULT_DIGITAL_BOOKS.find(b => b.id === savedBook.id);
+            return {
+              ...(defaultMatch || {}),
+              ...savedBook,
+              coverImage: savedBook.coverImage || defaultMatch?.coverImage || ''
+            };
+          })
           : DEFAULT_DIGITAL_BOOKS;
 
         // Assegura que as frases douradas oficiais de Soluções de Excelência estejam sempre atualizadas (Itens 30 a 37 e 59)
@@ -1087,7 +1129,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         const centennialLegacy = { ...DEFAULT_CONFIG.centennialLegacy, ...(parsed.centennialLegacy || {}) };
         if (centennialLegacy.events && centennialLegacy.events.length > 0) {
-          centennialLegacy.events = centennialLegacy.events.map((ev: any) => 
+          centennialLegacy.events = centennialLegacy.events.map((ev: any) =>
             (ev.title?.toLowerCase().includes('presença nacional digital') && ev.year === '2026')
               ? { ...ev, year: '2020' }
               : ev
@@ -1109,7 +1151,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           excellenceSolutions,
           digitalBooks,
           publications,
-          founder: { ...DEFAULT_CONFIG.founder, ...(parsed.founder || {}) },
+          founder: normalizeFounderConfig(parsed.founder),
           slide2: { ...DEFAULT_CONFIG.slide2, ...(parsed.slide2 || {}) },
           nationalPresence: { ...DEFAULT_CONFIG.nationalPresence, ...(parsed.nationalPresence || {}) },
           centennialLegacy,
@@ -1156,8 +1198,8 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
             navbar: { ...(prev.navbar || {}), ...(cloudConfig.navbar || {}) },
             hero: { ...(prev.hero || {}), ...(cloudConfig.hero || {}) },
             slide2: { ...(prev.slide2 || {}), ...(cloudConfig.slide2 || {}) },
-            contact: { ...(prev.contact || {}), ...(cloudConfig.contact || {}) },
-            founder: { ...(prev.founder || {}), ...(cloudConfig.founder || {}) },
+            contact: normalizeContactConfig({ ...(prev.contact || {}), ...(cloudConfig.contact || {}) }),
+            founder: normalizeFounderConfig({ ...(prev.founder || {}), ...(cloudConfig.founder || {}) }),
             nationalPresence: { ...(prev.nationalPresence || {}), ...(cloudConfig.nationalPresence || {}) },
             centennialLegacy: { ...(prev.centennialLegacy || {}), ...(cloudConfig.centennialLegacy || {}) },
             holdingFamiliar: { ...(prev.holdingFamiliar || {}), ...(cloudConfig.holdingFamiliar || {}) },
