@@ -2523,6 +2523,18 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
           </div>
 
           <div>
+            <label className="block text-xs text-[#F6E27A] font-bold mb-1">Box 1 · Atendimento Virtual Brasil (Texto)</label>
+            <textarea
+              rows={3}
+              value={siteConfig.contact.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
+              onChange={(e) => updateSiteConfig({
+                contact: { ...siteConfig.contact, boxVirtualText: e.target.value }
+              })}
+              className="w-full p-2 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-white text-xs leading-relaxed"
+            />
+          </div>
+
+          <div>
             <label className="block text-xs text-slate-300 font-semibold mb-1">Endereço Sede (Porto Alegre)</label>
             <textarea
               rows={2}

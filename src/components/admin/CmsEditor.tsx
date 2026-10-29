@@ -5314,6 +5314,21 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
 
           <div>
+            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1.5">
+              Box 1 · Texto de Atendimento Virtual Brasil
+            </label>
+            <textarea
+              rows={3}
+              value={formData.contact.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
+              onChange={(e) => setFormData({
+                ...formData,
+                contact: { ...formData.contact, boxVirtualText: e.target.value }
+              })}
+              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white leading-relaxed"
+            />
+          </div>
+
+          <div>
             <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
               Horário de Atendimento
             </label>

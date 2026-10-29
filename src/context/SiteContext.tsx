@@ -620,9 +620,9 @@ const DEFAULT_CONFIG: SiteConfig = {
     formNamePlaceholder: 'Nome Completo',
     formConsultationLabel: 'Tipo de Consulta',
     addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
-    officeHours: 'De 2ª a 6ª Feira das 08:30/11:30hs e das 13:30/18:30hs',
+    officeHours: 'De 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.',
     boxVirtualTitle: 'ATENDIMENTO VIRTUAL BRASIL',
-    boxVirtualText: 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2ª à 6ª feira, das 08:30/11:30hs e das 13:30/18:30hs.',
+    boxVirtualText: 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.',
     spAddress: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     bsbAddress: 'Atendimento Virtual Especializado com Hora Marcada em Todo o Brasil',
     cwbAddress: 'Escritório Digital Brasil · Atendimento em Todo o Território Nacional',
@@ -1004,11 +1004,11 @@ interface SiteContextType {
   resetSiteConfigToDefault: () => void;
 }
 
-const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v24';
+const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v25';
 
 const normalizeContactConfig = (rawContact: any) => {
   const c = { ...DEFAULT_CONFIG.contact, ...(rawContact || {}) };
-  if (!c.boxVirtualText || !c.boxVirtualText.includes('08:30')) {
+  if (!c.boxVirtualText || !c.boxVirtualText.includes('08:30/11:30hs') || c.boxVirtualText.includes('2ª')) {
     c.boxVirtualText = DEFAULT_CONFIG.contact.boxVirtualText;
   }
   return c;
@@ -1065,7 +1065,8 @@ try {
     'aldoleao_site_config_v20',
     'aldoleao_site_config_v21',
     'aldoleao_site_config_v22',
-    'aldoleao_site_config_v23'
+    'aldoleao_site_config_v23',
+    'aldoleao_site_config_v24'
   ];
   legacyKeys.forEach(k => localStorage.removeItem(k));
 } catch (e) {
@@ -1220,6 +1221,13 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
               ? cloudConfig.publications
               : prev.publications,
           };
+          if (
+            !cloudConfig.contact?.boxVirtualText ||
+            !cloudConfig.contact.boxVirtualText.includes('08:30/11:30hs') ||
+            cloudConfig.contact.boxVirtualText.includes('2ª')
+          ) {
+            saveSiteConfigToFirebase(updated).catch(() => {});
+          }
           return updated;
         });
       }
