@@ -28,11 +28,8 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
     setIsLoading(true);
     setError('');
 
-    // Credentials: login "aldo" or "admin" or "aldo1908" / password "aldo1908" or "1908"
-    const validUser = ['aldo', 'admin', 'aldo1908', 'doutor', 'dr.aldo'].includes(
-      username.trim().toLowerCase()
-    );
-    const validPass = ['aldo1908', '1908', 'leao1908', 'admin'].includes(password.trim());
+    const validUser = username.trim().toLowerCase() === 'aldo';
+    const validPass = password.trim() === '$uce$$o';
 
     setTimeout(() => {
       if (validUser && validPass) {
@@ -103,7 +100,7 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Ex: aldo1908"
+              placeholder="Digite seu usuário"
               className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/40 focus:border-[#F6E27A] text-white text-xs outline-none transition-colors"
             />
           </div>
@@ -121,13 +118,6 @@ export const AdminAuthModal: React.FC<AdminAuthModalProps> = ({
               placeholder="••••••••"
               className="w-full px-3.5 py-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/40 focus:border-[#F6E27A] text-white text-xs outline-none transition-colors"
             />
-          </div>
-
-          <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400">
-            <span className="flex items-center gap-1 text-[#E5C158]">
-              <Lock className="w-3 h-3" />
-              Credencial padrão: <strong className="text-white">aldo1908</strong> / <strong className="text-white">1908</strong>
-            </span>
           </div>
 
           <div className="pt-3 flex items-center gap-2">

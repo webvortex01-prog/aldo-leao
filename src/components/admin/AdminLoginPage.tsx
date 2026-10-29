@@ -82,8 +82,8 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
     const cleanUser = username.trim().toLowerCase();
     const cleanPass = password.trim();
 
-    const isValidUser = ['aldo', 'admin', 'aldo1908', 'dr.aldo', 'doutor', 'leao'].includes(cleanUser);
-    const isValidPass = ['aldo1908', '1908', 'leao1908', 'admin'].includes(cleanPass);
+    const isValidUser = cleanUser === 'aldo';
+    const isValidPass = cleanPass === '$uce$$o';
 
     setTimeout(() => {
       setIsSubmitting(false);
@@ -225,7 +225,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
                     disabled={lockoutRemaining > 0 || isSubmitting}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Ex: aldo ou admin"
+                    placeholder="Digite seu usuário"
                     autoComplete="username"
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-[#050B14] border border-slate-700 focus:border-[#D4AF37] text-white text-xs outline-none transition-colors disabled:opacity-50"
                   />
