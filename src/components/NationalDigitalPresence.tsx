@@ -11,7 +11,7 @@ export const NationalDigitalPresence: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Content */}
-          <div className="lg:col-span-7 text-left">
+          <div className="lg:col-span-7 text-left reveal-fade-left">
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
               <span>{np?.kicker || 'ATENDIMENTO JURÍDICO DE EXCELÊNCIA EM TODO O BRASIL'}</span>
             </div>
@@ -73,8 +73,8 @@ export const NationalDigitalPresence: React.FC = () => {
           </div>
 
           {/* Right Column: Mapa do Brasil com inscrição Presença Nacional Digital (Item 30) */}
-          <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-full rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-gradient-to-b from-[#09152B] via-[#071122] to-[#050B14] p-6 sm:p-8 flex flex-col items-center text-center">
+          <div className="lg:col-span-5 relative flex justify-center reveal-fade-right">
+            <div className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-gradient-to-b from-[#09152B] via-[#071122] to-[#050B14] p-6 sm:p-8 flex flex-col items-center text-center photo-luxury-frame">
               {/* Inscrição Superior (Item 47: ATENDIMENTO 100% DIGITAL, sem 27 estados) */}
               <div className="w-full border-b border-[#D4AF37]/25 pb-4 mb-5 flex items-center justify-center">
                 <div className="flex items-center gap-2">
@@ -86,11 +86,11 @@ export const NationalDigitalPresence: React.FC = () => {
               </div>
 
               {/* Imagem Oficial da Presença Nacional Digital enviada com animação sofisticada */}
-              <div className="relative w-full overflow-hidden rounded-xl border border-[#D4AF37]/40 shadow-inner bg-[#050B14] my-2 group animate-map-glow">
+              <div className="relative w-full overflow-hidden rounded-xl sm:rounded-2xl border border-[#D4AF37]/40 shadow-inner bg-[#050B14] my-2 group animate-map-glow p-1">
                 <img
                   src={np?.mapImageUrl || '/presencadigital.jpeg'}
                   alt="Presença Nacional Digital - Aldo Leão Advocacia Estratégica"
-                  className="w-full h-auto object-cover object-center group-hover:scale-[1.03] transition-transform duration-700"
+                  className="w-full h-auto object-cover object-center rounded-lg sm:rounded-xl group-hover:scale-[1.03] transition-transform duration-700"
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
                     if (!target.src.includes('presencadigital.jpeg')) {

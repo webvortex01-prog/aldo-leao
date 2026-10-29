@@ -28,7 +28,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
     <section id="holding-familiar" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 reveal-fade-up">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
             <span>{hf?.sectionKicker || 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0'}</span>
           </div>
@@ -52,17 +52,17 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
         </div>
 
         {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL vem ANTES de O QUE É O PLANEJAMENTO 4.0? (Item 3 do dia 23/10/26) */}
-        <div className="max-w-2xl lg:max-w-3xl mx-auto mb-14">
-          <div className="group relative rounded-2xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl text-left card-hover-interactive">
-            <div className="aspect-[4/3] sm:aspect-[16/11] md:aspect-[16/10] w-full overflow-hidden relative">
+        <div className="max-w-2xl lg:max-w-3xl mx-auto mb-14 reveal-scale">
+          <div className="group relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl text-left card-hover-interactive photo-luxury-frame">
+            <div className="aspect-[4/3] sm:aspect-[16/11] md:aspect-[16/10] w-full overflow-hidden relative p-1.5 sm:p-2 bg-[#081326]">
               <img
                 src={hf?.cardImageUrl || '/img/holding-familiar-1.jpg'}
                 alt={hf?.cardTitle || 'Estruturação e Proteção Patrimonial - Holding Familiar'}
-                className="w-full h-full object-cover object-[center_28%] transition-transform duration-1000 ease-out group-hover:scale-106 animate-section-photo-float"
+                className="w-full h-full object-cover object-[center_28%] rounded-xl sm:rounded-2xl transition-transform duration-1000 ease-out group-hover:scale-106 animate-section-photo-float"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-80 pointer-events-none" />
               {/* Badge alterada para PLANEJAMENTO 4.0 (Item 3) com Levitação Nobre */}
-              <div className="absolute top-3 left-3 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full animate-float-gentle shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+              <div className="absolute top-4 left-4 bg-[#050B14]/85 border border-[#D4AF37]/50 backdrop-blur-md px-3.5 py-1 rounded-full animate-float-gentle shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                 <span className="text-[10px] uppercase tracking-wider text-[#F6E27A] font-bold">
                   {hf?.cardBadge || 'PLANEJAMENTO 4.0'}
                 </span>
@@ -82,7 +82,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
 
         {/* What is and Benefits Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-16">
-          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left card-hover-interactive">
+          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left card-hover-interactive reveal-fade-left">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
                 {hf?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
@@ -107,7 +107,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           </div>
 
           {/* Benefits Checkmarks */}
-          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between text-left card-hover-interactive">
+          <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between text-left card-hover-interactive reveal-fade-right">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
                 VANTAGENS EXCLUSIVAS
@@ -140,7 +140,7 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
         </div>
 
         {/* TABELA COMPARATIVA DE CUSTOS (INVENTÁRIO x HOLDING FAMILIAR) - Item 10 e Item 40 (coluna direita não cortada) */}
-        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12 card-hover-interactive">
+        <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#09152B] to-[#071122] p-5 sm:p-8 md:p-10 shadow-2xl mb-12 card-hover-interactive reveal-scale">
           <div className="text-center max-w-3xl mx-auto mb-8">
             <h3 className="font-cinzel text-xl sm:text-2xl md:text-3xl font-bold text-white uppercase">
               CUSTOS: INVENTÁRIO X HOLDING FAMILIAR

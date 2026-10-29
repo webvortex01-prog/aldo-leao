@@ -27,7 +27,7 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0E1F3D]/40 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/45 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#071122]">
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#D4AF37]/45 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#071122] reveal-scale">
           {/* Fundo da section meio esfumaçado com a imagem de consulta virtual mais clara e com flutuação suave */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
@@ -101,18 +101,18 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
 
             {/* Coluna Direita: Segunda imagem em moldura nobre de vidro flutuando suavemente */}
             <div className="lg:col-span-5 relative flex justify-center">
-              <div className="relative w-full max-w-sm rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-[0_20px_50px_rgba(0,0,0,0.85)] bg-[#070F1E] group card-hover-interactive animate-card-float">
-                <div className="aspect-[4/3] sm:aspect-[14/10] w-full overflow-hidden relative">
+              <div className="relative w-full max-w-sm rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/60 shadow-[0_20px_50px_rgba(0,0,0,0.85)] bg-[#070F1E] group card-hover-interactive animate-card-float photo-luxury-frame">
+                <div className="aspect-[4/3] sm:aspect-[14/10] w-full overflow-hidden relative p-1.5 sm:p-2 bg-[#081326]">
                   <img
                     src="/img/consulta-virtual-1.jpg"
                     alt="Dr. Aldo Leão em Consulta Digital Estratégica"
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover object-center rounded-xl sm:rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src = '/img/consulta-virtual-2.jpg';
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-60" />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#050B14]/85 backdrop-blur-md border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider shadow-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-60 pointer-events-none" />
+                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#050B14]/85 backdrop-blur-md border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider shadow-md">
                     Atendimento 100% Digital
                   </div>
                 </div>

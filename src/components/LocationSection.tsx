@@ -58,7 +58,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
     <section id="contato" className="py-20 md:py-28 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: Título CONTATO (Itens 11, 42 e X) */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-14 reveal-fade-up">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
             <Scale className="w-4 h-4 text-[#F6E27A]" />
             <span>{c?.sectionKicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}</span>
@@ -77,7 +77,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
         {/* Grid de Canais de Atendimento Conforme Item 13, 42, 43, 44, 45 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 text-left">
           {/* Box 1: ATENDIMENTO VIRTUAL BRASIL com Balança da Justiça (Item 9, 1 e 43) */}
-          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group card-hover-interactive reveal-fade-up delay-75">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Scale className="w-6 h-6 text-[#E5C158]" />
@@ -103,7 +103,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
           </div>
 
           {/* Box 2: ESCRITÓRIO DIGITAL BRASIL - PORTO ALEGRE/RS */}
-          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group card-hover-interactive reveal-fade-up delay-150">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Scale className="w-6 h-6 text-[#E5C158]" />
@@ -124,7 +124,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
           </div>
 
           {/* Box 3: TELEFONES (Itens 1, 8, 25 e 44: dois números de atendimento) */}
-          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group card-hover-interactive reveal-fade-up delay-200">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Phone className="w-6 h-6 text-[#E5C158]" />
@@ -156,7 +156,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
           </div>
 
           {/* Box 4: E-MAILS (Itens 45 e V: sem links clicáveis e sem botão Enviar E-mail) */}
-          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group">
+          <div className="p-6 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col justify-between hover:border-[#D4AF37] transition-all group card-hover-interactive reveal-fade-up delay-300">
             <div>
               <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#F6E27A] mb-4 group-hover:scale-105 transition-transform">
                 <Mail className="w-6 h-6 text-[#E5C158]" />
@@ -195,7 +195,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
         </div>
 
         {/* Box WHATSAPP BUSINESS com animação de abertura (Item 46 e 6) */}
-        <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left card-hover-interactive">
+        <div className="mb-14 p-6 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0A1B38] to-[#071122] border border-[#25D366]/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left card-hover-interactive reveal-scale">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-[#25D366] text-black flex items-center justify-center shrink-0 shadow-lg">
               <MessageSquare className="w-6 h-6" />
@@ -220,7 +220,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
         </div>
 
         {/* FORMULÁRIO DE CONTATO (Item 10, 47 e Item 6) */}
-        <div className="max-w-3xl mx-auto rounded-2xl border-2 border-[#D4AF37]/50 bg-[#071122] p-6 sm:p-10 shadow-2xl text-left mb-16">
+        <div className="max-w-3xl mx-auto rounded-2xl border-2 border-[#D4AF37]/50 bg-[#071122] p-6 sm:p-10 shadow-2xl text-left mb-16 reveal-fade-up">
           <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white uppercase tracking-wider animate-title-reveal">
               FORMULÁRIO DE CONTATO

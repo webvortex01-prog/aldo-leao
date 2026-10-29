@@ -86,7 +86,7 @@ export const PublicationsSection: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-14 reveal-fade-up">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
             <BookOpen className="w-3.5 h-3.5 text-[#D4AF37]" />
             <span>{siteConfig.publicationsSection?.kicker || 'NOTÍCIAS E ARTIGOS JURÍDICOS'}</span>
@@ -111,7 +111,7 @@ export const PublicationsSection: React.FC = () => {
         </div>
 
         {/* Filter and Search Bar */}
-        <div className="p-4 sm:p-5 rounded-xl bg-[#071122] border border-[#D4AF37]/30 shadow-xl mb-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#071122] border border-[#D4AF37]/30 shadow-xl mb-12 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 reveal-fade-up">
           {/* Search Box com Botão PESQUISAR */}
           <div className="flex-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <div className="relative flex-1">
@@ -193,13 +193,15 @@ export const PublicationsSection: React.FC = () => {
               Nenhuma publicação encontrada para os critérios selecionados.
             </div>
           ) : (
-            currentPublications.map((pub) => {
+            currentPublications.map((pub, index) => {
               const isArtigo = pub.type === 'artigo';
+              const staggerClasses = ['delay-75', 'delay-150', 'delay-200', 'delay-250', 'delay-300'];
+              const delayClass = staggerClasses[index % staggerClasses.length];
 
               return (
                 <article
                   key={pub.id}
-                  className="rounded-xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/60 shadow-lg group hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)]"
+                  className={`reveal-fade-up ${delayClass} rounded-2xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/60 shadow-lg group hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] card-hover-interactive`}
                 >
                   <div>
                     {/* Header Banner com diferenciação clara entre Artigo e Notícia */}

@@ -72,7 +72,7 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
     <section id="solucoes-excelencia" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 reveal-fade-up">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-semibold mb-3">
             <span>{siteConfig.excellenceSolutionsHeader?.kicker || 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO'}</span>
           </div>
@@ -95,11 +95,13 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
         {/* 14 Solutions Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {solutions.map((sol, index) => {
+            const staggerClasses = ['delay-75', 'delay-150', 'delay-200', 'delay-250', 'delay-300'];
+            const delayClass = staggerClasses[index % staggerClasses.length];
             return (
               <div
                 key={sol.id || index}
                 onClick={() => handleSolutionClick(sol)}
-                className="group rounded-xl p-6 transition-all duration-300 flex flex-col justify-between cursor-pointer border bg-[#071122] border-[#D4AF37]/25 hover:border-[#D4AF37]/65 hover:bg-[#0B1A35] hover:-translate-y-1.5 shadow-lg text-left"
+                className={`reveal-fade-up ${delayClass} group rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between cursor-pointer border bg-[#071122] border-[#D4AF37]/25 hover:border-[#D4AF37]/65 hover:bg-[#0B1A35] hover:-translate-y-1.5 shadow-lg text-left card-hover-interactive`}
               >
                 <div>
                   {/* Top Bar of Box */}

@@ -77,7 +77,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
     <section id="head-juridico" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header da Seção: ADVOCACIA ESTRATÉGICA DESDE 1986, Dr. ALDO LEÃO e LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 reveal-fade-up">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
             <span>ADVOCACIA ESTRATÉGICA DESDE 1986</span>
           </div>
@@ -94,28 +94,28 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
         {/* Main Grid: Foto do escritório e Bio oficial */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
           {/* Coluna Esquerda: Imagem no escritório sem miniaturas, sem badge sobreposta, limpa e elegante (Item 35) */}
-          <div className="lg:col-span-5 relative flex justify-center">
+          <div className="lg:col-span-5 relative flex justify-center reveal-fade-right">
             <div className="relative w-full max-w-md">
-              <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/30 to-transparent rounded-2xl blur-md" />
+              <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/35 via-[#F6E27A]/20 to-transparent rounded-3xl blur-lg opacity-80" />
 
-              <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#071122]">
-                <div className="aspect-[3/4] relative overflow-hidden bg-[#0A1424]">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/60 shadow-2xl bg-[#071122] photo-luxury-frame">
+                <div className="aspect-[3/4] relative overflow-hidden bg-[#0A1424] p-2.5 sm:p-3">
                   <img
                     src={f?.photoUrl || '/img/dr-aldo-reuniao.jpg'}
                     alt={`${f?.name || 'Dr. Aldo Leão'} no Escritório`}
-                    className="w-full h-full object-cover object-top animate-photo-soft-zoom hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-top rounded-xl sm:rounded-2xl animate-photo-soft-zoom hover:scale-105 transition-transform duration-700"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).src = '/img/dr-aldo-foco.jpg';
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/20 to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/20 to-transparent opacity-80 pointer-events-none" />
                 </div>
               </div>
             </div>
           </div>
 
           {/* Coluna Direita: Conteúdo Oficial Conforme Item 35 e Item IV (Sem repetição do nome) */}
-          <div className="lg:col-span-7 text-left">
+          <div className="lg:col-span-7 text-left reveal-fade-left">
             <div className="mb-4">
               <p className="font-cinzel text-sm sm:text-base font-bold text-[#E5C158] tracking-widest uppercase">
                 {f?.title && f.title !== 'ADVOCACIA ESTRATÉGICA' ? f.title : 'EXCELÊNCIA JURÍDICA CENTENÁRIA'}
@@ -208,7 +208,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
         </div>
 
         {/* Item 21 e 53: Contador no final da página Head Jurídico, com a balança da justiça na cor azul-marinho e ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA */}
-        <div ref={counterRef} className="pt-8 border-t border-[#D4AF37]/25">
+        <div ref={counterRef} className="pt-8 border-t border-[#D4AF37]/25 reveal-scale">
           <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-4">
               {/* Ícone da balança da justiça na cor azul-marinho (fundo claro/dourado suave para contraste) */}

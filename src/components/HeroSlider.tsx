@@ -235,12 +235,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             >
               <div className="relative w-full max-w-md lg:max-w-none mx-auto">
                 <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/60 via-[#F6E27A]/30 to-[#D4AF37]/15 rounded-2xl blur-xl opacity-85" />
-                <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#0A1424] shadow-2xl">
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-6">
+                <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 bg-[#0A1424] shadow-2xl photo-luxury-frame">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-5 sm:p-6">
                     <img
                       src="/img/logo.jpg"
                       alt="Aldo Leão Advocacia Estratégica"
-                      className="w-full h-full object-contain filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] animate-lion-breath"
+                      className="w-full h-full object-contain rounded-xl sm:rounded-2xl filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] animate-lion-breath"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = '/img/logo.png';
                       }}
@@ -249,7 +249,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </div>
 
                 {/* Card logo abaixo do box da logomarca com a MESMA cor de fundo azul-marinho da logo do leão (#0A1424) */}
-                <div className="relative mt-3.5 p-3.5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
+                <div className="relative mt-3.5 p-3.5 rounded-2xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-[#D4AF37]/25 border border-[#D4AF37]/70 flex items-center justify-center text-[#F6E27A] shrink-0">
                       <Scale className="w-4 h-4 text-[#E5C158]" />
@@ -372,13 +372,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </button>
                 </div>
 
-                {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 (Aparece integralmente com zoom flutuante sutil) */}
-                <div className="relative rounded-xl overflow-hidden border border-[#D4AF37]/50 bg-[#070F1E] shadow-2xl card-hover-interactive group">
-                  <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-2">
+                {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 (Aparece com bordas arredondadas e efeito de brilho) */}
+                <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/60 bg-[#070F1E] shadow-2xl card-hover-interactive group photo-luxury-frame">
+                  <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-2.5 sm:p-3">
                     <img
                       src="/img/holding-familiar-1.jpg"
                       alt="Holding Familiar - Planejamento Patrimonial 4.0"
-                      className="w-full h-full object-contain animate-section-photo-float group-hover:scale-105 transition-transform duration-700 ease-out"
+                      className="w-full h-full object-contain rounded-xl sm:rounded-2xl animate-section-photo-float group-hover:scale-105 transition-transform duration-700 ease-out"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = '/img/holding-familiar-1.jpg';
                       }}
@@ -387,7 +387,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </div>
 
                 {/* Card com a balança e os textos logo abaixo do box da foto (Item c) */}
-                <div className="p-3.5 rounded-xl bg-[#070F1E] border border-[#D4AF37]/50 flex items-center gap-3 text-left shadow-xl">
+                <div className="p-3.5 rounded-2xl bg-[#070F1E] border border-[#D4AF37]/50 flex items-center gap-3 text-left shadow-xl">
                   <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
                     <Scale className="w-4 h-4 text-[#E5C158]" />
                   </div>

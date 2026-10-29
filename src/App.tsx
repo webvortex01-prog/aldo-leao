@@ -106,6 +106,63 @@ function AppContent() {
     };
   }, []);
 
+  // Efeito Global de Scroll Reveal Suave para Elementos ao Rolar a Página
+  React.useEffect(() => {
+    const revealVisibleNow = () => {
+      const targets = document.querySelectorAll(
+        '.reveal-on-scroll, .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale'
+      );
+      targets.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= window.innerHeight - 30) {
+          el.classList.add('revealed');
+        }
+      });
+    };
+
+    revealVisibleNow();
+
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll(
+        '.reveal-on-scroll, .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale'
+      ).forEach((el) => el.classList.add('revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.08
+      }
+    );
+
+    const observeAll = () => {
+      const targets = document.querySelectorAll(
+        '.reveal-on-scroll, .reveal-fade-up, .reveal-fade-left, .reveal-fade-right, .reveal-scale'
+      );
+      targets.forEach((el) => observer.observe(el));
+    };
+
+    observeAll();
+    const t1 = setTimeout(observeAll, 300);
+    const t2 = setTimeout(revealVisibleNow, 700);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      observer.disconnect();
+    };
+  }, [currentView]);
+
   const handleOpenConsultation = (area?: string) => {
     if (area) setPresetArea(area);
     setIsConsultationOpen(true);

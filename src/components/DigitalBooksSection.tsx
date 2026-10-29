@@ -153,7 +153,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-12 reveal-fade-up">
           {/* Frase em dourado acima do título */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0E1F3D]/80 border border-[#D4AF37]/40 text-xs sm:text-sm uppercase tracking-[0.22em] text-[#E5C158] font-bold mb-4 shadow-inner">
             <BookOpen className="w-4 h-4 text-[#F6E27A]" />
@@ -196,7 +196,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
         </div>
 
         {/* Barra de Busca rápida */}
-        <div className="max-w-3xl mx-auto mb-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="max-w-3xl mx-auto mb-12 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 reveal-fade-up">
           <div className="relative flex-1 w-full">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
@@ -257,20 +257,23 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
             key={`page-${safeCurrentPage}`}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 animate-fade-in"
           >
-            {currentBooks.map((book) => {
+            {currentBooks.map((book, index) => {
+              const staggerClasses = ['delay-75', 'delay-150', 'delay-200'];
+              const delayClass = staggerClasses[index % staggerClasses.length];
+
               return (
                 <div
                   key={book.id}
-                  className="rounded-2xl overflow-hidden bg-[#071122] border border-[#D4AF37]/35 hover:border-[#D4AF37] transition-all duration-300 shadow-2xl flex flex-col justify-between group text-left hover:-translate-y-1.5"
+                  className={`reveal-fade-up ${delayClass} rounded-2xl sm:rounded-3xl overflow-hidden bg-[#071122] border border-[#D4AF37]/35 hover:border-[#D4AF37] transition-all duration-300 shadow-2xl flex flex-col justify-between group text-left hover:-translate-y-1.5 card-hover-interactive`}
                 >
                   <div>
-                    {/* Capa do Livro Digital (Itens 13, 18, 41: Exibição integral sem cortes via object-contain em fundo escuro nobre, sem selos sobre a capa) */}
-                    <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#030710] border-b border-[#D4AF37]/30 flex items-center justify-center p-3">
+                    {/* Capa do Livro Digital com cantos arredondados elegantes */}
+                    <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#030710] border-b border-[#D4AF37]/30 flex items-center justify-center p-3 sm:p-4">
                       {book.coverImage ? (
                         <img
                           src={book.coverImage}
                           alt={`Capa do livro: ${book.title}`}
-                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_8px_24px_rgba(0,0,0,0.85)]"
+                          className="w-full h-full object-contain rounded-xl sm:rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-[0_8px_24px_rgba(0,0,0,0.85)]"
                           loading="lazy"
                         />
                       ) : (

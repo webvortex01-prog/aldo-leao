@@ -419,5 +419,84 @@
   animation: yearBadgePulse 3.5s ease-in-out infinite;
 }
 
+/* ============================================================== */
+/* LUXURY SCROLL REVEAL & INTERACTIVE SMOOTH ANIMATIONS           */
+/* ============================================================== */
+
+.reveal-on-scroll,
+.reveal-fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-left {
+  opacity: 0;
+  transform: translateX(-35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-right {
+  opacity: 0;
+  transform: translateX(35px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93) translateY(20px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.revealed,
+.revealed.reveal-on-scroll,
+.revealed.reveal-fade-up,
+.revealed.reveal-fade-left,
+.revealed.reveal-fade-right,
+.revealed.reveal-scale {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+}
+
+/* Stagger delays for grid cascades */
+.delay-75  { transition-delay: 75ms !important; }
+.delay-150 { transition-delay: 150ms !important; }
+.delay-200 { transition-delay: 200ms !important; }
+.delay-250 { transition-delay: 250ms !important; }
+.delay-300 { transition-delay: 300ms !important; }
+.delay-350 { transition-delay: 350ms !important; }
+.delay-400 { transition-delay: 400ms !important; }
+.delay-500 { transition-delay: 500ms !important; }
+
+/* Moldura Nobre Arredondada de Fotos (Photo Luxury Frame) */
+.photo-luxury-frame {
+  position: relative;
+  border-radius: 1.5rem; /* 24px */
+  overflow: hidden;
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-luxury-frame:hover {
+  border-color: rgba(246, 226, 122, 0.85);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.35);
+  transform: translateY(-4px) scale(1.01);
+}
+
+.photo-luxury-frame img {
+  border-radius: 1.1rem; /* 18px */
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-luxury-frame:hover img {
+  transform: scale(1.04);
+}
+
+
 
 

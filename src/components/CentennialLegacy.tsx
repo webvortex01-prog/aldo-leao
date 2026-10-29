@@ -51,7 +51,7 @@ export const CentennialLegacy: React.FC = () => {
     <section id="legado" className="py-20 md:py-24 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL · DESDE 1908 (Item 31) */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-14 reveal-fade-up">
           <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.24em] text-[#E5C158] font-bold mb-3 text-center">
             <span>{cl?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL'}</span>
             <span className="text-[#D4AF37]/50 hidden sm:inline" aria-hidden="true">·</span>
@@ -138,7 +138,7 @@ export const CentennialLegacy: React.FC = () => {
         </div>
 
         {/* 40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA (Item 33, 34 e 49) */}
-        <div className="relative rounded-2xl overflow-hidden border border-[#D4AF37]/40 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl">
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#D4AF37]/40 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl reveal-scale">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
               <span>{cl?.card40Kicker || 'ADVOCACIA ESTRATÉGICA'}</span>
