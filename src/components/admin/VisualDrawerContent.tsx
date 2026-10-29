@@ -111,41 +111,55 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
       description: 'Sinopse e descrição da obra jurídica para download gratuito.',
       pages: '120 páginas',
       year: '2026',
+      publicationOrder: 0,
+      isbn: 'Oficial',
       format: 'Livro Digital (PDF Gratuito)',
       downloadAvailable: true,
+      downloadCount: '1.200 downloads',
       badge: 'Download Gratuito',
       coverImage: '/capa-1.png'
     };
     updateSiteConfig({
-      digitalBooks: [...(siteConfig.digitalBooks || []), newBook]
+      digitalBooks: [newBook, ...(siteConfig.digitalBooks || [])]
     });
   };
 
   const handleRemoveBook = (index: number) => {
-    const updated = (siteConfig.digitalBooks || []).filter((_, i) => i !== index);
-    updateSiteConfig({ digitalBooks: updated });
+    if (window.confirm('Tem certeza que deseja remover este livro digital?')) {
+      const updated = (siteConfig.digitalBooks || []).filter((_, i) => i !== index);
+      updateSiteConfig({ digitalBooks: updated });
+    }
   };
 
-  const handleAddPublication = () => {
+  const handleAddPublication = (type: 'artigo' | 'noticia' = 'artigo') => {
+    const isArtigo = type === 'artigo';
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
     const newPub: Publication = {
       id: `pub-${Date.now()}`,
-      type: 'artigo',
-      title: 'Novo Artigo / Parecer Jurídico',
-      area: 'Planejamento Patrimonial',
-      date: '13/10/2026',
+      type,
+      title: isArtigo ? 'Novo Artigo Jurídico · Dr. Aldo Leão' : 'Nova Notícia Jurídica Estratégica',
+      area: 'Planejamento Patrimonial 4.0',
+      date: formattedDate,
       readTime: '5 min de leitura',
-      slug: `artigo-${Date.now()}`,
-      excerpt: 'Resumo da publicação para exibição no portal.',
-      content: 'Conteúdo completo do artigo ou parecer.'
+      slug: `${type}-${Date.now()}`,
+      excerpt: isArtigo
+        ? 'Resumo executivo do artigo jurídico para prévia nos cartões e leitura rápida.'
+        : 'Resumo da nova notícia com informações estratégicas para os clientes e empresas.',
+      content: isArtigo
+        ? 'Escreva ou cole aqui o conteúdo completo do artigo jurídico assinado pelo Dr. Aldo Leão. Este texto será exibido integralmente na página de leitura com a assinatura oficial ao final.'
+        : 'Escreva ou cole aqui o conteúdo completo da notícia jurídica com os desdobramentos legais e análise estratégica.'
     };
     updateSiteConfig({
-      publications: [...(siteConfig.publications || []), newPub]
+      publications: [newPub, ...(siteConfig.publications || [])]
     });
   };
 
   const handleRemovePublication = (index: number) => {
-    const updated = (siteConfig.publications || []).filter((_, i) => i !== index);
-    updateSiteConfig({ publications: updated });
+    if (window.confirm('Tem certeza que deseja remover esta publicação?')) {
+      const updated = (siteConfig.publications || []).filter((_, i) => i !== index);
+      updateSiteConfig({ publications: updated });
+    }
   };
 
   const handleAddDifferential = () => {
@@ -2248,53 +2262,147 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
           </div>
 
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h4 className="text-xs uppercase font-bold text-[#F6E27A]">
-                  Artigos Publicados ({(siteConfig.publications || []).length})
+                  Publicações Cadastradas ({(siteConfig.publications || []).length})
                 </h4>
-                <p className="text-[10px] text-slate-400">Adicione novos pareceres ou edite os artigos existentes.</p>
+                <p className="text-[10px] text-slate-400">Novos itens aparecem instantaneamente no topo do portal.</p>
               </div>
-              <button
-                type="button"
-                onClick={handleAddPublication}
-                className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
-              >
-                <Plus className="w-3 h-3" /> Adicionar Artigo
-              </button>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('artigo')}
+                  className="px-2.5 py-1 rounded bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-[11px] font-bold flex items-center gap-1 cursor-pointer hover:brightness-110"
+                >
+                  <Plus className="w-3 h-3" /> + Artigo
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('noticia')}
+                  className="px-2.5 py-1 rounded bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-[11px] font-bold flex items-center gap-1 cursor-pointer hover:bg-[#142A52]"
+                >
+                  <Plus className="w-3 h-3" /> + Notícia
+                </button>
+              </div>
             </div>
 
-            <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-[520px] overflow-y-auto pr-1">
               {(siteConfig.publications || []).map((pub, idx) => (
-                <div key={pub.id || idx} className="p-3 rounded-xl bg-[#071122] border border-slate-700 space-y-2">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] text-[#D4AF37] font-bold uppercase">{pub.type} · {pub.area}</span>
-                    <button type="button" onClick={() => handleRemovePublication(idx)} className="p-1 text-red-400">
+                <div
+                  key={pub.id || idx}
+                  className={`p-3.5 rounded-xl bg-[#071122] border space-y-2.5 ${
+                    idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/40' : 'border-slate-700'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2">
+                    <div className="flex items-center gap-2">
+                      <select
+                        value={pub.type || 'artigo'}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.publications || [])];
+                          updated[idx] = { ...updated[idx], type: e.target.value as 'artigo' | 'noticia' };
+                          updateSiteConfig({ publications: updated });
+                        }}
+                        className="px-2 py-0.5 rounded bg-[#050B14] border border-slate-700 text-[10px] text-[#F6E27A] font-bold uppercase"
+                      >
+                        <option value="artigo">Artigo Jurídico</option>
+                        <option value="noticia">Notícia Jurídica</option>
+                      </select>
+                      {idx === 0 && (
+                        <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                          Topo
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePublication(idx)}
+                      className="p-1 text-red-400 hover:text-red-300"
+                      title="Remover publicação"
+                    >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
-                  <input
-                    type="text"
-                    value={pub.title}
-                    onChange={(e) => {
-                      const updated = [...(siteConfig.publications || [])];
-                      updated[idx] = { ...updated[idx], title: e.target.value };
-                      updateSiteConfig({ publications: updated });
-                    }}
-                    placeholder="Título do Artigo"
-                    className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
-                  />
-                  <textarea
-                    rows={2}
-                    value={pub.excerpt}
-                    onChange={(e) => {
-                      const updated = [...(siteConfig.publications || [])];
-                      updated[idx] = { ...updated[idx], excerpt: e.target.value };
-                      updateSiteConfig({ publications: updated });
-                    }}
-                    placeholder="Resumo do Artigo"
-                    className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
-                  />
+
+                  <div>
+                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Título da Publicação</label>
+                    <input
+                      type="text"
+                      value={pub.title}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], title: e.target.value };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      placeholder="Título da Publicação"
+                      className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Área Jurídica</label>
+                      <input
+                        type="text"
+                        value={pub.area}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.publications || [])];
+                          updated[idx] = { ...updated[idx], area: e.target.value };
+                          updateSiteConfig({ publications: updated });
+                        }}
+                        placeholder="Ex: Planejamento Patrimonial 4.0"
+                        className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Data</label>
+                      <input
+                        type="text"
+                        value={pub.date || ''}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.publications || [])];
+                          updated[idx] = { ...updated[idx], date: e.target.value };
+                          updateSiteConfig({ publications: updated });
+                        }}
+                        placeholder="Ex: 29/10/2026"
+                        className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Resumo / Prévia</label>
+                    <textarea
+                      rows={2}
+                      value={pub.excerpt}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], excerpt: e.target.value };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      placeholder="Resumo do Artigo"
+                      className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5 flex items-center justify-between">
+                      <span>Conteúdo Integral</span>
+                      <span className="text-[9px] text-[#D4AF37]">Texto lido no portal</span>
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={pub.content || ''}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], content: e.target.value };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      placeholder="Escreva ou cole o conteúdo completo do artigo ou notícia jurídica..."
+                      className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-200 text-[11px] leading-relaxed font-sans"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -2345,12 +2453,29 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </button>
             </div>
 
-            <div className="space-y-4 max-h-[460px] overflow-y-auto pr-1">
+            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
               {(siteConfig.digitalBooks || []).map((book, idx) => (
-                <div key={book.id || idx} className="p-3 rounded-xl bg-[#071122] border border-slate-700 space-y-3">
+                <div
+                  key={book.id || idx}
+                  className={`p-3.5 rounded-xl bg-[#071122] border space-y-3 ${
+                    idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/40' : 'border-slate-700'
+                  }`}
+                >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono text-[#D4AF37] font-bold uppercase">Livro #{idx + 1}</span>
-                    <button type="button" onClick={() => handleRemoveBook(idx)} className="p-1 text-red-400">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono text-[#D4AF37] font-bold uppercase">Livro #{idx + 1}</span>
+                      {idx === 0 && (
+                        <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                          Topo
+                        </span>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveBook(idx)}
+                      className="p-1 text-red-400 hover:text-red-300"
+                      title="Remover livro"
+                    >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -2368,41 +2493,81 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   />
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <input
-                      type="text"
-                      value={book.title}
-                      onChange={(e) => {
-                        const updated = [...(siteConfig.digitalBooks || [])];
-                        updated[idx] = { ...updated[idx], title: e.target.value };
-                        updateSiteConfig({ digitalBooks: updated });
-                      }}
-                      placeholder="Título do Livro"
-                      className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
-                    />
-                    <input
-                      type="text"
-                      value={book.area || ''}
-                      onChange={(e) => {
-                        const updated = [...(siteConfig.digitalBooks || [])];
-                        updated[idx] = { ...updated[idx], area: e.target.value };
-                        updateSiteConfig({ digitalBooks: updated });
-                      }}
-                      placeholder="Área Jurídica"
-                      className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-                    />
+                    <div>
+                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Título do Livro</label>
+                      <input
+                        type="text"
+                        value={book.title}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.digitalBooks || [])];
+                          updated[idx] = { ...updated[idx], title: e.target.value };
+                          updateSiteConfig({ digitalBooks: updated });
+                        }}
+                        placeholder="Título do Livro"
+                        className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Área Jurídica</label>
+                      <input
+                        type="text"
+                        value={book.area || ''}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.digitalBooks || [])];
+                          updated[idx] = { ...updated[idx], area: e.target.value };
+                          updateSiteConfig({ digitalBooks: updated });
+                        }}
+                        placeholder="Área Jurídica"
+                        className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
+                      />
+                    </div>
                   </div>
 
-                  <textarea
-                    rows={2}
-                    value={book.description}
-                    onChange={(e) => {
-                      const updated = [...(siteConfig.digitalBooks || [])];
-                      updated[idx] = { ...updated[idx], description: e.target.value };
-                      updateSiteConfig({ digitalBooks: updated });
-                    }}
-                    placeholder="Sinopse da Obra"
-                    className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
-                  />
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Autor</label>
+                      <input
+                        type="text"
+                        value={book.author || 'Dr. Aldo Leão'}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.digitalBooks || [])];
+                          updated[idx] = { ...updated[idx], author: e.target.value };
+                          updateSiteConfig({ digitalBooks: updated });
+                        }}
+                        placeholder="Autor"
+                        className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Páginas</label>
+                      <input
+                        type="text"
+                        value={book.pages || '120 páginas'}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.digitalBooks || [])];
+                          updated[idx] = { ...updated[idx], pages: e.target.value };
+                          updateSiteConfig({ digitalBooks: updated });
+                        }}
+                        placeholder="Ex: 120 páginas"
+                        className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Sinopse da Obra</label>
+                    <textarea
+                      rows={2}
+                      value={book.description}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.digitalBooks || [])];
+                        updated[idx] = { ...updated[idx], description: e.target.value };
+                        updateSiteConfig({ digitalBooks: updated });
+                      }}
+                      placeholder="Sinopse da Obra"
+                      className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

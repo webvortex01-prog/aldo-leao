@@ -234,6 +234,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     | 'all_images'
   >('identidade');
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [saveNotification, setSaveNotification] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   // Sincroniza caso o context inicial mude
@@ -241,17 +242,24 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     setFormData(siteConfig);
   }, [siteConfig]);
 
+  const showNotification = (msg?: string) => {
+    setSaveNotification(msg || null);
+    setSaveSuccess(true);
+    setTimeout(() => {
+      setSaveSuccess(false);
+      setSaveNotification(null);
+    }, 4000);
+  };
+
   const handleSave = () => {
     updateSiteConfig(formData);
-    setSaveSuccess(true);
-    setTimeout(() => setSaveSuccess(false), 3000);
+    showNotification('Conteúdo e imagens salvos com sucesso!');
   };
 
   const handleReset = () => {
     if (window.confirm('Tem certeza que deseja restaurar todo o conteúdo do site para o padrão oficial do Dr. Aldo Leão?')) {
       resetSiteConfigToDefault();
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 3000);
+      showNotification('Configurações restauradas com sucesso!');
     }
   };
 
@@ -276,55 +284,96 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     setFormData({ ...formData, practiceAreas: updated });
   };
 
-  // Helper para adicionar livro digital
+  // Helper para adicionar livro digital no TOPO com salvamento imediato
   const handleAddBook = () => {
+    const newId = `livro-${Date.now()}`;
     const newBook: DigitalBook = {
-      id: `livro-${Date.now()}`,
+      id: newId,
       title: 'Novo Livro / E-Book Jurídico',
       author: 'Dr. Aldo Leão',
       area: 'Planejamento Patrimonial 4.0',
-      description: 'Sinopse e descrição da obra jurídica para download gratuito.',
+      description: 'Sinopse e descrição da obra jurídica para download gratuito pelos clientes e operadores do Direito.',
       pages: '120 páginas',
       year: '2026',
+      publicationOrder: 0,
       isbn: 'Oficial',
       format: 'Livro Digital (PDF Gratuito)',
       downloadAvailable: true,
       downloadCount: '1.200 downloads',
-      badge: 'Download Gratuito'
+      badge: 'Download Gratuito',
+      coverImage: '/capa-1.png'
     };
-    setFormData({
+    const updated = [newBook, ...(formData.digitalBooks || [])];
+    const newFormData = {
       ...formData,
-      digitalBooks: [...(formData.digitalBooks || []), newBook]
-    });
+      digitalBooks: updated
+    };
+    setFormData(newFormData);
+    updateSiteConfig(newFormData);
+    showNotification('✨ Novo Livro Digital adicionado no topo da lista e salvo!');
+    setTimeout(() => {
+      const el = document.getElementById(`book-item-${newId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 150);
   };
 
   const handleRemoveBook = (index: number) => {
-    const updated = (formData.digitalBooks || []).filter((_, i) => i !== index);
-    setFormData({ ...formData, digitalBooks: updated });
+    if (window.confirm('Tem certeza que deseja remover este livro digital?')) {
+      const updated = (formData.digitalBooks || []).filter((_, i) => i !== index);
+      const newFormData = { ...formData, digitalBooks: updated };
+      setFormData(newFormData);
+      updateSiteConfig(newFormData);
+      showNotification('Livro digital removido.');
+    }
   };
 
-  // Helper para adicionar publicação
-  const handleAddPublication = () => {
+  // Helper para adicionar publicação (Artigo ou Notícia) no TOPO com salvamento imediato
+  const handleAddPublication = (type: 'artigo' | 'noticia' = 'artigo') => {
+    const isArtigo = type === 'artigo';
+    const now = new Date();
+    const formattedDate = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+    const newId = `pub-${Date.now()}`;
     const newPub: Publication = {
-      id: `pub-${Date.now()}`,
-      type: 'artigo',
-      title: 'Novo Artigo / Parecer Jurídico',
-      area: 'Planejamento Patrimonial',
-      date: '13/10/2026',
+      id: newId,
+      type,
+      title: isArtigo ? 'Novo Artigo Jurídico · Dr. Aldo Leão' : 'Nova Notícia Jurídica Estratégica',
+      area: 'Planejamento Patrimonial 4.0',
+      date: formattedDate,
       readTime: '5 min de leitura',
-      slug: `artigo-${Date.now()}`,
-      excerpt: 'Resumo da publicação para exibição no portal.',
-      content: 'Conteúdo completo do artigo ou parecer.'
+      slug: `${type}-${Date.now()}`,
+      excerpt: isArtigo
+        ? 'Resumo executivo do artigo jurídico para prévia nos cartões e leitura rápida.'
+        : 'Resumo da nova notícia com informações estratégicas para os clientes e empresas.',
+      content: isArtigo
+        ? 'Escreva ou cole aqui o conteúdo completo do artigo jurídico assinado pelo Dr. Aldo Leão. Este texto será exibido integralmente na página de leitura com a assinatura oficial ao final.'
+        : 'Escreva ou cole aqui o conteúdo completo da notícia jurídica com os desdobramentos legais e análise estratégica.'
     };
-    setFormData({
+    const updated = [newPub, ...(formData.publications || [])];
+    const newFormData = {
       ...formData,
-      publications: [...(formData.publications || []), newPub]
-    });
+      publications: updated
+    };
+    setFormData(newFormData);
+    updateSiteConfig(newFormData);
+    showNotification(isArtigo ? '✨ Novo Artigo Jurídico adicionado no topo da lista e salvo!' : '✨ Nova Notícia Jurídica adicionada no topo da lista e salva!');
+    setTimeout(() => {
+      const el = document.getElementById(`pub-item-${newId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 150);
   };
 
   const handleRemovePublication = (index: number) => {
-    const updated = (formData.publications || []).filter((_, i) => i !== index);
-    setFormData({ ...formData, publications: updated });
+    if (window.confirm('Tem certeza que deseja remover esta publicação?')) {
+      const updated = (formData.publications || []).filter((_, i) => i !== index);
+      const newFormData = { ...formData, publications: updated };
+      setFormData(newFormData);
+      updateSiteConfig(newFormData);
+      showNotification('Publicação removida.');
+    }
   };
 
   // Linha do tempo: Adicionar ou editar eventos
@@ -735,10 +784,11 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
       </div>
 
       {saveSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-950/90 border border-emerald-500/60 text-emerald-200 text-xs sm:text-sm flex items-center gap-3 shadow-xl animate-in fade-in duration-200">
+        <div className="p-4 rounded-xl bg-emerald-950/90 border border-emerald-500/60 text-emerald-200 text-xs sm:text-sm flex items-center gap-3 shadow-xl animate-in fade-in duration-200 sticky top-24 z-50">
           <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
           <span>
-            <strong>Conteúdo e imagens salvos com sucesso!</strong> Todas as alterações foram salvas e já estão ativas em todo o site.
+            <strong>{saveNotification ? saveNotification : 'Conteúdo e imagens salvos com sucesso!'}</strong>
+            {!saveNotification && ' Todas as alterações foram salvas e já estão ativas em todo o site.'}
           </span>
         </div>
       )}
@@ -4220,13 +4270,26 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 Edite o cabeçalho e os textos introdutórios oficiais, configure a assinatura automática e gerencie todos os artigos e notícias.
               </p>
             </div>
-            <button
-              onClick={handleAddPublication}
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Adicionar Publicação</span>
-            </button>
+            <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+              <button
+                type="button"
+                onClick={() => handleAddPublication('artigo')}
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                title="Criar novo Artigo Jurídico assinado pelo Dr. Aldo Leão"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Novo Artigo Jurídico</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => handleAddPublication('noticia')}
+                className="px-4 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#142A52] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                title="Criar nova Notícia Jurídica com foco informativo"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Nova Notícia Jurídica</span>
+              </button>
+            </div>
           </div>
 
           {/* Cabeçalho da Seção Publicações Jurídicas */}
@@ -4698,33 +4761,86 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
           {/* LISTA DE PUBLICAÇÕES (ARTIGOS E NOTÍCIAS) */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h4 className="text-xs uppercase tracking-wider font-bold text-slate-300">
-                Lista de Publicações Cadastradas ({formData.publications?.length || 0})
-              </h4>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
+              <div>
+                <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#F6E27A]" />
+                  <span>Publicações Cadastradas ({formData.publications?.length || 0})</span>
+                </h4>
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  Novos artigos e notícias aparecem no topo da lista e já são publicados no site.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('artigo')}
+                  className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ Artigo Jurídico</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('noticia')}
+                  className="px-3.5 py-1.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#142A52] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ Notícia Jurídica</span>
+                </button>
+              </div>
             </div>
 
             {(formData.publications || []).map((pub, idx) => (
-              <div key={pub.id || idx} className="p-5 rounded-xl bg-[#050B14] border border-slate-800 hover:border-[#D4AF37]/40 transition-colors space-y-4">
+              <div
+                key={pub.id || idx}
+                id={`pub-item-${pub.id}`}
+                className={`p-5 rounded-xl bg-[#050B14] border transition-all space-y-4 ${
+                  idx === 0
+                    ? 'border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)] ring-1 ring-[#D4AF37]/50'
+                    : 'border-slate-800 hover:border-[#D4AF37]/40'
+                }`}
+              >
                 <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
                   <div className="flex items-center gap-2">
                     <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                      pub.type === 'artigo' ? 'bg-[#D4AF37] text-black font-black' : 'bg-slate-700 text-slate-200'
+                      pub.type === 'artigo' ? 'bg-[#D4AF37] text-black font-black' : 'bg-[#0E1F3D] text-[#F6E27A] border border-[#D4AF37]/50 font-bold'
                     }`}>
                       {pub.type === 'artigo' ? 'Artigo Jurídico' : 'Notícia Jurídica'}
                     </span>
                     <span className="text-xs font-semibold text-slate-400">
                       Publicação #{idx + 1}
                     </span>
+                    {idx === 0 && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        Item no Topo
+                      </span>
+                    )}
                   </div>
 
-                  <button
-                    onClick={() => handleRemovePublication(idx)}
-                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Remover</span>
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateSiteConfig(formData);
+                        showNotification('Publicação salva com sucesso!');
+                      }}
+                      className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
+                      title="Salvar esta publicação imediatamente"
+                    >
+                      <Save className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Salvar</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePublication(idx)}
+                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors px-2 py-1 rounded hover:bg-red-500/10"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Remover</span>
+                    </button>
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
@@ -4934,11 +5050,12 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </p>
             </div>
             <button
+              type="button"
               onClick={handleAddBook}
               className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Adicionar Livro</span>
+              <span>+ Adicionar Livro Digital</span>
             </button>
           </div>
 
@@ -5043,19 +5160,71 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
 
           <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
+              <div>
+                <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                  <span>Acervo de Obras e Livros Digitais ({formData.digitalBooks?.length || 0})</span>
+                </h4>
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  Novos livros adicionados entram automaticamente no topo do acervo oficial.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddBook}
+                className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Novo Livro Digital</span>
+              </button>
+            </div>
+
             {(formData.digitalBooks || []).map((book, idx) => (
-              <div key={book.id || idx} className="p-5 rounded-xl bg-[#050B14] border border-slate-800 space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#E5C158] uppercase">
-                    Livro Digital #{idx + 1}
-                  </span>
-                  <button
-                    onClick={() => handleRemoveBook(idx)}
-                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Remover</span>
-                  </button>
+              <div
+                key={book.id || idx}
+                id={`book-item-${book.id}`}
+                className={`p-5 rounded-xl bg-[#050B14] border transition-all space-y-4 ${
+                  idx === 0
+                    ? 'border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)] ring-1 ring-[#D4AF37]/50'
+                    : 'border-slate-800 hover:border-[#D4AF37]/40'
+                }`}
+              >
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-[#E5C158] uppercase">
+                      Livro Digital #{idx + 1}
+                    </span>
+                    {idx === 0 && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        Item no Topo
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        updateSiteConfig(formData);
+                        showNotification('Livro digital salvo com sucesso!');
+                      }}
+                      className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
+                      title="Salvar este livro imediatamente"
+                    >
+                      <Save className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">Salvar</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveBook(idx)}
+                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors px-2 py-1 rounded hover:bg-red-500/10"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Remover</span>
+                    </button>
+                  </div>
                 </div>
 
                 {/* Upload de Capa para cada Livro */}
