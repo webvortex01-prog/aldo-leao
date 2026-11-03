@@ -47,6 +47,14 @@ export const PublicationsSection: React.FC = () => {
         (areaFilter === 'Relações de Consumo' && (item.area?.includes('Consumo') || item.area?.includes('Consumidor'))) ||
         (areaFilter === 'Direito' && (item.area === 'Direito' || item.area?.includes('Direito')));
 
+      // Programação de publicação (Item 59): Se tiver data futura agendada, oculta do portal público até o momento exato
+      if (item.publishAt && item.isScheduled) {
+        const scheduleTime = new Date(item.publishAt).getTime();
+        if (!isNaN(scheduleTime) && scheduleTime > Date.now()) {
+          return false;
+        }
+      }
+
       return matchesSearch && matchesType && matchesArea;
     });
   }, [publications, searchTerm, typeFilter, areaFilter]);

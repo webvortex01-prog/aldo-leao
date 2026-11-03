@@ -8,7 +8,8 @@ import {
   Publication,
   DigitalBook,
   CaseStudy,
-  HoldingLandingConfig
+  HoldingLandingConfig,
+  GestaoJuridicaConfig
 } from '../types';
 import realPartnerImg from '../assets/images/aldo_leao_portrait_real_1791572566625.jpg';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
@@ -573,6 +574,55 @@ export const DEFAULT_HOLDING_LANDING: HoldingLandingConfig = {
   footerCopyright: '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'
 };
 
+
+export const DEFAULT_GESTAO_JURIDICA: GestaoJuridicaConfig = {
+  kickerBadge: 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+  heroTitle: 'GESTÃO JURÍDICA 4.0',
+  heroSubtitle: 'ADVOCACIA ESTRATÉGICA, INTELIGÊNCIA JURÍDICA E GESTÃO DE VANGUARDA',
+  introParagraph1: 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados. Este serviço especializado e estratégico, possui duas vertentes de alta performance: ORGANIZACIONAL e/ou JUDICIAL.',
+  introParagraph2: 'Com atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.',
+  btnVoltarText: 'Voltar',
+  btnCtaHeroText: 'AGENDAR CONSULTA DIGITAL',
+  frentesSectionKicker: 'ARQUITETURA JURÍDICA CORPORATIVA',
+  frentesSectionTitle: 'Duas Frentes de Alta Performance para o Seu Negócio',
+  frentesSectionSubtitle: 'Soluções completas e customizadas desenhadas sob medida para blindar, potencializar e perpetuar o patrimônio corporativo da sua empresa.',
+  // Frente 1
+  frente1Badge: 'Frente Estratégica I',
+  frente1Title: 'GESTÃO JURÍDICA ORGANIZACIONAL',
+  frente1Subtitle: 'Com atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.',
+  frente1Desc: 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:',
+  frente1BoxTitle: 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:',
+  frente1Card1Title: 'AUDITORIA PREVENTIVA',
+  frente1Card1Desc: 'Auditoria preventiva da situação atual de informações, contratos e documentos corporativos;',
+  frente1Card2Title: 'ANÁLISE JURÍDICA ESPECIALIZADA',
+  frente1Card2Desc: 'Análise jurídica especializada alinhada ao modelo de negócios e compliance fiscal;',
+  frente1Card3Title: 'MAPEAMENTO DE RISCOS E VULNERABILIDADES',
+  frente1Card3Desc: 'Mapeamento de riscos, passivos e vulnerabilidades operacionais e patrimoniais;',
+  frente1Card4Title: 'SOLUÇÕES JURÍDICAS ESTRATÉGICAS',
+  frente1Card4Desc: 'Desenvolvimento e implantação de soluções jurídicas estratégicas personalizadas;',
+  frente1Conclusion: 'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.',
+  // Frente 2
+  frente2Badge: 'Frente Estratégica II',
+  frente2Title: 'GESTÃO JURÍDICA JUDICIAL',
+  frente2Subtitle: 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:',
+  frente2Desc: 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:',
+  frente2Pilar1Title: 'DECISÕES ASSERTIVAS',
+  frente2Pilar1Desc: 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;',
+  frente2Pilar2Title: 'GESTÃO DE RESULTADOS',
+  frente2Pilar2Desc: 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;',
+  frente2Pilar3Title: 'COMPETITIVIDADE',
+  frente2Pilar3Desc: 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;',
+  frente2Impact: 'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.',
+  // CTA
+  ctaKicker: 'ATENDIMENTO BRASIL 100% DIGITAL E CONFIDENCIAL',
+  ctaTitle: 'Estruture a Segurança Jurídica da Sua Empresa com Especialistas Centenários',
+  ctaDesc: 'Agende a sua Consulta Jurídica Digital com o Dr. Aldo Leão e nossa equipe sênior. Avalie o nível de vulnerabilidade, os riscos operacionais e as oportunidades de blindagem patrimonial para a sua empresa.',
+  ctaHighlight1: 'Atendimento Brasil 100% digital e confidencial com a mesma excelência jurídica do presencial.',
+  ctaHighlight2: 'Diagnóstico Estratégico Personalizado para o tamanho do seu negócio e patrimônio.',
+  ctaHighlight3: 'Três Gerações de Excelência Jurídica dedicadas à perpetuação do seu legado.',
+  ctaButtonText: 'AGENDAR CONSULTA DIGITAL'
+};
+
 const DEFAULT_CONFIG: SiteConfig = {
   navbar: {
     logoTitle: 'Aldo Leão',
@@ -601,7 +651,9 @@ const DEFAULT_CONFIG: SiteConfig = {
     cta1Text: 'AGENDAR CONSULTA DIGITAL',
     cta2Text: 'CONHEÇA O PLANEJAMENTO 4.0',
     badgeYear: '1908',
-    badgeText: 'O Escritório Mais Antigo do Brasil'
+    badgeText: 'O Escritório Mais Antigo do Brasil',
+    slide1Duration: 18,
+    slide2Duration: 18
   },
   contact: {
     sectionKicker: 'ATENDIMENTO DIGITAL EM TODO O BRASIL',
@@ -648,6 +700,8 @@ const DEFAULT_CONFIG: SiteConfig = {
     bioParagraph4: 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.',
     bioParagraph5: 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.',
     bioParagraph6: 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.',
+    curriculumClosingP1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.',
+    curriculumClosingP2: 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.',
     signatureImageUrl: '/img/assinatura-gold.png',
     saibaMaisBtn: 'SAIBA MAIS',
     btnConsultation: 'AGENDAR CONSULTA VIRTUAL',
@@ -781,6 +835,7 @@ const DEFAULT_CONFIG: SiteConfig = {
   },
   centennialLegacy: {
     goldKicker: 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL',
+    modalKicker: 'EXCELÊNCIA JURÍDICA DESDE 1908',
     title: 'O LEGADO',
     titleHighlight: 'CENTENÁRIO',
     subtitle: 'DESDE 1908',
@@ -839,20 +894,20 @@ const DEFAULT_CONFIG: SiteConfig = {
     cardTitle: 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL',
     cardText: 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.',
     cardBadge: 'PLANEJAMENTO 4.0',
-    boxWhatIsTitle: 'O QUE É O PLANEJAMENTO 4.0?',
+    boxWhatIsTitle: 'O QUE É O PLANEJAMENTO PATRIMONIAL 4.0?',
     boxWhatIsHeading: 'Metodologia Jurídica Estratégica Multidisciplinar',
-    boxWhatIsText: 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.',
+    boxWhatIsText: 'O Planejamento Patrimonial e Empresarial 4.0 é uma metodologia jurídica avançada, legal e estratégica desenvolvida por advogados especialistas para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos e vulnerabilidades juridicamente, com o objetivo de perpetuar negócios e patrimônios familiares para as futuras gerações. Sua estruturação integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil (Contratos Estratégicos, Família e Sucessões), Direito Imobiliário e Governança Familiar.',
     boxWhyTitle: 'Por Que Planejar em Vida?',
-    boxWhyText: 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.',
+    boxWhyText: 'Permite que decisões patrimoniais e empresariais sejam tomadas em vida, de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros e disputas de bens, a alta perda patrimonial e financeira dos herdeiros no inventário (em média de 40% do patrimônio inventariado), evita a comunicação e a partilha das cotas sociais dos herdeiros no divórcio e na dissolução de união estável, evita a venda forçada e rápida de bens com deságio médio de 20% do valor de mercado para quitar o inventário e etc.',
     benefitsTitle: 'Principais Benefícios da Holding Familiar',
     benefits: [
-      'Proteção Jurídica Patrimonial',
+      'Proteção Jurídica Patrimonial e Empresarial',
+      'Evita a Alta Perda Patrimonial dos herdeiros no Inventário (média de 40% do patrimônio)',
+      'Maior Eficiência na Gestão Patrimonial',
       'Planejamento Sucessório Corporativo',
       'Governança Familiar Estruturada',
       'Redução Expressiva da Carga Tributária',
-      'Evita a Perda Financeira do Inventário',
       'Segurança e Continuidade dos Negócios',
-      'Gestão Estratégica dos Ativos',
       'Harmonia e Preservação da Paz Familiar'
     ],
     tableTitle: 'INVENTÁRIO x HOLDING FAMILIAR',
@@ -889,7 +944,7 @@ const DEFAULT_CONFIG: SiteConfig = {
     paragraph3: 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'
   },
   digitalConsultation: {
-    sectionKicker: 'ATENDIMENTO DIGITAL EM TODO O BRASIL',
+    sectionKicker: 'ATENDIMENTO DIGITAL BRASIL',
     sectionTitle: 'AGENDE SUA',
     sectionHighlight: 'CONSULTA DIGITAL',
     description: 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.',
@@ -915,10 +970,10 @@ const DEFAULT_CONFIG: SiteConfig = {
     kicker: 'CENTRO DE ESTUDOS JURÍDICOS SUPERIORES',
     title: 'ACADEMIA LEÃO FERREIRA',
     paragraph1: 'Centro de Estudos Jurídicos Superiores da Aldo Leão Advocacia Estratégica, dedicado à produção e difusão do conhecimento jurídico especializado.',
-    paragraph2: 'A Academia realiza a publicação de artigos jurídicos, de livros digitais, promove a realização de palestras, cursos, treinamentos, mentorias, workshops e seminários especializados.',
+    paragraph2: 'A Academia realiza a publicação de artigos jurídicos, livros digitais, promove a realização de palestras, cursos, mentorias, workshops e seminários especializados.',
     paragraph3: 'Nossa missão é transformar o conhecimento jurídico especializado em uma ferramenta de evolução pessoal e transformação.',
     phraseGold: 'CONFERENCISTA E PALESTRANTE NACIONAL',
-    speakerText: 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.',
+    speakerText: 'O Dr. ALDO LEÃO é presença marcante em congressos, seminários, mentorias, workshops, palestras e fóruns especializados.',
     btnWhatsApp: 'FALAR COM A ACADEMIA',
     lectureBoxTitle: 'PLANEJAMENTO PATRIMONIAL 4.0 & O ALTO CUSTO DA OMISSÃO',
     lecturePhotoUrl: '/img/palestra-1.jpg',
@@ -939,7 +994,8 @@ const DEFAULT_CONFIG: SiteConfig = {
     whatsappNumber: '',
     whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
   },
-  holdingLanding: DEFAULT_HOLDING_LANDING
+  holdingLanding: DEFAULT_HOLDING_LANDING,
+  gestaoJuridica: DEFAULT_GESTAO_JURIDICA
 };
 
 const INITIAL_LEADS: ConsultationRequest[] = [
@@ -1167,6 +1223,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           academiaLeao: { ...DEFAULT_CONFIG.academiaLeao, ...(parsed.academiaLeao || {}) },
           articleSignature: { ...DEFAULT_CONFIG.articleSignature, ...(parsed.articleSignature || {}) },
           holdingLanding: { ...DEFAULT_HOLDING_LANDING, ...(parsed.holdingLanding || {}) },
+          gestaoJuridica: { ...DEFAULT_GESTAO_JURIDICA, ...(parsed.gestaoJuridica || {}) },
         };
       }
     } catch (e) {
@@ -1207,7 +1264,14 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
             digitalConsultation: { ...(prev.digitalConsultation || {}), ...(cloudConfig.digitalConsultation || {}) },
             footer: { ...(prev.footer || {}), ...(cloudConfig.footer || {}) },
             academiaLeao: { ...(prev.academiaLeao || {}), ...(cloudConfig.academiaLeao || {}) },
-            holdingLanding: { ...(prev.holdingLanding || {}), ...(cloudConfig.holdingLanding || {}) },
+            holdingLanding: { ...(prev.holdingLanding || DEFAULT_HOLDING_LANDING), ...(cloudConfig.holdingLanding || {}) },
+            gestaoJuridica: { ...(prev.gestaoJuridica || DEFAULT_GESTAO_JURIDICA), ...(cloudConfig.gestaoJuridica || {}) },
+            booksSection: { ...(prev.booksSection || DEFAULT_CONFIG.booksSection), ...(cloudConfig.booksSection || {}) },
+            publicationsSection: { ...(prev.publicationsSection || DEFAULT_CONFIG.publicationsSection), ...(cloudConfig.publicationsSection || {}) },
+            practiceAreasHeader: { ...(prev.practiceAreasHeader || DEFAULT_CONFIG.practiceAreasHeader), ...(cloudConfig.practiceAreasHeader || {}) },
+            excellenceSolutionsHeader: { ...(prev.excellenceSolutionsHeader || DEFAULT_CONFIG.excellenceSolutionsHeader), ...(cloudConfig.excellenceSolutionsHeader || {}) },
+            urgentHotline: { ...(prev.urgentHotline || DEFAULT_CONFIG.urgentHotline), ...(cloudConfig.urgentHotline || {}) },
+            articleSignature: { ...(prev.articleSignature || DEFAULT_CONFIG.articleSignature), ...(cloudConfig.articleSignature || {}) },
             practiceAreas: (cloudConfig.practiceAreas && cloudConfig.practiceAreas.length > 0)
               ? cloudConfig.practiceAreas
               : prev.practiceAreas,

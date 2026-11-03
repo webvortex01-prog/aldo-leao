@@ -19,13 +19,18 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isCostModalOpen, setIsCostModalOpen] = useState(false);
 
-  // Auto advance slide every 18 seconds (Item d do dia 15/10/26)
+  // Auto advance slide com tempo customizado por slide (Item 61)
   useEffect(() => {
-    const timer = setInterval(() => {
+    const s1Duration = Math.max(3, (siteConfig.hero?.slide1Duration || 18)) * 1000;
+    const s2Duration = Math.max(3, (siteConfig.hero?.slide2Duration || 18)) * 1000;
+    const currentDuration = currentSlide === 0 ? s1Duration : s2Duration;
+
+    const timer = setTimeout(() => {
       setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
-    }, 18000);
-    return () => clearInterval(timer);
-  }, []);
+    }, currentDuration);
+
+    return () => clearTimeout(timer);
+  }, [currentSlide, siteConfig.hero?.slide1Duration, siteConfig.hero?.slide2Duration]);
 
   const handleWhatsAppSlide1 = () => {
     const phone = siteConfig.contact.whatsappNumber || '5551998088998';

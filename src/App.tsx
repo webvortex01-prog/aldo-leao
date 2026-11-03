@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { SiteProvider } from './context/SiteContext';
 import { Navbar } from './components/Navbar';
 import { HeroSlider } from './components/HeroSlider';
@@ -26,7 +27,7 @@ import { GestaoJuridicaPage } from './components/GestaoJuridicaPage';
 import { PrivacyPolicyModal, TermsOfUseModal, OabDisclaimerModal } from './components/LegalModals';
 
 function AppContent() {
-  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'admin-login' | 'holding-landing' | 'academia' | 'gestao-juridica'>('site');
+  const [currentView, setCurrentView] = useState<'site' | 'admin' | 'admin-login' | 'holding-landing' | 'holding-page' | 'academia' | 'gestao-juridica'>('site');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [isAdminAuthOpen, setIsAdminAuthOpen] = useState(false);
   const [isTutorialOpen, setIsTutorialOpen] = useState(false);
@@ -76,20 +77,25 @@ function AppContent() {
         return;
       }
 
-      // 2. Rota da Landing Page Exclusiva de Holding Familiar 4.0 (/1208/ ou #1208)
+      // 2. Rota da Página Dedicada HOLDING FAMILIAR (Item 65 - sem mostrar Publicações Jurídicas)
+      if (path.includes('holding-page') || hash.includes('holding-page')) {
+        setCurrentView('holding-page');
+        return;
+      }
+
+      // 3. Rota da Landing Page Exclusiva de Holding Familiar 4.0 (/1208/ ou #1208)
       if (
         path.includes('1208') || 
         path.includes('landing') || 
         path.includes('holding-landing') || 
         hash.includes('1208') || 
-        hash.includes('holding-landing') ||
-        hash.includes('holding')
+        hash.includes('holding-landing')
       ) {
         setCurrentView('holding-landing');
         return;
       }
 
-      // 3. Rota da Academia Leão Ferreira
+      // 4. Rota da Academia Leão Ferreira
       if (path.includes('academia') || hash.includes('academia')) {
         setCurrentView('academia');
         return;
@@ -233,6 +239,41 @@ function AppContent() {
     );
   }
 
+  // View: Página Dedicada HOLDING FAMILIAR (Item 65 - sem mostrar Publicações Jurídicas)
+  if (currentView === 'holding-page') {
+    return (
+      <div className="min-h-screen bg-[#050B14] text-slate-100 flex flex-col font-sans-body selection:bg-[#D4AF37]/30 selection:text-[#F6E27A]">
+        <Navbar
+          onOpenConsultation={() => handleOpenConsultation('Holding Familiar 4.0')}
+          onOpenAdmin={handleOpenAdmin}
+          onOpenTutorial={() => setIsTutorialOpen(true)}
+          onOpenLandingPage={() => setCurrentView('holding-landing')}
+        />
+        <div className="pt-24 pb-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+          <button
+            onClick={handleBackToSite}
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#071122] border border-[#D4AF37]/30 hover:border-[#D4AF37] text-slate-300 hover:text-[#F6E27A] transition-all text-xs sm:text-sm font-semibold cursor-pointer shadow-md"
+          >
+            <ArrowLeft className="w-4 h-4 text-[#D4AF37] group-hover:-translate-x-1 transition-transform" />
+            <span>Voltar ao Portal Principal</span>
+          </button>
+        </div>
+        <HoldingFamiliarSection
+          onGoToLandingPage={() => setCurrentView('holding-landing')}
+        />
+        <DigitalConsultationCTA
+          onOpenConsultation={() => handleOpenConsultation('Holding Familiar 4.0')}
+        />
+        <Footer 
+          onOpenAdmin={handleOpenAdmin} 
+          onOpenTutorial={() => setIsTutorialOpen(true)}
+          onOpenLandingPage={() => setCurrentView('holding-landing')}
+        />
+        <UrgentHotlineFloat onOpenConsultation={() => handleOpenConsultation('Holding Familiar 4.0')} />
+      </div>
+    );
+  }
+
   // View: Página Completa GESTÃO JURÍDICA 4.0
   if (currentView === 'gestao-juridica') {
     return (
@@ -292,9 +333,14 @@ function AppContent() {
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
 
-        {/* 5. Página ÁREAS DE ATUAÇÃO (Item 7 e Item 36) */}
+        {/* 5. Página ÁREAS DE ATUAÇÃO (Item 7, Item 36 e Item 65) */}
         <PracticeAreas
           onGoToLandingPage={() => setCurrentView('holding-landing')}
+          onGoToHoldingPage={() => {
+            window.history.pushState(null, '', '#holding-page');
+            setCurrentView('holding-page');
+            window.scrollTo({ top: 0, behavior: 'instant' });
+          }}
           onOpenConsultation={() => handleOpenConsultation()}
         />
 

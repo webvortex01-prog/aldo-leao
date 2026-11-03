@@ -14,13 +14,13 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
   const s2 = siteConfig.slide2;
 
   const benefitsList = hf?.benefits && hf.benefits.length > 0 ? hf.benefits : [
-    'Proteção Jurídica Patrimonial',
+    'Proteção Jurídica Patrimonial e Empresarial',
+    'Evita a Alta Perda Patrimonial dos herdeiros no Inventário (média de 40% do patrimônio)',
+    'Maior Eficiência na Gestão Patrimonial',
     'Planejamento Sucessório Corporativo',
     'Governança Familiar Estruturada',
     'Redução Expressiva da Carga Tributária',
-    'Evita a Perda Financeira do Inventário',
     'Segurança e Continuidade dos Negócios',
-    'Gestão Estratégica dos Ativos',
     'Harmonia e Preservação da Paz Familiar'
   ];
 
@@ -85,23 +85,23 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
           <div className="p-8 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 flex flex-col justify-between shadow-xl text-left card-hover-interactive reveal-fade-left">
             <div>
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold block mb-2">
-                {hf?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
+                {hf?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO PATRIMONIAL 4.0?'}
               </span>
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-4">
                 {hf?.boxWhatIsHeading || 'Metodologia Jurídica Estratégica Multidisciplinar'}
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-                {hf?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
+                {hf?.boxWhatIsText || 'O Planejamento Patrimonial e Empresarial 4.0 é uma metodologia jurídica avançada, legal e estratégica desenvolvida por advogados especialistas para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos e vulnerabilidades juridicamente, com o objetivo de perpetuar negócios e patrimônios familiares para as futuras gerações. Sua estruturação integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil (Contratos Estratégicos, Família e Sucessões), Direito Imobiliário e Governança Familiar.'}
               </p>
             </div>
 
-            {/* Porque Planejar em Vida conforme Item 40 */}
+            {/* Porque Planejar em Vida conforme Item 40 e 69 */}
             <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25">
               <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] mb-2 uppercase">
-                {hf?.boxWhyTitle || 'Por Que Planejar em Vida?'}
+                {hf?.boxWhyTitle || 'POR QUE PLANEJAR EM VIDA?'}
               </h4>
               <p className="text-xs text-slate-300 leading-relaxed font-light">
-                {hf?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
+                {hf?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas em vida, de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros e disputas de bens, a alta perda patrimonial e financeira dos herdeiros no inventário (em média de 40% do patrimônio inventariado), evita a comunicação e a partilha das cotas sociais dos herdeiros no divórcio e na dissolução de união estável, evita a venda forçada e desvalorizada de bens e a dilapidação do patrimônio familiar e empresarial.'}
               </p>
             </div>
           </div>

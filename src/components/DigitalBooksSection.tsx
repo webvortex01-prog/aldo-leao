@@ -309,21 +309,21 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                     </div>
                   </div>
 
-                  {/* Ações: Botão BAIXAR e Botão VER SUMÁRIO */}
+                  {/* Ações: Botão BAIXAR e Botão VER SUMÁRIO - Ambos abrem a Janela de Leitura e Download (Item 70) */}
                   <div className="p-6 pt-0 flex flex-col gap-2.5">
                     <button
-                      onClick={() => handleOpenForm(book)}
+                      onClick={() => setSummaryBook(book)}
                       className="btn-gold-luxury w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider text-center cursor-pointer shadow-lg flex items-center justify-center gap-2 transition-all"
                     >
                       <Download className="w-4 h-4 text-black" />
-                      <span>BAIXAR</span>
+                      <span>LEITURA & DOWNLOAD</span>
                     </button>
 
                     <button
                       onClick={() => setSummaryBook(book)}
                       className="btn-secondary-luxury w-full py-2.5 px-3 rounded-xl bg-[#0A1730] hover:bg-[#0E1F3D] border border-[#D4AF37]/35 text-[#F6E27A] text-xs font-semibold uppercase tracking-wider text-center cursor-pointer transition-all"
                     >
-                      VER SUMÁRIO
+                      VER SUMÁRIO DO LIVRO
                     </button>
                   </div>
                 </div>
@@ -414,7 +414,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
             {/* Cabeçalho do Sumário */}
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
               <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider block mb-1">
-                LIVRO DIGITAL (PDF)
+                LIVRO DIGITAL (PDF) · LEITURA & DOWNLOAD
               </span>
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
                 {summaryBook.title}
@@ -424,25 +424,28 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
               </p>
             </div>
 
-            {/* Sumário */}
+            {/* Sumário do Livro (Item 70: frase alterada para SUMÁRIO DO LIVRO em dourado) */}
             <div className="mb-6">
-              <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider mb-4">
-                Conteúdo & Capítulos da Obra
+              <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider mb-4 flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-[#D4AF37]" />
+                <span>{summaryBook.summaryTitle || 'SUMÁRIO DO LIVRO'}</span>
               </h4>
 
               <div className="space-y-2.5">
                 {(summaryBook.chapters || []).map((chapter, i) => (
                   <div 
                     key={i} 
-                    className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/20 text-xs text-slate-200"
+                    className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/25 text-xs text-slate-200 flex items-start gap-2.5"
                   >
-                    {chapter}
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E5C158] mt-1.5 shrink-0" />
+                    <span>{chapter}</span>
                   </div>
                 ))}
               </div>
 
+              {/* Texto que vem abaixo de SUMÁRIO DO LIVRO (Item 70) */}
               {summaryBook.sampleExcerpt && (
-                <div className="mt-5 p-4 rounded-xl bg-[#0E1F3D]/40 border border-[#D4AF37]/25 text-xs text-slate-300 italic">
+                <div className="mt-5 p-4 rounded-xl bg-[#0E1F3D]/50 border border-[#D4AF37]/30 text-xs sm:text-sm text-slate-300 italic leading-relaxed">
                   "{summaryBook.sampleExcerpt}"
                 </div>
               )}
@@ -452,12 +455,16 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
               <button
                 onClick={() => {
                   const b = summaryBook;
+                  if (b.pdfUrl) {
+                    window.open(b.pdfUrl, '_blank');
+                  }
                   setSummaryBook(null);
                   handleOpenForm(b);
                 }}
-                className="btn-gold-luxury flex-1 py-3 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 text-xs font-bold uppercase tracking-wider text-center cursor-pointer shadow-md"
+                className="btn-gold-luxury flex-1 py-3.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 text-xs font-bold uppercase tracking-wider text-center cursor-pointer shadow-md flex items-center justify-center gap-2"
               >
-                BAIXAR ESTE LIVRO DIGITAL
+                <Download className="w-4 h-4 text-black" />
+                <span>BAIXAR ESTE LIVRO DIGITAL</span>
               </button>
 
               <button

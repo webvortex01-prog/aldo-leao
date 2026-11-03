@@ -62,21 +62,24 @@ export interface Publication {
   readTime: string;
   slug: string;
   image?: string;
-  // Campos SEO Ocultos para indexação nos buscadores (Itens 17 e 55)
+  // Campos SEO Ocultos para indexação nos buscadores (Itens 17, 55 e 60)
   seoTitle?: string;
   metaDescription?: string;
   keywords?: string[];
+  // Agendamento / Programação de Publicação (Item 59)
+  publishAt?: string;
+  isScheduled?: boolean;
 }
 
 export interface ArticleSignatureConfig {
-  enabled: boolean;
-  line1: string;          // e.g. "Núcleo de Comunicação" (#FFFFFF)
+  enabled?: boolean;
+  line1?: string;          // e.g. "Núcleo de Comunicação" (#FFFFFF)
   line1Color?: string;    // #FFFFFF
-  line2: string;          // e.g. "ALDO LEÃO ADVOCACIA ESTRATÉGICA" (#D4AF37)
+  line2?: string;          // e.g. "ALDO LEÃO ADVOCACIA ESTRATÉGICA" (#D4AF37)
   line2Color?: string;    // #D4AF37
   line3?: string;         // e.g. "Excelência Jurídica Desde 1908" (#F8F8F8)
   line3Color?: string;    // #F8F8F8
-  buttonText: string;     // e.g. "AGENDAR CONSULTA VIRTUAL"
+  buttonText?: string;     // e.g. "AGENDAR CONSULTA VIRTUAL"
   buttonTextColor?: string;
   whatsappNumber?: string;
   whatsappMessage?: string;
@@ -98,9 +101,12 @@ export interface DigitalBook {
   downloadAvailable?: boolean;
   downloadCount?: string;
   badge?: string;
+  summaryTitle?: string;
   chapters?: string[];
   summaryImage?: string;
   sampleExcerpt?: string;
+  pdfUrl?: string;
+  downloadUrl?: string;
 }
 
 export interface FAQItem {
@@ -157,6 +163,8 @@ export interface SiteConfig {
     cta2Text?: string;
     badgeYear?: string;
     badgeText?: string;
+    slide1Duration?: number; // Tempo de exibição em segundos (Item 61)
+    slide2Duration?: number; // Tempo de exibição em segundos (Item 61)
   };
   contact: {
     sectionKicker?: string;
@@ -230,6 +238,8 @@ export interface SiteConfig {
     counterSuffix?: string;
     modalBio1?: string;
     modalBio2?: string;
+    curriculumClosingP1?: string; // Síntese de Encerramento Parágrafo 1 (Item 64)
+    curriculumClosingP2?: string; // Síntese de Encerramento Parágrafo 2 (Item 64)
   };
   practiceAreas: PracticeArea[];
   excellenceSolutions: ExcellenceSolution[];
@@ -281,6 +291,7 @@ export interface SiteConfig {
   };
   centennialLegacy?: {
     goldKicker?: string;
+    modalKicker?: string; // Frase dourada do modal Saiba Mais (Item 63: EXCELÊNCIA JURÍDICA DESDE 1908)
     title?: string;
     titleHighlight?: string;
     subtitle?: string;
@@ -403,6 +414,56 @@ export interface SiteConfig {
   };
   articleSignature?: ArticleSignatureConfig;
   holdingLanding?: HoldingLandingConfig;
+  gestaoJuridica?: GestaoJuridicaConfig;
+}
+
+export interface GestaoJuridicaConfig {
+  kickerBadge?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  introParagraph1?: string;
+  introParagraph2?: string;
+  btnVoltarText?: string;
+  btnCtaHeroText?: string;
+  frentesSectionKicker?: string;
+  frentesSectionTitle?: string;
+  frentesSectionSubtitle?: string;
+  frentesSectionDesc?: string;
+  // Frente 1: Organizacional
+  frente1Badge?: string;
+  frente1Title?: string;
+  frente1Subtitle?: string;
+  frente1Desc?: string;
+  frente1BoxTitle?: string;
+  frente1Card1Title?: string;
+  frente1Card1Desc?: string;
+  frente1Card2Title?: string;
+  frente1Card2Desc?: string;
+  frente1Card3Title?: string;
+  frente1Card3Desc?: string;
+  frente1Card4Title?: string;
+  frente1Card4Desc?: string;
+  frente1Conclusion?: string;
+  // Frente 2: Judicial
+  frente2Badge?: string;
+  frente2Title?: string;
+  frente2Subtitle?: string;
+  frente2Desc?: string;
+  frente2Pilar1Title?: string;
+  frente2Pilar1Desc?: string;
+  frente2Pilar2Title?: string;
+  frente2Pilar2Desc?: string;
+  frente2Pilar3Title?: string;
+  frente2Pilar3Desc?: string;
+  frente2Impact?: string;
+  // Seção de Conversão / Agendamento
+  ctaKicker?: string;
+  ctaTitle?: string;
+  ctaDesc?: string;
+  ctaHighlight1?: string;
+  ctaHighlight2?: string;
+  ctaHighlight3?: string;
+  ctaButtonText?: string;
 }
 
 export interface HoldingLandingFaqItem {

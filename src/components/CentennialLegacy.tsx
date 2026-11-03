@@ -194,7 +194,7 @@ export const CentennialLegacy: React.FC = () => {
 
             <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
               <span className="text-xs uppercase tracking-widest text-[#E5C158] font-bold">
-                {cl?.goldKicker || 'O LEGADO CENTENÁRIO'} · {cl?.subtitle || 'DESDE 1908'}
+                {cl?.modalKicker || 'EXCELÊNCIA JURÍDICA DESDE 1908'}
               </span>
               <h3 className="font-cinzel text-2xl font-bold text-white mt-1">
                 A Trajetória Centenária do Escritório Mais Antigo do Brasil

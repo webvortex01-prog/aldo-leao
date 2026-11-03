@@ -117,7 +117,7 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
               {al?.paragraph1 || 'Centro de Estudos Jurídicos Superiores da Aldo Leão Advocacia Estratégica, dedicado à produção e difusão do conhecimento jurídico especializado.'}
             </p>
             <p>
-              {al?.paragraph2 || 'A Academia realiza a publicação de artigos jurídicos, de livros digitais, promove a realização de palestras, cursos, treinamentos, mentorias, workshops e seminários especializados.'}
+              {al?.paragraph2 || 'A Academia realiza a publicação de artigos jurídicos, livros digitais, promove a realização de palestras, cursos, mentorias, workshops e seminários especializados.'}
             </p>
             <p className="font-normal text-white">
               {al?.paragraph3 || 'Nossa missão é transformar o conhecimento jurídico especializado em uma ferramenta de evolução pessoal e transformação.'}
@@ -132,7 +132,7 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
 
           {/* 5. Texto em branco */}
           <p className="text-sm sm:text-base text-white font-sans-body max-w-2xl mx-auto mb-6 leading-relaxed">
-            {al?.speakerText || 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.'}
+            {al?.speakerText || 'O Dr. ALDO LEÃO é presença marcante em congressos, seminários, mentorias, workshops, palestras e fóruns especializados.'}
           </p>
 
           {/* 6. Botão dourado "FALAR COM A ACADEMIA" (whatsapp) */}

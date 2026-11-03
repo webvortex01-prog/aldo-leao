@@ -6,11 +6,13 @@ import { cleanAndFormatPhone } from '../utils/phoneUtils';
 
 interface PracticeAreasProps {
   onGoToLandingPage: () => void;
+  onGoToHoldingPage?: () => void;
   onOpenConsultation: () => void;
 }
 
 export const PracticeAreas: React.FC<PracticeAreasProps> = ({
-  onGoToLandingPage
+  onGoToLandingPage,
+  onGoToHoldingPage
 }) => {
   const { siteConfig } = useSite();
   const [selectedAreaModal, setSelectedAreaModal] = useState<PracticeArea | null>(null);
@@ -65,10 +67,9 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
 
   const handleAreaClick = (area: PracticeArea) => {
     if (area.id === 'holding-40') {
-      // Item 36: No card Planejamento Patrimonial 4.0 ao clicar em Saiba Mais abre a página Holding Familiar
-      const el = document.getElementById('holding-familiar');
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+      // Item 36 e Item 65: Abre a página Holding Familiar sem mostrar Publicações Jurídicas
+      if (onGoToHoldingPage) {
+        onGoToHoldingPage();
       } else {
         onGoToLandingPage();
       }

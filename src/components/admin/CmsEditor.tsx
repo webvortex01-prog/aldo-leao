@@ -214,6 +214,175 @@ interface CmsEditorProps {
   onSwitchToCanvasMode?: () => void;
 }
 
+
+// ============================================================================
+// BARRA DE FORMATAÇÃO E TEXTO RICO (Item 62: Negrito, Itálico, Cor #... e Alinhamentos)
+// ============================================================================
+interface FormattingToolbarProps {
+  onInsert: (prefix: string, suffix?: string) => void;
+}
+
+export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }) => {
+  const [customColor, setCustomColor] = useState('#D4AF37');
+
+  return (
+    <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-[#030710] border border-[#D4AF37]/30 rounded-lg mb-1.5 text-[11px]">
+      <span className="text-[10px] uppercase font-bold text-slate-400 px-1">Formatação:</span>
+      <button
+        type="button"
+        onClick={() => onInsert('<b>', '</b>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
+        title="Negrito"
+      >
+        B
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<i>', '</i>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white italic font-serif transition-colors cursor-pointer"
+        title="Itálico"
+      >
+        I
+      </button>
+      <div className="h-3.5 w-px bg-slate-700 mx-1" />
+      <button
+        type="button"
+        onClick={() => onInsert('<div class="text-left">', '</div>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+        title="Alinhar à Esquerda"
+      >
+        Esquerda
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<div class="text-center">', '</div>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+        title="Centralizado"
+      >
+        Centralizado
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<div class="text-right">', '</div>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+        title="Alinhar à Direita"
+      >
+        Direita
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<div class="text-justify">', '</div>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+        title="Justificado"
+      >
+        Justificado
+      </button>
+      <div className="h-3.5 w-px bg-slate-700 mx-1" />
+      <span className="text-[10px] text-slate-400">Cor:</span>
+      <button
+        type="button"
+        onClick={() => onInsert('<span style="color: #D4AF37">', '</span>')}
+        className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
+        title="Dourado Nobre #D4AF37"
+      >
+        #D4AF37
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<span style="color: #F6E27A">', '</span>')}
+        className="px-1.5 py-0.5 rounded bg-[#F6E27A]/20 border border-[#F6E27A] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
+        title="Ouro Claro #F6E27A"
+      >
+        #F6E27A
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<span style="color: #FFFFFF">', '</span>')}
+        className="px-1.5 py-0.5 rounded bg-white/20 border border-white text-white font-semibold text-[10px] cursor-pointer"
+        title="Branco #FFFFFF"
+      >
+        #FFFFFF
+      </button>
+      <div className="flex items-center gap-1">
+        <input
+          type="color"
+          value={customColor}
+          onChange={(e) => setCustomColor(e.target.value)}
+          className="w-5 h-5 rounded cursor-pointer bg-transparent border-0"
+          title="Escolher cor personalizada"
+        />
+        <button
+          type="button"
+          onClick={() => onInsert(`<span style="color: ${customColor}">`, '</span>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-mono cursor-pointer"
+          title="Aplicar cor selecionada"
+        >
+          {customColor}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+interface RichTextareaProps {
+  label: string;
+  value: string;
+  onChange: (val: string) => void;
+  rows?: number;
+  placeholder?: string;
+  hint?: string;
+}
+
+export const RichTextarea: React.FC<RichTextareaProps> = ({
+  label,
+  value,
+  onChange,
+  rows = 3,
+  placeholder,
+  hint
+}) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInsert = (prefix: string, suffix: string = '') => {
+    const el = textareaRef.current;
+    if (!el) {
+      onChange(value + prefix + suffix);
+      return;
+    }
+    const start = el.selectionStart;
+    const end = el.selectionEnd;
+    const selectedText = value.substring(start, end);
+    const before = value.substring(0, start);
+    const after = value.substring(end);
+    const newText = before + prefix + (selectedText || '') + suffix + after;
+    onChange(newText);
+    setTimeout(() => {
+      el.focus();
+      el.setSelectionRange(start + prefix.length, start + prefix.length + selectedText.length);
+    }, 50);
+  };
+
+  return (
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between">
+        <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+          {label}
+        </label>
+        {hint && <span className="text-[11px] text-slate-400">{hint}</span>}
+      </div>
+      <FormattingToolbar onInsert={handleInsert} />
+      <textarea
+        ref={textareaRef}
+        rows={rows}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full px-4 py-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/35 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-xs sm:text-sm font-sans"
+      />
+    </div>
+  );
+};
+
 export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) => {
   const { siteConfig, updateSiteConfig, resetSiteConfigToDefault } = useSite();
   const [formData, setFormData] = useState(siteConfig);
@@ -225,8 +394,10 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     | 'founder'
     | 'services'
     | 'solutions'
+    | 'gestao_juridica'
     | 'consultation'
     | 'holding'
+    | 'landing_holding'
     | 'publications'
     | 'books'
     | 'contact'
@@ -286,6 +457,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
   // Helper para adicionar livro digital no TOPO com salvamento imediato
   const handleAddBook = () => {
+    setActiveTab('books');
     const newId = `livro-${Date.now()}`;
     const newBook: DigitalBook = {
       id: newId,
@@ -331,6 +503,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
   // Helper para adicionar publicação (Artigo ou Notícia) no TOPO com salvamento imediato
   const handleAddPublication = (type: 'artigo' | 'noticia' = 'artigo') => {
+    setActiveTab('publications');
     const isArtigo = type === 'artigo';
     const now = new Date();
     const formattedDate = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
@@ -605,10 +778,12 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     { id: 'founder', label: '5. Head Jurídico (Dr. Aldo & 40 Anos)', icon: ImageIcon },
     { id: 'services', label: '6. Áreas de Atuação', icon: Briefcase },
     { id: 'solutions', label: '7. Soluções & Academia Leão', icon: GraduationCap },
+    { id: 'gestao_juridica', label: '★ Página Gestão Jurídica 4.0', icon: Briefcase },
     { id: 'consultation', label: '8. Agende sua Consulta Digital', icon: PhoneCall },
-    { id: 'holding', label: '9. Planejamento Patrimonial (Holding 4.0)', icon: Layers },
+    { id: 'holding', label: '9. Holding Familiar (Portal)', icon: Layers },
+    { id: 'landing_holding', label: '★ Landing Page Holding Familiar 4.0', icon: Sparkles },
     { id: 'publications', label: '10. Publicações Jurídicas (Artigos & Notícias)', icon: BookOpen },
-    { id: 'books', label: '11. Livros Digitais (Acervo de 8 Obras)', icon: BookOpen },
+    { id: 'books', label: '11. Livros Digitais (Acervo & Sumário)', icon: BookOpen },
     { id: 'contact', label: '12. Telefones, WhatsApp & Endereço', icon: PhoneCall },
     { id: 'footer', label: '13. Rodapé, LGPD & OAB', icon: Scale },
     { id: 'all_images', label: '14. Central de Fotos & Mídia', icon: ImageIcon },
@@ -998,7 +1173,23 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                Frase Dourada do Modal Saiba Mais (Item 63)
+              </label>
+              <input
+                type="text"
+                value={formData.centennialLegacy?.modalKicker || 'EXCELÊNCIA JURÍDICA DESDE 1908'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), modalKicker: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+              />
+            </div>
+
               <div>
                 <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
                   Título Parte 1
@@ -1092,6 +1283,33 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
           </div>
+
+          
+            {/* Campo de Tempo de Transição entre Slide 1 e Slide 2 (Item 61) */}
+            <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                  ⏱️ Tempo de Exibição do Slide 1 (Segundos - Item 61)
+                </label>
+                <p className="text-[11px] text-slate-300">
+                  Duração em segundos que o Slide 1 permanece na tela antes de alternar para o Slide 2.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min={3}
+                  max={120}
+                  value={formData.hero.slide1Duration || 18}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    hero: { ...formData.hero, slide1Duration: Number(e.target.value) || 18 }
+                  })}
+                  className="w-24 p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm font-bold text-center text-white"
+                />
+                <span className="text-xs text-slate-300 font-semibold">segundos</span>
+              </div>
+            </div>
 
           {/* SLIDE 2 */}
           <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
@@ -1305,6 +1523,33 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
         </div>
       )}
+
+      
+            {/* Campo de Tempo de Transição do Slide 2 (Item 61) */}
+            <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                  ⏱️ Tempo de Exibição do Slide 2 (Segundos - Item 61)
+                </label>
+                <p className="text-[11px] text-slate-300">
+                  Duração em segundos que o Slide 2 permanece na tela antes de alternar para o Slide 1.
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min={3}
+                  max={120}
+                  value={formData.hero.slide2Duration || 18}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    hero: { ...formData.hero, slide2Duration: Number(e.target.value) || 18 }
+                  })}
+                  className="w-24 p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm font-bold text-center text-white"
+                />
+                <span className="text-xs text-slate-300 font-semibold">segundos</span>
+              </div>
+            </div>
 
       {/* TAB 3: PRESENÇA NACIONAL DIGITAL */}
       {activeTab === 'digital_presence' && (
@@ -2290,6 +2535,37 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
           </div>
 
+          
+          {/* Parágrafos de Conclusão do Currículo no Box Azul Escuro (Item 64) */}
+          <div className="p-4 sm:p-5 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-4">
+            <div className="border-b border-[#D4AF37]/20 pb-2">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                Dois Parágrafos de Fechamento do Currículo no Box Azul Escuro (Item 64)
+              </h4>
+              <p className="text-[11px] text-slate-300 mt-0.5">
+                Exibidos no final do modal "Saiba Mais" do Head Jurídico e na Landing Page.
+              </p>
+            </div>
+            <RichTextarea
+              label="Parágrafo de Fechamento 1 (Item 64)"
+              value={formData.founder?.curriculumClosingP1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração da tradição jurídica centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA, unindo a sabedoria acumulada ao longo de mais de um século à inovação constante das ferramentas jurídicas contemporâneas.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...(formData.founder || {}), curriculumClosingP1: val }
+              })}
+              rows={3}
+            />
+            <RichTextarea
+              label="Parágrafo de Fechamento 2 (Item 64)"
+              value={formData.founder?.curriculumClosingP2 || 'Atuando na Advocacia Estratégica desde 1986, assessora famílias, empresários e corporações em decisões de alta relevância patrimonial e societária, assegurando a blindagem legal, a eficiência sucessória e a perpetuação sustentável de legados empresariais.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...(formData.founder || {}), curriculumClosingP2: val }
+              })}
+              rows={3}
+            />
+          </div>
+
           {/* Contador de 40 Anos */}
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
             <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
@@ -2781,6 +3057,331 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
         </div>
       )}
 
+      
+      {/* TAB GESTÃO JURÍDICA 4.0 (Item 66) */}
+      {activeTab === 'gestao_juridica' && (
+        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
+          <div className="border-b border-[#D4AF37]/25 pb-4">
+            <span className="text-[10px] uppercase font-bold tracking-widest text-[#E5C158] block mb-1">
+              PÁGINA DEDICADA INTEGRAL
+            </span>
+            <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-[#F6E27A]" />
+              <span>Edição Total da Página GESTÃO JURÍDICA 4.0 (Item 66)</span>
+            </h3>
+            <p className="text-xs text-slate-300 mt-1">
+              Edite todos os textos, vertentes organizacional e judicial, diagnóstico estratégico, pilares e botão de agendamento desta página.
+            </p>
+          </div>
+
+          {/* 1. Header da Página e Botão Voltar */}
+          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+              1. Cabeçalho e Identificação da Página
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Texto do Botão Voltar (Item 66: "Voltar")
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.btnVoltarText || 'Voltar'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), btnVoltarText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Kicker / Badge Superior (com Ícone da Balança)
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.kickerBadge || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), kickerBadge: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Título Principal
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.heroTitle || 'GESTÃO JURÍDICA 4.0'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), heroTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/60 text-sm text-[#F6E27A] font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Subtítulo Dourado
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.heroSubtitle || 'ADVOCACIA ESTRATÉGICA, INTELIGÊNCIA JURÍDICA E GESTÃO DE VANGUARDA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), heroSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <RichTextarea
+              label="Primeiro Parágrafo da Página (Item 66)"
+              value={formData.gestaoJuridica?.introParagraph1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                gestaoJuridica: { ...(formData.gestaoJuridica || {}), introParagraph1: val }
+              })}
+              rows={4}
+            />
+
+            <RichTextarea
+              label="Vertentes de Alta Performance (Organizacional e Judicial) - Item 66"
+              value={formData.gestaoJuridica?.introParagraph2 || 'Este serviço especializado e estratégico, possui duas vertentes de alta performance: ORGANIZACIONAL e/ou JUDICIAL.\n\n► GESTÃO JURÍDICA ORGANIZACIONAL\nCom atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                gestaoJuridica: { ...(formData.gestaoJuridica || {}), introParagraph2: val }
+              })}
+              rows={4}
+            />
+          </div>
+
+          {/* 2. Frente 1: Gestão Jurídica Organizacional & Box Azul-Marinho */}
+          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+              2. Frente 1: Gestão Jurídica Organizacional & Diagnóstico Estratégico
+            </h4>
+
+            <RichTextarea
+              label="Texto do Box Azul-Marinho (Item 66: Diagnóstico Situacional Estratégico)"
+              value={formData.gestaoJuridica?.frente1BoxTitle || 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:'}
+              onChange={(val) => setFormData({
+                ...formData,
+                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1BoxTitle: val }
+              })}
+              rows={2}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-[11px] text-slate-300 mb-1">Item 1: Auditoria Preventiva</label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.frente1Card1Desc || 'Auditoria preventiva da situação atual, contratos e fluxos corporativos;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card1Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-300 mb-1">Item 2: Análise Jurídica Especializada</label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.frente1Card2Desc || 'Análise jurídica especializada alinhada ao modelo de negócios e setor de atuação;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card2Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-300 mb-1">Item 3: Mapeamento de Riscos e Vulnerabilidades</label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.frente1Card3Desc || 'Mapeamento detalhado de riscos operacionais, tributários e inconformidades legais;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card3Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-300 mb-1">Item 4: Soluções Jurídicas Estratégicas</label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.frente1Card4Desc || 'Desenvolvimento e implantação de soluções preventivas e estruturantes personalizadas;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card4Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <RichTextarea
+              label="Conclusão da Frente 1 (Item 66)"
+              value={formData.gestaoJuridica?.frente1Conclusion || 'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Conclusion: val }
+              })}
+              rows={3}
+            />
+          </div>
+
+          {/* 3. Frente 2: Gestão Jurídica Judicial & 3 Pilares */}
+          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+              3. Frente 2: Gestão Jurídica Judicial & 3 Pilares Essenciais
+            </h4>
+
+            <RichTextarea
+              label="Introdução da Frente Judicial (Item 66)"
+              value={formData.gestaoJuridica?.frente2Desc || 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:'}
+              onChange={(val) => setFormData({
+                ...formData,
+                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Desc: val }
+              })}
+              rows={2}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 1: DECISÕES ASSERTIVAS</label>
+                <textarea
+                  rows={2}
+                  value={formData.gestaoJuridica?.frente2Pilar1Desc || 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar1Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 2: GESTÃO DE RESULTADOS</label>
+                <textarea
+                  rows={2}
+                  value={formData.gestaoJuridica?.frente2Pilar2Desc || 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar2Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 3: COMPETITIVIDADE</label>
+                <textarea
+                  rows={2}
+                  value={formData.gestaoJuridica?.frente2Pilar3Desc || 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar3Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <RichTextarea
+              label="Impacto e Vantagem Competitiva da Frente Judicial (Item 66)"
+              value={formData.gestaoJuridica?.frente2Impact || 'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Impact: val }
+              })}
+              rows={3}
+            />
+          </div>
+
+          {/* 4. Seção de Conversão e Destaques (Item 66) */}
+          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+              4. Destaques e Botão AGENDAR CONSULTA DIGITAL (Item 66)
+            </h4>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                Destaque 1 (Mantido conforme Item 66)
+              </label>
+              <input
+                type="text"
+                value={formData.gestaoJuridica?.ctaHighlight1 || 'Atendimento Brasil 100% digital e confidencial com a mesma excelência jurídica do presencial.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight1: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                Destaque 2 (Mantido conforme Item 66)
+              </label>
+              <input
+                type="text"
+                value={formData.gestaoJuridica?.ctaHighlight2 || 'Diagnóstico Estratégico Personalizado para o tamanho do seu negócio e patrimônio.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight2: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                Destaque 3 (Mantido conforme Item 66)
+              </label>
+              <input
+                type="text"
+                value={formData.gestaoJuridica?.ctaHighlight3 || 'Três Gerações de Excelência Jurídica dedicadas à perpetuação do seu legado.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight3: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                Texto do Botão de Agendamento (Item 66)
+              </label>
+              <input
+                type="text"
+                value={formData.gestaoJuridica?.ctaButtonText || 'AGENDAR CONSULTA DIGITAL'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaButtonText: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-xs text-white font-bold"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* TAB 8: AGENDE SUA CONSULTA DIGITAL */}
       {activeTab === 'consultation' && (
         <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
@@ -2904,7 +3505,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
       )}
 
       {/* TAB 9: HOLDING FAMILIAR & PLANEJAMENTO 4.0 */}
-      {activeTab === 'holding' && (
+      {(activeTab === 'holding' || activeTab === 'landing_holding') && (
         <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
           <div className="border-b border-slate-800 pb-3">
             <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
@@ -4843,6 +5444,43 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   </div>
                 </div>
 
+                
+                {/* Programação de Publicação para Data/Hora Futura (Item 59) */}
+                <div className="p-3.5 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <input
+                      type="checkbox"
+                      id={`schedule-${pub.id || idx}`}
+                      checked={pub.isScheduled || false}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].isScheduled = e.target.checked;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      className="w-4 h-4 accent-[#D4AF37] cursor-pointer"
+                    />
+                    <label htmlFor={`schedule-${pub.id || idx}`} className="text-xs font-bold text-[#F6E27A] cursor-pointer">
+                      Programar publicação para data e hora futura (Item 59)
+                    </label>
+                  </div>
+
+                  {pub.isScheduled && (
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-slate-300">Publicar em:</span>
+                      <input
+                        type="datetime-local"
+                        value={pub.publishAt || ''}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].publishAt = e.target.value;
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        className="p-1.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white"
+                      />
+                    </div>
+                  )}
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                   {/* Tipo de Publicação */}
                   <div>
@@ -5305,6 +5943,124 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                       }}
                       placeholder="Ex: 144 páginas"
                       className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                
+                {/* SUMÁRIO DO LIVRO (Item 70: Frase editável "SUMÁRIO DO LIVRO", Capítulos e Texto Abaixo) */}
+                <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+                  <div className="border-b border-[#D4AF37]/20 pb-2 flex items-center justify-between">
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#F6E27A] flex items-center gap-1.5">
+                        <BookOpen className="w-3.5 h-3.5" />
+                        <span>Sumário do Livro & Capítulos (Item 70)</span>
+                      </h4>
+                      <p className="text-[11px] text-slate-300">
+                        Edite o título dourado do sumário, adicione capítulos/itens e edite a citação abaixo.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                      Frase em Dourado do Sumário (Padrão: "SUMÁRIO DO LIVRO")
+                    </label>
+                    <input
+                      type="text"
+                      value={book.summaryTitle || 'SUMÁRIO DO LIVRO'}
+                      onChange={(e) => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        updated[idx].summaryTitle = e.target.value;
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                      className="w-full p-2.5 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                    />
+                  </div>
+
+                  {/* Lista de Capítulos com Adicionar e Remover */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                        Capítulos / Itens do Sumário
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          const chapters = [...(updated[idx].chapters || [])];
+                          chapters.push(`Capítulo ${chapters.length + 1}: Novo Tema da Obra`);
+                          updated[idx].chapters = chapters;
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-[11px] font-bold hover:bg-[#D4AF37]/30 transition-colors cursor-pointer flex items-center gap-1"
+                      >
+                        <Plus className="w-3 h-3" />
+                        <span>+ Adicionar Item ao Sumário</span>
+                      </button>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      {(book.chapters || []).map((ch, chIdx) => (
+                        <div key={chIdx} className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            value={ch}
+                            onChange={(e) => {
+                              const updated = [...(formData.digitalBooks || [])];
+                              const chapters = [...(updated[idx].chapters || [])];
+                              chapters[chIdx] = e.target.value;
+                              updated[idx].chapters = chapters;
+                              setFormData({ ...formData, digitalBooks: updated });
+                            }}
+                            className="flex-1 p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = [...(formData.digitalBooks || [])];
+                              const chapters = (updated[idx].chapters || []).filter((_, i) => i !== chIdx);
+                              updated[idx].chapters = chapters;
+                              setFormData({ ...formData, digitalBooks: updated });
+                            }}
+                            className="p-1.5 text-red-400 hover:text-red-300 cursor-pointer"
+                            title="Remover item"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Texto que vem abaixo de SUMÁRIO DO LIVRO (Item 70) */}
+                  <RichTextarea
+                    label="Texto que vem abaixo de SUMÁRIO DO LIVRO (Item 70)"
+                    value={book.sampleExcerpt || ''}
+                    onChange={(val) => {
+                      const updated = [...(formData.digitalBooks || [])];
+                      updated[idx].sampleExcerpt = val;
+                      setFormData({ ...formData, digitalBooks: updated });
+                    }}
+                    rows={2}
+                    placeholder="Trecho em destaque ou citação da obra..."
+                  />
+
+                  {/* Link / URL do PDF do Livro */}
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-300 mb-1">
+                      Link / URL do PDF do Livro (Para Leitura e Download)
+                    </label>
+                    <input
+                      type="text"
+                      value={book.pdfUrl || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        updated[idx].pdfUrl = e.target.value;
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                      placeholder="Ex: /docs/livro-holding.pdf ou https://..."
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                     />
                   </div>
                 </div>

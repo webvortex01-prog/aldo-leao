@@ -96,8 +96,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
       a: 'Rompendo as fronteiras geográficas de um país continental, para levar a Excelência Jurídica Centenária a clientes de todo o território nacional, desde 2020 o nosso atendimento é realizado 100% digital, para clientes de todo o território nacional, com a mesma excelência jurídica, confidencialidade e segurança do atendimento presencial.'
     },
     {
-      q: 'O que é a Holding Familiar (Planejamento Patrimonial 4.0)?',
-      a: 'É uma estrutura societária e patrimonial especializada, avançada e inteligente utilizada para proteger juridicamente, organizar e bem administrar o patrimônio e o negócio familiar, planejando em vida para evitar a alta perda patrimonial e financeira dos herdeiros no inventário (em média 40%).'
+      q: 'O que é o Planejamento Patrimonial 4.0 (Holding Familiar)?',
+      a: 'O Planejamento Patrimonial e Empresarial 4.0 é uma metodologia jurídica avançada, legal e estratégica desenvolvida por advogados especialistas para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos e vulnerabilidades juridicamente, com o objetivo de perpetuar negócios e patrimônios familiares para as futuras gerações. Sua estruturação integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil (Contratos Estratégicos, Família e Sucessões), Direito Imobiliário e Governança Familiar.'
     },
     {
       q: 'Quem pode fazer o Planejamento Patrimonial 4.0?',
@@ -986,13 +986,13 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 </div>
               </div>
 
-              {/* Texto 2: Síntese de Encerramento Oficial */}
+              {/* Texto 2: Síntese de Encerramento Oficial (Item 64) */}
               <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-slate-300 text-xs sm:text-sm space-y-2.5">
                 <p>
-                  "Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica."
+                  "{f?.curriculumClosingP1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'}"
                 </p>
                 <p>
-                  "Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado."
+                  "{f?.curriculumClosingP2 || 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'}"
                 </p>
               </div>
             </div>
