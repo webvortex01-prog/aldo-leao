@@ -41,7 +41,7 @@ export const CentennialLegacy: React.FC = () => {
   ];
 
   // Garante que o último marco SEMPRE seja 2020 (Item f do dia 15/10/26)
-  const timelineEvents = rawEvents.map((evt, idx) => 
+  const timelineEvents = rawEvents.map((evt, idx) =>
     (idx === rawEvents.length - 1 || evt.title === 'Presença Nacional Digital' || evt.year === '2026')
       ? { ...evt, year: '2020' }
       : evt
@@ -84,33 +84,33 @@ export const CentennialLegacy: React.FC = () => {
               {timelineEvents.map((evt, idx) => {
                 const displayYear = (idx === 4 || evt.title?.toLowerCase().includes('presença nacional digital') || evt.year === '2026') ? '2020' : evt.year;
                 return (
-                <div key={idx} className="flex flex-col items-center text-center group">
-                  {/* Year Ball com Animação (Item 6 das solicitações e inspiração Decision) */}
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F6E27A] via-[#E5C158] to-[#D4AF37] border-2 border-white flex items-center justify-center text-[#050B14] font-cinzel font-black text-base shadow-[0_0_20px_rgba(212,175,55,0.4)] mb-4 shrink-0 tabular-nums animate-year-badge group-hover:scale-110 transition-transform duration-300">
-                    {displayYear}
+                  <div key={idx} className="flex flex-col items-center text-center group">
+                    {/* Year Ball com Animação (Item 6 das solicitações e inspiração Decision) */}
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F6E27A] via-[#E5C158] to-[#D4AF37] border-2 border-white flex items-center justify-center text-[#050B14] font-cinzel font-black text-base shadow-[0_0_20px_rgba(212,175,55,0.4)] mb-4 shrink-0 tabular-nums animate-year-badge group-hover:scale-110 transition-transform duration-300">
+                      {displayYear}
+                    </div>
+
+                    {/* Title */}
+                    <h4 className="text-xs font-bold text-white mb-2 leading-tight uppercase font-cinzel">
+                      {evt.title}
+                    </h4>
+
+                    {/* Lawyers in Bold (Item 5 e 32) */}
+                    <div className="mb-2 space-y-0.5">
+                      {evt.lawyers.map((name, i) => (
+                        <p key={i} className="text-xs font-black text-[#F6E27A] tracking-tight">
+                          {name}
+                        </p>
+                      ))}
+                    </div>
+
+                    {/* Description em Negrito (Item 48) */}
+                    <p className="text-[11px] sm:text-xs text-slate-200 leading-relaxed font-sans-body font-bold">
+                      {evt.description}
+                    </p>
                   </div>
-
-                  {/* Title */}
-                  <h4 className="text-xs font-bold text-white mb-2 leading-tight uppercase font-cinzel">
-                    {evt.title}
-                  </h4>
-
-                  {/* Lawyers in Bold (Item 5 e 32) */}
-                  <div className="mb-2 space-y-0.5">
-                    {evt.lawyers.map((name, i) => (
-                      <p key={i} className="text-xs font-black text-[#F6E27A] tracking-tight">
-                        {name}
-                      </p>
-                    ))}
-                  </div>
-
-                  {/* Description em Negrito (Item 48) */}
-                  <p className="text-[11px] sm:text-xs text-slate-200 leading-relaxed font-sans-body font-bold">
-                    {evt.description}
-                  </p>
-                </div>
-              );
-            })}
+                );
+              })}
             </div>
           </div>
 
@@ -208,7 +208,7 @@ export const CentennialLegacy: React.FC = () => {
               <p>
                 {cl?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
               </p>
-              
+
               <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3 mt-4">
                 {timelineEvents.map((evt, idx) => (
                   <p key={idx}>

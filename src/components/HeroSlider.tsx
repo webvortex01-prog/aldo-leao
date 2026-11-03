@@ -44,10 +44,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
     <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-8 md:pb-14 bg-[#050B14]">
       {/* Background Images ajustadas com versões dedicadas para Mobile (9:16) e Desktop (16:9) e Animação Flutuante Ken Burns (Decision) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Slide 1: Imagem da Justiça e Balança cobrindo a página até o final abaixo do box (Itens 7 e 51) */}
+        {/* Slide 1: Imagem da Justiça e Balança equilibrada com contraste escuro para máxima legibilidade do texto */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 0 ? 'opacity-95 sm:opacity-90 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 0 ? 'opacity-85 sm:opacity-80 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -55,19 +55,28 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroImageUrl || '/img/novofundohero.jpg'}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
-              className={`w-full h-[125%] object-cover object-top md:object-[72%_top] scale-110 lg:scale-[1.22] origin-[70%_top] filter brightness-105 contrast-105 transform-gpu ${
+              style={{
+                filter: `brightness(${(siteConfig.hero?.slide1Brightness ?? 85) / 100}) contrast(1.08)`
+              }}
+              className={`w-full h-[125%] object-cover object-top md:object-[72%_top] scale-110 lg:scale-[1.22] origin-[70%_top] transform-gpu ${
                 currentSlide === 0 ? 'animate-hero-panzoom-1' : ''
               }`}
             />
           </picture>
-          {/* Película escura suave apenas para legibilidade dos textos à esquerda sem escurecer a base */}
-          <div className="absolute inset-0 bg-[#050B14]/15 pointer-events-none" />
+          {/* Película escura configurável no CMS para legibilidade nobre */}
+          <div 
+            className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+            style={{
+              backgroundColor: '#050B14',
+              opacity: (siteConfig.hero?.slide1OverlayOpacity ?? 45) / 100
+            }}
+          />
         </div>
 
         {/* Slide 2: Imagem da Família Multigeracional com Pan-Zoom Flutuante e fundo equilibrado */}
         <div
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            currentSlide === 1 ? 'opacity-75 sm:opacity-65 z-10' : 'opacity-0 z-0 pointer-events-none'
+            currentSlide === 1 ? 'opacity-80 sm:opacity-75 z-10' : 'opacity-0 z-0 pointer-events-none'
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
@@ -75,17 +84,26 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             <img
               src={siteConfig.hero?.heroSlide2ImageUrl || holdingFamilyHeroBg}
               alt="Holding Familiar - Perpetuação do Patrimônio Familiar"
-              className={`w-full h-full object-cover object-top md:object-[center_20%] filter brightness-90 contrast-105 transform-gpu origin-[50%_25%] ${
+              style={{
+                filter: `brightness(${(siteConfig.hero?.slide2Brightness ?? 90) / 100}) contrast(1.05)`
+              }}
+              className={`w-full h-full object-cover object-top md:object-[center_20%] transform-gpu origin-[50%_25%] ${
                 currentSlide === 1 ? 'animate-hero-panzoom-2' : ''
               }`}
             />
           </picture>
-          {/* Película escura suave */}
-          <div className="absolute inset-0 bg-[#050B14]/35 pointer-events-none" />
+          {/* Película escura configurável */}
+          <div 
+            className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+            style={{
+              backgroundColor: '#050B14',
+              opacity: (siteConfig.hero?.slide2OverlayOpacity ?? 35) / 100
+            }}
+          />
         </div>
 
         {/* Overlays cinematográficos suaves: gradiente lateral para texto à esquerda mantendo a base totalmente nítida */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/40 via-transparent to-transparent md:bg-gradient-to-r md:from-[#050B14]/90 md:via-[#050B14]/55 md:to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050B14]/60 via-transparent to-[#050B14]/40 md:bg-gradient-to-r md:from-[#050B14]/95 md:via-[#050B14]/75 md:to-transparent pointer-events-none" />
       </div>
 
       {/* Background ambient luxury lighting suave sem clarear o fundo */}

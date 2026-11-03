@@ -165,6 +165,10 @@ export interface SiteConfig {
     badgeText?: string;
     slide1Duration?: number; // Tempo de exibição em segundos (Item 61)
     slide2Duration?: number; // Tempo de exibição em segundos (Item 61)
+    slide1Brightness?: number; // Brilho da imagem do slide 1 em % (padrão 85%)
+    slide1OverlayOpacity?: number; // Película escura do slide 1 em % (padrão 45%)
+    slide2Brightness?: number; // Brilho da imagem do slide 2 em % (padrão 90%)
+    slide2OverlayOpacity?: number; // Película escura do slide 2 em % (padrão 35%)
   };
   contact: {
     sectionKicker?: string;

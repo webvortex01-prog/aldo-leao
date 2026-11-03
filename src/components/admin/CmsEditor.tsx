@@ -1311,6 +1311,63 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
+            {/* Controles de Escurecimento e Contraste do Slide 1 (Solução para Legibilidade) */}
+            <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-1.5">
+                <span>Contraste & Escurecimento da Imagem do Slide 1</span>
+              </h4>
+              <p className="text-[11px] text-slate-300">
+                Ajuste o brilho e a película escura para garantir leitura perfeita dos textos dourados e brancos, equilibrando a claridade em relação ao Slide 2.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                      Brilho da Imagem
+                    </label>
+                    <span className="text-xs font-bold text-[#F6E27A]">
+                      {formData.hero.slide1Brightness ?? 85}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={50}
+                    max={120}
+                    value={formData.hero.slide1Brightness ?? 85}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, slide1Brightness: Number(e.target.value) }
+                    })}
+                    className="w-full accent-[#D4AF37] cursor-pointer"
+                  />
+                  <span className="text-[10px] text-slate-400">Padrão: 85% para tom equilibrado e nítido.</span>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                      Película Escura (Opacidade)
+                    </label>
+                    <span className="text-xs font-bold text-[#F6E27A]">
+                      {formData.hero.slide1OverlayOpacity ?? 45}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={10}
+                    max={85}
+                    value={formData.hero.slide1OverlayOpacity ?? 45}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, slide1OverlayOpacity: Number(e.target.value) }
+                    })}
+                    className="w-full accent-[#D4AF37] cursor-pointer"
+                  />
+                  <span className="text-[10px] text-slate-400">Padrão: 45% para máximo conforto de leitura.</span>
+                </div>
+              </div>
+            </div>
+
           {/* SLIDE 2 */}
           <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
             <h3 className="font-cinzel text-base font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
@@ -1520,11 +1577,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
 
-      
             {/* Campo de Tempo de Transição do Slide 2 (Item 61) */}
             <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
@@ -1550,6 +1603,66 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <span className="text-xs text-slate-300 font-semibold">segundos</span>
               </div>
             </div>
+
+            {/* Controles de Escurecimento e Contraste do Slide 2 */}
+            <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-1.5">
+                <span>Contraste & Escurecimento da Imagem do Slide 2</span>
+              </h4>
+              <p className="text-[11px] text-slate-300">
+                Ajuste o brilho e a película escura para equilibrar a luz do Slide 2 com o Slide 1.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                      Brilho da Imagem
+                    </label>
+                    <span className="text-xs font-bold text-[#F6E27A]">
+                      {formData.hero.slide2Brightness ?? 90}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={50}
+                    max={120}
+                    value={formData.hero.slide2Brightness ?? 90}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, slide2Brightness: Number(e.target.value) }
+                    })}
+                    className="w-full accent-[#D4AF37] cursor-pointer"
+                  />
+                  <span className="text-[10px] text-slate-400">Padrão: 90%</span>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                      Película Escura (Opacidade)
+                    </label>
+                    <span className="text-xs font-bold text-[#F6E27A]">
+                      {formData.hero.slide2OverlayOpacity ?? 35}%
+                    </span>
+                  </div>
+                  <input
+                    type="range"
+                    min={10}
+                    max={85}
+                    value={formData.hero.slide2OverlayOpacity ?? 35}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, slide2OverlayOpacity: Number(e.target.value) }
+                    })}
+                    className="w-full accent-[#D4AF37] cursor-pointer"
+                  />
+                  <span className="text-[10px] text-slate-400">Padrão: 35%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* TAB 3: PRESENÇA NACIONAL DIGITAL */}
       {activeTab === 'digital_presence' && (

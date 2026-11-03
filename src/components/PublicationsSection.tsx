@@ -292,11 +292,10 @@ export const PublicationsSection: React.FC = () => {
                   <button
                     key={pageNum}
                     onClick={() => setCurrentPage(pageNum)}
-                    className={`min-w-[36px] h-9 px-3 rounded-lg text-xs font-bold font-cinzel transition-all cursor-pointer ${
-                      isActive
-                        ? 'bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] shadow-[0_0_12px_rgba(212,175,55,0.4)] scale-105'
-                        : 'bg-[#071122] border border-slate-700 text-slate-300 hover:text-white hover:border-[#D4AF37]/60'
-                    }`}
+                    className={`min-w-[36px] h-9 px-3 rounded-lg text-xs font-bold font-cinzel transition-all cursor-pointer ${isActive
+                      ? 'bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] shadow-[0_0_12px_rgba(212,175,55,0.4)] scale-105'
+                      : 'bg-[#071122] border border-slate-700 text-slate-300 hover:text-white hover:border-[#D4AF37]/60'
+                      }`}
                     aria-label={`Ir para a página ${pageNum}`}
                   >
                     {pageNum}
@@ -386,8 +385,8 @@ export const PublicationsSection: React.FC = () => {
             </div>
 
             {/* Assinatura Oficial Automatizada tanto em Artigo quanto em Notícia Jurídica (Itens 4 e 40) */}
-            <ArticleSignature 
-              publicationTitle={activePubModal.title} 
+            <ArticleSignature
+              publicationTitle={activePubModal.title}
             />
 
             <div className="mt-6 pt-4 border-t border-slate-800 flex justify-end">

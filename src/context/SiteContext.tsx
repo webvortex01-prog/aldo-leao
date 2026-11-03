@@ -653,7 +653,11 @@ const DEFAULT_CONFIG: SiteConfig = {
     badgeYear: '1908',
     badgeText: 'O Escritório Mais Antigo do Brasil',
     slide1Duration: 18,
-    slide2Duration: 18
+    slide2Duration: 18,
+    slide1Brightness: 85,
+    slide1OverlayOpacity: 45,
+    slide2Brightness: 90,
+    slide2OverlayOpacity: 35
   },
   contact: {
     sectionKicker: 'ATENDIMENTO DIGITAL EM TODO O BRASIL',
