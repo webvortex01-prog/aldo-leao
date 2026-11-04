@@ -82,14 +82,27 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
             <span className="gold-text-gradient">{siteConfig.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light">
-            {siteConfig.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
-          </p>
+          {siteConfig.excellenceSolutionsHeader?.description1?.includes('<') ? (
+            <div 
+              className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light publication-rich-content"
+              dangerouslySetInnerHTML={{ __html: siteConfig.excellenceSolutionsHeader.description1 }}
+            />
+          ) : (
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light">
+              {siteConfig.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
+            </p>
+          )}
 
-          {/* Item 24 & Item 26: Parágrafo 2 com a mesma fonte e o mesmo destaque do parágrafo 1 */}
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            {siteConfig.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
-          </p>
+          {siteConfig.excellenceSolutionsHeader?.description2?.includes('<') ? (
+            <div 
+              className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light publication-rich-content"
+              dangerouslySetInnerHTML={{ __html: siteConfig.excellenceSolutionsHeader.description2 }}
+            />
+          ) : (
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+              {siteConfig.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
+            </p>
+          )}
         </div>
 
         {/* 14 Solutions Grid */}

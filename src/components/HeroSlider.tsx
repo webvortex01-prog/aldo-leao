@@ -191,9 +191,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light whitespace-pre-line">
-                  {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
-                </p>
+                {siteConfig.hero.description?.includes('<') ? (
+                  <div 
+                    className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light whitespace-normal"
+                    dangerouslySetInnerHTML={{ __html: siteConfig.hero.description }}
+                  />
+                ) : (
+                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light whitespace-pre-line">
+                    {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
+                  </p>
+                )}
               </div>
 
               {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}

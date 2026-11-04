@@ -218,174 +218,426 @@ interface CmsEditorProps {
 // ============================================================================
 // BARRA DE FORMATAÇÃO E TEXTO RICO (Item 62: Negrito, Itálico, Cor #... e Alinhamentos)
 // ============================================================================
+// BARRA DE FORMATAÇÃO E TEXTO RICO AVANÇADA (PADRÃO WORDPRESS / ELEMENTOR PRO)
+// ============================================================================
 interface FormattingToolbarProps {
   onInsert: (prefix: string, suffix?: string) => void;
 }
 
 export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }) => {
   const [customColor, setCustomColor] = useState('#D4AF37');
+  const [customBgColor, setCustomBgColor] = useState('#0B1A35');
 
   return (
-    <div className="flex flex-wrap items-center gap-1.5 p-2 bg-[#030710] border border-[#D4AF37]/35 rounded-lg mb-2 text-[11px] shadow-sm">
-      <span className="text-[10px] uppercase font-bold text-[#F6E27A] px-1">Editor Rico:</span>
-      
-      {/* Estilos de Texto */}
-      <button
-        type="button"
-        onClick={() => onInsert('<b>', '</b>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
-        title="Negrito (B)"
-      >
-        B
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<i>', '</i>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white italic font-serif transition-colors cursor-pointer"
-        title="Itálico (I)"
-      >
-        I
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<u>', '</u>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white underline font-semibold transition-colors cursor-pointer"
-        title="Sublinhado (U)"
-      >
-        U
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<h3 class="text-base font-bold text-[#F6E27A] mt-4 mb-2">', '</h3>')}
-        className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-colors cursor-pointer"
-        title="Subtítulo H3 em Dourado"
-      >
-        H3
-      </button>
+    <div className="p-2.5 bg-[#030710] border border-[#D4AF37]/40 rounded-xl mb-2.5 space-y-2 text-[11px] shadow-lg">
+      {/* LINHA 1: TIPOGRAFIA, TÍTULOS, TAMANHOS E ALINHAMENTO */}
+      <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-slate-800">
+        <span className="text-[10px] uppercase font-bold text-[#F6E27A] px-1">Tipografia & Estilo:</span>
 
-      <div className="h-3.5 w-px bg-slate-700 mx-1" />
-
-      {/* Alinhamento */}
-      <button
-        type="button"
-        onClick={() => onInsert('<div class="text-left">', '</div>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
-        title="Alinhar à Esquerda"
-      >
-        Esquerda
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<div class="text-center">', '</div>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
-        title="Centralizado"
-      >
-        Centralizado
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<div class="text-right">', '</div>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
-        title="Alinhar à Direita"
-      >
-        Direita
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<div class="text-justify">', '</div>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
-        title="Justificado"
-      >
-        Justificado
-      </button>
-
-      <div className="h-3.5 w-px bg-slate-700 mx-1" />
-
-      {/* Elementos Ricos: Marcadores, Tabelas, Imagens e Citação */}
-      <button
-        type="button"
-        onClick={() => onInsert('<ul class="list-disc pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segundo tópico relevante</li>\n  <li>Terceiro tópico relevante</li>\n</ul>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
-        title="Lista com Marcadores"
-      >
-        <span>• Marcadores</span>
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert(
-          '<table class="w-full my-4 border border-[#D4AF37]/40 text-xs text-left">\n  <thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30">\n    <tr><th class="p-2.5 border border-[#D4AF37]/20">Coluna 1</th><th class="p-2.5 border border-[#D4AF37]/20">Coluna 2</th></tr>\n  </thead>\n  <tbody>\n    <tr><td class="p-2 border border-slate-700">Dado 1</td><td class="p-2 border border-slate-700">Dado 2</td></tr>\n    <tr><td class="p-2 border border-slate-700">Dado 3</td><td class="p-2 border border-slate-700">Dado 4</td></tr>\n  </tbody>\n</table>'
-        )}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
-        title="Inserir Tabela Formatada"
-      >
-        <span>▦ Tabela</span>
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          const url = window.prompt('Insira a URL ou caminho da imagem (ex: /img/minha-foto.jpg ou https://...):');
-          if (url) {
-            onInsert(`<figure class="my-4 text-center"><img src="${url}" alt="Imagem do texto" class="rounded-xl border border-[#D4AF37]/40 max-w-full h-auto mx-auto shadow-lg" /><figcaption class="text-[11px] text-slate-400 mt-1 italic">Legenda da imagem</figcaption></figure>`);
-          }
-        }}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
-        title="Inserir Imagem dentro do Texto"
-      >
-        <span>🖼️ Imagem</span>
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<blockquote class="p-3 my-3 border-l-4 border-[#D4AF37] bg-[#0E1F3D]/40 text-slate-200 italic">', '</blockquote>')}
-        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
-        title="Citação / Destaque"
-      >
-        ❝ Citação
-      </button>
-
-      <div className="h-3.5 w-px bg-slate-700 mx-1" />
-
-      {/* Cores da Fonte */}
-      <span className="text-[10px] text-slate-400">Cor:</span>
-      <button
-        type="button"
-        onClick={() => onInsert('<span style="color: #D4AF37">', '</span>')}
-        className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
-        title="Dourado Nobre #D4AF37"
-      >
-        #D4AF37
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<span style="color: #F6E27A">', '</span>')}
-        className="px-1.5 py-0.5 rounded bg-[#F6E27A]/20 border border-[#F6E27A] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
-        title="Ouro Claro #F6E27A"
-      >
-        #F6E27A
-      </button>
-      <button
-        type="button"
-        onClick={() => onInsert('<span style="color: #FFFFFF">', '</span>')}
-        className="px-1.5 py-0.5 rounded bg-white/20 border border-white text-white font-semibold text-[10px] cursor-pointer"
-        title="Branco #FFFFFF"
-      >
-        #FFFFFF
-      </button>
-      <div className="flex items-center gap-1">
-        <input
-          type="color"
-          value={customColor}
-          onChange={(e) => setCustomColor(e.target.value)}
-          className="w-5 h-5 rounded cursor-pointer bg-transparent border-0"
-          title="Escolher cor personalizada"
-        />
+        {/* Títulos Estruturados */}
         <button
           type="button"
-          onClick={() => onInsert(`<span style="color: ${customColor}">`, '</span>')}
-          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-mono cursor-pointer"
-          title="Aplicar cor selecionada"
+          onClick={() => onInsert('<h1 class="text-2xl sm:text-3xl font-bold font-cinzel text-white my-3">', '</h1>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
+          title="Título Principal H1"
         >
-          {customColor}
+          H1
         </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<h2 class="text-xl sm:text-2xl font-bold font-cinzel text-[#F6E27A] my-3">', '</h2>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-colors cursor-pointer"
+          title="Título H2 Ouro"
+        >
+          H2
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<h3 class="text-base sm:text-lg font-bold font-cinzel text-[#F6E27A] mt-4 mb-2">', '</h3>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-colors cursor-pointer"
+          title="Subtítulo H3"
+        >
+          H3
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<h4 class="text-sm font-bold text-white mt-3 mb-1">', '</h4>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 font-bold transition-colors cursor-pointer"
+          title="Intertítulo H4"
+        >
+          H4
+        </button>
+
+        <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+        {/* Formatação Básica de Texto */}
+        <button
+          type="button"
+          onClick={() => onInsert('<b>', '</b>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
+          title="Negrito (B)"
+        >
+          B
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<i>', '</i>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white italic font-serif transition-colors cursor-pointer"
+          title="Itálico (I)"
+        >
+          I
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<u>', '</u>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white underline font-semibold transition-colors cursor-pointer"
+          title="Sublinhado (U)"
+        >
+          U
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<s>', '</s>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-300 line-through transition-colors cursor-pointer"
+          title="Tachado / Riscado"
+        >
+          S
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<mark class="bg-[#D4AF37]/30 text-white px-1.5 py-0.5 rounded">', '</mark>')}
+          className="px-2 py-0.5 rounded bg-[#D4AF37]/25 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-semibold transition-colors cursor-pointer"
+          title="Marca-Texto Dourado (Destaque)"
+        >
+          Marca-Texto
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="font-family: var(--font-cinzel); font-weight: 700;">', '</span>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-serif transition-colors cursor-pointer"
+          title="Fonte Nobre Cinzel (Jurídica)"
+        >
+          Fonte Cinzel
+        </button>
+
+        <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+        {/* Tamanho da Fonte */}
+        <span className="text-[10px] text-slate-400">Tamanho:</span>
+        <select
+          onChange={(e) => {
+            if (e.target.value) {
+              onInsert(`<span style="font-size: ${e.target.value};">`, '</span>');
+              e.target.value = '';
+            }
+          }}
+          className="px-2 py-0.5 rounded bg-[#071122] border border-slate-700 text-slate-200 text-[11px] cursor-pointer"
+        >
+          <option value="">Alterar Tamanho...</option>
+          <option value="12px">Pequeno (12px)</option>
+          <option value="14px">Normal (14px)</option>
+          <option value="16px">Médio (16px)</option>
+          <option value="18px">Grande (18px)</option>
+          <option value="22px">Destaque (22px)</option>
+          <option value="26px">Gigante (26px)</option>
+        </select>
+
+        <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+        {/* Alinhamento de Parágrafo */}
+        <button
+          type="button"
+          onClick={() => onInsert('<div class="text-left">', '</div>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+          title="Alinhar à Esquerda"
+        >
+          Esquerda
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<div class="text-center">', '</div>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+          title="Centralizado"
+        >
+          Centro
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<div class="text-right">', '</div>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+          title="Alinhar à Direita"
+        >
+          Direita
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<div class="text-justify">', '</div>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+          title="Texto Justificado"
+        >
+          Justificado
+        </button>
+      </div>
+
+      {/* LINHA 2: ELEMENTOS RICOS, CRIAR BOX/CARDS, TABELAS E MÍDIA */}
+      <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-slate-800">
+        <span className="text-[10px] uppercase font-bold text-[#E5C158] px-1">Estruturas & Boxes:</span>
+
+        {/* Criador de Box Card Nobre */}
+        <button
+          type="button"
+          onClick={() => onInsert(
+            '<div class="p-5 my-4 rounded-2xl bg-[#08152B] border border-[#D4AF37]/45 shadow-xl space-y-2">\n  <h4 class="font-cinzel text-base font-bold text-[#F6E27A]">Título do Card Estratégico</h4>\n  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Insira aqui o conteúdo aprofundado, tópicos explicativos ou conclusões sobre este tema jurídico...</p>\n</div>'
+          )}
+          className="px-2 py-0.5 rounded bg-[#0A1D3D] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-all cursor-pointer flex items-center gap-1 shadow-sm"
+          title="Criar Box / Card Corporativo Azul com Borda Dourada"
+        >
+          <span>📦 Criar Box/Card</span>
+        </button>
+
+        {/* Box de Alerta ou Destaque com Borda Esquerda Dourada */}
+        <button
+          type="button"
+          onClick={() => onInsert(
+            '<div class="p-4 my-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/15 to-transparent border-l-4 border-[#D4AF37] text-xs sm:text-sm text-slate-200 shadow-sm">\n  <strong class="text-[#F6E27A] uppercase tracking-wider block mb-1">IMPORTANTE / PARECER JURÍDICO:</strong>\n  <p>Insira aqui o ponto de maior relevância, recomendação legal ou observação para a sua empresa ou patrimônio.</p>\n</div>'
+          )}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Criar Box de Alerta ou Observação Dourada"
+        >
+          <span>⚠️ Box Destaque</span>
+        </button>
+
+        {/* Selo / Badge Dourado */}
+        <button
+          type="button"
+          onClick={() => onInsert(
+            '<span class="inline-block px-3 py-1 my-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider shadow-sm">',
+            '</span>'
+          )}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] transition-colors cursor-pointer flex items-center gap-1"
+          title="Inserir Selo / Tag Dourada"
+        >
+          <span>🏷️ Selo Dourado</span>
+        </button>
+
+        {/* Botão de Ação CTA para WhatsApp ou Contato */}
+        <button
+          type="button"
+          onClick={() => onInsert(
+            '<div class="my-4 text-center sm:text-left">\n  <a href="https://wa.me/5551998088998" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black text-xs uppercase tracking-wider shadow-xl hover:scale-105 transition-all cursor-pointer">\n    <span>AGENDAR CONSULTA JURÍDICA</span>\n  </a>\n</div>'
+          )}
+          className="px-2 py-0.5 rounded bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-bold hover:brightness-110 transition-all cursor-pointer flex items-center gap-1 shadow-sm"
+          title="Inserir Botão CTA Dourado Clicável"
+        >
+          <span>🔘 Botão CTA</span>
+        </button>
+
+        {/* Tabela Formatada */}
+        <button
+          type="button"
+          onClick={() => onInsert(
+            '<table class="w-full my-4 border border-[#D4AF37]/40 text-xs text-left shadow-lg">\n  <thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30">\n    <tr>\n      <th class="p-3 border border-[#D4AF37]/20">Pilar / Instrumento</th>\n      <th class="p-3 border border-[#D4AF37]/20">Aplicação Estratégica</th>\n      <th class="p-3 border border-[#D4AF37]/20">Benefício Patrimonial</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td class="p-2.5 border border-slate-700 bg-[#050B14]">Holding Familiar 4.0</td>\n      <td class="p-2.5 border border-slate-700 bg-[#050B14]">Planejamento Sucessório em Vida</td>\n      <td class="p-2.5 border border-slate-700 bg-[#050B14]">Economia de até 80% frente ao inventário</td>\n    </tr>\n    <tr>\n      <td class="p-2.5 border border-slate-700 bg-[#071122]">Acordo de Sócios</td>\n      <td class="p-2.5 border border-slate-700 bg-[#071122]">Governança e Blindagem Societária</td>\n      <td class="p-2.5 border border-slate-700 bg-[#071122]">Prevenção de conflitos e litígios futuros</td>\n    </tr>\n  </tbody>\n</table>'
+          )}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Inserir Tabela Jurídica Completa"
+        >
+          <span>▦ Tabela</span>
+        </button>
+
+        {/* Listas */}
+        <button
+          type="button"
+          onClick={() => onInsert('<ul class="list-disc pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segundo ponto estratégico</li>\n  <li>Terceiro ponto estratégico</li>\n</ul>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Lista com Marcadores"
+        >
+          <span>• Marcadores</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => onInsert('<ol class="list-decimal pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segunda etapa do procedimento</li>\n  <li>Terceira etapa do procedimento</li>\n</ol>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Lista Numerada"
+        >
+          <span>1. Numerada</span>
+        </button>
+
+        {/* Imagem no Texto */}
+        <button
+          type="button"
+          onClick={() => {
+            const url = window.prompt('Insira a URL ou caminho da imagem (ex: /img/holding-familiar-1.jpg ou https://...):');
+            if (url) {
+              const legenda = window.prompt('Legenda da imagem (opcional):') || '';
+              onInsert(`<figure class="my-5 text-center"><img src="${url}" alt="Imagem ilustrativa" class="rounded-2xl border border-[#D4AF37]/45 max-w-full h-auto mx-auto shadow-2xl" />${legenda ? `<figcaption class="text-xs text-slate-400 mt-2 italic">${legenda}</figcaption>` : ''}</figure>`);
+            }
+          }}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Inserir Imagem com Legenda"
+        >
+          <span>🖼️ Imagem</span>
+        </button>
+
+        {/* Vídeo do YouTube Embed */}
+        <button
+          type="button"
+          onClick={() => {
+            const rawUrl = window.prompt('Insira a URL do vídeo do YouTube (ex: https://www.youtube.com/watch?v=... ou https://youtu.be/...):');
+            if (rawUrl) {
+              let videoId = '';
+              const match = rawUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+              if (match) videoId = match[1];
+              if (videoId) {
+                onInsert(`<div class="my-5 aspect-video w-full rounded-2xl overflow-hidden border border-[#D4AF37]/50 shadow-2xl"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}" title="Vídeo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`);
+              } else {
+                alert('Não foi possível identificar o código do vídeo do YouTube. Verifique o link.');
+              }
+            }
+          }}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Inserir Vídeo do YouTube"
+        >
+          <span>🎥 Vídeo YouTube</span>
+        </button>
+
+        {/* Link / Hiperlink */}
+        <button
+          type="button"
+          onClick={() => {
+            const url = window.prompt('Insira o endereço do link (ex: https://...):');
+            if (url) {
+              onInsert(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#F6E27A] underline hover:text-white transition-colors">`, '</a>');
+            }
+          }}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Inserir Hiperlink"
+        >
+          <span>🔗 Link</span>
+        </button>
+
+        {/* Citação Jurídica */}
+        <button
+          type="button"
+          onClick={() => onInsert('<blockquote class="p-3.5 my-3.5 border-l-4 border-[#D4AF37] bg-[#0E1F3D]/45 text-slate-200 italic rounded-r-xl shadow-sm">', '</blockquote>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+          title="Citação / Jurisprudência"
+        >
+          ❝ Citação
+        </button>
+
+        {/* Linha Divisória Dourada */}
+        <button
+          type="button"
+          onClick={() => onInsert('\n<hr class="my-6 border-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />\n')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] transition-colors cursor-pointer"
+          title="Linha Divisória Dourada"
+        >
+          ➖ Divisor
+        </button>
+      </div>
+
+      {/* LINHA 3: PALETA DE CORES E CORES DE FUNDO */}
+      <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+        <span className="text-[10px] uppercase font-bold text-slate-400 px-1">Cor do Texto:</span>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="color: #D4AF37">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
+          title="Dourado Nobre #D4AF37"
+        >
+          #D4AF37
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="color: #F6E27A">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#F6E27A]/20 border border-[#F6E27A] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
+          title="Ouro Claro #F6E27A"
+        >
+          #F6E27A
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="color: #FFFFFF">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-white/20 border border-white text-white font-semibold text-[10px] cursor-pointer"
+          title="Branco #FFFFFF"
+        >
+          #FFFFFF
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="color: #94A3B8">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-600 text-slate-300 font-semibold text-[10px] cursor-pointer"
+          title="Prata #94A3B8"
+        >
+          #94A3B8
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="color: #10B981">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-500 text-emerald-400 font-semibold text-[10px] cursor-pointer"
+          title="Verde Sucesso #10B981"
+        >
+          Verde
+        </button>
+
+        {/* Seletor Livre de Cor do Texto */}
+        <div className="flex items-center gap-1 ml-1">
+          <input
+            type="color"
+            value={customColor}
+            onChange={(e) => setCustomColor(e.target.value)}
+            className="w-5 h-5 rounded cursor-pointer bg-transparent border-0"
+            title="Escolher cor personalizada para o texto"
+          />
+          <button
+            type="button"
+            onClick={() => onInsert(`<span style="color: ${customColor}">`, '</span>')}
+            className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-mono cursor-pointer"
+            title="Aplicar cor escolhida ao texto selecionado"
+          >
+            {customColor}
+          </button>
+        </div>
+
+        <div className="h-3.5 w-px bg-slate-700 mx-1.5" />
+
+        {/* Cor de Fundo / Highlight */}
+        <span className="text-[10px] uppercase font-bold text-slate-400 px-1">Fundo:</span>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="background-color: rgba(212, 175, 55, 0.2); padding: 2px 6px; border-radius: 4px;">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#F6E27A] text-[10px] cursor-pointer"
+          title="Fundo Ouro Translúcido"
+        >
+          Fundo Ouro
+        </button>
+        <button
+          type="button"
+          onClick={() => onInsert('<span style="background-color: #08152B; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(212,175,55,0.3);">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#08152B] border border-[#D4AF37]/40 text-slate-200 text-[10px] cursor-pointer"
+          title="Fundo Azul Marinho Nobre"
+        >
+          Fundo Azul
+        </button>
+
+        <div className="flex items-center gap-1 ml-1">
+          <input
+            type="color"
+            value={customBgColor}
+            onChange={(e) => setCustomBgColor(e.target.value)}
+            className="w-5 h-5 rounded cursor-pointer bg-transparent border-0"
+            title="Escolher cor de fundo personalizada"
+          />
+          <button
+            type="button"
+            onClick={() => onInsert(`<span style="background-color: ${customBgColor}; padding: 2px 6px; border-radius: 4px;">`, '</span>')}
+            className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-mono cursor-pointer"
+            title="Aplicar cor de fundo escolhida"
+          >
+            Fundo {customBgColor}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -404,11 +656,12 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
   label,
   value,
   onChange,
-  rows = 3,
+  rows = 4,
   placeholder,
   hint
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleInsert = (prefix: string, suffix: string = '') => {
     const el = textareaRef.current;
@@ -431,21 +684,61 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
 
   return (
     <div className="space-y-1.5">
-      <div className="flex items-center justify-between">
-        <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-          {label}
-        </label>
-        {hint && <span className="text-[11px] text-slate-400">{hint}</span>}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div>
+          <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+            {label}
+          </label>
+          {hint && <span className="text-[11px] text-slate-400 block">{hint}</span>}
+        </div>
+        
+        {/* Botão de Alternância: Modo Edição vs Pré-visualização em Tempo Real */}
+        <button
+          type="button"
+          onClick={() => setShowPreview(!showPreview)}
+          className={`px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-sm ${
+            showPreview
+              ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-black shadow-md'
+              : 'bg-[#0E1F3D] border border-[#D4AF37]/50 text-[#F6E27A] hover:bg-[#152e5a]'
+          }`}
+          title="Clique para alternar entre escrever e ver exatamente como vai aparecer no portal"
+        >
+          <span>{showPreview ? '✏️ Voltar ao Editor' : '👁️ Pré-visualizar no Layout'}</span>
+        </button>
       </div>
+
       <FormattingToolbar onInsert={handleInsert} />
-      <textarea
-        ref={textareaRef}
-        rows={rows}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        className="w-full px-4 py-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/35 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-xs sm:text-sm font-sans"
-      />
+
+      {showPreview ? (
+        <div className="w-full min-h-[160px] p-5 rounded-xl bg-[#030710] border border-[#D4AF37]/60 shadow-inner overflow-x-auto text-xs sm:text-sm text-slate-200 leading-relaxed publication-rich-content animate-in fade-in duration-150">
+          <div className="text-[10px] uppercase font-bold text-[#E5C158] pb-2 mb-3 border-b border-[#D4AF37]/20 flex items-center justify-between">
+            <span>Pré-visualização do Conteúdo em Tempo Real</span>
+            <span className="text-slate-400 font-normal">Renderizado como no portal</span>
+          </div>
+          {value ? (
+            <div 
+              dangerouslySetInnerHTML={{ 
+                __html: value.includes('<') 
+                  ? value 
+                  : value.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('') 
+              }} 
+            />
+          ) : (
+            <p className="text-slate-500 italic text-center py-6">
+              Nenhum texto inserido ainda. Clique em "Voltar ao Editor" e escreva seu conteúdo.
+            </p>
+          )}
+        </div>
+      ) : (
+        <textarea
+          ref={textareaRef}
+          rows={rows}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-xs sm:text-sm font-sans leading-relaxed"
+        />
+      )}
     </div>
   );
 };
