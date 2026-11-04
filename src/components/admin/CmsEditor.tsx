@@ -6060,136 +6060,23 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   </div>
                 </div>
 
-                
-                {/* SUMÁRIO DO LIVRO (Item 70: Frase editável "SUMÁRIO DO LIVRO", Capítulos e Texto Abaixo) */}
-                <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-                  <div className="border-b border-[#D4AF37]/20 pb-2 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#F6E27A] flex items-center gap-1.5">
-                        <BookOpen className="w-3.5 h-3.5" />
-                        <span>Sumário do Livro & Capítulos (Item 70)</span>
-                      </h4>
-                      <p className="text-[11px] text-slate-300">
-                        Edite o título dourado do sumário, adicione capítulos/itens e edite a citação abaixo.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                      Frase em Dourado do Sumário (Padrão: "SUMÁRIO DO LIVRO")
-                    </label>
-                    <input
-                      type="text"
-                      value={book.summaryTitle || 'SUMÁRIO DO LIVRO'}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].summaryTitle = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                    />
-                  </div>
-
-                  {/* Lista de Capítulos com Adicionar e Remover */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
-                        Capítulos / Itens do Sumário
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const updated = [...(formData.digitalBooks || [])];
-                          const chapters = [...(updated[idx].chapters || [])];
-                          chapters.push(`Capítulo ${chapters.length + 1}: Novo Tema da Obra`);
-                          updated[idx].chapters = chapters;
-                          setFormData({ ...formData, digitalBooks: updated });
-                        }}
-                        className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-[11px] font-bold hover:bg-[#D4AF37]/30 transition-colors cursor-pointer flex items-center gap-1"
-                      >
-                        <Plus className="w-3 h-3" />
-                        <span>+ Adicionar Item ao Sumário</span>
-                      </button>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      {(book.chapters || []).map((ch, chIdx) => (
-                        <div key={chIdx} className="flex items-center gap-2">
-                          <input
-                            type="text"
-                            value={ch}
-                            onChange={(e) => {
-                              const updated = [...(formData.digitalBooks || [])];
-                              const chapters = [...(updated[idx].chapters || [])];
-                              chapters[chIdx] = e.target.value;
-                              updated[idx].chapters = chapters;
-                              setFormData({ ...formData, digitalBooks: updated });
-                            }}
-                            className="flex-1 p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const updated = [...(formData.digitalBooks || [])];
-                              const chapters = (updated[idx].chapters || []).filter((_, i) => i !== chIdx);
-                              updated[idx].chapters = chapters;
-                              setFormData({ ...formData, digitalBooks: updated });
-                            }}
-                            className="p-1.5 text-red-400 hover:text-red-300 cursor-pointer"
-                            title="Remover item"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Texto que vem abaixo de SUMÁRIO DO LIVRO (Item 70) */}
-                  <RichTextarea
-                    label="Texto que vem abaixo de SUMÁRIO DO LIVRO (Item 70)"
-                    value={book.sampleExcerpt || ''}
-                    onChange={(val) => {
+                {/* Link / URL do PDF do Livro para Download Direto */}
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 mb-1">
+                    Link / URL do PDF do Livro (Para Download Direto)
+                  </label>
+                  <input
+                    type="text"
+                    value={book.pdfUrl || ''}
+                    onChange={(e) => {
                       const updated = [...(formData.digitalBooks || [])];
-                      updated[idx].sampleExcerpt = val;
+                      updated[idx].pdfUrl = e.target.value;
                       setFormData({ ...formData, digitalBooks: updated });
                     }}
-                    rows={2}
-                    placeholder="Trecho em destaque ou citação da obra..."
+                    placeholder="Ex: /docs/livro-holding.pdf ou https://..."
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                   />
-
-                  {/* Link / URL do PDF do Livro */}
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-300 mb-1">
-                      Link / URL do PDF do Livro (Para Leitura e Download)
-                    </label>
-                    <input
-                      type="text"
-                      value={book.pdfUrl || ''}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].pdfUrl = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      placeholder="Ex: /docs/livro-holding.pdf ou https://..."
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
                 </div>
-
-                {/* Upload das Páginas do Sumário (Item III: foto/imagem das páginas do sumário) */}
-                <ImageUploadField
-                  label={`Foto/Imagem das Páginas do Sumário: ${book.title}`}
-                  description="Carregue a foto ou digitalização das páginas do sumário deste livro para exibição na janela de Ver Sumário."
-                  currentValue={book.summaryImage}
-                  aspectRatio="portrait"
-                  onChange={(newUrl) => {
-                    const updated = [...(formData.digitalBooks || [])];
-                    updated[idx].summaryImage = newUrl;
-                    setFormData({ ...formData, digitalBooks: updated });
-                  }}
-                />
 
                 <div>
                   <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">

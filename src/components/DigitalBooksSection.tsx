@@ -25,7 +25,6 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [summaryBook, setSummaryBook] = useState<DigitalBook | null>(null);
   const [formBook, setFormBook] = useState<DigitalBook | null>(null);
   
   // Form State com os campos obrigatórios solicitados: Nome, WhatsApp, Cidade
@@ -292,7 +291,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                       </span>
 
                       {/* Título do Livro Digital */}
-                      <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white group-hover:text-[#F6E27A] transition-colors leading-snug mb-3 line-clamp-2 min-h-[3.25rem]">
+                      <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white leading-snug mb-3 line-clamp-2 min-h-[3.25rem]">
                         {book.title}
                       </h3>
 
@@ -309,21 +308,14 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                     </div>
                   </div>
 
-                  {/* Ações: Botão BAIXAR e Botão VER SUMÁRIO - Ambos abrem a Janela de Leitura e Download (Item 70) */}
-                  <div className="p-6 pt-0 flex flex-col gap-2.5">
+                  {/* Ação: Botão BAIXAR LIVRO DIGITAL */}
+                  <div className="p-6 pt-0">
                     <button
-                      onClick={() => setSummaryBook(book)}
+                      onClick={() => handleOpenForm(book)}
                       className="btn-gold-luxury w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider text-center cursor-pointer shadow-lg flex items-center justify-center gap-2 transition-all"
                     >
                       <Download className="w-4 h-4 text-black" />
-                      <span>LEITURA & DOWNLOAD</span>
-                    </button>
-
-                    <button
-                      onClick={() => setSummaryBook(book)}
-                      className="btn-secondary-luxury w-full py-2.5 px-3 rounded-xl bg-[#0A1730] hover:bg-[#0E1F3D] border border-[#D4AF37]/35 text-[#F6E27A] text-xs font-semibold uppercase tracking-wider text-center cursor-pointer transition-all"
-                    >
-                      VER SUMÁRIO DO LIVRO
+                      <span>BAIXAR LIVRO DIGITAL</span>
                     </button>
                   </div>
                 </div>
@@ -399,86 +391,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
         )}
       </div>
 
-      {/* Modal 1: VER SUMÁRIO */}
-      {summaryBook && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto text-slate-100 text-left">
-            <button
-              onClick={() => setSummaryBook(null)}
-              className="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
-              aria-label="Fechar"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            {/* Cabeçalho do Sumário */}
-            <div className="border-b border-[#D4AF37]/25 pb-4 mb-6">
-              <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider block mb-1">
-                LIVRO DIGITAL (PDF) · LEITURA & DOWNLOAD
-              </span>
-              <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
-                {summaryBook.title}
-              </h3>
-              <p className="text-xs text-slate-300 mt-1">
-                Autor: <strong className="text-white">Dr. Aldo Leão</strong> | Edição: <strong className="text-[#F6E27A]">{summaryBook.year || '2026'}</strong>
-              </p>
-            </div>
-
-            {/* Sumário do Livro (Item 70: frase alterada para SUMÁRIO DO LIVRO em dourado) */}
-            <div className="mb-6">
-              <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider mb-4 flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-[#D4AF37]" />
-                <span>{summaryBook.summaryTitle || 'SUMÁRIO DO LIVRO'}</span>
-              </h4>
-
-              <div className="space-y-2.5">
-                {(summaryBook.chapters || []).map((chapter, i) => (
-                  <div 
-                    key={i} 
-                    className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/25 text-xs text-slate-200 flex items-start gap-2.5"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E5C158] mt-1.5 shrink-0" />
-                    <span>{chapter}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Texto que vem abaixo de SUMÁRIO DO LIVRO (Item 70) */}
-              {summaryBook.sampleExcerpt && (
-                <div className="mt-5 p-4 rounded-xl bg-[#0E1F3D]/50 border border-[#D4AF37]/30 text-xs sm:text-sm text-slate-300 italic leading-relaxed">
-                  "{summaryBook.sampleExcerpt}"
-                </div>
-              )}
-            </div>
-
-            <div className="pt-4 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={() => {
-                  const b = summaryBook;
-                  if (b.pdfUrl) {
-                    window.open(b.pdfUrl, '_blank');
-                  }
-                  setSummaryBook(null);
-                  handleOpenForm(b);
-                }}
-                className="btn-gold-luxury flex-1 py-3.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 text-xs font-bold uppercase tracking-wider text-center cursor-pointer shadow-md flex items-center justify-center gap-2"
-              >
-                <Download className="w-4 h-4 text-black" />
-                <span>BAIXAR ESTE LIVRO DIGITAL</span>
-              </button>
-
-              <button
-                onClick={() => setSummaryBook(null)}
-                className="py-3 px-5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-white font-medium transition-colors cursor-pointer"
-              >
-                Fechar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Modal 2: FORMULÁRIO BAIXAR LIVRO DIGITAL (Com os campos obrigatórios solicitados) */}
+      {/* Modal: FORMULÁRIO BAIXAR LIVRO DIGITAL (Com os campos obrigatórios solicitados) */}
       {formBook && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
           <div className="relative w-full max-w-lg bg-[#071122] rounded-xl border border-[#D4AF37]/60 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto text-slate-100 text-left">

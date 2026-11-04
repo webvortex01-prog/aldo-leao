@@ -254,7 +254,7 @@ export const PublicationsSection: React.FC = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="font-cinzel text-base font-bold text-white group-hover:text-[#F6E27A] transition-colors leading-snug mb-3 line-clamp-2">
+                      <h3 className="font-cinzel text-base font-bold text-white leading-snug mb-3 line-clamp-2">
                         {pub.title}
                       </h3>
 
