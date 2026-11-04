@@ -226,13 +226,15 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
   const [customColor, setCustomColor] = useState('#D4AF37');
 
   return (
-    <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-[#030710] border border-[#D4AF37]/30 rounded-lg mb-1.5 text-[11px]">
-      <span className="text-[10px] uppercase font-bold text-slate-400 px-1">Formatação:</span>
+    <div className="flex flex-wrap items-center gap-1.5 p-2 bg-[#030710] border border-[#D4AF37]/35 rounded-lg mb-2 text-[11px] shadow-sm">
+      <span className="text-[10px] uppercase font-bold text-[#F6E27A] px-1">Editor Rico:</span>
+      
+      {/* Estilos de Texto */}
       <button
         type="button"
         onClick={() => onInsert('<b>', '</b>')}
         className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
-        title="Negrito"
+        title="Negrito (B)"
       >
         B
       </button>
@@ -240,11 +242,30 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         type="button"
         onClick={() => onInsert('<i>', '</i>')}
         className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white italic font-serif transition-colors cursor-pointer"
-        title="Itálico"
+        title="Itálico (I)"
       >
         I
       </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<u>', '</u>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white underline font-semibold transition-colors cursor-pointer"
+        title="Sublinhado (U)"
+      >
+        U
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<h3 class="text-base font-bold text-[#F6E27A] mt-4 mb-2">', '</h3>')}
+        className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-colors cursor-pointer"
+        title="Subtítulo H3 em Dourado"
+      >
+        H3
+      </button>
+
       <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+      {/* Alinhamento */}
       <button
         type="button"
         onClick={() => onInsert('<div class="text-left">', '</div>')}
@@ -277,7 +298,53 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
       >
         Justificado
       </button>
+
       <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+      {/* Elementos Ricos: Marcadores, Tabelas, Imagens e Citação */}
+      <button
+        type="button"
+        onClick={() => onInsert('<ul class="list-disc pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segundo tópico relevante</li>\n  <li>Terceiro tópico relevante</li>\n</ul>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+        title="Lista com Marcadores"
+      >
+        <span>• Marcadores</span>
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert(
+          '<table class="w-full my-4 border border-[#D4AF37]/40 text-xs text-left">\n  <thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30">\n    <tr><th class="p-2.5 border border-[#D4AF37]/20">Coluna 1</th><th class="p-2.5 border border-[#D4AF37]/20">Coluna 2</th></tr>\n  </thead>\n  <tbody>\n    <tr><td class="p-2 border border-slate-700">Dado 1</td><td class="p-2 border border-slate-700">Dado 2</td></tr>\n    <tr><td class="p-2 border border-slate-700">Dado 3</td><td class="p-2 border border-slate-700">Dado 4</td></tr>\n  </tbody>\n</table>'
+        )}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+        title="Inserir Tabela Formatada"
+      >
+        <span>▦ Tabela</span>
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          const url = window.prompt('Insira a URL ou caminho da imagem (ex: /img/minha-foto.jpg ou https://...):');
+          if (url) {
+            onInsert(`<figure class="my-4 text-center"><img src="${url}" alt="Imagem do texto" class="rounded-xl border border-[#D4AF37]/40 max-w-full h-auto mx-auto shadow-lg" /><figcaption class="text-[11px] text-slate-400 mt-1 italic">Legenda da imagem</figcaption></figure>`);
+          }
+        }}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+        title="Inserir Imagem dentro do Texto"
+      >
+        <span>🖼️ Imagem</span>
+      </button>
+      <button
+        type="button"
+        onClick={() => onInsert('<blockquote class="p-3 my-3 border-l-4 border-[#D4AF37] bg-[#0E1F3D]/40 text-slate-200 italic">', '</blockquote>')}
+        className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+        title="Citação / Destaque"
+      >
+        ❝ Citação
+      </button>
+
+      <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+      {/* Cores da Fonte */}
       <span className="text-[10px] text-slate-400">Cor:</span>
       <button
         type="button"
@@ -2788,17 +2855,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
 
             <div>
-              <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                Texto de Introdução das Especialidades
-              </label>
-              <textarea
+              <RichTextarea
+                label="Texto de Introdução das Especialidades (Abaixo do Título)"
                 rows={3}
                 value={formData.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
-                onChange={(e) => setFormData({
+                onChange={(val) => setFormData({
                   ...formData,
-                  practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), description: e.target.value }
+                  practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), description: val }
                 })}
-                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                hint="Edição total do texto que fica abaixo de ÁREAS DE ATUAÇÃO"
               />
             </div>
           </div>
@@ -5701,23 +5766,18 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   />
                 </div>
 
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1 flex items-center justify-between">
-                    <span>Conteúdo Completo (Texto Integral do Artigo / Notícia)</span>
-                    <span className="text-[10px] text-slate-500 font-normal">A assinatura automática é anexada ao final deste texto</span>
-                  </label>
-                  <textarea
-                    rows={5}
-                    value={pub.content || ''}
-                    onChange={(e) => {
-                      const updated = [...(formData.publications || [])];
-                      updated[idx].content = e.target.value;
-                      setFormData({ ...formData, publications: updated });
-                    }}
-                    placeholder="Cole aqui o texto integral do artigo ou parecer jurídico..."
-                    className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-sans font-light"
-                  />
-                </div>
+                <RichTextarea
+                  label="Conteúdo Completo (Texto Integral com Editor Rico: Tabelas, Marcadores, Imagens, Cores e Formatação)"
+                  value={pub.content || ''}
+                  onChange={(val) => {
+                    const updated = [...(formData.publications || [])];
+                    updated[idx].content = val;
+                    setFormData({ ...formData, publications: updated });
+                  }}
+                  rows={10}
+                  placeholder="Escreva ou cole aqui o conteúdo completo do artigo ou notícia jurídica..."
+                  hint="A assinatura automática oficial é anexada ao final do texto"
+                />
 
                 {/* Metadados SEO Ocultos para Indexação nos Buscadores (Itens 17 e 55) */}
                 <div className="p-4 rounded-lg bg-[#071122] border border-[#D4AF37]/25 space-y-3">

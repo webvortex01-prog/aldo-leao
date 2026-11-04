@@ -24,6 +24,7 @@ import { useSite } from '../../context/SiteContext';
 import { ImageUploadField } from './ImageUploadField';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
 import { PracticeArea, DigitalBook, Publication } from '../../types';
+import { RichTextarea } from './CmsEditor';
 
 export type EditableSectionKey = 
   | 'navbar'
@@ -1481,7 +1482,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
                 Kicker do Cabeçalho
@@ -1501,13 +1502,38 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </label>
               <input
                 type="text"
-                value={siteConfig.practiceAreasHeader?.titleWhite || 'ÁREAS DE'}
+                value={siteConfig.practiceAreasHeader?.titleWhite || siteConfig.practiceAreasHeader?.title || 'ÁREAS DE'}
                 onChange={(e) => updateSiteConfig({
-                  practiceAreasHeader: { ...(siteConfig.practiceAreasHeader || {}), titleWhite: e.target.value }
+                  practiceAreasHeader: { ...(siteConfig.practiceAreasHeader || {}), titleWhite: e.target.value, title: e.target.value }
                 })}
                 className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs"
               />
             </div>
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                Destaque Dourado do Título
+              </label>
+              <input
+                type="text"
+                value={siteConfig.practiceAreasHeader?.titleHighlight || 'ATUAÇÃO'}
+                onChange={(e) => updateSiteConfig({
+                  practiceAreasHeader: { ...(siteConfig.practiceAreasHeader || {}), titleHighlight: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-[#F6E27A] font-bold text-xs"
+              />
+            </div>
+          </div>
+
+          <div>
+            <RichTextarea
+              label="Texto de Introdução das Especialidades (Abaixo do Título)"
+              rows={3}
+              value={siteConfig.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
+              onChange={(val) => updateSiteConfig({
+                practiceAreasHeader: { ...(siteConfig.practiceAreasHeader || {}), description: val }
+              })}
+              hint="Edição total do texto que fica abaixo de ÁREAS DE ATUAÇÃO"
+            />
           </div>
 
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
@@ -2386,23 +2412,18 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5 flex items-center justify-between">
-                      <span>Conteúdo Integral</span>
-                      <span className="text-[9px] text-[#D4AF37]">Texto lido no portal</span>
-                    </label>
-                    <textarea
-                      rows={4}
-                      value={pub.content || ''}
-                      onChange={(e) => {
-                        const updated = [...(siteConfig.publications || [])];
-                        updated[idx] = { ...updated[idx], content: e.target.value };
-                        updateSiteConfig({ publications: updated });
-                      }}
-                      placeholder="Escreva ou cole o conteúdo completo do artigo ou notícia jurídica..."
-                      className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-200 text-[11px] leading-relaxed font-sans"
-                    />
-                  </div>
+                  <RichTextarea
+                    label="Conteúdo Integral (Editor Rico: Tabelas, Marcadores, Imagens, Cores e Alinhamentos)"
+                    rows={6}
+                    value={pub.content || ''}
+                    onChange={(val) => {
+                      const updated = [...(siteConfig.publications || [])];
+                      updated[idx] = { ...updated[idx], content: val };
+                      updateSiteConfig({ publications: updated });
+                    }}
+                    placeholder="Escreva ou cole o conteúdo completo do artigo ou notícia jurídica..."
+                    hint="Suporta tabelas, marcadores, imagens, cores e alinhamentos"
+                  />
                 </div>
               ))}
             </div>

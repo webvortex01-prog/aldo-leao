@@ -378,11 +378,14 @@ export const PublicationsSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-              {activePubModal.content.split('\n\n').map((par, i) => (
-                <p key={i}>{par}</p>
-              ))}
-            </div>
+            <div 
+              className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body publication-rich-content"
+              dangerouslySetInnerHTML={{
+                __html: activePubModal.content.includes('<')
+                  ? activePubModal.content
+                  : activePubModal.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
+              }}
+            />
 
             {/* Assinatura Oficial Automatizada tanto em Artigo quanto em Notícia Jurídica (Itens 4 e 40) */}
             <ArticleSignature

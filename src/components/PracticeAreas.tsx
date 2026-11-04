@@ -96,13 +96,20 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mb-4 [text-wrap:balance]">
-            {siteConfig.practiceAreasHeader?.title || 'ÁREAS DE'}{' '}
-            <span className="gold-text-gradient">{siteConfig.practiceAreasHeader?.titleHighlight || 'ATUAÇÃO'}</span>
+            {siteConfig.practiceAreasHeader?.title || siteConfig.practiceAreasHeader?.titleWhite || 'ÁREAS DE'}{' '}
+            <span className="gold-text-gradient">{siteConfig.practiceAreasHeader?.titleHighlight || (siteConfig.practiceAreasHeader as any)?.titleGold || 'ATUAÇÃO'}</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            {siteConfig.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
-          </p>
+          {siteConfig.practiceAreasHeader?.description && siteConfig.practiceAreasHeader.description.includes('<') ? (
+            <div
+              className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light"
+              dangerouslySetInnerHTML={{ __html: siteConfig.practiceAreasHeader.description }}
+            />
+          ) : (
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+              {siteConfig.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
+            </p>
+          )}
         </div>
 
         {/* 5 Cards Grid */}
