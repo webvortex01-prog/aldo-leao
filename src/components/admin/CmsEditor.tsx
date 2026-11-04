@@ -1596,20 +1596,16 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Texto Principal da Tradição (Slide 1)
-              </label>
-              <textarea
-                rows={3}
-                value={formData.hero.description}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  hero: { ...formData.hero, description: e.target.value }
-                })}
-                className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-              />
-            </div>
+            <RichTextarea
+              label="Texto Principal da Tradição (Slide 1)"
+              rows={4}
+              value={formData.hero.description}
+              onChange={(val) => setFormData({
+                ...formData,
+                hero: { ...formData.hero, description: val }
+              })}
+              hint="Editor rico com controle de tamanho de fontes, cores, negrito, caixas e pré-visualização"
+            />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -1855,20 +1851,16 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Texto do Card Direita (Alíquotas ITCMD 8%, 16%, 20%, 30%)
-              </label>
-              <textarea
-                rows={2}
-                value={formData.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  slide2: { ...(formData.slide2 || {}), rightCardText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
+            <RichTextarea
+              label="Texto do Card Direita (Alíquotas ITCMD 8%, 16%, 20%, 30%)"
+              rows={3}
+              value={formData.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
+              onChange={(val) => setFormData({
+                ...formData,
+                slide2: { ...(formData.slide2 || {}), rightCardText: val }
+              })}
+              hint="Editor rico com formatação avançada de alíquotas e cores"
+            />
 
             {/* TABELA COMPARATIVA DE CUSTOS */}
             <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">

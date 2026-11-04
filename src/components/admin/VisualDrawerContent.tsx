@@ -518,14 +518,35 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </div>
             </div>
 
-            <div>
-              <label className="block text-[11px] text-slate-300 font-semibold mb-1">Texto Principal (Slide 1)</label>
-              <textarea
-                rows={3}
-                value={siteConfig.hero.description}
-                onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, description: e.target.value } })}
-                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-white text-xs leading-relaxed"
-              />
+            <RichTextarea
+              label="Texto Principal (Slide 1)"
+              rows={4}
+              value={siteConfig.hero.description}
+              onChange={(val) => updateSiteConfig({ hero: { ...siteConfig.hero, description: val } })}
+              hint="Editor rico com controle de tamanho de fontes, cores, negrito, caixas e pré-visualização"
+            />
+
+            {/* Tempo de Transição do Slide 1 (Item 61) */}
+            <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 flex items-center justify-between gap-3 shadow-md">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  ⏱️ Tempo de Exibição do Slide 1
+                </label>
+                <span className="text-[10px] text-slate-300">Tempo em segundos antes de alternar para o Slide 2</span>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <input
+                  type="number"
+                  min={3}
+                  max={120}
+                  value={siteConfig.hero.slide1Duration || 18}
+                  onChange={(e) => updateSiteConfig({
+                    hero: { ...siteConfig.hero, slide1Duration: Number(e.target.value) || 18 }
+                  })}
+                  className="w-16 px-2 py-1.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-[#F6E27A] font-bold text-center text-xs"
+                />
+                <span className="text-xs text-slate-300 font-bold">seg</span>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -654,16 +675,37 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </div>
             </div>
 
-            <div>
-              <label className="block text-[11px] text-slate-300 font-semibold mb-1">Texto Card Direita (Alíquotas ITCMD)</label>
-              <textarea
-                rows={2}
-                value={siteConfig.slide2?.rightCardText || 'Em média a Perda Patrimonial dos herdeiros é de 40% do Patrimônio...'}
-                onChange={(e) => updateSiteConfig({
-                  slide2: { ...(siteConfig.slide2 || {}), rightCardText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-white text-xs"
-              />
+            <RichTextarea
+              label="Texto Card Direita (Alíquotas ITCMD 8%, 16%, 20%, 30%)"
+              rows={3}
+              value={siteConfig.slide2?.rightCardText || 'Em média a Perda Patrimonial dos herdeiros é de 40% do Patrimônio...'}
+              onChange={(val) => updateSiteConfig({
+                slide2: { ...(siteConfig.slide2 || {}), rightCardText: val }
+              })}
+              hint="Editor rico com formatação avançada de alíquotas e cores"
+            />
+
+            {/* Tempo de Transição do Slide 2 (Item 61) */}
+            <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 flex items-center justify-between gap-3 shadow-md">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  ⏱️ Tempo de Exibição do Slide 2
+                </label>
+                <span className="text-[10px] text-slate-300">Tempo em segundos antes de alternar para o Slide 1</span>
+              </div>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <input
+                  type="number"
+                  min={3}
+                  max={120}
+                  value={siteConfig.hero.slide2Duration || 18}
+                  onChange={(e) => updateSiteConfig({
+                    hero: { ...siteConfig.hero, slide2Duration: Number(e.target.value) || 18 }
+                  })}
+                  className="w-16 px-2 py-1.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-[#F6E27A] font-bold text-center text-xs"
+                />
+                <span className="text-xs text-slate-300 font-bold">seg</span>
+              </div>
             </div>
 
             {/* Parâmetros do Estudo de Custos do Slide 2 */}
