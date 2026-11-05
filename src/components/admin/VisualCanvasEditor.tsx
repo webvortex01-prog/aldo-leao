@@ -53,22 +53,7 @@ interface VisualCanvasEditorProps {
   onLogout?: () => void;
 }
 
-type EditableSectionKey = 
-  | 'navbar'
-  | 'hero'
-  | 'digital_presence'
-  | 'legacy'
-  | 'founder'
-  | 'services'
-  | 'solutions'
-  | 'consultation'
-  | 'holding'
-  | 'publications'
-  | 'books'
-  | 'contact'
-  | 'footer'
-  | 'academia'
-  | 'all_images';
+import { EditableSectionKey } from './VisualDrawerContent';
 
 export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
   onSwitchToFormMode,

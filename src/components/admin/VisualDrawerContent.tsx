@@ -18,7 +18,9 @@ import {
   ShieldCheck, 
   ExternalLink,
   HelpCircle,
-  Briefcase
+  Briefcase,
+  Clock,
+  Calendar
 } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
 import { ImageUploadField } from './ImageUploadField';
@@ -36,6 +38,7 @@ export type EditableSectionKey =
   | 'solutions'
   | 'consultation'
   | 'holding'
+  | 'landing_holding'
   | 'publications'
   | 'books'
   | 'contact'
@@ -294,6 +297,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             { key: 'solutions', label: 'Soluções' },
             { key: 'consultation', label: 'Agendamento' },
             { key: 'holding', label: 'Holding 4.0' },
+            { key: 'landing_holding', label: '🚀 Landing Page (/1208/)' },
             { key: 'publications', label: 'Publicações' },
             { key: 'books', label: 'Livros' },
             { key: 'contact', label: 'Contato' },
@@ -1832,27 +1836,49 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
       )}
 
       {/* ============================================================== */}
-      {/* 9. SEÇÃO: HOLDING FAMILIAR & LANDING PAGE 4.0 (/1208/)         */}
+      {/* 9. SEÇÃO: HOLDING FAMILIAR OU LANDING PAGE 4.0 (/1208/) (Item 71) */}
       {/* ============================================================== */}
-      {activeSection === 'holding' && (
+      {(activeSection === 'holding' || activeSection === 'landing_holding') && (
         <div className="space-y-5">
           <div className="flex items-center justify-between pb-2 border-b border-slate-800">
             <div>
               <h3 className="font-cinzel text-sm font-bold text-white uppercase flex items-center gap-2">
                 <Layers className="w-4 h-4 text-[#F6E27A]" />
-                <span>Holding Familiar & Planejamento Patrimonial 4.0</span>
+                <span>
+                  {activeSection === 'landing_holding'
+                    ? 'Landing Page Holding Familiar (/1208/) · Item 71'
+                    : 'Holding Familiar & Planejamento Patrimonial 4.0'}
+                </span>
               </h3>
-              <p className="text-[10px] text-slate-400">Escolha abaixo se deseja editar a Seção da Home ou a Landing Page Completa (/1208/).</p>
+              <p className="text-[10px] text-slate-400">
+                {activeSection === 'landing_holding'
+                  ? 'Edição completa da Landing Page de alta conversão /1208/ (Vantagens, FAQ, Problemas e Tabela de Custos).'
+                  : 'Escolha abaixo se deseja editar a Seção da Home ou a Landing Page Completa (/1208/).'}
+              </p>
             </div>
+            {activeSection === 'landing_holding' && (
+              <a
+                href="/1208/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] text-[#F6E27A] hover:underline flex items-center gap-1 shrink-0"
+              >
+                <span>Abrir /1208/</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            )}
           </div>
 
           {/* Abas Alternadoras da Holding */}
           <div className="flex rounded-xl bg-[#050B14] p-1 border border-[#D4AF37]/40 gap-1">
             <button
               type="button"
-              onClick={() => setHoldingSubTab('section')}
+              onClick={() => {
+                setHoldingSubTab('section');
+                setActiveSection('holding');
+              }}
               className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                holdingSubTab === 'section'
+                activeSection === 'holding' && holdingSubTab === 'section'
                   ? 'bg-[#D4AF37] text-black shadow'
                   : 'text-slate-300 hover:text-white'
               }`}
@@ -1861,19 +1887,22 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </button>
             <button
               type="button"
-              onClick={() => setHoldingSubTab('landing')}
+              onClick={() => {
+                setHoldingSubTab('landing');
+                setActiveSection('landing_holding');
+              }}
               className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                holdingSubTab === 'landing'
+                activeSection === 'landing_holding' || holdingSubTab === 'landing'
                   ? 'bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] text-black shadow'
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              2. Landing Page 4.0 (/1208/)
+              🚀 2. Landing Page 4.0 (/1208/)
             </button>
           </div>
 
           {/* CASO A: SEÇÃO DA HOLDING NA HOME */}
-          {holdingSubTab === 'section' ? (
+          {!(activeSection === 'landing_holding' || holdingSubTab === 'landing') ? (
             <div className="space-y-4">
               <ImageUploadField
                 label="Foto Oficial do Card (BMW e Portão Dourado)"
@@ -2391,6 +2420,58 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
+                  </div>
+
+                  {/* Agendamento / Programação de Data e Horário (Item 59 e 76) */}
+                  <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/45 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] uppercase font-bold text-[#F6E27A] flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
+                        <span>Agendamento da Publicação (Item 59)</span>
+                      </span>
+                      {pub.isScheduled && pub.publishAt ? (
+                        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300">
+                          ⏳ Programado
+                        </span>
+                      ) : (
+                        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
+                          ✅ Imediato
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id={`drawer-sched-${pub.id || idx}`}
+                        checked={!!pub.isScheduled}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.publications || [])];
+                          updated[idx] = { ...updated[idx], isScheduled: e.target.checked };
+                          updateSiteConfig({ publications: updated });
+                        }}
+                        className="w-4 h-4 accent-[#D4AF37] cursor-pointer"
+                      />
+                      <label htmlFor={`drawer-sched-${pub.id || idx}`} className="text-xs text-slate-200 font-semibold cursor-pointer">
+                        Programar para dia e hora específicos (Item 59)
+                      </label>
+                    </div>
+
+                    {pub.isScheduled && (
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1.5 border-t border-slate-800">
+                        <span className="text-[11px] text-slate-300 shrink-0">Data e Hora:</span>
+                        <input
+                          type="datetime-local"
+                          value={pub.publishAt || ''}
+                          onChange={(e) => {
+                            const updated = [...(siteConfig.publications || [])];
+                            updated[idx] = { ...updated[idx], publishAt: e.target.value };
+                            updateSiteConfig({ publications: updated });
+                          }}
+                          className="flex-1 px-2.5 py-1.5 rounded-lg bg-[#071122] border border-[#D4AF37]/60 text-xs text-white"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div>
