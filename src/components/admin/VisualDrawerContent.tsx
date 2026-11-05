@@ -1663,18 +1663,78 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </h3>
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-              Título da Seção
-            </label>
-            <input
-              type="text"
-              value={siteConfig.excellenceSolutionsHeader?.title || 'SOLUÇÕES DE'}
-              onChange={(e) => updateSiteConfig({
-                excellenceSolutionsHeader: { ...(siteConfig.excellenceSolutionsHeader || {}), title: e.target.value }
-              })}
-              className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white text-xs font-bold"
-            />
+          {/* Cabeçalho da Seção Soluções de Excelência */}
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+              Cabeçalho & Introdução (Primeira Frase Dourada, Título e Textos Descritivos)
+            </span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                  Primeira Frase Dourada (Kicker)
+                </label>
+                <input
+                  type="text"
+                  value={siteConfig.excellenceSolutionsHeader?.kicker || 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO'}
+                  onChange={(e) => updateSiteConfig({
+                    excellenceSolutionsHeader: { ...(siteConfig.excellenceSolutionsHeader || {}), kicker: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#071122] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-white font-bold mb-1">
+                  Título da Página (Branco)
+                </label>
+                <input
+                  type="text"
+                  value={siteConfig.excellenceSolutionsHeader?.title || 'SOLUÇÕES DE'}
+                  onChange={(e) => updateSiteConfig({
+                    excellenceSolutionsHeader: { ...(siteConfig.excellenceSolutionsHeader || {}), title: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={siteConfig.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}
+                  onChange={(e) => updateSiteConfig({
+                    excellenceSolutionsHeader: { ...(siteConfig.excellenceSolutionsHeader || {}), titleHighlight: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#071122] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
+            </div>
+
+            {/* Textos Descritivos Abaixo do Título com RichTextarea */}
+            <div className="space-y-3">
+              <RichTextarea
+                label="Texto Descritivo 1 (Abaixo do Título)"
+                rows={3}
+                value={siteConfig.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
+                onChange={(val) => updateSiteConfig({
+                  excellenceSolutionsHeader: { ...(siteConfig.excellenceSolutionsHeader || {}), description1: val }
+                })}
+                hint="Edição completa do parágrafo 1 abaixo do título"
+              />
+
+              <RichTextarea
+                label="Texto Descritivo 2 (Slogan de Excelência)"
+                rows={2}
+                value={siteConfig.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
+                onChange={(val) => updateSiteConfig({
+                  excellenceSolutionsHeader: { ...(siteConfig.excellenceSolutionsHeader || {}), description2: val }
+                })}
+                hint="Edição completa do parágrafo 2 abaixo do título"
+              />
+            </div>
           </div>
 
           <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
