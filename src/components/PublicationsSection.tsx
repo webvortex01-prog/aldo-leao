@@ -381,9 +381,95 @@ export const PublicationsSection: React.FC = () => {
             <div 
               className="space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body publication-rich-content"
               dangerouslySetInnerHTML={{
-                __html: activePubModal.content.includes('<')
-                  ? activePubModal.content
-                  : activePubModal.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
+                __html: (() => {
+                  let raw = activePubModal.content || '';
+
+                  // 1. Desescapa entidades HTML caso tenha sido salvo como texto escapado
+                  raw = raw
+                    .replace(/&lt;/g, '<')
+                    .replace(/&gt;/g, '>')
+                    .replace(/&quot;/g, '"')
+                    .replace(/&#39;/g, "'")
+                    .replace(/&amp;/g, '&');
+
+                  // 2. Parser inteligente de Tabelas Markdown (| col1 | col2 |)
+                  const lines = raw.split('\n');
+                  const processed: string[] = [];
+                  let inTable = false;
+                  let tableRows: string[] = [];
+
+                  for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (line.startsWith('|') && line.endsWith('|')) {
+                      if (!inTable) {
+                        inTable = true;
+                        tableRows = [];
+                      }
+                      // Ignora linhas separadoras markdown do tipo |---|---|
+                      if (!/^\|[\s\-:|]+\|$/.test(line)) {
+                        tableRows.push(line);
+                      }
+                    } else {
+                      if (inTable) {
+                        // Fecha a tabela acumulada
+                        if (tableRows.length > 0) {
+                          const headerCells = tableRows[0].slice(1, -1).split('|').map(c => c.trim());
+                          let tableHtml = '<div class="overflow-x-auto my-4"><table class="w-full border border-[#D4AF37]/40 text-xs text-left shadow-lg"><thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30"><tr>';
+                          headerCells.forEach(hc => {
+                            tableHtml += `<th class="p-3 border border-[#D4AF37]/20 font-bold">${hc}</th>`;
+                          });
+                          tableHtml += '</tr></thead><tbody>';
+                          for (let r = 1; r < tableRows.length; r++) {
+                            const cells = tableRows[r].slice(1, -1).split('|').map(c => c.trim());
+                            const bg = r % 2 === 0 ? 'bg-[#071122]' : 'bg-[#050B14]';
+                            tableHtml += `<tr class="${bg}">`;
+                            cells.forEach(cell => {
+                              tableHtml += `<td class="p-2.5 border border-slate-700 text-slate-200">${cell}</td>`;
+                            });
+                            tableHtml += '</tr>';
+                          }
+                          tableHtml += '</tbody></table></div>';
+                          processed.push(tableHtml);
+                        }
+                        inTable = false;
+                        tableRows = [];
+                      }
+                      processed.push(lines[i]);
+                    }
+                  }
+
+                  if (inTable && tableRows.length > 0) {
+                    const headerCells = tableRows[0].slice(1, -1).split('|').map(c => c.trim());
+                    let tableHtml = '<div class="overflow-x-auto my-4"><table class="w-full border border-[#D4AF37]/40 text-xs text-left shadow-lg"><thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30"><tr>';
+                    headerCells.forEach(hc => {
+                      tableHtml += `<th class="p-3 border border-[#D4AF37]/20 font-bold">${hc}</th>`;
+                    });
+                    tableHtml += '</tr></thead><tbody>';
+                    for (let r = 1; r < tableRows.length; r++) {
+                      const cells = tableRows[r].slice(1, -1).split('|').map(c => c.trim());
+                      const bg = r % 2 === 0 ? 'bg-[#071122]' : 'bg-[#050B14]';
+                      tableHtml += `<tr class="${bg}">`;
+                      cells.forEach(cell => {
+                        tableHtml += `<td class="p-2.5 border border-slate-700 text-slate-200">${cell}</td>`;
+                      });
+                      tableHtml += '</tr>';
+                    }
+                    tableHtml += '</tbody></table></div>';
+                    processed.push(tableHtml);
+                  }
+
+                  const combined = processed.join('\n');
+
+                  // Se tem tags HTML, renderiza diretamente garantindo que qualquer <table> tenha wrapper
+                  if (combined.includes('<')) {
+                    return combined.replace(/(<table[\s\S]*?<\/table>)/gi, (match) => {
+                      if (match.includes('overflow-x-auto')) return match;
+                      return `<div class="overflow-x-auto my-4">${match}</div>`;
+                    });
+                  }
+
+                  return combined.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('');
+                })()
               }}
             />
 

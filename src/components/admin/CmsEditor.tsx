@@ -23,7 +23,7 @@ import {
   Eye
 } from 'lucide-react';
 import { useSite } from '../../context/SiteContext';
-import { PracticeArea, DigitalBook, Publication } from '../../types';
+import { PracticeArea, ExcellenceSolution, DigitalBook, Publication } from '../../types';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
 import { ArticleSignature } from '../ArticleSignature';
 
@@ -644,7 +644,7 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
 };
 
 interface RichTextareaProps {
-  label: string;
+  label?: string;
   value: string;
   onChange: (val: string) => void;
   rows?: number;
@@ -686,9 +686,11 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
     <div className="space-y-1.5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
-          <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-            {label}
-          </label>
+          {label && (
+            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+              {label}
+            </label>
+          )}
           {hint && <span className="text-[11px] text-slate-400 block">{hint}</span>}
         </div>
         
@@ -813,6 +815,28 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
   const handleRemovePracticeArea = (index: number) => {
     const updated = (formData.practiceAreas || []).filter((_, i) => i !== index);
     setFormData({ ...formData, practiceAreas: updated });
+  };
+
+  // Helper para adicionar solução de excelência
+  const handleAddExcellenceSolution = () => {
+    const nextNum = String((formData.excellenceSolutions || []).length + 1).padStart(2, '0');
+    const newSol: ExcellenceSolution = {
+      id: `sol-${Date.now()}`,
+      number: nextNum,
+      title: 'Nova Solução de Excelência',
+      subtitle: 'ATUAÇÃO ESTRATÉGICA E PREVENTIVA',
+      description: 'Descrição detalhada dos serviços de excelência jurídica especializada.',
+      extendedText: ''
+    };
+    setFormData({
+      ...formData,
+      excellenceSolutions: [...(formData.excellenceSolutions || []), newSol]
+    });
+  };
+
+  const handleRemoveExcellenceSolution = (index: number) => {
+    const updated = (formData.excellenceSolutions || []).filter((_, i) => i !== index);
+    setFormData({ ...formData, excellenceSolutions: updated });
   };
 
   // Helper para adicionar livro digital no TOPO com salvamento imediato
@@ -1638,6 +1662,84 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 />
               </div>
             </div>
+
+            {/* Box 2 do Slide 1 (Item 79: Totalmente Editável) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box 2 · Advocacia Estratégica (Item 79)
+              </h5>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Kicker Box 2</label>
+                  <input
+                    type="text"
+                    value={formData.hero.box2Kicker || 'Excelência Jurídica Centenária'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, box2Kicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Box 2</label>
+                  <input
+                    type="text"
+                    value={formData.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, box2Title: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-300 font-semibold mb-1">Texto Descritivo Box 2</label>
+                <textarea
+                  rows={2}
+                  value={formData.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    hero: { ...formData.hero, box2Text: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                />
+              </div>
+            </div>
+
+            {/* Box Abaixo da Logomarca do Leão (Item 79: Totalmente Editável) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box Sob a Logomarca do Leão (Item 79)
+              </h5>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Sob a Logo</label>
+                  <input
+                    type="text"
+                    value={formData.hero.logoCardTitle || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, logoCardTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Subtítulo Sob a Logo</label>
+                  <input
+                    type="text"
+                    value={formData.hero.logoCardSubtitle || 'Excelência Jurídica Desde 1908'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, logoCardSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-[#F6E27A] text-xs font-bold"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           
@@ -1757,7 +1859,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
                   Texto acima do Título (Eyebrow)
@@ -1774,17 +1876,103 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
 
               <div>
-                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                  Título do Slide 2
+                <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1.5">
+                  Título em Branco (Item 80)
                 </label>
                 <input
                   type="text"
-                  value={formData.slide2?.title || 'PLANEJAMENTO PATRIMONIAL 4.0'}
+                  value={formData.slide2?.titleWhite ?? 'PLANEJAMENTO '}
                   onChange={(e) => setFormData({
                     ...formData,
-                    slide2: { ...(formData.slide2 || {}), title: e.target.value }
+                    slide2: { ...(formData.slide2 || {}), titleWhite: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                  Título em Dourado (Item 80)
+                </label>
+                <input
+                  type="text"
+                  value={formData.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    slide2: { ...(formData.slide2 || {}), titleGold: e.target.value }
                   })}
                   className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            {/* Texto Principal do Slide 2 com RichTextarea (Item 80) */}
+            <RichTextarea
+              label="Texto Principal do Slide 2 (Item 80)"
+              rows={4}
+              value={formData.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                slide2: { ...(formData.slide2 || {}), paragraph1: val }
+              })}
+              hint="Texto que fica abaixo do título do Slide 2"
+            />
+
+            {/* Box Comparativo de Custos do Slide 2 (Item 80) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box Comparativo de Custos (Item 80)
+              </h5>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Título do Box de Custos</label>
+                <input
+                  type="text"
+                  value={formData.slide2?.costBoxTitle || 'COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    slide2: { ...(formData.slide2 || {}), costBoxTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-white text-xs font-bold"
+                />
+              </div>
+              <RichTextarea
+                label="Texto do Box de Custos"
+                rows={2}
+                value={formData.slide2?.costBoxText || 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  slide2: { ...(formData.slide2 || {}), costBoxText: val }
+                })}
+              />
+            </div>
+
+            {/* Box Sob a Foto Familiar (Item 80) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box Sob a Foto Familiar (Item 80)
+              </h5>
+              <div>
+                <label className="block text-[10px] text-white font-semibold mb-1">Texto em Branco</label>
+                <input
+                  type="text"
+                  value={formData.slide2?.photoCardTitle || 'O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    slide2: { ...(formData.slide2 || {}), photoCardTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Texto em Dourado</label>
+                <input
+                  type="text"
+                  value={formData.slide2?.photoCardSubtitle || 'VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    slide2: { ...(formData.slide2 || {}), photoCardSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
                 />
               </div>
             </div>
@@ -2072,6 +2260,18 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
           </div>
 
+          {/* Editor Rico de Todo o Conteúdo da Página Presença Nacional Digital (Item 81 e 82) */}
+          <RichTextarea
+            label="Conteúdo Integral da Página (Item 81 e 82)"
+            rows={5}
+            value={formData.nationalPresence?.content || ''}
+            onChange={(val) => setFormData({
+              ...formData,
+              nationalPresence: { ...(formData.nationalPresence || {}), content: val }
+            })}
+            hint="Permite editar livremente o texto de toda a página, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+          />
+
           <div>
             <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
               Parágrafo 1 (História e Sede em Porto Alegre)
@@ -2163,14 +2363,14 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
                 Frase em Dourado Superior
               </label>
               <input
                 type="text"
-                value={formData.centennialLegacy?.goldKicker || 'EXCELÊNCIA JURÍDICA FAMILIAR'}
+                value={formData.centennialLegacy?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL'}
                 onChange={(e) => setFormData({
                   ...formData,
                   centennialLegacy: { ...(formData.centennialLegacy || {}), goldKicker: e.target.value }
@@ -2179,17 +2379,31 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Título da Página
+              <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
+                Título em Branco (Item 84)
               </label>
               <input
                 type="text"
-                value={formData.centennialLegacy?.title || 'O LEGADO CENTENÁRIO'}
+                value={formData.centennialLegacy?.titleWhite || formData.centennialLegacy?.title || 'O LEGADO'}
                 onChange={(e) => setFormData({
                   ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), title: e.target.value }
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), titleWhite: e.target.value, title: e.target.value }
                 })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                Título em Dourado (Item 84)
+              </label>
+              <input
+                type="text"
+                value={formData.centennialLegacy?.titleGold || formData.centennialLegacy?.titleHighlight || 'CENTENÁRIO'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), titleGold: e.target.value, titleHighlight: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
               />
             </div>
             <div>
@@ -2207,6 +2421,18 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               />
             </div>
           </div>
+
+          {/* Editor Rico de Todo o Conteúdo da Página O Legado Centenário (Item 81 e 84) */}
+          <RichTextarea
+            label="Conteúdo Integral da Página (Item 81 e 84)"
+            rows={4}
+            value={formData.centennialLegacy?.content || ''}
+            onChange={(val) => setFormData({
+              ...formData,
+              centennialLegacy: { ...(formData.centennialLegacy || {}), content: val }
+            })}
+            hint="Permite editar livremente o texto de toda a página do Legado, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+          />
 
           <div>
             <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
@@ -2270,16 +2496,43 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
             <div>
-              <label className="block text-[11px] text-slate-300 mb-1">Texto de Destaque dos 40 Anos</label>
-              <textarea
-                rows={2}
-                value={formData.centennialLegacy?.card40Text || 'Mais de 40 anos de sólida e ininterrupta atuação na advocacia estratégica, com excelência, discrição e resultados expressivos.'}
-                onChange={(e) => setFormData({
+              <RichTextarea
+                label="Texto de Destaque dos 40 Anos (Item 85)"
+                rows={3}
+                value={formData.centennialLegacy?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
+                onChange={(val) => setFormData({
                   ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), card40Text: e.target.value }
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), card40Text: val }
                 })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                hint="Texto rico com quebras de linha e destaques"
               />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+              <div>
+                <label className="block text-[11px] text-slate-300 mb-1">Nome Abaixo do Selo</label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealName: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-[#F6E27A] mb-1">Subtítulo Abaixo do Selo</label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
@@ -2477,17 +2730,21 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Kicker da Seção
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                Frase Inicial em Dourado (Item 86)
               </label>
               <input
                 type="text"
-                value={formData.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                value={formData.founder.initialGoldPhrase || formData.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
                 onChange={(e) => setFormData({
                   ...formData,
-                  founder: { ...formData.founder, sectionKicker: e.target.value }
+                  founder: {
+                    ...formData.founder,
+                    initialGoldPhrase: e.target.value,
+                    sectionKicker: e.target.value
+                  }
                 })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
               />
             </div>
 
@@ -2520,6 +2777,44 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
               />
             </div>
+          </div>
+
+          {/* Editor Rico de Todo o Conteúdo da Página Dr. Aldo Leão (Item 81 e 86) */}
+          <RichTextarea
+            label="Conteúdo Integral da Página Dr. Aldo Leão (Item 81 e 86)"
+            rows={5}
+            value={formData.founder.content || ''}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, content: val }
+            })}
+            hint="Permite editar livremente o texto de toda a página do Dr. Aldo Leão, com imagens, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+          />
+
+          {/* Controle de Tamanho da Assinatura (Item 86) */}
+          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                Tamanho da Assinatura (Item 86)
+              </label>
+              <span className="text-xs font-bold text-white font-mono">
+                {formData.founder.signatureSize || 64}px
+              </span>
+            </div>
+            <input
+              type="range"
+              min={40}
+              max={140}
+              value={formData.founder.signatureSize || 64}
+              onChange={(e) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, signatureSize: Number(e.target.value) }
+              })}
+              className="w-full accent-[#D4AF37] cursor-pointer"
+            />
+            <span className="text-[10px] text-slate-300 block">
+              Ajuste para aumentar ou diminuir a altura da assinatura manuscrita que fica logo abaixo do texto.
+            </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -2691,12 +2986,26 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             />
           </div>
 
-          {/* Diferenciais Estratégicos */}
+          {/* Diferenciais Estratégicos (Item 86) */}
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <div className="flex items-center justify-between">
+            <div>
+              <label className="block text-[11px] text-[#F6E27A] font-bold uppercase mb-1">
+                Título do Bloco de Diferenciais (Item 86)
+              </label>
+              <input
+                type="text"
+                value={formData.founder.differentialsTitle || 'Diferenciais Estratégicos:'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, differentialsTitle: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+              />
+            </div>
+            <div className="flex items-center justify-between pt-1">
               <div>
                 <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                  Diferenciais Estratégicos (Exibidos abaixo da biografia)
+                  Itens dos Diferenciais ({ (formData.founder.differentials || []).length })
                 </h4>
                 <p className="text-[11px] text-slate-400">
                   Pontos fortes do Dr. Aldo Leão com ícones de verificação dourados.
@@ -3031,14 +3340,44 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             />
           </div>
 
-          {/* Contador de 40 Anos */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+          {/* Contador de 40 Anos (Item 87: Frases Dourada e Branca Editáveis) */}
+          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
             <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              Contador / Selo Oficial de 40 Anos (Item 21 do Dr. Aldo Leão)
+              Contador / Selo Oficial de 40 Anos (Item 87)
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Título do Contador</label>
+                <label className="block text-[11px] text-[#F6E27A] font-bold mb-1">
+                  Frase Dourada Superior (Item 87)
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.counterGoldPhrase || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, counterGoldPhrase: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-white font-bold mb-1">
+                  Frase Branca Inferior (Item 87)
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.counterWhitePhrase || 'DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, counterWhitePhrase: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+              <div>
+                <label className="block text-[11px] text-slate-300 mb-1">Título Alternativo do Contador</label>
                 <input
                   type="text"
                   value={formData.founder.counterTitle || '40 ANOS DE ADVOCACIA'}
@@ -3207,15 +3546,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
                     Descrição do Escopo Jurídico
                   </label>
-                  <textarea
-                    rows={2}
+                  <RichTextarea
+                    rows={4}
                     value={area.description}
-                    onChange={(e) => {
+                    onChange={(val) => {
                       const updated = [...(formData.practiceAreas || [])];
-                      updated[idx].description = e.target.value;
+                      updated[idx].description = val;
                       setFormData({ ...formData, practiceAreas: updated });
                     }}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
+                    placeholder="Descrição detalhada do escopo de atuação jurídica..."
                   />
                 </div>
               </div>
@@ -3227,13 +3566,22 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
       {/* TAB 7: SOLUÇÕES DE EXCELÊNCIA & ACADEMIA */}
       {activeTab === 'solutions' && (
         <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white">
-              Página 6 · Soluções de Excelência & Academia Leão Ferreira
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Altere o cabeçalho da seção, os 14 cards de soluções de excelência e os detalhes da Academia Leão Ferreira.
-            </p>
+          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <h3 className="font-cinzel text-base font-bold text-white">
+                Página 6 · Soluções de Excelência & Academia Leão Ferreira
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Altere o cabeçalho da seção, os cards de soluções de excelência (editar, adicionar e excluir) e a Academia Leão Ferreira.
+              </p>
+            </div>
+            <button
+              onClick={handleAddExcellenceSolution}
+              className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              <span>Adicionar Solução</span>
+            </button>
           </div>
 
           {/* Cabeçalho da Seção Soluções de Excelência */}
@@ -3293,14 +3641,14 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
                   Parágrafo 1 de Introdução
                 </label>
-                <textarea
+                <RichTextarea
                   rows={3}
                   value={formData.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
-                  onChange={(e) => setFormData({
+                  onChange={(val) => setFormData({
                     ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description1: e.target.value }
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description1: val }
                   })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                  placeholder="Parágrafo 1 de introdução..."
                 />
               </div>
 
@@ -3308,14 +3656,14 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
                   Parágrafo 2 de Introdução (Slogan de Excelência)
                 </label>
-                <textarea
+                <RichTextarea
                   rows={3}
                   value={formData.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
-                  onChange={(e) => setFormData({
+                  onChange={(val) => setFormData({
                     ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description2: e.target.value }
+                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description2: val }
                   })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                  placeholder="Parágrafo 2 de introdução..."
                 />
               </div>
             </div>
@@ -3324,9 +3672,18 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           <div className="space-y-4">
             {(formData.excellenceSolutions || []).map((sol, idx) => (
               <div key={sol.id || idx} className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
-                <span className="text-xs font-bold text-[#E5C158] uppercase">
-                  Solução 0{idx + 1} · {sol.title}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-[#E5C158] uppercase">
+                    Solução 0{idx + 1} · {sol.title}
+                  </span>
+                  <button
+                    onClick={() => handleRemoveExcellenceSolution(idx)}
+                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Remover</span>
+                  </button>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
@@ -3363,15 +3720,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
                     Descrição Detalhada
                   </label>
-                  <textarea
-                    rows={2}
+                  <RichTextarea
+                    rows={4}
                     value={sol.description}
-                    onChange={(e) => {
+                    onChange={(val) => {
                       const updated = [...(formData.excellenceSolutions || [])];
-                      updated[idx].description = e.target.value;
+                      updated[idx].description = val;
                       setFormData({ ...formData, excellenceSolutions: updated });
                     }}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
+                    placeholder="Descrição detalhada da solução de excelência..."
                   />
                 </div>
               </div>

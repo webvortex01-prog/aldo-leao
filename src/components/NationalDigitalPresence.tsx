@@ -22,18 +22,31 @@ export const NationalDigitalPresence: React.FC = () => {
               <span className="gold-text-gradient">{np?.titleHighlight || 'DIGITAL'}</span>
             </h2>
 
-            {/* Text from Config */}
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-              {np?.paragraph1 || 'Com sede em Porto Alegre, a Advocacia Estratégica Dr. Aldo Leão rompe as fronteiras geográficas para levar a Excelência Jurídica Centenária a clientes de todo o território nacional.'}
-            </p>
+            {/* Conteúdo integral da página: suporta RichText ou parágrafos padrão (Item 81 e 82) */}
+            {np?.content ? (
+              <div
+                className="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light publication-rich-content"
+                dangerouslySetInnerHTML={{
+                  __html: np.content.includes('<')
+                    ? np.content
+                    : np.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
+                }}
+              />
+            ) : (
+              <>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
+                  {np?.paragraph1 || 'Com sede em Porto Alegre, a Advocacia Estratégica Dr. Aldo Leão rompe as fronteiras geográficas para levar a Excelência Jurídica Centenária a clientes de todo o território nacional.'}
+                </p>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
-              {np?.paragraph2 || 'Por meio de uma infraestrutura tecnológica de última geração e de processos 100% digitais, disponibilizamos uma advocacia estratégica moderna, segura e eficiente, proporcionando atendimento virtual com a mesma qualidade, proximidade e excelência do atendimento presencial.'}
-            </p>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-5 font-light">
+                  {np?.paragraph2 || 'Por meio de uma infraestrutura tecnológica de última geração e de processos 100% digitais, disponibilizamos uma advocacia estratégica moderna, segura e eficiente, proporcionando atendimento virtual com a mesma qualidade, proximidade e excelência do atendimento presencial.'}
+                </p>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-              {np?.paragraph3 || 'Nosso modelo de atuação elimina deslocamentos desnecessários, otimiza o tempo dos clientes e amplia o acesso a soluções jurídicas especializadas, sem abrir mão da segurança, da confidencialidade e da excelência profissional.'}
-            </p>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
+                  {np?.paragraph3 || 'Nosso modelo de atuação elimina deslocamentos desnecessários, otimiza o tempo dos clientes e amplia o acesso a soluções jurídicas especializadas, sem abrir mão da segurança, da confidencialidade e da excelência profissional.'}
+                </p>
+              </>
+            )}
 
             <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/30 mb-8">
               <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">

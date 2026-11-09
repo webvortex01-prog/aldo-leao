@@ -137,11 +137,18 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
                     </p>
                   )}
 
-                  {/* Description com caixa escura/preta conforme Item 37 */}
+                  {/* Description com caixa escura/preta respeitando quebras de linha e HTML (Item 89) */}
                   <div className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/20 mb-4">
-                    <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light">
-                      {sol.description}
-                    </p>
+                    {sol.description && sol.description.includes('<') ? (
+                      <div
+                        className="text-xs text-slate-300 leading-relaxed font-sans-body font-light publication-rich-content"
+                        dangerouslySetInnerHTML={{ __html: sol.description }}
+                      />
+                    ) : (
+                      <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light whitespace-pre-line">
+                        {sol.description}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -158,7 +165,7 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
         </div>
       </div>
 
-      {/* Solution Detail Modal com box preto para o texto (Item 37) */}
+      {/* Solution Detail Modal com box preto para o texto (Item 37 e 89) */}
       {selectedSolution && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
           <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto text-slate-100 text-left">
@@ -184,15 +191,29 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
               )}
             </div>
 
-            {/* Box preto para o texto conforme Item 37 e Item 26 */}
+            {/* Box preto para o texto conforme Item 37, 26 e 89 */}
             <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 mb-6">
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body">
-                {selectedSolution.description}
-              </p>
-              {selectedSolution.extendedText && (
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800">
-                  {selectedSolution.extendedText}
+              {selectedSolution.description && selectedSolution.description.includes('<') ? (
+                <div
+                  className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body publication-rich-content"
+                  dangerouslySetInnerHTML={{ __html: selectedSolution.description }}
+                />
+              ) : (
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body whitespace-pre-line">
+                  {selectedSolution.description}
                 </p>
+              )}
+              {selectedSolution.extendedText && (
+                selectedSolution.extendedText.includes('<') ? (
+                  <div
+                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800 publication-rich-content"
+                    dangerouslySetInnerHTML={{ __html: selectedSolution.extendedText }}
+                  />
+                ) : (
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800 whitespace-pre-line">
+                    {selectedSolution.extendedText}
+                  </p>
+                )
               )}
             </div>
 

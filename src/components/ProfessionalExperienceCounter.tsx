@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Scale, Award, Shield } from 'lucide-react';
+import { useSite } from '../context/SiteContext';
 
 export const ProfessionalExperienceCounter: React.FC = () => {
+  const { siteConfig } = useSite();
+  const f = siteConfig.founder;
   const currentYear = 2026;
   const targetYears = currentYear - 1986; // 40 anos
   const [count, setCount] = useState<number>(0);
@@ -69,11 +72,11 @@ export const ProfessionalExperienceCounter: React.FC = () => {
             {/* Right Column: Context & Credibility */}
             <div className="md:col-span-7 md:pl-4 lg:pl-6 text-left mt-2 md:mt-0">
               <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
-                <span>ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA</span>
+                <span>{f?.counterGoldPhrase || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}</span>
               </div>
 
               <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-4 leading-snug">
-                40 Anos + de Excelência Jurídica na Advocacia Estratégica
+                {f?.counterWhitePhrase || '40 Anos + de Excelência Jurídica na Advocacia Estratégica'}
               </h3>
 
               <p className="text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">

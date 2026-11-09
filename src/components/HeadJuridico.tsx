@@ -76,10 +76,10 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
   return (
     <section id="head-juridico" className="py-20 md:py-28 bg-[#060D1A] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header da Seção: ADVOCACIA ESTRATÉGICA DESDE 1986, Dr. ALDO LEÃO e LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA */}
+        {/* Header da Seção: ADVOCACIA ESTRATÉGICA DESDE 1986, Dr. ALDO LEÃO e LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA (Item 86) */}
         <div className="text-center max-w-3xl mx-auto mb-16 reveal-fade-up">
           <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-2">
-            <span>ADVOCACIA ESTRATÉGICA DESDE 1986</span>
+            <span>{f?.initialGoldPhrase || f?.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-3">
@@ -114,7 +114,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
             </div>
           </div>
 
-          {/* Coluna Direita: Conteúdo Oficial Conforme Item 35 e Item IV (Sem repetição do nome) */}
+          {/* Coluna Direita: Conteúdo Oficial (Item 86) */}
           <div className="lg:col-span-7 text-left reveal-fade-left">
             <div className="mb-4">
               <p className="font-cinzel text-sm sm:text-base font-bold text-[#E5C158] tracking-widest uppercase">
@@ -122,54 +122,64 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               </p>
             </div>
 
-            {/* Texto oficial da página Dr. ALDO LEÃO */}
-            <div className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-              <p>
-                {f?.bioParagraph1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração de um legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
-              </p>
-              <p>
-                {f?.bioParagraph2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência perfeita entre a tradição institucional centenária e a inovação tecnológica da advocacia avançada.'}
-              </p>
-              <p>
-                {f?.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
-              </p>
-              <p>
-                {f?.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
-              </p>
-              {f?.bioParagraph5 !== '' && (
+            {/* Texto oficial da página Dr. ALDO LEÃO (Item 81 e 86) */}
+            {f?.content ? (
+              <div
+                className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-4 font-light publication-rich-content"
+                dangerouslySetInnerHTML={{
+                  __html: f.content.includes('<')
+                    ? f.content
+                    : f.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
+                }}
+              />
+            ) : (
+              <div className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-4 font-light">
                 <p>
-                  {f?.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
+                  {f?.bioParagraph1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração de um legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
                 </p>
-              )}
-              {f?.bioParagraph6 !== '' && (
                 <p>
-                  {f?.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
+                  {f?.bioParagraph2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência perfeita entre a tradição institucional centenária e a inovação tecnológica da advocacia avançada.'}
                 </p>
-              )}
-            </div>
+                <p>
+                  {f?.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
+                </p>
+                <p>
+                  {f?.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
+                </p>
+                {f?.bioParagraph5 !== '' && (
+                  <p>
+                    {f?.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
+                  </p>
+                )}
+                {f?.bioParagraph6 !== '' && (
+                  <p>
+                    {f?.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
+                  </p>
+                )}
+              </div>
+            )}
 
-            {/* Assinatura em tamanho maior com animação iluminada que surge e fica fixa (Item 35 e Item 6) */}
-            <div className="my-6 py-4 border-y border-[#D4AF37]/25 flex flex-col items-center justify-center">
+            {/* Assinatura Oficial posicionada IMEDIATAMENTE ABAIXO do texto da página com tamanho configurável (Item 86) */}
+            <div className="my-5 flex items-center justify-start">
               <img
                 src={f?.signatureImageUrl || '/img/assinatura-gold.png'}
                 alt="Assinatura Dr. Aldo Leão"
-                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95 animate-signature-glow"
+                style={{
+                  height: `${f?.signatureSize || 64}px`,
+                  maxHeight: '140px',
+                  minHeight: '40px'
+                }}
+                className="w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(212,175,55,0.5)] opacity-95 animate-signature-glow"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/img/assinatura.png';
                 }}
               />
-              <button
-                onClick={() => setCurriculumModalOpen(true)}
-                className="mt-3 px-6 py-2.5 rounded-lg bg-[#060D1A] border-2 border-[#D4AF37] text-[#F6E27A] hover:bg-[#0E1F3D] hover:text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-md"
-              >
-                SAIBA MAIS
-              </button>
             </div>
 
-            {/* Diferenciais Estratégicos Conforme Item 50 */}
+            {/* Diferenciais Estratégicos Conforme Item 86 */}
             <div className="space-y-2 mb-6">
               <h4 className="font-cinzel text-xs font-bold text-white uppercase tracking-wider mb-2">
-                Diferenciais Estratégicos:
+                {f?.differentialsTitle || 'Diferenciais Estratégicos:'}
               </h4>
               <div className="space-y-2 text-xs text-slate-200">
                 {(f?.differentials && f.differentials.length > 0 ? f.differentials : [
@@ -186,8 +196,15 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               </div>
             </div>
 
-            {/* Botões: AGENDAR CONSULTA VIRTUAL (WhatsApp) e LIVROS DIGITAIS */}
+            {/* Botões: SAIBA MAIS, AGENDAR CONSULTA VIRTUAL (WhatsApp) e LIVROS DIGITAIS */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
+              <button
+                onClick={() => setCurriculumModalOpen(true)}
+                className="px-6 py-3 rounded text-xs font-bold uppercase tracking-wider bg-[#060D1A] border-2 border-[#D4AF37] text-[#F6E27A] hover:bg-[#0E1F3D] hover:text-white transition-all cursor-pointer shadow-md flex items-center gap-2"
+              >
+                <span>{f?.saibaMaisBtn || 'SAIBA MAIS'}</span>
+              </button>
+
               <button
                 onClick={handleWhatsAppConsultation}
                 className="px-6 py-3 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(212,175,55,0.35)] flex items-center gap-2 cursor-pointer"
@@ -207,20 +224,19 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
           </div>
         </div>
 
-        {/* Item 21 e 53: Contador no final da página Head Jurídico, com a balança da justiça na cor azul-marinho e ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA */}
+        {/* Item 87: Contador com frases editáveis dourada e branca */}
         <div ref={counterRef} className="pt-8 border-t border-[#D4AF37]/25 reveal-scale">
           <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-[#071122] via-[#0E1F3D] to-[#071122] border border-[#D4AF37]/35 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             <div className="flex items-center gap-4">
-              {/* Ícone da balança da justiça na cor azul-marinho (fundo claro/dourado suave para contraste) */}
               <div className="w-14 h-14 rounded-full bg-[#E5C158] flex items-center justify-center text-[#071122] shadow-[0_0_15px_rgba(212,175,55,0.4)] shrink-0">
                 <Scale className="w-7 h-7 text-[#071122]" />
               </div>
               <div>
                 <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                  ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA
+                  {f?.counterGoldPhrase || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}
                 </p>
                 <p className="text-xs text-white font-medium">
-                  DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO
+                  {f?.counterWhitePhrase || 'DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO'}
                 </p>
               </div>
             </div>

@@ -142,9 +142,9 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                     {area.subtitle}
                   </p>
 
-                  {/* Description (Item 29: Holding Familiar em negrito e dourado) */}
-                  <p 
-                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light"
+                  {/* Description (Item 29: Holding Familiar em negrito e dourado, com quebras de linha preservadas) */}
+                  <div 
+                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light whitespace-pre-line publication-rich-content"
                     dangerouslySetInnerHTML={{
                       __html: area.description.replace(
                         /Holding Familiar/g,
@@ -189,8 +189,8 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
               </p>
             </div>
 
-            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body font-light">
-              <p
+            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body font-light whitespace-pre-line publication-rich-content">
+              <div
                 dangerouslySetInnerHTML={{
                   __html: selectedAreaModal.description.replace(
                     /Holding Familiar/g,
@@ -198,6 +198,7 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                   )
                 }}
               />
+            </div>
 
               {/* Box CENTRAL DE ATENDIMENTO conforme Item 25 e 36 */}
               <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
@@ -227,7 +228,6 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
               </div>
             </div>
           </div>
-        </div>
       )}
     </section>
   );

@@ -50,28 +50,39 @@ export const CentennialLegacy: React.FC = () => {
   return (
     <section id="legado" className="py-20 md:py-24 bg-[#050B14] relative border-t border-[#D4AF37]/20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header: O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL · DESDE 1908 (Item 31) */}
+        {/* Section Header: O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL · DESDE 1908 (Item 31 e 84) */}
         <div className="text-center max-w-3xl mx-auto mb-14 reveal-fade-up">
           <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.24em] text-[#E5C158] font-bold mb-3 text-center">
-            <span>{cl?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL'}</span>
+            <span>{(cl?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL').replace(/\(1908\)\./g, '(1908)').replace(/1908\./g, '1908')}</span>
             <span className="text-[#D4AF37]/50 hidden sm:inline" aria-hidden="true">·</span>
-            <span>{cl?.subtitle || 'DESDE 1908'}</span>
+            <span>{(cl?.subtitle || 'DESDE 1908').replace(/\(1908\)\./g, '(1908)').replace(/1908\./g, '1908')}</span>
           </div>
 
           <h2 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight mb-5 [text-wrap:balance]">
-            <span className="text-white">O LEGADO</span>{' '}
-            <span className="gold-text-gradient">CENTENÁRIO</span>
+            <span className="text-white">{cl?.titleWhite || cl?.title || 'O LEGADO'}</span>{' '}
+            <span className="gold-text-gradient">{cl?.titleGold || cl?.titleHighlight || 'CENTENÁRIO'}</span>
           </h2>
 
-          {/* Texto do projeto conforme Item 31 */}
-          <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            <p>
-              {cl?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
-            </p>
-            <p>
-              {cl?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
-            </p>
-          </div>
+          {/* Conteúdo rico da página: suporta RichText ou parágrafos (Item 81 e 84) */}
+          {cl?.content ? (
+            <div
+              className="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light publication-rich-content"
+              dangerouslySetInnerHTML={{
+                __html: cl.content.includes('<')
+                  ? cl.content
+                  : cl.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
+              }}
+            />
+          ) : (
+            <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+              <p>
+                {cl?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
+              </p>
+              <p>
+                {cl?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
+              </p>
+            </div>
+          )}
         </div>
 
         {/* TIMELINE SECTION (Item 5, 32 e 48) */}
@@ -148,10 +159,17 @@ export const CentennialLegacy: React.FC = () => {
               {cl?.card40Title || '40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA'}
             </h3>
 
-            {/* Texto exato conforme Item 49 */}
-            <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto">
-              {cl?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
-            </p>
+            {/* Texto do card 40 anos com suporte a RichText (Item 85) */}
+            {cl?.card40Text && cl.card40Text.includes('<') ? (
+              <div
+                className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto publication-rich-content"
+                dangerouslySetInnerHTML={{ __html: cl.card40Text }}
+              />
+            ) : (
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto whitespace-pre-line">
+                {cl?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
+              </p>
+            )}
 
             {/* Selo inserido no lugar dos dois boxes removidos (Item 34) */}
             <div className="pt-6 border-t border-[#D4AF37]/25 flex flex-col items-center justify-center">

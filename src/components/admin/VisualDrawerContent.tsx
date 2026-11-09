@@ -25,7 +25,7 @@ import {
 import { useSite } from '../../context/SiteContext';
 import { ImageUploadField } from './ImageUploadField';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
-import { PracticeArea, DigitalBook, Publication } from '../../types';
+import { PracticeArea, ExcellenceSolution, DigitalBook, Publication } from '../../types';
 import { RichTextarea } from './CmsEditor';
 
 export type EditableSectionKey = 
@@ -104,6 +104,26 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
   const handleRemovePracticeArea = (index: number) => {
     const updated = (siteConfig.practiceAreas || []).filter((_, i) => i !== index);
     updateSiteConfig({ practiceAreas: updated });
+  };
+
+  const handleAddExcellenceSolution = () => {
+    const nextNum = String((siteConfig.excellenceSolutions || []).length + 1).padStart(2, '0');
+    const newSol: ExcellenceSolution = {
+      id: `sol-${Date.now()}`,
+      number: nextNum,
+      title: 'Nova Solução de Excelência',
+      subtitle: 'ATUAÇÃO ESTRATÉGICA E PREVENTIVA',
+      description: 'Descrição detalhada dos serviços de excelência jurídica especializada.',
+      extendedText: ''
+    };
+    updateSiteConfig({
+      excellenceSolutions: [...(siteConfig.excellenceSolutions || []), newSol]
+    });
+  };
+
+  const handleRemoveExcellenceSolution = (index: number) => {
+    const updated = (siteConfig.excellenceSolutions || []).filter((_, i) => i !== index);
+    updateSiteConfig({ excellenceSolutions: updated });
   };
 
   const handleAddBook = () => {
@@ -573,6 +593,69 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 />
               </div>
             </div>
+
+            {/* Box 2 do Slide 1 (Item 79: Totalmente Editável) */}
+            <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box 2 · Advocacia Estratégica (Item 79)
+              </h5>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Kicker Box 2</label>
+                  <input
+                    type="text"
+                    value={siteConfig.hero.box2Kicker || 'Excelência Jurídica Centenária'}
+                    onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, box2Kicker: e.target.value } })}
+                    className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Box 2</label>
+                  <input
+                    type="text"
+                    value={siteConfig.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, box2Title: e.target.value } })}
+                    className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-300 font-semibold mb-1">Texto Descritivo Box 2</label>
+                <textarea
+                  rows={2}
+                  value={siteConfig.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
+                  onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, box2Text: e.target.value } })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                />
+              </div>
+            </div>
+
+            {/* Box Abaixo da Logomarca do Leão (Item 79: Totalmente Editável) */}
+            <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box Sob a Logomarca do Leão (Item 79)
+              </h5>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Sob a Logo</label>
+                  <input
+                    type="text"
+                    value={siteConfig.hero.logoCardTitle || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, logoCardTitle: e.target.value } })}
+                    className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Subtítulo Sob a Logo</label>
+                  <input
+                    type="text"
+                    value={siteConfig.hero.logoCardSubtitle || 'Excelência Jurídica Desde 1908'}
+                    onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, logoCardSubtitle: e.target.value } })}
+                    className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-[#F6E27A] text-xs font-bold"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* SLIDE 2 */}
@@ -605,7 +688,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
                 <label className="block text-[11px] text-slate-300 font-semibold mb-1">Eyebrow</label>
                 <input
@@ -618,14 +701,91 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 />
               </div>
               <div>
-                <label className="block text-[11px] text-[#F6E27A] font-semibold mb-1">Título do Slide 2</label>
+                <label className="block text-[11px] text-white font-semibold mb-1">Título Branco (Item 80)</label>
                 <input
                   type="text"
-                  value={siteConfig.slide2?.title || 'PLANEJAMENTO PATRIMONIAL 4.0'}
+                  value={siteConfig.slide2?.titleWhite ?? 'PLANEJAMENTO '}
                   onChange={(e) => updateSiteConfig({
-                    slide2: { ...(siteConfig.slide2 || {}), title: e.target.value }
+                    slide2: { ...(siteConfig.slide2 || {}), titleWhite: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-lg bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-[#F6E27A] font-semibold mb-1">Título Dourado (Item 80)</label>
+                <input
+                  type="text"
+                  value={siteConfig.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}
+                  onChange={(e) => updateSiteConfig({
+                    slide2: { ...(siteConfig.slide2 || {}), titleGold: e.target.value }
                   })}
                   className="w-full px-3 py-2 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
+            </div>
+
+            {/* Texto Principal do Slide 2 com RichTextarea (Item 80) */}
+            <RichTextarea
+              label="Texto Principal do Slide 2 (Item 80)"
+              rows={4}
+              value={siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
+              onChange={(val) => updateSiteConfig({
+                slide2: { ...(siteConfig.slide2 || {}), paragraph1: val }
+              })}
+              hint="Texto que fica abaixo do título do Slide 2"
+            />
+
+            {/* Box Comparativo de Custos do Slide 2 (Item 80) */}
+            <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box Comparativo de Custos (Item 80)
+              </h5>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Título do Box de Custos</label>
+                <input
+                  type="text"
+                  value={siteConfig.slide2?.costBoxTitle || 'COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
+                  onChange={(e) => updateSiteConfig({
+                    slide2: { ...(siteConfig.slide2 || {}), costBoxTitle: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-white text-xs font-bold"
+                />
+              </div>
+              <RichTextarea
+                label="Texto do Box de Custos"
+                rows={2}
+                value={siteConfig.slide2?.costBoxText || 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'}
+                onChange={(val) => updateSiteConfig({
+                  slide2: { ...(siteConfig.slide2 || {}), costBoxText: val }
+                })}
+              />
+            </div>
+
+            {/* Box Sob a Foto Familiar (Item 80) */}
+            <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h5 className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                Box Sob a Foto Familiar (Item 80)
+              </h5>
+              <div>
+                <label className="block text-[10px] text-white font-semibold mb-1">Texto em Branco</label>
+                <input
+                  type="text"
+                  value={siteConfig.slide2?.photoCardTitle || 'O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
+                  onChange={(e) => updateSiteConfig({
+                    slide2: { ...(siteConfig.slide2 || {}), photoCardTitle: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Texto em Dourado</label>
+                <input
+                  type="text"
+                  value={siteConfig.slide2?.photoCardSubtitle || 'VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?'}
+                  onChange={(e) => updateSiteConfig({
+                    slide2: { ...(siteConfig.slide2 || {}), photoCardSubtitle: e.target.value }
+                  })}
+                  className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
                 />
               </div>
             </div>
@@ -835,6 +995,17 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             />
           </div>
 
+          {/* Editor Rico de Todo o Conteúdo da Página Presença Nacional Digital (Item 81 e 82) */}
+          <RichTextarea
+            label="Conteúdo Integral da Página (Item 81 e 82)"
+            rows={5}
+            value={siteConfig.nationalPresence?.content || ''}
+            onChange={(val) => updateSiteConfig({
+              nationalPresence: { ...(siteConfig.nationalPresence || {}), content: val }
+            })}
+            hint="Permite editar livremente o texto de toda a página, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+          />
+
           <div className="space-y-2">
             <div>
               <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 1</label>
@@ -962,7 +1133,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
                 Kicker Dourado
@@ -978,18 +1149,42 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
             <div>
               <label className="block text-xs uppercase tracking-wider text-white font-bold mb-1">
-                Título
+                Título em Branco (Item 84)
               </label>
               <input
                 type="text"
-                value={siteConfig.centennialLegacy?.title || ''}
+                value={siteConfig.centennialLegacy?.titleWhite || siteConfig.centennialLegacy?.title || 'O LEGADO'}
                 onChange={(e) => updateSiteConfig({
-                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), title: e.target.value }
+                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), titleWhite: e.target.value, title: e.target.value }
                 })}
-                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs"
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                Título em Dourado (Item 84)
+              </label>
+              <input
+                type="text"
+                value={siteConfig.centennialLegacy?.titleGold || siteConfig.centennialLegacy?.titleHighlight || 'CENTENÁRIO'}
+                onChange={(e) => updateSiteConfig({
+                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), titleGold: e.target.value, titleHighlight: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
               />
             </div>
           </div>
+
+          {/* Editor Rico de Todo o Conteúdo da Página O Legado Centenário (Item 81 e 84) */}
+          <RichTextarea
+            label="Conteúdo Integral da Página (Item 81 e 84)"
+            rows={4}
+            value={siteConfig.centennialLegacy?.content || ''}
+            onChange={(val) => updateSiteConfig({
+              centennialLegacy: { ...(siteConfig.centennialLegacy || {}), content: val }
+            })}
+            hint="Permite editar livremente o texto de toda a página do Legado, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+          />
 
           <div>
             <label className="block text-xs text-slate-300 font-semibold mb-1">Subtítulo</label>
@@ -1028,28 +1223,70 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          {/* Box 40 Anos */}
-          <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-2">
-            <span className="text-[10px] font-bold text-[#F6E27A] uppercase block">Card 40 Anos</span>
+          {/* Box 40 Anos com Editor Rico e Selo (Item 85) */}
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+              Card 40 Anos + de Excelência Jurídica & Selo (Item 85)
+            </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <input
-                type="text"
-                value={siteConfig.centennialLegacy?.card40Title || '40 ANOS'}
-                onChange={(e) => updateSiteConfig({
-                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), card40Title: e.target.value }
-                })}
-                placeholder="Título Card 40 Anos"
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
-              />
-              <input
-                type="text"
-                value={siteConfig.centennialLegacy?.card40Text || ''}
-                onChange={(e) => updateSiteConfig({
-                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), card40Text: e.target.value }
-                })}
-                placeholder="Texto do Card 40 Anos"
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
-              />
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Kicker do Card</label>
+                <input
+                  type="text"
+                  value={siteConfig.centennialLegacy?.card40Kicker || 'ADVOCACIA ESTRATÉGICA'}
+                  onChange={(e) => updateSiteConfig({
+                    centennialLegacy: { ...(siteConfig.centennialLegacy || {}), card40Kicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-white mb-0.5">Título do Card</label>
+                <input
+                  type="text"
+                  value={siteConfig.centennialLegacy?.card40Title || '40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA'}
+                  onChange={(e) => updateSiteConfig({
+                    centennialLegacy: { ...(siteConfig.centennialLegacy || {}), card40Title: e.target.value }
+                  })}
+                  placeholder="Título Card 40 Anos"
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+              </div>
+            </div>
+
+            <RichTextarea
+              label="Texto do Card 40 Anos (Item 85)"
+              rows={3}
+              value={siteConfig.centennialLegacy?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
+              onChange={(val) => updateSiteConfig({
+                centennialLegacy: { ...(siteConfig.centennialLegacy || {}), card40Text: val }
+              })}
+              hint="Texto com formatação rica do card de 40 anos"
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Nome Abaixo do Selo</label>
+                <input
+                  type="text"
+                  value={siteConfig.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
+                  onChange={(e) => updateSiteConfig({
+                    centennialLegacy: { ...(siteConfig.centennialLegacy || {}), sealName: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] mb-0.5">Subtítulo Abaixo do Selo</label>
+                <input
+                  type="text"
+                  value={siteConfig.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
+                  onChange={(e) => updateSiteConfig({
+                    centennialLegacy: { ...(siteConfig.centennialLegacy || {}), sealSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
             </div>
           </div>
 
@@ -1157,14 +1394,20 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Kicker da Seção
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                Frase Inicial Dourada (Item 86)
               </label>
               <input
                 type="text"
-                value={siteConfig.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, sectionKicker: e.target.value } })}
-                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs"
+                value={siteConfig.founder.initialGoldPhrase || siteConfig.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                onChange={(e) => updateSiteConfig({
+                  founder: {
+                    ...siteConfig.founder,
+                    initialGoldPhrase: e.target.value,
+                    sectionKicker: e.target.value
+                  }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
               />
             </div>
             <div>
@@ -1189,6 +1432,42 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
               />
             </div>
+          </div>
+
+          {/* Editor Rico de Todo o Conteúdo da Página Dr. Aldo Leão (Item 81 e 86) */}
+          <RichTextarea
+            label="Conteúdo Integral da Página Dr. Aldo Leão (Item 81 e 86)"
+            rows={5}
+            value={siteConfig.founder.content || ''}
+            onChange={(val) => updateSiteConfig({
+              founder: { ...siteConfig.founder, content: val }
+            })}
+            hint="Permite editar livremente o texto de toda a página do Dr. Aldo Leão, com imagens, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+          />
+
+          {/* Controle de Tamanho da Assinatura (Item 86) */}
+          <div className="p-3.5 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                Tamanho da Assinatura (Item 86)
+              </label>
+              <span className="text-xs font-bold text-white font-mono">
+                {siteConfig.founder.signatureSize || 64}px
+              </span>
+            </div>
+            <input
+              type="range"
+              min={40}
+              max={140}
+              value={siteConfig.founder.signatureSize || 64}
+              onChange={(e) => updateSiteConfig({
+                founder: { ...siteConfig.founder, signatureSize: Number(e.target.value) }
+              })}
+              className="w-full accent-[#D4AF37] cursor-pointer"
+            />
+            <span className="text-[10px] text-slate-300 block">
+              Ajuste para aumentar ou diminuir a altura da assinatura manuscrita que fica logo abaixo do texto.
+            </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1289,11 +1568,24 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          {/* Diferenciais Estratégicos */}
+          {/* Diferenciais Estratégicos (Item 86) */}
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <div className="flex items-center justify-between">
+            <div>
+              <label className="block text-[10px] text-[#F6E27A] font-bold uppercase mb-1">
+                Título do Bloco de Diferenciais (Item 86)
+              </label>
+              <input
+                type="text"
+                value={siteConfig.founder.differentialsTitle || 'Diferenciais Estratégicos:'}
+                onChange={(e) => updateSiteConfig({
+                  founder: { ...siteConfig.founder, differentialsTitle: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+              />
+            </div>
+            <div className="flex items-center justify-between pt-1">
               <span className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                Diferenciais Estratégicos ({ (siteConfig.founder.differentials || []).length })
+                Itens dos Diferenciais ({ (siteConfig.founder.differentials || []).length })
               </span>
               <button
                 type="button"
@@ -1325,6 +1617,41 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   </button>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* Box Contador 40 Anos (Item 87: Frases Dourada e Branca Editáveis) */}
+          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+            <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+              Box Contador 40 Anos · Frases Oficiais (Item 87)
+            </h5>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] font-bold mb-1">
+                  Frase Dourada Superior (Item 87)
+                </label>
+                <input
+                  type="text"
+                  value={siteConfig.founder.counterGoldPhrase || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}
+                  onChange={(e) => updateSiteConfig({
+                    founder: { ...siteConfig.founder, counterGoldPhrase: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-white font-bold mb-1">
+                  Frase Branca Inferior (Item 87)
+                </label>
+                <input
+                  type="text"
+                  value={siteConfig.founder.counterWhitePhrase || 'DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO'}
+                  onChange={(e) => updateSiteConfig({
+                    founder: { ...siteConfig.founder, counterWhitePhrase: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
+                />
+              </div>
             </div>
           </div>
 
@@ -1633,16 +1960,16 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     }}
                     className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
                   />
-                  <textarea
+                  <RichTextarea
+                    label="Descrição Detalhada do Card"
                     rows={2}
                     value={area.description}
-                    placeholder="Descrição detalhada dos serviços"
-                    onChange={(e) => {
+                    onChange={(val) => {
                       const updated = [...(siteConfig.practiceAreas || [])];
-                      updated[idx] = { ...updated[idx], description: e.target.value };
+                      updated[idx] = { ...updated[idx], description: val };
                       updateSiteConfig({ practiceAreas: updated });
                     }}
-                    className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
+                    hint="Edição rica com quebras de linha preservadas, negrito, itálico e destaques"
                   />
                 </div>
               ))}
@@ -1656,11 +1983,18 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
       {/* ============================================================== */}
       {activeSection === 'solutions' && (
         <div className="space-y-5">
-          <div className="border-b border-slate-800 pb-2">
+          <div className="border-b border-slate-800 pb-2 flex items-center justify-between">
             <h3 className="font-cinzel text-sm font-bold text-white uppercase flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#F6E27A]" />
               <span>Soluções de Excelência & Academia Leão</span>
             </h3>
+            <button
+              type="button"
+              onClick={handleAddExcellenceSolution}
+              className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+            >
+              <Plus className="w-3 h-3" /> Adicionar Solução
+            </button>
           </div>
 
           {/* Cabeçalho da Seção Soluções de Excelência */}
@@ -1737,10 +2071,10 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
+          <div className="space-y-3 max-h-[440px] overflow-y-auto pr-1">
             {(siteConfig.excellenceSolutions || []).map((sol, idx) => (
               <div key={sol.id || idx} className="p-3 rounded-xl bg-[#050B14] border border-slate-700 space-y-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-between gap-2">
                   <span className="text-[10px] text-[#D4AF37] font-bold uppercase">{sol.number}</span>
                   <input
                     type="text"
@@ -1752,16 +2086,36 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     }}
                     className="flex-1 px-2 py-1 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
                   />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveExcellenceSolution(idx)}
+                    className="p-1 text-red-400 hover:text-red-300"
+                    title="Excluir Card de Solução"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
                 </div>
-                <textarea
-                  rows={2}
-                  value={sol.description}
+                <input
+                  type="text"
+                  value={sol.subtitle || ''}
+                  placeholder="Subtítulo da Solução"
                   onChange={(e) => {
                     const updated = [...siteConfig.excellenceSolutions];
-                    updated[idx] = { ...updated[idx], description: e.target.value };
+                    updated[idx] = { ...updated[idx], subtitle: e.target.value };
                     updateSiteConfig({ excellenceSolutions: updated });
                   }}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-800 text-slate-300 text-[11px]"
+                  className="w-full px-2 py-1 rounded bg-[#071122] border border-slate-800 text-[#F6E27A] text-[11px]"
+                />
+                <RichTextarea
+                  label="Descrição da Solução (Item 89)"
+                  rows={2}
+                  value={sol.description}
+                  onChange={(val) => {
+                    const updated = [...siteConfig.excellenceSolutions];
+                    updated[idx] = { ...updated[idx], description: val };
+                    updateSiteConfig({ excellenceSolutions: updated });
+                  }}
+                  hint="Respeita quebras de linha e formatação rica"
                 />
               </div>
             ))}

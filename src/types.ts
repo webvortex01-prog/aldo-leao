@@ -158,6 +158,11 @@ export interface SiteConfig {
     experienceYears?: string;
     oabNumber?: string;
     yearsExperience?: string;
+    box2Kicker?: string; // Box 2 Kicker (Item 79: Excelência Jurídica Centenária)
+    box2Title?: string;  // Box 2 Título (Item 79: ADVOCACIA ESTRATÉGICA)
+    box2Text?: string;   // Box 2 Texto (Item 79: Um legado jurídico familiar construído desde 1908...)
+    logoCardTitle?: string;    // Box sob a logo (Item 79: ALDO LEÃO ADVOCACIA ESTRATÉGICA)
+    logoCardSubtitle?: string; // Box sob a logo (Item 79: Excelência Jurídica Desde 1908)
     assetsPreserved?: string;
     cta1Text?: string;
     cta2Text?: string;
@@ -218,6 +223,12 @@ export interface SiteConfig {
     bioParagraph4?: string;
     bioParagraph5?: string;
     bioParagraph6?: string;
+    content?: string; // Conteúdo rico total para página Dr. Aldo Leão (Item 81 e 86)
+    initialGoldPhrase?: string; // Frase inicial em dourado (Item 86: ADVOCACIA ESTRATÉGICA DESDE 1986)
+    differentialsTitle?: string; // Título diferenciais (Item 86: DIFERENCIAIS ESTRATÉGICOS)
+    signatureSize?: number; // Tamanho em px ou percentual da assinatura (Item 86)
+    counterGoldPhrase?: string; // Frase dourada do contador (Item 87: ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA)
+    counterWhitePhrase?: string; // Frase branca do contador (Item 87: DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO)
     differentials?: string[];
     curriculumTrajectoryP1?: string;
     curriculumTrajectoryP2?: string;
@@ -254,6 +265,8 @@ export interface SiteConfig {
     eyebrow?: string;
     title?: string;
     titleHighlight?: string;
+    titleWhite?: string; // Título branco (Item 80: PLANEJAMENTO )
+    titleGold?: string;  // Título dourado (Item 80: PATRIMONIAL 4.0)
     paragraph1?: string;
     paragraph2?: string;
     paragraph3?: string;
@@ -263,6 +276,10 @@ export interface SiteConfig {
     buttonText?: string;
     boxTitle?: string;
     boxText?: string;
+    costBoxTitle?: string; // Box comparativo custos (Item 80: COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR)
+    costBoxText?: string;  // Texto comparativo custos (Item 80)
+    photoCardTitle?: string;    // Box sob foto família (Item 80: O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL...)
+    photoCardSubtitle?: string; // Box sob foto família (Item 80: VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?)
     rightCardTitle?: string;
     rightCardSub?: string;
     rightCardText?: string;
@@ -282,6 +299,7 @@ export interface SiteConfig {
     kicker?: string;
     title?: string;
     titleHighlight?: string;
+    content?: string; // Conteúdo rico total para página Presença Nacional Digital (Item 81 e 82)
     paragraph1?: string;
     paragraph2?: string;
     paragraph3?: string;
@@ -298,6 +316,9 @@ export interface SiteConfig {
     modalKicker?: string; // Frase dourada do modal Saiba Mais (Item 63: EXCELÊNCIA JURÍDICA DESDE 1908)
     title?: string;
     titleHighlight?: string;
+    titleWhite?: string; // Título branco (Item 84: O LEGADO)
+    titleGold?: string;  // Título dourado (Item 84: CENTENÁRIO)
+    content?: string;    // Conteúdo rico total para página O Legado Centenário (Item 81 e 84)
     subtitle?: string;
     paragraph1?: string;
     paragraph2?: string;

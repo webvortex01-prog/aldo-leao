@@ -2,6 +2,81 @@ import { Publication } from '../types';
 
 export const OFFICIAL_PUBLICATIONS_2024_2025: Publication[] = [
   {
+    id: 'pub-custo-inventario-dobrar',
+    type: 'artigo',
+    title: 'CUSTO DO INVENTÁRIO PODE DOBRAR: POR QUE FAZER AGORA O SEU PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR?',
+    area: 'Holding Familiar',
+    date: '04/11/2026',
+    readTime: '8 min de leitura',
+    slug: 'custo-do-inventario-pode-dobrar-por-que-fazer-agora-o-seu-planejamento-patrimonial-4-0-via-holding-familiar',
+    excerpt: 'Com a iminente elevação das alíquotas do ITCMD para até 16% ou 20%, o custo do inventário pode dobrar. Saiba como o Planejamento Patrimonial 4.0 via Holding Familiar protege a sua família e evita perdas financeiras irreparáveis.',
+    content: `<p class="mb-4">O custo de um processo de inventário tradicional já consome, em média, entre <strong>20% e 40%</strong> de todo o patrimônio acumulado por uma família durante toda uma vida de trabalho e dedicação. Com as recentes discussões tributárias e o avanço da Reforma Tributária sobre a progressividade do <strong>ITCMD (Imposto sobre Transmissão Causa Mortis e Doação)</strong>, este custo pode simplesmente <strong>dobrar</strong> nos próximos meses.</p>
+
+<h3 class="text-[#F6E27A] font-cinzel text-lg font-bold my-4">A GUILHOTINA TRIBUTÁRIA E O AUMENTO DO ITCMD</h3>
+<p class="mb-3">Atualmente, grande parte dos estados brasileiros aplica alíquotas de ITCMD que variam de 2% a 8%. Contudo, tramita no Senado Federal o Projeto de Resolução nº 57/2019, que visa elevar o teto nacional do ITCMD para <strong>16%</strong>, além de propostas conjuntas do CONFAZ e estudos fazendários que defendem alíquotas de até <strong>20%</strong> ou mais sobre heranças de maior valor.</p>
+
+<p class="mb-4">Isso significa que, se você não estruturar o Planejamento Patrimonial dos seus bens em vida, seus herdeiros serão forçados a desembolsar o dobro de recursos financeiros apenas para ter direito à herança legítima — muitas vezes sendo obrigados a vender imóveis e ativos com deságio de 30% a 50% sob pressão para pagar as custas e impostos do inventário.</p>
+
+<h3 class="text-[#F6E27A] font-cinzel text-lg font-bold my-4">TABELA COMPARATIVA DE CUSTOS: INVENTÁRIO x HOLDING FAMILIAR 4.0</h3>
+<p class="mb-3">Abaixo apresentamos o comparativo real entre o processo de inventário convencional e a estruturação de uma Holding Familiar 4.0 para um patrimônio estimado em <strong>R$ 1.500.000,00</strong>:</p>
+
+<div class="overflow-x-auto my-6">
+  <table class="w-full border border-[#D4AF37]/50 text-xs text-left shadow-2xl">
+    <thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/40">
+      <tr>
+        <th class="p-3.5 border border-[#D4AF37]/25 font-bold uppercase tracking-wider">Item de Custo / Despesa</th>
+        <th class="p-3.5 border border-[#D4AF37]/25 font-bold uppercase tracking-wider text-rose-300">Inventário Judicial/Extrajudicial</th>
+        <th class="p-3.5 border border-[#D4AF37]/25 font-bold uppercase tracking-wider text-emerald-300">Planejamento Patrimonial 4.0 (Holding)</th>
+        <th class="p-3.5 border border-[#D4AF37]/25 font-bold uppercase tracking-wider text-[#F6E27A]">Vantagem Estratégica</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="bg-[#050B14]">
+        <td class="p-3 border border-slate-700 font-semibold text-white">Base de Cálculo</td>
+        <td class="p-3 border border-slate-700 text-slate-300">Valor de Mercado Atualizado (Ex: R$ 1.500.000,00)</td>
+        <td class="p-3 border border-slate-700 text-slate-300">Custo Histórico do IRPF (Ex: R$ 1.000.000,00)</td>
+        <td class="p-3 border border-slate-700 text-[#F6E27A] font-bold">Base legal menor (Art. 23 Lei 9.249/95)</td>
+      </tr>
+      <tr class="bg-[#071122]">
+        <td class="p-3 border border-slate-700 font-semibold text-white">Imposto ITCMD (Atual vs Futuro)</td>
+        <td class="p-3 border border-slate-700 text-rose-300 font-bold">R$ 120.000,00 (podendo saltar para R$ 240.000,00 a 16%)</td>
+        <td class="p-3 border border-slate-700 text-emerald-300 font-bold">R$ 40.000,00 a R$ 60.000,00 em vida com alíquota atual</td>
+        <td class="p-3 border border-slate-700 text-[#F6E27A] font-bold">Trava a alíquota hoje antes do aumento</td>
+      </tr>
+      <tr class="bg-[#050B14]">
+        <td class="p-3 border border-slate-700 font-semibold text-white">Custas Cartorárias / Judiciais</td>
+        <td class="p-3 border border-slate-700 text-slate-300">R$ 45.000,00 a R$ 75.000,00</td>
+        <td class="p-3 border border-slate-700 text-slate-300">R$ 3.000,00 a R$ 8.000,00 (Taxas Junta Comercial/RI)</td>
+        <td class="p-3 border border-slate-700 text-[#F6E27A] font-bold">Economia de até 90% nas taxas</td>
+      </tr>
+      <tr class="bg-[#071122]">
+        <td class="p-3 border border-slate-700 font-semibold text-white">Honorários Advocatícios Tabela OAB</td>
+        <td class="p-3 border border-slate-700 text-slate-300">R$ 120.000,00 a R$ 180.000,00 (8% a 12% do monte-mor)</td>
+        <td class="p-3 border border-slate-700 text-slate-300">Honorários fixos e planejados pela assessoria estratégica</td>
+        <td class="p-3 border border-slate-700 text-[#F6E27A] font-bold">Previsibilidade e parcelamento planejado</td>
+      </tr>
+      <tr class="bg-[#050B14]">
+        <td class="p-3 border border-slate-700 font-semibold text-white">Tempo Médio de Conclusão</td>
+        <td class="p-3 border border-slate-700 text-rose-300 font-bold">2 a 10 anos (ou mais em caso de litígio)</td>
+        <td class="p-3 border border-slate-700 text-emerald-300 font-bold">30 a 90 dias com bens 100% disponíveis</td>
+        <td class="p-3 border border-slate-700 text-[#F6E27A] font-bold">Transmissão instantânea aos herdeiros</td>
+      </tr>
+      <tr class="bg-[#0B1A35] font-bold">
+        <td class="p-3.5 border border-[#D4AF37]/30 text-[#F6E27A]">CUSTO TOTAL ESTIMADO</td>
+        <td class="p-3.5 border border-[#D4AF37]/30 text-rose-400">R$ 297.000,00 a R$ 495.000,00 (33% a 55%)</td>
+        <td class="p-3.5 border border-[#D4AF37]/30 text-emerald-400">R$ 133.000,00 (Apenas 8,8%)</td>
+        <td class="p-3.5 border border-[#D4AF37]/30 text-[#F6E27A] font-black">ECONOMIA REAL SUPERIOR A 55%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3 class="text-[#F6E27A] font-cinzel text-lg font-bold my-4">A SOLUÇÃO JURÍDICA: AGIR ANTES DA MUDANÇA DA LEI</h3>
+<p class="mb-3">A transmissão das cotas da Holding Familiar com reserva de usufruto vitalício, cláusulas de incomunicabilidade, impenhorabilidade, inalienabilidade e reversão garante aos instituidores o <strong>controle político e financeiro absoluto</strong> dos bens enquanto viverem, blindando o patrimônio contra desavenças familiares, divórcios de filhos e credores.</p>
+
+<p class="mb-4">Não espere a aprovação da nova alíquota do ITCMD para tomar uma atitude. Quem se planeja com antecedência protege os herdeiros e perpetua o legado centenário com inteligência jurídica e economia tributária máxima.</p>`
+  },
+  {
     id: 'pub-01',
     type: 'artigo',
     title: 'A IMPENHORABILIDADE DAS COTAS SOCIAIS DA HOLDING FAMILIAR',

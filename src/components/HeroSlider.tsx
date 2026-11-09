@@ -153,20 +153,20 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           </div>
         </div>
 
-        {/* Animated Slides Container */}
-        <div className="relative min-h-[580px] sm:min-h-[520px] lg:min-h-[460px]">
+        {/* Animated Slides Container com Grid Sobreposto para Zero Layout Shift (Item 90) */}
+        <div className="relative min-h-[580px] sm:min-h-[520px] lg:min-h-[460px] grid grid-cols-1 grid-rows-1">
           {/* SLIDE 1: Tradição Jurídica Desde 1908 */}
           <div
-            className={`w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-all duration-700 ease-in-out ${
+            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-opacity duration-700 ease-in-out ${
               currentSlide === 0
-                ? 'opacity-100 translate-y-0 scale-100 relative z-10 pointer-events-auto'
-                : 'opacity-0 translate-y-4 scale-[0.99] absolute inset-0 pointer-events-none z-0'
+                ? 'opacity-100 z-10 pointer-events-auto'
+                : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
               <div
-                className={`mb-4 transition-all duration-700 ease-out delay-100 transform ${
+                className={`mb-4 transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
                 }`}
               >
@@ -177,7 +177,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
               {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
               <h1
-                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance] transition-all duration-700 ease-out delay-200 transform ${
+                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance] transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -187,7 +187,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
               {/* Descrição com fundo sutilmente escurecido (solicitação Dr. Aldo) */}
               <div
-                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-700 ease-out delay-300 transform ${
+                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -203,9 +203,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 )}
               </div>
 
-              {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3) */}
+              {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3 e 79) */}
               <div
-                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-700 ease-out delay-400 transform ${
+                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -216,7 +216,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
               {/* CTAs */}
               <div
-                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-700 ease-out delay-500 transform ${
+                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -236,22 +236,21 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </button>
               </div>
 
-              {/* Box 1: ADVOCACIA ESTRATÉGICA (Box 2 excluído conforme Item 3) */}
+              {/* Box 2: ADVOCACIA ESTRATÉGICA (Item 79: Totalmente Editável) */}
               <div
-                className={`w-full transition-all duration-700 ease-out delay-600 transform ${
+                className={`w-full transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
                 <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left card-hover-interactive">
                   <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
-                    Excelência Jurídica Centenária
+                    {siteConfig.hero.box2Kicker || 'Excelência Jurídica Centenária'}
                   </span>
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
-                    ADVOCACIA ESTRATÉGICA
+                    {siteConfig.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
                   </h4>
                   <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body">
-                    Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em
-                    uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.
+                    {siteConfig.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
                   </p>
                 </div>
               </div>
@@ -259,7 +258,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
             {/* Right Column Visual (Logomarca Oficial do Leão - Box Estático com Respiração Nobre da Logo) */}
             <div
-              className={`lg:col-span-5 relative flex flex-col justify-center transition-all duration-700 ease-out delay-300 transform ${
+              className={`lg:col-span-5 relative flex flex-col justify-center transition-all duration-500 ease-out transform ${
                 currentSlide === 0 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
               }`}
             >
@@ -278,7 +277,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                 </div>
 
-                {/* Card logo abaixo do box da logomarca com a MESMA cor de fundo azul-marinho da logo do leão (#0A1424) */}
+                {/* Card logo abaixo do box da logomarca (Item 79: Totalmente Editável) */}
                 <div className="relative mt-3.5 p-3.5 rounded-2xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-[#D4AF37]/25 border border-[#D4AF37]/70 flex items-center justify-center text-[#F6E27A] shrink-0">
@@ -286,10 +285,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     </div>
                     <div>
                       <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                        ALDO LEÃO ADVOCACIA ESTRATÉGICA
+                        {siteConfig.hero.logoCardTitle || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
                       </p>
                       <p className="text-[10px] text-[#E5C158] font-bold">
-                        Excelência Jurídica Desde 1908
+                        {siteConfig.hero.logoCardSubtitle || 'Excelência Jurídica Desde 1908'}
                       </p>
                     </div>
                   </div>
@@ -300,35 +299,35 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
           {/* SLIDE 2: Planejamento Patrimonial 4.0 */}
           <div
-            className={`w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-all duration-700 ease-in-out ${
+            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-opacity duration-700 ease-in-out ${
               currentSlide === 1
-                ? 'opacity-100 translate-y-0 scale-100 relative z-10 pointer-events-auto'
-                : 'opacity-0 translate-y-4 scale-[0.99] absolute inset-0 pointer-events-none z-0'
+                ? 'opacity-100 z-10 pointer-events-auto'
+                : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              {/* Texto acima do título: HOLDING FAMILIAR em dourado sem a letra 'A' (Item c do dia 15/10/26) */}
+              {/* Texto acima do título: HOLDING FAMILIAR em dourado sem a letra 'A' */}
               <div
-                className={`text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158] transition-all duration-700 ease-out delay-100 transform ${
+                className={`text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158] transition-all duration-500 ease-out transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
                 }`}
               >
                 {siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}
               </div>
 
-              {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Itens 3 e I) */}
+              {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Item 80: Totalmente Editável) */}
               <h1
-                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-4 [text-wrap:balance] transition-all duration-700 ease-out delay-200 transform ${
+                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-4 [text-wrap:balance] transition-all duration-500 ease-out transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                <span className="text-white">PLANEJAMENTO </span>
-                <span className="gold-text-gradient">PATRIMONIAL 4.0</span>
+                <span className="text-white">{siteConfig.slide2?.titleWhite ?? 'PLANEJAMENTO '}</span>
+                <span className="gold-text-gradient">{siteConfig.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}</span>
               </h1>
 
-              {/* Texto principal do Slide 2 com fundo sutilmente escurecido */}
+              {/* Texto principal do Slide 2 com fundo sutilmente escurecido (Item 80) */}
               <div
-                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-700 ease-out delay-300 transform ${
+                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-500 ease-out transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -350,7 +349,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
               {/* Box do Slide 2 conforme Item 3 e 27 */}
               <div
-                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-700 ease-out delay-400 transform ${
+                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-500 ease-out transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -359,9 +358,9 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </p>
               </div>
 
-              {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page (Item 3 & 27) */}
+              {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page */}
               <div
-                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-700 ease-out delay-500 transform ${
+                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-500 ease-out transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -375,23 +374,23 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
 
-            {/* Right Column Slide 2: Card de Custos e Foto de Dr. Aldo com 2 pessoas com card abaixo (Boxes Estáticos com Zoom Interno Sutil) */}
+            {/* Right Column Slide 2: Card de Custos e Foto Holding Familiar com Card abaixo (Item 80: Totalmente Editável) */}
             <div
-              className={`lg:col-span-5 relative flex flex-col gap-4 justify-center transition-all duration-700 ease-out delay-300 transform ${
+              className={`lg:col-span-5 relative flex flex-col gap-4 justify-center transition-all duration-500 ease-out transform ${
                 currentSlide === 1 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
               }`}
             >
               <div className="flex flex-col gap-4">
-                {/* Card Comparativo de Custos */}
+                {/* Card Comparativo de Custos (Item 80: Editável) */}
                 <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-b from-[#0B1A35] to-[#071122] border-2 border-[#D4AF37]/60 shadow-2xl text-left card-hover-interactive">
                   <div className="border-b border-[#D4AF37]/30 pb-3 mb-3">
                     <h3 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider leading-snug">
-                      COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR
+                      {siteConfig.slide2?.costBoxTitle || 'COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
                     </h3>
                   </div>
 
                   <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
-                    Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?
+                    {siteConfig.slide2?.costBoxText || 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'}
                   </p>
 
                   <button
@@ -402,7 +401,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </button>
                 </div>
 
-                {/* Foto Holding Familiar - Planejamento Patrimonial 4.0 (Aparece com bordas arredondadas e efeito de brilho) */}
+                {/* Foto Holding Familiar */}
                 <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/60 bg-[#070F1E] shadow-2xl card-hover-interactive group photo-luxury-frame">
                   <div className="aspect-[4/3] sm:aspect-[5/4] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-2.5 sm:p-3">
                     <img
@@ -416,17 +415,17 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                 </div>
 
-                {/* Card com a balança e os textos logo abaixo do box da foto (Item c) */}
+                {/* Card com a balança e os textos logo abaixo do box da foto (Item 80: Editável) */}
                 <div className="p-3.5 rounded-2xl bg-[#070F1E] border border-[#D4AF37]/50 flex items-center gap-3 text-left shadow-xl">
                   <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/60 flex items-center justify-center text-[#F6E27A] shrink-0">
                     <Scale className="w-4 h-4 text-[#E5C158]" />
                   </div>
                   <div className="min-w-0">
                     <p className="font-cinzel text-[11px] sm:text-xs font-bold text-white uppercase leading-snug">
-                      O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO
+                      {siteConfig.slide2?.photoCardTitle || 'O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
                     </p>
                     <p className="text-[10px] sm:text-[11px] text-[#E5C158] font-bold mt-0.5">
-                      VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?
+                      {siteConfig.slide2?.photoCardSubtitle || 'VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?'}
                     </p>
                   </div>
                 </div>
