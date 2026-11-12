@@ -2447,7 +2447,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               label="Imagem de Fundo da Seção"
               description="Foto de fundo que ambienta a seção de solicitação de consulta."
               currentValue={siteConfig.digitalConsultation?.bgImageUrl}
-              defaultValue="/img/consulta-digital-2.jpg"
+              defaultValue="/img/consulta-virtual-2.jpg"
               aspectRatio="video"
               onChange={(newUrl) => updateSiteConfig({
                 digitalConsultation: { ...(siteConfig.digitalConsultation || {}), bgImageUrl: newUrl }
@@ -2457,7 +2457,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               label="Foto do Card Direito (Item 100)"
               description="Foto exibida no quadro direito ao lado do texto de agendamento."
               currentValue={siteConfig.digitalConsultation?.cardImageUrl}
-              defaultValue="/img/consulta-digital-2.jpg"
+              defaultValue="/img/consulta-virtual-1.jpg"
               aspectRatio="video"
               onChange={(newUrl) => updateSiteConfig({
                 digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardImageUrl: newUrl }
@@ -2468,15 +2468,15 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                Kicker Superior
+                Frase Dourada Superior (Item 57)
               </label>
               <input
                 type="text"
-                value={siteConfig.digitalConsultation?.sectionKicker || 'ATENDIMENTO JURÍDICO 100% ONLINE EM TODO O BRASIL'}
+                value={siteConfig.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL BRASIL'}
                 onChange={(e) => updateSiteConfig({
                   digitalConsultation: { ...(siteConfig.digitalConsultation || {}), sectionKicker: e.target.value }
                 })}
-                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
               />
             </div>
             <div>
@@ -2485,7 +2485,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </label>
               <input
                 type="text"
-                value={siteConfig.digitalConsultation?.sectionTitle || 'AGENDE A SUA'}
+                value={siteConfig.digitalConsultation?.sectionTitle || 'AGENDE SUA'}
                 onChange={(e) => updateSiteConfig({
                   digitalConsultation: { ...(siteConfig.digitalConsultation || {}), sectionTitle: e.target.value }
                 })}
@@ -2494,7 +2494,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                Destaque Dourado
+                Destaque Dourado do Título
               </label>
               <input
                 type="text"
@@ -2510,7 +2510,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
           <RichTextarea
             label="Descrição Principal (Editor Rico · Item 68 e 100)"
             rows={4}
-            value={siteConfig.digitalConsultation?.description || ''}
+            value={siteConfig.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
             onChange={(val) => updateSiteConfig({
               digitalConsultation: { ...(siteConfig.digitalConsultation || {}), description: val }
             })}
@@ -2518,10 +2518,10 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Ponto de Destaque 1</label>
+              <label className="block text-xs text-slate-300 font-semibold mb-1">Ponto de Destaque 1 (Balança)</label>
               <input
                 type="text"
-                value={siteConfig.digitalConsultation?.point1 || 'Videoconferência exclusiva com hora marcada'}
+                value={siteConfig.digitalConsultation?.point1 || 'Agendamento prévio da consulta'}
                 onChange={(e) => updateSiteConfig({
                   digitalConsultation: { ...(siteConfig.digitalConsultation || {}), point1: e.target.value }
                 })}
@@ -2529,10 +2529,10 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               />
             </div>
             <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Ponto de Destaque 2</label>
+              <label className="block text-xs text-slate-300 font-semibold mb-1">Ponto de Destaque 2 (Balança)</label>
               <input
                 type="text"
-                value={siteConfig.digitalConsultation?.point2 || 'Sigilo profissional absoluto e análise personalizada'}
+                value={siteConfig.digitalConsultation?.point2 || 'Consulta com hora marcada'}
                 onChange={(e) => updateSiteConfig({
                   digitalConsultation: { ...(siteConfig.digitalConsultation || {}), point2: e.target.value }
                 })}
@@ -2547,7 +2547,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </span>
             <input
               type="text"
-              value={siteConfig.digitalConsultation?.cardBadge || 'CONEXÃO DIRETA E SEGURA'}
+              value={siteConfig.digitalConsultation?.cardBadge || 'Atendimento 100% Digital'}
               onChange={(e) => updateSiteConfig({
                 digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardBadge: e.target.value }
               })}
@@ -2556,7 +2556,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             />
             <input
               type="text"
-              value={siteConfig.digitalConsultation?.cardTitle || 'Atendimento Jurídico em Todos os Estados do Brasil'}
+              value={siteConfig.digitalConsultation?.cardTitle || 'CONSULTA DIGITAL BRASIL'}
               onChange={(e) => updateSiteConfig({
                 digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardTitle: e.target.value }
               })}
@@ -2565,7 +2565,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             />
             <input
               type="text"
-              value={siteConfig.digitalConsultation?.cardSubtitle || 'Conforto, agilidade tecnológica e a excelência de mais de um século de tradição jurídica sem precisar sair de casa ou da sua empresa.'}
+              value={siteConfig.digitalConsultation?.cardSubtitle || 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.'}
               onChange={(e) => updateSiteConfig({
                 digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardSubtitle: e.target.value }
               })}
@@ -2579,22 +2579,22 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               <label className="block text-xs text-slate-300 font-semibold mb-1">Botão Agendamento</label>
               <input
                 type="text"
-                value={siteConfig.digitalConsultation?.btnSchedule || 'SOLICITAR CONSULTA ESTRATÉGICA'}
+                value={siteConfig.digitalConsultation?.btnSchedule || 'AGENDAR CONSULTA VIRTUAL'}
                 onChange={(e) => updateSiteConfig({
                   digitalConsultation: { ...(siteConfig.digitalConsultation || {}), btnSchedule: e.target.value }
                 })}
-                className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-semibold"
               />
             </div>
             <div>
               <label className="block text-xs text-slate-300 font-semibold mb-1">Botão WhatsApp</label>
               <input
                 type="text"
-                value={siteConfig.digitalConsultation?.btnWhatsApp || 'FALAR VIA WHATSAPP'}
+                value={siteConfig.digitalConsultation?.btnWhatsApp || 'Agendar pelo WhatsApp'}
                 onChange={(e) => updateSiteConfig({
                   digitalConsultation: { ...(siteConfig.digitalConsultation || {}), btnWhatsApp: e.target.value }
                 })}
-                className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-semibold"
               />
             </div>
           </div>

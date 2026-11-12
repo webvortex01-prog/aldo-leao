@@ -1421,9 +1421,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
     });
 
     // CTA Consulta
-    check(formData.digitalConsultation?.sectionKicker, 'CTA Consulta · Kicker', 'consultation');
+    check(formData.digitalConsultation?.sectionKicker, 'CTA Consulta · Frase Dourada Kicker', 'consultation');
     check(formData.digitalConsultation?.sectionTitle, 'CTA Consulta · Título', 'consultation');
+    check(formData.digitalConsultation?.sectionHighlight, 'CTA Consulta · Destaque Dourado', 'consultation');
     check(formData.digitalConsultation?.description, 'CTA Consulta · Descrição', 'consultation');
+    check(formData.digitalConsultation?.point1, 'CTA Consulta · Ponto 1 (Balança)', 'consultation');
+    check(formData.digitalConsultation?.point2, 'CTA Consulta · Ponto 2 (Balança)', 'consultation');
+    check(formData.digitalConsultation?.cardBadge, 'CTA Consulta · Selo do Card', 'consultation');
+    check(formData.digitalConsultation?.cardTitle, 'CTA Consulta · Título do Card', 'consultation');
+    check(formData.digitalConsultation?.cardSubtitle, 'CTA Consulta · Subtítulo do Card', 'consultation');
     check(formData.digitalConsultation?.btnSchedule, 'CTA Consulta · Botão Agendar', 'consultation');
     check(formData.digitalConsultation?.btnWhatsApp, 'CTA Consulta · Botão WhatsApp', 'consultation');
 
@@ -4533,49 +4539,53 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           {/* Imagem de Fundo do CTA e Foto do Card à Direita (Item 100) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <ImageUploadField
-              label="Foto Principal do Card à Direita (Sala / Reunião - Item 100)"
+              label="Foto Principal do Card à Direita (Item 100)"
               description="Foto principal em destaque à direita na seção Agende a sua Consulta Digital."
-              currentValue={formData.digitalConsultation?.cardImageUrl || '/img/dr-aldo-2.jpg'}
-              defaultValue="/img/dr-aldo-2.jpg"
+              currentValue={formData.digitalConsultation?.cardImageUrl || '/img/consulta-virtual-1.jpg'}
+              defaultValue="/img/consulta-virtual-1.jpg"
               aspectRatio="video"
               onChange={(newUrl) => setFormData({
                 ...formData,
                 digitalConsultation: { ...(formData.digitalConsultation || {}), cardImageUrl: newUrl }
               })}
               presetOptions={[
-                { label: 'Ambiente Executivo (Padrão)', url: '/img/dr-aldo-2.jpg' },
-                { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
-                { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
-                { label: 'Retrato Formal', url: '/img/dr-aldo-portrait.jpg' },
+                { label: 'Reunião Virtual Executiva (Padrão)', url: '/img/consulta-virtual-1.jpg' },
+                { label: 'Consulta Estratégica Digital', url: '/img/consulta-virtual-2.jpg' },
+                { label: 'Dr. Aldo Reunião', url: '/img/dr-aldo-reuniao.jpg' },
+                { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
               ]}
             />
 
             <ImageUploadField
-              label="Imagem de Fundo Sutil da Seção (Opcional)"
+              label="Imagem de Fundo Sutil da Seção (Item 100)"
               description="Imagem sutil de fundo para a seção de agendamento de consulta digital."
-              currentValue={formData.digitalConsultation?.bgImageUrl}
-              defaultValue="/img/dr-aldo-reuniao.jpg"
+              currentValue={formData.digitalConsultation?.bgImageUrl || '/img/consulta-virtual-2.jpg'}
+              defaultValue="/img/consulta-virtual-2.jpg"
               aspectRatio="video"
               onChange={(newUrl) => setFormData({
                 ...formData,
                 digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
               })}
+              presetOptions={[
+                { label: 'Fundo Consulta Virtual (Padrão)', url: '/img/consulta-virtual-2.jpg' },
+                { label: 'Fundo Gabinete Dr. Aldo', url: '/img/dr-aldo-reuniao.jpg' },
+              ]}
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Frase Superior (Kicker)
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                Frase Dourada Superior (Item 57: Kicker)
               </label>
               <input
                 type="text"
-                value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}
+                value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL BRASIL'}
                 onChange={(e) => setFormData({
                   ...formData,
                   digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: e.target.value }
                 })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
               />
             </div>
 
@@ -4611,7 +4621,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
 
           <RichTextarea
-            label="Descrição do Atendimento (Item 100)"
+            label="Descrição do Atendimento (Item 68 e 100)"
             rows={4}
             value={formData.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
             onChange={(val) => setFormData({
@@ -4619,6 +4629,39 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               digitalConsultation: { ...(formData.digitalConsultation || {}), description: val }
             })}
           />
+
+          {/* Pontos de Destaque com Balança da Justiça (Item 9 e 38) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                Ponto de Destaque 1 (com Ícone Balança)
+              </label>
+              <input
+                type="text"
+                value={formData.digitalConsultation?.point1 || 'Agendamento prévio da consulta'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  digitalConsultation: { ...(formData.digitalConsultation || {}), point1: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                Ponto de Destaque 2 (com Ícone Balança)
+              </label>
+              <input
+                type="text"
+                value={formData.digitalConsultation?.point2 || 'Consulta com hora marcada'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  digitalConsultation: { ...(formData.digitalConsultation || {}), point2: e.target.value }
+                })}
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+              />
+            </div>
+          </div>
 
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
             <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
@@ -4629,7 +4672,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <label className="block text-[11px] text-slate-400 mb-1">Selo Dourado</label>
                 <input
                   type="text"
-                  value={formData.digitalConsultation?.cardBadge || 'ATENDIMENTO PERSONALIZADO'}
+                  value={formData.digitalConsultation?.cardBadge || 'Atendimento 100% Digital'}
                   onChange={(e) => setFormData({
                     ...formData,
                     digitalConsultation: { ...(formData.digitalConsultation || {}), cardBadge: e.target.value }
@@ -4641,7 +4684,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <label className="block text-[11px] text-slate-400 mb-1">Título sobre a Foto</label>
                 <input
                   type="text"
-                  value={formData.digitalConsultation?.cardTitle || 'Videoconferência em Todo o Brasil'}
+                  value={formData.digitalConsultation?.cardTitle || 'CONSULTA DIGITAL BRASIL'}
                   onChange={(e) => setFormData({
                     ...formData,
                     digitalConsultation: { ...(formData.digitalConsultation || {}), cardTitle: e.target.value }
@@ -4653,7 +4696,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <label className="block text-[11px] text-slate-400 mb-1">Subtítulo sobre a Foto</label>
                 <input
                   type="text"
-                  value={formData.digitalConsultation?.cardSubtitle || 'Com a mesma excelência, sigilo e proximidade do atendimento presencial.'}
+                  value={formData.digitalConsultation?.cardSubtitle || 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.'}
                   onChange={(e) => setFormData({
                     ...formData,
                     digitalConsultation: { ...(formData.digitalConsultation || {}), cardSubtitle: e.target.value }

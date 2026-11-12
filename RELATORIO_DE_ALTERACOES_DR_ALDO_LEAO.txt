@@ -96,6 +96,10 @@ Desenvolvemos o motor utilitário "RichTextRenderer" integrado a regras de CSS c
 • Solicitação Original: Permitir editar o cabeçalho e os parágrafos "A produção intelectual sempre fez parte...".
 • Status & Solução Técnica: Os 3 parágrafos institucionais da página de Livros Digitais agora contam com editores individuais ricos em ambos os painéis administrativos.
 
+✔ Item 105 (Complemento) · Página 'Agende Sua Consulta Digital' (Frase Dourada e Edição Integral)
+• Solicitação Original: Atualizar a frase dourada superior para "ATENDIMENTO DIGITAL BRASIL" (removendo "EM TODO O BRASIL") e permitir a edição 100% completa de todos os campos da página de consulta no editor.
+• Status & Solução Técnica: Atualizamos o texto padrão e reparador para "ATENDIMENTO DIGITAL BRASIL" em todo o ecossistema. Liberamos no CMS Editor e no Visual Drawer 100% dos campos: Frase Dourada Kicker, Título em Branco, Destaque Dourado, Texto Descritivo com formatação rica, Ponto de Destaque 1 (com Balança), Ponto de Destaque 2 (com Balança), Selo do Card, Título e Subtítulo do Card, Botão Principal de Agendamento, Botão do WhatsApp, Foto de Fundo e Foto do Card Executivo.
+
 ✔ Itens 106 e 113 · Resposta Oficial sobre Dimensões dos Papéis de Parede
 • Solicitação Original: Esclarecer as medidas ideais de imagem para os Slides 1 e 2.
 • Status & Solução Técnica: Criamos um banner informativo em destaque dourado nos editores com as medidas técnicas recomendadas: Computador/Notebook (Horizontal 16:9): 1920 x 1080 px; Smartphones/Celulares (Vertical 9:16): 1080 x 1920 px.

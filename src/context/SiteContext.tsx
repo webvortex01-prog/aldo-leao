@@ -1169,6 +1169,13 @@ const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
   // 3. Item 68 & 100: Agende Sua Consulta Digital
   if (next.digitalConsultation) {
     const dc = { ...DEFAULT_CONFIG.digitalConsultation, ...next.digitalConsultation };
+    if (!dc.sectionKicker || dc.sectionKicker.includes('EM TODO O BRASIL') || dc.sectionKicker.includes('ONLINE EM TODO')) {
+      dc.sectionKicker = 'ATENDIMENTO DIGITAL BRASIL';
+    }
+    if (!dc.point1) dc.point1 = 'Agendamento prévio da consulta';
+    if (!dc.point2) dc.point2 = 'Consulta com hora marcada';
+    if (!dc.btnSchedule) dc.btnSchedule = 'AGENDAR CONSULTA VIRTUAL';
+    if (!dc.btnWhatsApp) dc.btnWhatsApp = 'Agendar pelo WhatsApp';
     if (!dc.description || !dc.description.includes('avançadas e inteligentes')) {
       dc.description = DEFAULT_CONFIG.digitalConsultation!.description;
     }
