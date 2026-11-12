@@ -140,7 +140,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                   (51) 99807-8998
                 </p>
                 <p className="text-[11px] text-slate-300 pt-1">
-                  Se preferir, ligue para a ALDO LEÃO ADVOCACIA ESTRATÉGICA
+                  Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:
                 </p>
               </div>
             </div>
