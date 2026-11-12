@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { 
-  ArrowLeft, 
-  ArrowRight, 
-  ShieldCheck, 
-  Scale, 
-  FileText, 
-  Briefcase, 
-  ShieldAlert, 
-  CheckCircle2, 
-  TrendingDown, 
-  Award, 
-  Cpu, 
-  Building2, 
-  MessageSquare, 
-  PhoneCall, 
+import {
+  ArrowLeft,
+  ArrowRight,
+  ShieldCheck,
+  Scale,
+  FileText,
+  Briefcase,
+  ShieldAlert,
+  CheckCircle2,
+  TrendingDown,
+  Award,
+  Cpu,
+  Building2,
+  MessageSquare,
+  PhoneCall,
   Lock,
   Send,
   ChevronRight,
@@ -109,9 +109,9 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
           </button>
 
           <div className="flex items-center gap-3">
-            <img 
-              src="/img/logo.jpg" 
-              alt="Aldo Leão Advocacia Estratégica" 
+            <img
+              src="/img/logo.jpg"
+              alt="Aldo Leão Advocacia Estratégica"
               className="w-10 h-10 object-contain rounded-md hidden sm:block border border-[#D4AF37]/30"
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = '/img/logo.png';
@@ -140,9 +140,9 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
       {/* HERO SECTION CINEMATOGRÁFICA GESTÃO JURÍDICA 4.0 */}
       <section className="relative overflow-hidden pt-12 pb-20 md:py-24 border-b border-[#D4AF37]/20">
         <div className="absolute inset-0 pointer-events-none">
-          <img 
-            src="/img/gestao-juridica-hero.jpg" 
-            alt="Ambiente Corporativo de Gestão Jurídica 4.0" 
+          <img
+            src="/img/gestao-juridica-hero.jpg"
+            alt="Ambiente Corporativo de Gestão Jurídica 4.0"
             className="w-full h-full object-cover object-center filter brightness-[0.38] contrast-110 scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/80 to-[#050B14]/60" />
@@ -222,7 +222,7 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
       {/* SEÇÃO PRINCIPAL DAS DUAS FRENTES DE ATUAÇÃO */}
       <section id="frentes-estrategicas" className="py-20 bg-gradient-to-b from-[#050B14] via-[#071122] to-[#050B14] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Cabeçalho da Seção */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="font-cinzel text-xs font-bold uppercase tracking-[0.25em] text-[#E5C158] block mb-2">
