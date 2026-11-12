@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { DigitalBook } from '../types';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface DigitalBooksSectionProps {
   onOpenConsultation?: (area?: string) => void;
@@ -167,30 +168,27 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
 
           {/* Texto oficial da página */}
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            <p>
-              {siteConfig.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
-            </p>
-            <p>
-              {siteConfig.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
-            </p>
-            <p>
-              {siteConfig.booksSection?.paragraph3 ? (
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: siteConfig.booksSection.paragraph3.replace(
-                      /Academia Le[ãa]o Ferreira/gi,
-                      '<strong class="text-[#F6E27A] font-semibold">Academia Leão Ferreira</strong>'
-                    )
-                  }}
-                />
-              ) : (
-                <>
-                  Cada obra publicada pela{' '}
-                  <strong className="text-[#F6E27A] font-semibold">Academia Leão Ferreira</strong>{' '}
-                  representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.
-                </>
+            <RichTextRenderer
+              content={
+                siteConfig.booksSection?.paragraph1 ||
+                'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                siteConfig.booksSection?.paragraph2 ||
+                'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'
+              }
+            />
+            <RichTextRenderer
+              content={(
+                siteConfig.booksSection?.paragraph3 ||
+                'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'
+              ).replace(
+                /(?<!<[^>]*?)Academia Le[ãa]o Ferreira/gi,
+                '<strong class="text-[#F6E27A] font-semibold">Academia Leão Ferreira</strong>'
               )}
-            </p>
+            />
           </div>
         </div>
 
@@ -436,18 +434,40 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
               </div>
             ) : (
               <div>
-                <div className="border-b border-[#D4AF37]/25 pb-4 mb-5">
+                <div className="border-b border-[#D4AF37]/25 pb-4 mb-5 space-y-3">
                   <h3 className="font-cinzel text-xl font-bold text-white uppercase">
                     BAIXAR LIVRO DIGITAL
                   </h3>
                   {/* Título do Livro Digital exibido automaticamente */}
-                  <div className="mt-2 p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/30">
+                  <div className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/30">
                     <span className="text-[10px] uppercase font-bold text-[#E5C158] block mb-0.5">Livro Solicitado:</span>
                     <p className="text-xs text-white font-semibold leading-snug">
                       {formBook.title}
                     </p>
                   </div>
-                  <p className="text-xs text-slate-300 mt-2 font-light">
+
+                  {/* Sumário do Livro e Trecho de Destaque (Item 70: 100% Editáveis) */}
+                  {formBook.chapters && formBook.chapters.length > 0 && (
+                    <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-2">
+                      <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider flex items-center gap-1.5">
+                        <Layers className="w-3.5 h-3.5 text-[#E5C158]" />
+                        <span>{formBook.summaryTitle || 'SUMÁRIO DO LIVRO'}</span>
+                      </h4>
+                      <ul className="space-y-1 text-[11px] text-slate-300 pl-1">
+                        {formBook.chapters.map((ch, idx) => (
+                          <li key={idx} className="leading-relaxed">• {ch}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {formBook.sampleExcerpt && (
+                    <div className="p-3 rounded-xl bg-[#09152B]/60 border-l-2 border-[#D4AF37] text-[11px] text-slate-200 italic leading-relaxed">
+                      <RichTextRenderer content={formBook.sampleExcerpt} />
+                    </div>
+                  )}
+
+                  <p className="text-xs text-slate-300 font-light">
                     Preencha os campos obrigatórios abaixo para receber gratuitamente seu exemplar em PDF.
                   </p>
                 </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Scale, ArrowRight, X, PhoneCall, GraduationCap, CheckCircle2 } from 'lucide-react';
 import { ExcellenceSolution } from '../types';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface ExcellenceSolutionsProps {
   onGoToLandingPage: () => void;
@@ -30,8 +31,8 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
         onGoToLandingPage();
       }
     } else if (
-      sol.id === 'gestao-juridica-40' || 
-      sol.title.toLowerCase().includes('gestão jurídica 4.0') || 
+      sol.id === 'gestao-juridica-40' ||
+      sol.title.toLowerCase().includes('gestão jurídica 4.0') ||
       sol.number === '08'
     ) {
       // Ao ser clicado no card ou botão da GESTÃO JURÍDICA 4.0, abre a página oficial dedicada
@@ -82,27 +83,21 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
             <span className="gold-text-gradient">{siteConfig.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}</span>
           </h2>
 
-          {siteConfig.excellenceSolutionsHeader?.description1?.includes('<') ? (
-            <div 
-              className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light publication-rich-content"
-              dangerouslySetInnerHTML={{ __html: siteConfig.excellenceSolutionsHeader.description1 }}
-            />
-          ) : (
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light">
-              {siteConfig.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
-            </p>
-          )}
+          <RichTextRenderer
+            content={
+              siteConfig.excellenceSolutionsHeader?.description1 ||
+              'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'
+            }
+            className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-3 font-light"
+          />
 
-          {siteConfig.excellenceSolutionsHeader?.description2?.includes('<') ? (
-            <div 
-              className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light publication-rich-content"
-              dangerouslySetInnerHTML={{ __html: siteConfig.excellenceSolutionsHeader.description2 }}
-            />
-          ) : (
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-              {siteConfig.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
-            </p>
-          )}
+          <RichTextRenderer
+            content={
+              siteConfig.excellenceSolutionsHeader?.description2 ||
+              'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'
+            }
+            className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light"
+          />
         </div>
 
         {/* 14 Solutions Grid */}
@@ -137,18 +132,12 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
                     </p>
                   )}
 
-                  {/* Description com caixa escura/preta respeitando quebras de linha e HTML (Item 89) */}
+                  {/* Description com caixa escura/preta respeitando quebras de linha e HTML (Item 89 e 108) */}
                   <div className="p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/20 mb-4">
-                    {sol.description && sol.description.includes('<') ? (
-                      <div
-                        className="text-xs text-slate-300 leading-relaxed font-sans-body font-light publication-rich-content"
-                        dangerouslySetInnerHTML={{ __html: sol.description }}
-                      />
-                    ) : (
-                      <p className="text-xs text-slate-300 leading-relaxed font-sans-body font-light whitespace-pre-line">
-                        {sol.description}
-                      </p>
-                    )}
+                    <RichTextRenderer
+                      content={sol.description}
+                      className="text-xs text-slate-300 leading-relaxed font-sans-body font-light"
+                    />
                   </div>
                 </div>
 
@@ -165,7 +154,7 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
         </div>
       </div>
 
-      {/* Solution Detail Modal com box preto para o texto (Item 37 e 89) */}
+      {/* Solution Detail Modal com box preto para o texto (Item 37, 89 e 108) */}
       {selectedSolution && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
           <div className="relative w-full max-w-2xl bg-[#071122] rounded-xl border border-[#D4AF37]/50 shadow-2xl p-6 sm:p-8 max-h-[88vh] overflow-y-auto text-slate-100 text-left">
@@ -191,29 +180,17 @@ export const ExcellenceSolutions: React.FC<ExcellenceSolutionsProps> = ({
               )}
             </div>
 
-            {/* Box preto para o texto conforme Item 37, 26 e 89 */}
+            {/* Box preto para o texto conforme Item 37, 26, 89 e 108 */}
             <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 mb-6">
-              {selectedSolution.description && selectedSolution.description.includes('<') ? (
-                <div
-                  className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body publication-rich-content"
-                  dangerouslySetInnerHTML={{ __html: selectedSolution.description }}
-                />
-              ) : (
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body whitespace-pre-line">
-                  {selectedSolution.description}
-                </p>
-              )}
+              <RichTextRenderer
+                content={selectedSolution.description}
+                className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body"
+              />
               {selectedSolution.extendedText && (
-                selectedSolution.extendedText.includes('<') ? (
-                  <div
-                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800 publication-rich-content"
-                    dangerouslySetInnerHTML={{ __html: selectedSolution.extendedText }}
-                  />
-                ) : (
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800 whitespace-pre-line">
-                    {selectedSolution.extendedText}
-                  </p>
-                )
+                <RichTextRenderer
+                  content={selectedSolution.extendedText}
+                  className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mt-3 pt-3 border-t border-slate-800"
+                />
               )}
             </div>
 

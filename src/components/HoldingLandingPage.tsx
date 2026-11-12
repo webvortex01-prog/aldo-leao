@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { UrgentHotlineFloat } from './UrgentHotlineFloat';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface HoldingLandingPageProps {
   onBackToSite: () => void;
@@ -228,21 +229,37 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
 
             {/* Texto do projeto conforme Item i do dia 15/10/26 */}
             <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-sans-body max-w-3xl mx-auto font-light mb-8 text-justify sm:text-center">
-              <p>
-                {hl?.heroParagraph1 || 'Muitas famílias somente descobrem a elevada perda patrimonial e o alto custo do processo de inventário quando já é tarde.'}
-              </p>
-              <p>
-                {hl?.heroParagraph2 || 'Além dos tributos, honorários, despesas cartorárias, registros imobiliários e demais custos sucessórios, o inventário frequentemente fomenta conflitos familiares, disputas pelo patrimônio e divergências entre os herdeiros.'}
-              </p>
-              <p>
-                {hl?.heroParagraph3 || 'A prática forense demonstra que, em muitos inventários, a necessidade de liquidez imediata leva os herdeiros à venda acelerada de bens, com deságio médio de 20% em relação ao respectivo valor de mercado, o que só faz aumentar a alta perda dos herdeiros.'}
-              </p>
-              <p>
-                {hl?.heroParagraph4 || 'Além disso, o ITCMD – Imposto de Transmissão Causa Mortis e Doação terá a sua alíquota máxima de 8%, majorada para 18% (Projeto de Resolução do Senado Federal N. 57/19) ou 20% (CONFAZ) ou 30% (Governo Federal) onerando ainda mais o inventário para os herdeiros.'}
-              </p>
-              <p className="font-medium text-white">
-                {hl?.heroParagraph5 || 'O resultado prático é a elevada perda patrimonial e financeira dos herdeiros, causada pelo inventário, justamente no momento mais delicado para a família, quando ela mais necessita de tranquilidade, segurança jurídica, estabilidade, paz e organização.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  hl?.heroParagraph1 ||
+                  'Muitas famílias somente descobrem a elevada perda patrimonial e o alto custo do processo de inventário quando já é tarde.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  hl?.heroParagraph2 ||
+                  'Além dos tributos, honorários, despesas cartorárias, registros imobiliários e demais custos sucessórios, o inventário frequentemente fomenta conflitos familiares, disputas pelo patrimônio e divergências entre os herdeiros.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  hl?.heroParagraph3 ||
+                  'A prática forense demonstra que, em muitos inventários, a necessidade de liquidez imediata leva os herdeiros à venda acelerada de bens, com deságio médio de 20% em relação ao respectivo valor de mercado, o que só faz aumentar a alta perda dos herdeiros.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  hl?.heroParagraph4 ||
+                  'Além disso, o ITCMD – Imposto de Transmissão Causa Mortis e Doação terá a sua alíquota máxima de 8%, majorada para 18% (Projeto de Resolução do Senado Federal N. 57/19) ou 20% (CONFAZ) ou 30% (Governo Federal) onerando ainda mais o inventário para os herdeiros.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  hl?.heroParagraph5 ||
+                  'O resultado prático é a elevada perda patrimonial e financeira dos herdeiros, causada pelo inventário, justamente no momento mais delicado para a família, quando ela mais necessita de tranquilidade, segurança jurídica, estabilidade, paz e organização.'
+                }
+                className="font-medium text-white"
+              />
             </div>
 
             {/* Botões do Hero: AGENDAR SESSÃO DE VIABILIDADE e CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0 (Item i) */}
@@ -283,9 +300,13 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   <h3 className="font-cinzel text-sm sm:text-base md:text-lg font-bold text-white mb-1.5 uppercase">
                     {hl?.showcaseTitle || 'Estruturação e Proteção do Patrimônio Familiar'}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                    {hl?.showcaseText || 'Blindagem preventiva de ativos, governança societária e planejamento sucessório em vida, garantindo a perpetuação do legado e evitando a perda de até 40% do patrimônio no inventário.'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      hl?.showcaseText ||
+                      'Blindagem preventiva de ativos, governança societária e planejamento sucessório em vida, garantindo a perpetuação do legado e evitando a perda de até 40% do patrimônio no inventário.'
+                    }
+                    className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed"
+                  />
                 </div>
               </div>
             </div>
@@ -333,15 +354,25 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
               {hl?.strategyTitle || 'O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO'}
             </h2>
             <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 font-sans-body leading-relaxed text-justify sm:text-center font-light">
-              <p>
-                {hl?.strategyParagraph1 || 'O Planejamento Patrimonial 4.0 via Holding Familiar consiste na engenharia jurídica societária (empresas) e patrimonial avançada e legal, voltada à estruturação, organização e proteção, realizada em vida e extrajudicialmente, que proporciona a perpetuação do seu legado, através do planejamento estratégico, que evita o inventário e seus prejuízos aos herdeiros.'}
-              </p>
-              <p>
-                {hl?.strategyParagraph2 || 'A Holding Familiar possibilita centralizar e profissionalizar a gestão dos bens e empresas; planejar e executar a sucessão empresarial; reduzir os tributos; proteger o patrimônio e as empresas; planejar em vida, a perpetuação do seu legado, para as futuras gerações.'}
-              </p>
-              <p className="font-medium text-white">
-                {hl?.strategyParagraph3 || 'Cada estrutura societária e patrimonial é minuciosamente planejada e executada de forma personalizada, conforme os objetivos, as necessidades e as situações existentes (família, patrimônio, empresas, ativos, passivos e etc.).'}
-              </p>
+              <RichTextRenderer
+                content={
+                  hl?.strategyParagraph1 ||
+                  'O Planejamento Patrimonial 4.0 via Holding Familiar consiste na engenharia jurídica societária (empresas) e patrimonial avançada e legal, voltada à estruturação, organização e proteção, realizada em vida e extrajudicialmente, que proporciona a perpetuação do seu legado, através do planejamento estratégico, que evita o inventário e seus prejuízos aos herdeiros.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  hl?.strategyParagraph2 ||
+                  'A Holding Familiar possibilita centralizar e profissionalizar a gestão dos bens e empresas; planejar e executar a sucessão empresarial; reduzir os tributos; proteger o patrimônio e as empresas; planejar em vida, a perpetuação do seu legado, para as futuras gerações.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  hl?.strategyParagraph3 ||
+                  'Cada estrutura societária e patrimonial é minuciosamente planejada e executada de forma personalizada, conforme os objetivos, as necessidades e as situações existentes (família, patrimônio, empresas, ativos, passivos e etc.).'
+                }
+                className="font-medium text-white"
+              />
             </div>
           </div>
 
@@ -490,9 +521,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-3">
               {hl?.ctaBoxTitle || 'FAÇA O SEU PLANEJAMENTO 4.0'}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 font-light">
-              {hl?.ctaBoxText || 'Agende, hoje mesmo, o seu Diagnóstico de Viabilidade e saiba porque o PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR é a sua melhor opção para perpetuar o seu legado.'}
-            </p>
+            <RichTextRenderer
+              content={hl?.ctaBoxText || 'Agende, hoje mesmo, o seu Diagnóstico de Viabilidade e saiba porque o PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR é a sua melhor opção para perpetuar o seu legado.'}
+              className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 font-light"
+            />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={handleOpenViabilidadeModal}
@@ -522,9 +554,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-white mb-4">
             {hl?.targetTitle || 'PARA QUEM É A HOLDING FAMILIAR?'}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 font-light">
-            {hl?.targetIntro || 'O PLANEJAMENTO PATRIMONIAL 4.0 foi desenvolvido para quem já tem ou pretende adquirir patrimônio, já tem ou pretende ter filhos e para:'}
-          </p>
+          <RichTextRenderer
+            content={hl?.targetIntro || 'O PLANEJAMENTO PATRIMONIAL 4.0 foi desenvolvido para quem já tem ou pretende adquirir patrimônio, já tem ou pretende ter filhos e para:'}
+            className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto mb-8 font-light"
+          />
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {publicoAlvo.map((item, idx) => (
@@ -553,18 +586,24 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
           </h2>
 
           <div className="space-y-4 text-xs sm:text-sm md:text-base text-slate-300 font-sans-body leading-relaxed text-justify sm:text-center font-light mb-8 max-w-3xl mx-auto">
-            <p>
-              {hl?.drAldoBio1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
-            </p>
-            <p>
-              {hl?.drAldoBio2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.'}
-            </p>
-            <p>
-              {hl?.drAldoBio3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.'}
-            </p>
-            <p>
-              {hl?.drAldoBio4 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.'}
-            </p>
+            <RichTextRenderer
+              content={hl?.drAldoBio1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
+            />
+            {hl?.drAldoBio2 !== '' && (
+              <RichTextRenderer
+                content={hl?.drAldoBio2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação tecnológica da advocacia estratégica.'}
+              />
+            )}
+            {hl?.drAldoBio3 !== '' && (
+              <RichTextRenderer
+                content={hl?.drAldoBio3 || 'Com uma trajetória de mais de 40 anos de Excelência Jurídica, unimos o rigor técnico do Direito à inteligência jurídica na gestão patrimonial e empresarial para a perpetuação do seu legado.'}
+              />
+            )}
+            {hl?.drAldoBio4 !== '' && (
+              <RichTextRenderer
+                content={hl?.drAldoBio4 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de Artigos Jurídicos e Livros Digitais publicados, com uma reconhecida trajetória profissional, liderança jurídica e docência superior, que lhe rendeu convites para realização de palestras sobre temas jurídicos importantes.'}
+              />
+            )}
           </div>
 
           <div className="max-w-md mx-auto mb-8 rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 shadow-2xl bg-[#070F1E] group photo-luxury-frame">
@@ -653,8 +692,8 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                     />
                   </button>
                   {isOpen && (
-                    <div className="p-5 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-[#D4AF37]/15 bg-[#050B14]/60 whitespace-pre-line">
-                      <p>{faq.a}</p>
+                    <div className="p-5 pt-0 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-[#D4AF37]/15 bg-[#050B14]/60">
+                      <RichTextRenderer content={faq.a} />
                     </div>
                   )}
                 </div>
@@ -667,9 +706,10 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
             <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#F6E27A] mb-2 uppercase">
               {hl?.doubtTitle || 'ALGUMA DÚVIDA?'}
             </h3>
-            <p className="text-xs sm:text-sm text-white mb-6 font-light max-w-xl mx-auto">
-              {hl?.doubtText || 'Se tiver dúvida, entre em contato com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
-            </p>
+            <RichTextRenderer
+              content={hl?.doubtText || 'Se tiver dúvida, entre em contato com um especialista da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
+              className="text-xs sm:text-sm text-white mb-6 font-light max-w-xl mx-auto"
+            />
             <div className="flex items-center justify-center">
               <button
                 onClick={() => handleDirectWhatsApp('Olá, gostaria de falar com um especialista sobre o Planejamento Patrimonial 4.0.')}
@@ -850,21 +890,30 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                   TRAJETÓRIA PROFISSIONAL
                 </h4>
                 <div className="space-y-3 text-slate-200 font-light">
-                  <p>
-                    {f?.curriculumTrajectoryP1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'}
-                  </p>
-                  <p>
-                    {f?.curriculumTrajectoryP2 || 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'}
-                  </p>
-                  <p>
-                    {f?.curriculumTrajectoryP3 || 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'}
-                  </p>
-                  <p>
-                    {f?.curriculumTrajectoryP4 || 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'}
-                  </p>
-                  <p className="text-[#F6E27A] font-semibold">
-                    {f?.curriculumTrajectoryP5 || 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'}
-                  </p>
+                  <RichTextRenderer
+                    content={f?.curriculumTrajectoryP1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'}
+                  />
+                  {f?.curriculumTrajectoryP2 !== '' && (
+                    <RichTextRenderer
+                      content={f?.curriculumTrajectoryP2 || 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'}
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP3 !== '' && (
+                    <RichTextRenderer
+                      content={f?.curriculumTrajectoryP3 || 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'}
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP4 !== '' && (
+                    <RichTextRenderer
+                      content={f?.curriculumTrajectoryP4 || 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'}
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP5 !== '' && (
+                    <RichTextRenderer
+                      content={f?.curriculumTrajectoryP5 || 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'}
+                      className="text-[#F6E27A] font-semibold"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -986,15 +1035,21 @@ export const HoldingLandingPage: React.FC<HoldingLandingPageProps> = ({
                 </div>
               </div>
 
-              {/* Texto 2: Síntese de Encerramento Oficial (Item 64) */}
-              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-slate-300 text-xs sm:text-sm space-y-2.5">
-                <p>
-                  "{f?.curriculumClosingP1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'}"
-                </p>
-                <p>
-                  "{f?.curriculumClosingP2 || 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'}"
-                </p>
-              </div>
+              {/* Texto 2: Síntese de Encerramento Oficial (Item 64 e 93) */}
+              {!(f?.curriculumClosingP1 === '' && f?.curriculumClosingP2 === '') && (
+                <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-slate-300 text-xs sm:text-sm space-y-2.5">
+                  {f?.curriculumClosingP1 !== '' && (
+                    <RichTextRenderer
+                      content={f?.curriculumClosingP1 ?? 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'}
+                    />
+                  )}
+                  {f?.curriculumClosingP2 !== '' && (
+                    <RichTextRenderer
+                      content={f?.curriculumClosingP2 ?? 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'}
+                    />
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="pt-4 border-t border-[#D4AF37]/25 flex flex-col sm:flex-row items-center justify-between gap-4">

@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { UrgentHotlineFloat } from './UrgentHotlineFloat';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface GestaoJuridicaPageProps {
   onBackToSite: () => void;
@@ -121,7 +122,7 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                 Aldo Leão Advocacia Estratégica
               </span>
               <span className="block text-[10px] text-[#E5C158] uppercase font-bold tracking-widest">
-                Gestão Jurídica 4.0 · Desde 1908
+                Gestão Jurídica 4.0
               </span>
             </div>
           </div>
@@ -170,9 +171,13 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
 
             {/* Texto Introdutório e Vertentes (Item 66) */}
             <div className="p-6 sm:p-7 rounded-2xl bg-[#040914]/75 border border-[#D4AF37]/35 backdrop-blur-md shadow-2xl mb-8 space-y-4">
-              <p className="text-base sm:text-lg text-slate-100 font-sans-body font-normal leading-relaxed">
-                {gj?.introParagraph1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  gj?.introParagraph1 ||
+                  'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados.'
+                }
+                className="text-base sm:text-lg text-slate-100 font-sans-body font-normal leading-relaxed"
+              />
               <div className="border-t border-[#D4AF37]/25 pt-4 space-y-2">
                 <p className="text-sm sm:text-base text-slate-200 font-sans-body font-light leading-relaxed">
                   Este serviço especializado e estratégico, possui duas vertentes de alta performance: <strong className="text-[#F6E27A] font-semibold">ORGANIZACIONAL</strong> e/ou <strong className="text-[#F6E27A] font-semibold">JUDICIAL</strong>.
@@ -181,9 +186,13 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#E5C158] uppercase mb-1">
                     ► GESTÃO JURÍDICA ORGANIZACIONAL
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 font-sans-body font-light leading-relaxed">
-                    Com atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      gj?.introParagraph2 ||
+                      'Com atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'
+                    }
+                    className="text-xs sm:text-sm text-slate-300 font-sans-body font-light leading-relaxed"
+                  />
                 </div>
               </div>
             </div>
@@ -217,15 +226,19 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
           {/* Cabeçalho da Seção */}
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="font-cinzel text-xs font-bold uppercase tracking-[0.25em] text-[#E5C158] block mb-2">
-              ARQUITETURA JURÍDICA CORPORATIVA
+              {gj?.frentesSectionKicker || 'ARQUITETURA JURÍDICA CORPORATIVA'}
             </span>
             <h2 className="font-cinzel text-2xl sm:text-4xl font-bold text-white mb-4">
-              Duas Vertentes de Alta Performance para o Seu Negócio
+              {gj?.frentesSectionTitle || 'Duas Vertentes de Alta Performance para o Seu Negócio'}
             </h2>
             <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-4" />
-            <p className="text-sm sm:text-base text-slate-300 font-light">
-              Soluções completas e customizadas desenhadas sob medida para blindar, potencializar e perpetuar o patrimônio corporativo da sua empresa.
-            </p>
+            <RichTextRenderer
+              content={
+                gj?.frentesSectionSubtitle ||
+                'Soluções completas e customizadas desenhadas sob medida para blindar, potencializar e perpetuar o patrimônio corporativo da sua empresa.'
+              }
+              className="text-sm sm:text-base text-slate-300 font-light"
+            />
           </div>
 
           <div className="space-y-16">
@@ -253,15 +266,23 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                   </span>
                 </h3>
 
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 max-w-4xl">
-                  {gj?.frente1Desc || 'Com atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'}
-                </p>
+                <RichTextRenderer
+                  content={
+                    gj?.frente1Desc ||
+                    'Com atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'
+                  }
+                  className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 max-w-4xl"
+                />
 
                 {/* Box azul-marinho: Diagnóstico Situacional Estratégico (Item 66) */}
                 <div className="mb-6 p-5 rounded-xl bg-[#09152B] border-2 border-[#D4AF37]/45 shadow-lg">
-                  <p className="text-xs sm:text-sm font-semibold text-[#F6E27A] uppercase tracking-wide leading-relaxed">
-                    {gj?.frente1BoxTitle || 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      gj?.frente1BoxTitle ||
+                      'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:'
+                    }
+                    className="text-xs sm:text-sm font-semibold text-[#F6E27A] uppercase tracking-wide leading-relaxed"
+                  />
                 </div>
 
                 {/* 4 Cards do Diagnóstico Estratégico */}
@@ -275,9 +296,10 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                       <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase mb-1">
                         {gj?.frente1Card1Title || 'Auditoria Preventiva'}
                       </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        {gj?.frente1Card1Desc || 'Auditoria preventiva da situação atual, contratos e fluxos corporativos;'}
-                      </p>
+                      <RichTextRenderer
+                        content={gj?.frente1Card1Desc || 'Auditoria preventiva da situação atual, contratos e fluxos corporativos;'}
+                        className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                      />
                     </div>
                   </div>
 
@@ -290,9 +312,10 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                       <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase mb-1">
                         {gj?.frente1Card2Title || 'Análise Jurídica Especializada'}
                       </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        {gj?.frente1Card2Desc || 'Análise jurídica especializada alinhada ao modelo de negócios e setor de atuação;'}
-                      </p>
+                      <RichTextRenderer
+                        content={gj?.frente1Card2Desc || 'Análise jurídica especializada alinhada ao modelo de negócios e setor de atuação;'}
+                        className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                      />
                     </div>
                   </div>
 
@@ -305,9 +328,10 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                       <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase mb-1">
                         {gj?.frente1Card3Title || 'Mapeamento de Riscos e Vulnerabilidades'}
                       </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        {gj?.frente1Card3Desc || 'Mapeamento detalhado de riscos operacionais, tributários e inconformidades legais;'}
-                      </p>
+                      <RichTextRenderer
+                        content={gj?.frente1Card3Desc || 'Mapeamento detalhado de riscos operacionais, tributários e inconformidades legais;'}
+                        className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                      />
                     </div>
                   </div>
 
@@ -320,9 +344,10 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                       <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white uppercase mb-1">
                         {gj?.frente1Card4Title || 'Soluções Jurídicas Estratégicas'}
                       </h4>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        {gj?.frente1Card4Desc || 'Desenvolvimento e implantação de soluções preventivas e estruturantes personalizadas;'}
-                      </p>
+                      <RichTextRenderer
+                        content={gj?.frente1Card4Desc || 'Desenvolvimento e implantação de soluções preventivas e estruturantes personalizadas;'}
+                        className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                      />
                     </div>
                   </div>
                 </div>
@@ -330,9 +355,13 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                 {/* Box de Conclusão da Frente 1 (Item 66) */}
                 <div className="p-5 rounded-xl bg-gradient-to-r from-[#0E1F3D] to-[#0A1424] border border-[#D4AF37]/45 flex items-center gap-4">
                   <ShieldCheck className="w-7 h-7 text-[#F6E27A] shrink-0 hidden sm:block" />
-                  <p className="text-xs sm:text-sm text-slate-100 font-sans-body font-normal leading-relaxed">
-                    {gj?.frente1Conclusion || 'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      gj?.frente1Conclusion ||
+                      'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.'
+                    }
+                    className="text-xs sm:text-sm text-slate-100 font-sans-body font-normal leading-relaxed"
+                  />
                 </div>
               </div>
             </div>
@@ -361,9 +390,13 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                   </span>
                 </h3>
 
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 max-w-4xl">
-                  {gj?.frente2Desc || 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:'}
-                </p>
+                <RichTextRenderer
+                  content={
+                    gj?.frente2Desc ||
+                    'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:'
+                  }
+                  className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 max-w-4xl"
+                />
 
                 {/* 3 Pilares Essenciais (Item 66) */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
@@ -378,9 +411,10 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                     <h4 className="font-cinzel text-sm sm:text-base font-bold text-white uppercase mb-2">
                       {gj?.frente2Pilar1Title || 'DECISÕES ASSERTIVAS'}
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {gj?.frente2Pilar1Desc || 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;'}
-                    </p>
+                    <RichTextRenderer
+                      content={gj?.frente2Pilar1Desc || 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;'}
+                      className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                    />
                   </div>
 
                   {/* Pilar 2 */}
@@ -394,9 +428,10 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                     <h4 className="font-cinzel text-sm sm:text-base font-bold text-white uppercase mb-2">
                       {gj?.frente2Pilar2Title || 'GESTÃO DE RESULTADOS'}
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {gj?.frente2Pilar2Desc || 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;'}
-                    </p>
+                    <RichTextRenderer
+                      content={gj?.frente2Pilar2Desc || 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;'}
+                      className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                    />
                   </div>
 
                   {/* Pilar 3 */}
@@ -410,17 +445,22 @@ export const GestaoJuridicaPage: React.FC<GestaoJuridicaPageProps> = ({
                     <h4 className="font-cinzel text-sm sm:text-base font-bold text-white uppercase mb-2">
                       {gj?.frente2Pilar3Title || 'COMPETITIVIDADE'}
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                      {gj?.frente2Pilar3Desc || 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;'}
-                    </p>
+                    <RichTextRenderer
+                      content={gj?.frente2Pilar3Desc || 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;'}
+                      className="text-xs sm:text-sm text-slate-300 leading-relaxed"
+                    />
                   </div>
                 </div>
 
                 {/* Box de Impacto da Frente 2 (Item 66) */}
                 <div className="p-5 sm:p-6 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-inner">
-                  <p className="text-sm sm:text-base text-slate-200 font-sans-body font-light leading-relaxed">
-                    {gj?.frente2Impact || 'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      gj?.frente2Impact ||
+                      'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.'
+                    }
+                    className="text-sm sm:text-base text-slate-200 font-sans-body font-light leading-relaxed"
+                  />
                 </div>
               </div>
             </div>

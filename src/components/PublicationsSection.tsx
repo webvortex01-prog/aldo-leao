@@ -3,6 +3,8 @@ import { Search, Calendar, Clock, ArrowRight, X, ChevronRight, ChevronLeft, Book
 import { Publication } from '../types';
 import { useSite } from '../context/SiteContext';
 import { ArticleSignature } from './ArticleSignature';
+import { RichTextRenderer, formatRichHtml } from '../utils/richTextUtils';
+import { OFFICIAL_PUBLICATIONS_2024_2025 } from '../data/officialPublications2024_2025';
 
 export const PublicationsSection: React.FC = () => {
   const { siteConfig } = useSite();
@@ -106,15 +108,24 @@ export const PublicationsSection: React.FC = () => {
           </h2>
 
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            <p>
-              {siteConfig.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
-            </p>
-            <p>
-              {siteConfig.publicationsSection?.paragraph2 || 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'}
-            </p>
-            <p>
-              {siteConfig.publicationsSection?.paragraph3 || 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'}
-            </p>
+            <RichTextRenderer
+              content={
+                siteConfig.publicationsSection?.paragraph1 ||
+                'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                siteConfig.publicationsSection?.paragraph2 ||
+                'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                siteConfig.publicationsSection?.paragraph3 ||
+                'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'
+              }
+            />
           </div>
         </div>
 
@@ -384,6 +395,14 @@ export const PublicationsSection: React.FC = () => {
                 __html: (() => {
                   let raw = activePubModal.content || '';
 
+                  // Garante que o artigo "O CUSTO DO INVENTÁRIO PODE DOBRAR" (Item 83) tenha sempre a tabela comparativa oficial
+                  if (
+                    normalize(activePubModal.title).includes('custo do inventario pode dobrar') &&
+                    !raw.includes('<table')
+                  ) {
+                    raw = OFFICIAL_PUBLICATIONS_2024_2025[0].content;
+                  }
+
                   // 1. Desescapa entidades HTML caso tenha sido salvo como texto escapado
                   raw = raw
                     .replace(/&lt;/g, '<')
@@ -458,17 +477,12 @@ export const PublicationsSection: React.FC = () => {
                     processed.push(tableHtml);
                   }
 
-                  const combined = processed.join('\n');
+                  const combined = processed.join('\n').replace(/(<table[\s\S]*?<\/table>)/gi, (match) => {
+                    if (match.includes('overflow-x-auto')) return match;
+                    return `<div class="overflow-x-auto my-4">${match}</div>`;
+                  });
 
-                  // Se tem tags HTML, renderiza diretamente garantindo que qualquer <table> tenha wrapper
-                  if (combined.includes('<')) {
-                    return combined.replace(/(<table[\s\S]*?<\/table>)/gi, (match) => {
-                      if (match.includes('overflow-x-auto')) return match;
-                      return `<div class="overflow-x-auto my-4">${match}</div>`;
-                    });
-                  }
-
-                  return combined.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('');
+                  return formatRichHtml(combined);
                 })()
               }}
             />

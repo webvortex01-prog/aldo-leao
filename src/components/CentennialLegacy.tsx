@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Scale } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 export const CentennialLegacy: React.FC = () => {
   const { siteConfig } = useSite();
@@ -65,22 +66,24 @@ export const CentennialLegacy: React.FC = () => {
 
           {/* Conteúdo rico da página: suporta RichText ou parágrafos (Item 81 e 84) */}
           {cl?.content ? (
-            <div
-              className="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light publication-rich-content"
-              dangerouslySetInnerHTML={{
-                __html: cl.content.includes('<')
-                  ? cl.content
-                  : cl.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
-              }}
+            <RichTextRenderer
+              content={cl.content}
+              className="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light"
             />
           ) : (
             <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-              <p>
-                {cl?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
-              </p>
-              <p>
-                {cl?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  cl?.paragraph1 ||
+                  'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'
+                }
+              />
+              <RichTextRenderer
+                content={
+                  cl?.paragraph2 ||
+                  'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'
+                }
+              />
             </div>
           )}
         </div>
@@ -115,10 +118,11 @@ export const CentennialLegacy: React.FC = () => {
                       ))}
                     </div>
 
-                    {/* Description em Negrito (Item 48) */}
-                    <p className="text-[11px] sm:text-xs text-slate-200 leading-relaxed font-sans-body font-bold">
-                      {evt.description}
-                    </p>
+                    {/* Description em Negrito (Item 48 e 109) */}
+                    <RichTextRenderer
+                      content={evt.description}
+                      className="text-[11px] sm:text-xs text-slate-200 leading-relaxed font-sans-body font-bold"
+                    />
                   </div>
                 );
               })}
@@ -148,7 +152,7 @@ export const CentennialLegacy: React.FC = () => {
           </div>
         </div>
 
-        {/* 40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA (Item 33, 34 e 49) */}
+        {/* 40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA (Item 33, 34, 49, 85 e 110) */}
         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#D4AF37]/40 bg-gradient-to-r from-[#071122] via-[#0B1A35] to-[#071122] p-8 sm:p-12 shadow-2xl reveal-scale">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#E5C158] font-bold mb-3">
@@ -159,17 +163,14 @@ export const CentennialLegacy: React.FC = () => {
               {cl?.card40Title || '40 ANOS + DE EXCELÊNCIA JURÍDICA NA ADVOCACIA ESTRATÉGICA'}
             </h3>
 
-            {/* Texto do card 40 anos com suporte a RichText (Item 85) */}
-            {cl?.card40Text && cl.card40Text.includes('<') ? (
-              <div
-                className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto publication-rich-content"
-                dangerouslySetInnerHTML={{ __html: cl.card40Text }}
-              />
-            ) : (
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto whitespace-pre-line">
-                {cl?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
-              </p>
-            )}
+            {/* Texto do card 40 anos com suporte total a RichText (Item 85 e 110) */}
+            <RichTextRenderer
+              content={
+                cl?.card40Text ||
+                'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'
+              }
+              className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body mb-8 font-normal max-w-3xl mx-auto"
+            />
 
             {/* Selo inserido no lugar dos dois boxes removidos (Item 34) */}
             <div className="pt-6 border-t border-[#D4AF37]/25 flex flex-col items-center justify-center">

@@ -36,6 +36,7 @@ export type EditableSectionKey =
   | 'founder'
   | 'services'
   | 'solutions'
+  | 'gestao_juridica'
   | 'consultation'
   | 'holding'
   | 'landing_holding'
@@ -315,6 +316,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             { key: 'founder', label: 'Dr. Aldo' },
             { key: 'services', label: 'Especialidades' },
             { key: 'solutions', label: 'Soluções' },
+            { key: 'gestao_juridica', label: 'Gestão Jurídica 4.0' },
             { key: 'consultation', label: 'Agendamento' },
             { key: 'holding', label: 'Holding 4.0' },
             { key: 'landing_holding', label: '🚀 Landing Page (/1208/)' },
@@ -457,10 +459,19 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               Slide 1 · Tradição Centenária Desde 1908
             </h4>
 
+            {/* Guia de Medidas Ideais dos Papéis de Parede (Itens 106 e 113) */}
+            <div className="p-3 rounded-xl bg-[#08152B] border border-[#D4AF37]/50 text-[11px] text-slate-200 space-y-1">
+              <p className="font-bold text-[#F6E27A] uppercase tracking-wider">
+                📐 Medidas Ideais Recomendadas para os Papéis de Parede (Slides 1 e 2):
+              </p>
+              <p>• <strong>Desktop (Computador / Notebook):</strong> <code className="text-[#F6E27A] font-bold">1920 x 1080 px</code> (Proporção 16:9 Full HD Horizontal)</p>
+              <p>• <strong>Mobile (Celular / Smartphone):</strong> <code className="text-[#F6E27A] font-bold">1080 x 1920 px</code> (Proporção 9:16 Vertical)</p>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <ImageUploadField
-                label="Foto Desktop Slide 1"
-                description="Exibida em computadores e notebooks."
+                label="Foto Desktop Slide 1 (1920 x 1080 px)"
+                description="Exibida em computadores e notebooks (Proporção 16:9)."
                 currentValue={siteConfig.hero.heroImageUrl}
                 defaultValue="/img/novofundohero.jpg"
                 aspectRatio="video"
@@ -470,8 +481,8 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               />
 
               <ImageUploadField
-                label="Foto Mobile Slide 1"
-                description="Versão vertical para smartphones."
+                label="Foto Mobile Slide 1 (1080 x 1920 px)"
+                description="Versão vertical para smartphones (Proporção 9:16)."
                 currentValue={siteConfig.hero.heroImageMobileUrl}
                 defaultValue="/img/novofundohero_mobile.jpg"
                 aspectRatio="portrait"
@@ -483,19 +494,19 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[11px] text-slate-300 font-semibold mb-1">Kicker Superior 1</label>
+                <label className="block text-[11px] text-slate-300 font-semibold mb-1">Primeira Frase Topo · Parte Dourada (Item 115)</label>
                 <input
                   type="text"
-                  value={siteConfig.hero.kicker}
+                  value={siteConfig.hero.kicker ?? 'ALDO LEÃO'}
                   onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, kicker: e.target.value } })}
                   className="w-full px-3 py-2 rounded-lg bg-[#071122] border border-slate-700 text-white text-xs"
                 />
               </div>
               <div>
-                <label className="block text-[11px] text-slate-300 font-semibold mb-1">Kicker Superior 2</label>
+                <label className="block text-[11px] text-slate-300 font-semibold mb-1">Primeira Frase Topo · Parte Branca (Item 115)</label>
                 <input
                   type="text"
-                  value={siteConfig.hero.kickerSub || 'ADVOCACIA ESTRATÉGICA'}
+                  value={siteConfig.hero.kickerSub ?? 'ADVOCACIA ESTRATÉGICA'}
                   onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, kickerSub: e.target.value } })}
                   className="w-full px-3 py-2 rounded-lg bg-[#071122] border border-slate-700 text-white text-xs"
                 />
@@ -619,15 +630,13 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-[10px] text-slate-300 font-semibold mb-1">Texto Descritivo Box 2</label>
-                <textarea
-                  rows={2}
-                  value={siteConfig.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
-                  onChange={(e) => updateSiteConfig({ hero: { ...siteConfig.hero, box2Text: e.target.value } })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-                />
-              </div>
+              <RichTextarea
+                label="Texto Descritivo Box 2 (Item 79)"
+                rows={3}
+                value={siteConfig.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
+                onChange={(val) => updateSiteConfig({ hero: { ...siteConfig.hero, box2Text: val } })}
+                hint="Editor visual estilo Word com negrito, alinhamento, tamanho de fonte e cores"
+              />
             </div>
 
             {/* Box Abaixo da Logomarca do Leão (Item 79: Totalmente Editável) */}
@@ -1006,55 +1015,41 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             hint="Permite editar livremente o texto de toda a página, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
           />
 
-          <div className="space-y-2">
-            <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 1</label>
-              <textarea
-                rows={2}
-                value={siteConfig.nationalPresence?.paragraph1 || ''}
-                onChange={(e) => updateSiteConfig({
-                  nationalPresence: { ...(siteConfig.nationalPresence || {}), paragraph1: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 2</label>
-              <textarea
-                rows={2}
-                value={siteConfig.nationalPresence?.paragraph2 || ''}
-                onChange={(e) => updateSiteConfig({
-                  nationalPresence: { ...(siteConfig.nationalPresence || {}), paragraph2: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 3</label>
-              <textarea
-                rows={2}
-                value={siteConfig.nationalPresence?.paragraph3 || ''}
-                onChange={(e) => updateSiteConfig({
-                  nationalPresence: { ...(siteConfig.nationalPresence || {}), paragraph3: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-              Box de Citação (Quote)
-            </label>
-            <textarea
+          <div className="space-y-3">
+            <RichTextarea
+              label="Parágrafo 1"
               rows={2}
-              value={siteConfig.nationalPresence?.quoteBox || ''}
-              onChange={(e) => updateSiteConfig({
-                nationalPresence: { ...(siteConfig.nationalPresence || {}), quoteBox: e.target.value }
+              value={siteConfig.nationalPresence?.paragraph1 || ''}
+              onChange={(val) => updateSiteConfig({
+                nationalPresence: { ...(siteConfig.nationalPresence || {}), paragraph1: val }
               })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-medium"
+            />
+            <RichTextarea
+              label="Parágrafo 2"
+              rows={2}
+              value={siteConfig.nationalPresence?.paragraph2 || ''}
+              onChange={(val) => updateSiteConfig({
+                nationalPresence: { ...(siteConfig.nationalPresence || {}), paragraph2: val }
+              })}
+            />
+            <RichTextarea
+              label="Parágrafo 3"
+              rows={2}
+              value={siteConfig.nationalPresence?.paragraph3 || ''}
+              onChange={(val) => updateSiteConfig({
+                nationalPresence: { ...(siteConfig.nationalPresence || {}), paragraph3: val }
+              })}
             />
           </div>
+
+          <RichTextarea
+            label="Box de Citação (Quote)"
+            rows={2}
+            value={siteConfig.nationalPresence?.quoteBox || ''}
+            onChange={(val) => updateSiteConfig({
+              nationalPresence: { ...(siteConfig.nationalPresence || {}), quoteBox: val }
+            })}
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
@@ -1198,29 +1193,23 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             />
           </div>
 
-          <div className="space-y-2">
-            <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 1</label>
-              <textarea
-                rows={2}
-                value={siteConfig.centennialLegacy?.paragraph1 || ''}
-                onChange={(e) => updateSiteConfig({
-                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), paragraph1: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 2</label>
-              <textarea
-                rows={2}
-                value={siteConfig.centennialLegacy?.paragraph2 || ''}
-                onChange={(e) => updateSiteConfig({
-                  centennialLegacy: { ...(siteConfig.centennialLegacy || {}), paragraph2: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
+          <div className="space-y-3">
+            <RichTextarea
+              label="Parágrafo 1"
+              rows={2}
+              value={siteConfig.centennialLegacy?.paragraph1 || ''}
+              onChange={(val) => updateSiteConfig({
+                centennialLegacy: { ...(siteConfig.centennialLegacy || {}), paragraph1: val }
+              })}
+            />
+            <RichTextarea
+              label="Parágrafo 2"
+              rows={2}
+              value={siteConfig.centennialLegacy?.paragraph2 || ''}
+              onChange={(val) => updateSiteConfig({
+                centennialLegacy: { ...(siteConfig.centennialLegacy || {}), paragraph2: val }
+              })}
+            />
           </div>
 
           {/* Box 40 Anos com Editor Rico e Selo (Item 85) */}
@@ -1508,64 +1497,46 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
           </div>
 
           {/* 6 Parágrafos de Biografia */}
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-              Parágrafos da Biografia Oficial
+              Parágrafos da Biografia Oficial (Editor Visual Completo)
             </span>
-            <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
-              <textarea
-                rows={2}
-                value={siteConfig.founder.bioParagraph1}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph1: e.target.value } })}
-                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
-              <textarea
-                rows={2}
-                value={siteConfig.founder.bioParagraph2}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph2: e.target.value } })}
-                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
-              <textarea
-                rows={2}
-                value={siteConfig.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica...'}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph3: e.target.value } })}
-                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4</label>
-              <textarea
-                rows={2}
-                value={siteConfig.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph4: e.target.value } })}
-                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5</label>
-              <textarea
-                rows={2}
-                value={siteConfig.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica...'}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph5: e.target.value } })}
-                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
-            <div>
-              <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 6</label>
-              <textarea
-                rows={2}
-                value={siteConfig.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão...'}
-                onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph6: e.target.value } })}
-                className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-              />
-            </div>
+            <RichTextarea
+              label="Parágrafo 1"
+              rows={2}
+              value={siteConfig.founder.bioParagraph1 ?? ''}
+              onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph1: val } })}
+            />
+            <RichTextarea
+              label="Parágrafo 2"
+              rows={2}
+              value={siteConfig.founder.bioParagraph2 ?? ''}
+              onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph2: val } })}
+            />
+            <RichTextarea
+              label="Parágrafo 3"
+              rows={2}
+              value={siteConfig.founder.bioParagraph3 ?? 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica...'}
+              onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph3: val } })}
+            />
+            <RichTextarea
+              label="Parágrafo 4"
+              rows={2}
+              value={siteConfig.founder.bioParagraph4 ?? 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
+              onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph4: val } })}
+            />
+            <RichTextarea
+              label="Parágrafo 5"
+              rows={2}
+              value={siteConfig.founder.bioParagraph5 ?? 'O Dr. Aldo Leão possui extensa produção jurídica...'}
+              onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph5: val } })}
+            />
+            <RichTextarea
+              label="Parágrafo 6"
+              rows={2}
+              value={siteConfig.founder.bioParagraph6 ?? 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão...'}
+              onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, bioParagraph6: val } })}
+            />
           </div>
 
           {/* Diferenciais Estratégicos (Item 86) */}
@@ -1662,55 +1633,40 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </span>
 
             {/* 5 Parágrafos da Trajetória */}
-            <div className="space-y-2">
+            <div className="space-y-3">
               <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-                Trajetória Profissional — 5 Parágrafos
+                Trajetória Profissional — 5 Parágrafos (Modal Saiba Mais)
               </span>
-              <div>
-                <label className="block text-[9px] text-slate-400 mb-0.5">Parágrafo 1</label>
-                <textarea
-                  rows={2}
-                  value={siteConfig.founder.curriculumTrajectoryP1 || ''}
-                  onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP1: e.target.value } })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[9px] text-slate-400 mb-0.5">Parágrafo 2</label>
-                <textarea
-                  rows={2}
-                  value={siteConfig.founder.curriculumTrajectoryP2 || ''}
-                  onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP2: e.target.value } })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[9px] text-slate-400 mb-0.5">Parágrafo 3</label>
-                <textarea
-                  rows={2}
-                  value={siteConfig.founder.curriculumTrajectoryP3 || ''}
-                  onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP3: e.target.value } })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[9px] text-slate-400 mb-0.5">Parágrafo 4</label>
-                <textarea
-                  rows={2}
-                  value={siteConfig.founder.curriculumTrajectoryP4 || ''}
-                  onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP4: e.target.value } })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[9px] text-slate-400 mb-0.5">Parágrafo 5 (Frase Dourada)</label>
-                <input
-                  type="text"
-                  value={siteConfig.founder.curriculumTrajectoryP5 || ''}
-                  onChange={(e) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP5: e.target.value } })}
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
-                />
-              </div>
+              <RichTextarea
+                label="Parágrafo 1"
+                rows={2}
+                value={siteConfig.founder.curriculumTrajectoryP1 ?? ''}
+                onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP1: val } })}
+              />
+              <RichTextarea
+                label="Parágrafo 2"
+                rows={2}
+                value={siteConfig.founder.curriculumTrajectoryP2 ?? ''}
+                onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP2: val } })}
+              />
+              <RichTextarea
+                label="Parágrafo 3"
+                rows={2}
+                value={siteConfig.founder.curriculumTrajectoryP3 ?? ''}
+                onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP3: val } })}
+              />
+              <RichTextarea
+                label="Parágrafo 4"
+                rows={2}
+                value={siteConfig.founder.curriculumTrajectoryP4 ?? ''}
+                onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP4: val } })}
+              />
+              <RichTextarea
+                label="Parágrafo 5 (Destaque Dourado)"
+                rows={2}
+                value={siteConfig.founder.curriculumTrajectoryP5 ?? ''}
+                onChange={(val) => updateSiteConfig({ founder: { ...siteConfig.founder, curriculumTrajectoryP5: val } })}
+              />
             </div>
 
             {/* Listas do Currículo: Liderança, Cargos, Docência, Obras */}
@@ -1838,6 +1794,55 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Box Azul Escuro Acima do Botão LIVROS DIGITAIS PUBLICADOS (Item 64 e 93) */}
+            <div className="p-3.5 rounded-xl bg-[#071122] border border-[#D4AF37]/50 space-y-3 mt-3">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-[11px] font-bold text-[#F6E27A] uppercase">
+                  Box Final (Acima do Botão "LIVROS DIGITAIS PUBLICADOS" · Item 64 e 93)
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const isHidden = siteConfig.founder.curriculumClosingP1 === '' && siteConfig.founder.curriculumClosingP2 === '';
+                    updateSiteConfig({
+                      founder: {
+                        ...siteConfig.founder,
+                        curriculumClosingP1: isHidden
+                          ? 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'
+                          : '',
+                        curriculumClosingP2: isHidden
+                          ? 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'
+                          : ''
+                      }
+                    });
+                  }}
+                  className="px-2 py-1 rounded bg-rose-950/60 border border-rose-500/40 text-rose-200 hover:bg-rose-900/80 text-[10px] font-bold cursor-pointer shrink-0"
+                >
+                  {siteConfig.founder.curriculumClosingP1 === '' && siteConfig.founder.curriculumClosingP2 === ''
+                    ? 'Restaurar Box'
+                    : 'Excluir / Ocultar Box'}
+                </button>
+              </div>
+              <RichTextarea
+                label="Parágrafo 1 do Box Final (Item 64 e 93)"
+                rows={3}
+                value={siteConfig.founder.curriculumClosingP1 ?? 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'}
+                onChange={(val) => updateSiteConfig({
+                  founder: { ...siteConfig.founder, curriculumClosingP1: val }
+                })}
+                hint="Formate livremente com negrito, cores e alinhamentos ou limpe para ocultar"
+              />
+              <RichTextarea
+                label="Parágrafo 2 do Box Final (Item 64 e 93)"
+                rows={3}
+                value={siteConfig.founder.curriculumClosingP2 ?? 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'}
+                onChange={(val) => updateSiteConfig({
+                  founder: { ...siteConfig.founder, curriculumClosingP2: val }
+                })}
+                hint="Formate livremente com negrito, cores e alinhamentos ou limpe para ocultar"
+              />
             </div>
           </div>
         </div>
@@ -2071,7 +2076,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          <div className="space-y-3 max-h-[440px] overflow-y-auto pr-1">
+          <div className="space-y-3">
             {(siteConfig.excellenceSolutions || []).map((sol, idx) => (
               <div key={sol.id || idx} className="p-3 rounded-xl bg-[#050B14] border border-slate-700 space-y-2">
                 <div className="flex items-center justify-between gap-2">
@@ -2107,7 +2112,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   className="w-full px-2 py-1 rounded bg-[#071122] border border-slate-800 text-[#F6E27A] text-[11px]"
                 />
                 <RichTextarea
-                  label="Descrição da Solução (Item 89)"
+                  label="Descrição no Card (Item 89 e 98)"
                   rows={2}
                   value={sol.description}
                   onChange={(val) => {
@@ -2117,6 +2122,25 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   }}
                   hint="Respeita quebras de linha e formatação rica"
                 />
+                <RichTextarea
+                  label="Texto Completo do Modal (Ao Clicar no Card)"
+                  rows={3}
+                  value={sol.extendedText || ''}
+                  onChange={(val) => {
+                    const updated = [...siteConfig.excellenceSolutions];
+                    updated[idx] = { ...updated[idx], extendedText: val };
+                    updateSiteConfig({ excellenceSolutions: updated });
+                  }}
+                />
+                {sol.number === '08' && (
+                  <button
+                    type="button"
+                    onClick={() => setActiveSection('gestao_juridica')}
+                    className="w-full py-2 px-3 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] hover:bg-[#D4AF37] hover:text-black text-xs font-bold uppercase tracking-wider transition-all cursor-pointer"
+                  >
+                    Editar Página Interna de Gestão Jurídica 4.0 →
+                  </button>
+                )}
               </div>
             ))}
           </div>
@@ -2145,43 +2169,316 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               placeholder="Frase Dourada da Academia"
               className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
             />
-            <textarea
+            <RichTextarea
+              label="Texto do Palestrante"
               rows={2}
               value={siteConfig.academiaLeao?.speakerText || ''}
-              onChange={(e) => updateSiteConfig({
-                academiaLeao: { ...(siteConfig.academiaLeao || {}), speakerText: e.target.value }
+              onChange={(val) => updateSiteConfig({
+                academiaLeao: { ...(siteConfig.academiaLeao || {}), speakerText: val }
               })}
-              placeholder="Texto do Palestrante"
-              className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
             />
           </div>
         </div>
       )}
 
       {/* ============================================================== */}
-      {/* 8. SEÇÃO: AGENDAMENTO / CONSULTA DIGITAL                       */}
+      {/* 7.5. SEÇÃO: PÁGINA INTERNA GESTÃO JURÍDICA 4.0 (Item 66 e 98)   */}
+      {/* ============================================================== */}
+      {activeSection === 'gestao_juridica' && (
+        <div className="space-y-4">
+          <div className="border-b border-slate-800 pb-2">
+            <h3 className="font-cinzel text-sm font-bold text-white uppercase flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#F6E27A]" />
+              <span>Página Interna: Gestão Jurídica 4.0 (Card 08)</span>
+            </h3>
+            <p className="text-[11px] text-slate-400">
+              Edição completa da página interna da Gestão Jurídica 4.0 (Item 66 e 98).
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-bold mb-1">Botão Voltar (Item 66)</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.btnVoltarText || 'Voltar'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), btnVoltarText: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">Kicker Superior (Com Balança)</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.kickerBadge || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), kickerBadge: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-white font-bold mb-1">Título Principal</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.heroTitle || 'GESTÃO JURÍDICA 4.0'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), heroTitle: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+              />
+            </div>
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">Subtítulo Dourado</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.heroSubtitle || 'ADVOCACIA ESTRATÉGICA, INTELIGÊNCIA JURÍDICA E GESTÃO DE VANGUARDA'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), heroSubtitle: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+              />
+            </div>
+          </div>
+
+          <RichTextarea
+            label="Primeiro Parágrafo da Página (Item 66)"
+            rows={4}
+            value={siteConfig.gestaoJuridica?.introParagraph1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados.'}
+            onChange={(val) => updateSiteConfig({
+              gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), introParagraph1: val }
+            })}
+          />
+          <RichTextarea
+            label="Vertentes de Alta Performance (Organizacional e Judicial - Item 66)"
+            rows={4}
+            value={siteConfig.gestaoJuridica?.introParagraph2 || 'Este serviço especializado e estratégico, possui duas vertentes de alta performance: ORGANIZACIONAL e/ou JUDICIAL.\n\n► GESTÃO JURÍDICA ORGANIZACIONAL\nCom atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'}
+            onChange={(val) => updateSiteConfig({
+              gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), introParagraph2: val }
+            })}
+          />
+
+          {/* Frente 1: Organizacional */}
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+              Frente 1: Gestão Jurídica Organizacional & Diagnóstico Estratégico
+            </span>
+            <RichTextarea
+              label="Texto do Box Azul-Marinho (Diagnóstico Situacional Estratégico)"
+              rows={2}
+              value={siteConfig.gestaoJuridica?.frente1BoxTitle || 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente1BoxTitle: val }
+              })}
+            />
+            <div className="space-y-2">
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Item 1: Auditoria Preventiva</label>
+                <input
+                  type="text"
+                  value={siteConfig.gestaoJuridica?.frente1Card1Desc || 'Auditoria preventiva da situação atual, contratos e fluxos corporativos;'}
+                  onChange={(e) => updateSiteConfig({
+                    gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente1Card1Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Item 2: Análise Jurídica Especializada</label>
+                <input
+                  type="text"
+                  value={siteConfig.gestaoJuridica?.frente1Card2Desc || 'Análise jurídica especializada alinhada ao modelo de negócios e setor de atuação;'}
+                  onChange={(e) => updateSiteConfig({
+                    gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente1Card2Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Item 3: Mapeamento de Riscos e Vulnerabilidades</label>
+                <input
+                  type="text"
+                  value={siteConfig.gestaoJuridica?.frente1Card3Desc || 'Mapeamento detalhado de riscos operacionais, tributários e inconformidades legais;'}
+                  onChange={(e) => updateSiteConfig({
+                    gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente1Card3Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-slate-400 mb-0.5">Item 4: Soluções Jurídicas Estratégicas</label>
+                <input
+                  type="text"
+                  value={siteConfig.gestaoJuridica?.frente1Card4Desc || 'Desenvolvimento e implantação de soluções preventivas e estruturantes personalizadas;'}
+                  onChange={(e) => updateSiteConfig({
+                    gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente1Card4Desc: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                />
+              </div>
+            </div>
+            <RichTextarea
+              label="Conclusão da Frente 1"
+              rows={3}
+              value={siteConfig.gestaoJuridica?.frente1Conclusion || 'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente1Conclusion: val }
+              })}
+            />
+          </div>
+
+          {/* Frente 2: Judicial */}
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+              Frente 2: Gestão Jurídica Judicial & 3 Pilares Essenciais
+            </span>
+            <RichTextarea
+              label="Introdução da Frente Judicial"
+              rows={2}
+              value={siteConfig.gestaoJuridica?.frente2Desc || 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente2Desc: val }
+              })}
+            />
+            <RichTextarea
+              label="Pilar 1: DECISÕES ASSERTIVAS"
+              rows={2}
+              value={siteConfig.gestaoJuridica?.frente2Pilar1Desc || 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente2Pilar1Desc: val }
+              })}
+            />
+            <RichTextarea
+              label="Pilar 2: GESTÃO DE RESULTADOS"
+              rows={2}
+              value={siteConfig.gestaoJuridica?.frente2Pilar2Desc || 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente2Pilar2Desc: val }
+              })}
+            />
+            <RichTextarea
+              label="Pilar 3: COMPETITIVIDADE"
+              rows={2}
+              value={siteConfig.gestaoJuridica?.frente2Pilar3Desc || 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente2Pilar3Desc: val }
+              })}
+            />
+            <RichTextarea
+              label="Impacto e Vantagem Competitiva da Frente Judicial"
+              rows={3}
+              value={siteConfig.gestaoJuridica?.frente2Impact || 'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.'}
+              onChange={(val) => updateSiteConfig({
+                gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), frente2Impact: val }
+              })}
+            />
+          </div>
+
+          {/* CTA Final */}
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">Destaques & Botão AGENDAR CONSULTA DIGITAL</span>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Destaque 1</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.ctaHighlight1 || 'Atendimento Brasil 100% digital e confidencial com a mesma excelência jurídica do presencial.'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), ctaHighlight1: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Destaque 2</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.ctaHighlight2 || 'Diagnóstico Estratégico Personalizado para o tamanho do seu negócio e patrimônio.'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), ctaHighlight2: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] text-slate-400 mb-0.5">Destaque 3</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.ctaHighlight3 || 'Três Gerações de Excelência Jurídica dedicadas à perpetuação do seu legado.'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), ctaHighlight3: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] text-[#F6E27A] font-bold mb-0.5">Texto do Botão de Agendamento</label>
+              <input
+                type="text"
+                value={siteConfig.gestaoJuridica?.ctaButtonText || 'AGENDAR CONSULTA DIGITAL'}
+                onChange={(e) => updateSiteConfig({
+                  gestaoJuridica: { ...(siteConfig.gestaoJuridica || {}), ctaButtonText: e.target.value }
+                })}
+                className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* 8. SEÇÃO: AGENDAMENTO / CONSULTA DIGITAL (Item 68 e 100)       */}
       {/* ============================================================== */}
       {activeSection === 'consultation' && (
         <div className="space-y-4">
           <div className="border-b border-slate-800 pb-2">
             <h3 className="font-cinzel text-sm font-bold text-white uppercase flex items-center gap-2">
               <PhoneCall className="w-4 h-4 text-[#F6E27A]" />
-              <span>Agendamento de Consulta Digital</span>
+              <span>Agendamento de Consulta Digital (Item 68 e 100)</span>
             </h3>
           </div>
 
-          <ImageUploadField
-            label="Imagem de Fundo da Seção de Agendamento"
-            description="Foto de fundo que ambienta a caixa de solicitação de consulta."
-            currentValue={siteConfig.digitalConsultation?.bgImageUrl}
-            defaultValue="/img/novofundohero.jpg"
-            aspectRatio="video"
-            onChange={(newUrl) => updateSiteConfig({
-              digitalConsultation: { ...(siteConfig.digitalConsultation || {}), bgImageUrl: newUrl }
-            })}
-          />
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <ImageUploadField
+              label="Imagem de Fundo da Seção"
+              description="Foto de fundo que ambienta a seção de solicitação de consulta."
+              currentValue={siteConfig.digitalConsultation?.bgImageUrl}
+              defaultValue="/img/consulta-digital-2.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => updateSiteConfig({
+                digitalConsultation: { ...(siteConfig.digitalConsultation || {}), bgImageUrl: newUrl }
+              })}
+            />
+            <ImageUploadField
+              label="Foto do Card Direito (Item 100)"
+              description="Foto exibida no quadro direito ao lado do texto de agendamento."
+              currentValue={siteConfig.digitalConsultation?.cardImageUrl}
+              defaultValue="/img/consulta-digital-2.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => updateSiteConfig({
+                digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardImageUrl: newUrl }
+              })}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                Kicker Superior
+              </label>
+              <input
+                type="text"
+                value={siteConfig.digitalConsultation?.sectionKicker || 'ATENDIMENTO JURÍDICO 100% ONLINE EM TODO O BRASIL'}
+                onChange={(e) => updateSiteConfig({
+                  digitalConsultation: { ...(siteConfig.digitalConsultation || {}), sectionKicker: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+              />
+            </div>
             <div>
               <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
                 Título em Branco
@@ -2210,15 +2507,70 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs text-slate-300 font-semibold mb-1">Descrição</label>
-            <textarea
-              rows={3}
-              value={siteConfig.digitalConsultation?.description || ''}
+          <RichTextarea
+            label="Descrição Principal (Editor Rico · Item 68 e 100)"
+            rows={4}
+            value={siteConfig.digitalConsultation?.description || ''}
+            onChange={(val) => updateSiteConfig({
+              digitalConsultation: { ...(siteConfig.digitalConsultation || {}), description: val }
+            })}
+          />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs text-slate-300 font-semibold mb-1">Ponto de Destaque 1</label>
+              <input
+                type="text"
+                value={siteConfig.digitalConsultation?.point1 || 'Videoconferência exclusiva com hora marcada'}
+                onChange={(e) => updateSiteConfig({
+                  digitalConsultation: { ...(siteConfig.digitalConsultation || {}), point1: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+              />
+            </div>
+            <div>
+              <label className="block text-xs text-slate-300 font-semibold mb-1">Ponto de Destaque 2</label>
+              <input
+                type="text"
+                value={siteConfig.digitalConsultation?.point2 || 'Sigilo profissional absoluto e análise personalizada'}
+                onChange={(e) => updateSiteConfig({
+                  digitalConsultation: { ...(siteConfig.digitalConsultation || {}), point2: e.target.value }
+                })}
+                className="w-full px-3 py-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+              />
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+              Legendas do Card de Imagem Direito (Item 100)
+            </span>
+            <input
+              type="text"
+              value={siteConfig.digitalConsultation?.cardBadge || 'CONEXÃO DIRETA E SEGURA'}
               onChange={(e) => updateSiteConfig({
-                digitalConsultation: { ...(siteConfig.digitalConsultation || {}), description: e.target.value }
+                digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardBadge: e.target.value }
               })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+              placeholder="Selo Dourado Superior"
+              className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+            />
+            <input
+              type="text"
+              value={siteConfig.digitalConsultation?.cardTitle || 'Atendimento Jurídico em Todos os Estados do Brasil'}
+              onChange={(e) => updateSiteConfig({
+                digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardTitle: e.target.value }
+              })}
+              placeholder="Título do Card"
+              className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+            />
+            <input
+              type="text"
+              value={siteConfig.digitalConsultation?.cardSubtitle || 'Conforto, agilidade tecnológica e a excelência de mais de um século de tradição jurídica sem precisar sair de casa ou da sua empresa.'}
+              onChange={(e) => updateSiteConfig({
+                digitalConsultation: { ...(siteConfig.digitalConsultation || {}), cardSubtitle: e.target.value }
+              })}
+              placeholder="Subtítulo do Card"
+              className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-slate-300 text-xs"
             />
           </div>
 
@@ -2315,7 +2667,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </button>
           </div>
 
-          {/* CASO A: SEÇÃO DA HOLDING NA HOME */}
+          {/* CASO A: SEÇÃO DA HOLDING NA HOME + PÁGINA INTERNA (Item 69) */}
           {!(activeSection === 'landing_holding' || holdingSubTab === 'landing') ? (
             <div className="space-y-4">
               <ImageUploadField
@@ -2365,44 +2717,131 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <div>
-                  <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 1</label>
-                  <textarea
-                    rows={2}
-                    value={siteConfig.holdingFamiliar?.paragraph1 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph1: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 2</label>
-                  <textarea
-                    rows={2}
-                    value={siteConfig.holdingFamiliar?.paragraph2 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph2: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-slate-300 font-semibold mb-1">Parágrafo 3</label>
-                  <textarea
-                    rows={2}
-                    value={siteConfig.holdingFamiliar?.paragraph3 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph3: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                  />
-                </div>
+              <div className="space-y-3">
+                <RichTextarea
+                  label="Parágrafo 1"
+                  rows={2}
+                  value={siteConfig.holdingFamiliar?.paragraph1 || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph1: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 2"
+                  rows={2}
+                  value={siteConfig.holdingFamiliar?.paragraph2 || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph2: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 3"
+                  rows={2}
+                  value={siteConfig.holdingFamiliar?.paragraph3 || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), paragraph3: val }
+                  })}
+                />
+              </div>
+
+              {/* Card da Imagem (BMW) */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2">
+                <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+                  Textos Sob a Foto da Família & BMW
+                </span>
+                <input
+                  type="text"
+                  value={siteConfig.holdingFamiliar?.cardBadge || 'PROTEÇÃO JURÍDICA PATRIMONIAL E EMPRESARIAL'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), cardBadge: e.target.value }
+                  })}
+                  placeholder="Badge Dourado"
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-[#F6E27A] text-xs font-bold"
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingFamiliar?.cardTitle || 'HOLDING FAMILIAR E EMPRESARIAL'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), cardTitle: e.target.value }
+                  })}
+                  placeholder="Título do Card"
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+                <RichTextarea
+                  label="Texto do Card"
+                  rows={2}
+                  value={siteConfig.holdingFamiliar?.cardText || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), cardText: val }
+                  })}
+                />
+              </div>
+
+              {/* Modal / Página Interna da Holding Familiar (Item 69) */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+                  Página Interna / Modal: "SAIBA MAIS" da Holding Familiar (Item 69)
+                </span>
+                <input
+                  type="text"
+                  value={siteConfig.holdingFamiliar?.boxWhatIsHeading || 'O QUE É UMA HOLDING FAMILIAR?'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), boxWhatIsHeading: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+                <RichTextarea
+                  label="Texto: O Que é uma Holding Familiar?"
+                  rows={3}
+                  value={siteConfig.holdingFamiliar?.boxWhatIsText || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), boxWhatIsText: val }
+                  })}
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingFamiliar?.boxWhyTitle || 'POR QUE CONSTITUIR UMA HOLDING?'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), boxWhyTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+                <RichTextarea
+                  label="Texto: Por que Constituir uma Holding?"
+                  rows={3}
+                  value={siteConfig.holdingFamiliar?.boxWhyText || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), boxWhyText: val }
+                  })}
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingFamiliar?.tableTitle || 'CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), tableTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                />
+                <RichTextarea
+                  label="Subtítulo do Box de Custos (Item 69)"
+                  rows={2}
+                  value={siteConfig.holdingFamiliar?.tableSubtitle || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), tableSubtitle: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Texto de Economia no Box de Custos"
+                  rows={2}
+                  value={siteConfig.holdingFamiliar?.tableSavingsText || ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingFamiliar: { ...(siteConfig.holdingFamiliar || {}), tableSavingsText: val }
+                  })}
+                />
               </div>
             </div>
           ) : (
-            /* CASO B: LANDING PAGE COMPLETA HOLDING 4.0 (/1208/) */
+            /* CASO B: LANDING PAGE COMPLETA HOLDING 4.0 (/1208/) (Itens 71, 77, 94, 105, 114) */
             <div className="space-y-5">
               {/* Fotos da Landing Page */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -2430,105 +2869,244 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </div>
 
               {/* Textos do Hero da LP */}
-              <div className="p-3 rounded-xl bg-[#050B14] border border-slate-800 space-y-2.5">
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
                 <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">
-                  Textos do Hero da Landing Page
+                  1. Textos do Hero da Landing Page (/1208/)
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Eyebrow Dourado</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.heroEyebrow || 'HOLDING FAMILIAR'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), heroEyebrow: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título Branco</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.heroTitle || 'PLANEJAMENTO'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), heroTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Destaque Dourado</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.heroTitleHighlight || 'PATRIMONIAL 4.0'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), heroTitleHighlight: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[10px] text-[#E5C158] mb-0.5">Subtítulo do Hero</label>
                   <input
                     type="text"
-                    value={siteConfig.holdingLanding?.heroEyebrow || 'HOLDING FAMILIAR'}
+                    value={siteConfig.holdingLanding?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA'}
                     onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroEyebrow: e.target.value }
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroSubtitle: e.target.value }
                     })}
-                    placeholder="Eyebrow"
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A]"
-                  />
-                  <input
-                    type="text"
-                    value={siteConfig.holdingLanding?.heroTitle || 'PLANEJAMENTO'}
-                    onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroTitle: e.target.value }
-                    })}
-                    placeholder="Título Hero"
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#E5C158] font-bold"
                   />
                 </div>
-                <input
-                  type="text"
-                  value={siteConfig.holdingLanding?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA'}
-                  onChange={(e) => updateSiteConfig({
-                    holdingLanding: { ...(siteConfig.holdingLanding || {}), heroSubtitle: e.target.value }
-                  })}
-                  placeholder="Subtítulo Hero"
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#E5C158] font-bold"
-                />
 
-                <div className="space-y-1.5 pt-1">
-                  <span className="text-[10px] text-slate-400 block font-semibold">Os 5 Parágrafos do Hero</span>
-                  <textarea
+                <div className="space-y-2.5 pt-1">
+                  <span className="text-[10px] text-slate-300 block font-semibold">Os 5 Parágrafos do Hero (Editor Rico)</span>
+                  <RichTextarea
+                    label="Parágrafo 1 do Hero"
                     rows={2}
-                    value={siteConfig.holdingLanding?.heroParagraph1 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph1: e.target.value }
+                    value={siteConfig.holdingLanding?.heroParagraph1 ?? ''}
+                    onChange={(val) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph1: val }
                     })}
-                    placeholder="Parágrafo 1"
-                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-white text-[11px]"
                   />
-                  <textarea
+                  <RichTextarea
+                    label="Parágrafo 2 do Hero"
                     rows={2}
-                    value={siteConfig.holdingLanding?.heroParagraph2 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph2: e.target.value }
+                    value={siteConfig.holdingLanding?.heroParagraph2 ?? ''}
+                    onChange={(val) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph2: val }
                     })}
-                    placeholder="Parágrafo 2"
-                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-white text-[11px]"
                   />
-                  <textarea
+                  <RichTextarea
+                    label="Parágrafo 3 do Hero"
                     rows={2}
-                    value={siteConfig.holdingLanding?.heroParagraph3 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph3: e.target.value }
+                    value={siteConfig.holdingLanding?.heroParagraph3 ?? ''}
+                    onChange={(val) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph3: val }
                     })}
-                    placeholder="Parágrafo 3"
-                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-white text-[11px]"
                   />
-                  <textarea
+                  <RichTextarea
+                    label="Parágrafo 4 do Hero"
                     rows={2}
-                    value={siteConfig.holdingLanding?.heroParagraph4 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph4: e.target.value }
+                    value={siteConfig.holdingLanding?.heroParagraph4 ?? ''}
+                    onChange={(val) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph4: val }
                     })}
-                    placeholder="Parágrafo 4"
-                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-white text-[11px]"
                   />
-                  <textarea
+                  <RichTextarea
+                    label="Parágrafo 5 do Hero (Destaque)"
                     rows={2}
-                    value={siteConfig.holdingLanding?.heroParagraph5 || ''}
-                    onChange={(e) => updateSiteConfig({
-                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph5: e.target.value }
+                    value={siteConfig.holdingLanding?.heroParagraph5 ?? ''}
+                    onChange={(val) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), heroParagraph5: val }
                     })}
-                    placeholder="Parágrafo 5 (Destaque)"
-                    className="w-full p-1.5 rounded bg-[#071122] border border-[#D4AF37]/40 text-white text-[11px] font-medium"
                   />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Botão 1 do Hero</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.heroBtnViabilidade || 'AGENDAR SESSÃO DE VIABILIDADE'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), heroBtnViabilidade: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Botão 2 do Hero</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.heroBtnCustos || 'COMPARATIVO DE CUSTOS'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), heroBtnCustos: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Os 7 Problemas Fatais do Inventário */}
-              <div className="p-3 rounded-xl bg-[#050B14] border border-red-500/30 space-y-2">
+              {/* 2. Card Showcase & Estratégia (O Que é uma Holding Familiar) */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">
+                  2. Card da Foto Familiar & Seção "O Que é uma Holding Familiar?"
+                </span>
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.showcaseBadge || 'PROTEÇÃO JURÍDICA PATRIMONIAL E EMPRESARIAL'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), showcaseBadge: e.target.value }
+                  })}
+                  placeholder="Badge do Card da Foto"
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-bold"
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.showcaseTitle || 'HOLDING FAMILIAR E EMPRESARIAL'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), showcaseTitle: e.target.value }
+                  })}
+                  placeholder="Título do Card da Foto"
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+                <RichTextarea
+                  label="Texto do Card da Foto"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.showcaseText ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), showcaseText: val }
+                  })}
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Kicker da Seção Estratégia</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.strategyKicker || 'ESTRATÉGIA E GOVERNANÇA'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), strategyKicker: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-white mb-0.5">Título da Seção Estratégia</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.strategyTitle || 'O QUE É UMA HOLDING FAMILIAR?'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), strategyTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+                <RichTextarea
+                  label="Parágrafo 1 (O Que é uma Holding Familiar)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.strategyParagraph1 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), strategyParagraph1: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 2 (O Que é uma Holding Familiar)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.strategyParagraph2 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), strategyParagraph2: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 3 (O Que é uma Holding Familiar)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.strategyParagraph3 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), strategyParagraph3: val }
+                  })}
+                />
+              </div>
+
+              {/* 3. Os 7 Problemas Fatais do Inventário */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-red-500/30 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-red-400 uppercase">
-                    Problemas do Inventário ({(siteConfig.holdingLanding?.problemsList || []).length})
+                    3. Problemas do Inventário ({(siteConfig.holdingLanding?.problemsList || []).length})
                   </span>
                   <button
                     type="button"
                     onClick={handleAddHoldingProblem}
-                    className="text-[10px] text-[#F6E27A] hover:underline"
+                    className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer"
                   >
                     + Adicionar
                   </button>
                 </div>
-                <div className="space-y-1.5 max-h-[220px] overflow-y-auto pr-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    value={siteConfig.holdingLanding?.problemsKicker || 'DIAGNÓSTICO DE RISCO PATRIMONIAL'}
+                    onChange={(e) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), problemsKicker: e.target.value }
+                    })}
+                    placeholder="Kicker"
+                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-xs text-[#F6E27A]"
+                  />
+                  <input
+                    type="text"
+                    value={siteConfig.holdingLanding?.problemsTitle || 'OS PROBLEMAS DO INVENTÁRIO'}
+                    onChange={(e) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), problemsTitle: e.target.value }
+                    })}
+                    placeholder="Título"
+                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-xs text-white font-bold"
+                  />
+                </div>
+                <div className="space-y-1.5">
                   {(siteConfig.holdingLanding?.problemsList || []).map((prob, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <input
@@ -2553,21 +3131,41 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 </div>
               </div>
 
-              {/* As 18 Vantagens da Holding Familiar */}
-              <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2">
+              {/* 4. As 18 Vantagens da Holding Familiar */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-[#F6E27A] uppercase">
-                    Vantagens da Holding Familiar ({(siteConfig.holdingLanding?.advantagesList || []).length})
+                    4. Vantagens da Holding Familiar ({(siteConfig.holdingLanding?.advantagesList || []).length})
                   </span>
                   <button
                     type="button"
                     onClick={handleAddHoldingAdvantage}
-                    className="text-[10px] text-[#F6E27A] hover:underline"
+                    className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer"
                   >
                     + Adicionar
                   </button>
                 </div>
-                <div className="space-y-1.5 max-h-[260px] overflow-y-auto pr-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    value={siteConfig.holdingLanding?.advantagesKicker || 'BENEFÍCIOS EXCLUSIVOS DO SISTEMA 4.0'}
+                    onChange={(e) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), advantagesKicker: e.target.value }
+                    })}
+                    placeholder="Kicker"
+                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-xs text-[#F6E27A]"
+                  />
+                  <input
+                    type="text"
+                    value={siteConfig.holdingLanding?.advantagesTitle || 'AS VANTAGENS DA HOLDING FAMILIAR'}
+                    onChange={(e) => updateSiteConfig({
+                      holdingLanding: { ...(siteConfig.holdingLanding || {}), advantagesTitle: e.target.value }
+                    })}
+                    placeholder="Título"
+                    className="w-full p-1.5 rounded bg-[#071122] border border-slate-800 text-xs text-white font-bold"
+                  />
+                </div>
+                <div className="space-y-1.5 max-h-[300px] overflow-y-auto pr-1">
                   {(siteConfig.holdingLanding?.advantagesList || []).map((adv, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <span className="text-[10px] font-mono text-[#D4AF37] w-5 text-right">{idx + 1}.</span>
@@ -2593,14 +3191,38 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 </div>
               </div>
 
-              {/* Estudo Comparativo de Custos Completo */}
+              {/* 5. Estudo Comparativo de Custos Completo */}
               <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 space-y-3">
                 <span className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider block">
-                  Tabela Comparativa de Custos (Inventário x Holding 4.0)
+                  5. Tabela Comparativa de Custos Completa (Inventário x Holding 4.0)
                 </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Valor de Aquisição (IR)</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.aquisicaoValor || 'R$ 500.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), aquisicaoValor: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Valor de Mercado Atual</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.mercadoValor || 'R$ 1.500.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), mercadoValor: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                    />
+                  </div>
+                </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-[10px] text-slate-400 mb-0.5">ITCMD Inventário</label>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">1. ITCMD Inventário</label>
                     <input
                       type="text"
                       value={siteConfig.holdingLanding?.itcmdInventario || 'R$ 75.000,00 (5%)'}
@@ -2611,7 +3233,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] text-emerald-400 mb-0.5">ITCMD Holding</label>
+                    <label className="block text-[10px] text-emerald-400 mb-0.5">1. ITCMD Holding</label>
                     <input
                       type="text"
                       value={siteConfig.holdingLanding?.itcmdHolding || 'R$ 60.000,00 (4%)'}
@@ -2623,7 +3245,76 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-[10px] text-slate-400 mb-0.5">Honorários Inventário</label>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">2. Custas Judiciais Inventário</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.custasInventario || 'R$ 5.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), custasInventario: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-emerald-400 mb-0.5">2. Custas Junta Comercial Holding</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.custasHolding || 'R$ 1.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), custasHolding: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-emerald-500/40 text-emerald-300 text-xs font-bold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">3. Certidões Inventário</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.certidoesInventario || 'R$ 2.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), certidoesInventario: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-emerald-400 mb-0.5">3. Certidões Holding</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.certidoesHolding || 'R$ 0,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), certidoesHolding: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-emerald-500/40 text-emerald-300 text-xs font-bold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">4. Ganho de Capital (IR) Inventário</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.ganhoCapitalInventario || 'R$ 85.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), ganhoCapitalInventario: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-emerald-400 mb-0.5">4. Ganho de Capital (IR) Holding</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.ganhoCapitalHolding || 'R$ 0,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), ganhoCapitalHolding: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-emerald-500/40 text-emerald-300 text-xs font-bold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">5. Honorários Inventário</label>
                     <input
                       type="text"
                       value={siteConfig.holdingLanding?.honorariosInventario || 'R$ 120.000,00 (8%)'}
@@ -2634,12 +3325,35 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] text-emerald-400 mb-0.5">Honorários Holding</label>
+                    <label className="block text-[10px] text-emerald-400 mb-0.5">5. Honorários Holding</label>
                     <input
                       type="text"
                       value={siteConfig.holdingLanding?.honorariosHolding || 'R$ 70.000,00'}
                       onChange={(e) => updateSiteConfig({
                         holdingLanding: { ...(siteConfig.holdingLanding || {}), honorariosHolding: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-emerald-500/40 text-emerald-300 text-xs font-bold"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">6. Registro de Imóveis Inventário</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.registroInventario || 'R$ 10.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), registroInventario: e.target.value }
+                      })}
+                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-emerald-400 mb-0.5">6. Registro de Imóveis Holding</label>
+                    <input
+                      type="text"
+                      value={siteConfig.holdingLanding?.registroHolding || 'R$ 2.000,00'}
+                      onChange={(e) => updateSiteConfig({
+                        holdingLanding: { ...(siteConfig.holdingLanding || {}), registroHolding: e.target.value }
                       })}
                       className="w-full p-1.5 rounded bg-[#071122] border border-emerald-500/40 text-emerald-300 text-xs font-bold"
                     />
@@ -2695,23 +3409,153 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 </div>
               </div>
 
-              {/* FAQs da Landing Page */}
-              <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2">
+              {/* 6. Box: FAÇA O SEU PLANEJAMENTO 4.0 */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
+                <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">
+                  6. Box CTA: "FAÇA O SEU PLANEJAMENTO 4.0"
+                </span>
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.ctaBoxTitle || 'FAÇA O SEU PLANEJAMENTO 4.0'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), ctaBoxTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+                <RichTextarea
+                  label="Texto do Box Faça o Seu Planejamento 4.0"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.ctaBoxText ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), ctaBoxText: val }
+                  })}
+                />
+              </div>
+
+              {/* 7. Público-Alvo: Para Quem é a Holding Familiar? */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold text-[#F6E27A] uppercase">
-                    Perguntas Frequentes / FAQs ({(siteConfig.holdingLanding?.faqs || []).length})
+                    7. Público-Alvo: Para Quem é a Holding?
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleAddHoldingTarget}
+                    className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer"
+                  >
+                    + Adicionar Perfil
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.targetTitle || 'PARA QUEM É A HOLDING FAMILIAR?'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), targetTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-white text-xs font-bold"
+                />
+                <RichTextarea
+                  label="Introdução Público-Alvo"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.targetIntro ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), targetIntro: val }
+                  })}
+                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                  {(siteConfig.holdingLanding?.targetList || []).map((tItem, idx) => (
+                    <div key={idx} className="flex items-center gap-1.5">
+                      <input
+                        type="text"
+                        value={tItem}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.holdingLanding?.targetList || [])];
+                          updated[idx] = e.target.value;
+                          updateSiteConfig({ holdingLanding: { ...(siteConfig.holdingLanding || {}), targetList: updated } });
+                        }}
+                        className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-800 text-xs text-[#F6E27A] font-bold"
+                      />
+                      <button type="button" onClick={() => handleRemoveHoldingTarget(idx)} className="p-1 text-red-400">
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 8. Dr. Aldo Leão na Landing Page */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
+                <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">
+                  8. Seção Dr. Aldo Leão na Landing Page (/1208/)
+                </span>
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.drAldoKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), drAldoKicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-bold"
+                />
+                <RichTextarea
+                  label="Parágrafo 1 Bio Dr. Aldo (LP)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.drAldoBio1 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), drAldoBio1: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 2 Bio Dr. Aldo (LP)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.drAldoBio2 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), drAldoBio2: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 3 Bio Dr. Aldo (LP)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.drAldoBio3 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), drAldoBio3: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 4 Bio Dr. Aldo (LP)"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.drAldoBio4 ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), drAldoBio4: val }
+                  })}
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.drAldoCaption || 'Conferência e Liderança em Planejamento Patrimonial 4.0'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), drAldoCaption: e.target.value }
+                  })}
+                  placeholder="Legenda da Foto da Palestra"
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-slate-300"
+                />
+              </div>
+
+              {/* 9. FAQs da Landing Page */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-[#F6E27A] uppercase">
+                    9. Perguntas Frequentes / FAQs ({(siteConfig.holdingLanding?.faqs || []).length})
                   </span>
                   <button
                     type="button"
                     onClick={handleAddHoldingFaq}
-                    className="text-[10px] text-[#F6E27A] hover:underline"
+                    className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer"
                   >
                     + Adicionar FAQ
                   </button>
                 </div>
-                <div className="space-y-2 max-h-[260px] overflow-y-auto pr-1">
+                <div className="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">
                   {(siteConfig.holdingLanding?.faqs || []).map((faq, idx) => (
-                    <div key={idx} className="p-2 rounded bg-[#071122] border border-slate-800 space-y-1">
+                    <div key={idx} className="p-2.5 rounded bg-[#071122] border border-slate-800 space-y-2">
                       <div className="flex items-center justify-between gap-1">
                         <input
                           type="text"
@@ -2721,25 +3565,65 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                             updated[idx] = { ...updated[idx], q: e.target.value };
                             updateSiteConfig({ holdingLanding: { ...(siteConfig.holdingLanding || {}), faqs: updated } });
                           }}
-                          className="flex-1 p-1 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-semibold"
+                          className="flex-1 p-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-semibold"
                         />
                         <button type="button" onClick={() => handleRemoveHoldingFaq(idx)} className="p-1 text-red-400">
                           <Trash2 className="w-3 h-3" />
                         </button>
                       </div>
-                      <textarea
+                      <RichTextarea
+                        label="Resposta da Pergunta"
                         rows={2}
                         value={faq.a}
-                        onChange={(e) => {
+                        onChange={(val) => {
                           const updated = [...(siteConfig.holdingLanding?.faqs || [])];
-                          updated[idx] = { ...updated[idx], a: e.target.value };
+                          updated[idx] = { ...updated[idx], a: val };
                           updateSiteConfig({ holdingLanding: { ...(siteConfig.holdingLanding || {}), faqs: updated } });
                         }}
-                        className="w-full p-1 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
                       />
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* 10. Box Alguma Dúvida & Rodapé da LP */}
+              <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
+                <span className="text-[11px] font-bold text-[#F6E27A] uppercase block">
+                  10. Box Final "Alguma Dúvida?" & Rodapé da Landing Page
+                </span>
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.doubtTitle || 'ALGUMA DÚVIDA?'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), doubtTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A] font-bold"
+                />
+                <RichTextarea
+                  label="Texto do Box de Dúvidas"
+                  rows={2}
+                  value={siteConfig.holdingLanding?.doubtText ?? ''}
+                  onChange={(val) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), doubtText: val }
+                  })}
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.doubtBtnText || 'FALAR COM O ESPECIALISTA'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), doubtBtnText: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+                <input
+                  type="text"
+                  value={siteConfig.holdingLanding?.footerCopyright || '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'}
+                  onChange={(e) => updateSiteConfig({
+                    holdingLanding: { ...(siteConfig.holdingLanding || {}), footerCopyright: e.target.value }
+                  })}
+                  placeholder="Copyright do Rodapé da LP"
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-slate-300"
+                />
               </div>
             </div>
           )}
@@ -2758,17 +3642,52 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </h3>
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-white font-bold mb-1">
-              Título da Seção
-            </label>
-            <input
-              type="text"
-              value={siteConfig.publicationsSection?.titleWhite || 'PUBLICAÇÕES JURÍDICAS &'}
-              onChange={(e) => updateSiteConfig({
-                publicationsSection: { ...(siteConfig.publicationsSection || {}), titleWhite: e.target.value }
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+              Cabeçalho da Seção de Publicações Jurídicas
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] mb-0.5">Kicker Dourado</label>
+                <input
+                  type="text"
+                  value={siteConfig.publicationsSection?.goldKicker || 'PRODUÇÃO INTELECTUAL E CIENTÍFICA'}
+                  onChange={(e) => updateSiteConfig({
+                    publicationsSection: { ...(siteConfig.publicationsSection || {}), goldKicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A]"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-white mb-0.5">Título Branco</label>
+                <input
+                  type="text"
+                  value={siteConfig.publicationsSection?.titleWhite || 'PUBLICAÇÕES'}
+                  onChange={(e) => updateSiteConfig({
+                    publicationsSection: { ...(siteConfig.publicationsSection || {}), titleWhite: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] mb-0.5">Destaque Dourado</label>
+                <input
+                  type="text"
+                  value={siteConfig.publicationsSection?.titleGold || 'JURÍDICAS'}
+                  onChange={(e) => updateSiteConfig({
+                    publicationsSection: { ...(siteConfig.publicationsSection || {}), titleGold: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+            <RichTextarea
+              label="Subtítulo / Introdução de Publicações Jurídicas"
+              rows={2}
+              value={siteConfig.publicationsSection?.subtitle || ''}
+              onChange={(val) => updateSiteConfig({
+                publicationsSection: { ...(siteConfig.publicationsSection || {}), subtitle: val }
               })}
-              className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs"
             />
           </div>
 
@@ -2934,20 +3853,16 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Resumo / Prévia</label>
-                    <textarea
-                      rows={2}
-                      value={pub.excerpt}
-                      onChange={(e) => {
-                        const updated = [...(siteConfig.publications || [])];
-                        updated[idx] = { ...updated[idx], excerpt: e.target.value };
-                        updateSiteConfig({ publications: updated });
-                      }}
-                      placeholder="Resumo do Artigo"
-                      className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
-                    />
-                  </div>
+                  <RichTextarea
+                    label="Resumo / Prévia no Card (Editor Rico)"
+                    rows={2}
+                    value={pub.excerpt}
+                    onChange={(val) => {
+                      const updated = [...(siteConfig.publications || [])];
+                      updated[idx] = { ...updated[idx], excerpt: val };
+                      updateSiteConfig({ publications: updated });
+                    }}
+                  />
 
                   <RichTextarea
                     label="Conteúdo Integral (Editor Rico: Tabelas, Marcadores, Imagens, Cores e Alinhamentos)"
@@ -2980,17 +3895,69 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </h3>
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-white font-bold mb-1">
-              Título da Seção
-            </label>
-            <input
-              type="text"
-              value={siteConfig.booksSection?.titleWhite || 'OBRAS &'}
-              onChange={(e) => updateSiteConfig({
-                booksSection: { ...(siteConfig.booksSection || {}), titleWhite: e.target.value }
+          {/* Cabeçalho e Textos da Página Livros Digitais (Itens 70, 101 e 111) */}
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
+              Cabeçalho & Textos da Página de Livros Digitais (Itens 70, 101 e 111)
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] mb-0.5">Kicker Dourado</label>
+                <input
+                  type="text"
+                  value={siteConfig.booksSection?.goldKicker || 'PRODUÇÃO INTELECTUAL DE ALTA RELEVÂNCIA'}
+                  onChange={(e) => updateSiteConfig({
+                    booksSection: { ...(siteConfig.booksSection || {}), goldKicker: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A]"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-white mb-0.5">Título Branco</label>
+                <input
+                  type="text"
+                  value={siteConfig.booksSection?.titleWhite || 'LIVROS'}
+                  onChange={(e) => updateSiteConfig({
+                    booksSection: { ...(siteConfig.booksSection || {}), titleWhite: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[10px] text-[#F6E27A] mb-0.5">Destaque Dourado</label>
+                <input
+                  type="text"
+                  value={siteConfig.booksSection?.titleGold || 'DIGITAIS'}
+                  onChange={(e) => updateSiteConfig({
+                    booksSection: { ...(siteConfig.booksSection || {}), titleGold: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+            <RichTextarea
+              label="Parágrafo 1 da Página de Livros Digitais (Item 70, 101 e 111)"
+              rows={2}
+              value={siteConfig.booksSection?.paragraph1 ?? ''}
+              onChange={(val) => updateSiteConfig({
+                booksSection: { ...(siteConfig.booksSection || {}), paragraph1: val }
               })}
-              className="w-full px-3 py-2 rounded-xl bg-[#050B14] border border-slate-700 text-white text-xs"
+            />
+            <RichTextarea
+              label="Parágrafo 2 da Página de Livros Digitais (Item 70, 101 e 111)"
+              rows={2}
+              value={siteConfig.booksSection?.paragraph2 ?? ''}
+              onChange={(val) => updateSiteConfig({
+                booksSection: { ...(siteConfig.booksSection || {}), paragraph2: val }
+              })}
+            />
+            <RichTextarea
+              label="Parágrafo 3 (Destaque Dourado)"
+              rows={2}
+              value={siteConfig.booksSection?.paragraph3 ?? ''}
+              onChange={(val) => updateSiteConfig({
+                booksSection: { ...(siteConfig.booksSection || {}), paragraph3: val }
+              })}
             />
           </div>
 
@@ -3112,18 +4079,89 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Sinopse da Obra</label>
-                    <textarea
-                      rows={2}
-                      value={book.description}
+                  <RichTextarea
+                    label="Sinopse / Descrição da Obra (Item 70)"
+                    rows={3}
+                    value={book.description}
+                    onChange={(val) => {
+                      const updated = [...(siteConfig.digitalBooks || [])];
+                      updated[idx] = { ...updated[idx], description: val };
+                      updateSiteConfig({ digitalBooks: updated });
+                    }}
+                  />
+
+                  {/* Sumário e Trecho de Destaque do Modal "Ler Sinopse & Amostra" (Item 70) */}
+                  <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold text-[#F6E27A] uppercase">
+                        Sumário & Citação do Modal "Ler Sinopse & Amostra" (Item 70)
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = [...(siteConfig.digitalBooks || [])];
+                          const currentChapters = updated[idx].chapters || [];
+                          updated[idx] = {
+                            ...updated[idx],
+                            chapters: [...currentChapters, `Capítulo ${currentChapters.length + 1}: Novo Tópico`]
+                          };
+                          updateSiteConfig({ digitalBooks: updated });
+                        }}
+                        className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer"
+                      >
+                        + Adicionar Capítulo
+                      </button>
+                    </div>
+                    <input
+                      type="text"
+                      value={book.summaryTitle ?? 'SUMÁRIO DO LIVRO'}
                       onChange={(e) => {
                         const updated = [...(siteConfig.digitalBooks || [])];
-                        updated[idx] = { ...updated[idx], description: e.target.value };
+                        updated[idx] = { ...updated[idx], summaryTitle: e.target.value };
                         updateSiteConfig({ digitalBooks: updated });
                       }}
-                      placeholder="Sinopse da Obra"
-                      className="w-full p-2 rounded bg-[#050B14] border border-slate-800 text-slate-300 text-[11px]"
+                      placeholder="Título do Sumário (Ex: SUMÁRIO DO LIVRO)"
+                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-[#F6E27A] font-bold"
+                    />
+                    <div className="space-y-1.5">
+                      {(book.chapters || []).map((chap, cIdx) => (
+                        <div key={cIdx} className="flex items-center gap-1.5">
+                          <input
+                            type="text"
+                            value={chap}
+                            onChange={(e) => {
+                              const updated = [...(siteConfig.digitalBooks || [])];
+                              const chaps = [...(updated[idx].chapters || [])];
+                              chaps[cIdx] = e.target.value;
+                              updated[idx] = { ...updated[idx], chapters: chaps };
+                              updateSiteConfig({ digitalBooks: updated });
+                            }}
+                            className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-800 text-xs text-white"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = [...(siteConfig.digitalBooks || [])];
+                              const chaps = (updated[idx].chapters || []).filter((_, i) => i !== cIdx);
+                              updated[idx] = { ...updated[idx], chapters: chaps };
+                              updateSiteConfig({ digitalBooks: updated });
+                            }}
+                            className="p-1 text-red-400 hover:text-red-300"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <RichTextarea
+                      label="Trecho / Citação em Destaque no Modal (Ex: 'Deixar para resolver a sucessão após a morte...')"
+                      rows={2}
+                      value={book.sampleExcerpt ?? 'Deixar para resolver a sucessão após a morte é transferir ao Estado e à burocracia judicial uma parcela significativa daquilo que você levou uma vida inteira para construir para os seus filhos.'}
+                      onChange={(val) => {
+                        const updated = [...(siteConfig.digitalBooks || [])];
+                        updated[idx] = { ...updated[idx], sampleExcerpt: val };
+                        updateSiteConfig({ digitalBooks: updated });
+                      }}
                     />
                   </div>
                 </div>
@@ -3245,29 +4283,23 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs text-[#F6E27A] font-bold mb-1">Box 1 · Atendimento Virtual Brasil (Texto)</label>
-            <textarea
-              rows={3}
-              value={siteConfig.contact.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
-              onChange={(e) => updateSiteConfig({
-                contact: { ...siteConfig.contact, boxVirtualText: e.target.value }
-              })}
-              className="w-full p-2 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-white text-xs leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Box 1 · Atendimento Virtual Brasil (Texto)"
+            rows={3}
+            value={siteConfig.contact.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
+            onChange={(val) => updateSiteConfig({
+              contact: { ...siteConfig.contact, boxVirtualText: val }
+            })}
+          />
 
-          <div>
-            <label className="block text-xs text-slate-300 font-semibold mb-1">Endereço Sede (Porto Alegre)</label>
-            <textarea
-              rows={2}
-              value={siteConfig.contact.addressPortoAlegre}
-              onChange={(e) => updateSiteConfig({
-                contact: { ...siteConfig.contact, addressPortoAlegre: e.target.value }
-              })}
-              className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
-            />
-          </div>
+          <RichTextarea
+            label="Endereço Sede (Porto Alegre)"
+            rows={2}
+            value={siteConfig.contact.addressPortoAlegre}
+            onChange={(val) => updateSiteConfig({
+              contact: { ...siteConfig.contact, addressPortoAlegre: val }
+            })}
+          />
         </div>
       )}
 
@@ -3297,19 +4329,14 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             />
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-              Texto de Conformidade Ética OAB
-            </label>
-            <textarea
-              rows={3}
-              value={siteConfig.footer?.oabComplianceText || ''}
-              onChange={(e) => updateSiteConfig({
-                footer: { ...(siteConfig.footer || {}), oabComplianceText: e.target.value }
-              })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Texto de Conformidade Ética OAB"
+            rows={3}
+            value={siteConfig.footer?.oabComplianceText || ''}
+            onChange={(val) => updateSiteConfig({
+              footer: { ...(siteConfig.footer || {}), oabComplianceText: val }
+            })}
+          />
         </div>
       )}
 
@@ -3365,17 +4392,38 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs text-slate-300 font-semibold mb-1">Texto do Palestrante</label>
-            <textarea
-              rows={3}
-              value={siteConfig.academiaLeao?.speakerText || ''}
-              onChange={(e) => updateSiteConfig({
-                academiaLeao: { ...(siteConfig.academiaLeao || {}), speakerText: e.target.value }
-              })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Subtítulo da Academia"
+            rows={2}
+            value={siteConfig.academiaLeao?.subtitle || ''}
+            onChange={(val) => updateSiteConfig({
+              academiaLeao: { ...(siteConfig.academiaLeao || {}), subtitle: val }
+            })}
+          />
+          <RichTextarea
+            label="Parágrafo Descritivo 1"
+            rows={3}
+            value={siteConfig.academiaLeao?.description1 || ''}
+            onChange={(val) => updateSiteConfig({
+              academiaLeao: { ...(siteConfig.academiaLeao || {}), description1: val }
+            })}
+          />
+          <RichTextarea
+            label="Parágrafo Descritivo 2"
+            rows={3}
+            value={siteConfig.academiaLeao?.description2 || ''}
+            onChange={(val) => updateSiteConfig({
+              academiaLeao: { ...(siteConfig.academiaLeao || {}), description2: val }
+            })}
+          />
+          <RichTextarea
+            label="Texto do Palestrante"
+            rows={3}
+            value={siteConfig.academiaLeao?.speakerText || ''}
+            onChange={(val) => updateSiteConfig({
+              academiaLeao: { ...(siteConfig.academiaLeao || {}), speakerText: val }
+            })}
+          />
         </div>
       )}
 

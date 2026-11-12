@@ -42,6 +42,7 @@ import { LocationSection } from '../LocationSection';
 import { Footer } from '../Footer';
 import { HoldingLandingPage } from '../HoldingLandingPage';
 import { AcademiaLeaoSection } from '../AcademiaLeaoSection';
+import { GestaoJuridicaPage } from '../GestaoJuridicaPage';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
 import { ImageUploadField } from './ImageUploadField';
 import { PracticeArea, DigitalBook, Publication } from '../../types';
@@ -65,7 +66,7 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
   const [activeSection, setActiveSection] = useState<EditableSectionKey | null>(null);
   const [deviceViewport, setDeviceViewport] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [isPreviewClean, setIsPreviewClean] = useState(false);
-  const [activePage, setActivePage] = useState<'home' | 'holding-landing' | 'academia'>('home');
+  const [activePage, setActivePage] = useState<'home' | 'gestao-juridica' | 'holding-landing' | 'academia'>('home');
   const [holdingTab, setHoldingTab] = useState<'section' | 'landing'>('section');
   const [saveToast, setSaveToast] = useState(false);
 
@@ -220,17 +221,36 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
                 Home / Portal
               </button>
               <button
-                onClick={() => setActivePage('holding-landing')}
+                onClick={() => {
+                  setActivePage('gestao-juridica');
+                  setActiveSection('gestao_juridica');
+                }}
+                className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
+                  activePage === 'gestao-juridica'
+                    ? 'bg-[#D4AF37] text-black shadow'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                Gestão Jurídica 4.0
+              </button>
+              <button
+                onClick={() => {
+                  setActivePage('holding-landing');
+                  setActiveSection('landing_holding');
+                }}
                 className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
                   activePage === 'holding-landing'
                     ? 'bg-[#D4AF37] text-black shadow'
                     : 'text-slate-300 hover:text-white'
                 }`}
               >
-                Holding 4.0
+                Holding 4.0 (/1208/)
               </button>
               <button
-                onClick={() => setActivePage('academia')}
+                onClick={() => {
+                  setActivePage('academia');
+                  setActiveSection('academia');
+                }}
                 className={`px-2.5 py-1 rounded text-xs font-semibold transition-all cursor-pointer ${
                   activePage === 'academia'
                     ? 'bg-[#D4AF37] text-black shadow'
@@ -395,9 +415,19 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
               {/* Soluções de Excelência */}
               {renderSectionWrapper('solutions', 'Soluções de Excelência', (
                 <ExcellenceSolutions 
-                  onGoToLandingPage={() => setActivePage('holding-landing')}
+                  onGoToLandingPage={() => {
+                    setActivePage('holding-landing');
+                    setActiveSection('landing_holding');
+                  }}
                   onOpenConsultation={() => setActiveSection('consultation')}
-                  onGoToAcademia={() => setActivePage('academia')}
+                  onGoToAcademia={() => {
+                    setActivePage('academia');
+                    setActiveSection('academia');
+                  }}
+                  onGoToGestaoJuridica={() => {
+                    setActivePage('gestao-juridica');
+                    setActiveSection('gestao_juridica');
+                  }}
                 />
               ))}
 
@@ -443,10 +473,22 @@ export const VisualCanvasEditor: React.FC<VisualCanvasEditorProps> = ({
             </div>
           )}
 
-          {/* CASO 2: LANDING PAGE DE HOLDING FAMILIAR 4.0 */}
+          {/* CASO 2: PÁGINA INTERNA DE GESTÃO JURÍDICA 4.0 */}
+          {activePage === 'gestao-juridica' && (
+            <div className="bg-[#050B14] text-slate-100 flex flex-col font-sans-body w-full">
+              {renderSectionWrapper('gestao_juridica', 'Página Gestão Jurídica 4.0', (
+                <GestaoJuridicaPage 
+                  onBackToSite={() => setActivePage('home')}
+                  onOpenConsultation={() => setActiveSection('consultation')}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* CASO 3: LANDING PAGE DE HOLDING FAMILIAR 4.0 (/1208/) */}
           {activePage === 'holding-landing' && (
             <div className="bg-[#050B14] text-slate-100 flex flex-col font-sans-body w-full">
-              {renderSectionWrapper('holding', 'Landing Page Holding Familiar', (
+              {renderSectionWrapper('landing_holding', 'Landing Page Holding Familiar (/1208/)', (
                 <HoldingLandingPage 
                   onBackToSite={() => setActivePage('home')}
                   onOpenAdmin={() => {}}

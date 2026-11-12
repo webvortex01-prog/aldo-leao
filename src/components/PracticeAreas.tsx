@@ -3,6 +3,7 @@ import { Scale, ArrowRight, X, Phone, MessageSquare } from 'lucide-react';
 import { PracticeArea } from '../types';
 import { useSite } from '../context/SiteContext';
 import { cleanAndFormatPhone } from '../utils/phoneUtils';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface PracticeAreasProps {
   onGoToLandingPage: () => void;
@@ -100,16 +101,13 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
             <span className="gold-text-gradient">{siteConfig.practiceAreasHeader?.titleHighlight || (siteConfig.practiceAreasHeader as any)?.titleGold || 'ATUAÇÃO'}</span>
           </h2>
 
-          {siteConfig.practiceAreasHeader?.description && siteConfig.practiceAreasHeader.description.includes('<') ? (
-            <div
-              className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light"
-              dangerouslySetInnerHTML={{ __html: siteConfig.practiceAreasHeader.description }}
-            />
-          ) : (
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-              {siteConfig.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
-            </p>
-          )}
+          <RichTextRenderer
+            content={
+              siteConfig.practiceAreasHeader?.description ||
+              'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'
+            }
+            className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light"
+          />
         </div>
 
         {/* 5 Cards Grid */}
@@ -143,14 +141,12 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
                   </p>
 
                   {/* Description (Item 29: Holding Familiar em negrito e dourado, com quebras de linha preservadas) */}
-                  <div 
-                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light whitespace-pre-line publication-rich-content"
-                    dangerouslySetInnerHTML={{
-                      __html: area.description.replace(
-                        /Holding Familiar/g,
-                        '<strong class="text-[#F6E27A] font-bold">Holding Familiar</strong>'
-                      )
-                    }}
+                  <RichTextRenderer
+                    content={(area.description || '').replace(
+                      /(?<!<[^>]*?)Holding Familiar/g,
+                      '<strong class="text-[#F6E27A] font-bold">Holding Familiar</strong>'
+                    )}
+                    className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light"
                   />
                 </div>
 
@@ -189,14 +185,12 @@ export const PracticeAreas: React.FC<PracticeAreasProps> = ({
               </p>
             </div>
 
-            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body font-light whitespace-pre-line publication-rich-content">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: selectedAreaModal.description.replace(
-                    /Holding Familiar/g,
-                    '<strong class="text-[#F6E27A] font-bold">Holding Familiar</strong>'
-                  )
-                }}
+            <div className="space-y-5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body font-light mb-5">
+              <RichTextRenderer
+                content={(selectedAreaModal.description || '').replace(
+                  /(?<!<[^>]*?)Holding Familiar/g,
+                  '<strong class="text-[#F6E27A] font-bold">Holding Familiar</strong>'
+                )}
               />
             </div>
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, MessageSquare, Scale } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface DigitalConsultationCTAProps {
   onOpenConsultation: () => void;
@@ -31,7 +32,7 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
           {/* Fundo da section meio esfumaçado com a imagem de consulta virtual mais clara e com flutuação suave */}
           <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
             <img
-              src="/img/consulta-virtual-2.jpg"
+              src={dc?.bgImageUrl || '/img/consulta-virtual-2.jpg'}
               alt="Atendimento Jurídico Digital Dr. Aldo Leão"
               className="w-full h-full object-cover object-[center_20%] opacity-65 sm:opacity-55 filter brightness-110 contrast-105 animate-smoky-float"
               onError={(e) => {
@@ -59,9 +60,13 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
                 <span className="gold-text-gradient">{dc?.sectionHighlight || 'CONSULTA DIGITAL'}</span>
               </h2>
 
-              <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-                {dc?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  dc?.description ||
+                  'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'
+                }
+                className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-sans-body mb-6 font-light"
+              />
 
               {/* Ícones com balança da justiça e textos do Item 9 e 38 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -99,12 +104,12 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
               </div>
             </div>
 
-            {/* Coluna Direita: Segunda imagem em moldura nobre de vidro flutuando suavemente */}
+            {/* Coluna Direita: Segunda imagem em moldura nobre de vidro flutuando suavemente (Item 100: Totalmente Editável) */}
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-sm rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/60 shadow-[0_20px_50px_rgba(0,0,0,0.85)] bg-[#070F1E] group card-hover-interactive animate-card-float photo-luxury-frame">
                 <div className="aspect-[4/3] sm:aspect-[14/10] w-full overflow-hidden relative p-1.5 sm:p-2 bg-[#081326]">
                   <img
-                    src="/img/consulta-virtual-1.jpg"
+                    src={dc?.cardImageUrl || '/img/consulta-virtual-1.jpg'}
                     alt="Dr. Aldo Leão em Consulta Digital Estratégica"
                     className="w-full h-full object-cover object-center rounded-xl sm:rounded-2xl group-hover:scale-105 transition-transform duration-700 ease-out"
                     onError={(e) => {
@@ -113,16 +118,16 @@ export const DigitalConsultationCTA: React.FC<DigitalConsultationCTAProps> = ({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070F1E] via-transparent to-transparent opacity-60 pointer-events-none" />
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-[#050B14]/85 backdrop-blur-md border border-[#D4AF37]/50 text-[10px] font-bold text-[#F6E27A] uppercase tracking-wider shadow-md">
-                    Atendimento 100% Digital
+                    {dc?.cardBadge || 'Atendimento 100% Digital'}
                   </div>
                 </div>
 
                 <div className="p-4 bg-[#071122] border-t border-[#D4AF37]/30 text-center">
                   <p className="font-cinzel text-xs font-bold text-white uppercase tracking-wider">
-                    CONSULTA DIGITAL BRASIL
+                    {dc?.cardTitle || 'CONSULTA DIGITAL BRASIL'}
                   </p>
                   <p className="text-[11px] text-[#E5C158] font-medium mt-0.5">
-                    Segurança Digital, Sigilo e Excelência Jurídica Centenária.
+                    {dc?.cardSubtitle || 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.'}
                   </p>
                 </div>
               </div>

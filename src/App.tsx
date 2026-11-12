@@ -261,9 +261,6 @@ function AppContent() {
         <HoldingFamiliarSection
           onGoToLandingPage={() => setCurrentView('holding-landing')}
         />
-        <DigitalConsultationCTA
-          onOpenConsultation={() => handleOpenConsultation('Holding Familiar 4.0')}
-        />
         <Footer 
           onOpenAdmin={handleOpenAdmin} 
           onOpenTutorial={() => setIsTutorialOpen(true)}

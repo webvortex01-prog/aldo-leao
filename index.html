@@ -15,20 +15,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- Preload prioritário da imagem da Themis para eliminar qualquer flash ou delay inicial -->
-    <link rel="preload" as="image" href="/img/novofundohero.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="/img/holding-family-hero-bg.jpg" />
+    <!-- Preload prioritário da imagem do Slide 1 (Mobile e Desktop) para carregamento simultâneo com a página completa -->
+    <link rel="preload" as="image" href="/img/novofundohero_mobile.jpg" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/img/novofundohero.jpg" media="(min-width: 768px)" fetchpriority="high" />
     <link rel="preload" as="image" href="/img/holding-familiar-1.jpg" />
-    <link rel="preload" as="image" href="/img/logo.png" />
+    <link rel="preload" as="image" href="/img/logo.png" fetchpriority="high" />
     <style>
-      /* Renderização instantânea do fundo antes mesmo do React hidratar para eliminar 100% o flash azul */
       #root:empty {
         min-height: 100vh;
         background-color: #050B14;
-        background-image: url('/img/novofundohero.jpg');
-        background-size: cover;
-        background-position: top center;
-        background-repeat: no-repeat;
       }
     </style>
   </head>

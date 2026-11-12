@@ -574,6 +574,39 @@
   margin-bottom: 0.5rem;
 }
 
+.publication-rich-content p {
+  margin-bottom: 0.75em;
+}
+
+.publication-rich-content p:last-child {
+  margin-bottom: 0;
+}
+
+.publication-rich-content .text-justify,
+.publication-rich-content [style*="text-align: justify"],
+.publication-rich-content [style*="text-align:justify"] {
+  text-align: justify !important;
+}
+
+.publication-rich-content .text-center,
+.publication-rich-content [style*="text-align: center"],
+.publication-rich-content [style*="text-align:center"] {
+  text-align: center !important;
+}
+
+.publication-rich-content .text-right,
+.publication-rich-content [style*="text-align: right"],
+.publication-rich-content [style*="text-align:right"] {
+  text-align: right !important;
+}
+
+.publication-rich-content .text-left,
+.publication-rich-content [style*="text-align: left"],
+.publication-rich-content [style*="text-align:left"] {
+  text-align: left !important;
+}
+
+
 
 
 

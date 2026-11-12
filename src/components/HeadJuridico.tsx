@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Scale, CheckCircle2, X, PhoneCall, BookOpen, ArrowRight } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface HeadJuridicoProps {
   onOpenConsultation: () => void;
@@ -124,37 +125,59 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
 
             {/* Texto oficial da página Dr. ALDO LEÃO (Item 81 e 86) */}
             {f?.content ? (
-              <div
-                className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-4 font-light publication-rich-content"
-                dangerouslySetInnerHTML={{
-                  __html: f.content.includes('<')
-                    ? f.content
-                    : f.content.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('')
-                }}
+              <RichTextRenderer
+                content={f.content}
+                className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-4 font-light"
               />
             ) : (
               <div className="space-y-3.5 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-4 font-light">
-                <p>
-                  {f?.bioParagraph1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração de um legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'}
-                </p>
-                <p>
-                  {f?.bioParagraph2 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência perfeita entre a tradição institucional centenária e a inovação tecnológica da advocacia avançada.'}
-                </p>
-                <p>
-                  {f?.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
-                </p>
-                <p>
-                  {f?.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
-                </p>
+                {f?.bioParagraph1 !== '' && (
+                  <RichTextRenderer
+                    content={
+                      f?.bioParagraph1 ??
+                      'Desde 1986, o Dr. Aldo Leão conduz a terceira geração de um legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.'
+                    }
+                  />
+                )}
+                {f?.bioParagraph2 !== '' && (
+                  <RichTextRenderer
+                    content={
+                      f?.bioParagraph2 ??
+                      'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência perfeita entre a tradição institucional centenária e a inovação tecnológica da advocacia avançada.'
+                    }
+                  />
+                )}
+                {f?.bioParagraph3 !== '' && (
+                  <RichTextRenderer
+                    content={
+                      f?.bioParagraph3 ??
+                      'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'
+                    }
+                  />
+                )}
+                {f?.bioParagraph4 !== '' && (
+                  <RichTextRenderer
+                    content={
+                      f?.bioParagraph4 ??
+                      'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'
+                    }
+                  />
+                )}
                 {f?.bioParagraph5 !== '' && (
-                  <p>
-                    {f?.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      f?.bioParagraph5 ??
+                      'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'
+                    }
+                  />
                 )}
                 {f?.bioParagraph6 !== '' && (
-                  <p>
-                    {f?.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      f?.bioParagraph6 ??
+                      'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'
+                    }
+                  />
                 )}
               </div>
             )}
@@ -282,21 +305,47 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                   TRAJETÓRIA PROFISSIONAL
                 </h4>
                 <div className="space-y-3 text-slate-200 font-light">
-                  <p>
-                    {f?.curriculumTrajectoryP1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'}
-                  </p>
-                  <p>
-                    {f?.curriculumTrajectoryP2 || 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'}
-                  </p>
-                  <p>
-                    {f?.curriculumTrajectoryP3 || 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'}
-                  </p>
-                  <p>
-                    {f?.curriculumTrajectoryP4 || 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'}
-                  </p>
-                  <p className="text-[#F6E27A] font-semibold">
-                    {f?.curriculumTrajectoryP5 || 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'}
-                  </p>
+                  {f?.curriculumTrajectoryP1 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumTrajectoryP1 ??
+                        'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'
+                      }
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP2 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumTrajectoryP2 ??
+                        'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'
+                      }
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP3 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumTrajectoryP3 ??
+                        'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'
+                      }
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP4 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumTrajectoryP4 ??
+                        'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'
+                      }
+                    />
+                  )}
+                  {f?.curriculumTrajectoryP5 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumTrajectoryP5 ??
+                        'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'
+                      }
+                      className="text-[#F6E27A] font-semibold"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -418,15 +467,27 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 </div>
               </div>
 
-              {/* Texto 2: Síntese de Encerramento Oficial (Item 64) */}
-              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-slate-300 text-xs sm:text-sm space-y-2.5">
-                <p>
-                  "{f?.curriculumClosingP1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'}"
-                </p>
-                <p>
-                  "{f?.curriculumClosingP2 || 'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'}"
-                </p>
-              </div>
+              {/* Texto 2: Síntese de Encerramento Oficial (Item 64 e 93) */}
+              {!(f?.curriculumClosingP1 === '' && f?.curriculumClosingP2 === '') && (
+                <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 text-slate-300 text-xs sm:text-sm space-y-2.5">
+                  {f?.curriculumClosingP1 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumClosingP1 ??
+                        'Desde 1986, o Dr. Aldo Leão conduz a terceira geração do legado jurídico familiar centenário, que teve início em 1908 com o seu Avô Paterno o Prof. Dr. Arnaldo da Silva Ferreira, no Escritório de Advocacia mais antigo do Brasil, consolidando a convergência entre a tradição jurídica centenária de três gerações, a inteligência jurídica e a inovação da Advocacia Estratégica.'
+                      }
+                    />
+                  )}
+                  {f?.curriculumClosingP2 !== '' && (
+                    <RichTextRenderer
+                      content={
+                        f?.curriculumClosingP2 ??
+                        'Atuando na Advocacia Estratégica desde 1986, com uma trajetória profissional de relevância jurídica nacional, pautada pelo rigor técnico, excelência e especialização na estruturação de soluções jurídicas avançadas, estratégicas e protetivas do patrimônio e da empresa para perpetuar o seu legado.'
+                      }
+                    />
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="mt-8 pt-5 border-t border-[#D4AF37]/20 flex flex-col sm:flex-row gap-3 justify-end">

@@ -798,15 +798,21 @@ const DEFAULT_CONFIG: SiteConfig = {
     eyebrow: 'HOLDING FAMILIAR',
     title: 'PLANEJAMENTO',
     titleHighlight: 'PATRIMONIAL 4.0',
-    paragraph1: 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.',
-    paragraph2: 'A Holding Familiar é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.',
-    paragraph3: 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.',
-    paragraph4: 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.',
+    titleWhite: 'PLANEJAMENTO ',
+    titleGold: 'PATRIMONIAL 4.0',
+    paragraph1: '<p>Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.</p><p><strong style="color: #F6E27A;">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.</p><p>Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.</p><p>Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.</p>',
+    paragraph2: '',
+    paragraph3: '',
+    paragraph4: '',
     callout1: 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?',
     callout2: 'EVITE A ALTA PERDA PATRIMONIAL E FINANCEIRA DOS SEUS FILHOS NO INVENTÁRIO.',
     buttonText: 'Planejamento Patrimonial 4.0',
     boxTitle: 'O INVENTÁRIO GERA UMA ALTA PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO',
     boxText: 'O inventário gera uma Alta Perda Patrimonial e Financeira dos herdeiros em média de 40% do Patrimônio Inventário, em média, que é evitada pelo Planejamento Patrimonial 4.0, que vai aumentar por causa do aumento do ITCMD.',
+    costBoxTitle: 'COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR',
+    costBoxText: 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?',
+    photoCardTitle: 'O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DE CERCA DE 40% DO INVENTÁRIO',
+    photoCardSubtitle: 'VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?',
     rightCardTitle: 'Comparativo de Custos entre o processo de Inventário e o Planejamento Patrimonial 4.0 via Holding Familiar',
     rightCardSub: 'Você conhece o Alto Custo do processo de Inventário para os seus herdeiros? Os números são incontestáveis.',
     rightCardText: 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).',
@@ -956,7 +962,11 @@ const DEFAULT_CONFIG: SiteConfig = {
     point2: 'Consulta com hora marcada',
     btnSchedule: 'AGENDAR CONSULTA VIRTUAL',
     btnWhatsApp: 'Agendar pelo WhatsApp',
-    bgImageUrl: '/img/dr-aldo-reuniao.jpg'
+    bgImageUrl: '/img/consulta-virtual-2.jpg',
+    cardImageUrl: '/img/consulta-virtual-1.jpg',
+    cardBadge: 'Atendimento 100% Digital',
+    cardTitle: 'CONSULTA DIGITAL BRASIL',
+    cardSubtitle: 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.'
   },
   footer: {
     textCol1Paragraph1: 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.',
@@ -1064,7 +1074,7 @@ interface SiteContextType {
   resetSiteConfigToDefault: () => void;
 }
 
-const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v25';
+const CURRENT_CONFIG_KEY = 'aldoleao_site_config_v26';
 
 const normalizeContactConfig = (rawContact: any) => {
   const c = { ...DEFAULT_CONFIG.contact, ...(rawContact || {}) };
@@ -1085,6 +1095,12 @@ const normalizeFounderConfig = (rawFounder: any) => {
   if (!f.btnConsultation || f.btnConsultation === 'AGENDAR CONSULTA DIGITAL') {
     f.btnConsultation = DEFAULT_CONFIG.founder.btnConsultation;
   }
+  if (!f.curriculumClosingP1) {
+    f.curriculumClosingP1 = DEFAULT_CONFIG.founder.curriculumClosingP1;
+  }
+  if (!f.curriculumClosingP2) {
+    f.curriculumClosingP2 = DEFAULT_CONFIG.founder.curriculumClosingP2;
+  }
   // Atualiza textos legados da biografia para o novo texto oficial do Dr. Aldo Leão
   if (
     !f.bioParagraph1 ||
@@ -1101,6 +1117,135 @@ const normalizeFounderConfig = (rawFounder: any) => {
     f.bioParagraph6 = DEFAULT_CONFIG.founder.bioParagraph6;
   }
   return f;
+};
+
+// Repara e normaliza dados legados (tanto do localStorage quanto da nuvem Firebase) para atender 100% dos itens solicitados
+const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
+  const next = { ...cfg };
+
+  // 1. Slide 2: Unifica os 4 parágrafos num único bloco rico sem duplicação e limpa tags escapadas
+  if (next.slide2) {
+    const s2 = { ...DEFAULT_CONFIG.slide2, ...next.slide2 };
+    let p1 = s2.paragraph1 || '';
+    // Desescapa eventuais tags HTML literais que tenham sido salvas como &lt;span...&gt;
+    p1 = p1
+      .replace(/&lt;(\/?(?:span|b|strong|i|em|u|s|mark|div|p|br)[^&]*?)&gt;/gi, '<$1>');
+
+    if (
+      p1.trim() === 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'
+    ) {
+      s2.paragraph1 = DEFAULT_CONFIG.slide2!.paragraph1;
+      s2.paragraph2 = '';
+      s2.paragraph3 = '';
+      s2.paragraph4 = '';
+    } else if (
+      p1.includes('Holding Familiar') ||
+      p1.includes('Diagnóstico de Viabilidade') ||
+      p1.includes('expertise centenária')
+    ) {
+      s2.paragraph1 = p1;
+      s2.paragraph2 = '';
+      s2.paragraph3 = '';
+      s2.paragraph4 = '';
+    } else {
+      s2.paragraph1 = p1;
+    }
+    next.slide2 = s2;
+  }
+
+  // 2. Item 67: Academia Leão Ferreira - Conferencista e Palestrante Nacional
+  if (next.academiaLeao) {
+    const acad = { ...DEFAULT_CONFIG.academiaLeao, ...next.academiaLeao };
+    if (
+      !acad.speakerText ||
+      acad.speakerText.includes('fóruns empresariais') ||
+      acad.speakerText.includes('imobiliários')
+    ) {
+      acad.speakerText = DEFAULT_CONFIG.academiaLeao!.speakerText;
+    }
+    next.academiaLeao = acad;
+  }
+
+  // 3. Item 68 & 100: Agende Sua Consulta Digital
+  if (next.digitalConsultation) {
+    const dc = { ...DEFAULT_CONFIG.digitalConsultation, ...next.digitalConsultation };
+    if (!dc.description || !dc.description.includes('avançadas e inteligentes')) {
+      dc.description = DEFAULT_CONFIG.digitalConsultation!.description;
+    }
+    if (!dc.bgImageUrl || dc.bgImageUrl === '/img/dr-aldo-reuniao.jpg') {
+      dc.bgImageUrl = '/img/consulta-virtual-2.jpg';
+    }
+    if (!dc.cardImageUrl) dc.cardImageUrl = '/img/consulta-virtual-1.jpg';
+    if (!dc.cardBadge) dc.cardBadge = 'Atendimento 100% Digital';
+    if (!dc.cardTitle) dc.cardTitle = 'CONSULTA DIGITAL BRASIL';
+    if (!dc.cardSubtitle) dc.cardSubtitle = 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.';
+    next.digitalConsultation = dc;
+  }
+
+  // 4. Item 69: Holding Familiar
+  if (next.holdingFamiliar) {
+    const hf = { ...DEFAULT_CONFIG.holdingFamiliar, ...next.holdingFamiliar };
+    if (!hf.boxWhatIsTitle || hf.boxWhatIsTitle.includes('EMPRESARIAL')) {
+      hf.boxWhatIsTitle = 'O QUE É O PLANEJAMENTO PATRIMONIAL 4.0?';
+    }
+    if (!hf.boxWhatIsText || !hf.boxWhatIsText.includes('reduzindo riscos e vulnerabilidades juridicamente')) {
+      hf.boxWhatIsText = DEFAULT_CONFIG.holdingFamiliar!.boxWhatIsText;
+    }
+    if (!hf.boxWhyText || !hf.boxWhyText.includes('deságio médio de 20% do valor de mercado para quitar o inventário e etc.')) {
+      hf.boxWhyText = DEFAULT_CONFIG.holdingFamiliar!.boxWhyText;
+    }
+    if (!hf.benefits || hf.benefits.length === 0 || hf.benefits[0] !== 'Proteção Jurídica Patrimonial e Empresarial') {
+      hf.benefits = DEFAULT_CONFIG.holdingFamiliar!.benefits;
+    }
+    next.holdingFamiliar = hf;
+  }
+
+  // 5. Item 66: Gestão Jurídica 4.0
+  if (next.gestaoJuridica) {
+    const gj = { ...DEFAULT_GESTAO_JURIDICA, ...next.gestaoJuridica };
+    if (!gj.btnVoltarText || gj.btnVoltarText.includes('Portal Principal')) {
+      gj.btnVoltarText = 'Voltar';
+    }
+    if (!gj.kickerBadge || gj.kickerBadge.includes('1908')) {
+      gj.kickerBadge = 'ALDO LEÃO ADVOCACIA ESTRATÉGICA';
+    }
+    next.gestaoJuridica = gj;
+  }
+
+  // 6. Item 83: Publicações Jurídicas - Tabela obrigatória no artigo "O CUSTO DO INVENTÁRIO PODE DOBRAR"
+  if (next.publications && Array.isArray(next.publications)) {
+    const officialItcmdPub = OFFICIAL_PUBLICATIONS_2024_2025[0];
+    const tableMatch = officialItcmdPub.content.match(/<div class="my-6 rounded-2xl overflow-hidden border-2[\s\S]*?<\/table>\s*<\/div>\s*<\/div>/);
+    const officialTableHtml = tableMatch ? tableMatch[0] : '';
+
+    const norm = (s: string) =>
+      (s || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+
+    let foundItcmd = false;
+    next.publications = next.publications.map((pub) => {
+      if (norm(pub.title).includes('custo do inventario pode dobrar')) {
+        foundItcmd = true;
+        if (!pub.content || !pub.content.includes('<table')) {
+          return {
+            ...pub,
+            content: officialTableHtml && pub.content
+              ? `${pub.content}\n\n${officialTableHtml}`
+              : officialItcmdPub.content
+          };
+        }
+      }
+      return pub;
+    });
+
+    if (!foundItcmd) {
+      next.publications = [officialItcmdPub, ...next.publications];
+    }
+  }
+
+  return next;
 };
 
 // Purga de chaves antigas de cache para garantir que todos os navegadores carreguem a versão mais recente
@@ -1126,7 +1271,8 @@ try {
     'aldoleao_site_config_v21',
     'aldoleao_site_config_v22',
     'aldoleao_site_config_v23',
-    'aldoleao_site_config_v24'
+    'aldoleao_site_config_v24',
+    'aldoleao_site_config_v25'
   ];
   legacyKeys.forEach(k => localStorage.removeItem(k));
 } catch (e) {
@@ -1184,7 +1330,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           return {
             ...defSol,
             ...(userSol || {}),
-            subtitle: defSol.subtitle // Garante sempre o subtítulo dourado oficial atualizado
+            subtitle: userSol?.subtitle || defSol.subtitle
           };
         });
 
@@ -1202,7 +1348,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           ? parsed.publications
           : DEFAULT_PUBLICATIONS;
 
-        return {
+        return repairSiteConfig({
           ...DEFAULT_CONFIG,
           ...parsed,
           navbar: navbarConfig,
@@ -1228,12 +1374,12 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
           articleSignature: { ...DEFAULT_CONFIG.articleSignature, ...(parsed.articleSignature || {}) },
           holdingLanding: { ...DEFAULT_HOLDING_LANDING, ...(parsed.holdingLanding || {}) },
           gestaoJuridica: { ...DEFAULT_GESTAO_JURIDICA, ...(parsed.gestaoJuridica || {}) },
-        };
+        });
       }
     } catch (e) {
       console.error('Error loading site config:', e);
     }
-    return DEFAULT_CONFIG;
+    return repairSiteConfig(DEFAULT_CONFIG);
   });
 
   const [leads, setLeads] = useState<ConsultationRequest[]>(() => {
@@ -1253,8 +1399,8 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const unsubscribe = subscribeToSiteConfig((cloudConfig) => {
       if (cloudConfig && typeof cloudConfig === 'object') {
         setSiteConfig(prev => {
-          // Merge seguro para não perder nenhuma chave oficial
-          const updated: SiteConfig = {
+          // Merge seguro para não perder nenhuma chave oficial e reparar dados antigos da nuvem
+          const merged: SiteConfig = repairSiteConfig({
             ...prev,
             ...cloudConfig,
             navbar: { ...(prev.navbar || {}), ...(cloudConfig.navbar || {}) },
@@ -1288,15 +1434,8 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
             publications: (cloudConfig.publications && cloudConfig.publications.length > 0)
               ? cloudConfig.publications
               : prev.publications,
-          };
-          if (
-            !cloudConfig.contact?.boxVirtualText ||
-            !cloudConfig.contact.boxVirtualText.includes('08:30/11:30hs') ||
-            cloudConfig.contact.boxVirtualText.includes('2ª')
-          ) {
-            saveSiteConfigToFirebase(updated).catch(() => {});
-          }
-          return updated;
+          });
+          return merged;
         });
       }
     });

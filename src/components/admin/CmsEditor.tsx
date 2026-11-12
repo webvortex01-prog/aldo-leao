@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { 
   Save, 
   RotateCcw, 
@@ -25,6 +25,7 @@ import {
 import { useSite } from '../../context/SiteContext';
 import { PracticeArea, ExcellenceSolution, DigitalBook, Publication } from '../../types';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUtils';
+import { formatRichHtml } from '../../utils/richTextUtils';
 import { ArticleSignature } from '../ArticleSignature';
 
 // Componente Especializado para Upload e Gerenciamento de Imagens
@@ -218,26 +219,41 @@ interface CmsEditorProps {
 // ============================================================================
 // BARRA DE FORMATAÇÃO E TEXTO RICO (Item 62: Negrito, Itálico, Cor #... e Alinhamentos)
 // ============================================================================
-// BARRA DE FORMATAÇÃO E TEXTO RICO AVANÇADA (PADRÃO WORDPRESS / ELEMENTOR PRO)
+// BARRA DE FORMATAÇÃO E EDITOR VISUAL WYSIWYG (ESTILO WORD / SEM CÓDIGOS HTML)
 // ============================================================================
 interface FormattingToolbarProps {
   onInsert: (prefix: string, suffix?: string) => void;
+  onVisualAction?: (action: string, payload?: string) => void;
 }
 
-export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }) => {
+export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert, onVisualAction }) => {
   const [customColor, setCustomColor] = useState('#D4AF37');
   const [customBgColor, setCustomBgColor] = useState('#0B1A35');
+  const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const trigger = (action: string, payload: string, fallbackPrefix: string, fallbackSuffix: string = '') => {
+    if (onVisualAction) {
+      onVisualAction(action, payload);
+    } else {
+      onInsert(fallbackPrefix, fallbackSuffix);
+    }
+  };
+
+  const keepSelection = (e: React.MouseEvent) => {
+    e.preventDefault();
+  };
 
   return (
-    <div className="p-2.5 bg-[#030710] border border-[#D4AF37]/40 rounded-xl mb-2.5 space-y-2 text-[11px] shadow-lg">
-      {/* LINHA 1: TIPOGRAFIA, TÍTULOS, TAMANHOS E ALINHAMENTO */}
+    <div className="p-2.5 bg-[#030710] border border-[#D4AF37]/40 rounded-xl mb-2.5 space-y-2 text-[11px] shadow-lg select-none">
+      {/* LINHA 1: TIPOGRAFIA, TÍTULOS, TAMANHOS, ALINHAMENTO E LIMPAR FORMATAÇÃO */}
       <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-slate-800">
         <span className="text-[10px] uppercase font-bold text-[#F6E27A] px-1">Tipografia & Estilo:</span>
 
         {/* Títulos Estruturados */}
         <button
           type="button"
-          onClick={() => onInsert('<h1 class="text-2xl sm:text-3xl font-bold font-cinzel text-white my-3">', '</h1>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('heading', 'h1', '<h1 class="text-2xl sm:text-3xl font-bold font-cinzel text-white my-3">', '</h1>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
           title="Título Principal H1"
         >
@@ -245,7 +261,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<h2 class="text-xl sm:text-2xl font-bold font-cinzel text-[#F6E27A] my-3">', '</h2>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('heading', 'h2', '<h2 class="text-xl sm:text-2xl font-bold font-cinzel text-[#F6E27A] my-3">', '</h2>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-colors cursor-pointer"
           title="Título H2 Ouro"
         >
@@ -253,7 +270,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<h3 class="text-base sm:text-lg font-bold font-cinzel text-[#F6E27A] mt-4 mb-2">', '</h3>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('heading', 'h3', '<h3 class="text-base sm:text-lg font-bold font-cinzel text-[#F6E27A] mt-4 mb-2">', '</h3>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-colors cursor-pointer"
           title="Subtítulo H3"
         >
@@ -261,11 +279,21 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<h4 class="text-sm font-bold text-white mt-3 mb-1">', '</h4>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('heading', 'h4', '<h4 class="text-sm font-bold text-white mt-3 mb-1">', '</h4>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 font-bold transition-colors cursor-pointer"
           title="Intertítulo H4"
         >
           H4
+        </button>
+        <button
+          type="button"
+          onMouseDown={keepSelection}
+          onClick={() => trigger('heading', 'p', '<p>', '</p>')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-300 transition-colors cursor-pointer"
+          title="Parágrafo Normal"
+        >
+          Parágrafo
         </button>
 
         <div className="h-3.5 w-px bg-slate-700 mx-1" />
@@ -273,7 +301,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Formatação Básica de Texto */}
         <button
           type="button"
-          onClick={() => onInsert('<b>', '</b>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('exec', 'bold', '<b>', '</b>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white font-bold transition-colors cursor-pointer"
           title="Negrito (B)"
         >
@@ -281,7 +310,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<i>', '</i>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('exec', 'italic', '<i>', '</i>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white italic font-serif transition-colors cursor-pointer"
           title="Itálico (I)"
         >
@@ -289,7 +319,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<u>', '</u>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('exec', 'underline', '<u>', '</u>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-white underline font-semibold transition-colors cursor-pointer"
           title="Sublinhado (U)"
         >
@@ -297,7 +328,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<s>', '</s>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('exec', 'strikeThrough', '<s>', '</s>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-300 line-through transition-colors cursor-pointer"
           title="Tachado / Riscado"
         >
@@ -305,7 +337,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<mark class="bg-[#D4AF37]/30 text-white px-1.5 py-0.5 rounded">', '</mark>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('highlight', 'rgba(212, 175, 55, 0.3)', '<mark class="bg-[#D4AF37]/30 text-white px-1.5 py-0.5 rounded">', '</mark>')}
           className="px-2 py-0.5 rounded bg-[#D4AF37]/25 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-semibold transition-colors cursor-pointer"
           title="Marca-Texto Dourado (Destaque)"
         >
@@ -313,7 +346,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<span style="font-family: var(--font-cinzel); font-weight: 700;">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('fontCinzel', '', '<span style="font-family: var(--font-cinzel); font-weight: 700;">', '</span>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-serif transition-colors cursor-pointer"
           title="Fonte Nobre Cinzel (Jurídica)"
         >
@@ -327,7 +361,7 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         <select
           onChange={(e) => {
             if (e.target.value) {
-              onInsert(`<span style="font-size: ${e.target.value};">`, '</span>');
+              trigger('fontSize', e.target.value, `<span style="font-size: ${e.target.value};">`, '</span>');
               e.target.value = '';
             }
           }}
@@ -347,7 +381,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Alinhamento de Parágrafo */}
         <button
           type="button"
-          onClick={() => onInsert('<div class="text-left">', '</div>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('align', 'left', '<div class="text-left" style="text-align: left;">', '</div>')}
           className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
           title="Alinhar à Esquerda"
         >
@@ -355,7 +390,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<div class="text-center">', '</div>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('align', 'center', '<div class="text-center" style="text-align: center;">', '</div>')}
           className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
           title="Centralizado"
         >
@@ -363,7 +399,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<div class="text-right">', '</div>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('align', 'right', '<div class="text-right" style="text-align: right;">', '</div>')}
           className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
           title="Alinhar à Direita"
         >
@@ -371,11 +408,25 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<div class="text-justify">', '</div>')}
-          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
+          onMouseDown={keepSelection}
+          onClick={() => trigger('align', 'justify', '<div class="text-justify" style="text-align: justify;">', '</div>')}
+          className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer font-semibold"
           title="Texto Justificado"
         >
           Justificado
+        </button>
+
+        <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
+        {/* Limpar Formatação / Remover Códigos */}
+        <button
+          type="button"
+          onMouseDown={keepSelection}
+          onClick={() => trigger('clean', '', '', '')}
+          className="px-2 py-0.5 rounded bg-rose-950/60 border border-rose-500/40 hover:bg-rose-600 text-rose-200 hover:text-white transition-colors cursor-pointer font-semibold"
+          title="Limpar formatação do trecho selecionado ou limpar códigos aparentes"
+        >
+          🧹 Limpar Formatação
         </button>
       </div>
 
@@ -386,7 +437,10 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Criador de Box Card Nobre */}
         <button
           type="button"
-          onClick={() => onInsert(
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'insertHtml',
+            '<div class="p-5 my-4 rounded-2xl bg-[#08152B] border border-[#D4AF37]/45 shadow-xl space-y-2"><h4 class="font-cinzel text-base font-bold text-[#F6E27A]">Título do Card Estratégico</h4><p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Insira aqui o conteúdo aprofundado, tópicos explicativos ou conclusões sobre este tema jurídico...</p></div><p><br/></p>',
             '<div class="p-5 my-4 rounded-2xl bg-[#08152B] border border-[#D4AF37]/45 shadow-xl space-y-2">\n  <h4 class="font-cinzel text-base font-bold text-[#F6E27A]">Título do Card Estratégico</h4>\n  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Insira aqui o conteúdo aprofundado, tópicos explicativos ou conclusões sobre este tema jurídico...</p>\n</div>'
           )}
           className="px-2 py-0.5 rounded bg-[#0A1D3D] border border-[#D4AF37]/50 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-bold transition-all cursor-pointer flex items-center gap-1 shadow-sm"
@@ -398,7 +452,10 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Box de Alerta ou Destaque com Borda Esquerda Dourada */}
         <button
           type="button"
-          onClick={() => onInsert(
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'insertHtml',
+            '<div class="p-4 my-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/15 to-transparent border-l-4 border-[#D4AF37] text-xs sm:text-sm text-slate-200 shadow-sm"><strong class="text-[#F6E27A] uppercase tracking-wider block mb-1">IMPORTANTE / PARECER JURÍDICO:</strong><p>Insira aqui o ponto de maior relevância, recomendação legal ou observação para a sua empresa ou patrimônio.</p></div><p><br/></p>',
             '<div class="p-4 my-4 rounded-xl bg-gradient-to-r from-[#D4AF37]/15 to-transparent border-l-4 border-[#D4AF37] text-xs sm:text-sm text-slate-200 shadow-sm">\n  <strong class="text-[#F6E27A] uppercase tracking-wider block mb-1">IMPORTANTE / PARECER JURÍDICO:</strong>\n  <p>Insira aqui o ponto de maior relevância, recomendação legal ou observação para a sua empresa ou patrimônio.</p>\n</div>'
           )}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
@@ -410,7 +467,10 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Selo / Badge Dourado */}
         <button
           type="button"
-          onClick={() => onInsert(
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'wrapHtml',
+            '<span class="inline-block px-3 py-1 my-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider shadow-sm">|</span>',
             '<span class="inline-block px-3 py-1 my-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider shadow-sm">',
             '</span>'
           )}
@@ -423,7 +483,10 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Botão de Ação CTA para WhatsApp ou Contato */}
         <button
           type="button"
-          onClick={() => onInsert(
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'insertHtml',
+            '<div class="my-4 text-center sm:text-left"><a href="https://wa.me/5551998088998" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black text-xs uppercase tracking-wider shadow-xl"><span>AGENDAR CONSULTA JURÍDICA</span></a></div><p><br/></p>',
             '<div class="my-4 text-center sm:text-left">\n  <a href="https://wa.me/5551998088998" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black text-xs uppercase tracking-wider shadow-xl hover:scale-105 transition-all cursor-pointer">\n    <span>AGENDAR CONSULTA JURÍDICA</span>\n  </a>\n</div>'
           )}
           className="px-2 py-0.5 rounded bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-bold hover:brightness-110 transition-all cursor-pointer flex items-center gap-1 shadow-sm"
@@ -435,7 +498,10 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Tabela Formatada */}
         <button
           type="button"
-          onClick={() => onInsert(
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'insertHtml',
+            '<table class="w-full my-4 border border-[#D4AF37]/40 text-xs text-left shadow-lg"><thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30"><tr><th class="p-3 border border-[#D4AF37]/20">Pilar / Instrumento</th><th class="p-3 border border-[#D4AF37]/20">Aplicação Estratégica</th><th class="p-3 border border-[#D4AF37]/20">Benefício Patrimonial</th></tr></thead><tbody><tr><td class="p-2.5 border border-slate-700 bg-[#050B14]">Holding Familiar 4.0</td><td class="p-2.5 border border-slate-700 bg-[#050B14]">Planejamento Sucessório em Vida</td><td class="p-2.5 border border-slate-700 bg-[#050B14]">Economia de até 80% frente ao inventário</td></tr><tr><td class="p-2.5 border border-slate-700 bg-[#071122]">Acordo de Sócios</td><td class="p-2.5 border border-slate-700 bg-[#071122]">Governança e Blindagem Societária</td><td class="p-2.5 border border-slate-700 bg-[#071122]">Prevenção de conflitos e litígios futuros</td></tr></tbody></table><p><br/></p>',
             '<table class="w-full my-4 border border-[#D4AF37]/40 text-xs text-left shadow-lg">\n  <thead class="bg-[#0B1A35] text-[#F6E27A] border-b border-[#D4AF37]/30">\n    <tr>\n      <th class="p-3 border border-[#D4AF37]/20">Pilar / Instrumento</th>\n      <th class="p-3 border border-[#D4AF37]/20">Aplicação Estratégica</th>\n      <th class="p-3 border border-[#D4AF37]/20">Benefício Patrimonial</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td class="p-2.5 border border-slate-700 bg-[#050B14]">Holding Familiar 4.0</td>\n      <td class="p-2.5 border border-slate-700 bg-[#050B14]">Planejamento Sucessório em Vida</td>\n      <td class="p-2.5 border border-slate-700 bg-[#050B14]">Economia de até 80% frente ao inventário</td>\n    </tr>\n    <tr>\n      <td class="p-2.5 border border-slate-700 bg-[#071122]">Acordo de Sócios</td>\n      <td class="p-2.5 border border-slate-700 bg-[#071122]">Governança e Blindagem Societária</td>\n      <td class="p-2.5 border border-slate-700 bg-[#071122]">Prevenção de conflitos e litígios futuros</td>\n    </tr>\n  </tbody>\n</table>'
           )}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
@@ -447,7 +513,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Listas */}
         <button
           type="button"
-          onClick={() => onInsert('<ul class="list-disc pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segundo ponto estratégico</li>\n  <li>Terceiro ponto estratégico</li>\n</ul>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('exec', 'insertUnorderedList', '<ul class="list-disc pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segundo ponto estratégico</li>\n  <li>Terceiro ponto estratégico</li>\n</ul>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
           title="Lista com Marcadores"
         >
@@ -456,32 +523,67 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
 
         <button
           type="button"
-          onClick={() => onInsert('<ol class="list-decimal pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segunda etapa do procedimento</li>\n  <li>Terceira etapa do procedimento</li>\n</ol>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('exec', 'insertOrderedList', '<ol class="list-decimal pl-5 my-2 space-y-1">\n  <li>', '</li>\n  <li>Segunda etapa do procedimento</li>\n  <li>Terceira etapa do procedimento</li>\n</ol>')}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
           title="Lista Numerada"
         >
           <span>1. Numerada</span>
         </button>
 
-        {/* Imagem no Texto */}
+        {/* Imagem no Texto (Upload do Computador ou URL) */}
+        <input
+          ref={imageInputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+              if (typeof reader.result === 'string') {
+                trigger(
+                  'insertHtml',
+                  `<figure class="my-5 text-center"><img src="${reader.result}" alt="Imagem ilustrativa" class="rounded-2xl border border-[#D4AF37]/45 max-w-full h-auto mx-auto shadow-2xl" /></figure><p><br/></p>`,
+                  `<figure class="my-5 text-center"><img src="${reader.result}" alt="Imagem ilustrativa" class="rounded-2xl border border-[#D4AF37]/45 max-w-full h-auto mx-auto shadow-2xl" /></figure>`
+                );
+              }
+            };
+            reader.readAsDataURL(file);
+            e.target.value = '';
+          }}
+        />
         <button
           type="button"
+          onMouseDown={keepSelection}
+          onClick={() => imageInputRef.current?.click()}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
+          title="Enviar Imagem do Computador para o Texto"
+        >
+          <span>🖼️ Enviar Foto</span>
+        </button>
+        <button
+          type="button"
+          onMouseDown={keepSelection}
           onClick={() => {
             const url = window.prompt('Insira a URL ou caminho da imagem (ex: /img/holding-familiar-1.jpg ou https://...):');
             if (url) {
               const legenda = window.prompt('Legenda da imagem (opcional):') || '';
-              onInsert(`<figure class="my-5 text-center"><img src="${url}" alt="Imagem ilustrativa" class="rounded-2xl border border-[#D4AF37]/45 max-w-full h-auto mx-auto shadow-2xl" />${legenda ? `<figcaption class="text-xs text-slate-400 mt-2 italic">${legenda}</figcaption>` : ''}</figure>`);
+              const html = `<figure class="my-5 text-center"><img src="${url}" alt="Imagem ilustrativa" class="rounded-2xl border border-[#D4AF37]/45 max-w-full h-auto mx-auto shadow-2xl" />${legenda ? `<figcaption class="text-xs text-slate-400 mt-2 italic">${legenda}</figcaption>` : ''}</figure><p><br/></p>`;
+              trigger('insertHtml', html, html);
             }
           }}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
-          title="Inserir Imagem com Legenda"
+          title="Inserir Imagem por Link/URL"
         >
-          <span>🖼️ Imagem</span>
+          <span>🌐 Imagem URL</span>
         </button>
 
         {/* Vídeo do YouTube Embed */}
         <button
           type="button"
+          onMouseDown={keepSelection}
           onClick={() => {
             const rawUrl = window.prompt('Insira a URL do vídeo do YouTube (ex: https://www.youtube.com/watch?v=... ou https://youtu.be/...):');
             if (rawUrl) {
@@ -489,7 +591,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
               const match = rawUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
               if (match) videoId = match[1];
               if (videoId) {
-                onInsert(`<div class="my-5 aspect-video w-full rounded-2xl overflow-hidden border border-[#D4AF37]/50 shadow-2xl"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}" title="Vídeo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`);
+                const html = `<div class="my-5 aspect-video w-full rounded-2xl overflow-hidden border border-[#D4AF37]/50 shadow-2xl"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}" title="Vídeo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p><br/></p>`;
+                trigger('insertHtml', html, html);
               } else {
                 alert('Não foi possível identificar o código do vídeo do YouTube. Verifique o link.');
               }
@@ -504,10 +607,11 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Link / Hiperlink */}
         <button
           type="button"
+          onMouseDown={keepSelection}
           onClick={() => {
             const url = window.prompt('Insira o endereço do link (ex: https://...):');
             if (url) {
-              onInsert(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#F6E27A] underline hover:text-white transition-colors">`, '</a>');
+              trigger('link', url, `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[#F6E27A] underline hover:text-white transition-colors">`, '</a>');
             }
           }}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer flex items-center gap-1"
@@ -519,7 +623,13 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Citação Jurídica */}
         <button
           type="button"
-          onClick={() => onInsert('<blockquote class="p-3.5 my-3.5 border-l-4 border-[#D4AF37] bg-[#0E1F3D]/45 text-slate-200 italic rounded-r-xl shadow-sm">', '</blockquote>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'wrapHtml',
+            '<blockquote class="p-3.5 my-3.5 border-l-4 border-[#D4AF37] bg-[#0E1F3D]/45 text-slate-200 italic rounded-r-xl shadow-sm">|</blockquote>',
+            '<blockquote class="p-3.5 my-3.5 border-l-4 border-[#D4AF37] bg-[#0E1F3D]/45 text-slate-200 italic rounded-r-xl shadow-sm">',
+            '</blockquote>'
+          )}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 transition-colors cursor-pointer"
           title="Citação / Jurisprudência"
         >
@@ -529,7 +639,12 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         {/* Linha Divisória Dourada */}
         <button
           type="button"
-          onClick={() => onInsert('\n<hr class="my-6 border-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />\n')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger(
+            'insertHtml',
+            '<hr class="my-6 border-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" /><p><br/></p>',
+            '\n<hr class="my-6 border-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent" />\n'
+          )}
           className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] transition-colors cursor-pointer"
           title="Linha Divisória Dourada"
         >
@@ -542,39 +657,44 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         <span className="text-[10px] uppercase font-bold text-slate-400 px-1">Cor do Texto:</span>
         <button
           type="button"
-          onClick={() => onInsert('<span style="color: #D4AF37">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('color', '#D4AF37', '<span style="color: #D4AF37">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
           title="Dourado Nobre #D4AF37"
         >
-          #D4AF37
+          Ouro #D4AF37
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<span style="color: #F6E27A">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('color', '#F6E27A', '<span style="color: #F6E27A">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-[#F6E27A]/20 border border-[#F6E27A] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
           title="Ouro Claro #F6E27A"
         >
-          #F6E27A
+          Ouro Claro #F6E27A
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<span style="color: #FFFFFF">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('color', '#FFFFFF', '<span style="color: #FFFFFF">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-white/20 border border-white text-white font-semibold text-[10px] cursor-pointer"
           title="Branco #FFFFFF"
         >
-          #FFFFFF
+          Branco
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<span style="color: #94A3B8">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('color', '#94A3B8', '<span style="color: #94A3B8">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-600 text-slate-300 font-semibold text-[10px] cursor-pointer"
           title="Prata #94A3B8"
         >
-          #94A3B8
+          Prata
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<span style="color: #10B981">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('color', '#10B981', '<span style="color: #10B981">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-500 text-emerald-400 font-semibold text-[10px] cursor-pointer"
           title="Verde Sucesso #10B981"
         >
@@ -586,13 +706,17 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
           <input
             type="color"
             value={customColor}
-            onChange={(e) => setCustomColor(e.target.value)}
+            onChange={(e) => {
+              setCustomColor(e.target.value);
+              trigger('color', e.target.value, `<span style="color: ${e.target.value}">`, '</span>');
+            }}
             className="w-5 h-5 rounded cursor-pointer bg-transparent border-0"
             title="Escolher cor personalizada para o texto"
           />
           <button
             type="button"
-            onClick={() => onInsert(`<span style="color: ${customColor}">`, '</span>')}
+            onMouseDown={keepSelection}
+            onClick={() => trigger('color', customColor, `<span style="color: ${customColor}">`, '</span>')}
             className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-mono cursor-pointer"
             title="Aplicar cor escolhida ao texto selecionado"
           >
@@ -606,7 +730,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         <span className="text-[10px] uppercase font-bold text-slate-400 px-1">Fundo:</span>
         <button
           type="button"
-          onClick={() => onInsert('<span style="background-color: rgba(212, 175, 55, 0.2); padding: 2px 6px; border-radius: 4px;">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('highlight', 'rgba(212, 175, 55, 0.22)', '<span style="background-color: rgba(212, 175, 55, 0.2); padding: 2px 6px; border-radius: 4px;">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/50 text-[#F6E27A] text-[10px] cursor-pointer"
           title="Fundo Ouro Translúcido"
         >
@@ -614,7 +739,8 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
         </button>
         <button
           type="button"
-          onClick={() => onInsert('<span style="background-color: #08152B; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(212,175,55,0.3);">', '</span>')}
+          onMouseDown={keepSelection}
+          onClick={() => trigger('highlight', '#08152B', '<span style="background-color: #08152B; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(212,175,55,0.3);">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-[#08152B] border border-[#D4AF37]/40 text-slate-200 text-[10px] cursor-pointer"
           title="Fundo Azul Marinho Nobre"
         >
@@ -625,13 +751,17 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert }
           <input
             type="color"
             value={customBgColor}
-            onChange={(e) => setCustomBgColor(e.target.value)}
+            onChange={(e) => {
+              setCustomBgColor(e.target.value);
+              trigger('highlight', e.target.value, `<span style="background-color: ${e.target.value}; padding: 2px 6px; border-radius: 4px;">`, '</span>');
+            }}
             className="w-5 h-5 rounded cursor-pointer bg-transparent border-0"
             title="Escolher cor de fundo personalizada"
           />
           <button
             type="button"
-            onClick={() => onInsert(`<span style="background-color: ${customBgColor}; padding: 2px 6px; border-radius: 4px;">`, '</span>')}
+            onMouseDown={keepSelection}
+            onClick={() => trigger('highlight', customBgColor, `<span style="background-color: ${customBgColor}; padding: 2px 6px; border-radius: 4px;">`, '</span>')}
             className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] font-mono cursor-pointer"
             title="Aplicar cor de fundo escolhida"
           >
@@ -660,20 +790,71 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
   placeholder,
   hint
 }) => {
+  const editorRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const [showPreview, setShowPreview] = useState(false);
+  const savedRangeRef = useRef<Range | null>(null);
+  const isInternalChange = useRef(false);
+  const [showRawHtml, setShowRawHtml] = useState(false);
 
-  const handleInsert = (prefix: string, suffix: string = '') => {
+  // Salva a seleção atual do usuário dentro do editor visual
+  const saveSelection = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0 && editorRef.current) {
+      const range = sel.getRangeAt(0);
+      if (editorRef.current.contains(range.commonAncestorContainer)) {
+        savedRangeRef.current = range.cloneRange();
+      }
+    }
+  };
+
+  // Restaura a seleção salva antes de aplicar formatação
+  const restoreSelection = () => {
+    const el = editorRef.current;
+    if (!el) return;
+    el.focus();
+    if (savedRangeRef.current) {
+      const sel = window.getSelection();
+      if (sel) {
+        sel.removeAllRanges();
+        sel.addRange(savedRangeRef.current);
+      }
+    }
+  };
+
+  // Sincroniza valor externo com o editor visual sem perder o cursor enquanto digita
+  useEffect(() => {
+    if (showRawHtml) return;
+    const el = editorRef.current;
+    if (!el) return;
+    if (isInternalChange.current) {
+      isInternalChange.current = false;
+      return;
+    }
+    const formatted = formatRichHtml(value || '');
+    if (el.innerHTML !== formatted) {
+      el.innerHTML = formatted;
+    }
+  }, [value, showRawHtml]);
+
+  const emitChangeFromVisual = () => {
+    const el = editorRef.current;
+    if (!el) return;
+    isInternalChange.current = true;
+    onChange(el.innerHTML);
+  };
+
+  // Ações para o modo código HTML (caso o usuário alterne para ver o HTML bruto)
+  const handleInsertRaw = (prefix: string, suffix: string = '') => {
     const el = textareaRef.current;
     if (!el) {
-      onChange(value + prefix + suffix);
+      onChange((value || '') + prefix + suffix);
       return;
     }
     const start = el.selectionStart;
     const end = el.selectionEnd;
-    const selectedText = value.substring(start, end);
-    const before = value.substring(0, start);
-    const after = value.substring(end);
+    const selectedText = (value || '').substring(start, end);
+    const before = (value || '').substring(0, start);
+    const after = (value || '').substring(end);
     const newText = before + prefix + (selectedText || '') + suffix + after;
     onChange(newText);
     setTimeout(() => {
@@ -681,6 +862,149 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
       el.setSelectionRange(start + prefix.length, start + prefix.length + selectedText.length);
     }, 50);
   };
+
+  // Ações 100% visuais (estilo Word) sem nunca exibir códigos HTML no texto
+  const handleVisualAction = (action: string, payload: string = '') => {
+    if (showRawHtml) return;
+    const el = editorRef.current;
+    if (!el) return;
+
+    restoreSelection();
+    const sel = window.getSelection();
+    const hasSelection = sel && sel.rangeCount > 0 && !sel.isCollapsed && el.contains(sel.getRangeAt(0).commonAncestorContainer);
+    const selectedText = hasSelection ? sel!.toString() : '';
+
+    if (action === 'exec') {
+      document.execCommand(payload, false);
+    } else if (action === 'color') {
+      if (hasSelection) {
+        document.execCommand('styleWithCSS', false, 'true');
+        document.execCommand('foreColor', false, payload);
+      } else {
+        document.execCommand('insertHTML', false, `<span style="color: ${payload};">Texto</span>`);
+      }
+    } else if (action === 'highlight') {
+      if (hasSelection) {
+        const range = sel!.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.backgroundColor = payload;
+        span.style.padding = '2px 6px';
+        span.style.borderRadius = '4px';
+        try {
+          range.surroundContents(span);
+        } catch {
+          document.execCommand('insertHTML', false, `<span style="background-color: ${payload}; padding: 2px 6px; border-radius: 4px;">${selectedText}</span>`);
+        }
+      }
+    } else if (action === 'fontSize') {
+      if (hasSelection) {
+        const range = sel!.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.fontSize = payload;
+        try {
+          range.surroundContents(span);
+        } catch {
+          document.execCommand('insertHTML', false, `<span style="font-size: ${payload};">${selectedText}</span>`);
+        }
+      }
+    } else if (action === 'fontCinzel') {
+      if (hasSelection) {
+        const range = sel!.getRangeAt(0);
+        const span = document.createElement('span');
+        span.style.fontFamily = 'var(--font-cinzel)';
+        span.style.fontWeight = '700';
+        try {
+          range.surroundContents(span);
+        } catch {
+          document.execCommand('insertHTML', false, `<span style="font-family: var(--font-cinzel); font-weight: 700;">${selectedText}</span>`);
+        }
+      }
+    } else if (action === 'heading') {
+      if (payload === 'h1') {
+        document.execCommand('formatBlock', false, 'H1');
+      } else if (payload === 'h2') {
+        document.execCommand('formatBlock', false, 'H2');
+      } else if (payload === 'h3') {
+        document.execCommand('formatBlock', false, 'H3');
+      } else if (payload === 'h4') {
+        document.execCommand('formatBlock', false, 'H4');
+      } else {
+        document.execCommand('formatBlock', false, 'P');
+      }
+    } else if (action === 'align') {
+      // Aplica alinhamento no bloco selecionado ou em todo o texto caso nada esteja selecionado
+      const alignMap: Record<string, string> = {
+        left: 'justifyLeft',
+        center: 'justifyCenter',
+        right: 'justifyRight',
+        justify: 'justifyFull'
+      };
+      if (hasSelection) {
+        document.execCommand(alignMap[payload] || 'justifyLeft', false);
+        // Garante que o elemento pai de bloco também receba style="text-align: ..."
+        const anchor = sel?.anchorNode;
+        let node = anchor instanceof HTMLElement ? anchor : anchor?.parentElement;
+        while (node && node !== el && !['P', 'DIV', 'H1', 'H2', 'H3', 'H4', 'LI', 'BLOCKQUOTE'].includes(node.tagName)) {
+          node = node.parentElement;
+        }
+        if (node && node !== el) {
+          node.style.textAlign = payload;
+          node.classList.remove('text-left', 'text-center', 'text-right', 'text-justify');
+          node.classList.add(`text-${payload}`);
+        } else {
+          // Se era texto solto no root, envolve em uma div alinhada
+          el.innerHTML = `<div class="text-${payload}" style="text-align: ${payload};">${el.innerHTML}</div>`;
+        }
+      } else {
+        // Sem seleção: alinha todos os parágrafos/blocos do campo atual
+        const blocks = el.querySelectorAll('p, div, h1, h2, h3, h4, blockquote');
+        if (blocks.length > 0) {
+          blocks.forEach((b) => {
+            const htmlBlock = b as HTMLElement;
+            htmlBlock.style.textAlign = payload;
+            htmlBlock.classList.remove('text-left', 'text-center', 'text-right', 'text-justify');
+            htmlBlock.classList.add(`text-${payload}`);
+          });
+        } else {
+          el.innerHTML = `<div class="text-${payload}" style="text-align: ${payload};">${el.innerHTML}</div>`;
+        }
+      }
+    } else if (action === 'link') {
+      if (hasSelection) {
+        document.execCommand(
+          'insertHTML',
+          false,
+          `<a href="${payload}" target="_blank" rel="noopener noreferrer" class="text-[#F6E27A] underline">${selectedText}</a>`
+        );
+      } else {
+        document.execCommand(
+          'insertHTML',
+          false,
+          `<a href="${payload}" target="_blank" rel="noopener noreferrer" class="text-[#F6E27A] underline">${payload}</a>`
+        );
+      }
+    } else if (action === 'wrapHtml') {
+      const [openTag, closeTag] = payload.split('|');
+      document.execCommand('insertHTML', false, `${openTag}${selectedText || 'Texto Destacado'}${closeTag}`);
+    } else if (action === 'insertHtml') {
+      document.execCommand('insertHTML', false, payload);
+    } else if (action === 'clean') {
+      if (hasSelection) {
+        document.execCommand('removeFormat', false);
+      } else {
+        // Limpa códigos HTML escapados que possam ter sido colados por engano
+        const cleaned = el.innerHTML
+          .replace(/&lt;\/?(span|div|b|strong|i|em|u|s|mark|p|br)[^&]*&gt;/gi, '')
+          .replace(/<\/?(span|font|mark)[^>]*>/gi, '');
+        el.innerHTML = cleaned;
+      }
+    }
+
+    saveSelection();
+    emitChangeFromVisual();
+  };
+
+  const minHeightPx = Math.max(96, rows * 26);
 
   return (
     <div className="space-y-1.5">
@@ -693,53 +1017,63 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
           )}
           {hint && <span className="text-[11px] text-slate-400 block">{hint}</span>}
         </div>
-        
-        {/* Botão de Alternância: Modo Edição vs Pré-visualização em Tempo Real */}
-        <button
-          type="button"
-          onClick={() => setShowPreview(!showPreview)}
-          className={`px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-sm ${
-            showPreview
-              ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-black shadow-md'
-              : 'bg-[#0E1F3D] border border-[#D4AF37]/50 text-[#F6E27A] hover:bg-[#152e5a]'
-          }`}
-          title="Clique para alternar entre escrever e ver exatamente como vai aparecer no portal"
-        >
-          <span>{showPreview ? '✏️ Voltar ao Editor' : '👁️ Pré-visualizar no Layout'}</span>
-        </button>
+
+        {/* Alternância opcional entre Editor Visual Word (Padrão) e Código HTML Avançado */}
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-md">
+            ✓ Editor Visual Direto (Sem Códigos)
+          </span>
+          <button
+            type="button"
+            onClick={() => setShowRawHtml(!showRawHtml)}
+            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer ${
+              showRawHtml
+                ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-black shadow-md'
+                : 'bg-[#071122] border border-slate-700 text-slate-400 hover:text-white hover:border-[#D4AF37]/50'
+            }`}
+            title="Alternar entre o Editor Visual Direto (estilo Word) e o Código HTML"
+          >
+            <span>{showRawHtml ? '✨ Voltar ao Editor Visual' : '</> Código HTML'}</span>
+          </button>
+        </div>
       </div>
 
-      <FormattingToolbar onInsert={handleInsert} />
+      <FormattingToolbar onInsert={handleInsertRaw} onVisualAction={handleVisualAction} />
 
-      {showPreview ? (
-        <div className="w-full min-h-[160px] p-5 rounded-xl bg-[#030710] border border-[#D4AF37]/60 shadow-inner overflow-x-auto text-xs sm:text-sm text-slate-200 leading-relaxed publication-rich-content animate-in fade-in duration-150">
-          <div className="text-[10px] uppercase font-bold text-[#E5C158] pb-2 mb-3 border-b border-[#D4AF37]/20 flex items-center justify-between">
-            <span>Pré-visualização do Conteúdo em Tempo Real</span>
-            <span className="text-slate-400 font-normal">Renderizado como no portal</span>
-          </div>
-          {value ? (
-            <div 
-              dangerouslySetInnerHTML={{ 
-                __html: value.includes('<') 
-                  ? value 
-                  : value.split('\n\n').map(p => `<p class="mb-3">${p}</p>`).join('') 
-              }} 
-            />
-          ) : (
-            <p className="text-slate-500 italic text-center py-6">
-              Nenhum texto inserido ainda. Clique em "Voltar ao Editor" e escreva seu conteúdo.
-            </p>
-          )}
-        </div>
-      ) : (
+      {showRawHtml ? (
         <textarea
           ref={textareaRef}
           rows={rows}
-          value={value}
+          value={value || ''}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-xs sm:text-sm font-sans leading-relaxed"
+          className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 text-amber-200 placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] text-xs font-mono leading-relaxed"
         />
+      ) : (
+        <div className="relative">
+          <div
+            ref={editorRef}
+            contentEditable
+            suppressContentEditableWarning
+            onInput={() => {
+              saveSelection();
+              emitChangeFromVisual();
+            }}
+            onKeyUp={saveSelection}
+            onMouseUp={saveSelection}
+            onBlur={() => {
+              saveSelection();
+              emitChangeFromVisual();
+            }}
+            style={{ minHeight: `${minHeightPx}px` }}
+            className="w-full px-4 py-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/40 text-xs sm:text-sm font-sans leading-relaxed publication-rich-content overflow-y-auto"
+          />
+          {(!value || value.replace(/<[^>]*>/g, '').trim() === '') && placeholder && (
+            <div className="pointer-events-none absolute top-3 left-4 text-xs sm:text-sm text-slate-500 italic">
+              {placeholder}
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
@@ -1484,10 +1818,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </h3>
 
             {/* Imagens do Slide 1 (Desktop e Mobile) com Upload */}
+            <div className="p-3 rounded-xl bg-[#09152B] border border-[#D4AF37]/40 text-[11px] text-slate-200">
+              <strong className="text-[#F6E27A] uppercase tracking-wider block mb-0.5">📐 Medidas Ideais de Papel de Parede (Itens 106 e 113):</strong>
+              • <strong>Computador / Notebook (Horizontal):</strong> <code className="text-[#F6E27A] font-bold">1920 x 1080 px</code> (Proporção 16:9 Full HD)<br />
+              • <strong>Smartphone / Celular (Vertical):</strong> <code className="text-[#F6E27A] font-bold">1080 x 1920 px</code> (Proporção 9:16 Vertical)
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <ImageUploadField
-                label="Imagem do Slide 1 · Desktop (Computadores)"
-                description="Foto exibida em telas grandes (computadores e notebooks)."
+                label="Imagem do Slide 1 · Desktop (1920 x 1080 px)"
+                description="Foto horizontal 16:9 exibida em telas grandes (computadores e notebooks)."
                 currentValue={formData.hero.heroImageUrl}
                 defaultValue="/img/novofundohero.jpg"
                 aspectRatio="video"
@@ -1498,8 +1837,8 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               />
 
               <ImageUploadField
-                label="Imagem do Slide 1 · Mobile (Smartphones)"
-                description="Versão vertical otimizada para smartphones (mostra as duas estátuas sem zoom excessivo)."
+                label="Imagem do Slide 1 · Mobile (1080 x 1920 px)"
+                description="Versão vertical 9:16 otimizada para smartphones (mostra as duas estátuas sem zoom excessivo)."
                 currentValue={formData.hero.heroImageMobileUrl}
                 defaultValue="/img/novofundohero_mobile.jpg"
                 aspectRatio="portrait"
@@ -1695,15 +2034,14 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 </div>
               </div>
               <div>
-                <label className="block text-[10px] text-slate-300 font-semibold mb-1">Texto Descritivo Box 2</label>
-                <textarea
-                  rows={2}
+                <RichTextarea
+                  label="Texto Descritivo Box 2"
+                  rows={3}
                   value={formData.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
-                  onChange={(e) => setFormData({
+                  onChange={(val) => setFormData({
                     ...formData,
-                    hero: { ...formData.hero, box2Text: e.target.value }
+                    hero: { ...formData.hero, box2Text: val }
                   })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
                 />
               </div>
             </div>
@@ -2273,32 +2611,26 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           />
 
           <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-              Parágrafo 1 (História e Sede em Porto Alegre)
-            </label>
-            <textarea
+            <RichTextarea
+              label="Parágrafo 1 (História e Sede em Porto Alegre)"
               rows={3}
               value={formData.nationalPresence?.paragraph1 || 'Com sede em Porto Alegre/RS e atuação digital estratégica em todo o Brasil, a ALDO LEÃO ADVOCACIA ESTRATÉGICA atende clientes em todo o território nacional e no exterior, prestando serviços jurídicos de alta excelência com agilidade, segurança e eficiência.'}
-              onChange={(e) => setFormData({
+              onChange={(val) => setFormData({
                 ...formData,
-                nationalPresence: { ...(formData.nationalPresence || {}), paragraph1: e.target.value }
+                nationalPresence: { ...(formData.nationalPresence || {}), paragraph1: val }
               })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
             />
           </div>
 
           <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-              Parágrafo 2 (Tradição e Tecnologia de Ponta)
-            </label>
-            <textarea
+            <RichTextarea
+              label="Parágrafo 2 (Tradição e Tecnologia de Ponta)"
               rows={3}
               value={formData.nationalPresence?.paragraph2 || 'Combinando tradição jurídica centenária e tecnologia de ponta, estruturamos um modelo de advocacia digital que proporciona aos nossos clientes atendimento personalizado, videoconferências e acompanhamento processual transparente em tempo real, sem a necessidade de deslocamentos.'}
-              onChange={(e) => setFormData({
+              onChange={(val) => setFormData({
                 ...formData,
-                nationalPresence: { ...(formData.nationalPresence || {}), paragraph2: e.target.value }
+                nationalPresence: { ...(formData.nationalPresence || {}), paragraph2: val }
               })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
             />
           </div>
 
@@ -2435,32 +2767,26 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           />
 
           <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-              Parágrafo 1 da História Centenária (Início em 1908)
-            </label>
-            <textarea
+            <RichTextarea
+              label="Parágrafo 1 da História Centenária (Início em 1908)"
               rows={3}
               value={formData.centennialLegacy?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
-              onChange={(e) => setFormData({
+              onChange={(val) => setFormData({
                 ...formData,
-                centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph1: e.target.value }
+                centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph1: val }
               })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
             />
           </div>
 
           <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-              Parágrafo 2 da História Centenária (3ª Geração desde 1986)
-            </label>
-            <textarea
+            <RichTextarea
+              label="Parágrafo 2 da História Centenária (3ª Geração desde 1986)"
               rows={3}
               value={formData.centennialLegacy?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
-              onChange={(e) => setFormData({
+              onChange={(val) => setFormData({
                 ...formData,
-                centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph2: e.target.value }
+                centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph2: val }
               })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
             />
           </div>
 
@@ -2896,95 +3222,65 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 1
-            </label>
-            <textarea
-              rows={3}
-              value={formData.founder.bioParagraph1}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, bioParagraph1: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Biografia Institucional — Parágrafo 1"
+            rows={3}
+            value={formData.founder.bioParagraph1}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, bioParagraph1: val }
+            })}
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 2
-            </label>
-            <textarea
-              rows={3}
-              value={formData.founder.bioParagraph2}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, bioParagraph2: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Biografia Institucional — Parágrafo 2"
+            rows={3}
+            value={formData.founder.bioParagraph2}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, bioParagraph2: val }
+            })}
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 3
-            </label>
-            <textarea
-              rows={3}
-              value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, bioParagraph3: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Biografia Institucional — Parágrafo 3"
+            rows={3}
+            value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, bioParagraph3: val }
+            })}
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 4
-            </label>
-            <textarea
-              rows={2}
-              value={formData.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, bioParagraph4: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Biografia Institucional — Parágrafo 4"
+            rows={2}
+            value={formData.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, bioParagraph4: val }
+            })}
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 5
-            </label>
-            <textarea
-              rows={3}
-              value={formData.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, bioParagraph5: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Biografia Institucional — Parágrafo 5"
+            rows={3}
+            value={formData.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, bioParagraph5: val }
+            })}
+          />
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Biografia Institucional — Parágrafo 6
-            </label>
-            <textarea
-              rows={3}
-              value={formData.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, bioParagraph6: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
+          <RichTextarea
+            label="Biografia Institucional — Parágrafo 6"
+            rows={3}
+            value={formData.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
+            onChange={(val) => setFormData({
+              ...formData,
+              founder: { ...formData.founder, bioParagraph6: val }
+            })}
+          />
 
           {/* Diferenciais Estratégicos (Item 86) */}
           <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
@@ -3080,70 +3376,55 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
 
             {/* 5 Parágrafos da Trajetória */}
-            <div className="space-y-2.5">
+            <div className="space-y-3">
               <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
                 Trajetória Profissional — 5 Parágrafos Oficiais
               </span>
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1 (Convergência Centenária)</label>
-                <textarea
-                  rows={2}
-                  value={formData.founder.curriculumTrajectoryP1 || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, curriculumTrajectoryP1: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2 (Continuidade Desde 1986 e Avô Paterno)</label>
-                <textarea
-                  rows={2}
-                  value={formData.founder.curriculumTrajectoryP2 || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, curriculumTrajectoryP2: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3 (Rigor Técnico e Inteligência Jurídica)</label>
-                <textarea
-                  rows={2}
-                  value={formData.founder.curriculumTrajectoryP3 || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, curriculumTrajectoryP3: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4 (Artigos, Livros, Mentorias e Liderança)</label>
-                <textarea
-                  rows={2}
-                  value={formData.founder.curriculumTrajectoryP4 || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, curriculumTrajectoryP4: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5 (Frase Dourada de Encerramento)</label>
-                <input
-                  type="text"
-                  value={formData.founder.curriculumTrajectoryP5 || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, curriculumTrajectoryP5: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-semibold"
-                />
-              </div>
+              <RichTextarea
+                label="Parágrafo 1 (Convergência Centenária)"
+                rows={2}
+                value={formData.founder.curriculumTrajectoryP1 || ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, curriculumTrajectoryP1: val }
+                })}
+              />
+              <RichTextarea
+                label="Parágrafo 2 (Continuidade Desde 1986 e Avô Paterno)"
+                rows={2}
+                value={formData.founder.curriculumTrajectoryP2 || ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, curriculumTrajectoryP2: val }
+                })}
+              />
+              <RichTextarea
+                label="Parágrafo 3 (Rigor Técnico e Inteligência Jurídica)"
+                rows={2}
+                value={formData.founder.curriculumTrajectoryP3 || ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, curriculumTrajectoryP3: val }
+                })}
+              />
+              <RichTextarea
+                label="Parágrafo 4 (Artigos, Livros, Mentorias e Liderança)"
+                rows={2}
+                value={formData.founder.curriculumTrajectoryP4 || ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, curriculumTrajectoryP4: val }
+                })}
+              />
+              <RichTextarea
+                label="Parágrafo 5 (Frase Dourada de Encerramento)"
+                rows={2}
+                value={formData.founder.curriculumTrajectoryP5 || ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, curriculumTrajectoryP5: val }
+                })}
+              />
             </div>
 
             {/* Especialização e Excelência Jurídica */}
@@ -3310,19 +3591,47 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
 
           
-          {/* Parágrafos de Conclusão do Currículo no Box Azul Escuro (Item 64) */}
+          {/* Parágrafos de Conclusão do Currículo no Box Azul Escuro (Item 64 e 93) */}
           <div className="p-4 sm:p-5 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-4">
-            <div className="border-b border-[#D4AF37]/20 pb-2">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                Dois Parágrafos de Fechamento do Currículo no Box Azul Escuro (Item 64)
-              </h4>
-              <p className="text-[11px] text-slate-300 mt-0.5">
-                Exibidos no final do modal "Saiba Mais" do Head Jurídico e na Landing Page.
-              </p>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#D4AF37]/20 pb-2">
+              <div>
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  Dois Parágrafos de Fechamento do Currículo no Box Azul Escuro (Itens 64 e 93)
+                </h4>
+                <p className="text-[11px] text-slate-300 mt-0.5">
+                  Exibidos no final do modal "Saiba Mais" do Head Jurídico e na Landing Page. Se ambos estiverem vazios, o card azul escuro fica oculto.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setFormData({
+                    ...formData,
+                    founder: { ...(formData.founder || {}), curriculumClosingP1: '', curriculumClosingP2: '' }
+                  })}
+                  className="px-2.5 py-1 rounded bg-red-500/20 border border-red-500/40 text-[10px] font-bold text-red-300 hover:bg-red-500/30 cursor-pointer"
+                >
+                  Ocultar / Excluir Box (Item 93)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFormData({
+                    ...formData,
+                    founder: {
+                      ...(formData.founder || {}),
+                      curriculumClosingP1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração da tradição jurídica centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA, unindo a sabedoria acumulada ao longo de mais de um século à inovação constante das ferramentas jurídicas contemporâneas.',
+                      curriculumClosingP2: 'Atuando na Advocacia Estratégica desde 1986, assessora famílias, empresários e corporações em decisões de alta relevância patrimonial e societária, assegurando a blindagem legal, a eficiência sucessória e a perpetuação sustentável de legados empresariais.'
+                    }
+                  })}
+                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[10px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 cursor-pointer"
+                >
+                  Restaurar Padrão
+                </button>
+              </div>
             </div>
             <RichTextarea
-              label="Parágrafo de Fechamento 1 (Item 64)"
-              value={formData.founder?.curriculumClosingP1 || 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração da tradição jurídica centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA, unindo a sabedoria acumulada ao longo de mais de um século à inovação constante das ferramentas jurídicas contemporâneas.'}
+              label="Parágrafo de Fechamento 1 (Itens 64 e 93)"
+              value={formData.founder?.curriculumClosingP1 ?? ''}
               onChange={(val) => setFormData({
                 ...formData,
                 founder: { ...(formData.founder || {}), curriculumClosingP1: val }
@@ -3330,8 +3639,8 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               rows={3}
             />
             <RichTextarea
-              label="Parágrafo de Fechamento 2 (Item 64)"
-              value={formData.founder?.curriculumClosingP2 || 'Atuando na Advocacia Estratégica desde 1986, assessora famílias, empresários e corporações em decisões de alta relevância patrimonial e societária, assegurando a blindagem legal, a eficiência sucessória e a perpetuação sustentável de legados empresariais.'}
+              label="Parágrafo de Fechamento 2 (Itens 64 e 93)"
+              value={formData.founder?.curriculumClosingP2 ?? ''}
               onChange={(val) => setFormData({
                 ...formData,
                 founder: { ...(formData.founder || {}), curriculumClosingP2: val }
@@ -3776,20 +4085,26 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
-            <div>
-              <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                Texto do Palestrante (Dr. Aldo Leão)
-              </label>
-              <textarea
-                rows={2}
-                value={formData.academiaLeao?.speakerText || 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  academiaLeao: { ...(formData.academiaLeao || {}), speakerText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
+            <RichTextarea
+              label="Conteúdo Integral da Página Academia Leão Ferreira (Item 68)"
+              rows={5}
+              value={formData.academiaLeao?.content || ''}
+              onChange={(val) => setFormData({
+                ...formData,
+                academiaLeao: { ...(formData.academiaLeao || {}), content: val }
+              })}
+              hint="Editor Visual completo para o texto principal da página Academia Leão Ferreira."
+            />
+
+            <RichTextarea
+              label="Texto do Palestrante (Dr. Aldo Leão)"
+              rows={2}
+              value={formData.academiaLeao?.speakerText || 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                academiaLeao: { ...(formData.academiaLeao || {}), speakerText: val }
+              })}
+            />
 
             <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3">
               <h5 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
@@ -4215,18 +4530,38 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </p>
           </div>
 
-          {/* Imagem de Fundo do CTA */}
-          <ImageUploadField
-            label="Imagem de Fundo do Bloco de Consulta"
-            description="Imagem sutil de fundo para a seção de agendamento de consulta digital."
-            currentValue={formData.digitalConsultation?.bgImageUrl}
-            defaultValue="/img/dr-aldo-reuniao.jpg"
-            aspectRatio="video"
-            onChange={(newUrl) => setFormData({
-              ...formData,
-              digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
-            })}
-          />
+          {/* Imagem de Fundo do CTA e Foto do Card à Direita (Item 100) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ImageUploadField
+              label="Foto Principal do Card à Direita (Sala / Reunião - Item 100)"
+              description="Foto principal em destaque à direita na seção Agende a sua Consulta Digital."
+              currentValue={formData.digitalConsultation?.cardImageUrl || '/img/dr-aldo-2.jpg'}
+              defaultValue="/img/dr-aldo-2.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                digitalConsultation: { ...(formData.digitalConsultation || {}), cardImageUrl: newUrl }
+              })}
+              presetOptions={[
+                { label: 'Ambiente Executivo (Padrão)', url: '/img/dr-aldo-2.jpg' },
+                { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
+                { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
+                { label: 'Retrato Formal', url: '/img/dr-aldo-portrait.jpg' },
+              ]}
+            />
+
+            <ImageUploadField
+              label="Imagem de Fundo Sutil da Seção (Opcional)"
+              description="Imagem sutil de fundo para a seção de agendamento de consulta digital."
+              currentValue={formData.digitalConsultation?.bgImageUrl}
+              defaultValue="/img/dr-aldo-reuniao.jpg"
+              aspectRatio="video"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
+              })}
+            />
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
@@ -4275,19 +4610,58 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-              Descrição do Atendimento
-            </label>
-            <textarea
-              rows={3}
-              value={formData.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                digitalConsultation: { ...(formData.digitalConsultation || {}), description: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
+          <RichTextarea
+            label="Descrição do Atendimento (Item 100)"
+            rows={4}
+            value={formData.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
+            onChange={(val) => setFormData({
+              ...formData,
+              digitalConsultation: { ...(formData.digitalConsultation || {}), description: val }
+            })}
+          />
+
+          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+            <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
+              Textos Sobrepostos na Foto da Direita (Item 100)
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Selo Dourado</label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.cardBadge || 'ATENDIMENTO PERSONALIZADO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), cardBadge: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Título sobre a Foto</label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.cardTitle || 'Videoconferência em Todo o Brasil'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), cardTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Subtítulo sobre a Foto</label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.cardSubtitle || 'Com a mesma excelência, sigilo e proximidade do atendimento presencial.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), cardSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -4389,42 +4763,33 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
               3 Parágrafos Explicativos Abaixo do Título
             </span>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Parágrafo 1</label>
-              <textarea
-                rows={2}
-                value={formData.holdingFamiliar?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph1: e.target.value }
-                })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Parágrafo 2</label>
-              <textarea
-                rows={2}
-                value={formData.holdingFamiliar?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph2: e.target.value }
-                })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Parágrafo 3</label>
-              <textarea
-                rows={2}
-                value={formData.holdingFamiliar?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph3: e.target.value }
-                })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
+            <RichTextarea
+              label="Parágrafo 1"
+              rows={2}
+              value={formData.holdingFamiliar?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph1: val }
+              })}
+            />
+            <RichTextarea
+              label="Parágrafo 2"
+              rows={2}
+              value={formData.holdingFamiliar?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph2: val }
+              })}
+            />
+            <RichTextarea
+              label="Parágrafo 3"
+              rows={2}
+              value={formData.holdingFamiliar?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
+              onChange={(val) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph3: val }
+              })}
+            />
           </div>
 
           {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL (Foto BMW oficial) */}
@@ -4518,18 +4883,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 />
               </div>
             </div>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Texto Explicativo</label>
-              <textarea
-                rows={3}
-                value={formData.holdingFamiliar?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
-              />
-            </div>
+            <RichTextarea
+              label="Texto Explicativo"
+              rows={3}
+              value={formData.holdingFamiliar?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsText: val }
+              })}
+            />
           </div>
 
           {/* Box POR QUE PLANEJAR EM VIDA? */}
@@ -4549,18 +4911,15 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
               />
             </div>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Texto de Alerta e Conscientização</label>
-              <textarea
-                rows={3}
-                value={formData.holdingFamiliar?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
-              />
-            </div>
+            <RichTextarea
+              label="Texto de Alerta e Conscientização"
+              rows={3}
+              value={formData.holdingFamiliar?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyText: val }
+              })}
+            />
           </div>
 
           {/* ========================================================= */}
@@ -6565,50 +6924,35 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
 
             <div className="space-y-2">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 1 Oficial
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    booksSection: { ...(formData.booksSection || {}), paragraph1: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
-                />
-              </div>
+              <RichTextarea
+                label="Parágrafo 1 Oficial"
+                rows={2}
+                value={formData.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  booksSection: { ...(formData.booksSection || {}), paragraph1: val }
+                })}
+              />
 
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 2 Oficial
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    booksSection: { ...(formData.booksSection || {}), paragraph2: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
-                />
-              </div>
+              <RichTextarea
+                label="Parágrafo 2 Oficial"
+                rows={2}
+                value={formData.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  booksSection: { ...(formData.booksSection || {}), paragraph2: val }
+                })}
+              />
 
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 3 Oficial
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    booksSection: { ...(formData.booksSection || {}), paragraph3: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
-                />
-              </div>
+              <RichTextarea
+                label="Parágrafo 3 Oficial"
+                rows={2}
+                value={formData.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  booksSection: { ...(formData.booksSection || {}), paragraph3: val }
+                })}
+              />
             </div>
           </div>
 
@@ -6780,19 +7124,92 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   />
                 </div>
 
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Sinopse da Obra
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={book.description}
-                    onChange={(e) => {
+                <RichTextarea
+                  label="Sinopse da Obra (Card Principal e Modal)"
+                  rows={3}
+                  value={book.description}
+                  onChange={(val) => {
+                    const updated = [...(formData.digitalBooks || [])];
+                    updated[idx].description = val;
+                    setFormData({ ...formData, digitalBooks: updated });
+                  }}
+                />
+
+                {/* Modal: Sumário da Obra e Trecho da Obra (Itens 70, 101 e 111) */}
+                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/30 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                      Modal "Ler Resumo Executivo / Sumário da Obra" (Itens 70, 101 e 111)
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        const currentChapters = updated[idx].chapters || [];
+                        updated[idx].chapters = [...currentChapters, `Capítulo ${currentChapters.length + 1}: Novo Capítulo`];
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                      className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" /> Adicionar Capítulo
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] text-slate-400 uppercase mb-1">
+                      Título da Seção de Capítulos (Ex: Sumário Executivo da Obra)
+                    </label>
+                    <input
+                      type="text"
+                      value={book.summaryTitle || 'Sumário Executivo da Obra'}
+                      onChange={(e) => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        updated[idx].summaryTitle = e.target.value;
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                      className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                    {(book.chapters || []).map((chap, cIdx) => (
+                      <div key={cIdx} className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={chap}
+                          onChange={(e) => {
+                            const updated = [...(formData.digitalBooks || [])];
+                            const chaps = [...(updated[idx].chapters || [])];
+                            chaps[cIdx] = e.target.value;
+                            updated[idx].chapters = chaps;
+                            setFormData({ ...formData, digitalBooks: updated });
+                          }}
+                          className="flex-1 p-1.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = [...(formData.digitalBooks || [])];
+                            updated[idx].chapters = (updated[idx].chapters || []).filter((_, i) => i !== cIdx);
+                            setFormData({ ...formData, digitalBooks: updated });
+                          }}
+                          className="p-1.5 text-red-400 hover:text-red-300 cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+
+                  <RichTextarea
+                    label="Trecho da Obra / Citação em Destaque no Modal"
+                    rows={3}
+                    value={book.sampleExcerpt || ''}
+                    onChange={(val) => {
                       const updated = [...(formData.digitalBooks || [])];
-                      updated[idx].description = e.target.value;
+                      updated[idx].sampleExcerpt = val;
                       setFormData({ ...formData, digitalBooks: updated });
                     }}
-                    className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
                   />
                 </div>
               </div>

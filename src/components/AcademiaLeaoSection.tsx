@@ -16,6 +16,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface AcademiaLeaoSectionProps {
   onOpenConsultation?: (topic?: string) => void;
@@ -108,20 +109,36 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
 
           {/* 2. Título da página: ACADEMIA LEÃO FERREIRA */}
           <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight mt-5 mb-6 [text-wrap:balance]">
-            ACADEMIA <span className="gold-text-gradient">LEÃO FERREIRA</span>
+            {al?.title && al.title !== 'ACADEMIA LEÃO FERREIRA' ? (
+              <span className="gold-text-gradient">{al.title}</span>
+            ) : (
+              <>
+                ACADEMIA <span className="gold-text-gradient">LEÃO FERREIRA</span>
+              </>
+            )}
           </h1>
 
           {/* 3. Texto que consta do projeto */}
           <div className="space-y-3.5 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light text-center sm:text-justify mb-8">
-            <p>
-              {al?.paragraph1 || 'Centro de Estudos Jurídicos Superiores da Aldo Leão Advocacia Estratégica, dedicado à produção e difusão do conhecimento jurídico especializado.'}
-            </p>
-            <p>
-              {al?.paragraph2 || 'A Academia realiza a publicação de artigos jurídicos, livros digitais, promove a realização de palestras, cursos, mentorias, workshops e seminários especializados.'}
-            </p>
-            <p className="font-normal text-white">
-              {al?.paragraph3 || 'Nossa missão é transformar o conhecimento jurídico especializado em uma ferramenta de evolução pessoal e transformação.'}
-            </p>
+            <RichTextRenderer
+              content={
+                al?.paragraph1 ||
+                'Centro de Estudos Jurídicos Superiores da Aldo Leão Advocacia Estratégica, dedicado à produção e difusão do conhecimento jurídico especializado.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                al?.paragraph2 ||
+                'A Academia realiza a publicação de artigos jurídicos, livros digitais, promove a realização de palestras, cursos, mentorias, workshops e seminários especializados.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                al?.paragraph3 ||
+                'Nossa missão é transformar o conhecimento jurídico especializado em uma ferramenta de evolução pessoal e transformação.'
+              }
+              className="font-normal text-white"
+            />
           </div>
 
           {/* 4. Frase em dourado: CONFERENCISTA E PALESTRANTE NACIONAL */}
@@ -131,9 +148,13 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
           </div>
 
           {/* 5. Texto em branco */}
-          <p className="text-sm sm:text-base text-white font-sans-body max-w-2xl mx-auto mb-6 leading-relaxed">
-            {al?.speakerText || 'O Dr. ALDO LEÃO é presença marcante em congressos, seminários, mentorias, workshops, palestras e fóruns especializados.'}
-          </p>
+          <RichTextRenderer
+            content={
+              al?.speakerText ||
+              'O Dr. ALDO LEÃO é presença marcante em congressos, seminários, mentorias, workshops, palestras e fóruns especializados.'
+            }
+            className="text-sm sm:text-base text-white font-sans-body max-w-2xl mx-auto mb-6 leading-relaxed"
+          />
 
           {/* 6. Botão dourado "FALAR COM A ACADEMIA" (whatsapp) */}
           <div className="flex justify-center mb-10">
@@ -166,15 +187,24 @@ export const AcademiaLeaoSection: React.FC<AcademiaLeaoSectionProps> = ({ onOpen
           </div>
           {/* Texto branco abaixo da imagem conforme Item II */}
           <div className="p-4 bg-[#070F1E] text-center text-xs sm:text-sm text-white font-normal leading-relaxed">
-            {al?.lectureCaption || 'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão'}
+            <RichTextRenderer
+              content={
+                al?.lectureCaption ||
+                'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão'
+              }
+            />
           </div>
         </div>
 
         {/* 8. Texto em dourado e Botão AGENDAR CONFERÊNCIA abaixo do box (Item II) */}
         <div className="max-w-3xl mx-auto text-center space-y-5 pt-4">
-          <p className="text-sm sm:text-base text-[#F6E27A] font-medium leading-relaxed max-w-2xl mx-auto [text-wrap:balance]">
-            {al?.ctaPrompt || 'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.'}
-          </p>
+          <RichTextRenderer
+            content={
+              al?.ctaPrompt ||
+              'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.'
+            }
+            className="text-sm sm:text-base text-[#F6E27A] font-medium leading-relaxed max-w-2xl mx-auto [text-wrap:balance]"
+          />
 
           <div className="flex justify-center">
             <button

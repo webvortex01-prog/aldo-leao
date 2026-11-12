@@ -5,6 +5,7 @@ import heroNovoFundoMobileImg from '../assets/images/novofundohero_mobile.jpg';
 import holdingFamilyHeroBg from '../assets/images/holding_family_hero_bg.jpg';
 import holdingFamilyMobileBg from '../assets/images/holding_family_mobile.jpg';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface HeroSliderProps {
   onOpenConsultation: () => void;
@@ -51,10 +52,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           }`}
         >
           <picture className="w-full h-full block overflow-hidden">
-            <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroImageMobileUrl || '/img/novofundohero.jpg'} />
+            <source media="(max-width: 768px)" srcSet={siteConfig.hero?.heroImageMobileUrl || '/img/novofundohero_mobile.jpg'} />
             <img
               src={siteConfig.hero?.heroImageUrl || '/img/novofundohero.jpg'}
               alt="Ambiente Jurídico Centenário - Tradição e Justiça"
+              loading="eager"
+              fetchPriority="high"
               style={{
                 filter: `brightness(${(siteConfig.hero?.slide1Brightness ?? 85) / 100}) contrast(1.08)`
               }}
@@ -157,21 +160,22 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
         <div className="relative min-h-[580px] sm:min-h-[520px] lg:min-h-[460px] grid grid-cols-1 grid-rows-1">
           {/* SLIDE 1: Tradição Jurídica Desde 1908 */}
           <div
-            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-opacity duration-700 ease-in-out ${
+            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center transition-opacity duration-700 ease-in-out ${
               currentSlide === 0
                 ? 'opacity-100 z-10 pointer-events-auto'
                 : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              {/* Item 2 e 46: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" em negrito e numa só linha */}
+              {/* Item 2, 46 e 115: Kicker editável ("ALDO LEÃO ADVOCACIA ESTRATÉGICA") */}
               <div
                 className={`mb-4 transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
                 }`}
               >
                 <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
-                  ALDO LEÃO <strong className="font-black text-white">ADVOCACIA ESTRATÉGICA</strong>
+                  {siteConfig.hero.kicker ?? 'ALDO LEÃO'}{' '}
+                  <strong className="font-black text-white">{siteConfig.hero.kickerSub ?? 'ADVOCACIA ESTRATÉGICA'}</strong>
                 </span>
               </div>
 
@@ -191,32 +195,30 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                {siteConfig.hero.description?.includes('<') ? (
-                  <div 
-                    className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light whitespace-normal"
-                    dangerouslySetInnerHTML={{ __html: siteConfig.hero.description }}
-                  />
-                ) : (
-                  <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light whitespace-pre-line">
-                    {siteConfig.hero.description || 'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'}
-                  </p>
-                )}
+                <RichTextRenderer
+                  content={
+                    siteConfig.hero.description ||
+                    'Desde 1908, o escritório de advocacia mais antigo do Brasil une tradição jurídica, experiência e inovação na proteção e perpetuação de legados familiares. Com sede em Porto Alegre e atuação digital em todo o território nacional, o Dr. Aldo Leão representa a terceira geração da família na Advocacia Estratégica (1986), sendo referência em Planejamento Patrimonial 4.0 via Holding Familiar, Proteção Patrimonial e Sucessão Empresarial.'
+                  }
+                  className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans-body font-light"
+                />
               </div>
 
               {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3 e 79) */}
               <div
-                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-500 ease-out transform ${
+                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-5 shadow-md card-hover-interactive transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  {siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
-                </p>
+                <RichTextRenderer
+                  content={siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
+                  className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase"
+                />
               </div>
 
               {/* CTAs */}
               <div
-                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-500 ease-out transform ${
+                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-5 transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
@@ -236,7 +238,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </button>
               </div>
 
-              {/* Box 2: ADVOCACIA ESTRATÉGICA (Item 79: Totalmente Editável) */}
+              {/* Box 2: ADVOCACIA ESTRATÉGICA (Item 79 e 103: Totalmente Editável e sem espaço excessivo para o box da Logo) */}
               <div
                 className={`w-full transition-all duration-500 ease-out transform ${
                   currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -249,9 +251,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
                     {siteConfig.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body">
-                    {siteConfig.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      siteConfig.hero.box2Text ||
+                      'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'
+                    }
+                    className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans-body"
+                  />
                 </div>
               </div>
             </div>
@@ -278,7 +284,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 </div>
 
                 {/* Card logo abaixo do box da logomarca (Item 79: Totalmente Editável) */}
-                <div className="relative mt-3.5 p-3.5 rounded-2xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
+                <div className="relative mt-2.5 p-3.5 rounded-2xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-[#D4AF37]/25 border border-[#D4AF37]/70 flex items-center justify-center text-[#F6E27A] shrink-0">
                       <Scale className="w-4 h-4 text-[#E5C158]" />
@@ -299,7 +305,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
           {/* SLIDE 2: Planejamento Patrimonial 4.0 */}
           <div
-            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-opacity duration-700 ease-in-out ${
+            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center transition-opacity duration-700 ease-in-out ${
               currentSlide === 1
                 ? 'opacity-100 z-10 pointer-events-auto'
                 : 'opacity-0 z-0 pointer-events-none'
@@ -325,25 +331,47 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                 <span className="gold-text-gradient">{siteConfig.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}</span>
               </h1>
 
-              {/* Texto principal do Slide 2 com fundo sutilmente escurecido (Item 80) */}
+              {/* Texto principal do Slide 2 com suporte completo a formatação visual, múltiplos parágrafos e sem duplicação (Itens 80, 91, 92, 96, 112) */}
               <div
                 className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-500 ease-out transform ${
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
                 <div className="space-y-2.5 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans-body font-light">
-                  <p>
-                    {siteConfig.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
-                  </p>
-                  <p>
-                    <strong className="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.
-                  </p>
-                  <p>
-                    {siteConfig.slide2?.paragraph3 || 'Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.'}
-                  </p>
-                  <p>
-                    {siteConfig.slide2?.paragraph4 || 'Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'}
-                  </p>
+                  {(() => {
+                    const p1 = siteConfig.slide2?.paragraph1 || '';
+                    const isUnified =
+                      p1.includes('Holding Familiar') ||
+                      p1.includes('Diagnóstico de Viabilidade') ||
+                      p1.includes('expertise centenária') ||
+                      (!siteConfig.slide2?.paragraph2 && !siteConfig.slide2?.paragraph3 && !siteConfig.slide2?.paragraph4 && p1.length > 220);
+
+                    if (isUnified) {
+                      return <RichTextRenderer content={p1} />;
+                    }
+
+                    return (
+                      <>
+                        <RichTextRenderer
+                          content={
+                            p1 ||
+                            'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'
+                          }
+                        />
+                        {(siteConfig.slide2?.paragraph2 ??
+                          '<strong class="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.') && (
+                          <RichTextRenderer
+                            content={
+                              siteConfig.slide2?.paragraph2 ||
+                              '<strong class="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.'
+                            }
+                          />
+                        )}
+                        {siteConfig.slide2?.paragraph3 && <RichTextRenderer content={siteConfig.slide2.paragraph3} />}
+                        {siteConfig.slide2?.paragraph4 && <RichTextRenderer content={siteConfig.slide2.paragraph4} />}
+                      </>
+                    );
+                  })()}
                 </div>
               </div>
 
@@ -353,9 +381,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                 }`}
               >
-                <p className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase">
-                  {siteConfig.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
-                </p>
+                <RichTextRenderer
+                  content={
+                    siteConfig.slide2?.callout1 ||
+                    'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'
+                  }
+                  className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase"
+                />
               </div>
 
               {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page */}
@@ -389,9 +421,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                     </h3>
                   </div>
 
-                  <p className="text-xs text-slate-200 leading-relaxed mb-4 font-normal">
-                    {siteConfig.slide2?.costBoxText || 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'}
-                  </p>
+                  <RichTextRenderer
+                    content={
+                      siteConfig.slide2?.costBoxText ||
+                      'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'
+                    }
+                    className="text-xs text-slate-200 leading-relaxed mb-4 font-normal"
+                  />
 
                   <button
                     onClick={() => setIsCostModalOpen(true)}

@@ -364,6 +364,11 @@ export interface SiteConfig {
     tableTitle?: string;
     tableSubtitle?: string;
     tableSavingsText?: string;
+    content?: string;
+    modalTitle?: string;
+    modalIntro?: string;
+    modalDifferenceTitle?: string;
+    modalDifferenceText?: string;
   };
   practiceAreasHeader?: {
     kicker?: string;
@@ -382,6 +387,8 @@ export interface SiteConfig {
   };
   publicationsSection?: {
     kicker?: string;
+    goldKicker?: string;
+    subtitle?: string;
     titleWhite?: string;
     titleGold?: string;
     paragraph1?: string;
@@ -406,6 +413,10 @@ export interface SiteConfig {
     btnSchedule?: string;
     btnWhatsApp?: string;
     bgImageUrl?: string;
+    cardImageUrl?: string;
+    cardBadge?: string;
+    cardTitle?: string;
+    cardSubtitle?: string;
   };
   footer?: {
     institutionalParagraph1?: string;
@@ -425,6 +436,10 @@ export interface SiteConfig {
   academiaLeao?: {
     kicker?: string;
     title?: string;
+    subtitle?: string;
+    description1?: string;
+    description2?: string;
+    content?: string;
     paragraph1?: string;
     paragraph2?: string;
     paragraph3?: string;
@@ -499,6 +514,7 @@ export interface HoldingLandingFaqItem {
 export interface HoldingLandingConfig {
   heroEyebrow?: string;
   heroTitle?: string;
+  heroTitleHighlight?: string;
   heroSubtitle?: string;
   heroParagraph1?: string;
   heroParagraph2?: string;
@@ -512,6 +528,7 @@ export interface HoldingLandingConfig {
   showcaseText?: string;
   showcaseBadge?: string;
   showcaseImageUrl?: string;
+  problemsKicker?: string;
   problemsTitle?: string;
   problemsSubtitle?: string;
   problemsList?: string[];
@@ -520,11 +537,14 @@ export interface HoldingLandingConfig {
   strategyParagraph1?: string;
   strategyParagraph2?: string;
   strategyParagraph3?: string;
+  advantagesKicker?: string;
   advantagesTitle?: string;
   advantagesList?: string[];
   tableKicker?: string;
   tableTitle?: string;
   tableSubtitle?: string;
+  aquisicaoValor?: string;
+  mercadoValor?: string;
   itcmdInventario?: string;
   itcmdHolding?: string;
   honorariosInventario?: string;

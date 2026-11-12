@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useSite } from '../context/SiteContext';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface HoldingFamiliarSectionProps {
   onGoToLandingPage: () => void;
@@ -37,17 +38,26 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
             {hf?.sectionTitle || 'HOLDING'} <span className="gold-text-gradient">{hf?.sectionHighlight || 'FAMILIAR'}</span>
           </h2>
 
-          {/* Texto abaixo do título conforme Item 40 */}
+          {/* Texto abaixo do título conforme Item 40 e 69 */}
           <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            <p>
-              {hf?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
-            </p>
-            <p>
-              {hf?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
-            </p>
-            <p>
-              {hf?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
-            </p>
+            <RichTextRenderer
+              content={
+                hf?.paragraph1 ||
+                'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                hf?.paragraph2 ||
+                'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'
+              }
+            />
+            <RichTextRenderer
+              content={
+                hf?.paragraph3 ||
+                'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'
+              }
+            />
           </div>
         </div>
 
@@ -73,9 +83,13 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <h4 className="font-cinzel text-sm sm:text-base font-bold text-white mb-1.5 uppercase">
                 {hf?.cardTitle || 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL'}
               </h4>
-              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                {hf?.cardText || 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  hf?.cardText ||
+                  'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.'
+                }
+                className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed"
+              />
             </div>
           </div>
         </div>
@@ -90,9 +104,13 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white mb-4">
                 {hf?.boxWhatIsHeading || 'Metodologia Jurídica Estratégica Multidisciplinar'}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light">
-                {hf?.boxWhatIsText || 'O Planejamento Patrimonial e Empresarial 4.0 é uma metodologia jurídica avançada, legal e estratégica desenvolvida por advogados especialistas para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos e vulnerabilidades juridicamente, com o objetivo de perpetuar negócios e patrimônios familiares para as futuras gerações. Sua estruturação integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil (Contratos Estratégicos, Família e Sucessões), Direito Imobiliário e Governança Familiar.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  hf?.boxWhatIsText ||
+                  'O Planejamento Patrimonial e Empresarial 4.0 é uma metodologia jurídica avançada, legal e estratégica desenvolvida por advogados especialistas para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos e vulnerabilidades juridicamente, com o objetivo de perpetuar negócios e patrimônios familiares para as futuras gerações. Sua estruturação integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil (Contratos Estratégicos, Família e Sucessões), Direito Imobiliário e Governança Familiar.'
+                }
+                className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans-body mb-6 font-light"
+              />
             </div>
 
             {/* Porque Planejar em Vida conforme Item 40 e 69 */}
@@ -100,9 +118,13 @@ export const HoldingFamiliarSection: React.FC<HoldingFamiliarSectionProps> = ({
               <h4 className="font-cinzel text-xs font-bold text-[#F6E27A] mb-2 uppercase">
                 {hf?.boxWhyTitle || 'POR QUE PLANEJAR EM VIDA?'}
               </h4>
-              <p className="text-xs text-slate-300 leading-relaxed font-light">
-                {hf?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas em vida, de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros e disputas de bens, a alta perda patrimonial e financeira dos herdeiros no inventário (em média de 40% do patrimônio inventariado), evita a comunicação e a partilha das cotas sociais dos herdeiros no divórcio e na dissolução de união estável, evita a venda forçada e desvalorizada de bens e a dilapidação do patrimônio familiar e empresarial.'}
-              </p>
+              <RichTextRenderer
+                content={
+                  hf?.boxWhyText ||
+                  'Permite que decisões patrimoniais e empresariais sejam tomadas em vida, de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros e disputas de bens, a alta perda patrimonial e financeira dos herdeiros no inventário (em média de 40% do patrimônio inventariado), evita a comunicação e a partilha das cotas sociais dos herdeiros no divórcio e na dissolução de união estável, evita a venda forçada e rápida de bens com deságio médio de 20% do valor de mercado para quitar o inventário e etc.'
+                }
+                className="text-xs text-slate-300 leading-relaxed font-light"
+              />
             </div>
           </div>
 
