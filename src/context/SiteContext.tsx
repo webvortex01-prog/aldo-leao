@@ -800,7 +800,7 @@ const DEFAULT_CONFIG: SiteConfig = {
     titleHighlight: 'PATRIMONIAL 4.0',
     titleWhite: 'PLANEJAMENTO ',
     titleGold: 'PATRIMONIAL 4.0',
-    paragraph1: '<p>Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.</p><p><strong style="color: #F6E27A;">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.</p><p>Com expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.</p><p>Agende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.</p>',
+    paragraph1: 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.\n\nA Holding Familiar é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.\n\nCom expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.\n\nAgende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.',
     paragraph2: '',
     paragraph3: '',
     paragraph4: '',
@@ -1123,32 +1123,39 @@ const normalizeFounderConfig = (rawFounder: any) => {
 const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
   const next = { ...cfg };
 
-  // 1. Slide 2: Unifica os 4 parágrafos num único bloco rico sem duplicação e limpa tags escapadas
+  // 1. Slide 2: Unifica os 4 parágrafos num único bloco rico sem duplicação e limpa tags/códigos de edição
   if (next.slide2) {
     const s2 = { ...DEFAULT_CONFIG.slide2, ...next.slide2 };
     let p1 = s2.paragraph1 || '';
-    // Desescapa eventuais tags HTML literais que tenham sido salvas como &lt;span...&gt;
-    p1 = p1
-      .replace(/&lt;(\/?(?:span|b|strong|i|em|u|s|mark|div|p|br)[^&]*?)&gt;/gi, '<$1>');
+
+    // Se o texto tiver tags HTML brutas ou escapadas (&lt;span...&gt;) salvas no localStorage que estejam aparecendo como código
+    if (p1.includes('&lt;') || p1.includes('<strong') || p1.includes('<span') || p1.includes('<p>')) {
+      p1 = p1
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/<\/?(p|div|br)[^>]*>/gi, '\n')
+        .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '$1')
+        .replace(/<span[^>]*>(.*?)<\/span>/gi, '$1')
+        .replace(/\r\n|\r/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    }
 
     if (
+      !p1 ||
       p1.trim() === 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'
     ) {
       s2.paragraph1 = DEFAULT_CONFIG.slide2!.paragraph1;
       s2.paragraph2 = '';
       s2.paragraph3 = '';
       s2.paragraph4 = '';
-    } else if (
-      p1.includes('Holding Familiar') ||
-      p1.includes('Diagnóstico de Viabilidade') ||
-      p1.includes('expertise centenária')
-    ) {
+    } else {
       s2.paragraph1 = p1;
       s2.paragraph2 = '';
       s2.paragraph3 = '';
       s2.paragraph4 = '';
-    } else {
-      s2.paragraph1 = p1;
     }
     next.slide2 = s2;
   }

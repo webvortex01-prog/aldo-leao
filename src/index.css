@@ -574,12 +574,28 @@
   margin-bottom: 0.5rem;
 }
 
-.publication-rich-content p {
-  margin-bottom: 0.75em;
+.publication-rich-content p,
+.publication-rich-content .rich-paragraph,
+[contenteditable].publication-rich-content p,
+[contenteditable].publication-rich-content > div {
+  margin-bottom: 0.85em;
+  line-height: 1.65;
 }
 
-.publication-rich-content p:last-child {
+[contenteditable].publication-rich-content > div:empty,
+[contenteditable].publication-rich-content p:empty {
+  min-height: 1.4em;
+}
+
+.publication-rich-content p:last-child,
+.publication-rich-content .rich-paragraph:last-child,
+[contenteditable].publication-rich-content > div:last-child,
+[contenteditable].publication-rich-content p:last-child {
   margin-bottom: 0;
+}
+
+.rich-spacer {
+  height: 0.85rem;
 }
 
 .publication-rich-content .text-justify,

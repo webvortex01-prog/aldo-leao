@@ -2467,9 +2467,21 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                Frase Dourada Superior (Item 57)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Frase Dourada Superior (Item 57)
+                </label>
+                <button
+                  type="button"
+                  onClick={() => updateSiteConfig({
+                    digitalConsultation: { ...(siteConfig.digitalConsultation || {}), sectionKicker: 'ATENDIMENTO DIGITAL BRASIL' }
+                  })}
+                  className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer"
+                  title="Restaurar Frase Oficial do Cliente"
+                >
+                  Restaurar "ATENDIMENTO DIGITAL BRASIL"
+                </button>
+              </div>
               <input
                 type="text"
                 value={siteConfig.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL BRASIL'}

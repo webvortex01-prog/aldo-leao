@@ -168,11 +168,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               {/* Item 2, 46 e 115: Kicker editável ("ALDO LEÃO ADVOCACIA ESTRATÉGICA") */}
-              <div
-                className={`mb-4 transition-all duration-500 ease-out transform ${
-                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-                }`}
-              >
+              <div className="mb-3">
                 <span className="inline-block font-cinzel text-xs sm:text-sm font-bold tracking-[0.16em] sm:tracking-[0.24em] text-[#E5C158] uppercase">
                   {siteConfig.hero.kicker ?? 'ALDO LEÃO'}{' '}
                   <strong className="font-black text-white">{siteConfig.hero.kickerSub ?? 'ADVOCACIA ESTRATÉGICA'}</strong>
@@ -180,21 +176,13 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
 
               {/* Título: TRADIÇÃO JURÍDICA DESDE 1908 (Item 3) */}
-              <h1
-                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-5 [text-wrap:balance] transition-all duration-500 ease-out transform ${
-                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-[1.12] mb-3.5 [text-wrap:balance]">
                 {siteConfig.hero.titlePart1 || 'TRADIÇÃO JURÍDICA'}{' '}
                 <span className="gold-text-gradient">{siteConfig.hero.titleHighlight || 'DESDE 1908'}</span>
               </h1>
 
-              {/* Descrição com fundo sutilmente escurecido (solicitação Dr. Aldo) */}
-              <div
-                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-500 ease-out transform ${
-                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              {/* Descrição com fundo sutilmente escurecido e suporte total a múltiplos parágrafos (Itens 91, 92, 95) */}
+              <div className="p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-3.5">
                 <RichTextRenderer
                   content={
                     siteConfig.hero.description ||
@@ -205,11 +193,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
 
               {/* Box: EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES (Item 3 e 79) */}
-              <div
-                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-5 shadow-md card-hover-interactive transition-all duration-500 ease-out transform ${
-                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              <div className="p-3 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-3.5 shadow-md card-hover-interactive">
                 <RichTextRenderer
                   content={siteConfig.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
                   className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] tracking-wider uppercase"
@@ -217,11 +201,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
 
               {/* CTAs */}
-              <div
-                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-5 transition-all duration-500 ease-out transform ${
-                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-3.5">
                 <button
                   onClick={handleWhatsAppSlide1}
                   className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded text-xs font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.35)]"
@@ -239,16 +219,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
 
               {/* Box 2: ADVOCACIA ESTRATÉGICA (Item 79 e 103: Totalmente Editável e sem espaço excessivo para o box da Logo) */}
-              <div
-                className={`w-full transition-all duration-500 ease-out transform ${
-                  currentSlide === 0 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left card-hover-interactive">
-                  <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-1">
+              <div className="w-full">
+                <div className="p-3.5 rounded-xl bg-[#071122] border border-[#D4AF37]/35 text-left card-hover-interactive">
+                  <span className="text-[10px] uppercase tracking-wider text-[#E5C158] font-bold block mb-0.5">
                     {siteConfig.hero.box2Kicker || 'Excelência Jurídica Centenária'}
                   </span>
-                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1.5 uppercase">
+                  <h4 className="font-cinzel text-xs sm:text-sm font-bold text-white mb-1 uppercase">
                     {siteConfig.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
                   </h4>
                   <RichTextRenderer
@@ -262,19 +238,17 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
             </div>
 
-            {/* Right Column Visual (Logomarca Oficial do Leão - Box Estático com Respiração Nobre da Logo) */}
-            <div
-              className={`lg:col-span-5 relative flex flex-col justify-center transition-all duration-500 ease-out transform ${
-                currentSlide === 0 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-6'
-              }`}
-            >
+            {/* Right Column Visual (Logomarca Oficial do Leão - Box Estático sem espaço excessivo - Itens 95 e 103) */}
+            <div className="lg:col-span-5 relative flex flex-col justify-center">
               <div className="relative w-full max-w-md lg:max-w-none mx-auto">
                 <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/60 via-[#F6E27A]/30 to-[#D4AF37]/15 rounded-2xl blur-xl opacity-85" />
                 <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 bg-[#0A1424] shadow-2xl photo-luxury-frame">
-                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-5 sm:p-6">
+                  <div className="aspect-[4/3] w-full overflow-hidden bg-[#0A1424] relative flex items-center justify-center p-3.5 sm:p-4">
                     <img
                       src="/img/logo.jpg"
                       alt="Aldo Leão Advocacia Estratégica"
+                      loading="eager"
+                      fetchPriority="high"
                       className="w-full h-full object-contain rounded-xl sm:rounded-2xl filter drop-shadow-[0_2px_14px_rgba(212,175,55,0.4)] animate-lion-breath"
                       onError={(e) => {
                         (e.currentTarget as HTMLImageElement).src = '/img/logo.png';
@@ -283,8 +257,8 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
                   </div>
                 </div>
 
-                {/* Card logo abaixo do box da logomarca (Item 79: Totalmente Editável) */}
-                <div className="relative mt-2.5 p-3.5 rounded-2xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
+                {/* Card logo abaixo do box da logomarca (Item 79 e 103: Totalmente Editável e perfeitamente ajustado) */}
+                <div className="relative mt-2 p-3 rounded-2xl bg-[#0A1424] border border-[#D4AF37]/50 flex items-center justify-between shadow-2xl">
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 rounded-full bg-[#D4AF37]/25 border border-[#D4AF37]/70 flex items-center justify-center text-[#F6E27A] shrink-0">
                       <Scale className="w-4 h-4 text-[#E5C158]" />
@@ -313,74 +287,29 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
               {/* Texto acima do título: HOLDING FAMILIAR em dourado sem a letra 'A' */}
-              <div
-                className={`text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158] transition-all duration-500 ease-out transform ${
-                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-                }`}
-              >
+              <div className="text-xs uppercase tracking-[0.24em] font-bold mb-3 text-[#E5C158]">
                 {siteConfig.slide2?.eyebrow || 'HOLDING FAMILIAR'}
               </div>
 
               {/* Título: PLANEJAMENTO em branco e PATRIMONIAL 4.0 em dourado (Item 80: Totalmente Editável) */}
-              <h1
-                className={`font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-4 [text-wrap:balance] transition-all duration-500 ease-out transform ${
-                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-3.5 [text-wrap:balance]">
                 <span className="text-white">{siteConfig.slide2?.titleWhite ?? 'PLANEJAMENTO '}</span>
                 <span className="gold-text-gradient">{siteConfig.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}</span>
               </h1>
 
               {/* Texto principal do Slide 2 com suporte completo a formatação visual, múltiplos parágrafos e sem duplicação (Itens 80, 91, 92, 96, 112) */}
-              <div
-                className={`p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-5 transition-all duration-500 ease-out transform ${
-                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
-                <div className="space-y-2.5 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans-body font-light">
-                  {(() => {
-                    const p1 = siteConfig.slide2?.paragraph1 || '';
-                    const isUnified =
-                      p1.includes('Holding Familiar') ||
-                      p1.includes('Diagnóstico de Viabilidade') ||
-                      p1.includes('expertise centenária') ||
-                      (!siteConfig.slide2?.paragraph2 && !siteConfig.slide2?.paragraph3 && !siteConfig.slide2?.paragraph4 && p1.length > 220);
-
-                    if (isUnified) {
-                      return <RichTextRenderer content={p1} />;
-                    }
-
-                    return (
-                      <>
-                        <RichTextRenderer
-                          content={
-                            p1 ||
-                            'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'
-                          }
-                        />
-                        {(siteConfig.slide2?.paragraph2 ??
-                          '<strong class="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.') && (
-                          <RichTextRenderer
-                            content={
-                              siteConfig.slide2?.paragraph2 ||
-                              '<strong class="text-[#F6E27A] font-semibold">A Holding Familiar</strong> é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.'
-                            }
-                          />
-                        )}
-                        {siteConfig.slide2?.paragraph3 && <RichTextRenderer content={siteConfig.slide2.paragraph3} />}
-                        {siteConfig.slide2?.paragraph4 && <RichTextRenderer content={siteConfig.slide2.paragraph4} />}
-                      </>
-                    );
-                  })()}
-                </div>
+              <div className="p-3 sm:p-3.5 rounded-xl bg-[#040914]/40 border border-[#D4AF37]/20 backdrop-blur-[3px] shadow-lg mb-3.5">
+                <RichTextRenderer
+                  content={
+                    siteConfig.slide2?.paragraph1 ||
+                    'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.\n\nA Holding Familiar é a solução jurídica de vanguarda para a proteção do patrimônio e da/s empresa/s, com vistas à sua perpetuação.\n\nCom expertise centenária, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve avançadas modelagens empresariais e patrimoniais personalizadas para você e sua família.\n\nAgende hoje, o seu Diagnóstico de Viabilidade e saiba porque o Planejamento Patrimonial 4.0 via Holding Familiar é a solução jurídica inteligente e eficaz para a perpetuação do seu legado.'
+                  }
+                  className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans-body font-light"
+                />
               </div>
 
               {/* Box do Slide 2 conforme Item 3 e 27 */}
-              <div
-                className={`p-3.5 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-6 shadow-md card-hover-interactive transition-all duration-500 ease-out transform ${
-                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              <div className="p-3 rounded-lg bg-[#0E1F3D]/80 border border-[#D4AF37]/40 mb-4 shadow-md card-hover-interactive">
                 <RichTextRenderer
                   content={
                     siteConfig.slide2?.callout1 ||
@@ -391,11 +320,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
               </div>
 
               {/* Botão "Planejamento Patrimonial 4.0" que abre a landing page */}
-              <div
-                className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6 transition-all duration-500 ease-out transform ${
-                  currentSlide === 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                }`}
-              >
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-4">
                 <button
                   onClick={onGoToLandingPage}
                   className="btn-gold-luxury group inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider text-[#050B14] bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] cursor-pointer shadow-[0_0_25px_rgba(212,175,55,0.4)]"

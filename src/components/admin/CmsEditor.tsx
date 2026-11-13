@@ -378,6 +378,28 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert, 
 
         <div className="h-3.5 w-px bg-slate-700 mx-1" />
 
+        {/* Parágrafo e Quebra de Linha (Itens 91, 92, 96, 97, 102, 104, 108) */}
+        <button
+          type="button"
+          onMouseDown={keepSelection}
+          onClick={() => trigger('paragraph', '', '<p>', '</p>')}
+          className="px-2 py-0.5 rounded bg-[#0A1730] border border-[#D4AF37]/60 hover:bg-[#D4AF37] hover:text-black text-[#F6E27A] font-semibold text-[10px] transition-all cursor-pointer flex items-center gap-1 shadow-sm"
+          title="Inserir Novo Parágrafo com Espaçamento Real (Enter)"
+        >
+          <span>¶ Novo Parágrafo</span>
+        </button>
+        <button
+          type="button"
+          onMouseDown={keepSelection}
+          onClick={() => trigger('lineBreak', '', '<br />', '')}
+          className="px-2 py-0.5 rounded bg-slate-800 hover:bg-[#D4AF37] hover:text-black text-slate-200 text-[10px] transition-colors cursor-pointer flex items-center gap-1"
+          title="Inserir Nova Linha Simples (Shift+Enter)"
+        >
+          <span>↵ Nova Linha</span>
+        </button>
+
+        <div className="h-3.5 w-px bg-slate-700 mx-1" />
+
         {/* Alinhamento de Parágrafo */}
         <button
           type="button"
@@ -855,11 +877,17 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
     const selectedText = (value || '').substring(start, end);
     const before = (value || '').substring(0, start);
     const after = (value || '').substring(end);
-    const newText = before + prefix + (selectedText || '') + suffix + after;
+    let inserted = prefix + (selectedText || '') + suffix;
+    if (prefix === '<p>' && suffix === '</p>' && !selectedText) {
+      inserted = '\n\n';
+    } else if (prefix === '<br />') {
+      inserted = '\n';
+    }
+    const newText = before + inserted + after;
     onChange(newText);
     setTimeout(() => {
       el.focus();
-      el.setSelectionRange(start + prefix.length, start + prefix.length + selectedText.length);
+      el.setSelectionRange(start + inserted.length, start + inserted.length);
     }, 50);
   };
 
@@ -874,7 +902,11 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
     const hasSelection = sel && sel.rangeCount > 0 && !sel.isCollapsed && el.contains(sel.getRangeAt(0).commonAncestorContainer);
     const selectedText = hasSelection ? sel!.toString() : '';
 
-    if (action === 'exec') {
+    if (action === 'paragraph') {
+      document.execCommand('insertParagraph', false);
+    } else if (action === 'lineBreak') {
+      document.execCommand('insertLineBreak', false);
+    } else if (action === 'exec') {
       document.execCommand(payload, false);
     } else if (action === 'color') {
       if (hasSelection) {
@@ -1055,6 +1087,41 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
             ref={editorRef}
             contentEditable
             suppressContentEditableWarning
+            onFocus={() => {
+              try {
+                document.execCommand('defaultParagraphSeparator', false, 'p');
+              } catch {}
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                if (e.shiftKey) {
+                  e.preventDefault();
+                  document.execCommand('insertLineBreak');
+                  emitChangeFromVisual();
+                } else {
+                  e.preventDefault();
+                  document.execCommand('insertParagraph');
+                  emitChangeFromVisual();
+                }
+              }
+            }}
+            onPaste={(e) => {
+              e.preventDefault();
+              const text = e.clipboardData.getData('text/plain');
+              if (!text) return;
+              const normalized = text.replace(/\r\n|\r/g, '\n').trim();
+              const paragraphs = normalized.split(/\n{2,}/);
+              if (paragraphs.length > 1) {
+                const html = paragraphs
+                  .map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+                  .join('');
+                document.execCommand('insertHTML', false, html);
+              } else {
+                const html = normalized.replace(/\n/g, '<br>');
+                document.execCommand('insertHTML', false, html);
+              }
+              emitChangeFromVisual();
+            }}
             onInput={() => {
               saveSelection();
               emitChangeFromVisual();
@@ -4575,9 +4642,22 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                Frase Dourada Superior (Item 57: Kicker)
-              </label>
+              <div className="flex items-center justify-between mb-1">
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Frase Dourada Superior (Item 57: Kicker)
+                </label>
+                <button
+                  type="button"
+                  onClick={() => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: 'ATENDIMENTO DIGITAL BRASIL' }
+                  })}
+                  className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer font-normal"
+                  title="Restaurar Frase Oficial"
+                >
+                  Restaurar "ATENDIMENTO DIGITAL BRASIL"
+                </button>
+              </div>
               <input
                 type="text"
                 value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL BRASIL'}
