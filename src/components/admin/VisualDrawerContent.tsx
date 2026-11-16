@@ -3759,7 +3759,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                       updated[idx] = { ...updated[idx], title: e.target.value };
                       updateSiteConfig({ publications: updated });
                     }}
-                    placeholder="Digite o título da publicação (Ex: O CNPJ TÉCNICO)"
+                    placeholder="Digite o título da publicação (Ex: A Nova Disciplina do ITCMD)"
                     className="w-full px-2.5 py-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-white text-xs font-bold font-cinzel focus:border-[#F6E27A] focus:outline-none"
                   />
                 </div>

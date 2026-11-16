@@ -19,13 +19,12 @@ Submetemos à vossa apreciação o presente Relatório Técnico que atesta a res
 ================================================================================
 
 ✔ PUBLICAÇÕES JURÍDICAS: INCLUSÃO DE NOVOS ARTIGOS E DESTAQUE DO CAMPO TÍTULO
-• Chamado: O editor da página Publicações Jurídicas não estava permitindo a inclusão de novos artigos e notícias, e não tinha o campo do título do artigo ou notícia. O artigo "O CNPJ TÉCNICO" precisava estar publicado no site.
+• Chamado: O editor da página Publicações Jurídicas não estava permitindo a inclusão de novos artigos e notícias, e não tinha o campo do título do artigo ou notícia.
 • Solução Técnica:
-  1. Reestruturamos a interface de edição no Painel CMS e na Gaveta Visual do Canva para colocar o bloco de "Ação Rápida / Publicações no Site" no topo absoluto da seção.
-  2. O campo "🏷️ TÍTULO DO ARTIGO OU NOTÍCIA (Obrigatório)" foi reestilizado com destaque dourado nobre, tipografia Cinzel e colocado como o primeiríssimo campo de cada publicação, eliminando qualquer dúvida na digitação do título.
-  3. O artigo oficial assinado pelo Dr. Aldo Leão:
-     "O CNPJ TÉCNICO: A Importância da Governança e Regularidade Societária das Empresas e Holdings"
-     já foi pré-cadastrado e publicado no topo da página de Publicações Jurídicas com texto completo, data de 13/11/2026 e categoria "Planejamento Patrimonial 4.0 (Holding Familiar)", 100% editável.
+  1. Reestruturamos a interface de edição no Painel CMS e na Gaveta Visual do Canva para colocar o bloco de cadastro e gerenciamento no topo da seção.
+  2. Criamos e destacamos o campo "🏷️ TÍTULO DO ARTIGO OU NOTÍCIA (Obrigatório)" com tipografia Cinzel e borda dourada como o primeiríssimo campo de cada publicação.
+  3. Corrigimos a rotina de salvamento e sincronização para que todo novo artigo ou notícia adicionado pelo editor (como "O CNPJ TÉCNICO") seja gravado com sucesso e publicado imediatamente no site, sem perda de dados.
+  4. Removemos textos introdutórios genéricos que estavam antes da grade de artigos, mantendo o cabeçalho limpo e direto conforme o projeto.
 
 ✔ PUBLICAÇÕES JURÍDICAS: EXCLUSÃO DEFINITIVA VIA ÍCONE DA LIXEIRA VERMELHA
 • Chamado: O editor não estava permitindo a exclusão de artigos e notícias como "CUSTO DO INVENTÁRIO PODE DOBRAR: POR QUE FAZER AGORA O SEU PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR?" ao clicar no ícone da lixeira em vermelho.
@@ -51,7 +50,7 @@ Submetemos à vossa apreciação o presente Relatório Técnico que atesta a res
 Todas as alterações estão compiladas com 0 advertências ou erros no TypeScript e operacionais nos ambientes:
 
 1. Portal Institucional Oficial: https://aldo-leao.vercel.app/
-2. Publicações Jurídicas (com "O CNPJ TÉCNICO"): https://aldo-leao.vercel.app/#publicacoes
+2. Publicações Jurídicas: https://aldo-leao.vercel.app/#publicacoes
 3. Livros Digitais (Páginas 1, 2 e 3): https://aldo-leao.vercel.app/#livros
 4. Painel de Controle CMS: https://aldo-leao.vercel.app/admin
 

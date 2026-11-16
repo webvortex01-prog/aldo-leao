@@ -6802,7 +6802,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                       updated[idx].title = e.target.value;
                       setFormData({ ...formData, publications: updated });
                     }}
-                    placeholder="Digite o título do artigo ou notícia (Ex: O CNPJ TÉCNICO)"
+                    placeholder="Digite o título do artigo ou notícia (Ex: A Nova Disciplina do ITCMD)"
                     className="w-full p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm sm:text-base text-white font-bold font-cinzel focus:border-[#F6E27A] focus:outline-none focus:ring-2 focus:ring-[#F6E27A]/30"
                   />
                 </div>

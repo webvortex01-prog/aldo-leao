@@ -107,31 +107,24 @@ export const PublicationsSection: React.FC = () => {
             <span className="gold-text-gradient">{siteConfig.publicationsSection?.titleGold || 'JURÍDICAS'}</span>
           </h2>
 
-          <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
-            <RichTextRenderer
-              content={
-                siteConfig.publicationsSection?.paragraph1 ||
-                'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'
-              }
-            />
-            <RichTextRenderer
-              content={
-                siteConfig.publicationsSection?.paragraph2 ||
-                'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'
-              }
-            />
-            <RichTextRenderer
-              content={
-                siteConfig.publicationsSection?.paragraph3 ||
-                'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'
-              }
-            />
-            {siteConfig.publicationsSection?.subtitle && (
-              <div className="pt-2">
-                <RichTextRenderer content={siteConfig.publicationsSection.subtitle} />
-              </div>
-            )}
-          </div>
+          {(siteConfig.publicationsSection?.paragraph1 || siteConfig.publicationsSection?.paragraph2 || siteConfig.publicationsSection?.paragraph3 || siteConfig.publicationsSection?.subtitle) && (
+            <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
+              {siteConfig.publicationsSection?.paragraph1 && (
+                <RichTextRenderer content={siteConfig.publicationsSection.paragraph1} />
+              )}
+              {siteConfig.publicationsSection?.paragraph2 && (
+                <RichTextRenderer content={siteConfig.publicationsSection.paragraph2} />
+              )}
+              {siteConfig.publicationsSection?.paragraph3 && (
+                <RichTextRenderer content={siteConfig.publicationsSection.paragraph3} />
+              )}
+              {siteConfig.publicationsSection?.subtitle && (
+                <div className="pt-2">
+                  <RichTextRenderer content={siteConfig.publicationsSection.subtitle} />
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Filter and Search Bar */}
