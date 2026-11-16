@@ -181,7 +181,19 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
   };
 
   const handleRemovePublication = (index: number) => {
-    if (window.confirm('Tem certeza que deseja remover esta publicação?')) {
+    const pub = (siteConfig.publications || [])[index];
+    if (window.confirm(`Tem certeza que deseja remover a publicação "${pub?.title || 'selecionada'}"?`)) {
+      if (pub?.id) {
+        try {
+          const currentDeleted = JSON.parse(localStorage.getItem('aldoleao_deleted_pub_ids') || '[]');
+          if (!currentDeleted.includes(pub.id)) {
+            currentDeleted.push(pub.id);
+            localStorage.setItem('aldoleao_deleted_pub_ids', JSON.stringify(currentDeleted));
+          }
+        } catch (e) {
+          // Ignora
+        }
+      }
       const updated = (siteConfig.publications || []).filter((_, i) => i !== index);
       updateSiteConfig({ publications: updated });
     }
@@ -3650,13 +3662,205 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
           <div className="border-b border-slate-800 pb-2">
             <h3 className="font-cinzel text-sm font-bold text-white uppercase flex items-center gap-2">
               <FileText className="w-4 h-4 text-[#F6E27A]" />
-              <span>Publicações Jurídicas & Pareceres</span>
+              <span>Publicações Jurídicas & Artigos</span>
             </h3>
+            <p className="text-[11px] text-slate-400 mt-0.5">
+              Cadastre novos artigos do Dr. Aldo Leão ou notícias jurídicas. Novos itens entram no topo e já aparecem no portal.
+            </p>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <span className="text-xs font-bold text-[#F6E27A] uppercase block">
-              Cabeçalho da Seção de Publicações Jurídicas
+          {/* PAINEL DE AÇÃO RÁPIDA: PUBLICAR NOVO ARTIGO OU NOTÍCIA (NO TOPO) */}
+          <div className="p-4 rounded-xl bg-[#0B1A35] border-2 border-[#D4AF37] shadow-xl space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#E5C158] block">
+                  Ação Rápida
+                </span>
+                <h4 className="text-xs uppercase font-bold text-white flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#F6E27A]" />
+                  <span>Publicações no Site ({(siteConfig.publications || []).length})</span>
+                </h4>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('artigo')}
+                  className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold flex items-center gap-1 cursor-pointer hover:brightness-110 shadow-md"
+                  title="Criar novo Artigo Jurídico assinado pelo Dr. Aldo Leão"
+                >
+                  <Plus className="w-3.5 h-3.5" /> + Novo Artigo
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('noticia')}
+                  className="px-3 py-1.5 rounded-lg bg-[#071122] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold flex items-center gap-1 cursor-pointer hover:bg-[#0E1F3D] shadow-md"
+                  title="Criar nova Notícia Jurídica"
+                >
+                  <Plus className="w-3.5 h-3.5" /> + Nova Notícia
+                </button>
+              </div>
+            </div>
+            <p className="text-[10px] text-slate-300">
+              Clique em <strong>+ Novo Artigo</strong> para abrir o formulário com o campo de <strong>Título</strong> no topo da lista.
+            </p>
+          </div>
+
+          {/* LISTA DAS PUBLICAÇÕES CADASTRADAS */}
+          <div className="space-y-3 max-h-[560px] overflow-y-auto pr-1">
+            {(siteConfig.publications || []).map((pub, idx) => (
+              <div
+                key={pub.id || idx}
+                className={`p-3.5 rounded-xl bg-[#071122] border space-y-3 ${
+                  idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-slate-700'
+                }`}
+              >
+                {/* Cabeçalho do Card */}
+                <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2">
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={pub.type || 'artigo'}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], type: e.target.value as 'artigo' | 'noticia' };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      className="px-2 py-0.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-[10px] text-[#F6E27A] font-bold uppercase"
+                    >
+                      <option value="artigo">Artigo Jurídico (Dr. Aldo Leão)</option>
+                      <option value="noticia">Notícia Jurídica</option>
+                    </select>
+                    {idx === 0 && (
+                      <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        Topo do Site
+                      </span>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleRemovePublication(idx)}
+                    className="px-2 py-1 rounded bg-red-500/10 text-red-400 hover:text-red-300 hover:bg-red-500/20 text-xs flex items-center gap-1 cursor-pointer transition-colors border border-red-500/30"
+                    title="Excluir esta publicação definitivamente"
+                  >
+                    <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                    <span>Excluir</span>
+                  </button>
+                </div>
+
+                {/* CAMPO DE TÍTULO OFICIAL DESTACADO EM DOURADO */}
+                <div className="p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/70 space-y-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-[#F6E27A] flex items-center justify-between">
+                    <span>🏷️ TÍTULO DO ARTIGO OU NOTÍCIA (Obrigatório)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={pub.title}
+                    onChange={(e) => {
+                      const updated = [...(siteConfig.publications || [])];
+                      updated[idx] = { ...updated[idx], title: e.target.value };
+                      updateSiteConfig({ publications: updated });
+                    }}
+                    placeholder="Digite o título da publicação (Ex: O CNPJ TÉCNICO)"
+                    className="w-full px-2.5 py-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-white text-xs font-bold font-cinzel focus:border-[#F6E27A] focus:outline-none"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Área Jurídica</label>
+                    <input
+                      type="text"
+                      value={pub.area}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], area: e.target.value };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      placeholder="Ex: Planejamento Patrimonial 4.0"
+                      className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Data da Publicação</label>
+                    <input
+                      type="text"
+                      value={pub.date || ''}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], date: e.target.value };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      placeholder="Ex: 13/11/2026"
+                      className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
+                    />
+                  </div>
+                </div>
+
+                <RichTextarea
+                  label="Resumo / Prévia no Card (Editor Rico)"
+                  rows={2}
+                  value={pub.excerpt}
+                  onChange={(val) => {
+                    const updated = [...(siteConfig.publications || [])];
+                    updated[idx] = { ...updated[idx], excerpt: val };
+                    updateSiteConfig({ publications: updated });
+                  }}
+                />
+
+                <RichTextarea
+                  label="Conteúdo Integral (Editor Rico com Parágrafos e Formatações)"
+                  rows={6}
+                  value={pub.content || ''}
+                  onChange={(val) => {
+                    const updated = [...(siteConfig.publications || [])];
+                    updated[idx] = { ...updated[idx], content: val };
+                    updateSiteConfig({ publications: updated });
+                  }}
+                  placeholder="Escreva ou cole o conteúdo completo do artigo ou notícia jurídica..."
+                  hint="A assinatura oficial institucional é inserida automaticamente ao final do texto"
+                />
+
+                {/* Agendamento Opcional de Data e Horário (Item 59) */}
+                <div className="p-2.5 rounded-lg bg-[#050B14] border border-slate-800 space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id={`drawer-sched-${pub.id || idx}`}
+                      checked={!!pub.isScheduled}
+                      onChange={(e) => {
+                        const updated = [...(siteConfig.publications || [])];
+                        updated[idx] = { ...updated[idx], isScheduled: e.target.checked };
+                        updateSiteConfig({ publications: updated });
+                      }}
+                      className="w-4 h-4 accent-[#D4AF37] cursor-pointer"
+                    />
+                    <label htmlFor={`drawer-sched-${pub.id || idx}`} className="text-[11px] text-slate-300 font-semibold cursor-pointer">
+                      Programar publicação para data e hora futura (Item 59)
+                    </label>
+                  </div>
+                  {pub.isScheduled && (
+                    <div className="pt-1.5 border-t border-slate-800 flex items-center gap-2">
+                      <span className="text-[10px] text-slate-400">Publicar em:</span>
+                      <input
+                        type="datetime-local"
+                        value={pub.publishAt || ''}
+                        onChange={(e) => {
+                          const updated = [...(siteConfig.publications || [])];
+                          updated[idx] = { ...updated[idx], publishAt: e.target.value };
+                          updateSiteConfig({ publications: updated });
+                        }}
+                        className="px-2 py-1 rounded bg-[#071122] border border-[#D4AF37]/60 text-xs text-white"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CABEÇALHO INSTITUCIONAL DA SEÇÃO PUBLICAÇÕES (AO FINAL) */}
+          <div className="p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3 pt-3">
+            <span className="text-xs font-bold text-[#E5C158] uppercase block">
+              Configurações do Cabeçalho da Página Publicações Jurídicas (Página 9)
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <div>
@@ -3694,203 +3898,13 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               </div>
             </div>
             <RichTextarea
-              label="Subtítulo / Introdução de Publicações Jurídicas"
+              label="Subtítulo / Introdução Institucional da Página"
               rows={2}
               value={siteConfig.publicationsSection?.subtitle || ''}
               onChange={(val) => updateSiteConfig({
                 publicationsSection: { ...(siteConfig.publicationsSection || {}), subtitle: val }
               })}
             />
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <h4 className="text-xs uppercase font-bold text-[#F6E27A]">
-                  Publicações Cadastradas ({(siteConfig.publications || []).length})
-                </h4>
-                <p className="text-[10px] text-slate-400">Novos itens aparecem instantaneamente no topo do portal.</p>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => handleAddPublication('artigo')}
-                  className="px-2.5 py-1 rounded bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-[11px] font-bold flex items-center gap-1 cursor-pointer hover:brightness-110"
-                >
-                  <Plus className="w-3 h-3" /> + Artigo
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleAddPublication('noticia')}
-                  className="px-2.5 py-1 rounded bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-[11px] font-bold flex items-center gap-1 cursor-pointer hover:bg-[#142A52]"
-                >
-                  <Plus className="w-3 h-3" /> + Notícia
-                </button>
-              </div>
-            </div>
-
-            <div className="space-y-3 max-h-[520px] overflow-y-auto pr-1">
-              {(siteConfig.publications || []).map((pub, idx) => (
-                <div
-                  key={pub.id || idx}
-                  className={`p-3.5 rounded-xl bg-[#071122] border space-y-2.5 ${
-                    idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/40' : 'border-slate-700'
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2">
-                    <div className="flex items-center gap-2">
-                      <select
-                        value={pub.type || 'artigo'}
-                        onChange={(e) => {
-                          const updated = [...(siteConfig.publications || [])];
-                          updated[idx] = { ...updated[idx], type: e.target.value as 'artigo' | 'noticia' };
-                          updateSiteConfig({ publications: updated });
-                        }}
-                        className="px-2 py-0.5 rounded bg-[#050B14] border border-slate-700 text-[10px] text-[#F6E27A] font-bold uppercase"
-                      >
-                        <option value="artigo">Artigo Jurídico</option>
-                        <option value="noticia">Notícia Jurídica</option>
-                      </select>
-                      {idx === 0 && (
-                        <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                          Topo
-                        </span>
-                      )}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => handleRemovePublication(idx)}
-                      className="p-1 text-red-400 hover:text-red-300"
-                      title="Remover publicação"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-
-                  {/* Agendamento / Programação de Data e Horário (Item 59 e 76) */}
-                  <div className="p-3 rounded-xl bg-[#050B14] border border-[#D4AF37]/45 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase font-bold text-[#F6E27A] flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-[#D4AF37]" />
-                        <span>Agendamento da Publicação (Item 59)</span>
-                      </span>
-                      {pub.isScheduled && pub.publishAt ? (
-                        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300">
-                          ⏳ Programado
-                        </span>
-                      ) : (
-                        <span className="text-[9px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400">
-                          ✅ Imediato
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        id={`drawer-sched-${pub.id || idx}`}
-                        checked={!!pub.isScheduled}
-                        onChange={(e) => {
-                          const updated = [...(siteConfig.publications || [])];
-                          updated[idx] = { ...updated[idx], isScheduled: e.target.checked };
-                          updateSiteConfig({ publications: updated });
-                        }}
-                        className="w-4 h-4 accent-[#D4AF37] cursor-pointer"
-                      />
-                      <label htmlFor={`drawer-sched-${pub.id || idx}`} className="text-xs text-slate-200 font-semibold cursor-pointer">
-                        Programar para dia e hora específicos (Item 59)
-                      </label>
-                    </div>
-
-                    {pub.isScheduled && (
-                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1.5 border-t border-slate-800">
-                        <span className="text-[11px] text-slate-300 shrink-0">Data e Hora:</span>
-                        <input
-                          type="datetime-local"
-                          value={pub.publishAt || ''}
-                          onChange={(e) => {
-                            const updated = [...(siteConfig.publications || [])];
-                            updated[idx] = { ...updated[idx], publishAt: e.target.value };
-                            updateSiteConfig({ publications: updated });
-                          }}
-                          className="flex-1 px-2.5 py-1.5 rounded-lg bg-[#071122] border border-[#D4AF37]/60 text-xs text-white"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Título da Publicação</label>
-                    <input
-                      type="text"
-                      value={pub.title}
-                      onChange={(e) => {
-                        const updated = [...(siteConfig.publications || [])];
-                        updated[idx] = { ...updated[idx], title: e.target.value };
-                        updateSiteConfig({ publications: updated });
-                      }}
-                      placeholder="Título da Publicação"
-                      className="w-full px-2 py-1.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Área Jurídica</label>
-                      <input
-                        type="text"
-                        value={pub.area}
-                        onChange={(e) => {
-                          const updated = [...(siteConfig.publications || [])];
-                          updated[idx] = { ...updated[idx], area: e.target.value };
-                          updateSiteConfig({ publications: updated });
-                        }}
-                        placeholder="Ex: Planejamento Patrimonial 4.0"
-                        className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] uppercase text-slate-400 mb-0.5">Data</label>
-                      <input
-                        type="text"
-                        value={pub.date || ''}
-                        onChange={(e) => {
-                          const updated = [...(siteConfig.publications || [])];
-                          updated[idx] = { ...updated[idx], date: e.target.value };
-                          updateSiteConfig({ publications: updated });
-                        }}
-                        placeholder="Ex: 29/10/2026"
-                        className="w-full px-2 py-1 rounded bg-[#050B14] border border-slate-700 text-white text-[11px]"
-                      />
-                    </div>
-                  </div>
-
-                  <RichTextarea
-                    label="Resumo / Prévia no Card (Editor Rico)"
-                    rows={2}
-                    value={pub.excerpt}
-                    onChange={(val) => {
-                      const updated = [...(siteConfig.publications || [])];
-                      updated[idx] = { ...updated[idx], excerpt: val };
-                      updateSiteConfig({ publications: updated });
-                    }}
-                  />
-
-                  <RichTextarea
-                    label="Conteúdo Integral (Editor Rico: Tabelas, Marcadores, Imagens, Cores e Alinhamentos)"
-                    rows={6}
-                    value={pub.content || ''}
-                    onChange={(val) => {
-                      const updated = [...(siteConfig.publications || [])];
-                      updated[idx] = { ...updated[idx], content: val };
-                      updateSiteConfig({ publications: updated });
-                    }}
-                    placeholder="Escreva ou cole o conteúdo completo do artigo ou notícia jurídica..."
-                    hint="Suporta tabelas, marcadores, imagens, cores e alinhamentos"
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       )}

@@ -1228,8 +1228,8 @@ const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
 
   // 6. Item 83: Publicações Jurídicas - Tabela obrigatória no artigo "O CUSTO DO INVENTÁRIO PODE DOBRAR"
   if (next.publications && Array.isArray(next.publications)) {
-    const officialItcmdPub = OFFICIAL_PUBLICATIONS_2024_2025[0];
-    const tableMatch = officialItcmdPub.content.match(/<div class="my-6 rounded-2xl overflow-hidden border-2[\s\S]*?<\/table>\s*<\/div>\s*<\/div>/);
+    const itcmdPub = OFFICIAL_PUBLICATIONS_2024_2025.find(p => p.id === 'pub-custo-inventario-dobrar') || OFFICIAL_PUBLICATIONS_2024_2025[1];
+    const tableMatch = itcmdPub?.content.match(/<div class="my-6 rounded-2xl overflow-hidden border-2[\s\S]*?<\/table>\s*<\/div>\s*<\/div>/);
     const officialTableHtml = tableMatch ? tableMatch[0] : '';
 
     const norm = (s: string) =>
@@ -1238,26 +1238,66 @@ const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase();
 
-    let foundItcmd = false;
+    // Recupera IDs de publicações que o usuário excluiu na lixeira vermelha
+    let deletedPubIds: string[] = [];
+    try {
+      const storedDeleted = localStorage.getItem('aldoleao_deleted_pub_ids');
+      if (storedDeleted) {
+        deletedPubIds = JSON.parse(storedDeleted);
+      }
+    } catch (e) {
+      // Ignora erro em ambientes sem localStorage
+    }
+
+    // Filtra para nunca restaurar publicações excluídas pelo usuário
+    next.publications = next.publications.filter(p => !deletedPubIds.includes(p.id));
+
+    // Se o artigo "Custo do Inventário" estiver na lista (e não excluído), garante a tabela comparativa
     next.publications = next.publications.map((pub) => {
       if (norm(pub.title).includes('custo do inventario pode dobrar')) {
-        foundItcmd = true;
         if (!pub.content || !pub.content.includes('<table')) {
           return {
             ...pub,
             content: officialTableHtml && pub.content
               ? `${pub.content}\n\n${officialTableHtml}`
-              : officialItcmdPub.content
+              : (itcmdPub ? itcmdPub.content : pub.content)
           };
         }
       }
       return pub;
     });
 
-    if (!foundItcmd) {
-      next.publications = [officialItcmdPub, ...next.publications];
+    // Garante que o artigo "O CNPJ TÉCNICO" publicado pelo Dr. Aldo Leão esteja presente no topo
+    const hasCnpjTecnico = next.publications.some(p => norm(p.title).includes('cnpj tecnico') || p.id === 'pub-o-cnpj-tecnico');
+    const isCnpjDeleted = deletedPubIds.includes('pub-o-cnpj-tecnico');
+    if (!hasCnpjTecnico && !isCnpjDeleted) {
+      const cnpjPub = OFFICIAL_PUBLICATIONS_2024_2025.find(p => p.id === 'pub-o-cnpj-tecnico');
+      if (cnpjPub) {
+        next.publications = [cnpjPub, ...next.publications];
+      }
     }
   }
+
+  // 7. Livros Digitais: Garante que todos os 8 livros oficiais do Dr. Aldo Leão existam no acervo (Páginas 1, 2 e 3)
+  const currentBooks = (next.digitalBooks && Array.isArray(next.digitalBooks) && next.digitalBooks.length > 0)
+    ? [...next.digitalBooks]
+    : [...DEFAULT_DIGITAL_BOOKS];
+
+  DEFAULT_DIGITAL_BOOKS.forEach((defBook) => {
+    const exists = currentBooks.some((b) => b.id === defBook.id || b.title === defBook.title);
+    if (!exists) {
+      currentBooks.push(defBook);
+    }
+  });
+
+  next.digitalBooks = currentBooks.map((book) => {
+    const def = DEFAULT_DIGITAL_BOOKS.find((b) => b.id === book.id || b.title === book.title);
+    return {
+      ...(def || {}),
+      ...book,
+      coverImage: book.coverImage || def?.coverImage || ''
+    };
+  }).sort((a, b) => (a.publicationOrder || 0) - (b.publicationOrder || 0));
 
   return next;
 };

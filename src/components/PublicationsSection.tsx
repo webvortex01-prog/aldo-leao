@@ -126,6 +126,11 @@ export const PublicationsSection: React.FC = () => {
                 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'
               }
             />
+            {siteConfig.publicationsSection?.subtitle && (
+              <div className="pt-2">
+                <RichTextRenderer content={siteConfig.publicationsSection.subtitle} />
+              </div>
+            )}
           </div>
         </div>
 

@@ -1325,12 +1325,24 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
   };
 
   const handleRemovePublication = (index: number) => {
-    if (window.confirm('Tem certeza que deseja remover esta publicação?')) {
+    const pub = (formData.publications || [])[index];
+    if (window.confirm(`Tem certeza que deseja remover a publicação "${pub?.title || 'selecionada'}"?`)) {
+      if (pub?.id) {
+        try {
+          const currentDeleted = JSON.parse(localStorage.getItem('aldoleao_deleted_pub_ids') || '[]');
+          if (!currentDeleted.includes(pub.id)) {
+            currentDeleted.push(pub.id);
+            localStorage.setItem('aldoleao_deleted_pub_ids', JSON.stringify(currentDeleted));
+          }
+        } catch (e) {
+          // Ignora
+        }
+      }
       const updated = (formData.publications || []).filter((_, i) => i !== index);
       const newFormData = { ...formData, publications: updated };
       setFormData(newFormData);
       updateSiteConfig(newFormData);
-      showNotification('Publicação removida.');
+      showNotification('Publicação removida com sucesso!');
     }
   };
 
@@ -6195,8 +6207,33 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </div>
           </div>
 
+          {/* Atalhos Rápidos da Aba 10 */}
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-inner">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-[11px] text-[#F6E27A] font-bold uppercase tracking-wider">Acesso Rápido:</span>
+              <a
+                href="#publicacoes-cadastradas"
+                className="px-3 py-1.5 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-white text-xs font-semibold hover:bg-[#D4AF37]/30 transition-colors"
+              >
+                📚 Gerenciar Artigos e Notícias ({formData.publications?.length || 0})
+              </a>
+              <a
+                href="#cabecalho-secao-publicacoes"
+                className="px-3 py-1.5 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 text-xs hover:text-white hover:border-[#D4AF37]/50 transition-colors"
+              >
+                🏛️ Cabeçalho & Parágrafos da Seção
+              </a>
+              <a
+                href="#assinatura-artigos"
+                className="px-3 py-1.5 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 text-xs hover:text-white hover:border-[#D4AF37]/50 transition-colors"
+              >
+                ✍️ Assinatura Automática
+              </a>
+            </div>
+          </div>
+
           {/* Cabeçalho da Seção Publicações Jurídicas */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+          <div id="cabecalho-secao-publicacoes" className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
             <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
               Cabeçalho & 3 Parágrafos Oficiais da Seção (Página 9)
             </span>
@@ -6296,7 +6333,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
 
           {/* SEÇÃO EXCLUSIVA: ASSINATURA AUTOMÁTICA DOS ARTIGOS E NOTÍCIAS */}
-          <div className="p-5 sm:p-6 rounded-xl bg-[#050B14] border-2 border-[#D4AF37]/60 shadow-2xl space-y-5 relative overflow-hidden">
+          <div id="assinatura-artigos" className="p-5 sm:p-6 rounded-xl bg-[#050B14] border-2 border-[#D4AF37]/60 shadow-2xl space-y-5 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-32 bg-[#D4AF37]/5 blur-3xl pointer-events-none rounded-full" />
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800 relative z-10">
@@ -6663,7 +6700,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
           </div>
 
           {/* LISTA DE PUBLICAÇÕES (ARTIGOS E NOTÍCIAS) */}
-          <div className="space-y-4">
+          <div id="publicacoes-cadastradas" className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
               <div>
                 <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
@@ -6747,8 +6784,88 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 </div>
 
                 
+                {/* CAMPO DE TÍTULO OFICIAL DESTACADO EM DOURADO */}
+                <div className="p-3.5 rounded-xl bg-[#071122] border-2 border-[#D4AF37]/70 space-y-1.5 shadow-md">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#F6E27A] flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                      <span>🏷️ TÍTULO DO ARTIGO OU NOTÍCIA (Obrigatório)</span>
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-normal">Este título aparecerá em destaque no site e nos cartões</span>
+                  </label>
+                  <input
+                    id={`pub-title-${pub.id}`}
+                    type="text"
+                    value={pub.title}
+                    onChange={(e) => {
+                      const updated = [...(formData.publications || [])];
+                      updated[idx].title = e.target.value;
+                      setFormData({ ...formData, publications: updated });
+                    }}
+                    placeholder="Digite o título do artigo ou notícia (Ex: O CNPJ TÉCNICO)"
+                    className="w-full p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm sm:text-base text-white font-bold font-cinzel focus:border-[#F6E27A] focus:outline-none focus:ring-2 focus:ring-[#F6E27A]/30"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* Tipo de Publicação */}
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Tipo de Conteúdo
+                    </label>
+                    <select
+                      value={pub.type || 'artigo'}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].type = e.target.value as 'artigo' | 'noticia';
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    >
+                      <option value="artigo">Artigo Jurídico (Dr. Aldo Leão)</option>
+                      <option value="noticia">Notícia Jurídica</option>
+                    </select>
+                  </div>
+
+                  {/* Área */}
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Área Jurídica
+                    </label>
+                    <input
+                      type="text"
+                      value={pub.area}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].area = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      placeholder="Ex: Planejamento Patrimonial 4.0"
+                    />
+                  </div>
+
+                  {/* Data */}
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Data da Publicação
+                    </label>
+                    <input
+                      type="text"
+                      value={pub.date || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].date = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      placeholder="Ex: 13/11/2026"
+                    />
+                  </div>
+                </div>
+
                 {/* Programação de Publicação para Data/Hora Futura (Item 59) */}
-                <div className="p-3.5 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="p-3 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-2.5">
                     <input
                       type="checkbox"
@@ -6783,95 +6900,21 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                   )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                  {/* Tipo de Publicação */}
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Tipo de Conteúdo
-                    </label>
-                    <select
-                      value={pub.type || 'artigo'}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].type = e.target.value as 'artigo' | 'noticia';
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    >
-                      <option value="artigo">Artigo Jurídico (Dr. Aldo Leão)</option>
-                      <option value="noticia">Notícia Jurídica</option>
-                    </select>
-                  </div>
-
-                  {/* Título */}
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Título da Publicação
-                    </label>
-                    <input
-                      type="text"
-                      value={pub.title}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].title = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
-                    />
-                  </div>
-
-                  {/* Área */}
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Área Jurídica
-                    </label>
-                    <input
-                      type="text"
-                      value={pub.area}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].area = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Data da Publicação
-                    </label>
-                    <input
-                      type="text"
-                      value={pub.date || ''}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].date = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      placeholder="Ex: 10 de Outubro de 2026"
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Tempo de Leitura Estimado
-                    </label>
-                    <input
-                      type="text"
-                      value={pub.readTime || ''}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].readTime = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      placeholder="Ex: 5 min de leitura"
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Tempo de Leitura Estimado
+                  </label>
+                  <input
+                    type="text"
+                    value={pub.readTime || ''}
+                    onChange={(e) => {
+                      const updated = [...(formData.publications || [])];
+                      updated[idx].readTime = e.target.value;
+                      setFormData({ ...formData, publications: updated });
+                    }}
+                    placeholder="Ex: 5 min de leitura"
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
                 </div>
 
                 <div>

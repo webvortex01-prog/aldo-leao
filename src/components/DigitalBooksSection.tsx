@@ -235,6 +235,55 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
           )}
         </div>
 
+        {/* Barra Superior de Paginação e Navegação Rápida entre Páginas 1, 2 e 3 */}
+        {filteredBooks.length > 0 && totalPages > 1 && (
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold">
+                Acervo Oficial ({filteredBooks.length} Livros):
+              </span>
+              <span className="text-xs text-slate-300">
+                Página <strong className="text-white font-bold">{safeCurrentPage}</strong> de <strong className="text-white font-bold">{totalPages}</strong> (3 por página)
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2 flex-wrap justify-center">
+              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mr-1 hidden sm:inline">
+                Ir para Página:
+              </span>
+              {Array.from({ length: totalPages }).map((_, idx) => {
+                const pageNum = idx + 1;
+                const isActive = pageNum === safeCurrentPage;
+                return (
+                  <button
+                    key={`top-page-pill-${pageNum}`}
+                    type="button"
+                    onClick={() => handleSelectPage(pageNum)}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                      isActive
+                        ? 'bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black shadow-lg scale-105'
+                        : 'bg-[#0A1730] border border-[#D4AF37]/30 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37]'
+                    }`}
+                  >
+                    <span>Página {pageNum}</span>
+                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-slate-950" />}
+                  </button>
+                );
+              })}
+              {safeCurrentPage < totalPages && (
+                <button
+                  type="button"
+                  onClick={handleNextPage}
+                  className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#0E1F3D] border border-[#D4AF37]/60 text-[#F6E27A] hover:bg-[#142A52] transition-all cursor-pointer flex items-center gap-1 ml-1"
+                >
+                  <span>Próxima Página</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Grade de Livros (3 capas por página com transição) */}
         {filteredBooks.length === 0 ? (
           <div className="py-16 text-center text-slate-400 p-8 rounded-2xl bg-[#071122] border border-slate-800 max-w-2xl mx-auto">
