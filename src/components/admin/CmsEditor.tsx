@@ -680,25 +680,34 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert, 
         <button
           type="button"
           onMouseDown={keepSelection}
-          onClick={() => trigger('color', '#D4AF37', '<span style="color: #D4AF37">', '</span>')}
-          className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
-          title="Dourado Nobre #D4AF37"
+          onClick={() => trigger('color', '#D4AF37', '<span style="color: #D4AF37 !important;">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] font-bold text-[10px] cursor-pointer hover:bg-[#D4AF37]/40 transition-colors"
+          title="Ouro Nobre Clássico #D4AF37"
         >
           Ouro #D4AF37
         </button>
         <button
           type="button"
           onMouseDown={keepSelection}
-          onClick={() => trigger('color', '#F6E27A', '<span style="color: #F6E27A">', '</span>')}
-          className="px-1.5 py-0.5 rounded bg-[#F6E27A]/20 border border-[#F6E27A] text-[#F6E27A] font-semibold text-[10px] cursor-pointer"
-          title="Ouro Claro #F6E27A"
+          onClick={() => trigger('color', '#E5C158', '<span style="color: #E5C158 !important;">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#E5C158]/20 border border-[#E5C158] text-[#E5C158] font-bold text-[10px] cursor-pointer hover:bg-[#E5C158]/40 transition-colors"
+          title="Ouro Médio Prestígio #E5C158"
+        >
+          Ouro Médio #E5C158
+        </button>
+        <button
+          type="button"
+          onMouseDown={keepSelection}
+          onClick={() => trigger('color', '#F6E27A', '<span style="color: #F6E27A !important;">', '</span>')}
+          className="px-1.5 py-0.5 rounded bg-[#F6E27A]/20 border border-[#F6E27A] text-[#F6E27A] font-bold text-[10px] cursor-pointer hover:bg-[#F6E27A]/40 transition-colors"
+          title="Ouro Claro Brilhante #F6E27A"
         >
           Ouro Claro #F6E27A
         </button>
         <button
           type="button"
           onMouseDown={keepSelection}
-          onClick={() => trigger('color', '#FFFFFF', '<span style="color: #FFFFFF">', '</span>')}
+          onClick={() => trigger('color', '#FFFFFF', '<span style="color: #FFFFFF !important;">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-white/20 border border-white text-white font-semibold text-[10px] cursor-pointer"
           title="Branco #FFFFFF"
         >
@@ -707,7 +716,7 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert, 
         <button
           type="button"
           onMouseDown={keepSelection}
-          onClick={() => trigger('color', '#94A3B8', '<span style="color: #94A3B8">', '</span>')}
+          onClick={() => trigger('color', '#94A3B8', '<span style="color: #94A3B8 !important;">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-600 text-slate-300 font-semibold text-[10px] cursor-pointer"
           title="Prata #94A3B8"
         >
@@ -716,7 +725,7 @@ export const FormattingToolbar: React.FC<FormattingToolbarProps> = ({ onInsert, 
         <button
           type="button"
           onMouseDown={keepSelection}
-          onClick={() => trigger('color', '#10B981', '<span style="color: #10B981">', '</span>')}
+          onClick={() => trigger('color', '#10B981', '<span style="color: #10B981 !important;">', '</span>')}
           className="px-1.5 py-0.5 rounded bg-emerald-950/60 border border-emerald-500 text-emerald-400 font-semibold text-[10px] cursor-pointer"
           title="Verde Sucesso #10B981"
         >
@@ -909,11 +918,39 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
     } else if (action === 'exec') {
       document.execCommand(payload, false);
     } else if (action === 'color') {
-      if (hasSelection) {
-        document.execCommand('styleWithCSS', false, 'true');
-        document.execCommand('foreColor', false, payload);
+      const activeRange = (sel && sel.rangeCount > 0 && !sel.isCollapsed && el.contains(sel.getRangeAt(0).commonAncestorContainer))
+        ? sel.getRangeAt(0)
+        : (savedRangeRef.current && !savedRangeRef.current.collapsed && el.contains(savedRangeRef.current.commonAncestorContainer) ? savedRangeRef.current : null);
+
+      if (activeRange) {
+        const container = document.createElement('div');
+        container.appendChild(activeRange.cloneContents());
+        const innerHtml = container.innerHTML || activeRange.toString();
+
+        if (innerHtml) {
+          const colored = `<span style="color: ${payload} !important;" data-color="${payload}">${innerHtml}</span>`;
+          activeRange.deleteContents();
+
+          const temp = document.createElement('div');
+          temp.innerHTML = colored;
+          const frag = document.createDocumentFragment();
+          let node: Node | null;
+          let lastNode: Node | null = null;
+          while ((node = temp.firstChild)) {
+            lastNode = frag.appendChild(node);
+          }
+          activeRange.insertNode(frag);
+
+          if (lastNode && sel) {
+            const newRange = document.createRange();
+            newRange.selectNodeContents(lastNode);
+            sel.removeAllRanges();
+            sel.addRange(newRange);
+            savedRangeRef.current = newRange.cloneRange();
+          }
+        }
       } else {
-        document.execCommand('insertHTML', false, `<span style="color: ${payload};">Texto</span>`);
+        document.execCommand('insertHTML', false, `<span style="color: ${payload} !important;" data-color="${payload}">Texto em Dourado</span>`);
       }
     } else if (action === 'highlight') {
       if (hasSelection) {
@@ -2400,20 +2437,17 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Box de Chamada 1: Que Legado Você Vai Deixar?
-              </label>
-              <input
-                type="text"
-                value={formData.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  slide2: { ...(formData.slide2 || {}), callout1: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
+            {/* Box de Chamada 1: Que Legado Você Vai Deixar? com RichTextarea (Item 80) */}
+            <RichTextarea
+              label="Box de Chamada 1: Que Legado Você Vai Deixar? (Item 80)"
+              rows={2}
+              value={formData.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
+              onChange={(val) => setFormData({
+                ...formData,
+                slide2: { ...(formData.slide2 || {}), callout1: val }
+              })}
+              hint="Box destacado com borda dourada logo abaixo do texto principal do Slide 2. Suporta formatação de cores douradas e negrito."
+            />
 
             <div>
               <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">

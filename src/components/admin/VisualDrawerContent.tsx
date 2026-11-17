@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  Edit3, 
-  Image as ImageIcon, 
-  FileText, 
-  PhoneCall, 
-  Scale, 
-  BookOpen, 
-  ChevronRight, 
-  Plus, 
-  Trash2, 
-  GraduationCap, 
-  Layers, 
-  CheckCircle2, 
-  Trophy, 
-  Upload, 
-  ShieldCheck, 
+import {
+  Sparkles,
+  Edit3,
+  Image as ImageIcon,
+  FileText,
+  PhoneCall,
+  Scale,
+  BookOpen,
+  ChevronRight,
+  Plus,
+  Trash2,
+  GraduationCap,
+  Layers,
+  CheckCircle2,
+  Trophy,
+  Upload,
+  ShieldCheck,
   ExternalLink,
   HelpCircle,
   Briefcase,
@@ -28,7 +28,7 @@ import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../../utils/phoneUt
 import { PracticeArea, ExcellenceSolution, DigitalBook, Publication } from '../../types';
 import { RichTextarea } from './CmsEditor';
 
-export type EditableSectionKey = 
+export type EditableSectionKey =
   | 'navbar'
   | 'hero'
   | 'digital_presence'
@@ -343,11 +343,10 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               key={item.key}
               type="button"
               onClick={() => setActiveSection(item.key as EditableSectionKey)}
-              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors cursor-pointer ${
-                activeSection === item.key
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] text-black shadow-md'
-                  : 'bg-[#071122] text-slate-300 hover:text-white hover:bg-[#0E1F3D] border border-slate-800'
-              }`}
+              className={`px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors cursor-pointer ${activeSection === item.key
+                ? 'bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] text-black shadow-md'
+                : 'bg-[#071122] text-slate-300 hover:text-white hover:bg-[#0E1F3D] border border-slate-800'
+                }`}
             >
               {item.label}
             </button>
@@ -1568,7 +1567,7 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             </div>
             <div className="flex items-center justify-between pt-1">
               <span className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                Itens dos Diferenciais ({ (siteConfig.founder.differentials || []).length })
+                Itens dos Diferenciais ({(siteConfig.founder.differentials || []).length})
               </span>
               <button
                 type="button"
@@ -2667,11 +2666,10 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 setHoldingSubTab('section');
                 setActiveSection('holding');
               }}
-              className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                activeSection === 'holding' && holdingSubTab === 'section'
-                  ? 'bg-[#D4AF37] text-black shadow'
-                  : 'text-slate-300 hover:text-white'
-              }`}
+              className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${activeSection === 'holding' && holdingSubTab === 'section'
+                ? 'bg-[#D4AF37] text-black shadow'
+                : 'text-slate-300 hover:text-white'
+                }`}
             >
               1. Seção na Home
             </button>
@@ -2681,11 +2679,10 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
                 setHoldingSubTab('landing');
                 setActiveSection('landing_holding');
               }}
-              className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                activeSection === 'landing_holding' || holdingSubTab === 'landing'
-                  ? 'bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] text-black shadow'
-                  : 'text-slate-300 hover:text-white'
-              }`}
+              className={`flex-1 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${activeSection === 'landing_holding' || holdingSubTab === 'landing'
+                ? 'bg-gradient-to-r from-[#D4AF37] to-[#F6E27A] text-black shadow'
+                : 'text-slate-300 hover:text-white'
+                }`}
             >
               🚀 2. Landing Page 4.0 (/1208/)
             </button>
@@ -3710,9 +3707,8 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
             {(siteConfig.publications || []).map((pub, idx) => (
               <div
                 key={pub.id || idx}
-                className={`p-3.5 rounded-xl bg-[#071122] border space-y-3 ${
-                  idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-slate-700'
-                }`}
+                className={`p-3.5 rounded-xl bg-[#071122] border space-y-3 ${idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/50 shadow-[0_0_15px_rgba(212,175,55,0.15)]' : 'border-slate-700'
+                  }`}
               >
                 {/* Cabeçalho do Card */}
                 <div className="flex items-center justify-between gap-2 border-b border-slate-800 pb-2">
@@ -4008,9 +4004,8 @@ export const VisualDrawerContent: React.FC<VisualDrawerContentProps> = ({
               {(siteConfig.digitalBooks || []).map((book, idx) => (
                 <div
                   key={book.id || idx}
-                  className={`p-3.5 rounded-xl bg-[#071122] border space-y-3 ${
-                    idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/40' : 'border-slate-700'
-                  }`}
+                  className={`p-3.5 rounded-xl bg-[#071122] border space-y-3 ${idx === 0 ? 'border-[#D4AF37] ring-1 ring-[#D4AF37]/40' : 'border-slate-700'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">

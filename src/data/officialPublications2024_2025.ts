@@ -2,6 +2,23 @@ import { Publication } from '../types';
 
 export const OFFICIAL_PUBLICATIONS_2024_2025: Publication[] = [
   {
+    id: 'pub-o-cnpj-tecnico',
+    type: 'artigo',
+    title: 'O CNPJ TÉCNICO',
+    area: 'Planejamento Patrimonial 4.0 (Holding Familiar)',
+    date: '13/11/2026',
+    readTime: '6 min de leitura',
+    slug: 'o-cnpj-tecnico',
+    excerpt: 'A parametrização do CNPJ Técnico, a correta estruturação do objeto social e a conformidade contábil-fiscal são pilares inegociáveis para a blindagem patrimonial ética e a perpetuação do legado empresarial e familiar.',
+    content: `<p class="mb-4">No cenário contemporâneo de cruzamento eletrônico de dados pela Receita Federal do Brasil, Secretarias Estaduais de Fazenda e Juntas Comerciais, o <strong>CNPJ Técnico</strong> não é meramente um número de registro, mas a espinha dorsal de toda a segurança jurídica, societária, contábil e fiscal de uma organização empresarial ou Holding Familiar.</p>
+
+<h3 class="text-[#F6E27A] font-cinzel text-lg font-bold my-4">A ESTRUTURAÇÃO TÉCNICA DO CADASTRO EMPRESARIAL</h3>
+<p class="mb-3">A adequada parametrização dos Códigos Nacionais de Atividade Econômica (CNAEs), a redação minuciosa das cláusulas do Contrato Social e a absoluta coerência entre os atos societários e a escrituração contábil são requisitos inegociáveis para afastar riscos de desconsideração da personalidade jurídica e garantir os benefícios tributários da segregação patrimonial.</p>
+
+<h3 class="text-[#F6E27A] font-cinzel text-lg font-bold my-4">PREVENÇÃO DE PASSIVOS E PERPETUAÇÃO DO LEGADO</h3>
+<p class="mb-4">Sob a ótica do <strong>Planejamento Patrimonial 4.0</strong>, a <strong>ALDO LEÃO ADVOCACIA ESTRATÉGICA</strong> assessora empresários e famílias na modelagem e auditoria de seus cadastros empresariais, prevenindo autuações fiscais, contingências trabalhistas e garantindo a transição geracional segura do patrimônio.</p>`
+  },
+  {
     id: 'pub-custo-inventario-dobrar',
     type: 'artigo',
     title: 'CUSTO DO INVENTÁRIO PODE DOBRAR: POR QUE FAZER AGORA O SEU PLANEJAMENTO PATRIMONIAL 4.0 VIA HOLDING FAMILIAR?',

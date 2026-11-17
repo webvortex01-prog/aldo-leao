@@ -25,6 +25,16 @@ export function formatRichHtml(raw?: string | null): string {
       .replace(/&amp;/g, '&');
   }
 
+  // 1.1 Converte tags legadas <font color="..."> para <span style="color: ... !important;">
+  text = text.replace(/<font\s+color=["']?([^"'>]+)["']?>([\s\S]*?)<\/font>/gi, (_match, colorVal, content) => {
+    return `<span style="color: ${colorVal} !important;" data-color="${colorVal}">${content}</span>`;
+  });
+
+  // 1.2 Garante que qualquer propriedade color em style inline tenha !important para sobrepor classes Tailwind como text-slate-200 ou text-white
+  text = text.replace(/color:\s*([^;!"]+)(?:!important)?/gi, (_match, colorVal) => {
+    return `color: ${colorVal.trim()} !important`;
+  });
+
   // 2. Se o texto não possui tags de bloco HTML (<p>, <div>, <h1>-<h6>, <table>, <ul>, <ol>)
   const hasBlockTags = /<(?:p|div|h[1-6]|table|ul|ol|blockquote)\b/i.test(text);
 

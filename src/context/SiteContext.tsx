@@ -941,9 +941,9 @@ const DEFAULT_CONFIG: SiteConfig = {
     kicker: 'NOTÍCIAS E ARTIGOS JURÍDICOS',
     titleWhite: 'PUBLICAÇÕES',
     titleGold: 'JURÍDICAS',
-    paragraph1: '',
-    paragraph2: '',
-    paragraph3: '',
+    paragraph1: 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.',
+    paragraph2: 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.',
+    paragraph3: 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.',
   },
   booksSection: {
     goldKicker: 'Acervo de Livros Digitais Publicados',
@@ -1265,18 +1265,27 @@ const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
         }
       }
       return pub;
-    }).filter(p => p.id !== 'pub-o-cnpj-tecnico');
+    });
 
-    // Remove parágrafos genéricos não solicitados pelo cliente no cabeçalho de publicações
+    // Garante que o artigo oficial "O CNPJ TÉCNICO" exista em seu próprio box (a menos que tenha sido excluído pelo usuário)
+    const hasCnpj = next.publications.some(p => norm(p.title).includes('cnpj tecnico') || p.id === 'pub-o-cnpj-tecnico');
+    if (!hasCnpj && !deletedPubIds.includes('pub-o-cnpj-tecnico')) {
+      const cnpjPub = OFFICIAL_PUBLICATIONS_2024_2025.find(p => p.id === 'pub-o-cnpj-tecnico');
+      if (cnpjPub) {
+        next.publications = [cnpjPub, ...next.publications];
+      }
+    }
+
+    // Garante que o cabeçalho oficial de Publicações Jurídicas contenha os 3 parágrafos solicitados pelo cliente
     if (next.publicationsSection) {
-      if (next.publicationsSection.paragraph1?.includes('A produção de conhecimento jurídico faz parte da tradição centenária')) {
-        next.publicationsSection.paragraph1 = '';
+      if (!next.publicationsSection.paragraph1 || next.publicationsSection.paragraph1.trim() === '') {
+        next.publicationsSection.paragraph1 = DEFAULT_CONFIG.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA reflete o compromisso com a excelência, o aprofundamento dogmático e a aplicação prática do Direito.';
       }
-      if (next.publicationsSection.paragraph2?.includes('Aqui você encontra as notícias importantes')) {
-        next.publicationsSection.paragraph2 = '';
+      if (!next.publicationsSection.paragraph2 || next.publicationsSection.paragraph2.trim() === '') {
+        next.publicationsSection.paragraph2 = DEFAULT_CONFIG.publicationsSection?.paragraph2 || 'Nesta seção, compartilhamos artigos, pareceres e análises sobre temas contemporâneos, com ênfase em Planejamento Patrimonial 4.0, Direito Empresarial e Imobiliário.';
       }
-      if (next.publicationsSection.paragraph3?.includes('Nosso compromisso é compartilhar o conhecimento')) {
-        next.publicationsSection.paragraph3 = '';
+      if (!next.publicationsSection.paragraph3 || next.publicationsSection.paragraph3.trim() === '') {
+        next.publicationsSection.paragraph3 = DEFAULT_CONFIG.publicationsSection?.paragraph3 || 'Acompanhe as atualizações e explore os conteúdos desenvolvidos por nossos especialistas.';
       }
     }
   }

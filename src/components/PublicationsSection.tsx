@@ -376,9 +376,7 @@ export const PublicationsSection: React.FC = () => {
               {/* Segunda frase dourada: AUTOR: Dr. ALDO LEÃO à esquerda e Data alinhada à direita na mesma linha */}
               <div className="flex items-center justify-between text-xs sm:text-sm text-[#E5C158] font-bold uppercase tracking-wider pt-1">
                 <span className="text-left">
-                  {activePubModal.type === 'artigo'
-                    ? 'AUTOR: Dr. ALDO LEÃO'
-                    : 'Fonte: Tribunais Superiores (STF/STJ) & Seleção Editorial'}
+                  {activePubModal.type === 'artigo' ? 'AUTOR: Dr. ALDO LEÃO' : ''}
                 </span>
                 <span className="text-right text-[#E5C158] font-bold flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5 text-[#E5C158]" />
