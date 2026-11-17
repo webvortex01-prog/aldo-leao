@@ -156,14 +156,14 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
           </div>
         </div>
 
-        {/* Animated Slides Container com Grid Sobreposto para Zero Layout Shift (Item 90) */}
-        <div className="relative min-h-[580px] sm:min-h-[520px] lg:min-h-[460px] grid grid-cols-1 grid-rows-1">
+        {/* Animated Slides Container com Grid Sobreposto para Zero Layout Shift (Item 90 e 103) */}
+        <div className="relative min-h-0 lg:min-h-[460px] grid grid-cols-1 grid-rows-1">
           {/* SLIDE 1: Tradição Jurídica Desde 1908 */}
           <div
-            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center transition-opacity duration-700 ease-in-out ${
+            className={`col-start-1 row-start-1 w-full grid-cols-1 lg:grid-cols-12 gap-3.5 lg:gap-8 items-start lg:items-center content-start transition-opacity duration-700 ease-in-out ${
               currentSlide === 0
-                ? 'opacity-100 z-10 pointer-events-auto'
-                : 'opacity-0 z-0 pointer-events-none'
+                ? 'grid opacity-100 z-10 pointer-events-auto'
+                : 'hidden lg:grid opacity-0 z-0 pointer-events-none'
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
@@ -239,7 +239,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
             </div>
 
             {/* Right Column Visual (Logomarca Oficial do Leão - Box Estático sem espaço excessivo - Itens 95 e 103) */}
-            <div className="lg:col-span-5 relative flex flex-col justify-center">
+            <div className="lg:col-span-5 relative flex flex-col justify-start lg:justify-center mt-1 lg:mt-0">
               <div className="relative w-full max-w-md lg:max-w-none mx-auto">
                 <div className="absolute -inset-2 bg-gradient-to-tr from-[#D4AF37]/60 via-[#F6E27A]/30 to-[#D4AF37]/15 rounded-2xl blur-xl opacity-85" />
                 <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-[#D4AF37]/50 bg-[#0A1424] shadow-2xl photo-luxury-frame">
@@ -279,10 +279,10 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({
 
           {/* SLIDE 2: Planejamento Patrimonial 4.0 */}
           <div
-            className={`col-start-1 row-start-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-center transition-opacity duration-700 ease-in-out ${
+            className={`col-start-1 row-start-1 w-full grid-cols-1 lg:grid-cols-12 gap-3.5 lg:gap-8 items-start lg:items-center content-start transition-opacity duration-700 ease-in-out ${
               currentSlide === 1
-                ? 'opacity-100 z-10 pointer-events-auto'
-                : 'opacity-0 z-0 pointer-events-none'
+                ? 'grid opacity-100 z-10 pointer-events-auto'
+                : 'hidden lg:grid opacity-0 z-0 pointer-events-none'
             }`}
           >
             <div className="lg:col-span-7 flex flex-col justify-center text-left">
