@@ -675,6 +675,13 @@ const DEFAULT_CONFIG: SiteConfig = {
     formPrompt: 'Preencha os campos abaixo para o seu atendimento estratégico por um de nossos Advogados especialistas.',
     formNamePlaceholder: 'Nome Completo',
     formConsultationLabel: 'Tipo de Consulta',
+    phonesBoxTitle: 'TELEFONES',
+    phonesBoxSubtitle: 'Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:',
+    phonesCtaText: 'AGENDAR NO WHATSAPP',
+    emailsBoxTitle: 'E-MAILS',
+    emailsBoxFooter: 'Entre em contato enviando um e-mail, para o setor que deseja atendimento',
+    footerParagraph1: 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.',
+    footerParagraph2: 'Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.',
     addressPortoAlegre: 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS',
     officeHours: 'De 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.',
     boxVirtualTitle: 'ATENDIMENTO VIRTUAL BRASIL',
@@ -1278,6 +1285,9 @@ const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
 
     // Garante que o cabeçalho oficial de Publicações Jurídicas contenha os 3 parágrafos solicitados pelo cliente
     if (next.publicationsSection) {
+      // Elimina de vez qualquer texto de CNPJ Técnico que tenha ficado salvo em subtitle no cache do cliente
+      delete (next.publicationsSection as any).subtitle;
+
       if (!next.publicationsSection.paragraph1 || next.publicationsSection.paragraph1.trim() === '') {
         next.publicationsSection.paragraph1 = DEFAULT_CONFIG.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico da ALDO LEÃO ADVOCACIA ESTRATÉGICA reflete o compromisso com a excelência, o aprofundamento dogmático e a aplicação prática do Direito.';
       }
@@ -1290,26 +1300,42 @@ const repairSiteConfig = (cfg: SiteConfig): SiteConfig => {
     }
   }
 
-  // 7. Livros Digitais: Garante que todos os 8 livros oficiais do Dr. Aldo Leão existam no acervo (Páginas 1, 2 e 3)
-  const currentBooks = (next.digitalBooks && Array.isArray(next.digitalBooks) && next.digitalBooks.length > 0)
+  // 7. Livros Digitais: Garante que TODAS as 8 obras oficiais do Dr. Aldo Leão estejam SEMPRE presentes no acervo (Páginas 1, 2 e 3)
+  const existingBooks = (next.digitalBooks && Array.isArray(next.digitalBooks) && next.digitalBooks.length > 0)
     ? [...next.digitalBooks]
-    : [...DEFAULT_DIGITAL_BOOKS];
+    : [];
 
-  DEFAULT_DIGITAL_BOOKS.forEach((defBook) => {
-    const exists = currentBooks.some((b) => b.id === defBook.id || b.title === defBook.title);
-    if (!exists) {
-      currentBooks.push(defBook);
+  const mergedBooks: DigitalBook[] = DEFAULT_DIGITAL_BOOKS.map((defBook) => {
+    const found = existingBooks.find((b) => b.id === defBook.id || b.title === defBook.title);
+    return {
+      ...defBook,
+      ...(found || {}),
+      coverImage: found?.coverImage || defBook.coverImage || ''
+    };
+  });
+
+  // Mantém também eventuais livros extras cadastrados
+  existingBooks.forEach((userBook) => {
+    if (!DEFAULT_DIGITAL_BOOKS.some((d) => d.id === userBook.id || d.title === userBook.title)) {
+      mergedBooks.push({
+        ...userBook,
+        coverImage: userBook.coverImage || ''
+      });
     }
   });
 
-  next.digitalBooks = currentBooks.map((book) => {
-    const def = DEFAULT_DIGITAL_BOOKS.find((b) => b.id === book.id || b.title === book.title);
-    return {
-      ...(def || {}),
-      ...book,
-      coverImage: book.coverImage || def?.coverImage || ''
-    };
-  }).sort((a, b) => (a.publicationOrder || 0) - (b.publicationOrder || 0));
+  next.digitalBooks = mergedBooks.sort((a, b) => (a.publicationOrder || 0) - (b.publicationOrder || 0));
+
+  // 8. Contato: Garante que os campos dos boxes Telefones, E-mails e Rodapé Institucional estejam sempre populados
+  if (next.contact) {
+    if (!next.contact.phonesBoxTitle) next.contact.phonesBoxTitle = DEFAULT_CONFIG.contact.phonesBoxTitle;
+    if (!next.contact.phonesBoxSubtitle) next.contact.phonesBoxSubtitle = DEFAULT_CONFIG.contact.phonesBoxSubtitle;
+    if (!next.contact.phonesCtaText) next.contact.phonesCtaText = DEFAULT_CONFIG.contact.phonesCtaText;
+    if (!next.contact.emailsBoxTitle) next.contact.emailsBoxTitle = DEFAULT_CONFIG.contact.emailsBoxTitle;
+    if (!next.contact.emailsBoxFooter) next.contact.emailsBoxFooter = DEFAULT_CONFIG.contact.emailsBoxFooter;
+    if (!next.contact.footerParagraph1) next.contact.footerParagraph1 = DEFAULT_CONFIG.contact.footerParagraph1;
+    if (!next.contact.footerParagraph2) next.contact.footerParagraph2 = DEFAULT_CONFIG.contact.footerParagraph2;
+  }
 
   return next;
 };

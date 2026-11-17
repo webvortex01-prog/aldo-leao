@@ -206,6 +206,13 @@ export interface SiteConfig {
     formPrompt?: string;
     formNamePlaceholder?: string;
     formConsultationLabel?: string;
+    phonesBoxTitle?: string;
+    phonesBoxSubtitle?: string;
+    phonesCtaText?: string;
+    emailsBoxTitle?: string;
+    emailsBoxFooter?: string;
+    footerParagraph1?: string;
+    footerParagraph2?: string;
   };
   founder: {
     sectionKicker?: string;

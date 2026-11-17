@@ -107,7 +107,7 @@ export const PublicationsSection: React.FC = () => {
             <span className="gold-text-gradient">{siteConfig.publicationsSection?.titleGold || 'JURÍDICAS'}</span>
           </h2>
 
-          {(siteConfig.publicationsSection?.paragraph1 || siteConfig.publicationsSection?.paragraph2 || siteConfig.publicationsSection?.paragraph3 || siteConfig.publicationsSection?.subtitle) && (
+          {(siteConfig.publicationsSection?.paragraph1 || siteConfig.publicationsSection?.paragraph2 || siteConfig.publicationsSection?.paragraph3) && (
             <div className="space-y-3 text-sm sm:text-base text-slate-300 leading-relaxed font-sans-body font-light">
               {siteConfig.publicationsSection?.paragraph1 && (
                 <RichTextRenderer content={siteConfig.publicationsSection.paragraph1} />
@@ -117,11 +117,6 @@ export const PublicationsSection: React.FC = () => {
               )}
               {siteConfig.publicationsSection?.paragraph3 && (
                 <RichTextRenderer content={siteConfig.publicationsSection.paragraph3} />
-              )}
-              {siteConfig.publicationsSection?.subtitle && (
-                <div className="pt-2">
-                  <RichTextRenderer content={siteConfig.publicationsSection.subtitle} />
-                </div>
               )}
             </div>
           )}

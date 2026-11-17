@@ -13,6 +13,8 @@ import {
   Sparkles, 
   BookOpen, 
   Scale, 
+  Phone,
+  Mail,
   Compass, 
   GraduationCap, 
   Layers, 
@@ -7451,91 +7453,201 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Telefone Celular / WhatsApp 1
-              </label>
-              <input
-                type="text"
-                value={formData.contact.phonePrimary}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, phonePrimary: e.target.value.replace(/\./g, '') }
-                })}
-                onBlur={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, phonePrimary: cleanAndFormatPhone(e.target.value, '(51) 99808-8998') }
-                })}
-                placeholder="(51) 99808-8998"
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-              <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99808-8998</p>
-            </div>
+          {/* Box 3: TELEFONES (Totalmente Editável) */}
+          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+            <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+              <Phone className="w-4 h-4 text-[#F6E27A]" />
+              <span>Box 3 · Telefones de Atendimento</span>
+            </h4>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Telefone Celular / WhatsApp 2
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                Título do Box de Telefones
               </label>
               <input
                 type="text"
-                value={formData.contact.phoneSecondary}
+                value={formData.contact.phonesBoxTitle || 'TELEFONES'}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contact: { ...formData.contact, phoneSecondary: e.target.value.replace(/\./g, '') }
+                  contact: { ...formData.contact, phonesBoxTitle: e.target.value }
                 })}
-                onBlur={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, phoneSecondary: cleanAndFormatPhone(e.target.value, '(51) 99807-8998') }
-                })}
-                placeholder="(51) 99807-8998"
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
               />
-              <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99807-8998</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Telefone Celular / WhatsApp 1
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phonePrimary}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonePrimary: e.target.value.replace(/\./g, '') }
+                  })}
+                  onBlur={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonePrimary: cleanAndFormatPhone(e.target.value, '(51) 99808-8998') }
+                  })}
+                  placeholder="(51) 99808-8998"
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+                <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99808-8998</p>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Telefone Celular / WhatsApp 2
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phoneSecondary}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phoneSecondary: e.target.value.replace(/\./g, '') }
+                  })}
+                  onBlur={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phoneSecondary: cleanAndFormatPhone(e.target.value, '(51) 99807-8998') }
+                  })}
+                  placeholder="(51) 99807-8998"
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+                <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99807-8998</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto Instrução / Subtítulo Abaixo dos Telefones
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phonesBoxSubtitle || 'Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonesBoxSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto do Botão WhatsApp
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phonesCtaText || 'AGENDAR NO WHATSAPP'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonesCtaText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* Box 4: E-MAILS INSTITUCIONAIS (Totalmente Editável) */}
+          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+            <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+              <Mail className="w-4 h-4 text-[#F6E27A]" />
+              <span>Box 4 · E-mails Institucionais</span>
+            </h4>
+
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                E-mail Principal do Dr. Aldo
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                Título do Box de E-mails
               </label>
               <input
-                type="email"
-                value={formData.contact.emailPrimary}
+                type="text"
+                value={formData.contact.emailsBoxTitle || 'E-MAILS'}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contact: { ...formData.contact, emailPrimary: e.target.value }
+                  contact: { ...formData.contact, emailsBoxTitle: e.target.value }
                 })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
               />
             </div>
 
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                E-mail Holding Familiar
-              </label>
-              <input
-                type="email"
-                value={formData.contact.emailHolding || 'aldoleao.planejamento@gmail.com'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, emailHolding: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  E-mail Principal / Geral (Dr. Aldo Leão)
+                </label>
+                <input
+                  type="email"
+                  value={formData.contact.emailPrimary}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, emailPrimary: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  E-mail Academia Leão Ferreira
+                </label>
+                <input
+                  type="email"
+                  value={formData.contact.emailAcademia || 'academialeaoferreira@gmail.com'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, emailAcademia: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  E-mail Holding Familiar 1
+                </label>
+                <input
+                  type="email"
+                  value={formData.contact.emailHolding1 || 'aldoleao.planejamento@gmail.com'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, emailHolding1: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  E-mail Holding Familiar 2
+                </label>
+                <input
+                  type="email"
+                  value={formData.contact.emailHolding2 || 'holdingfamiliarbr@gmail.com'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, emailHolding2: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                E-mail Academia Leão Ferreira
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                Texto do Rodapé do Box de E-mails
               </label>
               <input
-                type="email"
-                value={formData.contact.emailAcademia || 'academialeaoferreira@gmail.com'}
+                type="text"
+                value={formData.contact.emailsBoxFooter || 'Entre em contato enviando um e-mail, para o setor que deseja atendimento'}
                 onChange={(e) => setFormData({
                   ...formData,
-                  contact: { ...formData.contact, emailAcademia: e.target.value }
+                  contact: { ...formData.contact, emailsBoxFooter: e.target.value }
                 })}
                 className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
               />
@@ -7639,6 +7751,41 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 />
               </div>
             </div>
+          </div>
+
+          {/* Textos Institucionais do Rodapé da Página Contato (Itens Solicitados pelo Dr. Aldo) */}
+          <div className="pt-6 border-t border-slate-800 space-y-4">
+            <div className="border-b border-slate-800 pb-2">
+              <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+                <Scale className="w-4 h-4 text-[#F6E27A]" />
+                <span>Textos Institucionais do Rodapé da Página Contato (Abaixo da Logomarca)</span>
+              </h4>
+              <p className="text-[11px] text-slate-400 mt-0.5">
+                Edite os dois parágrafos sobre a história centenária e a 3ª geração que aparecem no rodapé da página de contato.
+              </p>
+            </div>
+
+            <RichTextarea
+              label="Rodapé Contato · Parágrafo 1 (História e Tradição Desde 1908)"
+              rows={3}
+              value={formData.contact.footerParagraph1 || 'A história da <strong class="text-[#F6E27A] font-bold">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                contact: { ...formData.contact, footerParagraph1: val }
+              })}
+              hint="Texto com suporte total a formatação dourada e negrito"
+            />
+
+            <RichTextarea
+              label="Rodapé Contato · Parágrafo 2 (Terceira Geração Desde 1986)"
+              rows={3}
+              value={formData.contact.footerParagraph2 || 'Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                contact: { ...formData.contact, footerParagraph2: val }
+              })}
+              hint="Texto sobre a liderança da 3ª geração pelo Dr. Aldo Leão"
+            />
           </div>
         </div>
       )}

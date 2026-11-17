@@ -62,32 +62,38 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
     });
   }, [books, searchTerm]);
 
-  // Paginação com exatamente 3 livros por página conforme solicitação
+  // Navegação entre páginas (1, 2, 3) ou exibir todas as 8 obras ('all')
+  const [selectedPageFilter, setSelectedPageFilter] = useState<'all' | number>('all');
   const itemsPerPage = 3;
   const totalPages = Math.ceil(filteredBooks.length / itemsPerPage) || 1;
 
-  // Ajusta a página atual se a busca reduzir o total de páginas
-  const safeCurrentPage = Math.min(currentPage, totalPages);
-  const currentBooks = filteredBooks.slice(
-    (safeCurrentPage - 1) * itemsPerPage,
-    safeCurrentPage * itemsPerPage
-  );
+  const currentBooks = useMemo(() => {
+    if (selectedPageFilter === 'all') {
+      return filteredBooks;
+    }
+    const page = Math.min(Math.max(1, typeof selectedPageFilter === 'number' ? selectedPageFilter : 1), totalPages);
+    return filteredBooks.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+  }, [filteredBooks, selectedPageFilter, totalPages]);
 
   const handleNextPage = () => {
-    if (safeCurrentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
+    if (selectedPageFilter === 'all') {
+      setSelectedPageFilter(1);
     } else {
-      setCurrentPage(1); // Volta para a primeira página
+      const nextPage = (selectedPageFilter as number) + 1;
+      if (nextPage <= totalPages) {
+        setSelectedPageFilter(nextPage);
+      } else {
+        setSelectedPageFilter('all');
+      }
     }
-    // Scroll suave até o topo da seção
     const el = document.getElementById('livros');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
-  const handleSelectPage = (page: number) => {
-    setCurrentPage(page);
+  const handleSelectPage = (page: 'all' | number) => {
+    setSelectedPageFilter(page);
     const el = document.getElementById('livros');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -235,25 +241,40 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
           )}
         </div>
 
-        {/* Barra Superior de Paginação e Navegação Rápida entre Páginas 1, 2 e 3 */}
-        {filteredBooks.length > 0 && totalPages > 1 && (
+        {/* Barra Superior de Navegação Rápida entre Todas as Obras e Páginas 1, 2 e 3 */}
+        {filteredBooks.length > 0 && (
           <div className="p-4 sm:p-5 rounded-2xl bg-[#071122] border border-[#D4AF37]/35 shadow-xl mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <span className="text-xs uppercase tracking-wider text-[#E5C158] font-bold">
                 Acervo Oficial ({filteredBooks.length} Livros):
               </span>
               <span className="text-xs text-slate-300">
-                Página <strong className="text-white font-bold">{safeCurrentPage}</strong> de <strong className="text-white font-bold">{totalPages}</strong> (3 por página)
+                {selectedPageFilter === 'all' ? (
+                  <span>Exibindo <strong>todas as {filteredBooks.length} obras</strong> (Páginas 1, 2 e 3)</span>
+                ) : (
+                  <span>Exibindo <strong>Página {selectedPageFilter}</strong> de {totalPages}</span>
+                )}
               </span>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap justify-center">
-              <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mr-1 hidden sm:inline">
-                Ir para Página:
-              </span>
+              <button
+                type="button"
+                onClick={() => handleSelectPage('all')}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                  selectedPageFilter === 'all'
+                    ? 'bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black shadow-lg scale-105'
+                    : 'bg-[#0A1730] border border-[#D4AF37]/30 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37]'
+                }`}
+              >
+                <span>Todas as {filteredBooks.length} Obras</span>
+                {selectedPageFilter === 'all' && <span className="w-1.5 h-1.5 rounded-full bg-slate-950" />}
+              </button>
+
               {Array.from({ length: totalPages }).map((_, idx) => {
                 const pageNum = idx + 1;
-                const isActive = pageNum === safeCurrentPage;
+                const isActive = selectedPageFilter === pageNum;
+                const pageBooksCount = filteredBooks.slice((pageNum - 1) * itemsPerPage, pageNum * itemsPerPage).length;
                 return (
                   <button
                     key={`top-page-pill-${pageNum}`}
@@ -265,21 +286,11 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                         : 'bg-[#0A1730] border border-[#D4AF37]/30 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37]'
                     }`}
                   >
-                    <span>Página {pageNum}</span>
+                    <span>Página {pageNum} ({pageBooksCount} {pageBooksCount === 1 ? 'Livro' : 'Livros'})</span>
                     {isActive && <span className="w-1.5 h-1.5 rounded-full bg-slate-950" />}
                   </button>
                 );
               })}
-              {safeCurrentPage < totalPages && (
-                <button
-                  type="button"
-                  onClick={handleNextPage}
-                  className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#0E1F3D] border border-[#D4AF37]/60 text-[#F6E27A] hover:bg-[#142A52] transition-all cursor-pointer flex items-center gap-1 ml-1"
-                >
-                  <span>Próxima Página</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
-              )}
             </div>
           </div>
         )}
@@ -300,7 +311,7 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
           </div>
         ) : (
           <div 
-            key={`page-${safeCurrentPage}`}
+            key={`page-${selectedPageFilter}`}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 animate-fade-in"
           >
             {currentBooks.map((book, index) => {
@@ -332,10 +343,16 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
 
                     {/* Dados do Livro: Título, Autor, Ano da Edição e Área Jurídica */}
                     <div className="p-6">
-                      {/* Área Jurídica */}
-                      <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider block mb-2">
-                        {book.area}
-                      </span>
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        {/* Área Jurídica */}
+                        <span className="text-[11px] font-bold text-[#E5C158] uppercase tracking-wider block">
+                          {book.area}
+                        </span>
+                        {/* Indicador de Página do Livro */}
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#0A1730] border border-[#D4AF37]/40 text-[#F6E27A] shrink-0">
+                          Página {Math.floor(((book.publicationOrder || 1) - 1) / 3) + 1}
+                        </span>
+                      </div>
 
                       {/* Título do Livro Digital */}
                       <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white leading-snug mb-3 line-clamp-2 min-h-[3.25rem]">
@@ -381,58 +398,57 @@ export const DigitalBooksSection: React.FC<DigitalBooksSectionProps> = () => {
                 onClick={handleNextPage}
                 className="btn-gold-luxury w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg text-center cursor-pointer flex items-center justify-center gap-2 transition-all hover:scale-102 active:scale-98"
               >
-                <span>{safeCurrentPage < totalPages ? 'MAIS LIVROS' : 'VOLTAR AO INÍCIO'}</span>
+                <span>
+                  {selectedPageFilter === 'all'
+                    ? 'VER POR PÁGINAS'
+                    : (selectedPageFilter < totalPages ? 'PRÓXIMA PÁGINA' : 'VER TODAS AS OBRAS')}
+                </span>
                 <ChevronRight className="w-4 h-4 text-black" />
               </button>
             </div>
 
             {/* Paginação localizada à direita para mostrar que tem outras páginas */}
-            <div className="flex items-center gap-2 self-center sm:self-auto">
+            <div className="flex items-center gap-2 self-center sm:self-auto flex-wrap justify-center">
               <span className="text-xs text-slate-400 mr-2 font-medium">
-                Página <strong className="text-white">{safeCurrentPage}</strong> de <strong className="text-white">{totalPages}</strong>
+                {selectedPageFilter === 'all' ? (
+                  <span>Todas as <strong className="text-white">{filteredBooks.length}</strong> Obras</span>
+                ) : (
+                  <span>Página <strong className="text-white">{selectedPageFilter}</strong> de <strong className="text-white">{totalPages}</strong></span>
+                )}
               </span>
 
-              {/* Botão Anterior */}
+              {/* Botão Todas */}
               <button
                 type="button"
-                disabled={safeCurrentPage === 1}
-                onClick={() => handleSelectPage(safeCurrentPage - 1)}
-                className="p-2 rounded-lg bg-[#0A1730] border border-[#D4AF37]/30 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer"
-                aria-label="Página anterior"
+                onClick={() => handleSelectPage('all')}
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  selectedPageFilter === 'all'
+                    ? 'bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 font-black shadow-md scale-105'
+                    : 'bg-[#0A1730] border border-[#D4AF37]/25 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37]'
+                }`}
               >
-                <ChevronLeft className="w-4 h-4" />
+                Todas
               </button>
 
               {/* Pílulas de Páginas 1, 2, 3... */}
               {Array.from({ length: totalPages }).map((_, idx) => {
                 const pageNum = idx + 1;
-                const isActive = pageNum === safeCurrentPage;
+                const isActive = selectedPageFilter === pageNum;
                 return (
                   <button
                     key={`page-pill-${pageNum}`}
                     type="button"
                     onClick={() => handleSelectPage(pageNum)}
-                    className={`w-8 h-8 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                       isActive
                         ? 'bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-slate-950 shadow-md font-black scale-105'
                         : 'bg-[#0A1730] border border-[#D4AF37]/25 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37]'
                     }`}
                   >
-                    {pageNum}
+                    Pág {pageNum}
                   </button>
                 );
               })}
-
-              {/* Botão Próximo */}
-              <button
-                type="button"
-                disabled={safeCurrentPage === totalPages}
-                onClick={() => handleSelectPage(safeCurrentPage + 1)}
-                className="p-2 rounded-lg bg-[#0A1730] border border-[#D4AF37]/30 text-slate-300 hover:text-[#F6E27A] hover:border-[#D4AF37] disabled:opacity-40 disabled:pointer-events-none transition-colors cursor-pointer"
-                aria-label="Próxima página"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
         )}

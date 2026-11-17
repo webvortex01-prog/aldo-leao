@@ -3,6 +3,7 @@ import { Scale, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare } from 'lu
 import { Logo } from './Logo';
 import { useSite } from '../context/SiteContext';
 import { cleanAndFormatPhone, getCleanWhatsAppDigits } from '../utils/phoneUtils';
+import { RichTextRenderer } from '../utils/richTextUtils';
 
 interface LocationSectionProps {
   onOpenPrivacyPolicy?: () => void;
@@ -130,17 +131,17 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 <Phone className="w-6 h-6 text-[#E5C158]" />
               </div>
               <h3 className="font-cinzel text-base font-bold text-white mb-2 uppercase animate-title-reveal">
-                TELEFONES
+                {c?.phonesBoxTitle || 'TELEFONES'}
               </h3>
               <div className="space-y-1.5 text-xs text-slate-300 font-sans-body">
                 <p className="font-semibold text-white text-sm">
-                  (51) 99808-8998
+                  {cleanAndFormatPhone(c?.phonePrimary || '51998088998')}
                 </p>
                 <p className="font-semibold text-slate-300 text-sm">
-                  (51) 99807-8998
+                  {cleanAndFormatPhone(c?.phoneSecondary || '51998078998')}
                 </p>
                 <p className="text-[11px] text-slate-300 pt-1">
-                  Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:
+                  {c?.phonesBoxSubtitle || 'Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:'}
                 </p>
               </div>
             </div>
@@ -150,7 +151,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 className="w-full py-2.5 px-3 rounded-lg bg-[#25D366] text-black text-xs font-bold uppercase tracking-wider hover:bg-[#20ba59] transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>AGENDAR NO WHATSAPP</span>
+                <span>{c?.phonesCtaText || 'AGENDAR NO WHATSAPP'}</span>
               </button>
             </div>
           </div>
@@ -162,7 +163,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 <Mail className="w-6 h-6 text-[#E5C158]" />
               </div>
               <h3 className="font-cinzel text-base font-bold text-white mb-3 uppercase animate-title-reveal">
-                E-MAILS
+                {c?.emailsBoxTitle || 'E-MAILS'}
               </h3>
               <div className="space-y-3 text-xs text-slate-300 font-sans-body">
                 <div>
@@ -189,7 +190,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
               </div>
             </div>
             <div className="pt-4 mt-4 border-t border-[#D4AF37]/20 text-[11px] text-slate-300 font-medium">
-              Entre em contato enviando um e-mail, para o setor que deseja atendimento
+              {c?.emailsBoxFooter || 'Entre em contato enviando um e-mail, para o setor que deseja atendimento'}
             </div>
           </div>
         </div>
@@ -377,12 +378,22 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
           <div className="mb-4">
             <Logo size="md" />
           </div>
-          <p className="text-xs sm:text-sm text-slate-200 font-sans-body leading-relaxed font-light mb-3 max-w-2xl">
-            A história da <strong className="text-[#F6E27A] font-bold">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.
-          </p>
-          <p className="text-xs sm:text-sm text-[#E5C158] font-sans-body leading-relaxed font-semibold max-w-2xl">
-            Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.
-          </p>
+          <div className="text-xs sm:text-sm text-slate-200 font-sans-body leading-relaxed font-light mb-3 max-w-2xl">
+            <RichTextRenderer
+              content={
+                c?.footerParagraph1 ||
+                'A história da <strong class="text-[#F6E27A] font-bold">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.'
+              }
+            />
+          </div>
+          <div className="text-xs sm:text-sm text-[#E5C158] font-sans-body leading-relaxed font-semibold max-w-2xl">
+            <RichTextRenderer
+              content={
+                c?.footerParagraph2 ||
+                'Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.'
+              }
+            />
+          </div>
 
           {/* Links de Política de Privacidade e Termos de Uso e Cookies (Item 28/10 Dr. Aldo) */}
           <div className="flex flex-wrap items-center justify-center gap-3 pt-4 mt-2 border-t border-[#D4AF37]/20 text-xs font-semibold">
