@@ -736,11 +736,15 @@ const DEFAULT_CONFIG: SiteConfig = {
       'Referência nacional em Planejamento Patrimonial via Holding Familiar',
       'Atendimento e processos 100% digitais no Brasil'
     ],
+    curriculumModalTitle: 'Dr. ALDO LEÃO',
+    curriculumModalSubtitle: 'ADVOCACIA ESTRATÉGICA DESDE 1986',
+    curriculumTrajectoryTitle: 'TRAJETÓRIA PROFISSIONAL',
     curriculumTrajectoryP1: 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.',
     curriculumTrajectoryP2: 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.',
     curriculumTrajectoryP3: 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.',
     curriculumTrajectoryP4: 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.',
     curriculumTrajectoryP5: 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.',
+    curriculumLeadershipTitle: 'ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA',
     curriculumLeadershipItems: [
       '40 + Anos de Advocacia Estratégica (1986)',
       'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
@@ -751,6 +755,7 @@ const DEFAULT_CONFIG: SiteConfig = {
       'Direito Civil',
       'Relações de Consumo'
     ],
+    curriculumCargosTitle: 'TRAJETÓRIA PROFISSIONAL',
     curriculumTrajectoryItems: [
       'Advogado Estratégico',
       'Gestor Jurídico Patrimonial',
@@ -767,6 +772,10 @@ const DEFAULT_CONFIG: SiteConfig = {
       'Conselheiro do CONDECON POA (Defesa do Consumidor)',
       'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
     ],
+    curriculumLiteratureTitle: 'LITERATURA JURÍDICA & PALESTRAS',
+    curriculumArticlesHeader: 'Autor de mais de uma centena de Artigos Jurídicos Publicados',
+    curriculumBooksHeader: 'Autor de Livros Digitais Publicados:',
+    curriculumLiteratureTags: 'Palestras · Cursos · Mentorias · Workshops',
     curriculumLiteratureItems: [
       'Autor de mais de uma centena de Artigos Jurídicos Publicados',
       'Autor de Livros Digitais Publicados:'
@@ -781,6 +790,7 @@ const DEFAULT_CONFIG: SiteConfig = {
       'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
       'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
     ],
+    curriculumDocenciaTitle: 'DOCÊNCIA',
     curriculumDocenciaItems: [
       'Prof. da Faculdade de Direito da UNISINOS',
       'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
@@ -789,6 +799,7 @@ const DEFAULT_CONFIG: SiteConfig = {
       'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
       'Prof. da Academia Leão Ferreira'
     ],
+    curriculumBtnBooksText: 'Livros Digitais Publicados',
     differences: [
       'Terceira geração do legado jurídico familiar iniciado em 1908 pelo Prof. Dr. Arnaldo da Silva Ferreira.',
       'Mais de quatro décadas de advocacia estratégica ininterrupta do Dr. Aldo Leão (desde 1986).',
@@ -1108,6 +1119,26 @@ const normalizeFounderConfig = (rawFounder: any) => {
   if (!f.curriculumClosingP2) {
     f.curriculumClosingP2 = DEFAULT_CONFIG.founder.curriculumClosingP2;
   }
+  if (!f.curriculumModalTitle) f.curriculumModalTitle = DEFAULT_CONFIG.founder.curriculumModalTitle;
+  if (!f.curriculumModalSubtitle) f.curriculumModalSubtitle = DEFAULT_CONFIG.founder.curriculumModalSubtitle;
+  if (!f.curriculumTrajectoryTitle) f.curriculumTrajectoryTitle = DEFAULT_CONFIG.founder.curriculumTrajectoryTitle;
+  if (!f.curriculumTrajectoryP1) f.curriculumTrajectoryP1 = DEFAULT_CONFIG.founder.curriculumTrajectoryP1;
+  if (!f.curriculumTrajectoryP2) f.curriculumTrajectoryP2 = DEFAULT_CONFIG.founder.curriculumTrajectoryP2;
+  if (!f.curriculumTrajectoryP3) f.curriculumTrajectoryP3 = DEFAULT_CONFIG.founder.curriculumTrajectoryP3;
+  if (!f.curriculumTrajectoryP4) f.curriculumTrajectoryP4 = DEFAULT_CONFIG.founder.curriculumTrajectoryP4;
+  if (!f.curriculumTrajectoryP5) f.curriculumTrajectoryP5 = DEFAULT_CONFIG.founder.curriculumTrajectoryP5;
+  if (!f.curriculumLeadershipTitle) f.curriculumLeadershipTitle = DEFAULT_CONFIG.founder.curriculumLeadershipTitle;
+  if (!f.curriculumLeadershipItems || f.curriculumLeadershipItems.length === 0) f.curriculumLeadershipItems = DEFAULT_CONFIG.founder.curriculumLeadershipItems;
+  if (!f.curriculumCargosTitle) f.curriculumCargosTitle = DEFAULT_CONFIG.founder.curriculumCargosTitle;
+  if (!f.curriculumTrajectoryItems || f.curriculumTrajectoryItems.length === 0) f.curriculumTrajectoryItems = DEFAULT_CONFIG.founder.curriculumTrajectoryItems;
+  if (!f.curriculumLiteratureTitle) f.curriculumLiteratureTitle = DEFAULT_CONFIG.founder.curriculumLiteratureTitle;
+  if (!f.curriculumArticlesHeader) f.curriculumArticlesHeader = DEFAULT_CONFIG.founder.curriculumArticlesHeader;
+  if (!f.curriculumBooksHeader) f.curriculumBooksHeader = DEFAULT_CONFIG.founder.curriculumBooksHeader;
+  if (!f.curriculumLiteratureTags) f.curriculumLiteratureTags = DEFAULT_CONFIG.founder.curriculumLiteratureTags;
+  if (!f.curriculumBooksList || f.curriculumBooksList.length === 0) f.curriculumBooksList = DEFAULT_CONFIG.founder.curriculumBooksList;
+  if (!f.curriculumDocenciaTitle) f.curriculumDocenciaTitle = DEFAULT_CONFIG.founder.curriculumDocenciaTitle;
+  if (!f.curriculumDocenciaItems || f.curriculumDocenciaItems.length === 0) f.curriculumDocenciaItems = DEFAULT_CONFIG.founder.curriculumDocenciaItems;
+  if (!f.curriculumBtnBooksText) f.curriculumBtnBooksText = DEFAULT_CONFIG.founder.curriculumBtnBooksText;
   // Atualiza textos legados da biografia para o novo texto oficial do Dr. Aldo Leão
   if (
     !f.bioParagraph1 ||

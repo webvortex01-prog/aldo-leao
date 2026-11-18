@@ -3481,27 +3481,75 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
-            {/* Currículo Oficial Completo do Dr. Aldo Leão (Modal Saiba Mais) */}
-            <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/45 space-y-4">
+            {/* Currículo Oficial Completo do Dr. Aldo Leão (Modal Saiba Mais - TRAJETÓRIA PROFISSIONAL) */}
+            <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border-2 border-[#D4AF37]/50 space-y-5">
               <div className="border-b border-[#D4AF37]/25 pb-2">
                 <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
                   <GraduationCap className="w-4 h-4 text-[#D4AF37]" />
-                  <span>Currículo Oficial do Dr. Aldo Leão (Modal 'Saiba Mais')</span>
+                  <span>Currículo Oficial do Dr. Aldo Leão — Modal 'Saiba Mais' (Trajetória Profissional)</span>
                 </h4>
                 <p className="text-[11px] text-slate-400">
-                  Edite os 5 parágrafos da Trajetória Profissional, listas de cargos, obras e docência superior.
+                  Edite todos os títulos, cabeçalho, os 5 parágrafos da Trajetória Profissional, listas de cargos, obras digitais e docência superior.
                 </p>
+              </div>
+
+              {/* Cabeçalho do Modal Saiba Mais (Título em Branco e Subtítulo Dourado) */}
+              <div className="p-3.5 rounded-lg bg-[#071122] border border-[#D4AF37]/30 space-y-3">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase block tracking-wider">
+                  Cabeçalho do Modal 'Saiba Mais'
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                      Título do Modal (Dr. ALDO LEÃO)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumModalTitle || 'Dr. ALDO LEÃO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumModalTitle: e.target.value }
+                      })}
+                      className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                      Subtítulo Dourado (ADVOCACIA ESTRATÉGICA DESDE 1986)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumModalSubtitle || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumModalSubtitle: e.target.value }
+                      })}
+                      className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-[#F6E27A] font-bold"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* 5 Parágrafos da Trajetória */}
               <div className="space-y-3">
-                <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-                  Trajetória Profissional — 5 Parágrafos Oficiais
-                </span>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-bold mb-1">
+                    Título do Box 1 (Trajetória Profissional)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.founder.curriculumTrajectoryTitle || 'TRAJETÓRIA PROFISSIONAL'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, curriculumTrajectoryTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
                 <RichTextarea
                   label="Parágrafo 1 (Convergência Centenária)"
                   rows={2}
-                  value={formData.founder.curriculumTrajectoryP1 || ''}
+                  value={formData.founder.curriculumTrajectoryP1 ?? 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA representa a convergência entre a tradição jurídica centenária de três gerações e a inovação da Advocacia Estratégica.'}
                   onChange={(val) => setFormData({
                     ...formData,
                     founder: { ...formData.founder, curriculumTrajectoryP1: val }
@@ -3510,7 +3558,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <RichTextarea
                   label="Parágrafo 2 (Continuidade Desde 1986 e Avô Paterno)"
                   rows={2}
-                  value={formData.founder.curriculumTrajectoryP2 || ''}
+                  value={formData.founder.curriculumTrajectoryP2 ?? 'Desde 1986, o Dr. Aldo Leão dá continuidade a um legado jurídico familiar iniciado em 1908 por seu avô paterno, o Prof. Dr. Arnaldo da Silva Ferreira, construindo uma trajetória de mais de quatro décadas de reconhecida relevância jurídica nacional.'}
                   onChange={(val) => setFormData({
                     ...formData,
                     founder: { ...formData.founder, curriculumTrajectoryP2: val }
@@ -3519,7 +3567,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <RichTextarea
                   label="Parágrafo 3 (Rigor Técnico e Inteligência Jurídica)"
                   rows={2}
-                  value={formData.founder.curriculumTrajectoryP3 || ''}
+                  value={formData.founder.curriculumTrajectoryP3 ?? 'Com rigor técnico, excelência e inteligência jurídica, o escritório atua na estruturação de soluções jurídicas estratégicas e personalizadas, especialmente voltadas à proteção e gestão do patrimônio e da empresa, com visão de longo prazo e foco na perpetuação de legados.'}
                   onChange={(val) => setFormData({
                     ...formData,
                     founder: { ...formData.founder, curriculumTrajectoryP3: val }
@@ -3528,7 +3576,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <RichTextarea
                   label="Parágrafo 4 (Artigos, Livros, Mentorias e Liderança)"
                   rows={2}
-                  value={formData.founder.curriculumTrajectoryP4 || ''}
+                  value={formData.founder.curriculumTrajectoryP4 ?? 'A trajetória do Dr. Aldo Leão reúne ainda extensa produção jurídica, com mais de uma centena de artigos publicados, além de livros digitais publicados, docência superior e destacada atuação em palestras, congressos, seminários, mentorias e workshops, além do exercício de funções de relevância jurídica, acadêmica e institucional.'}
                   onChange={(val) => setFormData({
                     ...formData,
                     founder: { ...formData.founder, curriculumTrajectoryP4: val }
@@ -3537,7 +3585,7 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 <RichTextarea
                   label="Parágrafo 5 (Frase Dourada de Encerramento)"
                   rows={2}
-                  value={formData.founder.curriculumTrajectoryP5 || ''}
+                  value={formData.founder.curriculumTrajectoryP5 ?? 'Tradição, inteligência jurídica e estratégia para proteger e perpetuar o seu patrimônio e empresa para as futuras gerações.'}
                   onChange={(val) => setFormData({
                     ...formData,
                     founder: { ...formData.founder, curriculumTrajectoryP5: val }
@@ -3547,36 +3595,77 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
               {/* Especialização e Excelência Jurídica */}
               <div className="pt-2 border-t border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-[#E5C158] uppercase">
-                    Especialização e Excelência Jurídica
-                  </span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex-1 mr-2">
+                    <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-bold mb-1">
+                      Título do Box 2 (Especialização e Excelência Jurídica)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumLeadershipTitle || 'ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumLeadershipTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
                   <button
                     type="button"
                     onClick={() => {
-                      const current = formData.founder.curriculumLeadershipItems || [];
+                      const current = formData.founder.curriculumLeadershipItems || [
+                        '40 + Anos de Advocacia Estratégica (1986)',
+                        'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+                        'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+                        'Proteção Jurídica Patrimonial',
+                        'Direito Imobiliário & Ativos',
+                        'Direito Empresarial & Sucessão Corporativa',
+                        'Direito Civil',
+                        'Relações de Consumo'
+                      ];
                       setFormData({
                         ...formData,
                         founder: { ...formData.founder, curriculumLeadershipItems: [...current, 'Nova especialização'] }
                       });
                     }}
-                    className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                    className="self-end px-2.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer hover:bg-[#D4AF37]/30"
                   >
-                    <Plus className="w-2.5 h-2.5" /> Adicionar
+                    <Plus className="w-3 h-3" /> Adicionar Item
                   </button>
                 </div>
                 <div className="space-y-1.5">
-                  {(formData.founder.curriculumLeadershipItems || []).map((item, idx) => (
+                  {(formData.founder.curriculumLeadershipItems && formData.founder.curriculumLeadershipItems.length > 0 ? formData.founder.curriculumLeadershipItems : [
+                    '40 + Anos de Advocacia Estratégica (1986)',
+                    'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+                    'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+                    'Proteção Jurídica Patrimonial',
+                    'Direito Imobiliário & Ativos',
+                    'Direito Empresarial & Sucessão Corporativa',
+                    'Direito Civil',
+                    'Relações de Consumo'
+                  ]).map((item, idx) => (
                     <div key={idx} className="flex items-center gap-2">
+                      <span className="text-[#D4AF37] font-bold text-xs">◙</span>
                       <input
                         type="text"
                         value={item}
                         onChange={(e) => {
-                          const current = [...(formData.founder.curriculumLeadershipItems || [])];
-                          current[idx] = e.target.value;
+                          const base = formData.founder.curriculumLeadershipItems && formData.founder.curriculumLeadershipItems.length > 0
+                            ? [...formData.founder.curriculumLeadershipItems]
+                            : [
+                                '40 + Anos de Advocacia Estratégica (1986)',
+                                'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+                                'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+                                'Proteção Jurídica Patrimonial',
+                                'Direito Imobiliário & Ativos',
+                                'Direito Empresarial & Sucessão Corporativa',
+                                'Direito Civil',
+                                'Relações de Consumo'
+                              ];
+                          base[idx] = e.target.value;
                           setFormData({
                             ...formData,
-                            founder: { ...formData.founder, curriculumLeadershipItems: current }
+                            founder: { ...formData.founder, curriculumLeadershipItems: base }
                           });
                         }}
                         className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
@@ -3584,13 +3673,26 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                       <button
                         type="button"
                         onClick={() => {
-                          const current = (formData.founder.curriculumLeadershipItems || []).filter((_, i) => i !== idx);
+                          const base = formData.founder.curriculumLeadershipItems && formData.founder.curriculumLeadershipItems.length > 0
+                            ? formData.founder.curriculumLeadershipItems
+                            : [
+                                '40 + Anos de Advocacia Estratégica (1986)',
+                                'Escritório de Advocacia mais antigo do Brasil (3ª Geração)',
+                                'Referência em Planejamento Patrimonial e Empresarial 4.0 (Holding Familiar)',
+                                'Proteção Jurídica Patrimonial',
+                                'Direito Imobiliário & Ativos',
+                                'Direito Empresarial & Sucessão Corporativa',
+                                'Direito Civil',
+                                'Relações de Consumo'
+                              ];
+                          const updated = base.filter((_, i) => i !== idx);
                           setFormData({
                             ...formData,
-                            founder: { ...formData.founder, curriculumLeadershipItems: current }
+                            founder: { ...formData.founder, curriculumLeadershipItems: updated }
                           });
                         }}
                         className="p-1.5 text-red-400 hover:text-red-300"
+                        title="Excluir item"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -3601,36 +3703,95 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
               {/* Trajetória Profissional - Cargos e Funções */}
               <div className="pt-2 border-t border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-[#E5C158] uppercase">
-                    Trajetória Profissional — Cargos e Funções de Destaque
-                  </span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex-1 mr-2">
+                    <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-bold mb-1">
+                      Título do Box 3 (Cargos e Funções de Destaque)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumCargosTitle || 'TRAJETÓRIA PROFISSIONAL'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumCargosTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
                   <button
                     type="button"
                     onClick={() => {
-                      const current = formData.founder.curriculumTrajectoryItems || [];
+                      const current = formData.founder.curriculumTrajectoryItems || [
+                        'Advogado Estratégico',
+                        'Gestor Jurídico Patrimonial',
+                        'Gestor Jurídico Empresarial',
+                        'Palestrante e Coach Jurídico',
+                        'Procurador Municipal (20 Municípios no RS)',
+                        'Procurador do Banco do Brasil S/A',
+                        'Membro da Associação Nacional dos Gestores Ambientais',
+                        'Membro do Instituto dos Advogados do RS',
+                        'Presidente da Associação Brasileira do Meio Ambiente',
+                        'Assessor Jurídico da Assembleia Legislativa do RS',
+                        'Conselheiro do DMAE (Águas e Esgotos de POA)',
+                        'Diretor do Depto. de Direito Empresarial do IARGS',
+                        'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+                        'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+                      ];
                       setFormData({
                         ...formData,
                         founder: { ...formData.founder, curriculumTrajectoryItems: [...current, 'Novo cargo / função institucional'] }
                       });
                     }}
-                    className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                    className="self-end px-2.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer hover:bg-[#D4AF37]/30"
                   >
-                    <Plus className="w-2.5 h-2.5" /> Adicionar
+                    <Plus className="w-3 h-3" /> Adicionar Cargo
                   </button>
                 </div>
                 <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
-                  {(formData.founder.curriculumTrajectoryItems || []).map((item, idx) => (
+                  {(formData.founder.curriculumTrajectoryItems && formData.founder.curriculumTrajectoryItems.length > 0 ? formData.founder.curriculumTrajectoryItems : [
+                    'Advogado Estratégico',
+                    'Gestor Jurídico Patrimonial',
+                    'Gestor Jurídico Empresarial',
+                    'Palestrante e Coach Jurídico',
+                    'Procurador Municipal (20 Municípios no RS)',
+                    'Procurador do Banco do Brasil S/A',
+                    'Membro da Associação Nacional dos Gestores Ambientais',
+                    'Membro do Instituto dos Advogados do RS',
+                    'Presidente da Associação Brasileira do Meio Ambiente',
+                    'Assessor Jurídico da Assembleia Legislativa do RS',
+                    'Conselheiro do DMAE (Águas e Esgotos de POA)',
+                    'Diretor do Depto. de Direito Empresarial do IARGS',
+                    'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+                    'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+                  ]).map((item, idx) => (
                     <div key={idx} className="flex items-center gap-2">
+                      <span className="text-[#D4AF37] font-bold text-xs">◙</span>
                       <input
                         type="text"
                         value={item}
                         onChange={(e) => {
-                          const current = [...(formData.founder.curriculumTrajectoryItems || [])];
-                          current[idx] = e.target.value;
+                          const base = formData.founder.curriculumTrajectoryItems && formData.founder.curriculumTrajectoryItems.length > 0
+                            ? [...formData.founder.curriculumTrajectoryItems]
+                            : [
+                                'Advogado Estratégico',
+                                'Gestor Jurídico Patrimonial',
+                                'Gestor Jurídico Empresarial',
+                                'Palestrante e Coach Jurídico',
+                                'Procurador Municipal (20 Municípios no RS)',
+                                'Procurador do Banco do Brasil S/A',
+                                'Membro da Associação Nacional dos Gestores Ambientais',
+                                'Membro do Instituto dos Advogados do RS',
+                                'Presidente da Associação Brasileira do Meio Ambiente',
+                                'Assessor Jurídico da Assembleia Legislativa do RS',
+                                'Conselheiro do DMAE (Águas e Esgotos de POA)',
+                                'Diretor do Depto. de Direito Empresarial do IARGS',
+                                'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+                                'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+                              ];
+                          base[idx] = e.target.value;
                           setFormData({
                             ...formData,
-                            founder: { ...formData.founder, curriculumTrajectoryItems: current }
+                            founder: { ...formData.founder, curriculumTrajectoryItems: base }
                           });
                         }}
                         className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
@@ -3638,13 +3799,32 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                       <button
                         type="button"
                         onClick={() => {
-                          const current = (formData.founder.curriculumTrajectoryItems || []).filter((_, i) => i !== idx);
+                          const base = formData.founder.curriculumTrajectoryItems && formData.founder.curriculumTrajectoryItems.length > 0
+                            ? formData.founder.curriculumTrajectoryItems
+                            : [
+                                'Advogado Estratégico',
+                                'Gestor Jurídico Patrimonial',
+                                'Gestor Jurídico Empresarial',
+                                'Palestrante e Coach Jurídico',
+                                'Procurador Municipal (20 Municípios no RS)',
+                                'Procurador do Banco do Brasil S/A',
+                                'Membro da Associação Nacional dos Gestores Ambientais',
+                                'Membro do Instituto dos Advogados do RS',
+                                'Presidente da Associação Brasileira do Meio Ambiente',
+                                'Assessor Jurídico da Assembleia Legislativa do RS',
+                                'Conselheiro do DMAE (Águas e Esgotos de POA)',
+                                'Diretor do Depto. de Direito Empresarial do IARGS',
+                                'Conselheiro do CONDECON POA (Defesa do Consumidor)',
+                                'Membro da 3ª Comissão de Ética e Disciplina da OABRS'
+                              ];
+                          const updated = base.filter((_, i) => i !== idx);
                           setFormData({
                             ...formData,
-                            founder: { ...formData.founder, curriculumTrajectoryItems: current }
+                            founder: { ...formData.founder, curriculumTrajectoryItems: updated }
                           });
                         }}
                         className="p-1.5 text-red-400 hover:text-red-300"
+                        title="Excluir cargo"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -3653,38 +3833,235 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                 </div>
               </div>
 
+              {/* Box 4: Literatura Jurídica & Palestras (Obras e Eventos) */}
+              <div className="pt-2 border-t border-slate-800 space-y-3">
+                <div className="border-b border-slate-800 pb-2">
+                  <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-bold mb-1">
+                    Título do Box 4 (Literatura Jurídica & Palestras)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.founder.curriculumLiteratureTitle || 'LITERATURA JURÍDICA & PALESTRAS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, curriculumLiteratureTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                      Linha de Artigos Publicados
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumArticlesHeader || 'Autor de mais de uma centena de Artigos Jurídicos Publicados'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumArticlesHeader: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                      Linha de Chamada dos Livros Digitais
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumBooksHeader || 'Autor de Livros Digitais Publicados:'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumBooksHeader: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-[#F6E27A]"
+                    />
+                  </div>
+                </div>
+
+                {/* Lista dos Livros Digitais do Currículo */}
+                <div className="space-y-2 pt-2 border-t border-slate-800">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-300 uppercase">
+                      Lista dos Livros Digitais do Acervo:
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = formData.founder.curriculumBooksList || [
+                          'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+                          'Holding Familiar e Imobiliária',
+                          'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+                          'Os Sete Cuidados na Compra do Imóvel',
+                          'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+                          'Mercado de Carbono: Construindo um Futuro Sustentável',
+                          'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+                          'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+                        ];
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, curriculumBooksList: [...current, 'Título do Novo Livro Publicado'] }
+                        });
+                      }}
+                      className="px-2 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer hover:bg-[#D4AF37]/30"
+                    >
+                      <Plus className="w-2.5 h-2.5" /> Adicionar Livro
+                    </button>
+                  </div>
+
+                  <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                    {(formData.founder.curriculumBooksList && formData.founder.curriculumBooksList.length > 0 ? formData.founder.curriculumBooksList : [
+                      'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+                      'Holding Familiar e Imobiliária',
+                      'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+                      'Os Sete Cuidados na Compra do Imóvel',
+                      'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+                      'Mercado de Carbono: Construindo um Futuro Sustentável',
+                      'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+                      'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+                    ]).map((book, idx) => (
+                      <div key={idx} className="flex items-center gap-2">
+                        <span className="text-[#E5C158] font-bold text-xs">►</span>
+                        <input
+                          type="text"
+                          value={book}
+                          onChange={(e) => {
+                            const base = formData.founder.curriculumBooksList && formData.founder.curriculumBooksList.length > 0
+                              ? [...formData.founder.curriculumBooksList]
+                              : [
+                                  'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+                                  'Holding Familiar e Imobiliária',
+                                  'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+                                  'Os Sete Cuidados na Compra do Imóvel',
+                                  'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+                                  'Mercado de Carbono: Construindo um Futuro Sustentável',
+                                  'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+                                  'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+                                ];
+                            base[idx] = e.target.value;
+                            setFormData({
+                              ...formData,
+                              founder: { ...formData.founder, curriculumBooksList: base }
+                            });
+                          }}
+                          className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const base = formData.founder.curriculumBooksList && formData.founder.curriculumBooksList.length > 0
+                              ? formData.founder.curriculumBooksList
+                              : [
+                                  'Planejamento Patrimonial 4.0 & o Alto Risco da Omissão',
+                                  'Holding Familiar e Imobiliária',
+                                  'Você tem Patrimônio e deseja protegê-lo juridicamente?',
+                                  'Os Sete Cuidados na Compra do Imóvel',
+                                  'Síndico Próspero: Administrando o Condomínio em Alta Performance',
+                                  'Mercado de Carbono: Construindo um Futuro Sustentável',
+                                  'LGPD: A Primeira Condenação no Brasil por Compartilhamento Ilegal de Dados',
+                                  'Como Resolver as Dívidas Bancárias em Tempos de COVID-19?'
+                                ];
+                            const updated = base.filter((_, i) => i !== idx);
+                            setFormData({
+                              ...formData,
+                              founder: { ...formData.founder, curriculumBooksList: updated }
+                            });
+                          }}
+                          className="p-1.5 text-red-400 hover:text-red-300"
+                          title="Excluir livro"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-semibold mb-1">
+                    Tags de Modalidades (Rodapé do Box 4)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.founder.curriculumLiteratureTags || 'Palestras · Cursos · Mentorias · Workshops'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, curriculumLiteratureTags: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
               {/* Docência Superior */}
               <div className="pt-2 border-t border-slate-800 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-bold text-[#E5C158] uppercase">
-                    Docência Superior
-                  </span>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex-1 mr-2">
+                    <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-bold mb-1">
+                      Título do Box 5 (Docência Superior)
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.founder.curriculumDocenciaTitle || 'DOCÊNCIA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumDocenciaTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
                   <button
                     type="button"
                     onClick={() => {
-                      const current = formData.founder.curriculumDocenciaItems || [];
+                      const current = formData.founder.curriculumDocenciaItems || [
+                        'Prof. da Faculdade de Direito da UNISINOS',
+                        'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+                        'Prof. da Escola Superior de Advocacia da OABRS',
+                        'Prof. do Centro de Estudos do Trabalho – CETRA',
+                        'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+                        'Prof. da Academia Leão Ferreira'
+                      ];
                       setFormData({
                         ...formData,
                         founder: { ...formData.founder, curriculumDocenciaItems: [...current, 'Prof. em Instituição Jurídica'] }
                       });
                     }}
-                    className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                    className="self-end px-2.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer hover:bg-[#D4AF37]/30"
                   >
-                    <Plus className="w-2.5 h-2.5" /> Adicionar
+                    <Plus className="w-3 h-3" /> Adicionar Instituição
                   </button>
                 </div>
                 <div className="space-y-1.5">
-                  {(formData.founder.curriculumDocenciaItems || []).map((item, idx) => (
+                  {(formData.founder.curriculumDocenciaItems && formData.founder.curriculumDocenciaItems.length > 0 ? formData.founder.curriculumDocenciaItems : [
+                    'Prof. da Faculdade de Direito da UNISINOS',
+                    'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+                    'Prof. da Escola Superior de Advocacia da OABRS',
+                    'Prof. do Centro de Estudos do Trabalho – CETRA',
+                    'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+                    'Prof. da Academia Leão Ferreira'
+                  ]).map((item, idx) => (
                     <div key={idx} className="flex items-center gap-2">
+                      <span className="text-[#D4AF37] font-bold text-xs">◙</span>
                       <input
                         type="text"
                         value={item}
                         onChange={(e) => {
-                          const current = [...(formData.founder.curriculumDocenciaItems || [])];
-                          current[idx] = e.target.value;
+                          const base = formData.founder.curriculumDocenciaItems && formData.founder.curriculumDocenciaItems.length > 0
+                            ? [...formData.founder.curriculumDocenciaItems]
+                            : [
+                                'Prof. da Faculdade de Direito da UNISINOS',
+                                'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+                                'Prof. da Escola Superior de Advocacia da OABRS',
+                                'Prof. do Centro de Estudos do Trabalho – CETRA',
+                                'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+                                'Prof. da Academia Leão Ferreira'
+                              ];
+                          base[idx] = e.target.value;
                           setFormData({
                             ...formData,
-                            founder: { ...formData.founder, curriculumDocenciaItems: current }
+                            founder: { ...formData.founder, curriculumDocenciaItems: base }
                           });
                         }}
                         className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
@@ -3692,19 +4069,46 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
                       <button
                         type="button"
                         onClick={() => {
-                          const current = (formData.founder.curriculumDocenciaItems || []).filter((_, i) => i !== idx);
+                          const base = formData.founder.curriculumDocenciaItems && formData.founder.curriculumDocenciaItems.length > 0
+                            ? formData.founder.curriculumDocenciaItems
+                            : [
+                                'Prof. da Faculdade de Direito da UNISINOS',
+                                'Prof. da Escola Superior de Estudos Jurídicos do IARGS',
+                                'Prof. da Escola Superior de Advocacia da OABRS',
+                                'Prof. do Centro de Estudos do Trabalho – CETRA',
+                                'Prof. da Faculdade de Direito das Faculdades Reunidas São Judas Tadeu',
+                                'Prof. da Academia Leão Ferreira'
+                              ];
+                          const updated = base.filter((_, i) => i !== idx);
                           setFormData({
                             ...formData,
-                            founder: { ...formData.founder, curriculumDocenciaItems: current }
+                            founder: { ...formData.founder, curriculumDocenciaItems: updated }
                           });
                         }}
                         className="p-1.5 text-red-400 hover:text-red-300"
+                        title="Excluir instituição"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Botão de Fechamento do Modal */}
+              <div className="pt-2 border-t border-slate-800">
+                <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-bold mb-1">
+                  Texto do Botão de Ação no Rodapé do Modal
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.curriculumBtnBooksText || 'Livros Digitais Publicados'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumBtnBooksText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                />
               </div>
             </div>
 

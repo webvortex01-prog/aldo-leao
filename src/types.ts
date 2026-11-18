@@ -237,16 +237,27 @@ export interface SiteConfig {
     counterGoldPhrase?: string; // Frase dourada do contador (Item 87: ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA)
     counterWhitePhrase?: string; // Frase branca do contador (Item 87: DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO)
     differentials?: string[];
+    curriculumModalTitle?: string; // Título do Modal Saiba Mais (Padrão: Dr. ALDO LEÃO)
+    curriculumModalSubtitle?: string; // Subtítulo em dourado (Padrão: ADVOCACIA ESTRATÉGICA DESDE 1986)
+    curriculumTrajectoryTitle?: string; // Título do Box 1 (Padrão: TRAJETÓRIA PROFISSIONAL)
     curriculumTrajectoryP1?: string;
     curriculumTrajectoryP2?: string;
     curriculumTrajectoryP3?: string;
     curriculumTrajectoryP4?: string;
     curriculumTrajectoryP5?: string;
+    curriculumLeadershipTitle?: string; // Título Box 2 (Padrão: ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA)
     curriculumLeadershipItems?: string[];
+    curriculumCargosTitle?: string; // Título Box 3 (Padrão: TRAJETÓRIA PROFISSIONAL)
     curriculumTrajectoryItems?: string[];
+    curriculumLiteratureTitle?: string; // Título Box 4 (Padrão: LITERATURA JURÍDICA & PALESTRAS)
+    curriculumArticlesHeader?: string; // Padrão: Autor de mais de uma centena de Artigos Jurídicos Publicados
+    curriculumBooksHeader?: string; // Padrão: Autor de Livros Digitais Publicados:
+    curriculumLiteratureTags?: string; // Padrão: Palestras · Cursos · Mentorias · Workshops
     curriculumLiteratureItems?: string[];
     curriculumBooksList?: string[];
+    curriculumDocenciaTitle?: string; // Título Box 5 (Padrão: DOCÊNCIA)
     curriculumDocenciaItems?: string[];
+    curriculumBtnBooksText?: string; // Texto do botão final (Padrão: Livros Digitais Publicados)
     specialties: string[];
     differences: string[];
     signatureImageUrl?: string;

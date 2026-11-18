@@ -290,11 +290,11 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
 
             {/* Cabeçalho do Modal (Item 20: Título Dr. ALDO LEÃO em branco e Frase dourada ADVOCACIA ESTRATÉGICA DESDE 1986) */}
             <div className="border-b border-[#D4AF37]/30 pb-5 mb-6">
-              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white">
-                Dr. ALDO LEÃO
+              <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-white uppercase">
+                {f?.curriculumModalTitle || 'Dr. ALDO LEÃO'}
               </h3>
               <p className="font-cinzel text-xs sm:text-sm text-[#E5C158] uppercase font-bold tracking-widest mt-1">
-                ADVOCACIA ESTRATÉGICA DESDE 1986
+                {f?.curriculumModalSubtitle || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
               </p>
             </div>
 
@@ -302,7 +302,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
               {/* Box/Card: TRAJETÓRIA PROFISSIONAL (Texto 1) */}
               <div className="p-5 sm:p-6 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
                 <h4 className="font-cinzel text-sm sm:text-base font-bold text-[#F6E27A] uppercase tracking-wider">
-                  TRAJETÓRIA PROFISSIONAL
+                  {f?.curriculumTrajectoryTitle || 'TRAJETÓRIA PROFISSIONAL'}
                 </h4>
                 <div className="space-y-3 text-slate-200 font-light">
                   {f?.curriculumTrajectoryP1 !== '' && (
@@ -354,7 +354,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 {/* Box/Card ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA */}
                 <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                    ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA
+                    {f?.curriculumLeadershipTitle || 'ESPECIALIZAÇÃO E EXCELÊNCIA JURÍDICA'}
                   </h4>
                   <ul className="space-y-2 text-slate-300">
                     {(f?.curriculumLeadershipItems && f.curriculumLeadershipItems.length > 0 ? f.curriculumLeadershipItems : [
@@ -378,7 +378,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 {/* Box/Card TRAJETÓRIA PROFISSIONAL (Item 57) */}
                 <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                    TRAJETÓRIA PROFISSIONAL
+                    {f?.curriculumCargosTitle || 'TRAJETÓRIA PROFISSIONAL'}
                   </h4>
                   <ul className="space-y-1.5 text-slate-300 text-xs">
                     {(f?.curriculumTrajectoryItems && f.curriculumTrajectoryItems.length > 0 ? f.curriculumTrajectoryItems : [
@@ -411,13 +411,13 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 {/* Box/Card LITERATURA JURÍDICA & PALESTRAS */}
                 <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                    LITERATURA JURÍDICA & PALESTRAS
+                    {f?.curriculumLiteratureTitle || 'LITERATURA JURÍDICA & PALESTRAS'}
                   </h4>
                   <p className="text-slate-200 font-medium">
-                    ◙ Autor de mais de uma centena de Artigos Jurídicos Publicados
+                    ◙ {f?.curriculumArticlesHeader || 'Autor de mais de uma centena de Artigos Jurídicos Publicados'}
                   </p>
                   <p className="text-[#F6E27A] font-semibold mt-1">
-                    ◙ Autor de Livros Digitais Publicados:
+                    ◙ {f?.curriculumBooksHeader || 'Autor de Livros Digitais Publicados:'}
                   </p>
                   <ul className="space-y-1 text-slate-300 text-xs pl-2">
                     {(f?.curriculumBooksList && f.curriculumBooksList.length > 0 ? f.curriculumBooksList : [
@@ -434,20 +434,14 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                     ))}
                   </ul>
                   <div className="pt-2 flex flex-wrap gap-2 text-xs text-[#E5C158] font-bold">
-                    <span>◙ Palestras</span>
-                    <span>·</span>
-                    <span>◙ Cursos</span>
-                    <span>·</span>
-                    <span>◙ Mentorias</span>
-                    <span>·</span>
-                    <span>◙ Workshops</span>
+                    <span>◙ {f?.curriculumLiteratureTags || 'Palestras · Cursos · Mentorias · Workshops'}</span>
                   </div>
                 </div>
 
                 {/* Box/Card DOCÊNCIA (Item 58) */}
                 <div className="p-5 rounded-xl bg-[#0A1424] border border-[#D4AF37]/25 space-y-3">
                   <h4 className="font-cinzel text-xs sm:text-sm font-bold text-[#F6E27A] uppercase tracking-wider">
-                    DOCÊNCIA
+                    {f?.curriculumDocenciaTitle || 'DOCÊNCIA'}
                   </h4>
                   <ul className="space-y-2 text-slate-300">
                     {(f?.curriculumDocenciaItems && f.curriculumDocenciaItems.length > 0 ? f.curriculumDocenciaItems : [
@@ -495,7 +489,7 @@ export const HeadJuridico: React.FC<HeadJuridicoProps> = ({
                 onClick={scrollToLivros}
                 className="btn-gold-luxury px-6 py-2.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-[#050B14] text-xs font-bold uppercase tracking-wider hover:brightness-110 cursor-pointer shadow-md"
               >
-                Livros Digitais Publicados
+                {f?.curriculumBtnBooksText || 'Livros Digitais Publicados'}
               </button>
             </div>
           </div>
