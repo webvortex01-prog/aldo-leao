@@ -207,13 +207,11 @@ export const PublicationsSection: React.FC = () => {
           ) : (
             currentPublications.map((pub, index) => {
               const isArtigo = pub.type === 'artigo';
-              const staggerClasses = ['delay-75', 'delay-150', 'delay-200', 'delay-250', 'delay-300'];
-              const delayClass = staggerClasses[index % staggerClasses.length];
 
               return (
                 <article
-                  key={pub.id}
-                  className={`reveal-fade-up ${delayClass} rounded-2xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/60 shadow-lg group hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] card-hover-interactive`}
+                  key={pub.id || `pub-${index}`}
+                  className="rounded-2xl overflow-hidden bg-[#071122] border border-[#D4AF37]/25 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/60 shadow-lg group hover:shadow-[0_10px_30px_rgba(212,175,55,0.15)] card-hover-interactive opacity-100"
                 >
                   <div>
                     {/* Header Banner com diferenciação clara entre Artigo e Notícia */}

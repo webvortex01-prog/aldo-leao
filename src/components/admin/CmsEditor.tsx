@@ -1,26 +1,26 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { 
-  Save, 
-  RotateCcw, 
-  CheckCircle2, 
-  Image as ImageIcon, 
-  FileText, 
-  Briefcase, 
-  Trophy, 
-  PhoneCall, 
-  Plus, 
-  Trash2, 
-  Sparkles, 
-  BookOpen, 
-  Scale, 
+import {
+  Save,
+  RotateCcw,
+  CheckCircle2,
+  Image as ImageIcon,
+  FileText,
+  Briefcase,
+  Trophy,
+  PhoneCall,
+  Plus,
+  Trash2,
+  Sparkles,
+  BookOpen,
+  Scale,
   Phone,
   Mail,
-  Compass, 
-  GraduationCap, 
-  Layers, 
-  Search, 
-  Upload, 
-  FolderOpen, 
+  Compass,
+  GraduationCap,
+  Layers,
+  Search,
+  Upload,
+  FolderOpen,
   RefreshCw,
   Eye
 } from 'lucide-react';
@@ -192,11 +192,10 @@ const ImageUploadField: React.FC<ImageUploadFieldProps> = ({
                 key={i}
                 type="button"
                 onClick={() => onChange(opt.url)}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-medium border flex items-center gap-2 transition-all cursor-pointer ${
-                  activeImage === opt.url
-                    ? 'border-[#D4AF37] bg-[#0E1F3D] text-[#F6E27A] font-bold shadow-sm'
-                    : 'border-slate-800 bg-[#071122] text-slate-300 hover:border-slate-700'
-                }`}
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-medium border flex items-center gap-2 transition-all cursor-pointer ${activeImage === opt.url
+                  ? 'border-[#D4AF37] bg-[#0E1F3D] text-[#F6E27A] font-bold shadow-sm'
+                  : 'border-slate-800 bg-[#071122] text-slate-300 hover:border-slate-700'
+                  }`}
               >
                 <img
                   src={opt.url}
@@ -1097,11 +1096,10 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
           <button
             type="button"
             onClick={() => setShowRawHtml(!showRawHtml)}
-            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer ${
-              showRawHtml
-                ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-black shadow-md'
-                : 'bg-[#071122] border border-slate-700 text-slate-400 hover:text-white hover:border-[#D4AF37]/50'
-            }`}
+            className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer ${showRawHtml
+              ? 'bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-slate-950 font-black shadow-md'
+              : 'bg-[#071122] border border-slate-700 text-slate-400 hover:text-white hover:border-[#D4AF37]/50'
+              }`}
             title="Alternar entre o Editor Visual Direto (estilo Word) e o Código HTML"
           >
             <span>{showRawHtml ? '✨ Voltar ao Editor Visual' : '</> Código HTML'}</span>
@@ -1129,7 +1127,7 @@ export const RichTextarea: React.FC<RichTextareaProps> = ({
             onFocus={() => {
               try {
                 document.execCommand('defaultParagraphSeparator', false, 'p');
-              } catch {}
+              } catch { }
             }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -1820,11 +1818,10 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3.5 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center gap-2 cursor-pointer ${
-                isActive
-                  ? 'bg-[#0E1F3D] text-[#F6E27A] border border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.2)]'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
-              }`}
+              className={`px-3.5 py-2.5 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-all flex items-center gap-2 cursor-pointer ${isActive
+                ? 'bg-[#0E1F3D] text-[#F6E27A] border border-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.2)]'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
+                }`}
             >
               <Icon className="w-3.5 h-3.5" />
               <span>{tab.label}</span>
@@ -1840,150 +1837,75 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
       {/* Container Principal com ID para auto-scroll */}
       <div id="cms-editor-active-tab-container" className="rounded-xl transition-all duration-300">
-      {/* TAB 1: IDENTIDADE & LOGOMARCA */}
-      {activeTab === 'identidade' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-4">
-            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#F6E27A]" />
-              <span>Identidade Visual, Nome do Escritório & Barra Superior (Navbar)</span>
-            </h3>
-            <p className="text-xs text-slate-400 mt-1">
-              Configure o nome que aparece na logomarca do topo, no rodapé e nos botões de navegação.
-            </p>
-          </div>
-
-          {/* Upload de Imagem do Logo */}
-          <ImageUploadField
-            label="Logomarca Oficial (Leão Dourado / Símbolo do Escritório)"
-            description="Faça o upload do arquivo de imagem do logo (PNG com fundo transparente recomendado) ou use a imagem padrão."
-            currentValue={formData.navbar?.logoImageUrl}
-            defaultValue="/img/logo-symbol.png"
-            aspectRatio="square"
-            onChange={(newUrl) => setFormData({
-              ...formData,
-              navbar: { ...(formData.navbar || {}), logoImageUrl: newUrl }
-            })}
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1.5">
-                Nome do Escritório (Logo Principal)
-              </label>
-              <input
-                type="text"
-                value={formData.navbar?.logoTitle || 'Aldo Leão'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  navbar: { ...(formData.navbar || {}), logoTitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white font-bold"
-              />
-              <span className="text-[10px] text-slate-400 mt-1 block">Exibido na fonte clássica com gradiente dourado.</span>
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Subtítulo do Logo (Slogan)
-              </label>
-              <input
-                type="text"
-                value={formData.navbar?.logoSubtitle || 'Advocacia Estratégica'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  navbar: { ...(formData.navbar || {}), logoSubtitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-              <span className="text-[10px] text-slate-400 mt-1 block">Exibido logo abaixo do nome do escritório.</span>
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Inscrição da OAB Oficial
-              </label>
-              <input
-                type="text"
-                value={formData.navbar?.oabNumber || 'OAB/RS 48.452'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  navbar: { ...(formData.navbar || {}), oabNumber: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Texto do Botão Dourado Superior (Navbar)
-              </label>
-              <input
-                type="text"
-                value={formData.navbar?.btnConsultation || 'Consulta Digital'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  navbar: { ...(formData.navbar || {}), btnConsultation: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 2: HERO & SLIDES 1 E 2 */}
-      {activeTab === 'hero' && (
-        <div className="space-y-6">
-          {/* SLIDE 1 */}
+        {/* TAB 1: IDENTIDADE & LOGOMARCA */}
+        {activeTab === 'identidade' && (
           <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-            <h3 className="font-cinzel text-base font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
-              <span className="text-[#E5C158]">SLIDE 1</span> · Tradição Jurídica Desde 1908
-            </h3>
-
-            {/* Imagens do Slide 1 (Desktop e Mobile) com Upload */}
-            <div className="p-3 rounded-xl bg-[#09152B] border border-[#D4AF37]/40 text-[11px] text-slate-200">
-              <strong className="text-[#F6E27A] uppercase tracking-wider block mb-0.5">📐 Medidas Ideais de Papel de Parede (Itens 106 e 113):</strong>
-              • <strong>Computador / Notebook (Horizontal):</strong> <code className="text-[#F6E27A] font-bold">1920 x 1080 px</code> (Proporção 16:9 Full HD)<br />
-              • <strong>Smartphone / Celular (Vertical):</strong> <code className="text-[#F6E27A] font-bold">1080 x 1920 px</code> (Proporção 9:16 Vertical)
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ImageUploadField
-                label="Imagem do Slide 1 · Desktop (1920 x 1080 px)"
-                description="Foto horizontal 16:9 exibida em telas grandes (computadores e notebooks)."
-                currentValue={formData.hero.heroImageUrl}
-                defaultValue="/img/novofundohero.jpg"
-                aspectRatio="video"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  hero: { ...formData.hero, heroImageUrl: newUrl }
-                })}
-              />
-
-              <ImageUploadField
-                label="Imagem do Slide 1 · Mobile (1080 x 1920 px)"
-                description="Versão vertical 9:16 otimizada para smartphones (mostra as duas estátuas sem zoom excessivo)."
-                currentValue={formData.hero.heroImageMobileUrl}
-                defaultValue="/img/novofundohero_mobile.jpg"
-                aspectRatio="portrait"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  hero: { ...formData.hero, heroImageMobileUrl: newUrl }
-                })}
-              />
+            <div className="border-b border-slate-800 pb-4">
+              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-[#F6E27A]" />
+                <span>Identidade Visual, Nome do Escritório & Barra Superior (Navbar)</span>
+              </h3>
+              <p className="text-xs text-slate-400 mt-1">
+                Configure o nome que aparece na logomarca do topo, no rodapé e nos botões de navegação.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Upload de Imagem do Logo */}
+            <ImageUploadField
+              label="Logomarca Oficial (Leão Dourado / Símbolo do Escritório)"
+              description="Faça o upload do arquivo de imagem do logo (PNG com fundo transparente recomendado) ou use a imagem padrão."
+              currentValue={formData.navbar?.logoImageUrl}
+              defaultValue="/img/logo-symbol.png"
+              aspectRatio="square"
+              onChange={(newUrl) => setFormData({
+                ...formData,
+                navbar: { ...(formData.navbar || {}), logoImageUrl: newUrl }
+              })}
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Primeira Frase da Etiqueta Superior (Kicker 1)
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1.5">
+                  Nome do Escritório (Logo Principal)
                 </label>
                 <input
                   type="text"
-                  value={formData.hero.kicker}
+                  value={formData.navbar?.logoTitle || 'Aldo Leão'}
                   onChange={(e) => setFormData({
                     ...formData,
-                    hero: { ...formData.hero, kicker: e.target.value }
+                    navbar: { ...(formData.navbar || {}), logoTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white font-bold"
+                />
+                <span className="text-[10px] text-slate-400 mt-1 block">Exibido na fonte clássica com gradiente dourado.</span>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Subtítulo do Logo (Slogan)
+                </label>
+                <input
+                  type="text"
+                  value={formData.navbar?.logoSubtitle || 'Advocacia Estratégica'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    navbar: { ...(formData.navbar || {}), logoSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+                <span className="text-[10px] text-slate-400 mt-1 block">Exibido logo abaixo do nome do escritório.</span>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Inscrição da OAB Oficial
+                </label>
+                <input
+                  type="text"
+                  value={formData.navbar?.oabNumber || 'OAB/RS 48.452'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    navbar: { ...(formData.navbar || {}), oabNumber: e.target.value }
                   })}
                   className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
                 />
@@ -1991,220 +1913,295 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Segunda Frase da Etiqueta Superior (Kicker 2)
+                  Texto do Botão Dourado Superior (Navbar)
                 </label>
                 <input
                   type="text"
-                  value={formData.hero.kickerSub || 'ADVOCACIA ESTRATÉGICA'}
+                  value={formData.navbar?.btnConsultation || 'Consulta Digital'}
                   onChange={(e) => setFormData({
                     ...formData,
-                    hero: { ...formData.hero, kickerSub: e.target.value }
+                    navbar: { ...(formData.navbar || {}), btnConsultation: e.target.value }
                   })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
                 />
               </div>
             </div>
+          </div>
+        )}
 
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                Destaque do Box Superior (Tagline)
-              </label>
-              <input
-                type="text"
-                value={formData.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  hero: { ...formData.hero, tagline: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
+        {/* TAB 2: HERO & SLIDES 1 E 2 */}
+        {activeTab === 'hero' && (
+          <div className="space-y-6">
+            {/* SLIDE 1 */}
+            <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+              <h3 className="font-cinzel text-base font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+                <span className="text-[#E5C158]">SLIDE 1</span> · Tradição Jurídica Desde 1908
+              </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Frase Dourada do Modal Saiba Mais (Item 63)
-              </label>
-              <input
-                type="text"
-                value={formData.centennialLegacy?.modalKicker || 'EXCELÊNCIA JURÍDICA DESDE 1908'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), modalKicker: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Título Parte 1
-                </label>
-                <input
-                  type="text"
-                  value={formData.hero.titlePart1}
-                  onChange={(e) => setFormData({
+              {/* Imagens do Slide 1 (Desktop e Mobile) com Upload */}
+              <div className="p-3 rounded-xl bg-[#09152B] border border-[#D4AF37]/40 text-[11px] text-slate-200">
+                <strong className="text-[#F6E27A] uppercase tracking-wider block mb-0.5">📐 Medidas Ideais de Papel de Parede (Itens 106 e 113):</strong>
+                • <strong>Computador / Notebook (Horizontal):</strong> <code className="text-[#F6E27A] font-bold">1920 x 1080 px</code> (Proporção 16:9 Full HD)<br />
+                • <strong>Smartphone / Celular (Vertical):</strong> <code className="text-[#F6E27A] font-bold">1080 x 1920 px</code> (Proporção 9:16 Vertical)
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ImageUploadField
+                  label="Imagem do Slide 1 · Desktop (1920 x 1080 px)"
+                  description="Foto horizontal 16:9 exibida em telas grandes (computadores e notebooks)."
+                  currentValue={formData.hero.heroImageUrl}
+                  defaultValue="/img/novofundohero.jpg"
+                  aspectRatio="video"
+                  onChange={(newUrl) => setFormData({
                     ...formData,
-                    hero: { ...formData.hero, titlePart1: e.target.value }
+                    hero: { ...formData.hero, heroImageUrl: newUrl }
                   })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
                 />
+
+                <ImageUploadField
+                  label="Imagem do Slide 1 · Mobile (1080 x 1920 px)"
+                  description="Versão vertical 9:16 otimizada para smartphones (mostra as duas estátuas sem zoom excessivo)."
+                  currentValue={formData.hero.heroImageMobileUrl}
+                  defaultValue="/img/novofundohero_mobile.jpg"
+                  aspectRatio="portrait"
+                  onChange={(newUrl) => setFormData({
+                    ...formData,
+                    hero: { ...formData.hero, heroImageMobileUrl: newUrl }
+                  })}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Primeira Frase da Etiqueta Superior (Kicker 1)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.hero.kicker}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, kicker: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Segunda Frase da Etiqueta Superior (Kicker 2)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.hero.kickerSub || 'ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, kickerSub: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
               </div>
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                  Título em Destaque Dourado
+                  Destaque do Box Superior (Tagline)
                 </label>
                 <input
                   type="text"
-                  value={formData.hero.titleHighlight}
+                  value={formData.hero.tagline || 'EXCELÊNCIA JURÍDICA CENTENÁRIA EM TRÊS GERAÇÕES'}
                   onChange={(e) => setFormData({
                     ...formData,
-                    hero: { ...formData.hero, titleHighlight: e.target.value }
+                    hero: { ...formData.hero, tagline: e.target.value }
                   })}
                   className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-xs text-[#F6E27A] font-bold"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Título Parte 2
-                </label>
-                <input
-                  type="text"
-                  value={formData.hero.titlePart2 || '· MAIS DE UM SÉCULO DE EXCELÊNCIA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, titlePart2: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
 
-            <RichTextarea
-              label="Texto Principal da Tradição (Slide 1)"
-              rows={4}
-              value={formData.hero.description}
-              onChange={(val) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, description: val }
-              })}
-              hint="Editor rico com controle de tamanho de fontes, cores, negrito, caixas e pré-visualização"
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Botão CTA 1 (Principal)
-                </label>
-                <input
-                  type="text"
-                  value={formData.hero.cta1Text || 'Agende a sua Consulta Digital'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, cta1Text: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Botão CTA 2 (Secundário)
-                </label>
-                <input
-                  type="text"
-                  value={formData.hero.cta2Text || 'Holding Familiar 4.0'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, cta2Text: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            {/* Box 2 do Slide 1 (Item 79: Totalmente Editável) */}
-            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-                Box 2 · Advocacia Estratégica (Item 79)
-              </h5>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Kicker Box 2</label>
+                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                    Frase Dourada do Modal Saiba Mais (Item 63)
+                  </label>
                   <input
                     type="text"
-                    value={formData.hero.box2Kicker || 'Excelência Jurídica Centenária'}
+                    value={formData.centennialLegacy?.modalKicker || 'EXCELÊNCIA JURÍDICA DESDE 1908'}
                     onChange={(e) => setFormData({
                       ...formData,
-                      hero: { ...formData.hero, box2Kicker: e.target.value }
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), modalKicker: e.target.value }
                     })}
-                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
                   />
                 </div>
+
                 <div>
-                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Box 2</label>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Título Parte 1
+                  </label>
                   <input
                     type="text"
-                    value={formData.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
+                    value={formData.hero.titlePart1}
                     onChange={(e) => setFormData({
                       ...formData,
-                      hero: { ...formData.hero, box2Title: e.target.value }
+                      hero: { ...formData.hero, titlePart1: e.target.value }
                     })}
-                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                    Título em Destaque Dourado
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.hero.titleHighlight}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, titleHighlight: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Título Parte 2
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.hero.titlePart2 || '· MAIS DE UM SÉCULO DE EXCELÊNCIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, titlePart2: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
                   />
                 </div>
               </div>
-              <div>
-                <RichTextarea
-                  label="Texto Descritivo Box 2"
-                  rows={3}
-                  value={formData.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
-                  onChange={(val) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, box2Text: val }
-                  })}
-                />
+
+              <RichTextarea
+                label="Texto Principal da Tradição (Slide 1)"
+                rows={4}
+                value={formData.hero.description}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  hero: { ...formData.hero, description: val }
+                })}
+                hint="Editor rico com controle de tamanho de fontes, cores, negrito, caixas e pré-visualização"
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Botão CTA 1 (Principal)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.hero.cta1Text || 'Agende a sua Consulta Digital'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, cta1Text: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Botão CTA 2 (Secundário)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.hero.cta2Text || 'Holding Familiar 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, cta2Text: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              {/* Box 2 do Slide 1 (Item 79: Totalmente Editável) */}
+              <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+                <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Box 2 · Advocacia Estratégica (Item 79)
+                </h5>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-300 font-semibold mb-1">Kicker Box 2</label>
+                    <input
+                      type="text"
+                      value={formData.hero.box2Kicker || 'Excelência Jurídica Centenária'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        hero: { ...formData.hero, box2Kicker: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Box 2</label>
+                    <input
+                      type="text"
+                      value={formData.hero.box2Title || 'ADVOCACIA ESTRATÉGICA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        hero: { ...formData.hero, box2Title: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <RichTextarea
+                    label="Texto Descritivo Box 2"
+                    rows={3}
+                    value={formData.hero.box2Text || 'Um legado jurídico familiar construído desde 1908, que atravessa três gerações e se traduz em uma Advocacia Estratégica que integra conhecimentos multidisciplinares, planejamento e inteligência jurídica.'}
+                    onChange={(val) => setFormData({
+                      ...formData,
+                      hero: { ...formData.hero, box2Text: val }
+                    })}
+                  />
+                </div>
+              </div>
+
+              {/* Box Abaixo da Logomarca do Leão (Item 79: Totalmente Editável) */}
+              <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+                <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Box Sob a Logomarca do Leão (Item 79)
+                </h5>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Sob a Logo</label>
+                    <input
+                      type="text"
+                      value={formData.hero.logoCardTitle || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        hero: { ...formData.hero, logoCardTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Subtítulo Sob a Logo</label>
+                    <input
+                      type="text"
+                      value={formData.hero.logoCardSubtitle || 'Excelência Jurídica Desde 1908'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        hero: { ...formData.hero, logoCardSubtitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-[#F6E27A] text-xs font-bold"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Box Abaixo da Logomarca do Leão (Item 79: Totalmente Editável) */}
-            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-                Box Sob a Logomarca do Leão (Item 79)
-              </h5>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-300 font-semibold mb-1">Título Sob a Logo</label>
-                  <input
-                    type="text"
-                    value={formData.hero.logoCardTitle || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      hero: { ...formData.hero, logoCardTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Subtítulo Sob a Logo</label>
-                  <input
-                    type="text"
-                    value={formData.hero.logoCardSubtitle || 'Excelência Jurídica Desde 1908'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      hero: { ...formData.hero, logoCardSubtitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-[#F6E27A] text-xs font-bold"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
 
-          
             {/* Campo de Tempo de Transição entre Slide 1 e Slide 2 (Item 61) */}
             <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
@@ -2288,5711 +2285,876 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               </div>
             </div>
 
-          {/* SLIDE 2 */}
-          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-            <h3 className="font-cinzel text-base font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
-              <span className="text-[#E5C158]">SLIDE 2</span> · Holding Familiar & Planejamento Patrimonial 4.0
-            </h3>
+            {/* SLIDE 2 */}
+            <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+              <h3 className="font-cinzel text-base font-bold text-white border-b border-slate-800 pb-3 flex items-center gap-2">
+                <span className="text-[#E5C158]">SLIDE 2</span> · Holding Familiar & Planejamento Patrimonial 4.0
+              </h3>
 
-            {/* Imagens do Slide 2 (Desktop e Mobile) com Upload */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <ImageUploadField
-                label="Imagem de Fundo Slide 2 · Desktop (Computadores)"
-                description="Foto de fundo do Slide 2 em telas grandes (BMW e portão dourado)."
-                currentValue={formData.hero.heroSlide2ImageUrl}
-                defaultValue="/img/holding-familiar-1.jpg"
-                aspectRatio="video"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  hero: { ...formData.hero, heroSlide2ImageUrl: newUrl }
-                })}
-              />
-
-              <ImageUploadField
-                label="Imagem de Fundo Slide 2 · Mobile (Smartphones)"
-                description="Versão vertical otimizada para celulares do Slide 2."
-                currentValue={formData.hero.heroSlide2ImageMobileUrl}
-                defaultValue="/img/holding-familiar-1.jpg"
-                aspectRatio="portrait"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  hero: { ...formData.hero, heroSlide2ImageMobileUrl: newUrl }
-                })}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Texto acima do Título (Eyebrow)
-                </label>
-                <input
-                  type="text"
-                  value={formData.slide2?.eyebrow || 'HOLDING FAMILIAR'}
-                  onChange={(e) => setFormData({
+              {/* Imagens do Slide 2 (Desktop e Mobile) com Upload */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ImageUploadField
+                  label="Imagem de Fundo Slide 2 · Desktop (Computadores)"
+                  description="Foto de fundo do Slide 2 em telas grandes (BMW e portão dourado)."
+                  currentValue={formData.hero.heroSlide2ImageUrl}
+                  defaultValue="/img/holding-familiar-1.jpg"
+                  aspectRatio="video"
+                  onChange={(newUrl) => setFormData({
                     ...formData,
-                    slide2: { ...(formData.slide2 || {}), eyebrow: e.target.value }
+                    hero: { ...formData.hero, heroSlide2ImageUrl: newUrl }
                   })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+
+                <ImageUploadField
+                  label="Imagem de Fundo Slide 2 · Mobile (Smartphones)"
+                  description="Versão vertical otimizada para celulares do Slide 2."
+                  currentValue={formData.hero.heroSlide2ImageMobileUrl}
+                  defaultValue="/img/holding-familiar-1.jpg"
+                  aspectRatio="portrait"
+                  onChange={(newUrl) => setFormData({
+                    ...formData,
+                    hero: { ...formData.hero, heroSlide2ImageMobileUrl: newUrl }
+                  })}
                 />
               </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1.5">
-                  Título em Branco (Item 80)
-                </label>
-                <input
-                  type="text"
-                  value={formData.slide2?.titleWhite ?? 'PLANEJAMENTO '}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    slide2: { ...(formData.slide2 || {}), titleWhite: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Texto acima do Título (Eyebrow)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.slide2?.eyebrow || 'HOLDING FAMILIAR'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      slide2: { ...(formData.slide2 || {}), eyebrow: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1.5">
+                    Título em Branco (Item 80)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.slide2?.titleWhite ?? 'PLANEJAMENTO '}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      slide2: { ...(formData.slide2 || {}), titleWhite: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                    Título em Dourado (Item 80)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      slide2: { ...(formData.slide2 || {}), titleGold: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                  Título em Dourado (Item 80)
-                </label>
-                <input
-                  type="text"
-                  value={formData.slide2?.titleGold ?? 'PATRIMONIAL 4.0'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    slide2: { ...(formData.slide2 || {}), titleGold: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/60 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            {/* Texto Principal do Slide 2 com RichTextarea (Item 80) */}
-            <RichTextarea
-              label="Texto Principal do Slide 2 (Item 80)"
-              rows={4}
-              value={formData.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                slide2: { ...(formData.slide2 || {}), paragraph1: val }
-              })}
-              hint="Texto que fica abaixo do título do Slide 2"
-            />
-
-            {/* Box Comparativo de Custos do Slide 2 (Item 80) */}
-            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-                Box Comparativo de Custos (Item 80)
-              </h5>
-              <div>
-                <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Título do Box de Custos</label>
-                <input
-                  type="text"
-                  value={formData.slide2?.costBoxTitle || 'COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    slide2: { ...(formData.slide2 || {}), costBoxTitle: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-white text-xs font-bold"
-                />
-              </div>
+              {/* Texto Principal do Slide 2 com RichTextarea (Item 80) */}
               <RichTextarea
-                label="Texto do Box de Custos"
-                rows={2}
-                value={formData.slide2?.costBoxText || 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'}
+                label="Texto Principal do Slide 2 (Item 80)"
+                rows={4}
+                value={formData.slide2?.paragraph1 || 'Proteja, organize e perpetue o seu legado com a inteligência jurídica e a segurança estratégica de nossos especialistas.'}
                 onChange={(val) => setFormData({
                   ...formData,
-                  slide2: { ...(formData.slide2 || {}), costBoxText: val }
+                  slide2: { ...(formData.slide2 || {}), paragraph1: val }
                 })}
+                hint="Texto que fica abaixo do título do Slide 2"
               />
-            </div>
 
-            {/* Box Sob a Foto Familiar (Item 80) */}
-            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-              <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-                Box Sob a Foto Familiar (Item 80)
-              </h5>
-              <div>
-                <label className="block text-[10px] text-white font-semibold mb-1">Texto em Branco</label>
-                <input
-                  type="text"
-                  value={formData.slide2?.photoCardTitle || 'O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
-                  onChange={(e) => setFormData({
+              {/* Box Comparativo de Custos do Slide 2 (Item 80) */}
+              <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+                <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Box Comparativo de Custos (Item 80)
+                </h5>
+                <div>
+                  <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Título do Box de Custos</label>
+                  <input
+                    type="text"
+                    value={formData.slide2?.costBoxTitle || 'COMPARATIVO DE CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      slide2: { ...(formData.slide2 || {}), costBoxTitle: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-white text-xs font-bold"
+                  />
+                </div>
+                <RichTextarea
+                  label="Texto do Box de Custos"
+                  rows={2}
+                  value={formData.slide2?.costBoxText || 'Você sabia que o processo de Inventário acarreta aos seus herdeiros uma Alta Perda Patrimonial e Financeira que é evitada pelo PLANEJAMENTO PATRIMONIAL 4.0?'}
+                  onChange={(val) => setFormData({
                     ...formData,
-                    slide2: { ...(formData.slide2 || {}), photoCardTitle: e.target.value }
+                    slide2: { ...(formData.slide2 || {}), costBoxText: val }
                   })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
                 />
               </div>
-              <div>
-                <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Texto em Dourado</label>
-                <input
-                  type="text"
-                  value={formData.slide2?.photoCardSubtitle || 'VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    slide2: { ...(formData.slide2 || {}), photoCardSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
-                />
+
+              {/* Box Sob a Foto Familiar (Item 80) */}
+              <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+                <h5 className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Box Sob a Foto Familiar (Item 80)
+                </h5>
+                <div>
+                  <label className="block text-[10px] text-white font-semibold mb-1">Texto em Branco</label>
+                  <input
+                    type="text"
+                    value={formData.slide2?.photoCardTitle || 'O PLANEJAMENTO 4.0 EVITA A PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      slide2: { ...(formData.slide2 || {}), photoCardTitle: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-white text-xs font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-[#F6E27A] font-semibold mb-1">Texto em Dourado</label>
+                  <input
+                    type="text"
+                    value={formData.slide2?.photoCardSubtitle || 'VOCÊ JÁ FEZ O SEU PLANEJAMENTO PATRIMONIAL 4.0?'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      slide2: { ...(formData.slide2 || {}), photoCardSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Box de Chamada 1: Que Legado Você Vai Deixar? com RichTextarea (Item 80) */}
-            <RichTextarea
-              label="Box de Chamada 1: Que Legado Você Vai Deixar? (Item 80)"
-              rows={2}
-              value={formData.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
-              onChange={(val) => setFormData({
-                ...formData,
-                slide2: { ...(formData.slide2 || {}), callout1: val }
-              })}
-              hint="Box destacado com borda dourada logo abaixo do texto principal do Slide 2. Suporta formatação de cores douradas e negrito."
-            />
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Box de Chamada 2: Evite a Alta Perda Patrimonial
-              </label>
-              <input
-                type="text"
-                value={formData.slide2?.callout2 || 'EVITE A ALTA PERDA PATRIMONIAL E FINANCEIRA DOS SEUS FILHOS NO INVENTÁRIO.'}
-                onChange={(e) => setFormData({
+              {/* Box de Chamada 1: Que Legado Você Vai Deixar? com RichTextarea (Item 80) */}
+              <RichTextarea
+                label="Box de Chamada 1: Que Legado Você Vai Deixar? (Item 80)"
+                rows={2}
+                value={formData.slide2?.callout1 || 'QUE LEGADO VOCÊ VAI DEIXAR AOS SEUS HERDEIROS? A Alta Perda Patrimonial do Inventário ou o Planejamento Patrimonial 4.0 que evita o Inventário?'}
+                onChange={(val) => setFormData({
                   ...formData,
-                  slide2: { ...(formData.slide2 || {}), callout2: e.target.value }
+                  slide2: { ...(formData.slide2 || {}), callout1: val }
                 })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                hint="Box destacado com borda dourada logo abaixo do texto principal do Slide 2. Suporta formatação de cores douradas e negrito."
               />
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                  Título Box Inferior
+                  Box de Chamada 2: Evite a Alta Perda Patrimonial
                 </label>
                 <input
                   type="text"
-                  value={formData.slide2?.boxTitle || 'O INVENTÁRIO GERA UMA ALTA PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
+                  value={formData.slide2?.callout2 || 'EVITE A ALTA PERDA PATRIMONIAL E FINANCEIRA DOS SEUS FILHOS NO INVENTÁRIO.'}
                   onChange={(e) => setFormData({
                     ...formData,
-                    slide2: { ...(formData.slide2 || {}), boxTitle: e.target.value }
+                    slide2: { ...(formData.slide2 || {}), callout2: e.target.value }
                   })}
                   className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
                 />
               </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                  Título Card Direita
-                </label>
-                <input
-                  type="text"
-                  value={formData.slide2?.rightCardTitle || 'PERDA PATRIMONIAL E FINANCEIRA DOS HERDEIROS NO INVENTÁRIO'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    slide2: { ...(formData.slide2 || {}), rightCardTitle: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            <RichTextarea
-              label="Texto do Card Direita (Alíquotas ITCMD 8%, 16%, 20%, 30%)"
-              rows={3}
-              value={formData.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
-              onChange={(val) => setFormData({
-                ...formData,
-                slide2: { ...(formData.slide2 || {}), rightCardText: val }
-              })}
-              hint="Editor rico com formatação avançada de alíquotas e cores"
-            />
-
-            {/* TABELA COMPARATIVA DE CUSTOS */}
-            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                Parâmetros do Estudo Comparativo de Custos (Modal e Tabela)
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
-                <div>
-                  <label className="block text-[11px] text-slate-300 font-medium mb-1">
-                    Patrimônio Adquirido (IR)
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.slide2?.sampleAcquisition || 'R$ 1.000.000,00'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      slide2: { ...(formData.slide2 || {}), sampleAcquisition: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] text-slate-300 font-medium mb-1">
-                    Patrimônio a Valor de Mercado
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.slide2?.sampleMarket || 'R$ 1.500.000,00'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      slide2: { ...(formData.slide2 || {}), sampleMarket: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] text-slate-300 font-medium mb-1">
-                    Custo Médio no Inventário
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.slide2?.inventoryTotal || 'R$ 180.000,00 a R$ 250.000,00'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      slide2: { ...(formData.slide2 || {}), inventoryTotal: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] text-[#F6E27A] font-bold mb-1">
-                    Percentual de Economia Holding
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.slide2?.savingsPercentage || 'Economia de até 75%'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      slide2: { ...(formData.slide2 || {}), savingsPercentage: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Campo de Tempo de Transição do Slide 2 (Item 61) */}
-            <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                  ⏱️ Tempo de Exibição do Slide 2 (Segundos - Item 61)
-                </label>
-                <p className="text-[11px] text-slate-300">
-                  Duração em segundos que o Slide 2 permanece na tela antes de alternar para o Slide 1.
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="number"
-                  min={3}
-                  max={120}
-                  value={formData.hero.slide2Duration || 18}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, slide2Duration: Number(e.target.value) || 18 }
-                  })}
-                  className="w-24 p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm font-bold text-center text-white"
-                />
-                <span className="text-xs text-slate-300 font-semibold">segundos</span>
-              </div>
-            </div>
-
-            {/* Controles de Escurecimento e Contraste do Slide 2 */}
-            <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-3">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-1.5">
-                <span>Contraste & Escurecimento da Imagem do Slide 2</span>
-              </h4>
-              <p className="text-[11px] text-slate-300">
-                Ajuste o brilho e a película escura para equilibrar a luz do Slide 2 com o Slide 1.
-              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
-                      Brilho da Imagem
-                    </label>
-                    <span className="text-xs font-bold text-[#F6E27A]">
-                      {formData.hero.slide2Brightness ?? 90}%
-                    </span>
-                  </div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                    Título Box Inferior
+                  </label>
                   <input
-                    type="range"
-                    min={50}
-                    max={120}
-                    value={formData.hero.slide2Brightness ?? 90}
+                    type="text"
+                    value={formData.slide2?.boxTitle || 'O INVENTÁRIO GERA UMA ALTA PERDA PATRIMONIAL DOS HERDEIROS NO INVENTÁRIO'}
                     onChange={(e) => setFormData({
                       ...formData,
-                      hero: { ...formData.hero, slide2Brightness: Number(e.target.value) }
+                      slide2: { ...(formData.slide2 || {}), boxTitle: e.target.value }
                     })}
-                    className="w-full accent-[#D4AF37] cursor-pointer"
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
                   />
-                  <span className="text-[10px] text-slate-400">Padrão: 90%</span>
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
-                      Película Escura (Opacidade)
-                    </label>
-                    <span className="text-xs font-bold text-[#F6E27A]">
-                      {formData.hero.slide2OverlayOpacity ?? 35}%
-                    </span>
-                  </div>
+                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                    Título Card Direita
+                  </label>
                   <input
-                    type="range"
-                    min={10}
-                    max={85}
-                    value={formData.hero.slide2OverlayOpacity ?? 35}
+                    type="text"
+                    value={formData.slide2?.rightCardTitle || 'PERDA PATRIMONIAL E FINANCEIRA DOS HERDEIROS NO INVENTÁRIO'}
                     onChange={(e) => setFormData({
                       ...formData,
-                      hero: { ...formData.hero, slide2OverlayOpacity: Number(e.target.value) }
+                      slide2: { ...(formData.slide2 || {}), rightCardTitle: e.target.value }
                     })}
-                    className="w-full accent-[#D4AF37] cursor-pointer"
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-[#F6E27A] font-bold"
                   />
-                  <span className="text-[10px] text-slate-400">Padrão: 35%</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
 
-      {/* TAB 3: PRESENÇA NACIONAL DIGITAL */}
-      {activeTab === 'digital_presence' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white">
-              Página 2 · Presença Nacional Digital
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Altere os textos, os 3 tópicos institucionais e a imagem oficial de presença nacional.
-            </p>
-          </div>
-
-          {/* Upload do Mapa da Presença Digital */}
-          <ImageUploadField
-            label="Imagem do Mapa da Presença Nacional Digital"
-            description="Atualmente configurada para presencadigital.jpeg. Clique em Carregar do Computador para substituir pela sua imagem ou mapa."
-            currentValue={formData.nationalPresence?.mapImageUrl}
-            defaultValue="/presencadigital.jpeg"
-            onChange={(newUrl) => setFormData({
-              ...formData,
-              nationalPresence: { ...(formData.nationalPresence || {}), mapImageUrl: newUrl }
-            })}
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Etiqueta Superior (Kicker)
-              </label>
-              <input
-                type="text"
-                value={formData.nationalPresence?.kicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  nationalPresence: { ...(formData.nationalPresence || {}), kicker: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Título Principal
-              </label>
-              <input
-                type="text"
-                value={formData.nationalPresence?.title || 'PRESENÇA NACIONAL DIGITAL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  nationalPresence: { ...(formData.nationalPresence || {}), title: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-          </div>
-
-          {/* Editor Rico de Todo o Conteúdo da Página Presença Nacional Digital (Item 81 e 82) */}
-          <RichTextarea
-            label="Conteúdo Integral da Página (Item 81 e 82)"
-            rows={5}
-            value={formData.nationalPresence?.content || ''}
-            onChange={(val) => setFormData({
-              ...formData,
-              nationalPresence: { ...(formData.nationalPresence || {}), content: val }
-            })}
-            hint="Permite editar livremente o texto de toda a página, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
-          />
-
-          <div>
-            <RichTextarea
-              label="Parágrafo 1 (História e Sede em Porto Alegre)"
-              rows={3}
-              value={formData.nationalPresence?.paragraph1 || 'Com sede em Porto Alegre/RS e atuação digital estratégica em todo o Brasil, a ALDO LEÃO ADVOCACIA ESTRATÉGICA atende clientes em todo o território nacional e no exterior, prestando serviços jurídicos de alta excelência com agilidade, segurança e eficiência.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                nationalPresence: { ...(formData.nationalPresence || {}), paragraph1: val }
-              })}
-            />
-          </div>
-
-          <div>
-            <RichTextarea
-              label="Parágrafo 2 (Tradição e Tecnologia de Ponta)"
-              rows={3}
-              value={formData.nationalPresence?.paragraph2 || 'Combinando tradição jurídica centenária e tecnologia de ponta, estruturamos um modelo de advocacia digital que proporciona aos nossos clientes atendimento personalizado, videoconferências e acompanhamento processual transparente em tempo real, sem a necessidade de deslocamentos.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                nationalPresence: { ...(formData.nationalPresence || {}), paragraph2: val }
-              })}
-            />
-          </div>
-
-          {/* Os 3 Cards da Presença Digital */}
-          <div className="space-y-3 pt-2 border-t border-slate-800">
-            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
-              Os 3 Destaques com Ícone de Balança Dourada
-            </h4>
-            <div className="space-y-3">
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Destaque 1</label>
-                <input
-                  type="text"
-                  value={formData.nationalPresence?.card1Text || 'Atuação Digital no Brasil'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    nationalPresence: { ...(formData.nationalPresence || {}), card1Text: e.target.value }
-                  })}
-                  className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Destaque 2</label>
-                <input
-                  type="text"
-                  value={formData.nationalPresence?.card2Text || 'Infraestrutura Tecnológica de última geração'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    nationalPresence: { ...(formData.nationalPresence || {}), card2Text: e.target.value }
-                  })}
-                  className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Destaque 3</label>
-                <input
-                  type="text"
-                  value={formData.nationalPresence?.card3Text || 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    nationalPresence: { ...(formData.nationalPresence || {}), card3Text: e.target.value }
-                  })}
-                  className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 4: O LEGADO CENTENÁRIO */}
-      {activeTab === 'legacy' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white">
-              Página 3 · O Legado Centenário & Linha do Tempo
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Edite a história de mais de um século, os 3 parágrafos, o card de 40 anos e os marcos cronológicos.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Frase em Dourado Superior
-              </label>
-              <input
-                type="text"
-                value={formData.centennialLegacy?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), goldKicker: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
-                Título em Branco (Item 84)
-              </label>
-              <input
-                type="text"
-                value={formData.centennialLegacy?.titleWhite || formData.centennialLegacy?.title || 'O LEGADO'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), titleWhite: e.target.value, title: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Título em Dourado (Item 84)
-              </label>
-              <input
-                type="text"
-                value={formData.centennialLegacy?.titleGold || formData.centennialLegacy?.titleHighlight || 'CENTENÁRIO'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), titleGold: e.target.value, titleHighlight: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-semibold mb-1">
-                Subtítulo Dourado
-              </label>
-              <input
-                type="text"
-                value={formData.centennialLegacy?.subtitle || 'Desde 1908'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), subtitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#E5C158] font-bold"
-              />
-            </div>
-          </div>
-
-          {/* Editor Rico de Todo o Conteúdo da Página O Legado Centenário (Item 81 e 84) */}
-          <RichTextarea
-            label="Conteúdo Integral da Página (Item 81 e 84)"
-            rows={4}
-            value={formData.centennialLegacy?.content || ''}
-            onChange={(val) => setFormData({
-              ...formData,
-              centennialLegacy: { ...(formData.centennialLegacy || {}), content: val }
-            })}
-            hint="Permite editar livremente o texto de toda a página do Legado, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
-          />
-
-          <div>
-            <RichTextarea
-              label="Parágrafo 1 da História Centenária (Início em 1908)"
-              rows={3}
-              value={formData.centennialLegacy?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph1: val }
-              })}
-            />
-          </div>
-
-          <div>
-            <RichTextarea
-              label="Parágrafo 2 da História Centenária (3ª Geração desde 1986)"
-              rows={3}
-              value={formData.centennialLegacy?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph2: val }
-              })}
-            />
-          </div>
-
-          {/* Card de 40 Anos */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              Box de Destaque · 40 Anos de Advocacia
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Etiqueta do Box</label>
-                <input
-                  type="text"
-                  value={formData.centennialLegacy?.card40Kicker || '40 ANOS DE EXPERIÊNCIA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    centennialLegacy: { ...(formData.centennialLegacy || {}), card40Kicker: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Título do Box</label>
-                <input
-                  type="text"
-                  value={formData.centennialLegacy?.card40Title || 'Quatro décadas de dedicação exclusiva'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    centennialLegacy: { ...(formData.centennialLegacy || {}), card40Title: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-            </div>
-            <div>
               <RichTextarea
-                label="Texto de Destaque dos 40 Anos (Item 85)"
+                label="Texto do Card Direita (Alíquotas ITCMD 8%, 16%, 20%, 30%)"
                 rows={3}
-                value={formData.centennialLegacy?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
+                value={formData.slide2?.rightCardText || 'Em média a Perda Patrimonial e Financeira dos herdeiros é de 40% do Patrimônio Inventariado, a qual vai aumentar com a majoração da alíquota do ITCMD de 8% para 16% (Projeto de Resolução do Senado Federal N. 57/19), 20% (Confaz) ou 30% (Governo Federal).'}
                 onChange={(val) => setFormData({
                   ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), card40Text: val }
+                  slide2: { ...(formData.slide2 || {}), rightCardText: val }
                 })}
-                hint="Texto rico com quebras de linha e destaques"
+                hint="Editor rico com formatação avançada de alíquotas e cores"
               />
-            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Nome Abaixo do Selo</label>
-                <input
-                  type="text"
-                  value={formData.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealName: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-[#F6E27A] mb-1">Subtítulo Abaixo do Selo</label>
-                <input
-                  type="text"
-                  value={formData.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-[#F6E27A] text-xs font-bold"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Selo (Nome)</label>
-                <input
-                  type="text"
-                  value={formData.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealName: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo do Selo</label>
-                <input
-                  type="text"
-                  value={formData.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#E5C158] font-bold"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <ImageUploadField
-                label="Imagem do Selo 40 Anos"
-                description="Upload do selo dourado comemorativo."
-                currentValue={formData.centennialLegacy?.sealImageUrl}
-                defaultValue="/img/selo-40-anos.png"
-                aspectRatio="square"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
-                })}
-              />
-              <ImageUploadField
-                label="Assinatura Dourada Dr. Aldo Leão"
-                description="Upload da assinatura institucional exibida no final da linha do tempo."
-                currentValue={formData.centennialLegacy?.signatureImageUrl}
-                defaultValue="/img/assinatura-gold.png"
-                aspectRatio="video"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
-                })}
-              />
-            </div>
-          </div>
-
-          {/* Marcos Históricos / Linha do Tempo */}
-          <div className="space-y-3 pt-3 border-t border-slate-800">
-            <div className="flex items-center justify-between">
-              <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
-                Marcos Históricos da Linha do Tempo
-              </h4>
-              <button
-                type="button"
-                onClick={handleAddTimelineEvent}
-                className="px-3 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
-              >
-                <Plus className="w-3 h-3" />
-                <span>Adicionar Marco</span>
-              </button>
-            </div>
-
-            <div className="space-y-3">
-              {(formData.centennialLegacy?.events || []).map((ev, idx) => (
-                <div key={idx} className="p-3.5 rounded-lg bg-[#050B14] border border-slate-800 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#F6E27A]">
-                      Ano: {ev.year} · {ev.title}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveTimelineEvent(idx)}
-                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
-                    >
-                      <Trash2 className="w-3 h-3" />
-                      <span>Remover</span>
-                    </button>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    <div>
-                      <label className="block text-[10px] text-slate-400">Ano</label>
-                      <input
-                        type="text"
-                        value={ev.year}
-                        onChange={(e) => {
-                          const updated = [...(formData.centennialLegacy?.events || [])];
-                          updated[idx].year = e.target.value;
-                          setFormData({
-                            ...formData,
-                            centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
-                          });
-                        }}
-                        className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] text-slate-400">Título do Marco</label>
-                      <input
-                        type="text"
-                        value={ev.title}
-                        onChange={(e) => {
-                          const updated = [...(formData.centennialLegacy?.events || [])];
-                          updated[idx].title = e.target.value;
-                          setFormData({
-                            ...formData,
-                            centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
-                          });
-                        }}
-                        className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] text-slate-400">Advogado Homenageado</label>
-                      <input
-                        type="text"
-                        value={ev.lawyers?.join(', ') || ''}
-                        onChange={(e) => {
-                          const updated = [...(formData.centennialLegacy?.events || [])];
-                          updated[idx].lawyers = [e.target.value];
-                          setFormData({
-                            ...formData,
-                            centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
-                          });
-                        }}
-                        className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] text-slate-400">Descrição do Marco</label>
-                    <textarea
-                      rows={2}
-                      value={ev.description}
-                      onChange={(e) => {
-                        const updated = [...(formData.centennialLegacy?.events || [])];
-                        updated[idx].description = e.target.value;
-                        setFormData({
-                          ...formData,
-                          centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
-                        });
-                      }}
-                      className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 5: HEAD JURÍDICO DR. ALDO LEÃO */}
-      {activeTab === 'founder' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white">
-              Página 4 · Head Jurídico: Dr. Aldo Leão & 40 Anos de Advocacia
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Escolha a foto oficial, altere títulos, biografia completa, diferenciais e o contador de 40 anos.
-            </p>
-          </div>
-
-          {/* Upload de Imagem do Dr. Aldo Leão */}
-          <ImageUploadField
-            label="Foto Oficial do Dr. Aldo Leão (Head Jurídico)"
-            description="Carregue uma foto nova do Dr. Aldo Leão direto do computador/celular ou selecione uma foto pronta da galeria oficial."
-            currentValue={formData.founder.photoUrl}
-            defaultValue="/img/dr-aldo-portrait.jpg"
-            aspectRatio="portrait"
-            onChange={(newUrl) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, photoUrl: newUrl }
-            })}
-            presetOptions={[
-              { label: 'Retrato Formal', url: '/img/dr-aldo-portrait.jpg' },
-              { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
-              { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
-              { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
-              { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
-              { label: 'Alta Definição', url: '/img/dr-aldo-foco.jpg' },
-            ]}
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                Frase Inicial em Dourado (Item 86)
-              </label>
-              <input
-                type="text"
-                value={formData.founder.initialGoldPhrase || formData.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: {
-                    ...formData.founder,
-                    initialGoldPhrase: e.target.value,
-                    sectionKicker: e.target.value
-                  }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Título em Branco
-              </label>
-              <input
-                type="text"
-                value={(formData.founder as any).titleWhite || 'Dr. ALDO'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, titleWhite: e.target.value } as any
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                Título em Dourado
-              </label>
-              <input
-                type="text"
-                value={(formData.founder as any).titleGold || 'LEÃO'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, titleGold: e.target.value } as any
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-          </div>
-
-          {/* Editor Rico de Todo o Conteúdo da Página Dr. Aldo Leão (Item 81 e 86) */}
-          <RichTextarea
-            label="Conteúdo Integral da Página Dr. Aldo Leão (Item 81 e 86)"
-            rows={5}
-            value={formData.founder.content || ''}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, content: val }
-            })}
-            hint="Permite editar livremente o texto de toda a página do Dr. Aldo Leão, com imagens, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
-          />
-
-          {/* Controle de Tamanho da Assinatura (Item 86) */}
-          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-2">
-            <div className="flex items-center justify-between">
-              <label className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-                Tamanho da Assinatura (Item 86)
-              </label>
-              <span className="text-xs font-bold text-white font-mono">
-                {formData.founder.signatureSize || 64}px
-              </span>
-            </div>
-            <input
-              type="range"
-              min={40}
-              max={140}
-              value={formData.founder.signatureSize || 64}
-              onChange={(e) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, signatureSize: Number(e.target.value) }
-              })}
-              className="w-full accent-[#D4AF37] cursor-pointer"
-            />
-            <span className="text-[10px] text-slate-300 block">
-              Ajuste para aumentar ou diminuir a altura da assinatura manuscrita que fica logo abaixo do texto.
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Nome de Apresentação
-              </label>
-              <input
-                type="text"
-                value={formData.founder.name}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, name: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Nome Completo Oficial
-              </label>
-              <input
-                type="text"
-                value={formData.founder.fullName}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, fullName: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                Inscrição OAB
-              </label>
-              <input
-                type="text"
-                value={formData.founder.credentials || 'OAB/RS 48.452'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, credentials: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
-                Frase Dourada Abaixo do Título da Página
-              </label>
-              <input
-                type="text"
-                value={formData.founder.sectionSubtitle || 'LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, sectionSubtitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-medium"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Frase Dourada Abaixo da Imagem
-              </label>
-              <input
-                type="text"
-                value={formData.founder.title || 'EXCELÊNCIA JURÍDICA CENTENÁRIA'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, title: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
-              />
-            </div>
-          </div>
-
-          <RichTextarea
-            label="Biografia Institucional — Parágrafo 1"
-            rows={3}
-            value={formData.founder.bioParagraph1}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, bioParagraph1: val }
-            })}
-          />
-
-          <RichTextarea
-            label="Biografia Institucional — Parágrafo 2"
-            rows={3}
-            value={formData.founder.bioParagraph2}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, bioParagraph2: val }
-            })}
-          />
-
-          <RichTextarea
-            label="Biografia Institucional — Parágrafo 3"
-            rows={3}
-            value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, bioParagraph3: val }
-            })}
-          />
-
-          <RichTextarea
-            label="Biografia Institucional — Parágrafo 4"
-            rows={2}
-            value={formData.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, bioParagraph4: val }
-            })}
-          />
-
-          <RichTextarea
-            label="Biografia Institucional — Parágrafo 5"
-            rows={3}
-            value={formData.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, bioParagraph5: val }
-            })}
-          />
-
-          <RichTextarea
-            label="Biografia Institucional — Parágrafo 6"
-            rows={3}
-            value={formData.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
-            onChange={(val) => setFormData({
-              ...formData,
-              founder: { ...formData.founder, bioParagraph6: val }
-            })}
-          />
-
-          {/* Diferenciais Estratégicos (Item 86) */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <div>
-              <label className="block text-[11px] text-[#F6E27A] font-bold uppercase mb-1">
-                Título do Bloco de Diferenciais (Item 86)
-              </label>
-              <input
-                type="text"
-                value={formData.founder.differentialsTitle || 'Diferenciais Estratégicos:'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, differentialsTitle: e.target.value }
-                })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-            <div className="flex items-center justify-between pt-1">
-              <div>
+              {/* TABELA COMPARATIVA DE CUSTOS */}
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
                 <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                  Itens dos Diferenciais ({ (formData.founder.differentials || []).length })
+                  Parâmetros do Estudo Comparativo de Custos (Modal e Tabela)
                 </h4>
-                <p className="text-[11px] text-slate-400">
-                  Pontos fortes do Dr. Aldo Leão com ícones de verificação dourados.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  const current = formData.founder.differentials || [];
-                  setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, differentials: [...current, 'Novo diferencial estratégico'] }
-                  });
-                }}
-                className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
-              >
-                <Plus className="w-3 h-3" />
-                <span>Adicionar</span>
-              </button>
-            </div>
-
-            <div className="space-y-2">
-              {(formData.founder.differentials || [
-                '40 + Anos de Advocacia Estratégica num legado jurídico centenário',
-                'Autor de Livros e Artigos Jurídicos Publicados',
-                'Referência nacional em Planejamento Patrimonial via Holding Familiar',
-                'Atendimento e processos 100% digitais no Brasil'
-              ]).map((diff, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={diff}
-                    onChange={(e) => {
-                      const current = [...(formData.founder.differentials || [])];
-                      current[idx] = e.target.value;
-                      setFormData({
-                        ...formData,
-                        founder: { ...formData.founder, differentials: current }
-                      });
-                    }}
-                    className="flex-1 p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const current = (formData.founder.differentials || []).filter((_, i) => i !== idx);
-                      setFormData({
-                        ...formData,
-                        founder: { ...formData.founder, differentials: current }
-                      });
-                    }}
-                    className="p-2 text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded transition-colors cursor-pointer"
-                    title="Remover Diferencial"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Currículo Oficial Completo do Dr. Aldo Leão (Modal Saiba Mais) */}
-          <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/45 space-y-4">
-            <div className="border-b border-[#D4AF37]/25 pb-2">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
-                <GraduationCap className="w-4 h-4 text-[#D4AF37]" />
-                <span>Currículo Oficial do Dr. Aldo Leão (Modal 'Saiba Mais')</span>
-              </h4>
-              <p className="text-[11px] text-slate-400">
-                Edite os 5 parágrafos da Trajetória Profissional, listas de cargos, obras e docência superior.
-              </p>
-            </div>
-
-            {/* 5 Parágrafos da Trajetória */}
-            <div className="space-y-3">
-              <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-                Trajetória Profissional — 5 Parágrafos Oficiais
-              </span>
-              <RichTextarea
-                label="Parágrafo 1 (Convergência Centenária)"
-                rows={2}
-                value={formData.founder.curriculumTrajectoryP1 || ''}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, curriculumTrajectoryP1: val }
-                })}
-              />
-              <RichTextarea
-                label="Parágrafo 2 (Continuidade Desde 1986 e Avô Paterno)"
-                rows={2}
-                value={formData.founder.curriculumTrajectoryP2 || ''}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, curriculumTrajectoryP2: val }
-                })}
-              />
-              <RichTextarea
-                label="Parágrafo 3 (Rigor Técnico e Inteligência Jurídica)"
-                rows={2}
-                value={formData.founder.curriculumTrajectoryP3 || ''}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, curriculumTrajectoryP3: val }
-                })}
-              />
-              <RichTextarea
-                label="Parágrafo 4 (Artigos, Livros, Mentorias e Liderança)"
-                rows={2}
-                value={formData.founder.curriculumTrajectoryP4 || ''}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, curriculumTrajectoryP4: val }
-                })}
-              />
-              <RichTextarea
-                label="Parágrafo 5 (Frase Dourada de Encerramento)"
-                rows={2}
-                value={formData.founder.curriculumTrajectoryP5 || ''}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  founder: { ...formData.founder, curriculumTrajectoryP5: val }
-                })}
-              />
-            </div>
-
-            {/* Especialização e Excelência Jurídica */}
-            <div className="pt-2 border-t border-slate-800 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-[#E5C158] uppercase">
-                  Especialização e Excelência Jurídica
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.founder.curriculumLeadershipItems || [];
-                    setFormData({
-                      ...formData,
-                      founder: { ...formData.founder, curriculumLeadershipItems: [...current, 'Nova especialização'] }
-                    });
-                  }}
-                  className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-2.5 h-2.5" /> Adicionar
-                </button>
-              </div>
-              <div className="space-y-1.5">
-                {(formData.founder.curriculumLeadershipItems || []).map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={item}
-                      onChange={(e) => {
-                        const current = [...(formData.founder.curriculumLeadershipItems || [])];
-                        current[idx] = e.target.value;
-                        setFormData({
-                          ...formData,
-                          founder: { ...formData.founder, curriculumLeadershipItems: current }
-                        });
-                      }}
-                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const current = (formData.founder.curriculumLeadershipItems || []).filter((_, i) => i !== idx);
-                        setFormData({
-                          ...formData,
-                          founder: { ...formData.founder, curriculumLeadershipItems: current }
-                        });
-                      }}
-                      className="p-1.5 text-red-400 hover:text-red-300"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Trajetória Profissional - Cargos e Funções */}
-            <div className="pt-2 border-t border-slate-800 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-[#E5C158] uppercase">
-                  Trajetória Profissional — Cargos e Funções de Destaque
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.founder.curriculumTrajectoryItems || [];
-                    setFormData({
-                      ...formData,
-                      founder: { ...formData.founder, curriculumTrajectoryItems: [...current, 'Novo cargo / função institucional'] }
-                    });
-                  }}
-                  className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-2.5 h-2.5" /> Adicionar
-                </button>
-              </div>
-              <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
-                {(formData.founder.curriculumTrajectoryItems || []).map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={item}
-                      onChange={(e) => {
-                        const current = [...(formData.founder.curriculumTrajectoryItems || [])];
-                        current[idx] = e.target.value;
-                        setFormData({
-                          ...formData,
-                          founder: { ...formData.founder, curriculumTrajectoryItems: current }
-                        });
-                      }}
-                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const current = (formData.founder.curriculumTrajectoryItems || []).filter((_, i) => i !== idx);
-                        setFormData({
-                          ...formData,
-                          founder: { ...formData.founder, curriculumTrajectoryItems: current }
-                        });
-                      }}
-                      className="p-1.5 text-red-400 hover:text-red-300"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Docência Superior */}
-            <div className="pt-2 border-t border-slate-800 space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-bold text-[#E5C158] uppercase">
-                  Docência Superior
-                </span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.founder.curriculumDocenciaItems || [];
-                    setFormData({
-                      ...formData,
-                      founder: { ...formData.founder, curriculumDocenciaItems: [...current, 'Prof. em Instituição Jurídica'] }
-                    });
-                  }}
-                  className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-2.5 h-2.5" /> Adicionar
-                </button>
-              </div>
-              <div className="space-y-1.5">
-                {(formData.founder.curriculumDocenciaItems || []).map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={item}
-                      onChange={(e) => {
-                        const current = [...(formData.founder.curriculumDocenciaItems || [])];
-                        current[idx] = e.target.value;
-                        setFormData({
-                          ...formData,
-                          founder: { ...formData.founder, curriculumDocenciaItems: current }
-                        });
-                      }}
-                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const current = (formData.founder.curriculumDocenciaItems || []).filter((_, i) => i !== idx);
-                        setFormData({
-                          ...formData,
-                          founder: { ...formData.founder, curriculumDocenciaItems: current }
-                        });
-                      }}
-                      className="p-1.5 text-red-400 hover:text-red-300"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          
-          {/* Parágrafos de Conclusão do Currículo no Box Azul Escuro (Item 64 e 93) */}
-          <div className="p-4 sm:p-5 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#D4AF37]/20 pb-2">
-              <div>
-                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                  Dois Parágrafos de Fechamento do Currículo no Box Azul Escuro (Itens 64 e 93)
-                </h4>
-                <p className="text-[11px] text-slate-300 mt-0.5">
-                  Exibidos no final do modal "Saiba Mais" do Head Jurídico e na Landing Page. Se ambos estiverem vazios, o card azul escuro fica oculto.
-                </p>
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setFormData({
-                    ...formData,
-                    founder: { ...(formData.founder || {}), curriculumClosingP1: '', curriculumClosingP2: '' }
-                  })}
-                  className="px-2.5 py-1 rounded bg-red-500/20 border border-red-500/40 text-[10px] font-bold text-red-300 hover:bg-red-500/30 cursor-pointer"
-                >
-                  Ocultar / Excluir Box (Item 93)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFormData({
-                    ...formData,
-                    founder: {
-                      ...(formData.founder || {}),
-                      curriculumClosingP1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração da tradição jurídica centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA, unindo a sabedoria acumulada ao longo de mais de um século à inovação constante das ferramentas jurídicas contemporâneas.',
-                      curriculumClosingP2: 'Atuando na Advocacia Estratégica desde 1986, assessora famílias, empresários e corporações em decisões de alta relevância patrimonial e societária, assegurando a blindagem legal, a eficiência sucessória e a perpetuação sustentável de legados empresariais.'
-                    }
-                  })}
-                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[10px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 cursor-pointer"
-                >
-                  Restaurar Padrão
-                </button>
-              </div>
-            </div>
-            <RichTextarea
-              label="Parágrafo de Fechamento 1 (Itens 64 e 93)"
-              value={formData.founder?.curriculumClosingP1 ?? ''}
-              onChange={(val) => setFormData({
-                ...formData,
-                founder: { ...(formData.founder || {}), curriculumClosingP1: val }
-              })}
-              rows={3}
-            />
-            <RichTextarea
-              label="Parágrafo de Fechamento 2 (Itens 64 e 93)"
-              value={formData.founder?.curriculumClosingP2 ?? ''}
-              onChange={(val) => setFormData({
-                ...formData,
-                founder: { ...(formData.founder || {}), curriculumClosingP2: val }
-              })}
-              rows={3}
-            />
-          </div>
-
-          {/* Contador de 40 Anos (Item 87: Frases Dourada e Branca Editáveis) */}
-          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              Contador / Selo Oficial de 40 Anos (Item 87)
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] text-[#F6E27A] font-bold mb-1">
-                  Frase Dourada Superior (Item 87)
-                </label>
-                <input
-                  type="text"
-                  value={formData.founder.counterGoldPhrase || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, counterGoldPhrase: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-white font-bold mb-1">
-                  Frase Branca Inferior (Item 87)
-                </label>
-                <input
-                  type="text"
-                  value={formData.founder.counterWhitePhrase || 'DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, counterWhitePhrase: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Título Alternativo do Contador</label>
-                <input
-                  type="text"
-                  value={formData.founder.counterTitle || '40 ANOS DE ADVOCACIA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, counterTitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Subtítulo do Contador</label>
-                <input
-                  type="text"
-                  value={formData.founder.counterSub || 'Quatro décadas de excelência e dedicação exclusiva à advocacia estratégica'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    founder: { ...formData.founder, counterSub: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 6: ÁREAS DE ATUAÇÃO */}
-      {activeTab === 'services' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div>
-              <h3 className="font-cinzel text-base font-bold text-white">
-                Página 5 · Áreas de Atuação Especializadas
-              </h3>
-              <p className="text-xs text-slate-400">
-                Gerencie o cabeçalho da seção e os títulos, subtítulos, selos e descrições dos serviços jurídicos.
-              </p>
-            </div>
-            <button
-              onClick={handleAddPracticeArea}
-              className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Adicionar Área</span>
-            </button>
-          </div>
-
-          {/* Cabeçalho da Seção Áreas de Atuação */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
-              Cabeçalho & Introdução da Seção (Página 5)
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Frase Dourada Superior (Kicker)
-                </label>
-                <input
-                  type="text"
-                  value={formData.practiceAreasHeader?.kicker || 'SOLUÇÕES JURÍDICAS DE ALTA PERFORMANCE'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), kicker: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Título em Branco
-                </label>
-                <input
-                  type="text"
-                  value={formData.practiceAreasHeader?.title || 'ÁREAS DE'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), title: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Destaque Dourado do Título
-                </label>
-                <input
-                  type="text"
-                  value={formData.practiceAreasHeader?.titleHighlight || 'ATUAÇÃO'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), titleHighlight: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            <div>
-              <RichTextarea
-                label="Texto de Introdução das Especialidades (Abaixo do Título)"
-                rows={3}
-                value={formData.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), description: val }
-                })}
-                hint="Edição total do texto que fica abaixo de ÁREAS DE ATUAÇÃO"
-              />
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {(formData.practiceAreas || []).map((area, idx) => (
-              <div key={area.id || idx} className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#E5C158] uppercase">
-                    Área 0{idx + 1}
-                  </span>
-                  <button
-                    onClick={() => handleRemovePracticeArea(idx)}
-                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Remover</span>
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Título da Área
+                    <label className="block text-[11px] text-slate-300 font-medium mb-1">
+                      Patrimônio Adquirido (IR)
                     </label>
                     <input
                       type="text"
-                      value={area.title}
-                      onChange={(e) => {
-                        const updated = [...(formData.practiceAreas || [])];
-                        updated[idx].title = e.target.value;
-                        setFormData({ ...formData, practiceAreas: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                      value={formData.slide2?.sampleAcquisition || 'R$ 1.000.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        slide2: { ...(formData.slide2 || {}), sampleAcquisition: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Subtítulo / Selo
+                    <label className="block text-[11px] text-slate-300 font-medium mb-1">
+                      Patrimônio a Valor de Mercado
                     </label>
                     <input
                       type="text"
-                      value={area.subtitle}
-                      onChange={(e) => {
-                        const updated = [...(formData.practiceAreas || [])];
-                        updated[idx].subtitle = e.target.value;
-                        setFormData({ ...formData, practiceAreas: updated });
-                      }}
+                      value={formData.slide2?.sampleMarket || 'R$ 1.500.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        slide2: { ...(formData.slide2 || {}), sampleMarket: e.target.value }
+                      })}
                       className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                     />
                   </div>
-                </div>
 
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Descrição do Escopo Jurídico
-                  </label>
-                  <RichTextarea
-                    rows={4}
-                    value={area.description}
-                    onChange={(val) => {
-                      const updated = [...(formData.practiceAreas || [])];
-                      updated[idx].description = val;
-                      setFormData({ ...formData, practiceAreas: updated });
-                    }}
-                    placeholder="Descrição detalhada do escopo de atuação jurídica..."
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* TAB 7: SOLUÇÕES DE EXCELÊNCIA & ACADEMIA */}
-      {activeTab === 'solutions' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <div>
-              <h3 className="font-cinzel text-base font-bold text-white">
-                Página 6 · Soluções de Excelência & Academia Leão Ferreira
-              </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Altere o cabeçalho da seção, os cards de soluções de excelência (editar, adicionar e excluir) e a Academia Leão Ferreira.
-              </p>
-            </div>
-            <button
-              onClick={handleAddExcellenceSolution}
-              className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>Adicionar Solução</span>
-            </button>
-          </div>
-
-          {/* Cabeçalho da Seção Soluções de Excelência */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
-              Cabeçalho & Textos de Introdução (Página 6)
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Frase Dourada Superior (Kicker)
-                </label>
-                <input
-                  type="text"
-                  value={formData.excellenceSolutionsHeader?.kicker || 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), kicker: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Título em Branco
-                </label>
-                <input
-                  type="text"
-                  value={formData.excellenceSolutionsHeader?.title || 'SOLUÇÕES DE'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), title: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Destaque Dourado do Título
-                </label>
-                <input
-                  type="text"
-                  value={formData.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), titleHighlight: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 1 de Introdução
-                </label>
-                <RichTextarea
-                  rows={3}
-                  value={formData.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
-                  onChange={(val) => setFormData({
-                    ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description1: val }
-                  })}
-                  placeholder="Parágrafo 1 de introdução..."
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 2 de Introdução (Slogan de Excelência)
-                </label>
-                <RichTextarea
-                  rows={3}
-                  value={formData.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
-                  onChange={(val) => setFormData({
-                    ...formData,
-                    excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description2: val }
-                  })}
-                  placeholder="Parágrafo 2 de introdução..."
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            {(formData.excellenceSolutions || []).map((sol, idx) => (
-              <div key={sol.id || idx} className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#E5C158] uppercase">
-                    Solução 0{idx + 1} · {sol.title}
-                  </span>
-                  <button
-                    onClick={() => handleRemoveExcellenceSolution(idx)}
-                    className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                    <span>Remover</span>
-                  </button>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Título da Solução
+                    <label className="block text-[11px] text-slate-300 font-medium mb-1">
+                      Custo Médio no Inventário
                     </label>
                     <input
                       type="text"
-                      value={sol.title}
-                      onChange={(e) => {
-                        const updated = [...(formData.excellenceSolutions || [])];
-                        updated[idx].title = e.target.value;
-                        setFormData({ ...formData, excellenceSolutions: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                      value={formData.slide2?.inventoryTotal || 'R$ 180.000,00 a R$ 250.000,00'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        slide2: { ...(formData.slide2 || {}), inventoryTotal: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                     />
                   </div>
+
                   <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Subtítulo
+                    <label className="block text-[11px] text-[#F6E27A] font-bold mb-1">
+                      Percentual de Economia Holding
                     </label>
                     <input
                       type="text"
-                      value={sol.subtitle || ''}
-                      onChange={(e) => {
-                        const updated = [...(formData.excellenceSolutions || [])];
-                        updated[idx].subtitle = e.target.value;
-                        setFormData({ ...formData, excellenceSolutions: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Descrição Detalhada
-                  </label>
-                  <RichTextarea
-                    rows={4}
-                    value={sol.description}
-                    onChange={(val) => {
-                      const updated = [...(formData.excellenceSolutions || [])];
-                      updated[idx].description = val;
-                      setFormData({ ...formData, excellenceSolutions: updated });
-                    }}
-                    placeholder="Descrição detalhada da solução de excelência..."
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Configuração da Página da Academia Leão Ferreira (Item II) */}
-          <div className="pt-6 border-t border-[#D4AF37]/30 space-y-4">
-            <div className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-[#E5C158]" />
-              <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider">
-                Página Exclusiva: Academia Leão Ferreira
-              </h4>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Card Inicial (Tagline)
-                </label>
-                <input
-                  type="text"
-                  value={formData.academiaLeao?.kicker || 'CENTRO DE ESTUDOS JURÍDICOS SUPERIORES'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    academiaLeao: { ...(formData.academiaLeao || {}), kicker: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Frase Dourada
-                </label>
-                <input
-                  type="text"
-                  value={formData.academiaLeao?.phraseGold || 'CONFERENCISTA E PALESTRANTE NACIONAL'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    academiaLeao: { ...(formData.academiaLeao || {}), phraseGold: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            <RichTextarea
-              label="Conteúdo Integral da Página Academia Leão Ferreira (Item 68)"
-              rows={5}
-              value={formData.academiaLeao?.content || ''}
-              onChange={(val) => setFormData({
-                ...formData,
-                academiaLeao: { ...(formData.academiaLeao || {}), content: val }
-              })}
-              hint="Editor Visual completo para o texto principal da página Academia Leão Ferreira."
-            />
-
-            <RichTextarea
-              label="Texto do Palestrante (Dr. Aldo Leão)"
-              rows={2}
-              value={formData.academiaLeao?.speakerText || 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                academiaLeao: { ...(formData.academiaLeao || {}), speakerText: val }
-              })}
-            />
-
-            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3">
-              <h5 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
-                Box da Foto da Palestra com Plateia
-              </h5>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Título do Box
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.academiaLeao?.lectureBoxTitle || 'PLANEJAMENTO PATRIMONIAL 4.0 & O ALTO CUSTO DA OMISSÃO'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      academiaLeao: { ...(formData.academiaLeao || {}), lectureBoxTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-
-                {/* Upload da Foto da Palestra */}
-                <div className="sm:col-span-2">
-                  <ImageUploadField
-                    label="Foto da Palestra / Conferência com Plateia"
-                    description="Carregue a foto do Dr. Aldo Leão em conferência presencial a partir do seu dispositivo."
-                    currentValue={formData.academiaLeao?.lecturePhotoUrl || '/img/palestra-1.jpg'}
-                    aspectRatio="video"
-                    onChange={(newUrl) => setFormData({
-                      ...formData,
-                      academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
-                    })}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Legenda em Branco Abaixo da Foto
-                </label>
-                <input
-                  type="text"
-                  value={formData.academiaLeao?.lectureCaption || 'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    academiaLeao: { ...(formData.academiaLeao || {}), lectureCaption: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="sm:col-span-2">
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Frase Convite para Agendamento de Conferência (Dourada)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={formData.academiaLeao?.ctaPrompt || 'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      academiaLeao: { ...(formData.academiaLeao || {}), ctaPrompt: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Texto do Botão
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.academiaLeao?.ctaButtonText || 'AGENDAR CONFERÊNCIA'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      academiaLeao: { ...(formData.academiaLeao || {}), ctaButtonText: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      
-      {/* TAB GESTÃO JURÍDICA 4.0 (Item 66) */}
-      {activeTab === 'gestao_juridica' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-[#D4AF37]/25 pb-4">
-            <span className="text-[10px] uppercase font-bold tracking-widest text-[#E5C158] block mb-1">
-              PÁGINA DEDICADA INTEGRAL
-            </span>
-            <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-[#F6E27A]" />
-              <span>Edição Total da Página GESTÃO JURÍDICA 4.0 (Item 66)</span>
-            </h3>
-            <p className="text-xs text-slate-300 mt-1">
-              Edite todos os textos, vertentes organizacional e judicial, diagnóstico estratégico, pilares e botão de agendamento desta página.
-            </p>
-          </div>
-
-          {/* 1. Header da Página e Botão Voltar */}
-          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
-            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              1. Cabeçalho e Identificação da Página
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                  Texto do Botão Voltar (Item 66: "Voltar")
-                </label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.btnVoltarText || 'Voltar'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), btnVoltarText: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                  Kicker / Badge Superior (com Ícone da Balança)
-                </label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.kickerBadge || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), kickerBadge: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                  Título Principal
-                </label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.heroTitle || 'GESTÃO JURÍDICA 4.0'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), heroTitle: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/60 text-sm text-[#F6E27A] font-bold"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                  Subtítulo Dourado
-                </label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.heroSubtitle || 'ADVOCACIA ESTRATÉGICA, INTELIGÊNCIA JURÍDICA E GESTÃO DE VANGUARDA'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), heroSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            <RichTextarea
-              label="Primeiro Parágrafo da Página (Item 66)"
-              value={formData.gestaoJuridica?.introParagraph1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                gestaoJuridica: { ...(formData.gestaoJuridica || {}), introParagraph1: val }
-              })}
-              rows={4}
-            />
-
-            <RichTextarea
-              label="Vertentes de Alta Performance (Organizacional e Judicial) - Item 66"
-              value={formData.gestaoJuridica?.introParagraph2 || 'Este serviço especializado e estratégico, possui duas vertentes de alta performance: ORGANIZACIONAL e/ou JUDICIAL.\n\n► GESTÃO JURÍDICA ORGANIZACIONAL\nCom atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                gestaoJuridica: { ...(formData.gestaoJuridica || {}), introParagraph2: val }
-              })}
-              rows={4}
-            />
-          </div>
-
-          {/* 2. Frente 1: Gestão Jurídica Organizacional & Box Azul-Marinho */}
-          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
-            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              2. Frente 1: Gestão Jurídica Organizacional & Diagnóstico Estratégico
-            </h4>
-
-            <RichTextarea
-              label="Texto do Box Azul-Marinho (Item 66: Diagnóstico Situacional Estratégico)"
-              value={formData.gestaoJuridica?.frente1BoxTitle || 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:'}
-              onChange={(val) => setFormData({
-                ...formData,
-                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1BoxTitle: val }
-              })}
-              rows={2}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Item 1: Auditoria Preventiva</label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.frente1Card1Desc || 'Auditoria preventiva da situação atual, contratos e fluxos corporativos;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card1Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Item 2: Análise Jurídica Especializada</label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.frente1Card2Desc || 'Análise jurídica especializada alinhada ao modelo de negócios e setor de atuação;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card2Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Item 3: Mapeamento de Riscos e Vulnerabilidades</label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.frente1Card3Desc || 'Mapeamento detalhado de riscos operacionais, tributários e inconformidades legais;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card3Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-slate-300 mb-1">Item 4: Soluções Jurídicas Estratégicas</label>
-                <input
-                  type="text"
-                  value={formData.gestaoJuridica?.frente1Card4Desc || 'Desenvolvimento e implantação de soluções preventivas e estruturantes personalizadas;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card4Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            <RichTextarea
-              label="Conclusão da Frente 1 (Item 66)"
-              value={formData.gestaoJuridica?.frente1Conclusion || 'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Conclusion: val }
-              })}
-              rows={3}
-            />
-          </div>
-
-          {/* 3. Frente 2: Gestão Jurídica Judicial & 3 Pilares */}
-          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
-            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              3. Frente 2: Gestão Jurídica Judicial & 3 Pilares Essenciais
-            </h4>
-
-            <RichTextarea
-              label="Introdução da Frente Judicial (Item 66)"
-              value={formData.gestaoJuridica?.frente2Desc || 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:'}
-              onChange={(val) => setFormData({
-                ...formData,
-                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Desc: val }
-              })}
-              rows={2}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 1: DECISÕES ASSERTIVAS</label>
-                <textarea
-                  rows={2}
-                  value={formData.gestaoJuridica?.frente2Pilar1Desc || 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar1Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 2: GESTÃO DE RESULTADOS</label>
-                <textarea
-                  rows={2}
-                  value={formData.gestaoJuridica?.frente2Pilar2Desc || 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar2Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 3: COMPETITIVIDADE</label>
-                <textarea
-                  rows={2}
-                  value={formData.gestaoJuridica?.frente2Pilar3Desc || 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar3Desc: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            <RichTextarea
-              label="Impacto e Vantagem Competitiva da Frente Judicial (Item 66)"
-              value={formData.gestaoJuridica?.frente2Impact || 'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Impact: val }
-              })}
-              rows={3}
-            />
-          </div>
-
-          {/* 4. Seção de Conversão e Destaques (Item 66) */}
-          <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
-            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-              4. Destaques e Botão AGENDAR CONSULTA DIGITAL (Item 66)
-            </h4>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                Destaque 1 (Mantido conforme Item 66)
-              </label>
-              <input
-                type="text"
-                value={formData.gestaoJuridica?.ctaHighlight1 || 'Atendimento Brasil 100% digital e confidencial com a mesma excelência jurídica do presencial.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight1: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                Destaque 2 (Mantido conforme Item 66)
-              </label>
-              <input
-                type="text"
-                value={formData.gestaoJuridica?.ctaHighlight2 || 'Diagnóstico Estratégico Personalizado para o tamanho do seu negócio e patrimônio.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight2: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
-                Destaque 3 (Mantido conforme Item 66)
-              </label>
-              <input
-                type="text"
-                value={formData.gestaoJuridica?.ctaHighlight3 || 'Três Gerações de Excelência Jurídica dedicadas à perpetuação do seu legado.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight3: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
-                Texto do Botão de Agendamento (Item 66)
-              </label>
-              <input
-                type="text"
-                value={formData.gestaoJuridica?.ctaButtonText || 'AGENDAR CONSULTA DIGITAL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaButtonText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-xs text-white font-bold"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 8: AGENDE SUA CONSULTA DIGITAL */}
-      {activeTab === 'consultation' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-              <PhoneCall className="w-4 h-4 text-[#F6E27A]" />
-              <span>Aba 8 · Agende a sua Consulta Digital (Página 7 do Site)</span>
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Configure os textos, chamada para ação, imagem de fundo e garantias de confidencialidade da consulta online.
-            </p>
-          </div>
-
-          {/* Imagem de Fundo do CTA e Foto do Card à Direita (Item 100) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ImageUploadField
-              label="Foto Principal do Card à Direita (Item 100)"
-              description="Foto principal em destaque à direita na seção Agende a sua Consulta Digital."
-              currentValue={formData.digitalConsultation?.cardImageUrl || '/img/consulta-virtual-1.jpg'}
-              defaultValue="/img/consulta-virtual-1.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                digitalConsultation: { ...(formData.digitalConsultation || {}), cardImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Reunião Virtual Executiva (Padrão)', url: '/img/consulta-virtual-1.jpg' },
-                { label: 'Consulta Estratégica Digital', url: '/img/consulta-virtual-2.jpg' },
-                { label: 'Dr. Aldo Reunião', url: '/img/dr-aldo-reuniao.jpg' },
-                { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
-              ]}
-            />
-
-            <ImageUploadField
-              label="Imagem de Fundo Sutil da Seção (Item 100)"
-              description="Imagem sutil de fundo para a seção de agendamento de consulta digital."
-              currentValue={formData.digitalConsultation?.bgImageUrl || '/img/consulta-virtual-2.jpg'}
-              defaultValue="/img/consulta-virtual-2.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Fundo Consulta Virtual (Padrão)', url: '/img/consulta-virtual-2.jpg' },
-                { label: 'Fundo Gabinete Dr. Aldo', url: '/img/dr-aldo-reuniao.jpg' },
-              ]}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
-                  Frase Dourada Superior (Item 57: Kicker)
-                </label>
-                <button
-                  type="button"
-                  onClick={() => setFormData({
-                    ...formData,
-                    digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: 'ATENDIMENTO DIGITAL BRASIL' }
-                  })}
-                  className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer font-normal"
-                  title="Restaurar Frase Oficial"
-                >
-                  Restaurar "ATENDIMENTO DIGITAL BRASIL"
-                </button>
-              </div>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL BRASIL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
-                Título em Branco
-              </label>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.sectionTitle || 'AGENDE SUA'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), sectionTitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Destaque Dourado do Título
-              </label>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.sectionHighlight || 'CONSULTA DIGITAL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), sectionHighlight: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-          </div>
-
-          <RichTextarea
-            label="Descrição do Atendimento (Item 68 e 100)"
-            rows={4}
-            value={formData.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
-            onChange={(val) => setFormData({
-              ...formData,
-              digitalConsultation: { ...(formData.digitalConsultation || {}), description: val }
-            })}
-          />
-
-          {/* Pontos de Destaque com Balança da Justiça (Item 9 e 38) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Ponto de Destaque 1 (com Ícone Balança)
-              </label>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.point1 || 'Agendamento prévio da consulta'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), point1: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Ponto de Destaque 2 (com Ícone Balança)
-              </label>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.point2 || 'Consulta com hora marcada'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), point2: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-            <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
-              Textos Sobrepostos na Foto da Direita (Item 100)
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Selo Dourado</label>
-                <input
-                  type="text"
-                  value={formData.digitalConsultation?.cardBadge || 'Atendimento 100% Digital'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    digitalConsultation: { ...(formData.digitalConsultation || {}), cardBadge: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Título sobre a Foto</label>
-                <input
-                  type="text"
-                  value={formData.digitalConsultation?.cardTitle || 'CONSULTA DIGITAL BRASIL'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    digitalConsultation: { ...(formData.digitalConsultation || {}), cardTitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Subtítulo sobre a Foto</label>
-                <input
-                  type="text"
-                  value={formData.digitalConsultation?.cardSubtitle || 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    digitalConsultation: { ...(formData.digitalConsultation || {}), cardSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Texto do Botão Principal (Agendar Consulta)
-              </label>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.btnSchedule || 'AGENDAR CONSULTA VIRTUAL'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), btnSchedule: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Texto do Botão WhatsApp
-              </label>
-              <input
-                type="text"
-                value={formData.digitalConsultation?.btnWhatsApp || 'Agendar pelo WhatsApp'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  digitalConsultation: { ...(formData.digitalConsultation || {}), btnWhatsApp: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 9: HOLDING FAMILIAR & PLANEJAMENTO 4.0 */}
-      {(activeTab === 'holding' || activeTab === 'landing_holding') && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-              <Layers className="w-4 h-4 text-[#F6E27A]" />
-              <span>Aba 9 · Planejamento Patrimonial 4.0 (Holding Familiar) · Página 8 do Site</span>
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Edite todos os textos da seção explicativa de Holding, a foto do card de estruturação (BMW oficial), as caixas O Que É, Por Que Fazer e as vantagens.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Frase Superior (Kicker)
-              </label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.sectionKicker || 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionKicker: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
-                Título em Branco
-              </label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.sectionTitle || 'HOLDING'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionTitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
-                Destaque Dourado do Título
-              </label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.sectionHighlight || 'FAMILIAR'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionHighlight: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-              />
-            </div>
-          </div>
-
-          {/* 3 Parágrafos Explicativos da Seção */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
-            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
-              3 Parágrafos Explicativos Abaixo do Título
-            </span>
-            <RichTextarea
-              label="Parágrafo 1"
-              rows={2}
-              value={formData.holdingFamiliar?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph1: val }
-              })}
-            />
-            <RichTextarea
-              label="Parágrafo 2"
-              rows={2}
-              value={formData.holdingFamiliar?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph2: val }
-              })}
-            />
-            <RichTextarea
-              label="Parágrafo 3"
-              rows={2}
-              value={formData.holdingFamiliar?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
-              onChange={(val) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph3: val }
-              })}
-            />
-          </div>
-
-          {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL (Foto BMW oficial) */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 space-y-4">
-            <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
-              Card de Destaque: Estruturação e Proteção Patrimonial (Foto BMW)
-            </span>
-
-            <ImageUploadField
-              label="Foto Oficial do Card (Família, Edifício Corporativo e Carro BMW Dourado)"
-              description="Imagem oficial aprovada pelo Dr. Aldo Leão para o card de destaque da Holding Familiar."
-              currentValue={formData.holdingFamiliar?.cardImageUrl || '/img/holding-familiar-1.jpg'}
-              defaultValue="/img/holding-familiar-1.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardImageUrl: newUrl }
-              })}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Selo / Badge do Card</label>
-                <input
-                  type="text"
-                  value={formData.holdingFamiliar?.cardBadge || 'PLANEJAMENTO 4.0'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardBadge: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Título do Card</label>
-                <input
-                  type="text"
-                  value={formData.holdingFamiliar?.cardTitle || 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardTitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Descrição do Card</label>
-              <textarea
-                rows={2}
-                value={formData.holdingFamiliar?.cardText || 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-              />
-            </div>
-          </div>
-
-          {/* Box O QUE É? */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
-              Box 1: O Que É o Planejamento 4.0?
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Etiqueta do Box</label>
-                <input
-                  type="text"
-                  value={formData.holdingFamiliar?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsTitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] text-slate-400 mb-1">Cabeçalho</label>
-                <input
-                  type="text"
-                  value={formData.holdingFamiliar?.boxWhatIsHeading || 'Metodologia Jurídica Estratégica Multidisciplinar'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsHeading: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-            </div>
-            <RichTextarea
-              label="Texto Explicativo"
-              rows={3}
-              value={formData.holdingFamiliar?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsText: val }
-              })}
-            />
-          </div>
-
-          {/* Box POR QUE PLANEJAR EM VIDA? */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
-            <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
-              Box 2: Por Que Planejar em Vida?
-            </h4>
-            <div>
-              <label className="block text-[11px] text-slate-400 mb-1">Título do Box</label>
-              <input
-                type="text"
-                value={formData.holdingFamiliar?.boxWhyTitle || 'Por Que Planejar em Vida?'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyTitle: e.target.value }
-                })}
-                className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-            <RichTextarea
-              label="Texto de Alerta e Conscientização"
-              rows={3}
-              value={formData.holdingFamiliar?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyText: val }
-              })}
-            />
-          </div>
-
-          {/* ========================================================= */}
-          {/* SEÇÃO DEDICADA: LANDING PAGE HOLDING FAMILIAR 4.0 (/1208/) */}
-          {/* ========================================================= */}
-          <div className="mt-12 pt-8 border-t-2 border-[#D4AF37]/40 space-y-6">
-            <div className="bg-[#050B14] p-5 rounded-2xl border border-[#D4AF37]/50 shadow-xl">
-              <span className="text-[10px] uppercase tracking-widest text-[#E5C158] font-bold block mb-1">
-                PÁGINA DEDICADA EXCLUSIVA
-              </span>
-              <h3 className="font-cinzel text-lg sm:text-xl font-black text-white flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#F6E27A]" />
-                <span>LANDING PAGE HOLDING FAMILIAR 4.0 (ROTA /1208/)</span>
-              </h3>
-              <p className="text-xs text-slate-300 mt-1">
-                Gerencie todos os textos, perguntas frequentes, as 18 vantagens, os problemas do inventário e a tabela comparativa de custos da página oficial de conversão.
-              </p>
-            </div>
-
-            {/* 1. HERO DA LANDING PAGE */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                1. Hero Principal da Landing Page
-              </h4>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Frase Superior (Eyebrow)</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.heroEyebrow || 'HOLDING FAMILIAR'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroEyebrow: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Título em Branco</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.heroTitle || 'PLANEJAMENTO'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Subtítulo em Dourado</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroSubtitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-bold"
-                  />
-                </div>
-              </div>
-
-              {/* 5 Parágrafos do Hero */}
-              <div className="space-y-2 pt-2 border-t border-slate-800">
-                <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-                  Os 5 Parágrafos do Hero da Landing Page
-                </span>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.heroParagraph1 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph1: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.heroParagraph2 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph2: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.heroParagraph3 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph3: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.heroParagraph4 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph4: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5 (Destaque Final)</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.heroParagraph5 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph5: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-              </div>
-
-              {/* Botões do Hero */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Botão Dourado (Viabilidade)</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.heroBtnViabilidade || 'AGENDAR SESSÃO DE VIABILIDADE'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroBtnViabilidade: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Botão Secundário (Custos)</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.heroBtnCustos || 'CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), heroBtnCustos: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* 2. ALGUNS PROBLEMAS DO INVENTÁRIO */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-red-500/35 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-xs uppercase font-bold text-red-400 tracking-wider">
-                    2. Seção: Alguns Problemas do Inventário
-                  </h4>
-                  <p className="text-[11px] text-slate-400">
-                    Cards com ícone de alerta vermelho conscientizando o cliente sobre os riscos do inventário.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.holdingLanding?.problemsList || [];
-                    setFormData({
-                      ...formData,
-                      holdingLanding: {
-                        ...(formData.holdingLanding || {}),
-                        problemsList: [...current, 'Novo problema diagnosticado no inventário']
-                      }
-                    });
-                  }}
-                  className="px-2.5 py-1 rounded bg-red-950/40 border border-red-500 text-[11px] font-bold text-red-300 hover:bg-red-900/50 flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-3 h-3" /> Adicionar Problema
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker da Seção</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.problemsSubtitle || 'DIAGNÓSTICO PREVENTIVO'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), problemsSubtitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Título da Seção</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.problemsTitle || 'ALGUNS PROBLEMAS DO INVENTÁRIO'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), problemsTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2 pt-2">
-                {(formData.holdingLanding?.problemsList || []).map((prob, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={prob}
-                      onChange={(e) => {
-                        const current = [...(formData.holdingLanding?.problemsList || [])];
-                        current[idx] = e.target.value;
-                        setFormData({
-                          ...formData,
-                          holdingLanding: { ...(formData.holdingLanding || {}), problemsList: current }
-                        });
-                      }}
-                      className="flex-1 p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const current = (formData.holdingLanding?.problemsList || []).filter((_, i) => i !== idx);
-                        setFormData({
-                          ...formData,
-                          holdingLanding: { ...(formData.holdingLanding || {}), problemsList: current }
-                        });
-                      }}
-                      className="p-2 text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded transition-colors"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 3. ARQUITETURA JURÍDICA ESTRATÉGICA */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                3. Arquitetura Jurídica Estratégica (Perpetuação do Legado)
-              </h4>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Kicker Superior</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.strategyKicker || 'ARQUITETURA JURÍDICA ESTRATÉGICA'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), strategyKicker: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] text-slate-400 mb-1">Título</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.strategyTitle || 'O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), strategyTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.strategyParagraph1 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph1: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.strategyParagraph2 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph2: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.strategyParagraph3 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph3: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* 4. AS 18 VANTAGENS EXCLUSIVAS */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                    4. As 18 Vantagens Exclusivas da Holding Familiar
-                  </h4>
-                  <p className="text-[11px] text-slate-400">
-                    Cards elegantes com check dourado apresentando os benefícios diretos do planejamento.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.holdingLanding?.advantagesList || [];
-                    setFormData({
-                      ...formData,
-                      holdingLanding: {
-                        ...(formData.holdingLanding || {}),
-                        advantagesList: [...current, 'Nova vantagem exclusiva']
-                      }
-                    });
-                  }}
-                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-3 h-3" /> Adicionar Vantagem
-                </button>
-              </div>
-
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-1">Título da Seção</label>
-                <input
-                  type="text"
-                  value={formData.holdingLanding?.advantagesTitle || 'VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR)'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingLanding: { ...(formData.holdingLanding || {}), advantagesTitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-
-              <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
-                {(formData.holdingLanding?.advantagesList || []).map((vant, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <span className="text-[11px] text-[#D4AF37] font-bold w-6 text-right shrink-0">
-                      #{idx + 1}
-                    </span>
-                    <input
-                      type="text"
-                      value={vant}
-                      onChange={(e) => {
-                        const current = [...(formData.holdingLanding?.advantagesList || [])];
-                        current[idx] = e.target.value;
-                        setFormData({
-                          ...formData,
-                          holdingLanding: { ...(formData.holdingLanding || {}), advantagesList: current }
-                        });
-                      }}
-                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const current = (formData.holdingLanding?.advantagesList || []).filter((_, i) => i !== idx);
-                        setFormData({
-                          ...formData,
-                          holdingLanding: { ...(formData.holdingLanding || {}), advantagesList: current }
-                        });
-                      }}
-                      className="p-1.5 text-red-400 hover:text-red-300"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 5. TABELA COMPARATIVA DE CUSTOS COMPLETA */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 space-y-4">
-              <div>
-                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                  5. Tabela Comparativa de Custos: Inventário x Holding Familiar
-                </h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">
-                  Edite os títulos, o caso exemplo e cada valor da tabela comparativa lado a lado.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.tableKicker || 'ESTUDO COMPARATIVO'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), tableKicker: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Título da Tabela</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.tableTitle || 'CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), tableTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo / Caso Exemplo (R$ 1.000.000,00...)</label>
-                <textarea
-                  rows={2}
-                  value={formData.holdingLanding?.tableSubtitle || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingLanding: { ...(formData.holdingLanding || {}), tableSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              {/* Linhas da Tabela de Custos */}
-              <div className="space-y-3 pt-2 border-t border-slate-800">
-                <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
-                  Valores dos Custos (Inventário x Holding)
-                </span>
-
-                {/* ITCD */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-red-300 mb-0.5">ITCD / ITCMD · Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.itcmdInventario || 'R$ 75.000,00 (5%)'}
+                      value={formData.slide2?.savingsPercentage || 'Economia de até 75%'}
                       onChange={(e) => setFormData({
                         ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), itcmdInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">ITCD / ITCMD · Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.itcmdHolding || 'R$ 60.000,00 (4%)'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), itcmdHolding: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-
-                {/* Honorários */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-red-300 mb-0.5">Honorários Advocatícios · Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.honorariosInventario || 'R$ 120.000,00 (8%)'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), honorariosInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Honorários Advocatícios · Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.honorariosHolding || 'R$ 70.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), honorariosHolding: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-
-                {/* Custas */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-red-300 mb-0.5">Custas de Cartório · Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.custasInventario || 'R$ 12.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), custasInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#25D366] mb-0.5">Custas de Cartório · Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.custasHolding || 'R$ 0,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), custasHolding: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                    />
-                  </div>
-                </div>
-
-                {/* Certidões */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-red-300 mb-0.5">Certidões · Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.certidoesInventario || 'R$ 3.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), certidoesInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#25D366] mb-0.5">Certidões · Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.certidoesHolding || 'R$ 0,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), certidoesHolding: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                    />
-                  </div>
-                </div>
-
-                {/* Ganho de Capital */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-red-300 mb-0.5">I.R. Ganho de Capital · Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.ganhoCapitalInventario || 'R$ 75.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), ganhoCapitalInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#25D366] mb-0.5">I.R. Ganho de Capital · Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.ganhoCapitalHolding || 'R$ 0,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), ganhoCapitalHolding: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                    />
-                  </div>
-                </div>
-
-                {/* Registro */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[10px] text-red-300 mb-0.5">Registro de Imóveis · Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.registroInventario || 'R$ 12.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), registroInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#F6E27A] mb-0.5">Registro de Imóveis · Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.registroHolding || 'R$ 3.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), registroHolding: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-
-                {/* Custo Total */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
-                  <div>
-                    <label className="block text-[10px] text-red-400 font-bold mb-0.5">Custo Total · Processo de Inventário</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.totalInventario || 'R$ 297.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), totalInventario: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-red-500/50 text-xs text-red-400 font-bold"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-[#F6E27A] font-bold mb-0.5">Custo Total · Holding Familiar</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.totalHolding || 'R$ 133.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), totalHolding: e.target.value }
+                        slide2: { ...(formData.slide2 || {}), savingsPercentage: e.target.value }
                       })}
                       className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
                     />
                   </div>
                 </div>
-
-                {/* Economia */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
-                  <div>
-                    <label className="block text-[10px] text-[#25D366] font-bold mb-0.5">Economia em R$ com a Holding</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.economiaValor || 'R$ 164.000,00'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), economiaValor: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-[#25D366]/50 text-xs text-[#25D366] font-bold"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[10px] text-white font-bold mb-0.5">Percentual de Economia</label>
-                    <input
-                      type="text"
-                      value={formData.holdingLanding?.economiaPercentual || '55,21%'}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        holdingLanding: { ...(formData.holdingLanding || {}), economiaPercentual: e.target.value }
-                      })}
-                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 6. BOX FAÇA O SEU PLANEJAMENTO 4.0 */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                6. Box: Faça o Seu Planejamento 4.0 (Chamada para Ação)
-              </h4>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Título do Box</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.ctaBoxTitle || 'FAÇA O SEU PLANEJAMENTO 4.0'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Botão Viabilidade</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.ctaBoxBtnViabilidade || 'AGENDAR DIAGNÓSTICO DE VIABILIDADE'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxBtnViabilidade: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                  />
-                </div>
               </div>
 
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Box</label>
-                <textarea
-                  rows={2}
-                  value={formData.holdingLanding?.ctaBoxText || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxText: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            {/* 7. PÚBLICO-ALVO (PARA QUEM É A HOLDING FAMILIAR?) */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-              <div className="flex items-center justify-between">
+              {/* Campo de Tempo de Transição do Slide 2 (Item 61) */}
+              <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                    7. Para Quem É a Holding Familiar? (Público-Alvo)
-                  </h4>
-                  <p className="text-[11px] text-slate-400">
-                    Perfis atendidos (Empresários, Proprietários de bens, Famílias empresárias, etc.).
+                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                    ⏱️ Tempo de Exibição do Slide 2 (Segundos - Item 61)
+                  </label>
+                  <p className="text-[11px] text-slate-300">
+                    Duração em segundos que o Slide 2 permanece na tela antes de alternar para o Slide 1.
                   </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.holdingLanding?.targetList || [];
-                    setFormData({
-                      ...formData,
-                      holdingLanding: {
-                        ...(formData.holdingLanding || {}),
-                        targetList: [...current, 'Novo perfil de cliente']
-                      }
-                    });
-                  }}
-                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
-                >
-                  <Plus className="w-3 h-3" /> Adicionar Perfil
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.targetSubtitle || 'PERFIL E ABRANGÊNCIA'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), targetSubtitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div className="sm:col-span-2">
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Título</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.targetTitle || 'PARA QUEM É A HOLDING FAMILIAR?'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), targetTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Texto Introdutório</label>
-                <textarea
-                  rows={2}
-                  value={formData.holdingLanding?.targetIntro || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingLanding: { ...(formData.holdingLanding || {}), targetIntro: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {(formData.holdingLanding?.targetList || []).map((target, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <input
-                      type="text"
-                      value={target}
-                      onChange={(e) => {
-                        const current = [...(formData.holdingLanding?.targetList || [])];
-                        current[idx] = e.target.value;
-                        setFormData({
-                          ...formData,
-                          holdingLanding: { ...(formData.holdingLanding || {}), targetList: current }
-                        });
-                      }}
-                      className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const current = (formData.holdingLanding?.targetList || []).filter((_, i) => i !== idx);
-                        setFormData({
-                          ...formData,
-                          holdingLanding: { ...(formData.holdingLanding || {}), targetList: current }
-                        });
-                      }}
-                      className="p-1.5 text-red-400 hover:text-red-300"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 8. DR. ALDO LEÃO NA LANDING PAGE */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                8. Seção Dr. Aldo Leão na Landing Page
-              </h4>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker Superior</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.drAldoKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoKicker: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Legenda da Foto de Palestra</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.drAldoCaption || 'Conferência e Liderança em Planejamento Patrimonial 4.0'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoCaption: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-              </div>
-
-              <ImageUploadField
-                label="Foto de Palestra do Dr. Aldo Leão na Landing Page"
-                description="Foto exclusiva para a landing page (evita repetição da foto do site principal)."
-                currentValue={formData.holdingLanding?.drAldoPhotoUrl || '/img/palestra-1.jpg'}
-                defaultValue="/img/palestra-1.jpg"
-                aspectRatio="video"
-                onChange={(newUrl) => setFormData({
-                  ...formData,
-                  holdingLanding: { ...(formData.holdingLanding || {}), drAldoPhotoUrl: newUrl }
-                })}
-              />
-
-              <div className="space-y-2">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 1</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.drAldoBio1 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio1: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 2</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.drAldoBio2 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio2: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 3</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.drAldoBio3 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio3: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 4</label>
-                  <textarea
-                    rows={2}
-                    value={formData.holdingLanding?.drAldoBio4 || ''}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio4: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* 9. PERGUNTAS FREQUENTES (FAQS COMPLETAS COM ADICIONAR E REMOVER) */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                <div>
-                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                    9. Perguntas Frequentes da Landing Page (Sanfona Interativa)
-                  </h4>
-                  <p className="text-[11px] text-slate-400">
-                    As 8 perguntas e respostas essenciais. Você pode alterar, excluir ou adicionar novas perguntas.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    const current = formData.holdingLanding?.faqs || [];
-                    setFormData({
-                      ...formData,
-                      holdingLanding: {
-                        ...(formData.holdingLanding || {}),
-                        faqs: [
-                          ...current,
-                          {
-                            q: 'Nova Pergunta Frequente sobre Holding Familiar?',
-                            a: 'Resposta detalhada com orientação jurídica clara e preventiva.'
-                          }
-                        ]
-                      }
-                    });
-                  }}
-                  className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 flex items-center gap-1.5 cursor-pointer shadow-md"
-                >
-                  <Plus className="w-3.5 h-3.5" /> Adicionar Pergunta
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Kicker Superior</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.faqKicker || 'DÚVIDAS'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), faqKicker: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Título da Seção</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.faqTitle || 'PERGUNTAS FREQUENTES'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), faqTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-              </div>
-
-              {/* Lista de FAQs */}
-              <div className="space-y-4">
-                {(formData.holdingLanding?.faqs || []).map((faq, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-[#071122] border border-slate-700 space-y-2">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-bold text-[#E5C158] uppercase">
-                        Pergunta #{idx + 1}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const current = (formData.holdingLanding?.faqs || []).filter((_, i) => i !== idx);
-                          setFormData({
-                            ...formData,
-                            holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
-                          });
-                        }}
-                        className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 cursor-pointer"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" /> Remover
-                      </button>
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] text-slate-400 mb-0.5">Pergunta</label>
-                      <input
-                        type="text"
-                        value={faq.q}
-                        onChange={(e) => {
-                          const current = [...(formData.holdingLanding?.faqs || [])];
-                          current[idx] = { ...current[idx], q: e.target.value };
-                          setFormData({
-                            ...formData,
-                            holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
-                          });
-                        }}
-                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[10px] text-slate-400 mb-0.5">Resposta</label>
-                      <textarea
-                        rows={3}
-                        value={faq.a}
-                        onChange={(e) => {
-                          const current = [...(formData.holdingLanding?.faqs || [])];
-                          current[idx] = { ...current[idx], a: e.target.value };
-                          setFormData({
-                            ...formData,
-                            holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
-                          });
-                        }}
-                        className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-slate-200 leading-relaxed"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 10. BOX ALGUMA DÚVIDA? E RODAPÉ */}
-            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
-                10. Box Final "Alguma Dúvida?" & Rodapé Exclusivo
-              </h4>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Título do Box</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.doubtTitle || 'ALGUMA DÚVIDA?'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), doubtTitle: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Botão Especialista</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.doubtBtnText || 'FALAR COM O ESPECIALISTA'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), doubtBtnText: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] text-slate-400 mb-0.5">Rodapé Direitos Autorais</label>
-                  <input
-                    type="text"
-                    value={formData.holdingLanding?.footerCopyright || '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      holdingLanding: { ...(formData.holdingLanding || {}), footerCopyright: e.target.value }
-                    })}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] text-slate-400 mb-0.5">Texto de Orientação do Box</label>
-                <textarea
-                  rows={2}
-                  value={formData.holdingLanding?.doubtText || ''}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    holdingLanding: { ...(formData.holdingLanding || {}), doubtText: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 10: PUBLICAÇÕES & ARTIGOS */}
-      {activeTab === 'publications' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
-            <div>
-              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-[#F6E27A]" />
-                <span>Aba 10 · Publicações Jurídicas (Artigos & Notícias) · Página 9 do Site</span>
-              </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Edite o cabeçalho e os textos introdutórios oficiais, configure a assinatura automática e gerencie todos os artigos e notícias.
-              </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
-              <button
-                type="button"
-                onClick={() => handleAddPublication('artigo')}
-                className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
-                title="Criar novo Artigo Jurídico assinado pelo Dr. Aldo Leão"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Novo Artigo Jurídico</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleAddPublication('noticia')}
-                className="px-4 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#142A52] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
-                title="Criar nova Notícia Jurídica com foco informativo"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Nova Notícia Jurídica</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Atalhos Rápidos da Aba 10 */}
-          <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-inner">
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[11px] text-[#F6E27A] font-bold uppercase tracking-wider">Acesso Rápido:</span>
-              <a
-                href="#publicacoes-cadastradas"
-                className="px-3 py-1.5 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-white text-xs font-semibold hover:bg-[#D4AF37]/30 transition-colors"
-              >
-                📚 Gerenciar Artigos e Notícias ({formData.publications?.length || 0})
-              </a>
-              <a
-                href="#cabecalho-secao-publicacoes"
-                className="px-3 py-1.5 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 text-xs hover:text-white hover:border-[#D4AF37]/50 transition-colors"
-              >
-                🏛️ Cabeçalho & Parágrafos da Seção
-              </a>
-              <a
-                href="#assinatura-artigos"
-                className="px-3 py-1.5 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 text-xs hover:text-white hover:border-[#D4AF37]/50 transition-colors"
-              >
-                ✍️ Assinatura Automática
-              </a>
-            </div>
-          </div>
-
-          {/* Cabeçalho da Seção Publicações Jurídicas */}
-          <div id="cabecalho-secao-publicacoes" className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
-              Cabeçalho & 3 Parágrafos Oficiais da Seção (Página 9)
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Frase Dourada Superior (Kicker)
-                </label>
-                <input
-                  type="text"
-                  value={formData.publicationsSection?.kicker || 'NOTÍCIAS E ARTIGOS JURÍDICOS'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    publicationsSection: { ...(formData.publicationsSection || {}), kicker: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Título em Branco
-                </label>
-                <input
-                  type="text"
-                  value={formData.publicationsSection?.titleWhite || 'PUBLICAÇÕES'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    publicationsSection: { ...(formData.publicationsSection || {}), titleWhite: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Destaque Dourado do Título
-                </label>
-                <input
-                  type="text"
-                  value={formData.publicationsSection?.titleGold || 'JURÍDICAS'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    publicationsSection: { ...(formData.publicationsSection || {}), titleGold: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 1 Oficial
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    publicationsSection: { ...(formData.publicationsSection || {}), paragraph1: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 2 Oficial
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.publicationsSection?.paragraph2 || 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    publicationsSection: { ...(formData.publicationsSection || {}), paragraph2: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Parágrafo 3 Oficial
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.publicationsSection?.paragraph3 || 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    publicationsSection: { ...(formData.publicationsSection || {}), paragraph3: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* SEÇÃO EXCLUSIVA: ASSINATURA AUTOMÁTICA DOS ARTIGOS E NOTÍCIAS */}
-          <div id="assinatura-artigos" className="p-5 sm:p-6 rounded-xl bg-[#050B14] border-2 border-[#D4AF37]/60 shadow-2xl space-y-5 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-32 bg-[#D4AF37]/5 blur-3xl pointer-events-none rounded-full" />
-
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800 relative z-10">
-              <div className="flex items-start gap-3">
-                <div className="p-2.5 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] mt-0.5">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h4 className="font-cinzel text-base font-bold text-white">
-                      Assinatura Automática dos Artigos e Notícias
-                    </h4>
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                      Captação de Leads
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                    Esta assinatura é inserida <strong>automaticamente ao final de cada notícia ou artigo</strong>, sem necessidade de digitação em cada texto.
-                    Se quiser alterar o texto ou as cores da assinatura, basta digitar nos campos específicos abaixo.
-                  </p>
-                </div>
-              </div>
-
-              {/* Switch Ativar / Desativar */}
-              <label className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-[#071122] border border-slate-700 hover:border-[#D4AF37]/60 cursor-pointer transition-colors self-start sm:self-auto shrink-0">
-                <input
-                  type="checkbox"
-                  checked={formData.articleSignature?.enabled ?? true}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      articleSignature: {
-                        ...(formData.articleSignature || {
-                          enabled: true,
-                          line1: 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                          line1Color: '#FFFFFF',
-                          line2: 'Excelência Jurídica Desde 1908',
-                          line2Color: '#D4AF37',
-                          buttonText: 'AGENDAR CONSULTA',
-                          buttonTextColor: '#E0E6ED',
-                          whatsappNumber: '',
-                          whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
-                        }),
-                        enabled: e.target.checked
-                      }
-                    });
-                  }}
-                  className="w-4 h-4 rounded text-[#D4AF37] accent-[#D4AF37] cursor-pointer"
-                />
-                <span className="text-xs font-semibold text-white">
-                  {formData.articleSignature?.enabled !== false ? 'Assinatura Ativada' : 'Assinatura Desativada'}
-                </span>
-              </label>
-            </div>
-
-            {/* Controles de Configuração da Assinatura */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
-              {/* Linha 1 (Item 56: "Núcleo de Comunicação" #FFFFFF) */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Linha 1 da Assinatura (Núcleo de Comunicação)
-                </label>
                 <div className="flex items-center gap-2">
                   <input
-                    type="text"
-                    value={formData.articleSignature?.line1 ?? 'Núcleo de Comunicação'}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        articleSignature: {
-                          ...(formData.articleSignature || {}),
-                          enabled: formData.articleSignature?.enabled ?? true,
-                          line1: e.target.value,
-                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                          line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                          line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
-                          line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
-                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
-                        }
-                      });
-                    }}
-                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
-                    placeholder="Ex: Núcleo de Comunicação"
-                  />
-                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 1">
-                    <input
-                      type="color"
-                      value={formData.articleSignature?.line1Color || '#FFFFFF'}
-                      onChange={(e) => {
-                        setFormData({
-                          ...formData,
-                          articleSignature: {
-                            ...(formData.articleSignature || {}),
-                            enabled: formData.articleSignature?.enabled ?? true,
-                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
-                            line1Color: e.target.value,
-                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
-                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
-                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
-                          }
-                        });
-                      }}
-                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
-                    />
-                    <span className="text-[10px] text-slate-400 font-mono pr-1">
-                      {formData.articleSignature?.line1Color || '#FFFFFF'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Linha 2 (Item 56: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" #D4AF37) */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Linha 2 da Assinatura (Escritório / Marca)
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={formData.articleSignature?.line2 ?? 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        articleSignature: {
-                          ...(formData.articleSignature || {}),
-                          enabled: formData.articleSignature?.enabled ?? true,
-                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
-                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                          line2: e.target.value,
-                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                          line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
-                          line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
-                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
-                        }
-                      });
-                    }}
-                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
-                    placeholder="Ex: ALDO LEÃO ADVOCACIA ESTRATÉGICA"
-                  />
-                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 2">
-                    <input
-                      type="color"
-                      value={formData.articleSignature?.line2Color || '#D4AF37'}
-                      onChange={(e) => {
-                        setFormData({
-                          ...formData,
-                          articleSignature: {
-                            ...(formData.articleSignature || {}),
-                            enabled: formData.articleSignature?.enabled ?? true,
-                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
-                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                            line2Color: e.target.value,
-                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
-                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
-                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
-                          }
-                        });
-                      }}
-                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
-                    />
-                    <span className="text-[10px] text-slate-400 font-mono pr-1">
-                      {formData.articleSignature?.line2Color || '#D4AF37'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Linha 3 (Item 56: "Excelência Jurídica Desde 1908" #F8F8F8) */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Linha 3 da Assinatura (Slogan / Centenário)
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={formData.articleSignature?.line3 ?? 'Excelência Jurídica Desde 1908'}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        articleSignature: {
-                          ...(formData.articleSignature || {}),
-                          enabled: formData.articleSignature?.enabled ?? true,
-                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
-                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                          line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                          line3: e.target.value,
-                          line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
-                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
-                        }
-                      });
-                    }}
-                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
-                    placeholder="Ex: Excelência Jurídica Desde 1908"
-                  />
-                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 3">
-                    <input
-                      type="color"
-                      value={formData.articleSignature?.line3Color || '#F8F8F8'}
-                      onChange={(e) => {
-                        setFormData({
-                          ...formData,
-                          articleSignature: {
-                            ...(formData.articleSignature || {}),
-                            enabled: formData.articleSignature?.enabled ?? true,
-                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
-                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
-                            line3Color: e.target.value,
-                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
-                          }
-                        });
-                      }}
-                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
-                    />
-                    <span className="text-[10px] text-slate-400 font-mono pr-1">
-                      {formData.articleSignature?.line3Color || '#F8F8F8'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Botão CTA WhatsApp */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Texto do Botão de Agendamento (WhatsApp)
-                </label>
-                <div className="flex items-center gap-2">
-                  <input
-                    type="text"
-                    value={formData.articleSignature?.buttonText ?? 'AGENDAR CONSULTA'}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        articleSignature: {
-                          ...(formData.articleSignature || {}),
-                          enabled: formData.articleSignature?.enabled ?? true,
-                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                          line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
-                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                          buttonText: e.target.value,
-                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
-                        }
-                      });
-                    }}
-                    className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
-                    placeholder="Ex: AGENDAR CONSULTA"
-                  />
-                  <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor do Texto do Botão">
-                    <input
-                      type="color"
-                      value={formData.articleSignature?.buttonTextColor || '#E0E6ED'}
-                      onChange={(e) => {
-                        setFormData({
-                          ...formData,
-                          articleSignature: {
-                            ...(formData.articleSignature || {}),
-                            enabled: formData.articleSignature?.enabled ?? true,
-                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
-                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                            buttonTextColor: e.target.value,
-                          }
-                        });
-                      }}
-                      className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
-                    />
-                    <span className="text-[10px] text-slate-400 font-mono pr-1">
-                      {formData.articleSignature?.buttonTextColor || '#E0E6ED'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* WhatsApp Específico para Leads de Artigos */}
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  WhatsApp para Atendimento dos Artigos (Opcional)
-                </label>
-                <input
-                  type="text"
-                  value={formData.articleSignature?.whatsappNumber ?? ''}
-                  onChange={(e) => {
-                    setFormData({
+                    type="number"
+                    min={3}
+                    max={120}
+                    value={formData.hero.slide2Duration || 18}
+                    onChange={(e) => setFormData({
                       ...formData,
-                      articleSignature: {
-                        ...(formData.articleSignature || {}),
-                        enabled: formData.articleSignature?.enabled ?? true,
-                        line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                        line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                        line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
-                        line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                        buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                        buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
-                        whatsappNumber: e.target.value,
-                      }
-                    });
-                  }}
-                  className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
-                  placeholder="Deixe em branco para usar o WhatsApp oficial do site: (51) 99808-8998"
-                />
+                      hero: { ...formData.hero, slide2Duration: Number(e.target.value) || 18 }
+                    })}
+                    className="w-24 p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm font-bold text-center text-white"
+                  />
+                  <span className="text-xs text-slate-300 font-semibold">segundos</span>
+                </div>
               </div>
 
-              {/* Mensagem Pré-definida */}
-              <div className="md:col-span-2">
-                <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Mensagem Pré-definida enviada no WhatsApp
-                </label>
-                <textarea
-                  rows={2}
-                  value={formData.articleSignature?.whatsappMessage ?? 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      articleSignature: {
-                        ...(formData.articleSignature || {}),
-                        enabled: formData.articleSignature?.enabled ?? true,
-                        line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
-                        line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
-                        line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
-                        line2Color: formData.articleSignature?.line2Color || '#D4AF37',
-                        buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
-                        buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
-                        whatsappMessage: e.target.value,
-                      }
-                    });
-                  }}
-                  className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white focus:border-[#D4AF37] focus:outline-none leading-relaxed"
-                  placeholder="Mensagem padrão enviada quando o lead clica no botão AGENDAR CONSULTA"
-                />
-                <p className="text-[10px] text-slate-400 mt-1">
-                  Ao clicar, o WhatsApp é aberto com essa mensagem pré-preenchida, informando inclusive qual artigo o leitor estava consultando.
-                </p>
-              </div>
-            </div>
-
-            {/* Prévia Visual ao Vivo */}
-            <div className="pt-4 border-t border-slate-800 relative z-10">
-              <span className="block text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold mb-2 flex items-center gap-1.5">
-                <Eye className="w-3.5 h-3.5" />
-                <span>Prévia Visual em Tempo Real (Como aparecerá ao final de cada artigo e notícia):</span>
-              </span>
-              <ArticleSignature
-                previewMode={true}
-                customConfig={formData.articleSignature}
-                publicationTitle="A Nova Disciplina do ITCMD e o Impacto Imediato na Estruturação de Holdings Familiares"
-              />
-            </div>
-          </div>
-
-          {/* LISTA DE PUBLICAÇÕES (ARTIGOS E NOTÍCIAS) */}
-          <div id="publicacoes-cadastradas" className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
-              <div>
-                <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#F6E27A]" />
-                  <span>Publicações Cadastradas ({formData.publications?.length || 0})</span>
+              {/* Controles de Escurecimento e Contraste do Slide 2 */}
+              <div className="p-4 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-3">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-1.5">
+                  <span>Contraste & Escurecimento da Imagem do Slide 2</span>
                 </h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">
-                  Novos artigos e notícias aparecem no topo da lista e já são publicados no site.
+                <p className="text-[11px] text-slate-300">
+                  Ajuste o brilho e a película escura para equilibrar a luz do Slide 2 com o Slide 1.
                 </p>
-              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                        Brilho da Imagem
+                      </label>
+                      <span className="text-xs font-bold text-[#F6E27A]">
+                        {formData.hero.slide2Brightness ?? 90}%
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min={50}
+                      max={120}
+                      value={formData.hero.slide2Brightness ?? 90}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        hero: { ...formData.hero, slide2Brightness: Number(e.target.value) }
+                      })}
+                      className="w-full accent-[#D4AF37] cursor-pointer"
+                    />
+                    <span className="text-[10px] text-slate-400">Padrão: 90%</span>
+                  </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleAddPublication('artigo')}
-                  className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>+ Artigo Jurídico</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleAddPublication('noticia')}
-                  className="px-3.5 py-1.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#142A52] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>+ Notícia Jurídica</span>
-                </button>
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[11px] uppercase tracking-wider text-slate-300 font-semibold">
+                        Película Escura (Opacidade)
+                      </label>
+                      <span className="text-xs font-bold text-[#F6E27A]">
+                        {formData.hero.slide2OverlayOpacity ?? 35}%
+                      </span>
+                    </div>
+                    <input
+                      type="range"
+                      min={10}
+                      max={85}
+                      value={formData.hero.slide2OverlayOpacity ?? 35}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        hero: { ...formData.hero, slide2OverlayOpacity: Number(e.target.value) }
+                      })}
+                      className="w-full accent-[#D4AF37] cursor-pointer"
+                    />
+                    <span className="text-[10px] text-slate-400">Padrão: 35%</span>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {(formData.publications || []).map((pub, idx) => (
-              <div
-                key={pub.id || idx}
-                id={`pub-item-${pub.id}`}
-                className={`p-5 rounded-xl bg-[#050B14] border transition-all space-y-4 ${
-                  idx === 0
-                    ? 'border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)] ring-1 ring-[#D4AF37]/50'
-                    : 'border-slate-800 hover:border-[#D4AF37]/40'
-                }`}
-              >
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
-                  <div className="flex items-center gap-2">
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                      pub.type === 'artigo' ? 'bg-[#D4AF37] text-black font-black' : 'bg-[#0E1F3D] text-[#F6E27A] border border-[#D4AF37]/50 font-bold'
-                    }`}>
-                      {pub.type === 'artigo' ? 'Artigo Jurídico' : 'Notícia Jurídica'}
-                    </span>
-                    <span className="text-xs font-semibold text-slate-400">
-                      Publicação #{idx + 1}
-                    </span>
-                    {idx === 0 && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                        Item no Topo
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        updateSiteConfig(formData);
-                        showNotification('Publicação salva com sucesso!');
-                      }}
-                      className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
-                      title="Salvar esta publicação imediatamente"
-                    >
-                      <Save className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Salvar</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleRemovePublication(idx)}
-                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors px-2 py-1 rounded hover:bg-red-500/10"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      <span>Remover</span>
-                    </button>
-                  </div>
-                </div>
-
-                
-                {/* CAMPO DE TÍTULO OFICIAL DESTACADO EM DOURADO */}
-                <div className="p-3.5 rounded-xl bg-[#071122] border-2 border-[#D4AF37]/70 space-y-1.5 shadow-md">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#F6E27A] flex items-center justify-between">
-                    <span className="flex items-center gap-1.5">
-                      <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-                      <span>🏷️ TÍTULO DO ARTIGO OU NOTÍCIA (Obrigatório)</span>
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-normal">Este título aparecerá em destaque no site e nos cartões</span>
-                  </label>
-                  <input
-                    id={`pub-title-${pub.id}`}
-                    type="text"
-                    value={pub.title}
-                    onChange={(e) => {
-                      const updated = [...(formData.publications || [])];
-                      updated[idx].title = e.target.value;
-                      setFormData({ ...formData, publications: updated });
-                    }}
-                    placeholder="Digite o título do artigo ou notícia (Ex: A Nova Disciplina do ITCMD)"
-                    className="w-full p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm sm:text-base text-white font-bold font-cinzel focus:border-[#F6E27A] focus:outline-none focus:ring-2 focus:ring-[#F6E27A]/30"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {/* Tipo de Publicação */}
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Tipo de Conteúdo
-                    </label>
-                    <select
-                      value={pub.type || 'artigo'}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].type = e.target.value as 'artigo' | 'noticia';
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    >
-                      <option value="artigo">Artigo Jurídico (Dr. Aldo Leão)</option>
-                      <option value="noticia">Notícia Jurídica</option>
-                    </select>
-                  </div>
-
-                  {/* Área */}
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Área Jurídica
-                    </label>
-                    <input
-                      type="text"
-                      value={pub.area}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].area = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                      placeholder="Ex: Planejamento Patrimonial 4.0"
-                    />
-                  </div>
-
-                  {/* Data */}
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Data da Publicação
-                    </label>
-                    <input
-                      type="text"
-                      value={pub.date || ''}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].date = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                      placeholder="Ex: 13/11/2026"
-                    />
-                  </div>
-                </div>
-
-                {/* Programação de Publicação para Data/Hora Futura (Item 59) */}
-                <div className="p-3 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                  <div className="flex items-center gap-2.5">
-                    <input
-                      type="checkbox"
-                      id={`schedule-${pub.id || idx}`}
-                      checked={pub.isScheduled || false}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].isScheduled = e.target.checked;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      className="w-4 h-4 accent-[#D4AF37] cursor-pointer"
-                    />
-                    <label htmlFor={`schedule-${pub.id || idx}`} className="text-xs font-bold text-[#F6E27A] cursor-pointer">
-                      Programar publicação para data e hora futura (Item 59)
-                    </label>
-                  </div>
-
-                  {pub.isScheduled && (
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] text-slate-300">Publicar em:</span>
-                      <input
-                        type="datetime-local"
-                        value={pub.publishAt || ''}
-                        onChange={(e) => {
-                          const updated = [...(formData.publications || [])];
-                          updated[idx].publishAt = e.target.value;
-                          setFormData({ ...formData, publications: updated });
-                        }}
-                        className="p-1.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Tempo de Leitura Estimado
-                  </label>
-                  <input
-                    type="text"
-                    value={pub.readTime || ''}
-                    onChange={(e) => {
-                      const updated = [...(formData.publications || [])];
-                      updated[idx].readTime = e.target.value;
-                      setFormData({ ...formData, publications: updated });
-                    }}
-                    placeholder="Ex: 5 min de leitura"
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                    Resumo / Excerpt (Exibido no Cartão da Seção)
-                  </label>
-                  <textarea
-                    rows={2}
-                    value={pub.excerpt}
-                    onChange={(e) => {
-                      const updated = [...(formData.publications || [])];
-                      updated[idx].excerpt = e.target.value;
-                      setFormData({ ...formData, publications: updated });
-                    }}
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
-                  />
-                </div>
-
-                <RichTextarea
-                  label="Conteúdo Completo (Texto Integral com Editor Rico: Tabelas, Marcadores, Imagens, Cores e Formatação)"
-                  value={pub.content || ''}
-                  onChange={(val) => {
-                    const updated = [...(formData.publications || [])];
-                    updated[idx].content = val;
-                    setFormData({ ...formData, publications: updated });
-                  }}
-                  rows={10}
-                  placeholder="Escreva ou cole aqui o conteúdo completo do artigo ou notícia jurídica..."
-                  hint="A assinatura automática oficial é anexada ao final do texto"
-                />
-
-                {/* Metadados SEO Ocultos para Indexação nos Buscadores (Itens 17 e 55) */}
-                <div className="p-4 rounded-lg bg-[#071122] border border-[#D4AF37]/25 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
-                      Metadados SEO para Buscadores (Google / Bing) · Campos Ocultos
-                    </span>
-                    <span className="text-[10px] text-slate-400">Indexado por robôs de busca sem poluir o layout</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                        Título SEO (Title Tag)
-                      </label>
-                      <input
-                        type="text"
-                        value={pub.seoTitle || ''}
-                        onChange={(e) => {
-                          const updated = [...(formData.publications || [])];
-                          updated[idx].seoTitle = e.target.value;
-                          setFormData({ ...formData, publications: updated });
-                        }}
-                        placeholder={pub.title || "Ex: Holding Familiar e Proteção Patrimonial | Dr. Aldo Leão"}
-                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                        Palavras-Chave (# Tags)
-                      </label>
-                      <input
-                        type="text"
-                        value={(pub.keywords || []).join(', ')}
-                        onChange={(e) => {
-                          const updated = [...(formData.publications || [])];
-                          updated[idx].keywords = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
-                          setFormData({ ...formData, publications: updated });
-                        }}
-                        placeholder="Ex: #holding, #itcmd, #inventario, #planejamento"
-                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Meta Descrição (Meta Description)
-                    </label>
-                    <textarea
-                      rows={2}
-                      value={pub.metaDescription || ''}
-                      onChange={(e) => {
-                        const updated = [...(formData.publications || [])];
-                        updated[idx].metaDescription = e.target.value;
-                        setFormData({ ...formData, publications: updated });
-                      }}
-                      placeholder={pub.excerpt || "Breve descrição otimizada para aparecer nos resultados de busca do Google (150 a 160 caracteres)..."}
-                      className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
-        </div>
-      )}
+        )}
 
-      {/* TAB 11: LIVROS DIGITAIS */}
-      {activeTab === 'books' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
-            <div>
-              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-                <BookOpen className="w-5 h-5 text-[#F6E27A]" />
-                <span>Aba 11 · Livros Digitais (Acervo de 8 Obras) · Página 10 do Site</span>
+        {/* TAB 3: PRESENÇA NACIONAL DIGITAL */}
+        {activeTab === 'digital_presence' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white">
+                Página 2 · Presença Nacional Digital
               </h3>
               <p className="text-xs text-slate-400 mt-0.5">
-                Edite os textos do cabeçalho oficial da página e gerencie os 8 livros digitais publicados com download gratuito e capas personalizadas.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleAddBook}
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>+ Adicionar Livro Digital</span>
-            </button>
-          </div>
-
-          {/* Cabeçalho Oficial da Seção Livros Digitais */}
-          <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
-            <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
-              Cabeçalho & 3 Parágrafos Oficiais da Página (Página 10)
-            </span>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Frase Dourada Superior (Pill)
-                </label>
-                <input
-                  type="text"
-                  value={formData.booksSection?.goldKicker || 'Acervo de Livros Digitais Publicados'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    booksSection: { ...(formData.booksSection || {}), goldKicker: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Título em Branco
-                </label>
-                <input
-                  type="text"
-                  value={formData.booksSection?.titleWhite || 'LIVROS'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    booksSection: { ...(formData.booksSection || {}), titleWhite: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                  Destaque Dourado do Título
-                </label>
-                <input
-                  type="text"
-                  value={formData.booksSection?.titleGold || 'DIGITAIS'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    booksSection: { ...(formData.booksSection || {}), titleGold: e.target.value }
-                  })}
-                  className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <RichTextarea
-                label="Parágrafo 1 Oficial"
-                rows={2}
-                value={formData.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  booksSection: { ...(formData.booksSection || {}), paragraph1: val }
-                })}
-              />
-
-              <RichTextarea
-                label="Parágrafo 2 Oficial"
-                rows={2}
-                value={formData.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  booksSection: { ...(formData.booksSection || {}), paragraph2: val }
-                })}
-              />
-
-              <RichTextarea
-                label="Parágrafo 3 Oficial"
-                rows={2}
-                value={formData.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
-                onChange={(val) => setFormData({
-                  ...formData,
-                  booksSection: { ...(formData.booksSection || {}), paragraph3: val }
-                })}
-              />
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
-              <div>
-                <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-                  <span>Acervo de Obras e Livros Digitais ({formData.digitalBooks?.length || 0})</span>
-                </h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">
-                  Novos livros adicionados entram automaticamente no topo do acervo oficial.
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleAddBook}
-                className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
-              >
-                <Plus className="w-3.5 h-3.5" />
-                <span>+ Novo Livro Digital</span>
-              </button>
-            </div>
-
-            {(formData.digitalBooks || []).map((book, idx) => (
-              <div
-                key={book.id || idx}
-                id={`book-item-${book.id}`}
-                className={`p-5 rounded-xl bg-[#050B14] border transition-all space-y-4 ${
-                  idx === 0
-                    ? 'border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)] ring-1 ring-[#D4AF37]/50'
-                    : 'border-slate-800 hover:border-[#D4AF37]/40'
-                }`}
-              >
-                <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-[#E5C158] uppercase">
-                      Livro Digital #{idx + 1}
-                    </span>
-                    {idx === 0 && (
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                        Item no Topo
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        updateSiteConfig(formData);
-                        showNotification('Livro digital salvo com sucesso!');
-                      }}
-                      className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
-                      title="Salvar este livro imediatamente"
-                    >
-                      <Save className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Salvar</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveBook(idx)}
-                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors px-2 py-1 rounded hover:bg-red-500/10"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                      <span>Remover</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Upload de Capa para cada Livro */}
-                <ImageUploadField
-                  label={`Capa do Livro: ${book.title}`}
-                  description="Carregue a imagem da capa do livro digital a partir do seu dispositivo."
-                  currentValue={book.coverImage}
-                  aspectRatio="video"
-                  onChange={(newUrl) => {
-                    const updated = [...(formData.digitalBooks || [])];
-                    updated[idx].coverImage = newUrl;
-                    setFormData({ ...formData, digitalBooks: updated });
-                  }}
-                />
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="sm:col-span-2">
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Título do Livro
-                    </label>
-                    <input
-                      type="text"
-                      value={book.title}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].title = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Área Jurídica
-                    </label>
-                    <input
-                      type="text"
-                      value={book.area}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].area = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Autor
-                    </label>
-                    <input
-                      type="text"
-                      value={book.author}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].author = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
-                      Número de Páginas (Editável pelo Dr. Aldo Leão)
-                    </label>
-                    <input
-                      type="text"
-                      value={book.pages || '144 páginas'}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].pages = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      placeholder="Ex: 144 páginas"
-                      className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                    />
-                  </div>
-                </div>
-
-                {/* Link / URL do PDF do Livro para Download Direto */}
-                <div>
-                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 mb-1">
-                    Link / URL do PDF do Livro (Para Download Direto)
-                  </label>
-                  <input
-                    type="text"
-                    value={book.pdfUrl || ''}
-                    onChange={(e) => {
-                      const updated = [...(formData.digitalBooks || [])];
-                      updated[idx].pdfUrl = e.target.value;
-                      setFormData({ ...formData, digitalBooks: updated });
-                    }}
-                    placeholder="Ex: /docs/livro-holding.pdf ou https://..."
-                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
-                  />
-                </div>
-
-                <RichTextarea
-                  label="Sinopse da Obra (Card Principal e Modal)"
-                  rows={3}
-                  value={book.description}
-                  onChange={(val) => {
-                    const updated = [...(formData.digitalBooks || [])];
-                    updated[idx].description = val;
-                    setFormData({ ...formData, digitalBooks: updated });
-                  }}
-                />
-
-                {/* Modal: Sumário da Obra e Trecho da Obra (Itens 70, 101 e 111) */}
-                <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/30 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
-                      Modal "Ler Resumo Executivo / Sumário da Obra" (Itens 70, 101 e 111)
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        const currentChapters = updated[idx].chapters || [];
-                        updated[idx].chapters = [...currentChapters, `Capítulo ${currentChapters.length + 1}: Novo Capítulo`];
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
-                    >
-                      <Plus className="w-3 h-3" /> Adicionar Capítulo
-                    </button>
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] text-slate-400 uppercase mb-1">
-                      Título da Seção de Capítulos (Ex: Sumário Executivo da Obra)
-                    </label>
-                    <input
-                      type="text"
-                      value={book.summaryTitle || 'Sumário Executivo da Obra'}
-                      onChange={(e) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].summaryTitle = e.target.value;
-                        setFormData({ ...formData, digitalBooks: updated });
-                      }}
-                      className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
-                    {(book.chapters || []).map((chap, cIdx) => (
-                      <div key={cIdx} className="flex items-center gap-2">
-                        <input
-                          type="text"
-                          value={chap}
-                          onChange={(e) => {
-                            const updated = [...(formData.digitalBooks || [])];
-                            const chaps = [...(updated[idx].chapters || [])];
-                            chaps[cIdx] = e.target.value;
-                            updated[idx].chapters = chaps;
-                            setFormData({ ...formData, digitalBooks: updated });
-                          }}
-                          className="flex-1 p-1.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => {
-                            const updated = [...(formData.digitalBooks || [])];
-                            updated[idx].chapters = (updated[idx].chapters || []).filter((_, i) => i !== cIdx);
-                            setFormData({ ...formData, digitalBooks: updated });
-                          }}
-                          className="p-1.5 text-red-400 hover:text-red-300 cursor-pointer"
-                        >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-
-                  <RichTextarea
-                    label="Trecho da Obra / Citação em Destaque no Modal"
-                    rows={3}
-                    value={book.sampleExcerpt || ''}
-                    onChange={(val) => {
-                      const updated = [...(formData.digitalBooks || [])];
-                      updated[idx].sampleExcerpt = val;
-                      setFormData({ ...formData, digitalBooks: updated });
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* TAB 12: CONTATO & TELEFONES */}
-      {activeTab === 'contact' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white">
-              Página 11 · Canais de Comunicação, WhatsApp Oficial & Localização
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Altere o número de WhatsApp que recebe mensagens de todo o site, telefones e e-mails.
-            </p>
-          </div>
-
-          {/* WhatsApp Oficial Principal */}
-          <div className="p-4 rounded-xl bg-[#0E1F3D] border border-[#D4AF37]/50">
-            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1.5 flex items-center gap-2">
-              <PhoneCall className="w-4 h-4" />
-              <span>Número Oficial do WhatsApp do Escritório:</span>
-            </label>
-            <input
-              type="text"
-              value={formData.contact.whatsappNumber}
-              onChange={(e) => setFormData({
-                ...formData,
-                contact: { ...formData.contact, whatsappNumber: e.target.value.replace(/\D/g, '') }
-              })}
-              placeholder="Ex: 5551998088998 (com DDI e DDD)"
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-[#D4AF37] text-sm text-[#F6E27A] font-bold tabular-nums"
-            />
-            <p className="text-[11px] text-slate-300 mt-2">
-              Ao alterar este número, todos os botões do WhatsApp e formulários do site direcionam diretamente para este WhatsApp oficial.
-            </p>
-          </div>
-
-          {/* Box 3: TELEFONES (Totalmente Editável) */}
-          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-            <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
-              <Phone className="w-4 h-4 text-[#F6E27A]" />
-              <span>Box 3 · Telefones de Atendimento</span>
-            </h4>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Título do Box de Telefones
-              </label>
-              <input
-                type="text"
-                value={formData.contact.phonesBoxTitle || 'TELEFONES'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, phonesBoxTitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Telefone Celular / WhatsApp 1
-                </label>
-                <input
-                  type="text"
-                  value={formData.contact.phonePrimary}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, phonePrimary: e.target.value.replace(/\./g, '') }
-                  })}
-                  onBlur={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, phonePrimary: cleanAndFormatPhone(e.target.value, '(51) 99808-8998') }
-                  })}
-                  placeholder="(51) 99808-8998"
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-                <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99808-8998</p>
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Telefone Celular / WhatsApp 2
-                </label>
-                <input
-                  type="text"
-                  value={formData.contact.phoneSecondary}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, phoneSecondary: e.target.value.replace(/\./g, '') }
-                  })}
-                  onBlur={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, phoneSecondary: cleanAndFormatPhone(e.target.value, '(51) 99807-8998') }
-                  })}
-                  placeholder="(51) 99807-8998"
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-                <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99807-8998</p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Texto Instrução / Subtítulo Abaixo dos Telefones
-                </label>
-                <input
-                  type="text"
-                  value={formData.contact.phonesBoxSubtitle || 'Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, phonesBoxSubtitle: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Texto do Botão WhatsApp
-                </label>
-                <input
-                  type="text"
-                  value={formData.contact.phonesCtaText || 'AGENDAR NO WHATSAPP'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, phonesCtaText: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Box 4: E-MAILS INSTITUCIONAIS (Totalmente Editável) */}
-          <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
-            <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
-              <Mail className="w-4 h-4 text-[#F6E27A]" />
-              <span>Box 4 · E-mails Institucionais</span>
-            </h4>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Título do Box de E-mails
-              </label>
-              <input
-                type="text"
-                value={formData.contact.emailsBoxTitle || 'E-MAILS'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, emailsBoxTitle: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  E-mail Principal / Geral (Dr. Aldo Leão)
-                </label>
-                <input
-                  type="email"
-                  value={formData.contact.emailPrimary}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, emailPrimary: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  E-mail Academia Leão Ferreira
-                </label>
-                <input
-                  type="email"
-                  value={formData.contact.emailAcademia || 'academialeaoferreira@gmail.com'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, emailAcademia: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  E-mail Holding Familiar 1
-                </label>
-                <input
-                  type="email"
-                  value={formData.contact.emailHolding1 || 'aldoleao.planejamento@gmail.com'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, emailHolding1: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  E-mail Holding Familiar 2
-                </label>
-                <input
-                  type="email"
-                  value={formData.contact.emailHolding2 || 'holdingfamiliarbr@gmail.com'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, emailHolding2: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Texto do Rodapé do Box de E-mails
-              </label>
-              <input
-                type="text"
-                value={formData.contact.emailsBoxFooter || 'Entre em contato enviando um e-mail, para o setor que deseja atendimento'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, emailsBoxFooter: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Endereço Completo em Porto Alegre - RS
-            </label>
-            <input
-              type="text"
-              value={formData.contact.addressPortoAlegre}
-              onChange={(e) => setFormData({
-                ...formData,
-                contact: { ...formData.contact, addressPortoAlegre: e.target.value }
-              })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1.5">
-              Box 1 · Texto de Atendimento Virtual Brasil
-            </label>
-            <textarea
-              rows={3}
-              value={formData.contact.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                contact: { ...formData.contact, boxVirtualText: e.target.value }
-              })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white leading-relaxed"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Horário de Atendimento
-            </label>
-            <input
-              type="text"
-              value={formData.contact.officeHours}
-              onChange={(e) => setFormData({
-                ...formData,
-                contact: { ...formData.contact, officeHours: e.target.value }
-              })}
-              className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-            />
-          </div>
-
-          {/* Seção Formulário de Contato (Item 10) */}
-          <div className="pt-4 border-t border-slate-800 space-y-4">
-            <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider">
-              Textos do Formulário de Contato
-            </h4>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                Frase em Dourado no Topo do Formulário
-              </label>
-              <textarea
-                rows={2}
-                value={formData.contact.formPrompt || 'Preencha os campos abaixo para o seu atendimento estratégico por um de nossos Advogados especialistas.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  contact: { ...formData.contact, formPrompt: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Placeholder do Nome Completo
-                </label>
-                <input
-                  type="text"
-                  value={formData.contact.formNamePlaceholder || 'Nome Completo'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, formNamePlaceholder: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
-                  Rótulo do Campo de Consulta
-                </label>
-                <input
-                  type="text"
-                  value={formData.contact.formConsultationLabel || 'Tipo de Consulta'}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    contact: { ...formData.contact, formConsultationLabel: e.target.value }
-                  })}
-                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Textos Institucionais do Rodapé da Página Contato (Itens Solicitados pelo Dr. Aldo) */}
-          <div className="pt-6 border-t border-slate-800 space-y-4">
-            <div className="border-b border-slate-800 pb-2">
-              <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
-                <Scale className="w-4 h-4 text-[#F6E27A]" />
-                <span>Textos Institucionais do Rodapé da Página Contato (Abaixo da Logomarca)</span>
-              </h4>
-              <p className="text-[11px] text-slate-400 mt-0.5">
-                Edite os dois parágrafos sobre a história centenária e a 3ª geração que aparecem no rodapé da página de contato.
+                Altere os textos, os 3 tópicos institucionais e a imagem oficial de presença nacional.
               </p>
             </div>
 
-            <RichTextarea
-              label="Rodapé Contato · Parágrafo 1 (História e Tradição Desde 1908)"
-              rows={3}
-              value={formData.contact.footerParagraph1 || 'A história da <strong class="text-[#F6E27A] font-bold">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                contact: { ...formData.contact, footerParagraph1: val }
-              })}
-              hint="Texto com suporte total a formatação dourada e negrito"
-            />
-
-            <RichTextarea
-              label="Rodapé Contato · Parágrafo 2 (Terceira Geração Desde 1986)"
-              rows={3}
-              value={formData.contact.footerParagraph2 || 'Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.'}
-              onChange={(val) => setFormData({
-                ...formData,
-                contact: { ...formData.contact, footerParagraph2: val }
-              })}
-              hint="Texto sobre a liderança da 3ª geração pelo Dr. Aldo Leão"
-            />
-          </div>
-        </div>
-      )}
-
-      {/* TAB 13: RODAPÉ & AVISOS DA OAB */}
-      {activeTab === 'footer' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-3">
-            <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
-              <Scale className="w-4 h-4 text-[#F6E27A]" />
-              <span>Página 12 · Rodapé Institucional & Avisos da OAB</span>
-            </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Altere os textos de rodapé, mensagens de direitos autorais e avisos de conformidade com a OAB.
-            </p>
-          </div>
-
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Texto Institucional do Rodapé — Parágrafo 1
-            </label>
-            <textarea
-              rows={3}
-              value={formData.footer?.institutionalParagraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                footer: { ...(formData.footer || {}), institutionalParagraph1: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-              Texto Institucional do Rodapé — Parágrafo 2
-            </label>
-            <textarea
-              rows={3}
-              value={formData.footer?.institutionalParagraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
-              onChange={(e) => setFormData({
-                ...formData,
-                footer: { ...(formData.footer || {}), institutionalParagraph2: e.target.value }
-              })}
-              className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Texto de Direitos Reservados (Copyright)
-              </label>
-              <input
-                type="text"
-                value={formData.footer?.copyrightText || '© 2026 Aldo Leão Advocacia Estratégica · Tradição Jurídica Centenária Desde 1908. Todos os direitos reservados.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  footer: { ...(formData.footer || {}), copyrightText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
-                Aviso de Conformidade OAB (Provimento nº 205/2021)
-              </label>
-              <input
-                type="text"
-                value={formData.footer?.oabComplianceText || 'Provimento nº 205/2021 do Conselho Federal da OAB · Inscrição OAB/RS 22.418.'}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  footer: { ...(formData.footer || {}), oabComplianceText: e.target.value }
-                })}
-                className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* TAB 14: CENTRAL DE TODAS AS IMAGENS DO SITE */}
-      {activeTab === 'all_images' && (
-        <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
-          <div className="border-b border-slate-800 pb-4">
-            <h3 className="font-cinzel text-base sm:text-lg font-bold text-white flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-[#F6E27A]" />
-              <span>14. Central de Todas as Imagens & Fotos do Portal</span>
-            </h3>
-            <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-              Aqui você tem visão panorâmica e controle total sobre <strong>todas as imagens, fotos e capas de livros de todas as seções do site</strong>. Clique em <strong>"Carregar do Computador / Celular"</strong> para selecionar qualquer arquivo ou cole o link/URL.
-            </p>
-          </div>
-
-          <div className="space-y-6">
-            {/* 1. Logomarca Oficial */}
+            {/* Upload do Mapa da Presença Digital */}
             <ImageUploadField
-              label="1. Logomarca Oficial (Leão Dourado / Símbolo do Topo e Rodapé)"
-              description="Exibida na barra de navegação no topo, nas seções e no rodapé do portal."
-              currentValue={formData.navbar?.logoImageUrl}
-              defaultValue="/img/logo-symbol.png"
-              aspectRatio="square"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                navbar: { ...(formData.navbar || {}), logoImageUrl: newUrl }
-              })}
-            />
-
-            {/* 2. Slide 1 Desktop */}
-            <ImageUploadField
-              label="2. Slide 1 - Imagem Principal Tradição Jurídica Centenária (Computador / Desktop)"
-              description="Foto de abertura em alta resolução exibida no primeiro slide em telas de computador."
-              currentValue={formData.hero.heroImageUrl}
-              defaultValue="/img/hero-advocacia-bg.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, heroImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Imagem Atual com Estátuas', url: '/img/hero-advocacia-bg.jpg' },
-                { label: 'Versão Otimizada Mobile', url: '/img/hero-advocacia-bg-mobile.jpg' },
-              ]}
-            />
-
-            {/* 3. Slide 1 Mobile */}
-            <ImageUploadField
-              label="3. Slide 1 - Imagem Tradição Jurídica Centenária (Smartphones / Celular)"
-              description="Versão enquadrada perfeitamente na vertical para celulares (sem cortar as estátuas da justiça)."
-              currentValue={formData.hero.heroImageMobileUrl}
-              defaultValue="/img/hero-advocacia-bg-mobile.jpg"
-              aspectRatio="portrait"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, heroImageMobileUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Versão Otimizada Mobile', url: '/img/hero-advocacia-bg-mobile.jpg' },
-                { label: 'Versão Desktop', url: '/img/hero-advocacia-bg.jpg' },
-              ]}
-            />
-
-            {/* 4. Slide 2 Desktop */}
-            <ImageUploadField
-              label="4. Slide 2 - Imagem Holding Familiar & Planejamento 4.0 (Computador / Desktop)"
-              description="Foto oficial aprovada com a família em frente ao edifício e carro BMW dourado."
-              currentValue={formData.hero.heroSlide2ImageUrl}
-              defaultValue="/img/holding-familiar-1.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, heroSlide2ImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
-              ]}
-            />
-
-            {/* 5. Slide 2 Mobile */}
-            <ImageUploadField
-              label="5. Slide 2 - Imagem Holding Familiar (Smartphones / Celular)"
-              description="Foto otimizada para celulares no slide 2 de Planejamento Patrimonial 4.0."
-              currentValue={formData.hero.heroSlide2ImageMobileUrl}
-              defaultValue="/img/holding-familiar-1.jpg"
-              aspectRatio="portrait"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                hero: { ...formData.hero, heroSlide2ImageMobileUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
-              ]}
-            />
-
-            {/* 6. Card Estruturação Holding BMW */}
-            <ImageUploadField
-              label="6. Foto do Card de Estruturação & Proteção Patrimonial (Página 9)"
-              description="Foto em destaque no card central com badge 'ESTRUTURAÇÃO & PROTEÇÃO' na seção Planejamento Patrimonial 4.0."
-              currentValue={formData.holdingFamiliar?.cardImageUrl}
-              defaultValue="/img/holding-familiar-1.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
-              ]}
-            />
-
-            {/* 7. Mapa de Presença Nacional Digital */}
-            <ImageUploadField
-              label="7. Mapa da Presença Nacional Digital (Página 3)"
-              description="Mapa do Brasil com os estados e capitais atendidas pelo escritório digital."
+              label="Imagem do Mapa da Presença Nacional Digital"
+              description="Atualmente configurada para presencadigital.jpeg. Clique em Carregar do Computador para substituir pela sua imagem ou mapa."
               currentValue={formData.nationalPresence?.mapImageUrl}
               defaultValue="/presencadigital.jpeg"
-              aspectRatio="auto"
               onChange={(newUrl) => setFormData({
                 ...formData,
                 nationalPresence: { ...(formData.nationalPresence || {}), mapImageUrl: newUrl }
               })}
             />
 
-            {/* 8. Retrato Oficial do Dr. Aldo Leão */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Etiqueta Superior (Kicker)
+                </label>
+                <input
+                  type="text"
+                  value={formData.nationalPresence?.kicker || 'ATENDIMENTO DIGITAL EM TODO O BRASIL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    nationalPresence: { ...(formData.nationalPresence || {}), kicker: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Título Principal
+                </label>
+                <input
+                  type="text"
+                  value={formData.nationalPresence?.title || 'PRESENÇA NACIONAL DIGITAL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    nationalPresence: { ...(formData.nationalPresence || {}), title: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            {/* Editor Rico de Todo o Conteúdo da Página Presença Nacional Digital (Item 81 e 82) */}
+            <RichTextarea
+              label="Conteúdo Integral da Página (Item 81 e 82)"
+              rows={5}
+              value={formData.nationalPresence?.content || ''}
+              onChange={(val) => setFormData({
+                ...formData,
+                nationalPresence: { ...(formData.nationalPresence || {}), content: val }
+              })}
+              hint="Permite editar livremente o texto de toda a página, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+            />
+
+            <div>
+              <RichTextarea
+                label="Parágrafo 1 (História e Sede em Porto Alegre)"
+                rows={3}
+                value={formData.nationalPresence?.paragraph1 || 'Com sede em Porto Alegre/RS e atuação digital estratégica em todo o Brasil, a ALDO LEÃO ADVOCACIA ESTRATÉGICA atende clientes em todo o território nacional e no exterior, prestando serviços jurídicos de alta excelência com agilidade, segurança e eficiência.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  nationalPresence: { ...(formData.nationalPresence || {}), paragraph1: val }
+                })}
+              />
+            </div>
+
+            <div>
+              <RichTextarea
+                label="Parágrafo 2 (Tradição e Tecnologia de Ponta)"
+                rows={3}
+                value={formData.nationalPresence?.paragraph2 || 'Combinando tradição jurídica centenária e tecnologia de ponta, estruturamos um modelo de advocacia digital que proporciona aos nossos clientes atendimento personalizado, videoconferências e acompanhamento processual transparente em tempo real, sem a necessidade de deslocamentos.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  nationalPresence: { ...(formData.nationalPresence || {}), paragraph2: val }
+                })}
+              />
+            </div>
+
+            {/* Os 3 Cards da Presença Digital */}
+            <div className="space-y-3 pt-2 border-t border-slate-800">
+              <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
+                Os 3 Destaques com Ícone de Balança Dourada
+              </h4>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Destaque 1</label>
+                  <input
+                    type="text"
+                    value={formData.nationalPresence?.card1Text || 'Atuação Digital no Brasil'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      nationalPresence: { ...(formData.nationalPresence || {}), card1Text: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Destaque 2</label>
+                  <input
+                    type="text"
+                    value={formData.nationalPresence?.card2Text || 'Infraestrutura Tecnológica de última geração'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      nationalPresence: { ...(formData.nationalPresence || {}), card2Text: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Destaque 3</label>
+                  <input
+                    type="text"
+                    value={formData.nationalPresence?.card3Text || 'Comodidade, Segurança, Confidencialidade, Sigilo e Economia para cada cliente.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      nationalPresence: { ...(formData.nationalPresence || {}), card3Text: e.target.value }
+                    })}
+                    className="w-full p-2 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 4: O LEGADO CENTENÁRIO */}
+        {activeTab === 'legacy' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white">
+                Página 3 · O Legado Centenário & Linha do Tempo
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Edite a história de mais de um século, os 3 parágrafos, o card de 40 anos e os marcos cronológicos.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Frase em Dourado Superior
+                </label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.goldKicker || 'O ESCRITÓRIO DE ADVOCACIA MAIS ANTIGO DO BRASIL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), goldKicker: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
+                  Título em Branco (Item 84)
+                </label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.titleWhite || formData.centennialLegacy?.title || 'O LEGADO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), titleWhite: e.target.value, title: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Título em Dourado (Item 84)
+                </label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.titleGold || formData.centennialLegacy?.titleHighlight || 'CENTENÁRIO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), titleGold: e.target.value, titleHighlight: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#E5C158] font-semibold mb-1">
+                  Subtítulo Dourado
+                </label>
+                <input
+                  type="text"
+                  value={formData.centennialLegacy?.subtitle || 'Desde 1908'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), subtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#E5C158] font-bold"
+                />
+              </div>
+            </div>
+
+            {/* Editor Rico de Todo o Conteúdo da Página O Legado Centenário (Item 81 e 84) */}
+            <RichTextarea
+              label="Conteúdo Integral da Página (Item 81 e 84)"
+              rows={4}
+              value={formData.centennialLegacy?.content || ''}
+              onChange={(val) => setFormData({
+                ...formData,
+                centennialLegacy: { ...(formData.centennialLegacy || {}), content: val }
+              })}
+              hint="Permite editar livremente o texto de toda a página do Legado, incluindo imagens, tabelas, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+            />
+
+            <div>
+              <RichTextarea
+                label="Parágrafo 1 da História Centenária (Início em 1908)"
+                rows={3}
+                value={formData.centennialLegacy?.paragraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph1: val }
+                })}
+              />
+            </div>
+
+            <div>
+              <RichTextarea
+                label="Parágrafo 2 da História Centenária (3ª Geração desde 1986)"
+                rows={3}
+                value={formData.centennialLegacy?.paragraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  centennialLegacy: { ...(formData.centennialLegacy || {}), paragraph2: val }
+                })}
+              />
+            </div>
+
+            {/* Card de 40 Anos */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                Box de Destaque · 40 Anos de Advocacia
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Etiqueta do Box</label>
+                  <input
+                    type="text"
+                    value={formData.centennialLegacy?.card40Kicker || '40 ANOS DE EXPERIÊNCIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), card40Kicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Título do Box</label>
+                  <input
+                    type="text"
+                    value={formData.centennialLegacy?.card40Title || 'Quatro décadas de dedicação exclusiva'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), card40Title: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+              <div>
+                <RichTextarea
+                  label="Texto de Destaque dos 40 Anos (Item 85)"
+                  rows={3}
+                  value={formData.centennialLegacy?.card40Text || 'A terceira geração de advogados do escritório jurídico mais antigo do Brasil, teve início em 1986, através do Dr. ALDO LEÃO, que consolidou a Advocacia Estratégica direcionada para a proteção patrimonial e empresarial no país, com o intuito de perpetuar legados com experiência, inteligência jurídica e serviços de vanguarda.'}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), card40Text: val }
+                  })}
+                  hint="Texto rico com quebras de linha e destaques"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-800">
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Nome Abaixo do Selo</label>
+                  <input
+                    type="text"
+                    value={formData.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), sealName: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-[#F6E27A] mb-1">Subtítulo Abaixo do Selo</label>
+                  <input
+                    type="text"
+                    value={formData.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), sealSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-[#F6E27A] text-xs font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Selo (Nome)</label>
+                  <input
+                    type="text"
+                    value={formData.centennialLegacy?.sealName || 'Dr. ALDO LEÃO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), sealName: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo do Selo</label>
+                  <input
+                    type="text"
+                    value={formData.centennialLegacy?.sealSubtitle || '40 ANOS DE ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      centennialLegacy: { ...(formData.centennialLegacy || {}), sealSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-[#E5C158] font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <ImageUploadField
+                  label="Imagem do Selo 40 Anos"
+                  description="Upload do selo dourado comemorativo."
+                  currentValue={formData.centennialLegacy?.sealImageUrl}
+                  defaultValue="/img/selo-40-anos.png"
+                  aspectRatio="square"
+                  onChange={(newUrl) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
+                  })}
+                />
+                <ImageUploadField
+                  label="Assinatura Dourada Dr. Aldo Leão"
+                  description="Upload da assinatura institucional exibida no final da linha do tempo."
+                  currentValue={formData.centennialLegacy?.signatureImageUrl}
+                  defaultValue="/img/assinatura-gold.png"
+                  aspectRatio="video"
+                  onChange={(newUrl) => setFormData({
+                    ...formData,
+                    centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
+                  })}
+                />
+              </div>
+            </div>
+
+            {/* Marcos Históricos / Linha do Tempo */}
+            <div className="space-y-3 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
+                  Marcos Históricos da Linha do Tempo
+                </h4>
+                <button
+                  type="button"
+                  onClick={handleAddTimelineEvent}
+                  className="px-3 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" />
+                  <span>Adicionar Marco</span>
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                {(formData.centennialLegacy?.events || []).map((ev, idx) => (
+                  <div key={idx} className="p-3.5 rounded-lg bg-[#050B14] border border-slate-800 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#F6E27A]">
+                        Ano: {ev.year} · {ev.title}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTimelineEvent(idx)}
+                        className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
+                      >
+                        <Trash2 className="w-3 h-3" />
+                        <span>Remover</span>
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                      <div>
+                        <label className="block text-[10px] text-slate-400">Ano</label>
+                        <input
+                          type="text"
+                          value={ev.year}
+                          onChange={(e) => {
+                            const updated = [...(formData.centennialLegacy?.events || [])];
+                            updated[idx].year = e.target.value;
+                            setFormData({
+                              ...formData,
+                              centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
+                            });
+                          }}
+                          className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] text-slate-400">Título do Marco</label>
+                        <input
+                          type="text"
+                          value={ev.title}
+                          onChange={(e) => {
+                            const updated = [...(formData.centennialLegacy?.events || [])];
+                            updated[idx].title = e.target.value;
+                            setFormData({
+                              ...formData,
+                              centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
+                            });
+                          }}
+                          className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[10px] text-slate-400">Advogado Homenageado</label>
+                        <input
+                          type="text"
+                          value={ev.lawyers?.join(', ') || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.centennialLegacy?.events || [])];
+                            updated[idx].lawyers = [e.target.value];
+                            setFormData({
+                              ...formData,
+                              centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
+                            });
+                          }}
+                          className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] text-slate-400">Descrição do Marco</label>
+                      <textarea
+                        rows={2}
+                        value={ev.description}
+                        onChange={(e) => {
+                          const updated = [...(formData.centennialLegacy?.events || [])];
+                          updated[idx].description = e.target.value;
+                          setFormData({
+                            ...formData,
+                            centennialLegacy: { ...(formData.centennialLegacy || {}), events: updated }
+                          });
+                        }}
+                        className="w-full p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: HEAD JURÍDICO DR. ALDO LEÃO */}
+        {activeTab === 'founder' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white">
+                Página 4 · Head Jurídico: Dr. Aldo Leão & 40 Anos de Advocacia
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Escolha a foto oficial, altere títulos, biografia completa, diferenciais e o contador de 40 anos.
+              </p>
+            </div>
+
+            {/* Upload de Imagem do Dr. Aldo Leão */}
             <ImageUploadField
-              label="8. Retrato Principal do Dr. Aldo Leão (Head Jurídico · 40 Anos)"
-              description="Foto principal do Dr. Aldo Leão na seção Head Jurídico e apresentações institucionais."
+              label="Foto Oficial do Dr. Aldo Leão (Head Jurídico)"
+              description="Carregue uma foto nova do Dr. Aldo Leão direto do computador/celular ou selecione uma foto pronta da galeria oficial."
               currentValue={formData.founder.photoUrl}
               defaultValue="/img/dr-aldo-portrait.jpg"
               aspectRatio="portrait"
@@ -8010,122 +3172,4911 @@ export const CmsEditor: React.FC<CmsEditorProps> = ({ onSwitchToCanvasMode }) =>
               ]}
             />
 
-            {/* 9. Foto Secundária Reunião / Gabinete */}
-            <ImageUploadField
-              label="9. Foto Secundária do Dr. Aldo Leão (Ambiente Executivo / Reunião)"
-              description="Foto de apoio do Dr. Aldo Leão em reunião estratégica com clientes."
-              currentValue={formData.founder.secondaryPhotoUrl}
-              defaultValue="/img/dr-aldo-2.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, secondaryPhotoUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
-                { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
-                { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
-                { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
-              ]}
-            />
-
-            {/* 10. Imagem de Fundo do CTA de Consulta Digital */}
-            <ImageUploadField
-              label="10. Imagem de Fundo do CTA Agende Sua Consulta Digital (Página 8)"
-              description="Plano de fundo ou ilustração do bloco de agendamento online de consulta."
-              currentValue={formData.digitalConsultation?.bgImageUrl}
-              defaultValue=""
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
-              })}
-            />
-
-            {/* 11. Selo Oficial de 40 Anos de Advocacia */}
-            <ImageUploadField
-              label="11. Selo Comemorativo de 40 Anos de Advocacia (1986–2026)"
-              description="Chancela e selo oficial de 40 Anos de Advocacia exibido na página O Legado Centenário e na seção do Selo."
-              currentValue={formData.centennialLegacy?.sealImageUrl}
-              defaultValue="/img/selo-40-anos.png"
-              aspectRatio="square"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Selo 40 Anos (PNG Transparente)', url: '/img/selo-40-anos.png' },
-                { label: 'Selo Dourado Oficial', url: '/img/selode40anos.jpg.jpeg' },
-              ]}
-            />
-
-            {/* 12. Assinatura Oficial do Dr. Aldo Leão */}
-            <ImageUploadField
-              label="12. Assinatura do Dr. Aldo Leão (Dourada / Transparente)"
-              description="Assinatura manuscrita oficial exibida na página Head Jurídico e no final da linha do tempo do Legado Centenário."
-              currentValue={formData.founder?.signatureImageUrl || formData.centennialLegacy?.signatureImageUrl}
-              defaultValue="/img/assinatura-gold.png"
-              aspectRatio="auto"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                founder: { ...formData.founder, signatureImageUrl: newUrl },
-                centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
-              })}
-              presetOptions={[
-                { label: 'Assinatura Dourada Oficial', url: '/img/assinatura-gold.png' },
-                { label: 'Assinatura Original', url: '/img/assinatura.png' },
-              ]}
-            />
-
-            {/* 13. Foto da Palestra / Conferência Presencial */}
-            <ImageUploadField
-              label="13. Foto da Palestra Presencial (Academia Leão Ferreira)"
-              description="Foto exibida na seção Academia Leão Ferreira com o Dr. Aldo Leão ministrando a palestra magna 'Planejamento Patrimonial 4.0 & O Alto Custo da Omissão'."
-              currentValue={formData.academiaLeao?.lecturePhotoUrl}
-              defaultValue="/img/palestra-1.jpg"
-              aspectRatio="video"
-              onChange={(newUrl) => setFormData({
-                ...formData,
-                academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
-              })}
-            />
-
-            {/* 14. Capas dos 8 Livros Digitais */}
-            <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
-                  <BookOpen className="w-4 h-4 text-[#F6E27A]" />
-                  <span>14. Capas dos 8 Livros Digitais Publicados (Acervo Completo)</span>
-                </h4>
-                <p className="text-[11px] text-slate-300 mt-0.5">
-                  Faça o upload ou altere a imagem da capa de cada uma das 8 obras digitais disponíveis para download gratuito.
-                </p>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                  Frase Inicial em Dourado (Item 86)
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.initialGoldPhrase || formData.founder.sectionKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: {
+                      ...formData.founder,
+                      initialGoldPhrase: e.target.value,
+                      sectionKicker: e.target.value
+                    }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {(formData.digitalBooks || []).map((book, idx) => (
-                  <div key={book.id || idx} className="p-3.5 rounded-lg bg-[#071122] border border-slate-800 space-y-2">
-                    <span className="text-xs font-bold text-[#E5C158] block truncate">
-                      Livro #{idx + 1} · {book.title}
-                    </span>
-                    <ImageUploadField
-                      label={`Capa do Livro #${idx + 1}`}
-                      currentValue={book.coverImage}
-                      aspectRatio="video"
-                      onChange={(newUrl) => {
-                        const updated = [...(formData.digitalBooks || [])];
-                        updated[idx].coverImage = newUrl;
-                        setFormData({ ...formData, digitalBooks: updated });
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={(formData.founder as any).titleWhite || 'Dr. ALDO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, titleWhite: e.target.value } as any
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                  Título em Dourado
+                </label>
+                <input
+                  type="text"
+                  value={(formData.founder as any).titleGold || 'LEÃO'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, titleGold: e.target.value } as any
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            {/* Editor Rico de Todo o Conteúdo da Página Dr. Aldo Leão (Item 81 e 86) */}
+            <RichTextarea
+              label="Conteúdo Integral da Página Dr. Aldo Leão (Item 81 e 86)"
+              rows={5}
+              value={formData.founder.content || ''}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, content: val }
+              })}
+              hint="Permite editar livremente o texto de toda a página do Dr. Aldo Leão, com imagens, formatações e links como em Publicações Jurídicas. Se preenchido, substitui os parágrafos abaixo."
+            />
+
+            {/* Controle de Tamanho da Assinatura (Item 86) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-2">
+              <div className="flex items-center justify-between">
+                <label className="text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                  Tamanho da Assinatura (Item 86)
+                </label>
+                <span className="text-xs font-bold text-white font-mono">
+                  {formData.founder.signatureSize || 64}px
+                </span>
+              </div>
+              <input
+                type="range"
+                min={40}
+                max={140}
+                value={formData.founder.signatureSize || 64}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  founder: { ...formData.founder, signatureSize: Number(e.target.value) }
+                })}
+                className="w-full accent-[#D4AF37] cursor-pointer"
+              />
+              <span className="text-[10px] text-slate-300 block">
+                Ajuste para aumentar ou diminuir a altura da assinatura manuscrita que fica logo abaixo do texto.
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Nome de Apresentação
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.name}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, name: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Nome Completo Oficial
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.fullName}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, fullName: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                  Inscrição OAB
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.credentials || 'OAB/RS 48.452'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, credentials: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1.5">
+                  Frase Dourada Abaixo do Título da Página
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.sectionSubtitle || 'LIDERANÇA JURÍDICA E TRADIÇÃO DE VANGUARDA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, sectionSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-medium"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Frase Dourada Abaixo da Imagem
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.title || 'EXCELÊNCIA JURÍDICA CENTENÁRIA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, title: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-medium"
+                />
+              </div>
+            </div>
+
+            <RichTextarea
+              label="Biografia Institucional — Parágrafo 1"
+              rows={3}
+              value={formData.founder.bioParagraph1}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph1: val }
+              })}
+            />
+
+            <RichTextarea
+              label="Biografia Institucional — Parágrafo 2"
+              rows={3}
+              value={formData.founder.bioParagraph2}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph2: val }
+              })}
+            />
+
+            <RichTextarea
+              label="Biografia Institucional — Parágrafo 3"
+              rows={3}
+              value={formData.founder.bioParagraph3 || 'Com uma trajetória de mais de quatro décadas dedicada à Excelência Jurídica, o Dr. Aldo Leão une o rigor técnico do Direito à inteligência estratégica na gestão patrimonial e empresarial, estruturando soluções voltadas à segurança, à proteção e à perpetuação de ativos familiares e corporativos.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph3: val }
+              })}
+            />
+
+            <RichTextarea
+              label="Biografia Institucional — Parágrafo 4"
+              rows={2}
+              value={formData.founder.bioParagraph4 || 'Sua sólida atuação profissional é marcada por uma expressiva contribuição acadêmica e intelectual.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph4: val }
+              })}
+            />
+
+            <RichTextarea
+              label="Biografia Institucional — Parágrafo 5"
+              rows={3}
+              value={formData.founder.bioParagraph5 || 'O Dr. Aldo Leão possui extensa produção jurídica, com mais de uma centena de artigos e livros digitais publicados, além de reconhecida experiência em docência superior e palestras sobre temas fundamentais do Direito.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph5: val }
+              })}
+            />
+
+            <RichTextarea
+              label="Biografia Institucional — Parágrafo 6"
+              rows={3}
+              value={formData.founder.bioParagraph6 || 'Sob sua liderança, o escritório consolida um modelo de atendimento de altíssimo padrão, unindo a sabedoria de um histórico centenário à agilidade da Gestão Jurídica 4.0. no Planejamento Patrimonial avançado.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                founder: { ...formData.founder, bioParagraph6: val }
+              })}
+            />
+
+            {/* Diferenciais Estratégicos (Item 86) */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <div>
+                <label className="block text-[11px] text-[#F6E27A] font-bold uppercase mb-1">
+                  Título do Bloco de Diferenciais (Item 86)
+                </label>
+                <input
+                  type="text"
+                  value={formData.founder.differentialsTitle || 'Diferenciais Estratégicos:'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, differentialsTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <div className="flex items-center justify-between pt-1">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                    Itens dos Diferenciais ({(formData.founder.differentials || []).length})
+                  </h4>
+                  <p className="text-[11px] text-slate-400">
+                    Pontos fortes do Dr. Aldo Leão com ícones de verificação dourados.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const current = formData.founder.differentials || [];
+                    setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, differentials: [...current, 'Novo diferencial estratégico'] }
+                    });
+                  }}
+                  className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                >
+                  <Plus className="w-3 h-3" />
+                  <span>Adicionar</span>
+                </button>
+              </div>
+
+              <div className="space-y-2">
+                {(formData.founder.differentials || [
+                  '40 + Anos de Advocacia Estratégica num legado jurídico centenário',
+                  'Autor de Livros e Artigos Jurídicos Publicados',
+                  'Referência nacional em Planejamento Patrimonial via Holding Familiar',
+                  'Atendimento e processos 100% digitais no Brasil'
+                ]).map((diff, idx) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={diff}
+                      onChange={(e) => {
+                        const current = [...(formData.founder.differentials || [])];
+                        current[idx] = e.target.value;
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, differentials: current }
+                        });
                       }}
+                      className="flex-1 p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
                     />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const current = (formData.founder.differentials || []).filter((_, i) => i !== idx);
+                        setFormData({
+                          ...formData,
+                          founder: { ...formData.founder, differentials: current }
+                        });
+                      }}
+                      className="p-2 text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded transition-colors cursor-pointer"
+                      title="Remover Diferencial"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Currículo Oficial Completo do Dr. Aldo Leão (Modal Saiba Mais) */}
+            <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/45 space-y-4">
+              <div className="border-b border-[#D4AF37]/25 pb-2">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-[#D4AF37]" />
+                  <span>Currículo Oficial do Dr. Aldo Leão (Modal 'Saiba Mais')</span>
+                </h4>
+                <p className="text-[11px] text-slate-400">
+                  Edite os 5 parágrafos da Trajetória Profissional, listas de cargos, obras e docência superior.
+                </p>
+              </div>
+
+              {/* 5 Parágrafos da Trajetória */}
+              <div className="space-y-3">
+                <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
+                  Trajetória Profissional — 5 Parágrafos Oficiais
+                </span>
+                <RichTextarea
+                  label="Parágrafo 1 (Convergência Centenária)"
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP1 || ''}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP1: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 2 (Continuidade Desde 1986 e Avô Paterno)"
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP2 || ''}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP2: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 3 (Rigor Técnico e Inteligência Jurídica)"
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP3 || ''}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP3: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 4 (Artigos, Livros, Mentorias e Liderança)"
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP4 || ''}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP4: val }
+                  })}
+                />
+                <RichTextarea
+                  label="Parágrafo 5 (Frase Dourada de Encerramento)"
+                  rows={2}
+                  value={formData.founder.curriculumTrajectoryP5 || ''}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    founder: { ...formData.founder, curriculumTrajectoryP5: val }
+                  })}
+                />
+              </div>
+
+              {/* Especialização e Excelência Jurídica */}
+              <div className="pt-2 border-t border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-[#E5C158] uppercase">
+                    Especialização e Excelência Jurídica
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.founder.curriculumLeadershipItems || [];
+                      setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumLeadershipItems: [...current, 'Nova especialização'] }
+                      });
+                    }}
+                    className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-2.5 h-2.5" /> Adicionar
+                  </button>
+                </div>
+                <div className="space-y-1.5">
+                  {(formData.founder.curriculumLeadershipItems || []).map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => {
+                          const current = [...(formData.founder.curriculumLeadershipItems || [])];
+                          current[idx] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, curriculumLeadershipItems: current }
+                          });
+                        }}
+                        className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.founder.curriculumLeadershipItems || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, curriculumLeadershipItems: current }
+                          });
+                        }}
+                        className="p-1.5 text-red-400 hover:text-red-300"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trajetória Profissional - Cargos e Funções */}
+              <div className="pt-2 border-t border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-[#E5C158] uppercase">
+                    Trajetória Profissional — Cargos e Funções de Destaque
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.founder.curriculumTrajectoryItems || [];
+                      setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumTrajectoryItems: [...current, 'Novo cargo / função institucional'] }
+                      });
+                    }}
+                    className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-2.5 h-2.5" /> Adicionar
+                  </button>
+                </div>
+                <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                  {(formData.founder.curriculumTrajectoryItems || []).map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => {
+                          const current = [...(formData.founder.curriculumTrajectoryItems || [])];
+                          current[idx] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, curriculumTrajectoryItems: current }
+                          });
+                        }}
+                        className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.founder.curriculumTrajectoryItems || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, curriculumTrajectoryItems: current }
+                          });
+                        }}
+                        className="p-1.5 text-red-400 hover:text-red-300"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Docência Superior */}
+              <div className="pt-2 border-t border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-[#E5C158] uppercase">
+                    Docência Superior
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.founder.curriculumDocenciaItems || [];
+                      setFormData({
+                        ...formData,
+                        founder: { ...formData.founder, curriculumDocenciaItems: [...current, 'Prof. em Instituição Jurídica'] }
+                      });
+                    }}
+                    className="px-2 py-0.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-2.5 h-2.5" /> Adicionar
+                  </button>
+                </div>
+                <div className="space-y-1.5">
+                  {(formData.founder.curriculumDocenciaItems || []).map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => {
+                          const current = [...(formData.founder.curriculumDocenciaItems || [])];
+                          current[idx] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, curriculumDocenciaItems: current }
+                          });
+                        }}
+                        className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.founder.curriculumDocenciaItems || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, curriculumDocenciaItems: current }
+                          });
+                        }}
+                        className="p-1.5 text-red-400 hover:text-red-300"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+
+            {/* Parágrafos de Conclusão do Currículo no Box Azul Escuro (Item 64 e 93) */}
+            <div className="p-4 sm:p-5 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#D4AF37]/20 pb-2">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                    Dois Parágrafos de Fechamento do Currículo no Box Azul Escuro (Itens 64 e 93)
+                  </h4>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    Exibidos no final do modal "Saiba Mais" do Head Jurídico e na Landing Page. Se ambos estiverem vazios, o card azul escuro fica oculto.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({
+                      ...formData,
+                      founder: { ...(formData.founder || {}), curriculumClosingP1: '', curriculumClosingP2: '' }
+                    })}
+                    className="px-2.5 py-1 rounded bg-red-500/20 border border-red-500/40 text-[10px] font-bold text-red-300 hover:bg-red-500/30 cursor-pointer"
+                  >
+                    Ocultar / Excluir Box (Item 93)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({
+                      ...formData,
+                      founder: {
+                        ...(formData.founder || {}),
+                        curriculumClosingP1: 'Desde 1986, o Dr. Aldo Leão conduz a terceira geração da tradição jurídica centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA, unindo a sabedoria acumulada ao longo de mais de um século à inovação constante das ferramentas jurídicas contemporâneas.',
+                        curriculumClosingP2: 'Atuando na Advocacia Estratégica desde 1986, assessora famílias, empresários e corporações em decisões de alta relevância patrimonial e societária, assegurando a blindagem legal, a eficiência sucessória e a perpetuação sustentável de legados empresariais.'
+                      }
+                    })}
+                    className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[10px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 cursor-pointer"
+                  >
+                    Restaurar Padrão
+                  </button>
+                </div>
+              </div>
+              <RichTextarea
+                label="Parágrafo de Fechamento 1 (Itens 64 e 93)"
+                value={formData.founder?.curriculumClosingP1 ?? ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...(formData.founder || {}), curriculumClosingP1: val }
+                })}
+                rows={3}
+              />
+              <RichTextarea
+                label="Parágrafo de Fechamento 2 (Itens 64 e 93)"
+                value={formData.founder?.curriculumClosingP2 ?? ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  founder: { ...(formData.founder || {}), curriculumClosingP2: val }
+                })}
+                rows={3}
+              />
+            </div>
+
+            {/* Contador de 40 Anos (Item 87: Frases Dourada e Branca Editáveis) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                Contador / Selo Oficial de 40 Anos (Item 87)
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] text-[#F6E27A] font-bold mb-1">
+                    Frase Dourada Superior (Item 87)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.founder.counterGoldPhrase || 'ADVOCACIA ESTRATÉGICA DE EXCELÊNCIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, counterGoldPhrase: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-[#F6E27A] text-xs font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-white font-bold mb-1">
+                    Frase Branca Inferior (Item 87)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.founder.counterWhitePhrase || 'DESDE 1986 NUM LEGADO JURÍDICO CENTENÁRIO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, counterWhitePhrase: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-white text-xs"
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Título Alternativo do Contador</label>
+                  <input
+                    type="text"
+                    value={formData.founder.counterTitle || '40 ANOS DE ADVOCACIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, counterTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Subtítulo do Contador</label>
+                  <input
+                    type="text"
+                    value={formData.founder.counterSub || 'Quatro décadas de excelência e dedicação exclusiva à advocacia estratégica'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      founder: { ...formData.founder, counterSub: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
-      </div>
-    </div>
-  );
+        )}
+
+        {/* TAB 6: ÁREAS DE ATUAÇÃO */}
+        {activeTab === 'services' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div>
+                <h3 className="font-cinzel text-base font-bold text-white">
+                  Página 5 · Áreas de Atuação Especializadas
+                </h3>
+                <p className="text-xs text-slate-400">
+                  Gerencie o cabeçalho da seção e os títulos, subtítulos, selos e descrições dos serviços jurídicos.
+                </p>
+              </div>
+              <button
+                onClick={handleAddPracticeArea}
+                className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Adicionar Área</span>
+              </button>
+            </div>
+
+            {/* Cabeçalho da Seção Áreas de Atuação */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+                Cabeçalho & Introdução da Seção (Página 5)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Frase Dourada Superior (Kicker)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.practiceAreasHeader?.kicker || 'SOLUÇÕES JURÍDICAS DE ALTA PERFORMANCE'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), kicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Título em Branco
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.practiceAreasHeader?.title || 'ÁREAS DE'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), title: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Destaque Dourado do Título
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.practiceAreasHeader?.titleHighlight || 'ATUAÇÃO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), titleHighlight: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <RichTextarea
+                  label="Texto de Introdução das Especialidades (Abaixo do Título)"
+                  rows={3}
+                  value={formData.practiceAreasHeader?.description || 'Com a solidez de um legado jurídico iniciado em 1908 e a experiência de mais de quatro décadas da terceira geração da família na advocacia, a ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas avançadas e personalizadas, unindo inteligência estratégica, prevenção de riscos e excelência técnica para proteger patrimônios, fortalecer empresas e preservar legados. Nossa atuação concentra-se nas seguintes áreas:'}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    practiceAreasHeader: { ...(formData.practiceAreasHeader || {}), description: val }
+                  })}
+                  hint="Edição total do texto que fica abaixo de ÁREAS DE ATUAÇÃO"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {(formData.practiceAreas || []).map((area, idx) => (
+                <div key={area.id || idx} className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#E5C158] uppercase">
+                      Área 0{idx + 1}
+                    </span>
+                    <button
+                      onClick={() => handleRemovePracticeArea(idx)}
+                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Remover</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Título da Área
+                      </label>
+                      <input
+                        type="text"
+                        value={area.title}
+                        onChange={(e) => {
+                          const updated = [...(formData.practiceAreas || [])];
+                          updated[idx].title = e.target.value;
+                          setFormData({ ...formData, practiceAreas: updated });
+                        }}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Subtítulo / Selo
+                      </label>
+                      <input
+                        type="text"
+                        value={area.subtitle}
+                        onChange={(e) => {
+                          const updated = [...(formData.practiceAreas || [])];
+                          updated[idx].subtitle = e.target.value;
+                          setFormData({ ...formData, practiceAreas: updated });
+                        }}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Descrição do Escopo Jurídico
+                    </label>
+                    <RichTextarea
+                      rows={4}
+                      value={area.description}
+                      onChange={(val) => {
+                        const updated = [...(formData.practiceAreas || [])];
+                        updated[idx].description = val;
+                        setFormData({ ...formData, practiceAreas: updated });
+                      }}
+                      placeholder="Descrição detalhada do escopo de atuação jurídica..."
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 7: SOLUÇÕES DE EXCELÊNCIA & ACADEMIA */}
+        {activeTab === 'solutions' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div>
+                <h3 className="font-cinzel text-base font-bold text-white">
+                  Página 6 · Soluções de Excelência & Academia Leão Ferreira
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Altere o cabeçalho da seção, os cards de soluções de excelência (editar, adicionar e excluir) e a Academia Leão Ferreira.
+                </p>
+              </div>
+              <button
+                onClick={handleAddExcellenceSolution}
+                className="px-3.5 py-1.5 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-xs font-semibold text-[#F6E27A] hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Adicionar Solução</span>
+              </button>
+            </div>
+
+            {/* Cabeçalho da Seção Soluções de Excelência */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+                Cabeçalho & Textos de Introdução (Página 6)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Frase Dourada Superior (Kicker)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.excellenceSolutionsHeader?.kicker || 'INTELIGÊNCIA JURÍDICA, ESTRATÉGIA E INOVAÇÃO'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), kicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Título em Branco
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.excellenceSolutionsHeader?.title || 'SOLUÇÕES DE'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), title: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Destaque Dourado do Título
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.excellenceSolutionsHeader?.titleHighlight || 'EXCELÊNCIA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), titleHighlight: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Parágrafo 1 de Introdução
+                  </label>
+                  <RichTextarea
+                    rows={3}
+                    value={formData.excellenceSolutionsHeader?.description1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções jurídicas inovadoras que integram tradição jurídica centenária, inteligência estratégica e gestão, proporcionando proteção patrimonial e empresarial, segurança jurídica, eficiência organizacional e perpetuação de patrimônios, empresas e legados familiares.'}
+                    onChange={(val) => setFormData({
+                      ...formData,
+                      excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description1: val }
+                    })}
+                    placeholder="Parágrafo 1 de introdução..."
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Parágrafo 2 de Introdução (Slogan de Excelência)
+                  </label>
+                  <RichTextarea
+                    rows={3}
+                    value={formData.excellenceSolutionsHeader?.description2 || 'A excelência jurídica resulta da combinação entre o conhecimento técnico centenário, experiência profissional e visão estratégica.'}
+                    onChange={(val) => setFormData({
+                      ...formData,
+                      excellenceSolutionsHeader: { ...(formData.excellenceSolutionsHeader || {}), description2: val }
+                    })}
+                    placeholder="Parágrafo 2 de introdução..."
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {(formData.excellenceSolutions || []).map((sol, idx) => (
+                <div key={sol.id || idx} className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-[#E5C158] uppercase">
+                      Solução 0{idx + 1} · {sol.title}
+                    </span>
+                    <button
+                      onClick={() => handleRemoveExcellenceSolution(idx)}
+                      className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Remover</span>
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Título da Solução
+                      </label>
+                      <input
+                        type="text"
+                        value={sol.title}
+                        onChange={(e) => {
+                          const updated = [...(formData.excellenceSolutions || [])];
+                          updated[idx].title = e.target.value;
+                          setFormData({ ...formData, excellenceSolutions: updated });
+                        }}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Subtítulo
+                      </label>
+                      <input
+                        type="text"
+                        value={sol.subtitle || ''}
+                        onChange={(e) => {
+                          const updated = [...(formData.excellenceSolutions || [])];
+                          updated[idx].subtitle = e.target.value;
+                          setFormData({ ...formData, excellenceSolutions: updated });
+                        }}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Descrição Detalhada
+                    </label>
+                    <RichTextarea
+                      rows={4}
+                      value={sol.description}
+                      onChange={(val) => {
+                        const updated = [...(formData.excellenceSolutions || [])];
+                        updated[idx].description = val;
+                        setFormData({ ...formData, excellenceSolutions: updated });
+                      }}
+                      placeholder="Descrição detalhada da solução de excelência..."
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Configuração da Página da Academia Leão Ferreira (Item II) */}
+            <div className="pt-6 border-t border-[#D4AF37]/30 space-y-4">
+              <div className="flex items-center gap-2">
+                <GraduationCap className="w-5 h-5 text-[#E5C158]" />
+                <h4 className="font-cinzel text-sm font-bold text-white uppercase tracking-wider">
+                  Página Exclusiva: Academia Leão Ferreira
+                </h4>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Card Inicial (Tagline)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.academiaLeao?.kicker || 'CENTRO DE ESTUDOS JURÍDICOS SUPERIORES'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), kicker: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Frase Dourada
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.academiaLeao?.phraseGold || 'CONFERENCISTA E PALESTRANTE NACIONAL'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), phraseGold: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <RichTextarea
+                label="Conteúdo Integral da Página Academia Leão Ferreira (Item 68)"
+                rows={5}
+                value={formData.academiaLeao?.content || ''}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  academiaLeao: { ...(formData.academiaLeao || {}), content: val }
+                })}
+                hint="Editor Visual completo para o texto principal da página Academia Leão Ferreira."
+              />
+
+              <RichTextarea
+                label="Texto do Palestrante (Dr. Aldo Leão)"
+                rows={2}
+                value={formData.academiaLeao?.speakerText || 'O Dr. Aldo Leão é presença marcante em congressos, seminários, mentorias, workshops, fóruns empresariais e imobiliários e palestras.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  academiaLeao: { ...(formData.academiaLeao || {}), speakerText: val }
+                })}
+              />
+
+              <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/25 space-y-3">
+                <h5 className="font-cinzel text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                  Box da Foto da Palestra com Plateia
+                </h5>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Título do Box
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.academiaLeao?.lectureBoxTitle || 'PLANEJAMENTO PATRIMONIAL 4.0 & O ALTO CUSTO DA OMISSÃO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        academiaLeao: { ...(formData.academiaLeao || {}), lectureBoxTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+
+                  {/* Upload da Foto da Palestra */}
+                  <div className="sm:col-span-2">
+                    <ImageUploadField
+                      label="Foto da Palestra / Conferência com Plateia"
+                      description="Carregue a foto do Dr. Aldo Leão em conferência presencial a partir do seu dispositivo."
+                      currentValue={formData.academiaLeao?.lecturePhotoUrl || '/img/palestra-1.jpg'}
+                      aspectRatio="video"
+                      onChange={(newUrl) => setFormData({
+                        ...formData,
+                        academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
+                      })}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Legenda em Branco Abaixo da Foto
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.academiaLeao?.lectureCaption || 'Dr. Aldo Leão em conferência presencial sobre Planejamento Patrimonial 4.0 & o Alto Custo da Omissão'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      academiaLeao: { ...(formData.academiaLeao || {}), lectureCaption: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="sm:col-span-2">
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Frase Convite para Agendamento de Conferência (Dourada)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={formData.academiaLeao?.ctaPrompt || 'Para solicitar a realização de uma Conferência, Palestra, Seminário, Mentoria ou Workshop a ser ministrado pelo Dr. Aldo Leão, clique no botão abaixo.'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        academiaLeao: { ...(formData.academiaLeao || {}), ctaPrompt: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Texto do Botão
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.academiaLeao?.ctaButtonText || 'AGENDAR CONFERÊNCIA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        academiaLeao: { ...(formData.academiaLeao || {}), ctaButtonText: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+
+        {/* TAB GESTÃO JURÍDICA 4.0 (Item 66) */}
+        {activeTab === 'gestao_juridica' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-[#D4AF37]/25 pb-4">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#E5C158] block mb-1">
+                PÁGINA DEDICADA INTEGRAL
+              </span>
+              <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-[#F6E27A]" />
+                <span>Edição Total da Página GESTÃO JURÍDICA 4.0 (Item 66)</span>
+              </h3>
+              <p className="text-xs text-slate-300 mt-1">
+                Edite todos os textos, vertentes organizacional e judicial, diagnóstico estratégico, pilares e botão de agendamento desta página.
+              </p>
+            </div>
+
+            {/* 1. Header da Página e Botão Voltar */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                1. Cabeçalho e Identificação da Página
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                    Texto do Botão Voltar (Item 66: "Voltar")
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.btnVoltarText || 'Voltar'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), btnVoltarText: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                    Kicker / Badge Superior (com Ícone da Balança)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.kickerBadge || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), kickerBadge: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                    Título Principal
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.heroTitle || 'GESTÃO JURÍDICA 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), heroTitle: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/60 text-sm text-[#F6E27A] font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                    Subtítulo Dourado
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.heroSubtitle || 'ADVOCACIA ESTRATÉGICA, INTELIGÊNCIA JURÍDICA E GESTÃO DE VANGUARDA'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), heroSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <RichTextarea
+                label="Primeiro Parágrafo da Página (Item 66)"
+                value={formData.gestaoJuridica?.introParagraph1 || 'A ALDO LEÃO ADVOCACIA ESTRATÉGICA desenvolve soluções avançadas em Gestão Jurídica 4.0 direcionadas para empresas de variados portes e segmentos. Unimos a experiência de mais de quatro décadas da terceira geração à solidez de um legado jurídico centenário (1908). Nossa atuação disponibiliza o suporte jurídico estratégico integral ou setorizado, voltado à segurança jurídica empresarial e patrimonial, reduzindo a carga tributária, mitigando os riscos e vulnerabilidades, proporcionando a conformidade legal necessária para a otimização de resultados.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), introParagraph1: val }
+                })}
+                rows={4}
+              />
+
+              <RichTextarea
+                label="Vertentes de Alta Performance (Organizacional e Judicial) - Item 66"
+                value={formData.gestaoJuridica?.introParagraph2 || 'Este serviço especializado e estratégico, possui duas vertentes de alta performance: ORGANIZACIONAL e/ou JUDICIAL.\n\n► GESTÃO JURÍDICA ORGANIZACIONAL\nCom atuação jurídica de forma preventiva e estratégica na identificação de riscos, vulnerabilidades e inconformidades legais operacionais, reduzimos ou evitamos prejuízos financeiros e passivos futuros, além de proteger patrimônios e empresas.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), introParagraph2: val }
+                })}
+                rows={4}
+              />
+            </div>
+
+            {/* 2. Frente 1: Gestão Jurídica Organizacional & Box Azul-Marinho */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                2. Frente 1: Gestão Jurídica Organizacional & Diagnóstico Estratégico
+              </h4>
+
+              <RichTextarea
+                label="Texto do Box Azul-Marinho (Item 66: Diagnóstico Situacional Estratégico)"
+                value={formData.gestaoJuridica?.frente1BoxTitle || 'O Gerenciamento Jurídico é estruturado por meio de um Diagnóstico Situacional Estratégico, que contempla:'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1BoxTitle: val }
+                })}
+                rows={2}
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Item 1: Auditoria Preventiva</label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.frente1Card1Desc || 'Auditoria preventiva da situação atual, contratos e fluxos corporativos;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card1Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Item 2: Análise Jurídica Especializada</label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.frente1Card2Desc || 'Análise jurídica especializada alinhada ao modelo de negócios e setor de atuação;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card2Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Item 3: Mapeamento de Riscos e Vulnerabilidades</label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.frente1Card3Desc || 'Mapeamento detalhado de riscos operacionais, tributários e inconformidades legais;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card3Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-300 mb-1">Item 4: Soluções Jurídicas Estratégicas</label>
+                  <input
+                    type="text"
+                    value={formData.gestaoJuridica?.frente1Card4Desc || 'Desenvolvimento e implantação de soluções preventivas e estruturantes personalizadas;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Card4Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <RichTextarea
+                label="Conclusão da Frente 1 (Item 66)"
+                value={formData.gestaoJuridica?.frente1Conclusion || 'Transformamos a estrutura administrativa da sua empresa e do seu patrimônio em um ambiente juridicamente mais seguro, protegido, eficiente, preparado para o crescimento e a perpetuação sustentável do seu legado.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente1Conclusion: val }
+                })}
+                rows={3}
+              />
+            </div>
+
+            {/* 3. Frente 2: Gestão Jurídica Judicial & 3 Pilares */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                3. Frente 2: Gestão Jurídica Judicial & 3 Pilares Essenciais
+              </h4>
+
+              <RichTextarea
+                label="Introdução da Frente Judicial (Item 66)"
+                value={formData.gestaoJuridica?.frente2Desc || 'Nossa atuação estratégica no contencioso judicial é voltada à construção de empresas mais resilientes, competitivas e juridicamente mais protegidas num ecossistema societário inteligente e legal, através de três pilares essenciais:'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Desc: val }
+                })}
+                rows={2}
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 1: DECISÕES ASSERTIVAS</label>
+                  <textarea
+                    rows={2}
+                    value={formData.gestaoJuridica?.frente2Pilar1Desc || 'Segurança jurídica avançada para a tomada de decisões empresariais e patrimoniais mais assertivas;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar1Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 2: GESTÃO DE RESULTADOS</label>
+                  <textarea
+                    rows={2}
+                    value={formData.gestaoJuridica?.frente2Pilar2Desc || 'Otimização da gestão de litígios com foco na redução de riscos, vulnerabilidades e custos;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar2Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-[#F6E27A] mb-1">Pilar 3: COMPETITIVIDADE</label>
+                  <textarea
+                    rows={2}
+                    value={formData.gestaoJuridica?.frente2Pilar3Desc || 'Fortalecimento da competitividade de mercado aliado à proteção jurídica patrimonial corporativa;'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Pilar3Desc: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <RichTextarea
+                label="Impacto e Vantagem Competitiva da Frente Judicial (Item 66)"
+                value={formData.gestaoJuridica?.frente2Impact || 'A integração da experiência centenária, da inteligência jurídica de advogados especialistas ao cotidiano de empresas e patrimônios, proporciona proteção, estabilidade, eficiência e uma vantagem competitiva decisiva para o sucesso do seu negócio e do seu patrimônio familiar.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  gestaoJuridica: { ...(formData.gestaoJuridica || {}), frente2Impact: val }
+                })}
+                rows={3}
+              />
+            </div>
+
+            {/* 4. Seção de Conversão e Destaques (Item 66) */}
+            <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+              <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                4. Destaques e Botão AGENDAR CONSULTA DIGITAL (Item 66)
+              </h4>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Destaque 1 (Mantido conforme Item 66)
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.ctaHighlight1 || 'Atendimento Brasil 100% digital e confidencial com a mesma excelência jurídica do presencial.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight1: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Destaque 2 (Mantido conforme Item 66)
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.ctaHighlight2 || 'Diagnóstico Estratégico Personalizado para o tamanho do seu negócio e patrimônio.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight2: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 mb-1">
+                  Destaque 3 (Mantido conforme Item 66)
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.ctaHighlight3 || 'Três Gerações de Excelência Jurídica dedicadas à perpetuação do seu legado.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaHighlight3: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1">
+                  Texto do Botão de Agendamento (Item 66)
+                </label>
+                <input
+                  type="text"
+                  value={formData.gestaoJuridica?.ctaButtonText || 'AGENDAR CONSULTA DIGITAL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    gestaoJuridica: { ...(formData.gestaoJuridica || {}), ctaButtonText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#071122] border border-[#D4AF37]/50 text-xs text-white font-bold"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 8: AGENDE SUA CONSULTA DIGITAL */}
+        {activeTab === 'consultation' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                <PhoneCall className="w-4 h-4 text-[#F6E27A]" />
+                <span>Aba 8 · Agende a sua Consulta Digital (Página 7 do Site)</span>
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Configure os textos, chamada para ação, imagem de fundo e garantias de confidencialidade da consulta online.
+              </p>
+            </div>
+
+            {/* Imagem de Fundo do CTA e Foto do Card à Direita (Item 100) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ImageUploadField
+                label="Foto Principal do Card à Direita (Item 100)"
+                description="Foto principal em destaque à direita na seção Agende a sua Consulta Digital."
+                currentValue={formData.digitalConsultation?.cardImageUrl || '/img/consulta-virtual-1.jpg'}
+                defaultValue="/img/consulta-virtual-1.jpg"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  digitalConsultation: { ...(formData.digitalConsultation || {}), cardImageUrl: newUrl }
+                })}
+                presetOptions={[
+                  { label: 'Reunião Virtual Executiva (Padrão)', url: '/img/consulta-virtual-1.jpg' },
+                  { label: 'Consulta Estratégica Digital', url: '/img/consulta-virtual-2.jpg' },
+                  { label: 'Dr. Aldo Reunião', url: '/img/dr-aldo-reuniao.jpg' },
+                  { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
+                ]}
+              />
+
+              <ImageUploadField
+                label="Imagem de Fundo Sutil da Seção (Item 100)"
+                description="Imagem sutil de fundo para a seção de agendamento de consulta digital."
+                currentValue={formData.digitalConsultation?.bgImageUrl || '/img/consulta-virtual-2.jpg'}
+                defaultValue="/img/consulta-virtual-2.jpg"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
+                })}
+                presetOptions={[
+                  { label: 'Fundo Consulta Virtual (Padrão)', url: '/img/consulta-virtual-2.jpg' },
+                  { label: 'Fundo Gabinete Dr. Aldo', url: '/img/dr-aldo-reuniao.jpg' },
+                ]}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold">
+                    Frase Dourada Superior (Item 57: Kicker)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({
+                      ...formData,
+                      digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: 'ATENDIMENTO DIGITAL BRASIL' }
+                    })}
+                    className="text-[10px] text-[#F6E27A] hover:underline cursor-pointer font-normal"
+                    title="Restaurar Frase Oficial"
+                  >
+                    Restaurar "ATENDIMENTO DIGITAL BRASIL"
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.sectionKicker || 'ATENDIMENTO DIGITAL BRASIL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), sectionKicker: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.sectionTitle || 'AGENDE SUA'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), sectionTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.sectionHighlight || 'CONSULTA DIGITAL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), sectionHighlight: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            <RichTextarea
+              label="Descrição do Atendimento (Item 68 e 100)"
+              rows={4}
+              value={formData.digitalConsultation?.description || 'Agende a sua Consulta Jurídica Digital com a ALDO LEÃO ADVOCACIA ESTRATÉGICA e descubra as soluções jurídicas avançadas e inteligentes para a sua necessidade. Nosso atendimento virtual no Brasil é realizado de forma personalizada, com segurança digital, confidencialidade e a mesma excelência do atendimento presencial.'}
+              onChange={(val) => setFormData({
+                ...formData,
+                digitalConsultation: { ...(formData.digitalConsultation || {}), description: val }
+              })}
+            />
+
+            {/* Pontos de Destaque com Balança da Justiça (Item 9 e 38) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Ponto de Destaque 1 (com Ícone Balança)
+                </label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.point1 || 'Agendamento prévio da consulta'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), point1: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Ponto de Destaque 2 (com Ícone Balança)
+                </label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.point2 || 'Consulta com hora marcada'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), point2: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+              <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
+                Textos Sobrepostos na Foto da Direita (Item 100)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Selo Dourado</label>
+                  <input
+                    type="text"
+                    value={formData.digitalConsultation?.cardBadge || 'Atendimento 100% Digital'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      digitalConsultation: { ...(formData.digitalConsultation || {}), cardBadge: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Título sobre a Foto</label>
+                  <input
+                    type="text"
+                    value={formData.digitalConsultation?.cardTitle || 'CONSULTA DIGITAL BRASIL'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      digitalConsultation: { ...(formData.digitalConsultation || {}), cardTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Subtítulo sobre a Foto</label>
+                  <input
+                    type="text"
+                    value={formData.digitalConsultation?.cardSubtitle || 'Segurança Digital, Sigilo e Excelência Jurídica Centenária.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      digitalConsultation: { ...(formData.digitalConsultation || {}), cardSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto do Botão Principal (Agendar Consulta)
+                </label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.btnSchedule || 'AGENDAR CONSULTA VIRTUAL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), btnSchedule: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto do Botão WhatsApp
+                </label>
+                <input
+                  type="text"
+                  value={formData.digitalConsultation?.btnWhatsApp || 'Agendar pelo WhatsApp'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    digitalConsultation: { ...(formData.digitalConsultation || {}), btnWhatsApp: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 9: HOLDING FAMILIAR & PLANEJAMENTO 4.0 */}
+        {(activeTab === 'holding' || activeTab === 'landing_holding') && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                <Layers className="w-4 h-4 text-[#F6E27A]" />
+                <span>Aba 9 · Planejamento Patrimonial 4.0 (Holding Familiar) · Página 8 do Site</span>
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Edite todos os textos da seção explicativa de Holding, a foto do card de estruturação (BMW oficial), as caixas O Que É, Por Que Fazer e as vantagens.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Frase Superior (Kicker)
+                </label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.sectionKicker || 'PLANEJAMENTO PATRIMONIAL E EMPRESARIAL 4.0'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionKicker: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-white font-semibold mb-1">
+                  Título em Branco
+                </label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.sectionTitle || 'HOLDING'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-semibold mb-1">
+                  Destaque Dourado do Título
+                </label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.sectionHighlight || 'FAMILIAR'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), sectionHighlight: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                />
+              </div>
+            </div>
+
+            {/* 3 Parágrafos Explicativos da Seção */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-slate-800 space-y-3">
+              <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+                3 Parágrafos Explicativos Abaixo do Título
+              </span>
+              <RichTextarea
+                label="Parágrafo 1"
+                rows={2}
+                value={formData.holdingFamiliar?.paragraph1 || 'O Planejamento Patrimonial e Empresarial 4.0 via Holding Familiar representa uma nova geração de soluções jurídicas avançadas e especializadas voltadas à proteção patrimonial, estruturação e organização societária, governança familiar e sucessão empresarial.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph1: val }
+                })}
+              />
+              <RichTextarea
+                label="Parágrafo 2"
+                rows={2}
+                value={formData.holdingFamiliar?.paragraph2 || 'Muito além da constituição de uma empresa, trata-se de uma modelagem jurídica personalizada, desenvolvida por advogados especialistas, para proteger o patrimônio, fortalecer a gestão dos ativos e assegurar sua perpetuação para as futuras gerações.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph2: val }
+                })}
+              />
+              <RichTextarea
+                label="Parágrafo 3"
+                rows={2}
+                value={formData.holdingFamiliar?.paragraph3 || 'Cada modelagem estrutural é concebida de forma individualizada, considerando as características do patrimônio, da empresa, da família e dos objetivos do cliente (família).'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), paragraph3: val }
+                })}
+              />
+            </div>
+
+            {/* Card ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL (Foto BMW oficial) */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 space-y-4">
+              <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider block">
+                Card de Destaque: Estruturação e Proteção Patrimonial (Foto BMW)
+              </span>
+
+              <ImageUploadField
+                label="Foto Oficial do Card (Família, Edifício Corporativo e Carro BMW Dourado)"
+                description="Imagem oficial aprovada pelo Dr. Aldo Leão para o card de destaque da Holding Familiar."
+                currentValue={formData.holdingFamiliar?.cardImageUrl || '/img/holding-familiar-1.jpg'}
+                defaultValue="/img/holding-familiar-1.jpg"
+                aspectRatio="video"
+                onChange={(newUrl) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardImageUrl: newUrl }
+                })}
+              />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Selo / Badge do Card</label>
+                  <input
+                    type="text"
+                    value={formData.holdingFamiliar?.cardBadge || 'PLANEJAMENTO 4.0'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardBadge: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Título do Card</label>
+                  <input
+                    type="text"
+                    value={formData.holdingFamiliar?.cardTitle || 'ESTRUTURAÇÃO E PROTEÇÃO PATRIMONIAL'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Descrição do Card</label>
+                <textarea
+                  rows={2}
+                  value={formData.holdingFamiliar?.cardText || 'Organização societária de especialistas para proteger e perpetuar o seu patrimônio e negócio para as futuras gerações.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            {/* Box O QUE É? */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
+                Box 1: O Que É o Planejamento 4.0?
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Etiqueta do Box</label>
+                  <input
+                    type="text"
+                    value={formData.holdingFamiliar?.boxWhatIsTitle || 'O QUE É O PLANEJAMENTO 4.0?'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] text-slate-400 mb-1">Cabeçalho</label>
+                  <input
+                    type="text"
+                    value={formData.holdingFamiliar?.boxWhatIsHeading || 'Metodologia Jurídica Estratégica Multidisciplinar'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsHeading: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+              </div>
+              <RichTextarea
+                label="Texto Explicativo"
+                rows={3}
+                value={formData.holdingFamiliar?.boxWhatIsText || 'Desenvolvida para organizar, proteger e perpetuar patrimônios e empresas por meio de soluções preventivas, reduzindo riscos jurídicos, sucessórios e tributários. Sua estrutura integra instrumentos de Direito Societário, Direito Empresarial, Direito Civil, Direito Imobiliário e Governança Familiar.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhatIsText: val }
+                })}
+              />
+            </div>
+
+            {/* Box POR QUE PLANEJAR EM VIDA? */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/30 space-y-3">
+              <h4 className="text-xs uppercase font-bold text-[#E5C158] tracking-wider">
+                Box 2: Por Que Planejar em Vida?
+              </h4>
+              <div>
+                <label className="block text-[11px] text-slate-400 mb-1">Título do Box</label>
+                <input
+                  type="text"
+                  value={formData.holdingFamiliar?.boxWhyTitle || 'Por Que Planejar em Vida?'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyTitle: e.target.value }
+                  })}
+                  className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+              <RichTextarea
+                label="Texto de Alerta e Conscientização"
+                rows={3}
+                value={formData.holdingFamiliar?.boxWhyText || 'Permite que decisões patrimoniais e empresariais sejam tomadas de forma organizada, estratégica e com segurança jurídica, eliminando brigas entre herdeiros, a alta perda patrimonial e financeira do inventário (média 40% do patrimônio inventariado), partilha das cotas sociais em divórcios e dissoluções de uniões estáveis, a venda forçada e rápida de bens com deságio para quitar o inventário.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  holdingFamiliar: { ...(formData.holdingFamiliar || {}), boxWhyText: val }
+                })}
+              />
+            </div>
+
+            {/* ========================================================= */}
+            {/* SEÇÃO DEDICADA: LANDING PAGE HOLDING FAMILIAR 4.0 (/1208/) */}
+            {/* ========================================================= */}
+            <div className="mt-12 pt-8 border-t-2 border-[#D4AF37]/40 space-y-6">
+              <div className="bg-[#050B14] p-5 rounded-2xl border border-[#D4AF37]/50 shadow-xl">
+                <span className="text-[10px] uppercase tracking-widest text-[#E5C158] font-bold block mb-1">
+                  PÁGINA DEDICADA EXCLUSIVA
+                </span>
+                <h3 className="font-cinzel text-lg sm:text-xl font-black text-white flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#F6E27A]" />
+                  <span>LANDING PAGE HOLDING FAMILIAR 4.0 (ROTA /1208/)</span>
+                </h3>
+                <p className="text-xs text-slate-300 mt-1">
+                  Gerencie todos os textos, perguntas frequentes, as 18 vantagens, os problemas do inventário e a tabela comparativa de custos da página oficial de conversão.
+                </p>
+              </div>
+
+              {/* 1. HERO DA LANDING PAGE */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  1. Hero Principal da Landing Page
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Frase Superior (Eyebrow)</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.heroEyebrow || 'HOLDING FAMILIAR'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroEyebrow: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Título em Branco</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.heroTitle || 'PLANEJAMENTO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Subtítulo em Dourado</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.heroSubtitle || 'O INVENTÁRIO ACARRETA ALTA PERDA PATRIMONIAL E FINANCEIRA AOS HERDEIROS'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroSubtitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/40 text-xs text-[#F6E27A] font-bold"
+                    />
+                  </div>
+                </div>
+
+                {/* 5 Parágrafos do Hero */}
+                <div className="space-y-2 pt-2 border-t border-slate-800">
+                  <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
+                    Os 5 Parágrafos do Hero da Landing Page
+                  </span>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.heroParagraph1 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph1: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.heroParagraph2 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph2: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.heroParagraph3 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph3: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 4</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.heroParagraph4 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph4: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 5 (Destaque Final)</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.heroParagraph5 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroParagraph5: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                {/* Botões do Hero */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Botão Dourado (Viabilidade)</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.heroBtnViabilidade || 'AGENDAR SESSÃO DE VIABILIDADE'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroBtnViabilidade: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Botão Secundário (Custos)</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.heroBtnCustos || 'CUSTOS: INVENTÁRIO X PLANEJAMENTO 4.0'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), heroBtnCustos: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. ALGUNS PROBLEMAS DO INVENTÁRIO */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-red-500/35 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-xs uppercase font-bold text-red-400 tracking-wider">
+                      2. Seção: Alguns Problemas do Inventário
+                    </h4>
+                    <p className="text-[11px] text-slate-400">
+                      Cards com ícone de alerta vermelho conscientizando o cliente sobre os riscos do inventário.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.holdingLanding?.problemsList || [];
+                      setFormData({
+                        ...formData,
+                        holdingLanding: {
+                          ...(formData.holdingLanding || {}),
+                          problemsList: [...current, 'Novo problema diagnosticado no inventário']
+                        }
+                      });
+                    }}
+                    className="px-2.5 py-1 rounded bg-red-950/40 border border-red-500 text-[11px] font-bold text-red-300 hover:bg-red-900/50 flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-3 h-3" /> Adicionar Problema
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Kicker da Seção</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.problemsSubtitle || 'DIAGNÓSTICO PREVENTIVO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), problemsSubtitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título da Seção</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.problemsTitle || 'ALGUNS PROBLEMAS DO INVENTÁRIO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), problemsTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  {(formData.holdingLanding?.problemsList || []).map((prob, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={prob}
+                        onChange={(e) => {
+                          const current = [...(formData.holdingLanding?.problemsList || [])];
+                          current[idx] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), problemsList: current }
+                          });
+                        }}
+                        className="flex-1 p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.holdingLanding?.problemsList || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), problemsList: current }
+                          });
+                        }}
+                        className="p-2 text-red-400 hover:text-red-300 hover:bg-red-950/40 rounded transition-colors"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 3. ARQUITETURA JURÍDICA ESTRATÉGICA */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  3. Arquitetura Jurídica Estratégica (Perpetuação do Legado)
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Kicker Superior</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.strategyKicker || 'ARQUITETURA JURÍDICA ESTRATÉGICA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), strategyKicker: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] text-slate-400 mb-1">Título</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.strategyTitle || 'O PLANEJAMENTO PATRIMONIAL 4.0 EVITA O INVENTÁRIO E PERPETUA O SEU LEGADO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), strategyTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 1</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.strategyParagraph1 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph1: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 2</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.strategyParagraph2 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph2: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Parágrafo 3</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.strategyParagraph3 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), strategyParagraph3: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. AS 18 VANTAGENS EXCLUSIVAS */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                      4. As 18 Vantagens Exclusivas da Holding Familiar
+                    </h4>
+                    <p className="text-[11px] text-slate-400">
+                      Cards elegantes com check dourado apresentando os benefícios diretos do planejamento.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.holdingLanding?.advantagesList || [];
+                      setFormData({
+                        ...formData,
+                        holdingLanding: {
+                          ...(formData.holdingLanding || {}),
+                          advantagesList: [...current, 'Nova vantagem exclusiva']
+                        }
+                      });
+                    }}
+                    className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-3 h-3" /> Adicionar Vantagem
+                  </button>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-1">Título da Seção</label>
+                  <input
+                    type="text"
+                    value={formData.holdingLanding?.advantagesTitle || 'VANTAGENS EXCLUSIVAS DO PLANEJAMENTO 4.0 (HOLDING FAMILIAR)'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), advantagesTitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
+                  {(formData.holdingLanding?.advantagesList || []).map((vant, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <span className="text-[11px] text-[#D4AF37] font-bold w-6 text-right shrink-0">
+                        #{idx + 1}
+                      </span>
+                      <input
+                        type="text"
+                        value={vant}
+                        onChange={(e) => {
+                          const current = [...(formData.holdingLanding?.advantagesList || [])];
+                          current[idx] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), advantagesList: current }
+                          });
+                        }}
+                        className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.holdingLanding?.advantagesList || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), advantagesList: current }
+                          });
+                        }}
+                        className="p-1.5 text-red-400 hover:text-red-300"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 5. TABELA COMPARATIVA DE CUSTOS COMPLETA */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 space-y-4">
+                <div>
+                  <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                    5. Tabela Comparativa de Custos: Inventário x Holding Familiar
+                  </h4>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Edite os títulos, o caso exemplo e cada valor da tabela comparativa lado a lado.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Kicker</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.tableKicker || 'ESTUDO COMPARATIVO'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), tableKicker: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título da Tabela</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.tableTitle || 'CUSTOS: INVENTÁRIO X HOLDING FAMILIAR'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), tableTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Subtítulo / Caso Exemplo (R$ 1.000.000,00...)</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.tableSubtitle || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), tableSubtitle: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                {/* Linhas da Tabela de Custos */}
+                <div className="space-y-3 pt-2 border-t border-slate-800">
+                  <span className="text-[11px] font-bold text-[#E5C158] uppercase block">
+                    Valores dos Custos (Inventário x Holding)
+                  </span>
+
+                  {/* ITCD */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-red-300 mb-0.5">ITCD / ITCMD · Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.itcmdInventario || 'R$ 75.000,00 (5%)'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), itcmdInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#F6E27A] mb-0.5">ITCD / ITCMD · Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.itcmdHolding || 'R$ 60.000,00 (4%)'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), itcmdHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Honorários */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-red-300 mb-0.5">Honorários Advocatícios · Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.honorariosInventario || 'R$ 120.000,00 (8%)'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), honorariosInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#F6E27A] mb-0.5">Honorários Advocatícios · Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.honorariosHolding || 'R$ 70.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), honorariosHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Custas */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-red-300 mb-0.5">Custas de Cartório · Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.custasInventario || 'R$ 12.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), custasInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#25D366] mb-0.5">Custas de Cartório · Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.custasHolding || 'R$ 0,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), custasHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Certidões */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-red-300 mb-0.5">Certidões · Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.certidoesInventario || 'R$ 3.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), certidoesInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#25D366] mb-0.5">Certidões · Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.certidoesHolding || 'R$ 0,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), certidoesHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Ganho de Capital */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-red-300 mb-0.5">I.R. Ganho de Capital · Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.ganhoCapitalInventario || 'R$ 75.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), ganhoCapitalInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#25D366] mb-0.5">I.R. Ganho de Capital · Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.ganhoCapitalHolding || 'R$ 0,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), ganhoCapitalHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Registro */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[10px] text-red-300 mb-0.5">Registro de Imóveis · Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.registroInventario || 'R$ 12.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), registroInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#F6E27A] mb-0.5">Registro de Imóveis · Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.registroHolding || 'R$ 3.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), registroHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Custo Total */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                    <div>
+                      <label className="block text-[10px] text-red-400 font-bold mb-0.5">Custo Total · Processo de Inventário</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.totalInventario || 'R$ 297.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), totalInventario: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-red-500/50 text-xs text-red-400 font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-[#F6E27A] font-bold mb-0.5">Custo Total · Holding Familiar</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.totalHolding || 'R$ 133.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), totalHolding: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Economia */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+                    <div>
+                      <label className="block text-[10px] text-[#25D366] font-bold mb-0.5">Economia em R$ com a Holding</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.economiaValor || 'R$ 164.000,00'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), economiaValor: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-[#25D366]/50 text-xs text-[#25D366] font-bold"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] text-white font-bold mb-0.5">Percentual de Economia</label>
+                      <input
+                        type="text"
+                        value={formData.holdingLanding?.economiaPercentual || '55,21%'}
+                        onChange={(e) => setFormData({
+                          ...formData,
+                          holdingLanding: { ...(formData.holdingLanding || {}), economiaPercentual: e.target.value }
+                        })}
+                        className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 6. BOX FAÇA O SEU PLANEJAMENTO 4.0 */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  6. Box: Faça o Seu Planejamento 4.0 (Chamada para Ação)
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título do Box</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.ctaBoxTitle || 'FAÇA O SEU PLANEJAMENTO 4.0'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Botão Viabilidade</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.ctaBoxBtnViabilidade || 'AGENDAR DIAGNÓSTICO DE VIABILIDADE'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxBtnViabilidade: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Box</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.ctaBoxText || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), ctaBoxText: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              {/* 7. PÚBLICO-ALVO (PARA QUEM É A HOLDING FAMILIAR?) */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                      7. Para Quem É a Holding Familiar? (Público-Alvo)
+                    </h4>
+                    <p className="text-[11px] text-slate-400">
+                      Perfis atendidos (Empresários, Proprietários de bens, Famílias empresárias, etc.).
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.holdingLanding?.targetList || [];
+                      setFormData({
+                        ...formData,
+                        holdingLanding: {
+                          ...(formData.holdingLanding || {}),
+                          targetList: [...current, 'Novo perfil de cliente']
+                        }
+                      });
+                    }}
+                    className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[11px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                  >
+                    <Plus className="w-3 h-3" /> Adicionar Perfil
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Kicker</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.targetSubtitle || 'PERFIL E ABRANGÊNCIA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), targetSubtitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.targetTitle || 'PARA QUEM É A HOLDING FAMILIAR?'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), targetTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto Introdutório</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.targetIntro || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), targetIntro: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {(formData.holdingLanding?.targetList || []).map((target, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={target}
+                        onChange={(e) => {
+                          const current = [...(formData.holdingLanding?.targetList || [])];
+                          current[idx] = e.target.value;
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), targetList: current }
+                          });
+                        }}
+                        className="flex-1 p-1.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const current = (formData.holdingLanding?.targetList || []).filter((_, i) => i !== idx);
+                          setFormData({
+                            ...formData,
+                            holdingLanding: { ...(formData.holdingLanding || {}), targetList: current }
+                          });
+                        }}
+                        className="p-1.5 text-red-400 hover:text-red-300"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 8. DR. ALDO LEÃO NA LANDING PAGE */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  8. Seção Dr. Aldo Leão na Landing Page
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Kicker Superior</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.drAldoKicker || 'ADVOCACIA ESTRATÉGICA DESDE 1986'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), drAldoKicker: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Legenda da Foto de Palestra</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.drAldoCaption || 'Conferência e Liderança em Planejamento Patrimonial 4.0'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), drAldoCaption: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                <ImageUploadField
+                  label="Foto de Palestra do Dr. Aldo Leão na Landing Page"
+                  description="Foto exclusiva para a landing page (evita repetição da foto do site principal)."
+                  currentValue={formData.holdingLanding?.drAldoPhotoUrl || '/img/palestra-1.jpg'}
+                  defaultValue="/img/palestra-1.jpg"
+                  aspectRatio="video"
+                  onChange={(newUrl) => setFormData({
+                    ...formData,
+                    holdingLanding: { ...(formData.holdingLanding || {}), drAldoPhotoUrl: newUrl }
+                  })}
+                />
+
+                <div className="space-y-2">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 1</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.drAldoBio1 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio1: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 2</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.drAldoBio2 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio2: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 3</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.drAldoBio3 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio3: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Bio Parágrafo 4</label>
+                    <textarea
+                      rows={2}
+                      value={formData.holdingLanding?.drAldoBio4 || ''}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), drAldoBio4: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 9. PERGUNTAS FREQUENTES (FAQS COMPLETAS COM ADICIONAR E REMOVER) */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/50 space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+                  <div>
+                    <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                      9. Perguntas Frequentes da Landing Page (Sanfona Interativa)
+                    </h4>
+                    <p className="text-[11px] text-slate-400">
+                      As 8 perguntas e respostas essenciais. Você pode alterar, excluir ou adicionar novas perguntas.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const current = formData.holdingLanding?.faqs || [];
+                      setFormData({
+                        ...formData,
+                        holdingLanding: {
+                          ...(formData.holdingLanding || {}),
+                          faqs: [
+                            ...current,
+                            {
+                              q: 'Nova Pergunta Frequente sobre Holding Familiar?',
+                              a: 'Resposta detalhada com orientação jurídica clara e preventiva.'
+                            }
+                          ]
+                        }
+                      });
+                    }}
+                    className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Adicionar Pergunta
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Kicker Superior</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.faqKicker || 'DÚVIDAS'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), faqKicker: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título da Seção</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.faqTitle || 'PERGUNTAS FREQUENTES'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), faqTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                </div>
+
+                {/* Lista de FAQs */}
+                <div className="space-y-4">
+                  {(formData.holdingLanding?.faqs || []).map((faq, idx) => (
+                    <div key={idx} className="p-4 rounded-xl bg-[#071122] border border-slate-700 space-y-2">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-xs font-bold text-[#E5C158] uppercase">
+                          Pergunta #{idx + 1}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const current = (formData.holdingLanding?.faqs || []).filter((_, i) => i !== idx);
+                            setFormData({
+                              ...formData,
+                              holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
+                            });
+                          }}
+                          className="text-xs text-red-400 hover:text-red-300 flex items-center gap-1 cursor-pointer"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" /> Remover
+                        </button>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] text-slate-400 mb-0.5">Pergunta</label>
+                        <input
+                          type="text"
+                          value={faq.q}
+                          onChange={(e) => {
+                            const current = [...(formData.holdingLanding?.faqs || [])];
+                            current[idx] = { ...current[idx], q: e.target.value };
+                            setFormData({
+                              ...formData,
+                              holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
+                            });
+                          }}
+                          className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-semibold"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] text-slate-400 mb-0.5">Resposta</label>
+                        <textarea
+                          rows={3}
+                          value={faq.a}
+                          onChange={(e) => {
+                            const current = [...(formData.holdingLanding?.faqs || [])];
+                            current[idx] = { ...current[idx], a: e.target.value };
+                            setFormData({
+                              ...formData,
+                              holdingLanding: { ...(formData.holdingLanding || {}), faqs: current }
+                            });
+                          }}
+                          className="w-full p-2.5 rounded bg-[#050B14] border border-slate-700 text-xs text-slate-200 leading-relaxed"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 10. BOX ALGUMA DÚVIDA? E RODAPÉ */}
+              <div className="p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+                <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider">
+                  10. Box Final "Alguma Dúvida?" & Rodapé Exclusivo
+                </h4>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Título do Box</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.doubtTitle || 'ALGUMA DÚVIDA?'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), doubtTitle: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Texto do Botão Especialista</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.doubtBtnText || 'FALAR COM O ESPECIALISTA'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), doubtBtnText: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-semibold"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] text-slate-400 mb-0.5">Rodapé Direitos Autorais</label>
+                    <input
+                      type="text"
+                      value={formData.holdingLanding?.footerCopyright || '© ALDO LEÃO ADVOCACIA ESTRATÉGICA – TODOS OS DIREITOS RESERVADOS'}
+                      onChange={(e) => setFormData({
+                        ...formData,
+                        holdingLanding: { ...(formData.holdingLanding || {}), footerCopyright: e.target.value }
+                      })}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] text-slate-400 mb-0.5">Texto de Orientação do Box</label>
+                  <textarea
+                    rows={2}
+                    value={formData.holdingLanding?.doubtText || ''}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      holdingLanding: { ...(formData.holdingLanding || {}), doubtText: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 10: PUBLICAÇÕES & ARTIGOS */}
+        {activeTab === 'publications' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
+              <div>
+                <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-[#F6E27A]" />
+                  <span>Aba 10 · Publicações Jurídicas (Artigos & Notícias) · Página 9 do Site</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  Edite o cabeçalho e os textos introdutórios oficiais, configure a assinatura automática e gerencie todos os artigos e notícias.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('artigo')}
+                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  title="Criar novo Artigo Jurídico assinado pelo Dr. Aldo Leão"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ Novo Artigo Jurídico</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleAddPublication('noticia')}
+                  className="px-4 py-2 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#142A52] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  title="Criar nova Notícia Jurídica com foco informativo"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ Nova Notícia Jurídica</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Atalhos Rápidos da Aba 10 */}
+            <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-inner">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[11px] text-[#F6E27A] font-bold uppercase tracking-wider">Acesso Rápido:</span>
+                <a
+                  href="#publicacoes-cadastradas"
+                  className="px-3 py-1.5 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-white text-xs font-semibold hover:bg-[#D4AF37]/30 transition-colors"
+                >
+                  📚 Gerenciar Artigos e Notícias ({formData.publications?.length || 0})
+                </a>
+                <a
+                  href="#cabecalho-secao-publicacoes"
+                  className="px-3 py-1.5 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 text-xs hover:text-white hover:border-[#D4AF37]/50 transition-colors"
+                >
+                  🏛️ Cabeçalho & Parágrafos da Seção
+                </a>
+                <a
+                  href="#assinatura-artigos"
+                  className="px-3 py-1.5 rounded-lg bg-[#071122] border border-slate-700 text-slate-300 text-xs hover:text-white hover:border-[#D4AF37]/50 transition-colors"
+                >
+                  ✍️ Assinatura Automática
+                </a>
+              </div>
+            </div>
+
+            {/* Cabeçalho da Seção Publicações Jurídicas */}
+            <div id="cabecalho-secao-publicacoes" className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+                Cabeçalho & 3 Parágrafos Oficiais da Seção (Página 9)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Frase Dourada Superior (Kicker)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.publicationsSection?.kicker || 'NOTÍCIAS E ARTIGOS JURÍDICOS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      publicationsSection: { ...(formData.publicationsSection || {}), kicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Título em Branco
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.publicationsSection?.titleWhite || 'PUBLICAÇÕES'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      publicationsSection: { ...(formData.publicationsSection || {}), titleWhite: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Destaque Dourado do Título
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.publicationsSection?.titleGold || 'JURÍDICAS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      publicationsSection: { ...(formData.publicationsSection || {}), titleGold: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Parágrafo 1 Oficial
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={formData.publicationsSection?.paragraph1 || 'A produção de conhecimento jurídico faz parte da tradição centenária da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      publicationsSection: { ...(formData.publicationsSection || {}), paragraph1: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Parágrafo 2 Oficial
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={formData.publicationsSection?.paragraph2 || 'Aqui você encontra as notícias importantes e os artigos jurídicos de especialistas em linguagem clara e acessível.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      publicationsSection: { ...(formData.publicationsSection || {}), paragraph2: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Parágrafo 3 Oficial
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={formData.publicationsSection?.paragraph3 || 'Nosso compromisso é compartilhar o conhecimento especializado para que você fique atualizado com as novas tendências do cenário jurídico nacional, que impactam a sua vida e o seu legado.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      publicationsSection: { ...(formData.publicationsSection || {}), paragraph3: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed font-light"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* SEÇÃO EXCLUSIVA: ASSINATURA AUTOMÁTICA DOS ARTIGOS E NOTÍCIAS */}
+            <div id="assinatura-artigos" className="p-5 sm:p-6 rounded-xl bg-[#050B14] border-2 border-[#D4AF37]/60 shadow-2xl space-y-5 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-64 h-32 bg-[#D4AF37]/5 blur-3xl pointer-events-none rounded-full" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800 relative z-10">
+                <div className="flex items-start gap-3">
+                  <div className="p-2.5 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] mt-0.5">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h4 className="font-cinzel text-base font-bold text-white">
+                        Assinatura Automática dos Artigos e Notícias
+                      </h4>
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                        Captação de Leads
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                      Esta assinatura é inserida <strong>automaticamente ao final de cada notícia ou artigo</strong>, sem necessidade de digitação em cada texto.
+                      Se quiser alterar o texto ou as cores da assinatura, basta digitar nos campos específicos abaixo.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Switch Ativar / Desativar */}
+                <label className="flex items-center gap-2.5 px-3 py-2 rounded-lg bg-[#071122] border border-slate-700 hover:border-[#D4AF37]/60 cursor-pointer transition-colors self-start sm:self-auto shrink-0">
+                  <input
+                    type="checkbox"
+                    checked={formData.articleSignature?.enabled ?? true}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {
+                            enabled: true,
+                            line1: 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1Color: '#FFFFFF',
+                            line2: 'Excelência Jurídica Desde 1908',
+                            line2Color: '#D4AF37',
+                            buttonText: 'AGENDAR CONSULTA',
+                            buttonTextColor: '#E0E6ED',
+                            whatsappNumber: '',
+                            whatsappMessage: 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'
+                          }),
+                          enabled: e.target.checked
+                        }
+                      });
+                    }}
+                    className="w-4 h-4 rounded text-[#D4AF37] accent-[#D4AF37] cursor-pointer"
+                  />
+                  <span className="text-xs font-semibold text-white">
+                    {formData.articleSignature?.enabled !== false ? 'Assinatura Ativada' : 'Assinatura Desativada'}
+                  </span>
+                </label>
+              </div>
+
+              {/* Controles de Configuração da Assinatura */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+                {/* Linha 1 (Item 56: "Núcleo de Comunicação" #FFFFFF) */}
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Linha 1 da Assinatura (Núcleo de Comunicação)
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={formData.articleSignature?.line1 ?? 'Núcleo de Comunicação'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: e.target.value,
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                          }
+                        });
+                      }}
+                      className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                      placeholder="Ex: Núcleo de Comunicação"
+                    />
+                    <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 1">
+                      <input
+                        type="color"
+                        value={formData.articleSignature?.line1Color || '#FFFFFF'}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            articleSignature: {
+                              ...(formData.articleSignature || {}),
+                              enabled: formData.articleSignature?.enabled ?? true,
+                              line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                              line1Color: e.target.value,
+                              line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                              line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                              line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                              line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
+                              buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                              buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                            }
+                          });
+                        }}
+                        className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                      />
+                      <span className="text-[10px] text-slate-400 font-mono pr-1">
+                        {formData.articleSignature?.line1Color || '#FFFFFF'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Linha 2 (Item 56: "ALDO LEÃO ADVOCACIA ESTRATÉGICA" #D4AF37) */}
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Linha 2 da Assinatura (Escritório / Marca)
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={formData.articleSignature?.line2 ?? 'ALDO LEÃO ADVOCACIA ESTRATÉGICA'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: e.target.value,
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                          }
+                        });
+                      }}
+                      className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                      placeholder="Ex: ALDO LEÃO ADVOCACIA ESTRATÉGICA"
+                    />
+                    <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 2">
+                      <input
+                        type="color"
+                        value={formData.articleSignature?.line2Color || '#D4AF37'}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            articleSignature: {
+                              ...(formData.articleSignature || {}),
+                              enabled: formData.articleSignature?.enabled ?? true,
+                              line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                              line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                              line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                              line2Color: e.target.value,
+                              line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                              line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
+                              buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                              buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                            }
+                          });
+                        }}
+                        className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                      />
+                      <span className="text-[10px] text-slate-400 font-mono pr-1">
+                        {formData.articleSignature?.line2Color || '#D4AF37'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Linha 3 (Item 56: "Excelência Jurídica Desde 1908" #F8F8F8) */}
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Linha 3 da Assinatura (Slogan / Centenário)
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={formData.articleSignature?.line3 ?? 'Excelência Jurídica Desde 1908'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            line3: e.target.value,
+                            line3Color: formData.articleSignature?.line3Color || '#F8F8F8',
+                            buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                          }
+                        });
+                      }}
+                      className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                      placeholder="Ex: Excelência Jurídica Desde 1908"
+                    />
+                    <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor da Linha 3">
+                      <input
+                        type="color"
+                        value={formData.articleSignature?.line3Color || '#F8F8F8'}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            articleSignature: {
+                              ...(formData.articleSignature || {}),
+                              enabled: formData.articleSignature?.enabled ?? true,
+                              line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação',
+                              line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                              line2: formData.articleSignature?.line2 || 'ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                              line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                              line3: formData.articleSignature?.line3 || 'Excelência Jurídica Desde 1908',
+                              line3Color: e.target.value,
+                              buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                              buttonTextColor: formData.articleSignature?.buttonTextColor || '#050B14',
+                            }
+                          });
+                        }}
+                        className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                      />
+                      <span className="text-[10px] text-slate-400 font-mono pr-1">
+                        {formData.articleSignature?.line3Color || '#F8F8F8'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Botão CTA WhatsApp */}
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Texto do Botão de Agendamento (WhatsApp)
+                  </label>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={formData.articleSignature?.buttonText ?? 'AGENDAR CONSULTA'}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          articleSignature: {
+                            ...(formData.articleSignature || {}),
+                            enabled: formData.articleSignature?.enabled ?? true,
+                            line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                            line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                            line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                            line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                            buttonText: e.target.value,
+                            buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          }
+                        });
+                      }}
+                      className="flex-1 p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium focus:border-[#D4AF37] focus:outline-none"
+                      placeholder="Ex: AGENDAR CONSULTA"
+                    />
+                    <div className="flex items-center gap-1.5 p-1 rounded bg-[#071122] border border-slate-700" title="Cor do Texto do Botão">
+                      <input
+                        type="color"
+                        value={formData.articleSignature?.buttonTextColor || '#E0E6ED'}
+                        onChange={(e) => {
+                          setFormData({
+                            ...formData,
+                            articleSignature: {
+                              ...(formData.articleSignature || {}),
+                              enabled: formData.articleSignature?.enabled ?? true,
+                              line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                              line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                              line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                              line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                              buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                              buttonTextColor: e.target.value,
+                            }
+                          });
+                        }}
+                        className="w-7 h-7 rounded border-0 cursor-pointer bg-transparent"
+                      />
+                      <span className="text-[10px] text-slate-400 font-mono pr-1">
+                        {formData.articleSignature?.buttonTextColor || '#E0E6ED'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* WhatsApp Específico para Leads de Artigos */}
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    WhatsApp para Atendimento dos Artigos (Opcional)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.articleSignature?.whatsappNumber ?? ''}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {}),
+                          enabled: formData.articleSignature?.enabled ?? true,
+                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                          line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          whatsappNumber: e.target.value,
+                        }
+                      });
+                    }}
+                    className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white focus:border-[#D4AF37] focus:outline-none"
+                    placeholder="Deixe em branco para usar o WhatsApp oficial do site: (51) 99808-8998"
+                  />
+                </div>
+
+                {/* Mensagem Pré-definida */}
+                <div className="md:col-span-2">
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Mensagem Pré-definida enviada no WhatsApp
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={formData.articleSignature?.whatsappMessage ?? 'Olá! Estava lendo uma publicação no portal da Aldo Leão Advocacia Estratégica e gostaria de agendar uma consulta jurídica.'}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        articleSignature: {
+                          ...(formData.articleSignature || {}),
+                          enabled: formData.articleSignature?.enabled ?? true,
+                          line1: formData.articleSignature?.line1 || 'Núcleo de Comunicação | ALDO LEÃO ADVOCACIA ESTRATÉGICA',
+                          line1Color: formData.articleSignature?.line1Color || '#FFFFFF',
+                          line2: formData.articleSignature?.line2 || 'Excelência Jurídica Desde 1908',
+                          line2Color: formData.articleSignature?.line2Color || '#D4AF37',
+                          buttonText: formData.articleSignature?.buttonText || 'AGENDAR CONSULTA',
+                          buttonTextColor: formData.articleSignature?.buttonTextColor || '#E0E6ED',
+                          whatsappMessage: e.target.value,
+                        }
+                      });
+                    }}
+                    className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white focus:border-[#D4AF37] focus:outline-none leading-relaxed"
+                    placeholder="Mensagem padrão enviada quando o lead clica no botão AGENDAR CONSULTA"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1">
+                    Ao clicar, o WhatsApp é aberto com essa mensagem pré-preenchida, informando inclusive qual artigo o leitor estava consultando.
+                  </p>
+                </div>
+              </div>
+
+              {/* Prévia Visual ao Vivo */}
+              <div className="pt-4 border-t border-slate-800 relative z-10">
+                <span className="block text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold mb-2 flex items-center gap-1.5">
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>Prévia Visual em Tempo Real (Como aparecerá ao final de cada artigo e notícia):</span>
+                </span>
+                <ArticleSignature
+                  previewMode={true}
+                  customConfig={formData.articleSignature}
+                  publicationTitle="A Nova Disciplina do ITCMD e o Impacto Imediato na Estruturação de Holdings Familiares"
+                />
+              </div>
+            </div>
+
+            {/* LISTA DE PUBLICAÇÕES (ARTIGOS E NOTÍCIAS) */}
+            <div id="publicacoes-cadastradas" className="space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#F6E27A]" />
+                    <span>Publicações Cadastradas ({formData.publications?.length || 0})</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Novos artigos e notícias aparecem no topo da lista e já são publicados no site.
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleAddPublication('artigo')}
+                    className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>+ Artigo Jurídico</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleAddPublication('noticia')}
+                    className="px-3.5 py-1.5 rounded-lg bg-[#0E1F3D] border border-[#D4AF37] text-[#F6E27A] text-xs font-bold uppercase tracking-wider hover:bg-[#142A52] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>+ Notícia Jurídica</span>
+                  </button>
+                </div>
+              </div>
+
+              {(formData.publications || []).map((pub, idx) => (
+                <div
+                  key={pub.id || idx}
+                  id={`pub-item-${pub.id}`}
+                  className={`p-5 rounded-xl bg-[#050B14] border transition-all space-y-4 ${idx === 0
+                    ? 'border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)] ring-1 ring-[#D4AF37]/50'
+                    : 'border-slate-800 hover:border-[#D4AF37]/40'
+                    }`}
+                >
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                    <div className="flex items-center gap-2">
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${pub.type === 'artigo' ? 'bg-[#D4AF37] text-black font-black' : 'bg-[#0E1F3D] text-[#F6E27A] border border-[#D4AF37]/50 font-bold'
+                        }`}>
+                        {pub.type === 'artigo' ? 'Artigo Jurídico' : 'Notícia Jurídica'}
+                      </span>
+                      <span className="text-xs font-semibold text-slate-400">
+                        Publicação #{idx + 1}
+                      </span>
+                      {idx === 0 && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                          Item no Topo
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          updateSiteConfig(formData);
+                          showNotification('Publicação salva com sucesso!');
+                        }}
+                        className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
+                        title="Salvar esta publicação imediatamente"
+                      >
+                        <Save className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Salvar</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleRemovePublication(idx)}
+                        className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors px-2 py-1 rounded hover:bg-red-500/10"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Remover</span>
+                      </button>
+                    </div>
+                  </div>
+
+
+                  {/* CAMPO DE TÍTULO OFICIAL DESTACADO EM DOURADO */}
+                  <div className="p-3.5 rounded-xl bg-[#071122] border-2 border-[#D4AF37]/70 space-y-1.5 shadow-md">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#F6E27A] flex items-center justify-between">
+                      <span className="flex items-center gap-1.5">
+                        <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                        <span>🏷️ TÍTULO DO ARTIGO OU NOTÍCIA (Obrigatório)</span>
+                      </span>
+                      <span className="text-[10px] text-slate-400 font-normal">Este título aparecerá em destaque no site e nos cartões</span>
+                    </label>
+                    <input
+                      id={`pub-title-${pub.id}`}
+                      type="text"
+                      value={pub.title}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].title = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      placeholder="Digite o título do artigo ou notícia (Ex: A Nova Disciplina do ITCMD)"
+                      className="w-full p-3 rounded-lg bg-[#050B14] border border-[#D4AF37]/50 text-sm sm:text-base text-white font-bold font-cinzel focus:border-[#F6E27A] focus:outline-none focus:ring-2 focus:ring-[#F6E27A]/30"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {/* Tipo de Publicação */}
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Tipo de Conteúdo
+                      </label>
+                      <select
+                        value={pub.type || 'artigo'}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].type = e.target.value as 'artigo' | 'noticia';
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      >
+                        <option value="artigo">Artigo Jurídico (Dr. Aldo Leão)</option>
+                        <option value="noticia">Notícia Jurídica</option>
+                      </select>
+                    </div>
+
+                    {/* Área */}
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Área Jurídica
+                      </label>
+                      <input
+                        type="text"
+                        value={pub.area}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].area = e.target.value;
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                        placeholder="Ex: Planejamento Patrimonial 4.0"
+                      />
+                    </div>
+
+                    {/* Data */}
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Data da Publicação
+                      </label>
+                      <input
+                        type="text"
+                        value={pub.date || ''}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].date = e.target.value;
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                        placeholder="Ex: 13/11/2026"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Programação de Publicação para Data/Hora Futura (Item 59) */}
+                  <div className="p-3 rounded-xl bg-[#09152B] border border-[#D4AF37]/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <input
+                        type="checkbox"
+                        id={`schedule-${pub.id || idx}`}
+                        checked={pub.isScheduled || false}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].isScheduled = e.target.checked;
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        className="w-4 h-4 accent-[#D4AF37] cursor-pointer"
+                      />
+                      <label htmlFor={`schedule-${pub.id || idx}`} className="text-xs font-bold text-[#F6E27A] cursor-pointer">
+                        Programar publicação para data e hora futura (Item 59)
+                      </label>
+                    </div>
+
+                    {pub.isScheduled && (
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] text-slate-300">Publicar em:</span>
+                        <input
+                          type="datetime-local"
+                          value={pub.publishAt || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.publications || [])];
+                            updated[idx].publishAt = e.target.value;
+                            setFormData({ ...formData, publications: updated });
+                          }}
+                          className="p-1.5 rounded bg-[#050B14] border border-[#D4AF37]/50 text-xs text-white"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Tempo de Leitura Estimado
+                    </label>
+                    <input
+                      type="text"
+                      value={pub.readTime || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].readTime = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      placeholder="Ex: 5 min de leitura"
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                      Resumo / Excerpt (Exibido no Cartão da Seção)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={pub.excerpt}
+                      onChange={(e) => {
+                        const updated = [...(formData.publications || [])];
+                        updated[idx].excerpt = e.target.value;
+                        setFormData({ ...formData, publications: updated });
+                      }}
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white leading-relaxed"
+                    />
+                  </div>
+
+                  <RichTextarea
+                    label="Conteúdo Completo (Texto Integral com Editor Rico: Tabelas, Marcadores, Imagens, Cores e Formatação)"
+                    value={pub.content || ''}
+                    onChange={(val) => {
+                      const updated = [...(formData.publications || [])];
+                      updated[idx].content = val;
+                      setFormData({ ...formData, publications: updated });
+                    }}
+                    rows={10}
+                    placeholder="Escreva ou cole aqui o conteúdo completo do artigo ou notícia jurídica..."
+                    hint="A assinatura automática oficial é anexada ao final do texto"
+                  />
+
+                  {/* Metadados SEO Ocultos para Indexação nos Buscadores (Itens 17 e 55) */}
+                  <div className="p-4 rounded-lg bg-[#071122] border border-[#D4AF37]/25 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] uppercase tracking-wider text-[#F6E27A] font-bold">
+                        Metadados SEO para Buscadores (Google / Bing) · Campos Ocultos
+                      </span>
+                      <span className="text-[10px] text-slate-400">Indexado por robôs de busca sem poluir o layout</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                          Título SEO (Title Tag)
+                        </label>
+                        <input
+                          type="text"
+                          value={pub.seoTitle || ''}
+                          onChange={(e) => {
+                            const updated = [...(formData.publications || [])];
+                            updated[idx].seoTitle = e.target.value;
+                            setFormData({ ...formData, publications: updated });
+                          }}
+                          placeholder={pub.title || "Ex: Holding Familiar e Proteção Patrimonial | Dr. Aldo Leão"}
+                          className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                          Palavras-Chave (# Tags)
+                        </label>
+                        <input
+                          type="text"
+                          value={(pub.keywords || []).join(', ')}
+                          onChange={(e) => {
+                            const updated = [...(formData.publications || [])];
+                            updated[idx].keywords = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+                            setFormData({ ...formData, publications: updated });
+                          }}
+                          placeholder="Ex: #holding, #itcmd, #inventario, #planejamento"
+                          className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Meta Descrição (Meta Description)
+                      </label>
+                      <textarea
+                        rows={2}
+                        value={pub.metaDescription || ''}
+                        onChange={(e) => {
+                          const updated = [...(formData.publications || [])];
+                          updated[idx].metaDescription = e.target.value;
+                          setFormData({ ...formData, publications: updated });
+                        }}
+                        placeholder={pub.excerpt || "Breve descrição otimizada para aparecer nos resultados de busca do Google (150 a 160 caracteres)..."}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 11: LIVROS DIGITAIS */}
+        {activeTab === 'books' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
+              <div>
+                <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-[#F6E27A]" />
+                  <span>Aba 11 · Livros Digitais (Acervo de 8 Obras) · Página 10 do Site</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Edite os textos do cabeçalho oficial da página e gerencie os 8 livros digitais publicados com download gratuito e capas personalizadas.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleAddBook}
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-[#F6E27A] via-[#E5C158] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Adicionar Livro Digital</span>
+              </button>
+            </div>
+
+            {/* Cabeçalho Oficial da Seção Livros Digitais */}
+            <div className="p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-3">
+              <span className="text-xs font-bold text-[#E5C158] uppercase tracking-wider block">
+                Cabeçalho & 3 Parágrafos Oficiais da Página (Página 10)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Frase Dourada Superior (Pill)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.booksSection?.goldKicker || 'Acervo de Livros Digitais Publicados'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      booksSection: { ...(formData.booksSection || {}), goldKicker: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Título em Branco
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.booksSection?.titleWhite || 'LIVROS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      booksSection: { ...(formData.booksSection || {}), titleWhite: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white font-bold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                    Destaque Dourado do Título
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.booksSection?.titleGold || 'DIGITAIS'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      booksSection: { ...(formData.booksSection || {}), titleGold: e.target.value }
+                    })}
+                    className="w-full p-2 rounded bg-[#071122] border border-[#D4AF37]/50 text-xs text-[#F6E27A] font-bold"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <RichTextarea
+                  label="Parágrafo 1 Oficial"
+                  rows={2}
+                  value={formData.booksSection?.paragraph1 || 'A produção intelectual sempre fez parte da tradição da ALDO LEÃO ADVOCACIA ESTRATÉGICA.'}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), paragraph1: val }
+                  })}
+                />
+
+                <RichTextarea
+                  label="Parágrafo 2 Oficial"
+                  rows={2}
+                  value={formData.booksSection?.paragraph2 || 'Nesta página reunimos os livros digitais publicados por especialistas, para compartilhar GRATUITAMENTE o conhecimento jurídico com soluções estratégicas e boas práticas.'}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), paragraph2: val }
+                  })}
+                />
+
+                <RichTextarea
+                  label="Parágrafo 3 Oficial"
+                  rows={2}
+                  value={formData.booksSection?.paragraph3 || 'Cada obra publicada pela Academia Leão Ferreira representa nosso compromisso permanente com a excelência jurídica, a inovação e a difusão do conhecimento especializado.'}
+                  onChange={(val) => setFormData({
+                    ...formData,
+                    booksSection: { ...(formData.booksSection || {}), paragraph3: val }
+                  })}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-[#050B14] border border-[#D4AF37]/40 shadow-lg">
+                <div>
+                  <h4 className="text-xs uppercase tracking-wider font-bold text-[#F6E27A] flex items-center gap-2">
+                    <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                    <span>Acervo de Obras e Livros Digitais ({formData.digitalBooks?.length || 0})</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-400 mt-0.5">
+                    Novos livros adicionados entram automaticamente no topo do acervo oficial.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleAddBook}
+                  className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-[#F6E27A] to-[#D4AF37] text-black text-xs font-bold uppercase tracking-wider hover:brightness-110 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer shadow-md self-start sm:self-auto"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ Novo Livro Digital</span>
+                </button>
+              </div>
+
+              {(formData.digitalBooks || []).map((book, idx) => (
+                <div
+                  key={book.id || idx}
+                  id={`book-item-${book.id}`}
+                  className={`p-5 rounded-xl bg-[#050B14] border transition-all space-y-4 ${idx === 0
+                    ? 'border-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.15)] ring-1 ring-[#D4AF37]/50'
+                    : 'border-slate-800 hover:border-[#D4AF37]/40'
+                    }`}
+                >
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-[#E5C158] uppercase">
+                        Livro Digital #{idx + 1}
+                      </span>
+                      {idx === 0 && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                          Item no Topo
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          updateSiteConfig(formData);
+                          showNotification('Livro digital salvo com sucesso!');
+                        }}
+                        className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[#F6E27A] text-xs font-bold hover:bg-[#D4AF37]/30 transition-colors flex items-center gap-1 cursor-pointer"
+                        title="Salvar este livro imediatamente"
+                      >
+                        <Save className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Salvar</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveBook(idx)}
+                        className="text-red-400 hover:text-red-300 text-xs flex items-center gap-1 cursor-pointer transition-colors px-2 py-1 rounded hover:bg-red-500/10"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                        <span>Remover</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Upload de Capa para cada Livro */}
+                  <ImageUploadField
+                    label={`Capa do Livro: ${book.title}`}
+                    description="Carregue a imagem da capa do livro digital a partir do seu dispositivo."
+                    currentValue={book.coverImage}
+                    aspectRatio="video"
+                    onChange={(newUrl) => {
+                      const updated = [...(formData.digitalBooks || [])];
+                      updated[idx].coverImage = newUrl;
+                      setFormData({ ...formData, digitalBooks: updated });
+                    }}
+                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="sm:col-span-2">
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Título do Livro
+                      </label>
+                      <input
+                        type="text"
+                        value={book.title}
+                        onChange={(e) => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          updated[idx].title = e.target.value;
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white font-medium"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Área Jurídica
+                      </label>
+                      <input
+                        type="text"
+                        value={book.area}
+                        onChange={(e) => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          updated[idx].area = e.target.value;
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Autor
+                      </label>
+                      <input
+                        type="text"
+                        value={book.author}
+                        onChange={(e) => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          updated[idx].author = e.target.value;
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] uppercase tracking-wider text-slate-400 mb-1">
+                        Número de Páginas (Editável pelo Dr. Aldo Leão)
+                      </label>
+                      <input
+                        type="text"
+                        value={book.pages || '144 páginas'}
+                        onChange={(e) => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          updated[idx].pages = e.target.value;
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        placeholder="Ex: 144 páginas"
+                        className="w-full p-2.5 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Link / URL do PDF do Livro para Download Direto */}
+                  <div>
+                    <label className="block text-[11px] uppercase tracking-wider text-slate-300 mb-1">
+                      Link / URL do PDF do Livro (Para Download Direto)
+                    </label>
+                    <input
+                      type="text"
+                      value={book.pdfUrl || ''}
+                      onChange={(e) => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        updated[idx].pdfUrl = e.target.value;
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                      placeholder="Ex: /docs/livro-holding.pdf ou https://..."
+                      className="w-full p-2 rounded bg-[#071122] border border-slate-700 text-xs text-white"
+                    />
+                  </div>
+
+                  <RichTextarea
+                    label="Sinopse da Obra (Card Principal e Modal)"
+                    rows={3}
+                    value={book.description}
+                    onChange={(val) => {
+                      const updated = [...(formData.digitalBooks || [])];
+                      updated[idx].description = val;
+                      setFormData({ ...formData, digitalBooks: updated });
+                    }}
+                  />
+
+                  {/* Modal: Sumário da Obra e Trecho da Obra (Itens 70, 101 e 111) */}
+                  <div className="p-4 rounded-xl bg-[#071122] border border-[#D4AF37]/30 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#F6E27A] uppercase tracking-wider">
+                        Modal "Ler Resumo Executivo / Sumário da Obra" (Itens 70, 101 e 111)
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          const currentChapters = updated[idx].chapters || [];
+                          updated[idx].chapters = [...currentChapters, `Capítulo ${currentChapters.length + 1}: Novo Capítulo`];
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        className="px-2.5 py-1 rounded bg-[#D4AF37]/20 border border-[#D4AF37] text-[10px] font-bold text-[#F6E27A] hover:bg-[#D4AF37]/30 flex items-center gap-1 cursor-pointer"
+                      >
+                        <Plus className="w-3 h-3" /> Adicionar Capítulo
+                      </button>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] text-slate-400 uppercase mb-1">
+                        Título da Seção de Capítulos (Ex: Sumário Executivo da Obra)
+                      </label>
+                      <input
+                        type="text"
+                        value={book.summaryTitle || 'Sumário Executivo da Obra'}
+                        onChange={(e) => {
+                          const updated = [...(formData.digitalBooks || [])];
+                          updated[idx].summaryTitle = e.target.value;
+                          setFormData({ ...formData, digitalBooks: updated });
+                        }}
+                        className="w-full p-2 rounded bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                      />
+                    </div>
+
+                    <div className="space-y-1.5 max-h-56 overflow-y-auto pr-1">
+                      {(book.chapters || []).map((chap, cIdx) => (
+                        <div key={cIdx} className="flex items-center gap-2">
+                          <input
+                            type="text"
+                            value={chap}
+                            onChange={(e) => {
+                              const updated = [...(formData.digitalBooks || [])];
+                              const chaps = [...(updated[idx].chapters || [])];
+                              chaps[cIdx] = e.target.value;
+                              updated[idx].chapters = chaps;
+                              setFormData({ ...formData, digitalBooks: updated });
+                            }}
+                            className="flex-1 p-1.5 rounded bg-[#050B14] border border-slate-700 text-xs text-white"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const updated = [...(formData.digitalBooks || [])];
+                              updated[idx].chapters = (updated[idx].chapters || []).filter((_, i) => i !== cIdx);
+                              setFormData({ ...formData, digitalBooks: updated });
+                            }}
+                            className="p-1.5 text-red-400 hover:text-red-300 cursor-pointer"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    <RichTextarea
+                      label="Trecho da Obra / Citação em Destaque no Modal"
+                      rows={3}
+                      value={book.sampleExcerpt || ''}
+                      onChange={(val) => {
+                        const updated = [...(formData.digitalBooks || [])];
+                        updated[idx].sampleExcerpt = val;
+                        setFormData({ ...formData, digitalBooks: updated });
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* TAB 12: CONTATO & TELEFONES */}
+        {activeTab === 'contact' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white">
+                Página 11 · Canais de Comunicação, WhatsApp Oficial & Localização
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Altere o número de WhatsApp que recebe mensagens de todo o site, telefones e e-mails.
+              </p>
+            </div>
+
+            {/* WhatsApp Oficial Principal */}
+            <div className="p-4 rounded-xl bg-[#0E1F3D] border border-[#D4AF37]/50">
+              <label className="block text-xs uppercase tracking-wider text-[#F6E27A] font-bold mb-1.5 flex items-center gap-2">
+                <PhoneCall className="w-4 h-4" />
+                <span>Número Oficial do WhatsApp do Escritório:</span>
+              </label>
+              <input
+                type="text"
+                value={formData.contact.whatsappNumber}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  contact: { ...formData.contact, whatsappNumber: e.target.value.replace(/\D/g, '') }
+                })}
+                placeholder="Ex: 5551998088998 (com DDI e DDD)"
+                className="w-full p-3 rounded-lg bg-[#050B14] border border-[#D4AF37] text-sm text-[#F6E27A] font-bold tabular-nums"
+              />
+              <p className="text-[11px] text-slate-300 mt-2">
+                Ao alterar este número, todos os botões do WhatsApp e formulários do site direcionam diretamente para este WhatsApp oficial.
+              </p>
+            </div>
+
+            {/* Box 1: Atendimento Virtual */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+                <Scale className="w-4 h-4 text-[#F6E27A]" />
+                <span>Box 1 · Atendimento Virtual Brasil</span>
+              </h4>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Título do Box 1
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.boxVirtualTitle || 'ATENDIMENTO VIRTUAL BRASIL'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, boxVirtualTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto de Atendimento Virtual (Horários e Dias)
+                </label>
+                <textarea
+                  rows={2}
+                  value={formData.contact.boxVirtualText || 'Nosso atendimento em todo o território nacional é feito com hora marcada, mediante prévio agendamento pelo WhatsApp, de 2a à 6a feira, das 08:30/11:30hs e das 13:30/18:30hs.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, boxVirtualText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            {/* Box 2: Escritório Central */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+                <Compass className="w-4 h-4 text-[#F6E27A]" />
+                <span>Box 2 · Escritório Central (Porto Alegre / RS)</span>
+              </h4>
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Endereço do Escritório Central
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.addressPortoAlegre || 'Av. Cel. Lucas de Oliveira, 1255/502, Bairro Bela Vista, CEP 90440-011, Porto Alegre - RS'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, addressPortoAlegre: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            {/* Box 3: TELEFONES (Totalmente Editável) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+                <Phone className="w-4 h-4 text-[#F6E27A]" />
+                <span>Box 3 · Telefones de Atendimento</span>
+              </h4>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Título do Box de Telefones
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phonesBoxTitle || 'TELEFONES'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonesBoxTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Telefone Celular / WhatsApp 1
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.contact.phonePrimary}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, phonePrimary: e.target.value.replace(/\./g, '') }
+                    })}
+                    onBlur={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, phonePrimary: cleanAndFormatPhone(e.target.value, '(51) 99808-8998') }
+                    })}
+                    placeholder="(51) 99808-8998"
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99808-8998</p>
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    Telefone Celular / WhatsApp 2
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.contact.phoneSecondary}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, phoneSecondary: e.target.value.replace(/\./g, '') }
+                    })}
+                    onBlur={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, phoneSecondary: cleanAndFormatPhone(e.target.value, '(51) 99807-8998') }
+                    })}
+                    placeholder="(51) 99807-8998"
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                  <p className="text-[10px] text-slate-400 mt-1">Formato oficial sem pontos: (51) 99807-8998</p>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto Explicativo Abaixo dos Telefones
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phonesBoxSubtitle || 'Fale com o Escritório Jurídico mais antigo do Brasil, pelos telefones:'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonesBoxSubtitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto do Botão de WhatsApp (Box de Telefones)
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.phonesCtaText || 'AGENDAR NO WHATSAPP'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, phonesCtaText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            {/* Box 4: E-MAILS (Totalmente Editável) */}
+            <div className="p-4 rounded-xl bg-[#08152B] border border-[#D4AF37]/40 space-y-3">
+              <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+                <Mail className="w-4 h-4 text-[#F6E27A]" />
+                <span>Box 4 · E-mails de Contato</span>
+              </h4>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Título do Box de E-mails
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.emailsBoxTitle || 'E-MAILS'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, emailsBoxTitle: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white font-bold"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    E-mail Principal / Geral
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.contact.emailPrimary}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, emailPrimary: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    E-mail Academia Leão Ferreira
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.contact.emailAcademia || 'academialeaoferreira@gmail.com'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, emailAcademia: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    E-mail Holding Familiar 1
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.contact.emailHolding1 || 'aldoleao.planejamento@gmail.com'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, emailHolding1: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                    E-mail Holding Familiar 2
+                  </label>
+                  <input
+                    type="email"
+                    value={formData.contact.emailHolding2 || 'holdingfamiliarbr@gmail.com'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contact: { ...formData.contact, emailHolding2: e.target.value }
+                    })}
+                    className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1">
+                  Texto do Rodapé do Box de E-mails
+                </label>
+                <input
+                  type="text"
+                  value={formData.contact.emailsBoxFooter || 'Entre em contato enviando um e-mail, para o setor que deseja atendimento'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    contact: { ...formData.contact, emailsBoxFooter: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+
+            {/* Textos Institucionais do Rodapé da Página Contato (Itens Solicitados pelo Dr. Aldo) */}
+            <div className="pt-6 border-t border-slate-800 space-y-4">
+              <div className="border-b border-slate-800 pb-2">
+                <h4 className="font-cinzel text-xs font-bold text-[#E5C158] uppercase tracking-wider flex items-center gap-2">
+                  <Scale className="w-4 h-4 text-[#F6E27A]" />
+                  <span>Textos Institucionais do Rodapé da Página Contato (Abaixo da Logomarca)</span>
+                </h4>
+                <p className="text-[11px] text-slate-400 mt-0.5">
+                  Edite os dois parágrafos sobre a história centenária e a 3ª geração que aparecem no rodapé da página de contato.
+                </p>
+              </div>
+
+              <RichTextarea
+                label="Rodapé Contato · Parágrafo 1 (História e Tradição Desde 1908)"
+                rows={3}
+                value={formData.contact.footerParagraph1 || 'A história da <strong class="text-[#F6E27A] font-bold">Aldo Leão Advocacia Estratégica</strong> começou em 1908 e perpassa Três Gerações de Excelência Jurídica, preservando os valores éticos, primazia técnica e o compromisso permanente com a proteção jurídica dos interesses de seus clientes.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  contact: { ...formData.contact, footerParagraph1: val }
+                })}
+                hint="Texto com suporte total a formatação dourada e negrito"
+              />
+
+              <RichTextarea
+                label="Rodapé Contato · Parágrafo 2 (Terceira Geração Desde 1986)"
+                rows={3}
+                value={formData.contact.footerParagraph2 || 'Desde 1986, esse legado jurídico familiar centenário é representado pela terceira geração, tendo o Dr. Aldo Leão implementado a Advocacia Estratégica, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas avançadas e de alta performance.'}
+                onChange={(val) => setFormData({
+                  ...formData,
+                  contact: { ...formData.contact, footerParagraph2: val }
+                })}
+                hint="Texto sobre a liderança da 3ª geração pelo Dr. Aldo Leão"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* TAB 13: RODAPÉ & AVISOS DA OAB */}
+        {activeTab === 'footer' && (
+          <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/25 p-6 sm:p-8 space-y-6">
+            <div className="border-b border-slate-800 pb-3">
+              <h3 className="font-cinzel text-base font-bold text-white flex items-center gap-2">
+                <Scale className="w-4 h-4 text-[#F6E27A]" />
+                <span>Página 12 · Rodapé Institucional & Avisos da OAB</span>
+              </h3>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Altere os textos de rodapé, mensagens de direitos autorais e avisos de conformidade com a OAB.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                Texto Institucional do Rodapé — Parágrafo 1
+              </label>
+              <textarea
+                rows={3}
+                value={formData.footer?.institutionalParagraph1 || 'A história da Aldo Leão Advocacia Estratégica começou em 1908 e atravessa mais de um século de dedicação ao Direito, preservando valores éticos, excelência técnica e compromisso permanente com a proteção dos interesses de seus clientes.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  footer: { ...(formData.footer || {}), institutionalParagraph1: e.target.value }
+                })}
+                className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                Texto Institucional do Rodapé — Parágrafo 2
+              </label>
+              <textarea
+                rows={3}
+                value={formData.footer?.institutionalParagraph2 || 'Desde 1986, esse legado jurídico centenário é representado pela terceira geração da família, unindo tradição jurídica, inovação e inteligência estratégica para oferecer soluções jurídicas de alta performance.'}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  footer: { ...(formData.footer || {}), institutionalParagraph2: e.target.value }
+                })}
+                className="w-full p-3 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white leading-relaxed"
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Texto de Direitos Reservados (Copyright)
+                </label>
+                <input
+                  type="text"
+                  value={formData.footer?.copyrightText || '© 2026 Aldo Leão Advocacia Estratégica · Tradição Jurídica Centenária Desde 1908. Todos os direitos reservados.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    footer: { ...(formData.footer || {}), copyrightText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs uppercase tracking-wider text-slate-300 font-semibold mb-1.5">
+                  Aviso de Conformidade OAB (Provimento nº 205/2021)
+                </label>
+                <input
+                  type="text"
+                  value={formData.footer?.oabComplianceText || 'Provimento nº 205/2021 do Conselho Federal da OAB · Inscrição OAB/RS 22.418.'}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    footer: { ...(formData.footer || {}), oabComplianceText: e.target.value }
+                  })}
+                  className="w-full p-2.5 rounded-lg bg-[#050B14] border border-slate-700 text-xs text-white"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 14: CENTRAL DE TODAS AS IMAGENS DO SITE */}
+                  {activeTab === 'all_images' && (
+                    <div className="bg-[#071122] rounded-xl border border-[#D4AF37]/35 p-6 sm:p-8 space-y-6">
+                      <div className="border-b border-slate-800 pb-4">
+                        <h3 className="font-cinzel text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                          <ImageIcon className="w-5 h-5 text-[#F6E27A]" />
+                          <span>14. Central de Todas as Imagens & Fotos do Portal</span>
+                        </h3>
+                        <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                          Aqui você tem visão panorâmica e controle total sobre <strong>todas as imagens, fotos e capas de livros de todas as seções do site</strong>. Clique em <strong>"Carregar do Computador / Celular"</strong> para selecionar qualquer arquivo ou cole o link/URL.
+                        </p>
+                      </div>
+
+                      <div className="space-y-6">
+                        {/* 1. Logomarca Oficial */}
+                        <ImageUploadField
+                          label="1. Logomarca Oficial (Leão Dourado / Símbolo do Topo e Rodapé)"
+                          description="Exibida na barra de navegação no topo, nas seções e no rodapé do portal."
+                          currentValue={formData.navbar?.logoImageUrl}
+                          defaultValue="/img/logo-symbol.png"
+                          aspectRatio="square"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            navbar: { ...(formData.navbar || {}), logoImageUrl: newUrl }
+                          })}
+                        />
+
+                        {/* 2. Slide 1 Desktop */}
+                        <ImageUploadField
+                          label="2. Slide 1 - Imagem Principal Tradição Jurídica Centenária (Computador / Desktop)"
+                          description="Foto de abertura em alta resolução exibida no primeiro slide em telas de computador."
+                          currentValue={formData.hero.heroImageUrl}
+                          defaultValue="/img/hero-advocacia-bg.jpg"
+                          aspectRatio="video"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            hero: { ...formData.hero, heroImageUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Imagem Atual com Estátuas', url: '/img/hero-advocacia-bg.jpg' },
+                            { label: 'Versão Otimizada Mobile', url: '/img/hero-advocacia-bg-mobile.jpg' },
+                          ]}
+                        />
+
+                        {/* 3. Slide 1 Mobile */}
+                        <ImageUploadField
+                          label="3. Slide 1 - Imagem Tradição Jurídica Centenária (Smartphones / Celular)"
+                          description="Versão enquadrada perfeitamente na vertical para celulares (sem cortar as estátuas da justiça)."
+                          currentValue={formData.hero.heroImageMobileUrl}
+                          defaultValue="/img/hero-advocacia-bg-mobile.jpg"
+                          aspectRatio="portrait"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            hero: { ...formData.hero, heroImageMobileUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Versão Otimizada Mobile', url: '/img/hero-advocacia-bg-mobile.jpg' },
+                            { label: 'Versão Desktop', url: '/img/hero-advocacia-bg.jpg' },
+                          ]}
+                        />
+
+                        {/* 4. Slide 2 Desktop */}
+                        <ImageUploadField
+                          label="4. Slide 2 - Imagem Holding Familiar & Planejamento 4.0 (Computador / Desktop)"
+                          description="Foto oficial aprovada com a família em frente ao edifício e carro BMW dourado."
+                          currentValue={formData.hero.heroSlide2ImageUrl}
+                          defaultValue="/img/holding-familiar-1.jpg"
+                          aspectRatio="video"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            hero: { ...formData.hero, heroSlide2ImageUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
+                          ]}
+                        />
+
+                        {/* 5. Slide 2 Mobile */}
+                        <ImageUploadField
+                          label="5. Slide 2 - Imagem Holding Familiar (Smartphones / Celular)"
+                          description="Foto otimizada para celulares no slide 2 de Planejamento Patrimonial 4.0."
+                          currentValue={formData.hero.heroSlide2ImageMobileUrl}
+                          defaultValue="/img/holding-familiar-1.jpg"
+                          aspectRatio="portrait"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            hero: { ...formData.hero, heroSlide2ImageMobileUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
+                          ]}
+                        />
+
+                        {/* 6. Card Estruturação Holding BMW */}
+                        <ImageUploadField
+                          label="6. Foto do Card de Estruturação & Proteção Patrimonial (Página 9)"
+                          description="Foto em destaque no card central com badge 'ESTRUTURAÇÃO & PROTEÇÃO' na seção Planejamento Patrimonial 4.0."
+                          currentValue={formData.holdingFamiliar?.cardImageUrl}
+                          defaultValue="/img/holding-familiar-1.jpg"
+                          aspectRatio="video"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            holdingFamiliar: { ...(formData.holdingFamiliar || {}), cardImageUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Família & BMW Dourada (Oficial)', url: '/img/holding-familiar-1.jpg' },
+                          ]}
+                        />
+
+                        {/* 7. Mapa de Presença Nacional Digital */}
+                        <ImageUploadField
+                          label="7. Mapa da Presença Nacional Digital (Página 3)"
+                          description="Mapa do Brasil com os estados e capitais atendidas pelo escritório digital."
+                          currentValue={formData.nationalPresence?.mapImageUrl}
+                          defaultValue="/presencadigital.jpeg"
+                          aspectRatio="auto"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            nationalPresence: { ...(formData.nationalPresence || {}), mapImageUrl: newUrl }
+                          })}
+                        />
+
+                        {/* 8. Retrato Oficial do Dr. Aldo Leão */}
+                        <ImageUploadField
+                          label="8. Retrato Principal do Dr. Aldo Leão (Head Jurídico · 40 Anos)"
+                          description="Foto principal do Dr. Aldo Leão na seção Head Jurídico e apresentações institucionais."
+                          currentValue={formData.founder.photoUrl}
+                          defaultValue="/img/dr-aldo-portrait.jpg"
+                          aspectRatio="portrait"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, photoUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Retrato Formal', url: '/img/dr-aldo-portrait.jpg' },
+                            { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
+                            { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
+                            { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
+                            { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
+                            { label: 'Alta Definição', url: '/img/dr-aldo-foco.jpg' },
+                          ]}
+                        />
+
+                        {/* 9. Foto Secundária Reunião / Gabinete */}
+                        <ImageUploadField
+                          label="9. Foto Secundária do Dr. Aldo Leão (Ambiente Executivo / Reunião)"
+                          description="Foto de apoio do Dr. Aldo Leão em reunião estratégica com clientes."
+                          currentValue={formData.founder.secondaryPhotoUrl}
+                          defaultValue="/img/dr-aldo-2.jpg"
+                          aspectRatio="video"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, secondaryPhotoUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Ambiente Executivo', url: '/img/dr-aldo-2.jpg' },
+                            { label: 'Consultoria Estratégica', url: '/img/dr-aldo-3.jpg' },
+                            { label: 'Gabinete & Biblioteca', url: '/img/dr-aldo-4.jpg' },
+                            { label: 'Dr. Aldo Forense', url: '/img/dr-aldo-1.jpg' },
+                          ]}
+                        />
+
+                        {/* 10. Imagem de Fundo do CTA de Consulta Digital */}
+                        <ImageUploadField
+                          label="10. Imagem de Fundo do CTA Agende Sua Consulta Digital (Página 8)"
+                          description="Plano de fundo ou ilustração do bloco de agendamento online de consulta."
+                          currentValue={formData.digitalConsultation?.bgImageUrl}
+                          defaultValue=""
+                          aspectRatio="video"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            digitalConsultation: { ...(formData.digitalConsultation || {}), bgImageUrl: newUrl }
+                          })}
+                        />
+
+                        {/* 11. Selo Oficial de 40 Anos de Advocacia */}
+                        <ImageUploadField
+                          label="11. Selo Comemorativo de 40 Anos de Advocacia (1986–2026)"
+                          description="Chancela e selo oficial de 40 Anos de Advocacia exibido na página O Legado Centenário e na seção do Selo."
+                          currentValue={formData.centennialLegacy?.sealImageUrl}
+                          defaultValue="/img/selo-40-anos.png"
+                          aspectRatio="square"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            centennialLegacy: { ...(formData.centennialLegacy || {}), sealImageUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Selo 40 Anos (PNG Transparente)', url: '/img/selo-40-anos.png' },
+                            { label: 'Selo Dourado Oficial', url: '/img/selode40anos.jpg.jpeg' },
+                          ]}
+                        />
+
+                        {/* 12. Assinatura Oficial do Dr. Aldo Leão */}
+                        <ImageUploadField
+                          label="12. Assinatura do Dr. Aldo Leão (Dourada / Transparente)"
+                          description="Assinatura manuscrita oficial exibida na página Head Jurídico e no final da linha do tempo do Legado Centenário."
+                          currentValue={formData.founder?.signatureImageUrl || formData.centennialLegacy?.signatureImageUrl}
+                          defaultValue="/img/assinatura-gold.png"
+                          aspectRatio="auto"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            founder: { ...formData.founder, signatureImageUrl: newUrl },
+                            centennialLegacy: { ...(formData.centennialLegacy || {}), signatureImageUrl: newUrl }
+                          })}
+                          presetOptions={[
+                            { label: 'Assinatura Dourada Oficial', url: '/img/assinatura-gold.png' },
+                            { label: 'Assinatura Original', url: '/img/assinatura.png' },
+                          ]}
+                        />
+
+                        {/* 13. Foto da Palestra / Conferência Presencial */}
+                        <ImageUploadField
+                          label="13. Foto da Palestra Presencial (Academia Leão Ferreira)"
+                          description="Foto exibida na seção Academia Leão Ferreira com o Dr. Aldo Leão ministrando a palestra magna 'Planejamento Patrimonial 4.0 & O Alto Custo da Omissão'."
+                          currentValue={formData.academiaLeao?.lecturePhotoUrl}
+                          defaultValue="/img/palestra-1.jpg"
+                          aspectRatio="video"
+                          onChange={(newUrl) => setFormData({
+                            ...formData,
+                            academiaLeao: { ...(formData.academiaLeao || {}), lecturePhotoUrl: newUrl }
+                          })}
+                        />
+
+                        {/* 14. Capas dos 8 Livros Digitais */}
+                        <div className="p-4 sm:p-5 rounded-xl bg-[#050B14] border border-[#D4AF37]/35 space-y-4">
+                          <div>
+                            <h4 className="text-xs uppercase font-bold text-[#F6E27A] tracking-wider flex items-center gap-2">
+                              <BookOpen className="w-4 h-4 text-[#F6E27A]" />
+                              <span>14. Capas dos 8 Livros Digitais Publicados (Acervo Completo)</span>
+                            </h4>
+                            <p className="text-[11px] text-slate-300 mt-0.5">
+                              Faça o upload ou altere a imagem da capa de cada uma das 8 obras digitais disponíveis para download gratuito.
+                            </p>
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {(formData.digitalBooks || []).map((book, idx) => (
+                              <div key={book.id || idx} className="p-3.5 rounded-lg bg-[#071122] border border-slate-800 space-y-2">
+                                <span className="text-xs font-bold text-[#E5C158] block truncate">
+                                  Livro #{idx + 1} · {book.title}
+                                </span>
+                                <ImageUploadField
+                                  label={`Capa do Livro #${idx + 1}`}
+                                  currentValue={book.coverImage}
+                                  aspectRatio="video"
+                                  onChange={(newUrl) => {
+                                    const updated = [...(formData.digitalBooks || [])];
+                                    updated[idx].coverImage = newUrl;
+                                    setFormData({ ...formData, digitalBooks: updated });
+                                  }}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
 };
